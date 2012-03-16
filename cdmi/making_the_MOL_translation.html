@@ -1,10 +1,10 @@
 <h1>Towards a Controlled Vocabulary Part 3: Making the MOL Translation to the Abstract Function Vocabulary</h1>
 
 We have described how to define an abstract vocabulary of function using exemplars
-in <a href="http://bio-admin-2.mcs.anl.gov/ksite/index.php/developers/tutorials/towards-a-controlled-vocabulary-part-1-defining-exemplars/"l>Part 1: Defining Exemplars</a>.
+in <a href="http://kbase.us/index.php/developers/tutorials/towards-a-controlled-vocabulary-part-1-defining-exemplars/"l>Part 1: Defining Exemplars</a>.
 Next, we described how to generate the SEED mapping from SEED ids to the abstract
 vocabulary imposed by exemplars 
-<a href="http://bio-admin-2.mcs.anl.gov/ksite/index.php/developers/tutorials/towards-a-controlled-vocabulary-part-2-mapping-to-exemplars/">Part 2: Mapping to Exemplars</a>.
+<a href="http://kbase.us/index.php/developers/tutorials/towards-a-controlled-vocabulary-part-2-mapping-to-exemplars/">Part 2: Mapping to Exemplars</a>.
 
 We complete this discussion of how to reach consistent annotations in an abstract vocabulary by
 discussing how one might map MicrobesOnLine (MOL) features to the abstract vocabulary.
@@ -21,7 +21,7 @@ where the <i>source</i> is <i>SEED</i>.  Here, the <i>fid</i> field is the KBase
 the SEED <i>source_id</i>.  We begin by adding a column containing the md5 values using
 
 <br><pre>
-           <a href="http://bio-admin-2.mcs.anl.gov/ksite/index.php/developers/api-documentation/cdmi-api/#fids_to_proteins" target='_blank'>fids_to_proteins</a> -c 3 < seed.translation.table > seed.translation.with.md5
+           <a href="http://kbase.us/index.php/developers/api-documentation/cdmi-api/#fids_to_proteins" target='_blank'>fids_to_proteins</a> -c 3 < seed.translation.table > seed.translation.with.md5
 <br></pre>
 and we sort them on the md5 value using
 <br><pre>
@@ -32,12 +32,12 @@ Then, we create a table of data relating to the MOL genomes using
 
 <br><pre>
             echo MOL | 
-	    <a href="http://bio-admin-2.mcs.anl.gov/ksite/index.php/developers/api-documentation/cdmi-entity-api/#get_relationship_Submitted" target='_blank'>get_relationship_Submitted</a> -to id | 
-	    <a href="http://bio-admin-2.mcs.anl.gov/ksite/index.php/developers/api-documentation/cdmi-api/#genomes_to_fids" target='_blank'>genomes_to_fids</a> peg | 
+	    <a href="http://kbase.us/index.php/developers/api-documentation/cdmi-entity-api/#get_relationship_Submitted" target='_blank'>get_relationship_Submitted</a> -to id | 
+	    <a href="http://kbase.us/index.php/developers/api-documentation/cdmi-api/#genomes_to_fids" target='_blank'>genomes_to_fids</a> peg | 
 	    cut -f 3 | 
-	    <a href="http://bio-admin-2.mcs.anl.gov/ksite/index.php/developers/api-documentation/cdmi-entity-api/#get_entity_Feature" target='_blank'>get_entity_Feature</a> -f source_id |
-	    <a href="http://bio-admin-2.mcs.anl.gov/ksite/index.php/developers/api-documentation/cdmi-api/#fids_to_proteins" target='_blank'>fids_to_proteins</a> -c 1 | 
-	    <a href="http://bio-admin-2.mcs.anl.gov/ksite/index.php/developers/api-documentation/cdmi-api/#fids_to_functions" target='_blank'>fids_to_functions</a> -c 1 |
+	    <a href="http://kbase.us/index.php/developers/api-documentation/cdmi-entity-api/#get_entity_Feature" target='_blank'>get_entity_Feature</a> -f source_id |
+	    <a href="http://kbase.us/index.php/developers/api-documentation/cdmi-api/#fids_to_proteins" target='_blank'>fids_to_proteins</a> -c 1 | 
+	    <a href="http://kbase.us/index.php/developers/api-documentation/cdmi-api/#fids_to_functions" target='_blank'>fids_to_functions</a> -c 1 |
 	    sort -k 3 > MOL.fid.source_id.md5.function
 <br></pre>
 Now, we have two fairy large files, <i>seed.translation.with.md5</i> and <i>MOL.fid.md5.function</i>,

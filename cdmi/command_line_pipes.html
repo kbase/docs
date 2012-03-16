@@ -5,7 +5,7 @@ certainly be used for many other purposes, as well; but, its creation is being
 driven by the needs of the modelling community.
 <br><br>
 We have described many details of how to access the contents of the CS via command-line 
-tools already in <a href="http://bio-admin-2.mcs.anl.gov/ksite/index.php/developers/tutorials/some-basic-exercises-using-the-doe-kbase/">Some Basic Exercises Using the DOE Kbase</a>.
+tools already in <a href="http://kbase.us/index.php/developers/tutorials/some-basic-exercises-using-the-doe-kbase/">Some Basic Exercises Using the DOE Kbase</a>.
 This document is designed to complement that tutorial.  We hope to explain an
 overview of the approach of piping KBase tools together on the command-line, as well
 as some very minimal notes relating to a subset of the Unix tools.
@@ -29,9 +29,9 @@ is the addition of one of more columns.  We create "pipelines" of these tools to
 fairly complex transformations leading to the final table containing the desired output.
 For example, consider the following little pipeline:
 <br><pre>
-           <a href="http://bio-admin-2.mcs.anl.gov/ksite/index.php/developers/api-documentation/cdmi-entity-api/#all_entities_Genome" target='_blank'>all_entities_Genome</a> -f scientific_name | grep "Streptococcus pneumoniae"
+           <a href="http://kbase.us/index.php/developers/api-documentation/cdmi-entity-api/#all_entities_Genome" target='_blank'>all_entities_Genome</a> -f scientific_name | grep "Streptococcus pneumoniae"
 <br></pre>
-The <i><a href="http://bio-admin-2.mcs.anl.gov/ksite/index.php/developers/api-documentation/cdmi-entity-api/#all_entities_Genome" target='_blank'>all_entities_Genome</a></i> command is thought of as producing a table in which the
+The <i><a href="http://kbase.us/index.php/developers/api-documentation/cdmi-entity-api/#all_entities_Genome" target='_blank'>all_entities_Genome</a></i> command is thought of as producing a table in which the
 first column (by default) is the genome ID, and any extra columns come from the arguments
 of the command.  In this case, we get a 2-column table 
 <br><pre>
@@ -64,10 +64,10 @@ the rows in a table is the basic style we advocate.  For example, suppose that y
 to find all features of <i>Streptococcus pneumoniae</i> that had been assigned a specific
 function (say, <i>triosephosphate isomerase</i>).  You might try using
 <br><pre>
-         <a href="http://bio-admin-2.mcs.anl.gov/ksite/index.php/developers/api-documentation/cdmi-entity-api/#all_entities_Genome" target='_blank'>all_entities_Genome</a> -f scientific_name | 
+         <a href="http://kbase.us/index.php/developers/api-documentation/cdmi-entity-api/#all_entities_Genome" target='_blank'>all_entities_Genome</a> -f scientific_name | 
 	 grep "Streptococcus pneumoniae" | 
-	 <a href="http://bio-admin-2.mcs.anl.gov/ksite/index.php/developers/api-documentation/cdmi-api/#genomes_to_fids" target='_blank'>genomes_to_fids</a> peg -c 1 | 
-	 <a href="http://bio-admin-2.mcs.anl.gov/ksite/index.php/developers/api-documentation/cdmi-api/#fids_to_functions" target='_blank'>fids_to_functions</a> | 
+	 <a href="http://kbase.us/index.php/developers/api-documentation/cdmi-api/#genomes_to_fids" target='_blank'>genomes_to_fids</a> peg -c 1 | 
+	 <a href="http://kbase.us/index.php/developers/api-documentation/cdmi-api/#fids_to_functions" target='_blank'>fids_to_functions</a> | 
 	 grep -i "triosephosphate isomerase"
 <br></pre>
 This produces output like
@@ -85,11 +85,11 @@ kb|g.3478	Streptococcus pneumoniae SPN034183	kb|g.3478.peg.287	Triosephosphate i
 
 Here, some extra comments need to be made:
 <ol>
-<li><i><a href="http://bio-admin-2.mcs.anl.gov/ksite/index.php/developers/api-documentation/cdmi-api/#genomes_to_fids" target='_blank'>genomes_to_fids</a></i> is a KBase command that takes a tab-separated table as input, and one 
+<li><i><a href="http://kbase.us/index.php/developers/api-documentation/cdmi-api/#genomes_to_fids" target='_blank'>genomes_to_fids</a></i> is a KBase command that takes a tab-separated table as input, and one 
 of the columns in the table must contain KBase genome IDs.  By default, that column is the last column in the table
 (i.e., the rightmost).  If the column of genome IDs is not the last, one uses the "-c N" argument to say that
 the column is the Nth.
-<li><i><a href="http://bio-admin-2.mcs.anl.gov/ksite/index.php/developers/api-documentation/cdmi-api/#fids_to_functions" target='_blank'>fids_to_functions</a></i> is a KBase command that takes a table containing a column of feature ids (i.e., fids), 
+<li><i><a href="http://kbase.us/index.php/developers/api-documentation/cdmi-api/#fids_to_functions" target='_blank'>fids_to_functions</a></i> is a KBase command that takes a table containing a column of feature ids (i.e., fids), 
 which by default is the last column, and extends the table with one more column, the function assigned to the feature.
 <li> Finally, the "-i" argument to <i>grep</i> makes the match case insensitive.  <i>grep</i> is an extremely
 powerful command with a number of useful options (you can select all rows that do not match, rows that match some
@@ -102,7 +102,7 @@ minutes, if necessary, and try to solve this yourself before looking at our appr
 <br><br>
 We would probably use the following pipeline:
 <br><pre>
-           echo 'kb|g.9772.peg.2175' | <a href="http://bio-admin-2.mcs.anl.gov/ksite/index.php/developers/api-documentation/cdmi-api/#fids_to_proteins" target='_blank'>fids_to_proteins</a> | <a href="http://bio-admin-2.mcs.anl.gov/ksite/index.php/developers/api-documentation/cdmi-api/#proteins_to_fids" target='_blank'>proteins_to_fids</a> | <a href="http://bio-admin-2.mcs.anl.gov/ksite/index.php/developers/api-documentation/cdmi-api/#fids_to_functions" target='_blank'>fids_to_functions</a>
+           echo 'kb|g.9772.peg.2175' | <a href="http://kbase.us/index.php/developers/api-documentation/cdmi-api/#fids_to_proteins" target='_blank'>fids_to_proteins</a> | <a href="http://kbase.us/index.php/developers/api-documentation/cdmi-api/#proteins_to_fids" target='_blank'>proteins_to_fids</a> | <a href="http://kbase.us/index.php/developers/api-documentation/cdmi-api/#fids_to_functions" target='_blank'>fids_to_functions</a>
 <br></pre>
 In some sense, this is probably not terribly efficient, but you do get the answer back in a few seconds
 (and, we think that the answer itself poses at least one interesting question).
@@ -113,12 +113,12 @@ A pipeline begins with a <i>generator</i> -- that is, a command that takes no in
 the other a single instance of an entity.  For example,
 
 <br><pre>
-        <a href="http://bio-admin-2.mcs.anl.gov/ksite/index.php/developers/api-documentation/cdmi-entity-api/#all_entities_Genome" target='_blank'>all_entities_Genome</a> 
+        <a href="http://kbase.us/index.php/developers/api-documentation/cdmi-entity-api/#all_entities_Genome" target='_blank'>all_entities_Genome</a> 
 <br></pre>
 is a generator that outputs a single column containing the ids of all genomes in KBase.
 Similarly,
 <br><pre>
-        <a href="http://bio-admin-2.mcs.anl.gov/ksite/index.php/developers/api-documentation/cdmi-entity-api/#all_entities_Genome" target='_blank'>all_entities_Genome</a> -f 'dna_size,contigs,scientific_name'
+        <a href="http://kbase.us/index.php/developers/api-documentation/cdmi-entity-api/#all_entities_Genome" target='_blank'>all_entities_Genome</a> -f 'dna_size,contigs,scientific_name'
 <br></pre>
 is a generator that would output a 4-column table (try it).
 The <i>all_entities_ENTITY</i> commands are generators that you may depend on being present
@@ -129,7 +129,7 @@ The <i>all_entities_ENTITY</i> commands are generators that you may depend on be
 was an example of a generator that produced a single instance of an entity.
 Now, it is true that you might begin a pipeline wihout a generator, using something like
 <br><pre>
-        <a href="http://bio-admin-2.mcs.anl.gov/ksite/index.php/developers/api-documentation/cdmi-api/#fids_to_proteins" target='_blank'>fids_to_proteins</a> < file.of.saved.fid.ids
+        <a href="http://kbase.us/index.php/developers/api-documentation/cdmi-api/#fids_to_proteins" target='_blank'>fids_to_proteins</a> < file.of.saved.fid.ids
 <br></pre>
 
 In this case, you might consider this a "restarted pipeline", or you might amend our
@@ -143,9 +143,9 @@ These transformation commands take as input a table and add columns to it:
 a column containing <b>ENTITY</b> ids.  These commands are used to add columns corresponding
 to fields from the referenced <b>ENTITY</b>.  Thus,
 <br><pre>
-        echo 'kb|g.9772.peg.2175' | <a href="http://bio-admin-2.mcs.anl.gov/ksite/index.php/developers/api-documentation/cdmi-entity-api/#get_entity_Feature" target='_blank'>get_entity_Feature</a> -f 'function,source_id'
+        echo 'kb|g.9772.peg.2175' | <a href="http://kbase.us/index.php/developers/api-documentation/cdmi-entity-api/#get_entity_Feature" target='_blank'>get_entity_Feature</a> -f 'function,source_id'
 <br></pre>
-is an example <i><a href="http://bio-admin-2.mcs.anl.gov/ksite/index.php/developers/api-documentation/cdmi-entity-api/#get_entity_Feature" target='_blank'>get_entity_Feature</a></i> that adds two columns to the (admittedly limited)
+is an example <i><a href="http://kbase.us/index.php/developers/api-documentation/cdmi-entity-api/#get_entity_Feature" target='_blank'>get_entity_Feature</a></i> that adds two columns to the (admittedly limited)
 input stream.
 <br><br>
 <li> The <b>get_relationship_RELATIONSHIP</b> commands are used for "crossing" a relationship from 
@@ -154,7 +154,7 @@ The input must be a table with a column containing ids of the <i>from entity</i>
 is formed by tacking on columns of data from three sources: the <i>from entity</i>, the relationship,
 and the <i>to entity</i>.  For example, 
 <br><pre>
-       echo 'kb|g.9772.peg.2175' | <a href="http://bio-admin-2.mcs.anl.gov/ksite/index.php/developers/api-documentation/cdmi-entity-api/#get_relationship_IsOwnedBy" target='_blank'>get_relationship_IsOwnedBy</a> -from source_id -to 'scientific_name,id'
+       echo 'kb|g.9772.peg.2175' | <a href="http://kbase.us/index.php/developers/api-documentation/cdmi-entity-api/#get_relationship_IsOwnedBy" target='_blank'>get_relationship_IsOwnedBy</a> -from source_id -to 'scientific_name,id'
 <br></pre>
 takes the input ids of Features, crosses the IsOwnedBy relationship, and adds three columns (one
 from the <i>from entity</i> and two from the <i>to entity</i>).
@@ -166,15 +166,15 @@ of commands representing what we call "well-trodden paths".  That, is when we se
 use that reoccur, sometimes we can reduce the requirred effort to extract the desired data.
 Thus,
 <br><pre>
-       <a href="http://bio-admin-2.mcs.anl.gov/ksite/index.php/developers/api-documentation/cdmi-api/#all_roles_used_in_models" target='_blank'>all_roles_used_in_models</a>
+       <a href="http://kbase.us/index.php/developers/api-documentation/cdmi-api/#all_roles_used_in_models" target='_blank'>all_roles_used_in_models</a>
 <br></pre>
 is a customized generator that outputs a table containing roles that are used in building models.
 If you wanted to get the number of unique protein sequences that connect to these roles, you might 
 use
 <br><pre>
-       <a href="http://bio-admin-2.mcs.anl.gov/ksite/index.php/developers/api-documentation/cdmi-api/#all_roles_used_in_models" target='_blank'>all_roles_used_in_models</a> | <a href="http://bio-admin-2.mcs.anl.gov/ksite/index.php/developers/api-documentation/cdmi-api/#roles_to_proteins" target='_blank'>roles_to_proteins</a> | cut -f 2 | sort -u | wc
+       <a href="http://kbase.us/index.php/developers/api-documentation/cdmi-api/#all_roles_used_in_models" target='_blank'>all_roles_used_in_models</a> | <a href="http://kbase.us/index.php/developers/api-documentation/cdmi-api/#roles_to_proteins" target='_blank'>roles_to_proteins</a> | cut -f 2 | sort -u | wc
 <br></pre>
-The <i><a href="http://bio-admin-2.mcs.anl.gov/ksite/index.php/developers/api-documentation/cdmi-api/#roles_to_proteins" target='_blank'>roles_to_proteins</a></i> transformation command is an example of one of these
+The <i><a href="http://kbase.us/index.php/developers/api-documentation/cdmi-api/#roles_to_proteins" target='_blank'>roles_to_proteins</a></i> transformation command is an example of one of these
 commands added transformation commands.  The Unix commands are worth noting:
 <ul>
 <li> <b>cut -f 2</b> says "extract just the second column" (the one containing md5 values

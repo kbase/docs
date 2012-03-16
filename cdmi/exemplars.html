@@ -31,7 +31,7 @@ ourselves to the set of functional roles needed to support metabolic modeling.
 You can just use the command
 
 <br><pre>
-    <a href="http://bio-admin-2.mcs.anl.gov/ksite/index.php/developers/api-documentation/cdmi-api/#all_roles_used_in_models" target='_blank'>all_roles_used_in_models</a> 
+    <a href="http://kbase.us/index.php/developers/api-documentation/cdmi-api/#all_roles_used_in_models" target='_blank'>all_roles_used_in_models</a> 
 <br></pre>
 to get the current list of functional roles used in metabolic models.  Currently, there 
 are about 2000-2500.  This is a manageable number.
@@ -49,9 +49,9 @@ vocabularies of function is the concept of <b>exemplar</b>.  We choose a sequenc
 Let's begin with connecting the roles used in models to literature.  A simple, but somewhat slow,
 way to do this is using
 <br><pre>
-         <a href="http://bio-admin-2.mcs.anl.gov/ksite/index.php/developers/api-documentation/cdmi-api/#all_roles_used_in_models" target='_blank'>all_roles_used_in_models</a> | 
-	 <a href="http://bio-admin-2.mcs.anl.gov/ksite/index.php/developers/api-documentation/cdmi-api/#roles_to_fids" target='_blank'>roles_to_fids</a> 2> roles.without.fids | 
-	 <a href="http://bio-admin-2.mcs.anl.gov/ksite/index.php/developers/api-documentation/cdmi-api/#fids_to_literature" target='_blank'>fids_to_literature</a> 2> roles.fids.no.literature > role.fid.pubmed 
+         <a href="http://kbase.us/index.php/developers/api-documentation/cdmi-api/#all_roles_used_in_models" target='_blank'>all_roles_used_in_models</a> | 
+	 <a href="http://kbase.us/index.php/developers/api-documentation/cdmi-api/#roles_to_fids" target='_blank'>roles_to_fids</a> 2> roles.without.fids | 
+	 <a href="http://kbase.us/index.php/developers/api-documentation/cdmi-api/#fids_to_literature" target='_blank'>fids_to_literature</a> 2> roles.fids.no.literature > role.fid.pubmed 
 <br></pre>
 This requires some explanation.  First, many of the command-line scripts that cross from
 one entity type to another write input lines that could not be matched up to <i>stderr</i>.
@@ -65,20 +65,20 @@ a set of issues that need to be processed manually.  When I last ran this comman
 <br><br>
 If we now run,
 <br><pre>
-      cut -f1,2 role.fid.pubmed | <a href="http://bio-admin-2.mcs.anl.gov/ksite/index.php/developers/api-documentation/cdmi-entity-api/#get_relationship_Produces" target='_blank'>get_relationship_Produces</a> -to id | sort -u > role.fid.md5
+      cut -f1,2 role.fid.pubmed | <a href="http://kbase.us/index.php/developers/api-documentation/cdmi-entity-api/#get_relationship_Produces" target='_blank'>get_relationship_Produces</a> -to id | sort -u > role.fid.md5
 <br></pre>
 we get a table showing roles and fids, where each of the fids connnects to a least
 one pubmed reference.  The <i>cut</i> picks up the first two fields (<i>role</i> and
 <i>fid</i>, dropping the <i>pubmed id</i>).  Then the
 <br><pre>
-        <a href="http://bio-admin-2.mcs.anl.gov/ksite/index.php/developers/api-documentation/cdmi-entity-api/#get_relationship_Produces" target='_blank'>get_relationship_Produces</a> -to id
+        <a href="http://kbase.us/index.php/developers/api-documentation/cdmi-entity-api/#get_relationship_Produces" target='_blank'>get_relationship_Produces</a> -to id
 <br></pre>
 is used to pick up the md5 value of the ProteinSequence corresponding to a fid.  To understand
 how this works, you need to know that the relationship <i>Produces</i> connects <i>Feature</i>
 entities to <i>ProteinSequence</i> entities, and that the md5 hash values are used as IDs for the
 <i>ProteinSequence</i> entities.  To see how this works, you might try running
 <br><pre>
-        echo 'kb|g.0.peg.2659' | <a href="http://bio-admin-2.mcs.anl.gov/ksite/index.php/developers/api-documentation/cdmi-entity-api/#get_relationship_Produces" target='_blank'>get_relationship_Produces</a> -to id
+        echo 'kb|g.0.peg.2659' | <a href="http://kbase.us/index.php/developers/api-documentation/cdmi-entity-api/#get_relationship_Produces" target='_blank'>get_relationship_Produces</a> -to id
 <br></pre>
 and study what comes out.
 
@@ -129,8 +129,8 @@ We begin by just getting a 3-column table
 using
 <br><pre> 
            cut -f1,2 role.fid.md5 | 
-	   <a href="http://bio-admin-2.mcs.anl.gov/ksite/index.php/developers/api-documentation/cdmi-entity-api/#get_relationship_IsOwnedBy" target='_blank'>get_relationship_IsOwnedBy</a> -to scientific_name | 
-	   <a href="http://bio-admin-2.mcs.anl.gov/ksite/index.php/developers/api-documentation/cdmi-api/#fids_to_functions" target='_blank'>fids_to_functions</a> -c 2 |
+	   <a href="http://kbase.us/index.php/developers/api-documentation/cdmi-entity-api/#get_relationship_IsOwnedBy" target='_blank'>get_relationship_IsOwnedBy</a> -to scientific_name | 
+	   <a href="http://kbase.us/index.php/developers/api-documentation/cdmi-api/#fids_to_functions" target='_blank'>fids_to_functions</a> -c 2 |
 	   sort > role.fid.genome.function
 <br></pre>
 We have tacked on the function of each fid because we wish to eliminate the use
@@ -196,8 +196,8 @@ We can make fairly arbitrary choices to get initial exemplars.
 Perhaps the easiest way to make an initial choice is to just use
 <br><pre>
                 perl delete_roles_with_exemplars.pl exemplars.with.literature < roles.fids.no.literature | 
-                <a href="http://bio-admin-2.mcs.anl.gov/ksite/index.php/developers/api-documentation/cdmi-entity-api/#get_relationship_IsOwnedBy" target='_blank'>get_relationship_IsOwnedBy</a> -to scientific_name |
-                <a href="http://bio-admin-2.mcs.anl.gov/ksite/index.php/developers/api-documentation/cdmi-api/#fids_to_functions" target='_blank'>fids_to_functions</a> -c 2 | 
+                <a href="http://kbase.us/index.php/developers/api-documentation/cdmi-entity-api/#get_relationship_IsOwnedBy" target='_blank'>get_relationship_IsOwnedBy</a> -to scientific_name |
+                <a href="http://kbase.us/index.php/developers/api-documentation/cdmi-api/#fids_to_functions" target='_blank'>fids_to_functions</a> -c 2 | 
                 sort | 
                 perl choose_exemplars.pl > exemplars.for.no.lit.roles
 <br></pre>
@@ -218,7 +218,7 @@ To get a list of the roles for which no exemplars could be chosen, we can
 use 
 <br><pre>
     cat exemplars.with.literature exemplars.for.no.lit.roles > exemplars
-    <a href="http://bio-admin-2.mcs.anl.gov/ksite/index.php/developers/api-documentation/cdmi-api/#all_roles_used_in_models" target='_blank'>all_roles_used_in_models</a> | perl delete_roles_with_exemplars.pl exemplars > roles.without.exemplars
+    <a href="http://kbase.us/index.php/developers/api-documentation/cdmi-api/#all_roles_used_in_models" target='_blank'>all_roles_used_in_models</a> | perl delete_roles_with_exemplars.pl exemplars > roles.without.exemplars
 <br></pre>
 Out of the 2000-2500 roles used in the curent collection of models, there are often a small
 number for which no attachment to a sequence exists.  These require manual curation and need to be

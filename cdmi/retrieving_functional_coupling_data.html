@@ -14,11 +14,11 @@ my $kbO = CDMI_APIClient->new;
 
 my $g = shift @ARGV;  # Just grab the first and only argument - it should be a Kbase genome
 
-my $genH       = $kbO-><a href="http://bio-admin-2.mcs.anl.gov/ksite/index.php/developers/api-documentation/cdmi-api/#genomes_to_fids" target='_blank'>genomes_to_fids</a>([$g],['peg']);
+my $genH       = $kbO-><a href="http://kbase.us/index.php/developers/api-documentation/cdmi-api/#genomes_to_fids" target='_blank'>genomes_to_fids</a>([$g],['peg']);
 my $fids       = $genH->{$g};
-my $funcH      = $kbO-><a href="http://bio-admin-2.mcs.anl.gov/ksite/index.php/developers/api-documentation/cdmi-api/#fids_to_functions" target='_blank'>fids_to_functions</a>($fids);
-my $fid_occH   = $kbO-><a href="http://bio-admin-2.mcs.anl.gov/ksite/index.php/developers/api-documentation/cdmi-api/#fids_to_co_occurring_fids" target='_blank'>fids_to_co_occurring_fids</a>($fids);
-my $fid_expH   = $kbO-><a href="http://bio-admin-2.mcs.anl.gov/ksite/index.php/developers/api-documentation/cdmi-api/#fids_to_coexpressed_fids" target='_blank'>fids_to_coexpressed_fids</a>($fids);
+my $funcH      = $kbO-><a href="http://kbase.us/index.php/developers/api-documentation/cdmi-api/#fids_to_functions" target='_blank'>fids_to_functions</a>($fids);
+my $fid_occH   = $kbO-><a href="http://kbase.us/index.php/developers/api-documentation/cdmi-api/#fids_to_co_occurring_fids" target='_blank'>fids_to_co_occurring_fids</a>($fids);
+my $fid_expH   = $kbO-><a href="http://kbase.us/index.php/developers/api-documentation/cdmi-api/#fids_to_coexpressed_fids" target='_blank'>fids_to_coexpressed_fids</a>($fids);
 
 foreach my $fid1 (@$fids)
 {
@@ -67,11 +67,11 @@ The program begins by accessing the protein-encoding genes, their functions,
 and the functional coupling data.
 
 <br><pre>
-my $genH       = $kbO-><a href="http://bio-admin-2.mcs.anl.gov/ksite/index.php/developers/api-documentation/cdmi-api/#genomes_to_fids" target='_blank'>genomes_to_fids</a>([$g],['peg']);
+my $genH       = $kbO-><a href="http://kbase.us/index.php/developers/api-documentation/cdmi-api/#genomes_to_fids" target='_blank'>genomes_to_fids</a>([$g],['peg']);
 my $fids       = $genH->{$g};
-my $funcH      = $kbO-><a href="http://bio-admin-2.mcs.anl.gov/ksite/index.php/developers/api-documentation/cdmi-api/#fids_to_functions" target='_blank'>fids_to_functions</a>($fids);
-my $fid_occH   = $kbO-><a href="http://bio-admin-2.mcs.anl.gov/ksite/index.php/developers/api-documentation/cdmi-api/#fids_to_co_occurring_fids" target='_blank'>fids_to_co_occurring_fids</a>($fids);
-my $fid_expH   = $kbO-><a href="http://bio-admin-2.mcs.anl.gov/ksite/index.php/developers/api-documentation/cdmi-api/#fids_to_coexpressed_fids" target='_blank'>fids_to_coexpressed_fids</a>($fids);
+my $funcH      = $kbO-><a href="http://kbase.us/index.php/developers/api-documentation/cdmi-api/#fids_to_functions" target='_blank'>fids_to_functions</a>($fids);
+my $fid_occH   = $kbO-><a href="http://kbase.us/index.php/developers/api-documentation/cdmi-api/#fids_to_co_occurring_fids" target='_blank'>fids_to_co_occurring_fids</a>($fids);
+my $fid_expH   = $kbO-><a href="http://kbase.us/index.php/developers/api-documentation/cdmi-api/#fids_to_coexpressed_fids" target='_blank'>fids_to_coexpressed_fids</a>($fids);
 <br></pre>
 
 It then goes through the genes gathering the related genes for each of the

@@ -1,7 +1,7 @@
 <h1>Towards a Controlled Vocabulary Part 2: Mapping to Exemplars</h1>
 
 In the first tutorial relating to creating and maintaining a controlled vocabulary of function 
-(<a href="http://bio-admin-2.mcs.anl.gov/ksite/index.php/developers/tutorials/towards-a-controlled-vocabulary-part-1-defining-exemplars/">Part 1: Defining Exemplars</a>)
+(<a href="http://kbase.us/index.php/developers/tutorials/towards-a-controlled-vocabulary-part-1-defining-exemplars/">Part 1: Defining Exemplars</a>)
 we discussed the creation of a set of exemplars.  These exemplars allowed us to make
 statements like
 
@@ -63,11 +63,11 @@ Here is how we implement this strategy:
             cat exemplars.with.literature exemplars.for.no.lit.roles > exemplars
 
             cut -f1,2 exemplars |
-            <a href="http://bio-admin-2.mcs.anl.gov/ksite/index.php/developers/api-documentation/cdmi-api/#roles_to_fids" target='_blank'>roles_to_fids</a> -c 1 |
-            <a href="http://bio-admin-2.mcs.anl.gov/ksite/index.php/developers/api-documentation/cdmi-api/#fids_to_genomes" target='_blank'>fids_to_genomes</a> | <a href="http://bio-admin-2.mcs.anl.gov/ksite/index.php/developers/api-documentation/cdmi-entity-api/#get_relationship_WasSubmittedBy" target='_blank'>get_relationship_WasSubmittedBy</a> -to id | grep "SEED$" | cut -f1,2,3 |
-            <a href="http://bio-admin-2.mcs.anl.gov/ksite/index.php/developers/api-documentation/cdmi-api/#fids_to_proteins" target='_blank'>fids_to_proteins</a> |
-            <a href="http://bio-admin-2.mcs.anl.gov/ksite/index.php/developers/api-documentation/cdmi-api/#fids_to_functions" target='_blank'>fids_to_functions</a> -c 3 |
-            <a href="http://bio-admin-2.mcs.anl.gov/ksite/index.php/developers/api-documentation/cdmi-entity-api/#get_entity_Feature" target='_blank'>get_entity_Feature</a> -c 3 -f source_id > role.exemplar.fid.md5.function.source_id
+            <a href="http://kbase.us/index.php/developers/api-documentation/cdmi-api/#roles_to_fids" target='_blank'>roles_to_fids</a> -c 1 |
+            <a href="http://kbase.us/index.php/developers/api-documentation/cdmi-api/#fids_to_genomes" target='_blank'>fids_to_genomes</a> | <a href="http://kbase.us/index.php/developers/api-documentation/cdmi-entity-api/#get_relationship_WasSubmittedBy" target='_blank'>get_relationship_WasSubmittedBy</a> -to id | grep "SEED$" | cut -f1,2,3 |
+            <a href="http://kbase.us/index.php/developers/api-documentation/cdmi-api/#fids_to_proteins" target='_blank'>fids_to_proteins</a> |
+            <a href="http://kbase.us/index.php/developers/api-documentation/cdmi-api/#fids_to_functions" target='_blank'>fids_to_functions</a> -c 3 |
+            <a href="http://kbase.us/index.php/developers/api-documentation/cdmi-entity-api/#get_entity_Feature" target='_blank'>get_entity_Feature</a> -c 3 -f source_id > role.exemplar.fid.md5.function.source_id
 
             export TAB=`echo -e "\t"`
             sort -t "$TAB" -k 4 role.exemplar.fid.md5.function.source_id |
@@ -88,8 +88,8 @@ These 3-tuples define our "abstract vocabulary of function".
 Then, look at
 <br><pre>
             cut -f1,2 exemplars |
-            <a href="http://bio-admin-2.mcs.anl.gov/ksite/index.php/developers/api-documentation/cdmi-api/#roles_to_fids" target='_blank'>roles_to_fids</a> -c 1 |
-            <a href="http://bio-admin-2.mcs.anl.gov/ksite/index.php/developers/api-documentation/cdmi-api/#fids_to_genomes" target='_blank'>fids_to_genomes</a> | <a href="http://bio-admin-2.mcs.anl.gov/ksite/index.php/developers/api-documentation/cdmi-entity-api/#get_relationship_WasSubmittedBy" target='_blank'>get_relationship_WasSubmittedBy</a> -to id | grep "SEED$" | cut -f1,2,3 |
+            <a href="http://kbase.us/index.php/developers/api-documentation/cdmi-api/#roles_to_fids" target='_blank'>roles_to_fids</a> -c 1 |
+            <a href="http://kbase.us/index.php/developers/api-documentation/cdmi-api/#fids_to_genomes" target='_blank'>fids_to_genomes</a> | <a href="http://kbase.us/index.php/developers/api-documentation/cdmi-entity-api/#get_relationship_WasSubmittedBy" target='_blank'>get_relationship_WasSubmittedBy</a> -to id | grep "SEED$" | cut -f1,2,3 |
 <br></pre>
 These three lines take the first two fields of the 3-tuples (dropping the <i>genome_name</i>),
 extend the table with fids that are believed to implement the role, and then the last line has
@@ -100,9 +100,9 @@ the effect of keeping only entries that originated in the SEED.  The output will
 Then, we add columns for the md5 of the SEED-fid, the function of the SEED-fid, and
 the SEED-id of the SEED-fid.
 <br><pre>
-            <a href="http://bio-admin-2.mcs.anl.gov/ksite/index.php/developers/api-documentation/cdmi-api/#fids_to_proteins" target='_blank'>fids_to_proteins</a> |
-            <a href="http://bio-admin-2.mcs.anl.gov/ksite/index.php/developers/api-documentation/cdmi-api/#fids_to_functions" target='_blank'>fids_to_functions</a> -c 3 |
-            <a href="http://bio-admin-2.mcs.anl.gov/ksite/index.php/developers/api-documentation/cdmi-entity-api/#get_entity_Feature" target='_blank'>get_entity_Feature</a> -c 3 -f source_id > role.exemplar.fid.md5.function.source_id
+            <a href="http://kbase.us/index.php/developers/api-documentation/cdmi-api/#fids_to_proteins" target='_blank'>fids_to_proteins</a> |
+            <a href="http://kbase.us/index.php/developers/api-documentation/cdmi-api/#fids_to_functions" target='_blank'>fids_to_functions</a> -c 3 |
+            <a href="http://kbase.us/index.php/developers/api-documentation/cdmi-entity-api/#get_entity_Feature" target='_blank'>get_entity_Feature</a> -c 3 -f source_id > role.exemplar.fid.md5.function.source_id
 <br></pre>
 This gives
 <br><pre>

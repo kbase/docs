@@ -14,16 +14,16 @@ my $kbO = CDMI_APIClient->new;
 
 my @fids = &lt;STDIN&gt;;
 chop @fids;
-my $fidH = $kbO-><a href="http://bio-admin-2.mcs.anl.gov/ksite/index.php/developers/api-documentation/cdmi-api/#fids_to_proteins" target='_blank'>fids_to_proteins</a>(\@fids);
+my $fidH = $kbO-><a href="http://kbase.us/index.php/developers/api-documentation/cdmi-api/#fids_to_proteins" target='_blank'>fids_to_proteins</a>(\@fids);
 foreach my $fid (@fids)
 {
     my $md5 = $fidH->{$fid};
-    my $md5H = $kbO-><a href="http://bio-admin-2.mcs.anl.gov/ksite/index.php/developers/api-documentation/cdmi-api/#proteins_to_fids" target='_blank'>proteins_to_fids</a>([$md5]);
+    my $md5H = $kbO-><a href="http://kbase.us/index.php/developers/api-documentation/cdmi-api/#proteins_to_fids" target='_blank'>proteins_to_fids</a>([$md5]);
     my $fids_with_same_sequence = $md5H->{$md5};
 
     if ($fids_with_same_sequence && (@$fids_with_same_sequence > 1))
     {
-        my $fidH = $kbO-><a href="http://bio-admin-2.mcs.anl.gov/ksite/index.php/developers/api-documentation/cdmi-api/#fids_to_functions" target='_blank'>fids_to_functions</a>($fids_with_same_sequence);
+        my $fidH = $kbO-><a href="http://kbase.us/index.php/developers/api-documentation/cdmi-api/#fids_to_functions" target='_blank'>fids_to_functions</a>($fids_with_same_sequence);
         my %counts;
         foreach $_ (keys(%$fidH))
         {
@@ -50,7 +50,7 @@ This is achieved by
 <br><pre>
 my @fids = &lt;STDIN&gt;;
 chop @fids;
-my $fidH = $kbO-><a href="http://bio-admin-2.mcs.anl.gov/ksite/index.php/developers/api-documentation/cdmi-api/#fids_to_proteins" target='_blank'>fids_to_proteins</a>(\@fids);
+my $fidH = $kbO-><a href="http://kbase.us/index.php/developers/api-documentation/cdmi-api/#fids_to_proteins" target='_blank'>fids_to_proteins</a>(\@fids);
 <br></pre>
 
 Then for each of the input features we compute the set of feature IDs
@@ -58,7 +58,7 @@ that all have the same sequence using
 
 <br><pre>
     my $md5 = $fidH->{$fid};
-    my $md5H = $kbO-><a href="http://bio-admin-2.mcs.anl.gov/ksite/index.php/developers/api-documentation/cdmi-api/#proteins_to_fids" target='_blank'>proteins_to_fids</a>([$md5]);
+    my $md5H = $kbO-><a href="http://kbase.us/index.php/developers/api-documentation/cdmi-api/#proteins_to_fids" target='_blank'>proteins_to_fids</a>([$md5]);
     my $fids_with_same_sequence = $md5H->{$md5};
 <br></pre>
 
@@ -66,7 +66,7 @@ The program then looks up the functions associated with each of these
 features using
 
 <br><pre>
-        my $fidH = $kbO-><a href="http://bio-admin-2.mcs.anl.gov/ksite/index.php/developers/api-documentation/cdmi-api/#fids_to_functions" target='_blank'>fids_to_functions</a>($fids_with_same_sequence);
+        my $fidH = $kbO-><a href="http://kbase.us/index.php/developers/api-documentation/cdmi-api/#fids_to_functions" target='_blank'>fids_to_functions</a>($fids_with_same_sequence);
 <br></pre>
 
 It then creates a hash with the function as a key and the number

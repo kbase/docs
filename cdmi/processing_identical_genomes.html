@@ -10,7 +10,7 @@ relating to the	use of identical genomes.
 So, howdo you know what identical genomes exist withinthe KBase?  You
 might start by just running a command like
 <br><pre>
-      <a href="http://bio-admin-2.mcs.anl.gov/ksite/index.php/developers/api-documentation/cdmi-entity-api/#all_entities_Genome" target='_blank'>all_entities_Genome</a> -f 'md5,scientific_name' | sort -k 2
+      <a href="http://kbase.us/index.php/developers/api-documentation/cdmi-entity-api/#all_entities_Genome" target='_blank'>all_entities_Genome</a> -f 'md5,scientific_name' | sort -k 2
 <br></pre>
 which produces output like
 <br><pre>
@@ -41,7 +41,7 @@ and <i>kb|8843</i> are identical.
 The simple command above often suffices to give you information relating
 to your needs.  Sometimes you can use a grep to focus the output.  Thus,
 <br><pre>
-      <a href="http://bio-admin-2.mcs.anl.gov/ksite/index.php/developers/api-documentation/cdmi-entity-api/#all_entities_Genome" target='_blank'>all_entities_Genome</a> -f 'md5,scientific_name' | sort -k 2 | grep E110019
+      <a href="http://kbase.us/index.php/developers/api-documentation/cdmi-entity-api/#all_entities_Genome" target='_blank'>all_entities_Genome</a> -f 'md5,scientific_name' | sort -k 2 | grep E110019
 <br></pre>
 would produce
 <br><pre>
@@ -64,7 +64,7 @@ my $csO = $kb->central_store();
 
 my %by_md5;
 
-my $genH = $csO-><a href="http://bio-admin-2.mcs.anl.gov/ksite/index.php/developers/api-documentation/cdmi-entity-api/#all_entities_Genome" target='_blank'>all_entities_Genome</a>(0,100000,['md5']);
+my $genH = $csO-><a href="http://kbase.us/index.php/developers/api-documentation/cdmi-entity-api/#all_entities_Genome" target='_blank'>all_entities_Genome</a>(0,100000,['md5']);
 foreach my $genome (keys(%$genH))
 {
     my $md5 = $genH->{$genome}->{md5};
@@ -85,7 +85,7 @@ my $csO = $kb->central_store();
 are used to get an object (<i>$csO</i>) that offers access to the CS-API.
 The line
 <br><pre>
-    my $genH = $csO-><a href="http://bio-admin-2.mcs.anl.gov/ksite/index.php/developers/api-documentation/cdmi-entity-api/#all_entities_Genome" target='_blank'>all_entities_Genome</a>(0,100000,['md5']);
+    my $genH = $csO-><a href="http://kbase.us/index.php/developers/api-documentation/cdmi-entity-api/#all_entities_Genome" target='_blank'>all_entities_Genome</a>(0,100000,['md5']);
 <br></pre>
 
 asks for access to the <i>md5</i> field for the first up to 100,000
@@ -123,7 +123,7 @@ my %by_md5;
 my $next_output = 0;
 my $size_chunk  = 100000;
 my $genH;
-while (($genH = $csO-><a href="http://bio-admin-2.mcs.anl.gov/ksite/index.php/developers/api-documentation/cdmi-entity-api/#all_entities_Genome" target='_blank'>all_entities_Genome</a>($next_output,$size_chunk,['md5'])) && (%$genH))
+while (($genH = $csO-><a href="http://kbase.us/index.php/developers/api-documentation/cdmi-entity-api/#all_entities_Genome" target='_blank'>all_entities_Genome</a>($next_output,$size_chunk,['md5'])) && (%$genH))
 {
     foreach my $genome (keys(%$genH))
     {
@@ -160,8 +160,8 @@ and you want to see the correspondence between the protein-encoding genes from t
 
 You might begin with something like
 <br><pre>
-    echo 'kb|g.3383'  | <a href="http://bio-admin-2.mcs.anl.gov/ksite/index.php/developers/api-documentation/cdmi-entity-api/#get_entity_Genome" target='_blank'>get_entity_Genome</a> -f md5 
-    echo 'kb|g.19998' | <a href="http://bio-admin-2.mcs.anl.gov/ksite/index.php/developers/api-documentation/cdmi-entity-api/#get_entity_Genome" target='_blank'>get_entity_Genome</a> -f md5 
+    echo 'kb|g.3383'  | <a href="http://kbase.us/index.php/developers/api-documentation/cdmi-entity-api/#get_entity_Genome" target='_blank'>get_entity_Genome</a> -f md5 
+    echo 'kb|g.19998' | <a href="http://kbase.us/index.php/developers/api-documentation/cdmi-entity-api/#get_entity_Genome" target='_blank'>get_entity_Genome</a> -f md5 
 <br></pre>
 
 to verify that the two gnomes are really the same (they should both produce an md5 of "f26f59daae18a385bdfcf89aa6b0bc1c").
@@ -174,9 +174,9 @@ kb|g.19998
 <br></pre>
 Then try
 <br><pre>
-	 <a href="http://bio-admin-2.mcs.anl.gov/ksite/index.php/developers/api-documentation/cdmi-api/#genomes_to_fids" target='_blank'>genomes_to_fids</a> peg < genomes |
-	 <a href="http://bio-admin-2.mcs.anl.gov/ksite/index.php/developers/api-documentation/cdmi-api/#fids_to_locations" target='_blank'>fids_to_locations</a> | 
-	 <a href="http://bio-admin-2.mcs.anl.gov/ksite/index.php/developers/api-documentation/cdmi-api/#fids_to_protein_sequences" target='_blank'>fids_to_protein_sequences</a> -c 2 -fasta=0 |
+	 <a href="http://kbase.us/index.php/developers/api-documentation/cdmi-api/#genomes_to_fids" target='_blank'>genomes_to_fids</a> peg < genomes |
+	 <a href="http://kbase.us/index.php/developers/api-documentation/cdmi-api/#fids_to_locations" target='_blank'>fids_to_locations</a> | 
+	 <a href="http://kbase.us/index.php/developers/api-documentation/cdmi-api/#fids_to_protein_sequences" target='_blank'>fids_to_protein_sequences</a> -c 2 -fasta=0 |
 	 sort -k 4
 <br></pre>
 to get a 4-column table containing
@@ -231,14 +231,14 @@ my $md5_to_contig_2 = &get_md5_to_contig_mapping($csO,$g2);
 
 # Genomes to fids just maps the genome IDs to lists of the
 # protein-encoding genes that occur in each of the genomes.
-my $gH    = $csO-><a href="http://bio-admin-2.mcs.anl.gov/ksite/index.php/developers/api-documentation/cdmi-api/#genomes_to_fids" target='_blank'>genomes_to_fids</a>([$g1,$g2],['peg']);
+my $gH    = $csO-><a href="http://kbase.us/index.php/developers/api-documentation/cdmi-api/#genomes_to_fids" target='_blank'>genomes_to_fids</a>([$g1,$g2],['peg']);
 my $fids1 = $gH->{$g1};
 my $fids2 = $gH->{$g2};
 
 # Now we pick up the locations associated with each of the features
 # in each of the genomes.
-my $fid_locH1       = $csO-><a href="http://bio-admin-2.mcs.anl.gov/ksite/index.php/developers/api-documentation/cdmi-api/#fids_to_locations" target='_blank'>fids_to_locations</a>($fids1);
-my $fid_locH2       = $csO-><a href="http://bio-admin-2.mcs.anl.gov/ksite/index.php/developers/api-documentation/cdmi-api/#fids_to_locations" target='_blank'>fids_to_locations</a>($fids2);
+my $fid_locH1       = $csO-><a href="http://kbase.us/index.php/developers/api-documentation/cdmi-api/#fids_to_locations" target='_blank'>fids_to_locations</a>($fids1);
+my $fid_locH2       = $csO-><a href="http://kbase.us/index.php/developers/api-documentation/cdmi-api/#fids_to_locations" target='_blank'>fids_to_locations</a>($fids2);
 
 # Now we map string forms of the locations in genome2 to
 # feature IDs.
@@ -291,17 +291,17 @@ foreach my $fid2 (@$fids2)
 sub get_contig_to_md5_mapping {
     my($csO,$g) = @_;
 
-    my $gH = $csO-><a href="http://bio-admin-2.mcs.anl.gov/ksite/index.php/developers/api-documentation/cdmi-api/#genomes_to_contigs" target='_blank'>genomes_to_contigs</a>([$g]);
+    my $gH = $csO-><a href="http://kbase.us/index.php/developers/api-documentation/cdmi-api/#genomes_to_contigs" target='_blank'>genomes_to_contigs</a>([$g]);
     my $contigs = $gH->{$g};
-    return $csO-><a href="http://bio-admin-2.mcs.anl.gov/ksite/index.php/developers/api-documentation/cdmi-api/#contigs_to_md5s" target='_blank'>contigs_to_md5s</a>($contigs);
+    return $csO-><a href="http://kbase.us/index.php/developers/api-documentation/cdmi-api/#contigs_to_md5s" target='_blank'>contigs_to_md5s</a>($contigs);
 }
 
 sub get_md5_to_contig_mapping {
     my($csO,$g) = @_;
 
-    my $gH = $csO-><a href="http://bio-admin-2.mcs.anl.gov/ksite/index.php/developers/api-documentation/cdmi-api/#genomes_to_contigs" target='_blank'>genomes_to_contigs</a>([$g]);
+    my $gH = $csO-><a href="http://kbase.us/index.php/developers/api-documentation/cdmi-api/#genomes_to_contigs" target='_blank'>genomes_to_contigs</a>([$g]);
     my $contigs = $gH->{$g};
-    my $md5_contig_tuples = $csO-><a href="http://bio-admin-2.mcs.anl.gov/ksite/index.php/developers/api-documentation/cdmi-entity-api/#get_relationship_HasAsSequence" target='_blank'>get_relationship_HasAsSequence</a>($contigs,[],['from_link','to_link'],[]);
+    my $md5_contig_tuples = $csO-><a href="http://kbase.us/index.php/developers/api-documentation/cdmi-entity-api/#get_relationship_HasAsSequence" target='_blank'>get_relationship_HasAsSequence</a>($contigs,[],['from_link','to_link'],[]);
     my $md5_contig = {};
     foreach $_ (@$md5_contig_tuples)
     {
