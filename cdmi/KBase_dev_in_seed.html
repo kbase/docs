@@ -1,0 +1,130 @@
+<h1>KBase Development in the SEED Environment</h1>
+
+The KBase development environment is still under construction.  To accelerate progress,
+we have created a framework within the SEED environment that allows us to develop and test
+software, as well as creating and maintaining tutorials and documentation.
+At this stage, we have employed this environment to support
+worrk on the ID server, the CS and the documentation.  We intend to move to a native KBase development environment, once it is well-defined.  Until then, this document is intended to help
+KBase developers with access to the SEED environment to get started.  
+To actually see documentation rendered in some format, 
+go to the 
+<a target="_blank" href="http://kbase.us/index.php/developers/developer-home/">KBase Developers Site</a>.
+<br><br>
+Let us start by listing the things that a developer will need access to:
+<ol>
+<li> the documentation of APIs (at this point, the the CS-API),
+<li> the documentation of the command-line scripts that support access to CS data,
+<li> the XML specification of the CDM ER-Model,
+<li> the tutorials being developed to document data, software, and protocols (this would include
+documents like those defining 
+<ul>
+<li> the creation of MD5 hashes for KBase genomes, contigs and proteins, 
+<li> the format for encoding genomes from external sources (sometimes loosely referred to as 
+<i>the exchange format</i>, but there will rapidly become more data types that need "exchange formats"), and
+<li> descriptions of the type language used for defining API routines
+</ul>
+<li> the type specifications for the CS-API routines
+<li> the documentation of the type language and the compiler,
+<li> the source code for the CS-API routines,
+<li> the source code for the CS-access command-line scripts, and
+<li> the source code for the examples used in the tutorials.
+</ol>
+We have chosen to embed the maintenance of these documents and code in an extension of the CVS structure
+that we use to maintain the SEED.  Thus, to get started, go to the <i>base</i> directory
+of your SEED, which is what we call the
+<br><pre>
+        .../FIGdisk/dist/releases/current
+<br></pre>
+directory.  Then update your source using
+<br><pre>
+        cvs co KBaseCDMI KBaseTutorials
+        make
+<br></pre>
+
+Once this is done
+you can find things at the following locations:
+<ul>
+<li> The XML specification of the CDM ER-Model can be found at <i>base/KBaseCDMI/KSaplingDBD.xml</i> (mere mortals should avoid
+     even thinking of altering this file)
+<li> The CS-API document type specifications for the "well-trodden path" routines are at <i>base/KBaseCDMI/CDMI-API.spec</i>
+<li> The CS-API document type specifications for the all_entities_ENTITY, get_entity_ENTITY, and get_relationship_RELATIONSHIP 
+     (which are automatically generated from the XML specifications of the CDM ER-Model) are at <i>base/KBaseCDMI/CDMI-EntityAPI.spec</i>
+<li> The CS-API source code for the "well-trodden path routines" is in <i>base/KBaseCDMI/Bio/KBase/CDMI/CDMI_APIImpl.pm</i>
+<li> The CS-API source code for the all_entities_ENTITY, get_entity_ENTITY, and get_relationship_RELATIONSHIP routines (which, again, are automatically generated) is in <i>base/KBaseCDMI/Bio/KBase/CDMI/CDMI_EntityAPIImpl.pm</i>
+<li> The CS well-trodden paths command-line scripts and embedded documentation is in <i>base/KBaseCDMI/scripts</i>
+<li> The CS command-line scripts source code for the all_entities_ENTITY, get_entity_ENTITY, and get_relationship_RELATIONSHIP scripts (which, again, are automatically generated) is in <i>base/KBaseCDMI/er_scripts</i>
+<li> The tutorials and supporting code can all be found in <i>base/KBaseTutorials</i>
+<li> The miscellaneous documentation (relating to things like the MD5 hashes, the type compiler, 
+     and the exchange format) are in <i>base/KBaseDoc</i>
+</ul>
+<br><hr>
+<br>
+Knowing where things are is half the battle.
+
+<h2>Updating or Defining a CS-API "Well-Trodden Path" Routine</h2>
+
+There are a set (a slowly growing set) of API services that reflect
+"well-trodden paths" (a routine that creates a short-cut through
+the ER-model, replacing a sequence of all_entities, get_entity, 
+get_relationship operations). You need to
+<ol>
+<li> Update the CS-API document type specifications kept in
+<i>base/KBaseCDMI/CDMI-API.spec</i>.  If you have not yet used the type
+compiler, we strongly recommend you work with someone who has to get started.
+<li> Run the type compiler.  This involves 
+<br><pre>
+         recompile_typespec
+<br></pre>
+This rebuilds
+<br><pre>
+         <i>base/KBaseCDMI/CDMI-EntityAPI.spec</i>
+         <i>base/KBaseCDMI/Bio/KBase/CDMI/CDMI_EntityAPIImpl.pm</i>
+         <i>base/KBaseCDMI/er_scripts</i>
+<br></pre>
+These should probably not be impacted by defining a new API routine
+or maintaining a well-trodden path routine.  However, 
+<br><pre>
+<i>base/KBaseCDMI/Bio/KBase/CDMI/CDMI_APIImpl.pm</i>         
+<br></pre>
+will contain a new routine, and the routine is a skeletal form
+of the one you want.  You need to flesh it out and debug it.
+<br><br>
+<li>
+Once you have fleshed out the routine and debugged it, you need 
+to commit the updated version of
+<br><pre>
+<i>base/KBaseCDMI/Bio/KBase/CDMI/CDMI_APIImpl.pm</i>         
+<br></pre>
+</ol>
+
+<h2>Updating or Defining a CS Command-Line Script</h2>
+
+The CS command-line scripts are a little different.  A skeletal form
+of the command can be generated, but details of arguments and function
+need to be manually done.  This means that you do not want to just rebuild
+these files automatically, but it is also true that you need to get the
+skeletal form for a new command (and you will fix it up, put it in 
+<br><pre>
+<i>base/KBaseCDMI/scripts</i>
+<br></pre>
+add it to CVS, and commit it.  You should spiff up the 
+documentation before doing so.
+
+<h2>Updating Tutorial Material</h2>
+
+The tutorial material is critical, at least at this initial stage of the
+KBase projet.  When you write a tutorial, you begin by creating a directory in
+
+<br><pre>
+       <i>base/KBaseTutorials</i>
+<br></pre>
+Then add the directory to CVS.
+We suggest that you look at what is there to see the pattern.
+You need to record the new directory in
+<br><pre>
+       <i>base/KBaseTutorials/ORDER</i>
+<br></pre>
+which determines placement of the tutorial in the sidebar you see when you
+go to the 
+<a target="_blank" href="http://kbase.us/index.php/developers/developer-home/">KBaseDevelopers Site</a>.
+Normally, you will put just an HTML document in your new directory, add it to CVS and commit it.

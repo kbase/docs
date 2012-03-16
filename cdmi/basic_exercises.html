@@ -5,7 +5,8 @@
 The DOE Kbase includes an integrated database of genomic data called
 the Central Store (<b>CS</b>).  Extracting data from the CS can be achieved
 using a defined API (see
-<a target=_blank href=https://trac.kbase.us/projects/kbase/wiki/KbAPIDocuments>Kbase Documentation</a>).
+<a target=_blank href="http://kbase.us/index.php/developers/api-documentation/">the reference 
+documentation</a>).
 
 It can also be accessed via a set of command-line scripts that allow a
 fairly simple and consistent mechanism for access, once a few general
@@ -17,7 +18,7 @@ The steps that are needed to get started are roughly as follows:
     You need to gain some familiarity with the entity-relationship
        model that describes the Central Data Model (<b>CDM</b>) underlying the CS.
 
-The <a target=_blank href=http://pubseed.theseed.org/ErdbDocWidget.cgi?xmlFileName=/home/parrello/FIGdisk/dist/releases/current/KBaseCDMI/KSaplingDBD.xml>ER-Model</a>
+The <a target=_blank href="http://pubseed.theseed.org/ErdbDocWidget.cgi?xmlFileName=/home/parrello/FIGdisk/dist/releases/current/KBaseCDMI/KSaplingDBD.xml">ER-Model</a>
  includes the precise description of which fields
        are implemented in the database and the paths through which
        they can be accessed.
@@ -64,7 +65,7 @@ entity-relationship model that describes the overall architecture of
 the <i>Central Data Model</i>, which describes the entities and relationships
 that make up the <i>Central Store</i>).  If you go to 
 
-<a target=_blank href=http://pubseed.theseed.org/ErdbDocWidget.cgi?xmlFileName=/home/parrello/FIGdisk/dist/releases/current/KBaseCDMI/KSaplingDBD.xml>ER-Model</a>, 
+<a target="_blank" href="http://pubseed.theseed.org/ErdbDocWidget.cgi?xmlFileName=/home/parrello/FIGdisk/dist/releases/current/KBaseCDMI/KSaplingDBD.xml">ER-Model</a>, 
 
 look for the
 path from the entity <b>Publication</b> to the entity <b>Feature</B>.  Take a few
@@ -607,7 +608,7 @@ well find convenient:
         have in the CS, use
 
 <br><pre>
-	     all_entities_CoregulatesSet | <a href="http://kbase.us/index.php/developers/api-documentation/cdmi-api/#regulons_to_fids" target='_blank'>regulons_to_fids</a>
+	     <a href="http://kbase.us/index.php/developers/api-documentation/cdmi-entity-api/#all_entities_CoregulatedSet" target='_blank'>all_entities_CoregulatedSet</a> | <a href="http://kbase.us/index.php/developers/api-documentation/cdmi-api/#regulons_to_fids" target='_blank'>regulons_to_fids</a>
 <br></pre>
 
         To get a table showing the regulons for a given genome, use
