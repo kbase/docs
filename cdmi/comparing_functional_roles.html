@@ -1,0 +1,147 @@
+<h1>Comparing the Functional Roles in Two Genomes</h1>
+
+As the KBase begins to be used to support development and maintenance
+of metabolic models, it becomes important that we be able to rapidly
+compare the functional roles that are implemented by protein-encoding
+genes in a pair of genomes.  In the most common case, we will be
+looking for errors in annotations between very close genomes.  In that
+case, most of the discrepancies will reflect errors in gene calling
+and annotations.  In the cases of more distant genomes, it becomes
+possible to infer metabolic differences from the discrepancies.
+<br><br>
+In any event, here we give a short program using the KBase API for
+extracting data from the CS and compasring the functional roles that
+occur in two genomes stored in the CS.
+<br><br>
+Here is the actual program:
+<br><pre>
+use CDMI_APIClient;
+my $kbO = CDMI_APIClient->new;
+
+my $usage = "usage: compare_two_genomes G1 G2";
+my($g1,$g2);
+
+(
+ ($g1 = shift @ARGV) &&
+ ($g2 = shift @ARGV)
+)
+    || die $usage;
+
+my $genH   = $kbO-><a href="http://bio-admin-2.mcs.anl.gov/ksite/index.php/developers/api-documentation/cdmi-api/#genomes_to_fids" target='_blank'>genomes_to_fids</a>([$g1,$g2],['peg']);
+my $fids1  = $genH->{$g1};
+my $fids2  = $genH->{$g2};
+my $funcH1 = $kbO-><a href="http://bio-admin-2.mcs.anl.gov/ksite/index.php/developers/api-documentation/cdmi-api/#fids_to_functions" target='_blank'>fids_to_functions</a>($fids1);
+my $funcH2 = $kbO-><a href="http://bio-admin-2.mcs.anl.gov/ksite/index.php/developers/api-documentation/cdmi-api/#fids_to_functions" target='_blank'>fids_to_functions</a>($fids2);
+my %roles_used_in_models = map { $_ => 1 } @{ $kbO-><a href="http://bio-admin-2.mcs.anl.gov/ksite/index.php/developers/api-documentation/cdmi-api/#all_roles_used_in_models" target='_blank'>all_roles_used_in_models</a>() };
+
+my %roles1 = map { $roles_used_in_models{$_} ? ($_ => 1) : () } 
+             map { &roles_of_function($_) } 
+             map { $funcH1->{$_} }
+             keys(%$funcH1);
+
+my %roles2 = map { $roles_used_in_models{$_} ? ($_ => 1) : () } 
+             map { &roles_of_function($_) } 
+             map { $funcH2->{$_} }
+             keys(%$funcH2);
+
+my @common = sort grep { $roles2{$_} }   keys(%roles1);
+my @just1  = sort grep { ! $roles2{$_} } keys(%roles1);
+my @just2  = sort grep { ! $roles1{$_} } keys(%roles2);
+
+&print_set(\@common,"In Common");
+&print_set(\@just1,"In Just $g1");
+&print_set(\@just2,"In Just $g2");
+
+sub print_set {
+    my($set,$title) = @_;
+
+    print $title,"\n\n";
+    foreach $_ (@$set) { print $_,"\n" }
+    print "//\n\n";
+}
+
+sub roles_of_function {
+    my ($assignment) = @_;
+    my $commentFree = ($assignment =~ /(.+?)\s*[#!]/ ? $1 : $assignment);
+    my @retVal = split /\s+[\/@]\s+|\s*;\s+/, $commentFree;
+    return @retVal;
+}
+<br></pre>
+The program takes in two arguments from the command line -- the IDs of
+the KBase genomes that are two be compared.  It uses
+
+<br><pre>
+my $genH   = $kbO-><a href="http://bio-admin-2.mcs.anl.gov/ksite/index.php/developers/api-documentation/cdmi-api/#genomes_to_fids" target='_blank'>genomes_to_fids</a>([$g1,$g2],['peg']);
+my $fids1  = $genH->{$g1};
+my $fids2  = $genH->{$g2};
+my $funcH1 = $kbO-><a href="http://bio-admin-2.mcs.anl.gov/ksite/index.php/developers/api-documentation/cdmi-api/#fids_to_functions" target='_blank'>fids_to_functions</a>($fids1);
+my $funcH2 = $kbO-><a href="http://bio-admin-2.mcs.anl.gov/ksite/index.php/developers/api-documentation/cdmi-api/#fids_to_functions" target='_blank'>fids_to_functions</a>($fids2);
+<br></pre>
+
+to retrieve the protein encoding genes from each genome ($genH is a
+hash keyed on the genome ID with values comprised of the PEGs
+associated with the genome), and then retrieving the functions
+associated with each of the Features of type 'peg'.
+
+The line
+<br><pre>
+
+my %roles_used_in_models = map { $_ => 1 } @{ $kbO-><a href="http://bio-admin-2.mcs.anl.gov/ksite/index.php/developers/api-documentation/cdmi-api/#all_roles_used_in_models" target='_blank'>all_roles_used_in_models</a>() };
+<br></pre>
+
+retrieves the roles that are used in models.  We will restrict our analysis to this set, 
+since the other roles tend to be poorly characterized.
+<br><br>
+We use
+<br><pre>
+
+my %roles1 = map { $roles_used_in_models{$_} ? ($_ => 1) : () } 
+             map { &roles_of_function($_) } 
+             map { $funcH1->{$_} }
+             keys(%$funcH1);
+
+my %roles2 = map { $roles_used_in_models{$_} ? ($_ => 1) : () } 
+             map { &roles_of_function($_) } 
+             map { $funcH2->{$_} }
+             keys(%$funcH2);
+<br></pre>
+
+to compute the functional roles that occur in $g1 and $g2.  The routine
+<br><pre>
+
+sub roles_of_function {
+    my ($assignment) = @_;
+    my $commentFree = ($assignment =~ /(.+?)\s*[#!]/ ? $1 : $assignment);
+    my @retVal = split /\s+[\/@]\s+|\s*;\s+/, $commentFree;
+    return @retVal;
+}
+<br></pre>
+
+is used to map each function to a set of functional roles.  In most cases a function 
+will implement a single role.  However, we are using the convention that
+
+<br><pre>
+     role1 / role2     means the protein implements two distinct roles using
+                       different domains in the protein (i.e., these represent
+		       fusions usually)
+
+     role1 @ role2     means that the protein implements two distinct roles
+                       probably due to broad specificity
+
+     role1; role2      means that there is uncertainty, but the best estimate is
+                       that the protein implements role1 or role2 (and maybe both).
+<br></pre>
+
+The lines
+
+<br><pre>
+    my @common = sort grep { $roles2{$_} }   keys(%roles1);
+    my @just1  = sort grep { ! $roles2{$_} } keys(%roles1);
+    my @just2  = sort grep { ! $roles1{$_} } keys(%roles2);
+<br></pre>
+
+compute the roles in common, those that occur in just $g1 and
+those that occur in just $g2.  The program prints the three sets and exists.
+It is a simple program, but it can be used to effectively get a sense of
+the performance supported by the KBase API and the utility of the operations.
+

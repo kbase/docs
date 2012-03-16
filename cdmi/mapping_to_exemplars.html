@@ -1,0 +1,196 @@
+<h1>Towards a Controlled Vocabulary Part 2: Mapping to Exemplars</h1>
+
+In the first tutorial relating to creating and maintaining a controlled vocabulary of function 
+(<a href="http://bio-admin-2.mcs.anl.gov/ksite/index.php/developers/tutorials/towards-a-controlled-vocabulary-part-1-defining-exemplars/">Part 1: Defining Exemplars</a>)
+we discussed the creation of a set of exemplars.  These exemplars allowed us to make
+statements like
+
+<blockquote>
+<i>The function of protein X is the same as that of exemplar E, where the exemplar
+is the ID of a Feature stored in KBase.</i>
+</blockquote>
+We now consider the issue of creating a translation table
+<br><pre>
+           [source,source-id,fid,exemplar]
+<br></pre>
+that maps fids from some sources of annotations into the exemplars.  
+In these tuples, <i>source_id</i> is the ID used in the source database,
+while <i>fid</i> is the registered KBase ID.
+To be concrete
+we will construct these tables for both MicrobesOnLine (MOL) genomes and the SEED genomes.
+In each case we will also construct sets of inconsistencies that will need to be
+resolved.
+<br><br>
+Let us begin by creating the translation table for the SEED.  The strategy here is
+as follows:
+<ol>
+<li>For each exemplar <b>E</b>, locate all SEED fids that have the same function as the KBase function
+assigned to <b>E</b>.  Call this set <b>S</b>. 
+
+<li>Then, for each SEED fid <b>F</b> in <b>S</b>, get all SEED fids that have identical md5 values. 
+    Call this set <b>FS</b>.
+Then,
+form a 2-tuple: [<b>F</b>,<b>FS</b>].
+
+<li>For each two-tuple [<b>F</b>, <b>FS</b>], split <b>FS</b> into 
+<br><br>
+<ul>
+<li>those genes with function identical to that of <b>E</b> and
+<li>those genes with functions that differ from <b>E</b>.
+</ul>
+<br><br>
+If a majority of genes with a common md5 have a function identical to that of <b>E</b>, write tuples
+<br><pre>
+    [SEED,SEED-id,fid,E] 
+<br></pre>
+
+as part of the translation table,
+and for cases in which a fid has a distinct function from the exemplar, write entries of the form
+<br><pre>
+    [SEED-id,fid,E] 
+<br></pre>
+as a 3-tuple to the file <i>SEED.inconsistencies.1</i>.  Otherwise, write
+the entire set of inconsistent fids to the file <i>SEED.inconsistencies.2</i>.
+</ol>
+<br><br>
+This simple procedure constructs a mapping of the SEED fids to
+the exemplars, a set of SEED fids that should probably be
+automatically reassigned a function to match an exemplar (<i>SEED.inconsistencies.1</i>),
+and a set of clear inconsistencies that need to be resolved (<i>SEED.inconsistencies.2</i>).
+<br><br>
+Here is how we implement this strategy:
+<br><pre>
+            cat exemplars.with.literature exemplars.for.no.lit.roles > exemplars
+
+            cut -f1,2 exemplars |
+            <a href="http://bio-admin-2.mcs.anl.gov/ksite/index.php/developers/api-documentation/cdmi-api/#roles_to_fids" target='_blank'>roles_to_fids</a> -c 1 |
+            <a href="http://bio-admin-2.mcs.anl.gov/ksite/index.php/developers/api-documentation/cdmi-api/#fids_to_genomes" target='_blank'>fids_to_genomes</a> | <a href="http://bio-admin-2.mcs.anl.gov/ksite/index.php/developers/api-documentation/cdmi-entity-api/#get_relationship_WasSubmittedBy" target='_blank'>get_relationship_WasSubmittedBy</a> -to id | grep "SEED$" | cut -f1,2,3 |
+            <a href="http://bio-admin-2.mcs.anl.gov/ksite/index.php/developers/api-documentation/cdmi-api/#fids_to_proteins" target='_blank'>fids_to_proteins</a> |
+            <a href="http://bio-admin-2.mcs.anl.gov/ksite/index.php/developers/api-documentation/cdmi-api/#fids_to_functions" target='_blank'>fids_to_functions</a> -c 3 |
+            <a href="http://bio-admin-2.mcs.anl.gov/ksite/index.php/developers/api-documentation/cdmi-entity-api/#get_entity_Feature" target='_blank'>get_entity_Feature</a> -c 3 -f source_id > role.exemplar.fid.md5.function.source_id
+
+            export TAB=`echo -e "\t"`
+            sort -t "$TAB" -k 4 role.exemplar.fid.md5.function.source_id |
+            perl make_seed_translation.pl > seed.translation.table
+<br></pre>
+where <i>make_seed_translation.pl</i>  program is given below.
+Let us go through this somewhat complex set of commands one step at a time.
+<br><pre>
+            cat exemplars.with.literature exemplars.for.no.lit.roles > exemplars
+<br></pre>
+
+just concatenates the two sets of exemplars into a single file.  The lines in this <i>exemplars</i>
+file contain 
+<br><pre>
+            [role,exemplar-fid,genome_name]
+<br></pre>
+These 3-tuples define our "abstract vocabulary of function".  
+Then, look at
+<br><pre>
+            cut -f1,2 exemplars |
+            <a href="http://bio-admin-2.mcs.anl.gov/ksite/index.php/developers/api-documentation/cdmi-api/#roles_to_fids" target='_blank'>roles_to_fids</a> -c 1 |
+            <a href="http://bio-admin-2.mcs.anl.gov/ksite/index.php/developers/api-documentation/cdmi-api/#fids_to_genomes" target='_blank'>fids_to_genomes</a> | <a href="http://bio-admin-2.mcs.anl.gov/ksite/index.php/developers/api-documentation/cdmi-entity-api/#get_relationship_WasSubmittedBy" target='_blank'>get_relationship_WasSubmittedBy</a> -to id | grep "SEED$" | cut -f1,2,3 |
+<br></pre>
+These three lines take the first two fields of the 3-tuples (dropping the <i>genome_name</i>),
+extend the table with fids that are believed to implement the role, and then the last line has
+the effect of keeping only entries that originated in the SEED.  The output will be 3-tuples
+<br><pre>
+            [role,exemplar-fid,KBase-id-of-SEED-fid]
+<br></pre>
+Then, we add columns for the md5 of the SEED-fid, the function of the SEED-fid, and
+the SEED-id of the SEED-fid.
+<br><pre>
+            <a href="http://bio-admin-2.mcs.anl.gov/ksite/index.php/developers/api-documentation/cdmi-api/#fids_to_proteins" target='_blank'>fids_to_proteins</a> |
+            <a href="http://bio-admin-2.mcs.anl.gov/ksite/index.php/developers/api-documentation/cdmi-api/#fids_to_functions" target='_blank'>fids_to_functions</a> -c 3 |
+            <a href="http://bio-admin-2.mcs.anl.gov/ksite/index.php/developers/api-documentation/cdmi-entity-api/#get_entity_Feature" target='_blank'>get_entity_Feature</a> -c 3 -f source_id > role.exemplar.fid.md5.function.source_id
+<br></pre>
+This gives
+<br><pre>
+            [role,exemplar-fid,
+	     KBase-id-of-SEED-fid,
+	     md5-SEED-fid,
+	     function-SEED-fid,
+	     SEED-id]
+<br></pre>
+Finally, we sort the table on the md5 values and use a simple perl program to generate
+the SEED translations:
+
+<br><pre>
+            export TAB=`echo -e "\t"`
+            sort -t "$TAB" -k 4 role.exemplar.fid.md5.function.source_id |
+            perl make_seed_translation.pl > seed.translation.table
+<br></pre>
+The <i>export</i> is a minor ugliness needed to tell the sort command that tabs
+are being used to delimit fields (this assumes use of the bash shell).  By sorting the
+tuples on md5 values, you group rows that represent the same protein sequence
+(and should, hence, be consistently annotated).  The program <i>make_seed_translation.pl</i>
+just forms the groups of rows with the same md5 values, checks to verify if they are
+consistently annotated (or can easily be made to be consistent), and writes out the
+desired SEED translation as the 4-tuples 
+
+<br><pre>
+           [source,source-id,fid,exemplar]
+<br></pre>
+where <i>source</i> will always be <i>SEED</i>.
+<br><br>
+The last time that we generated the SEED translations, the program produced somewhat over
+1.8 million tuples.  These impose a relatively consistent set of annotations on the SEED
+features.
+<br><br>
+Here is the program <i>make_seed_translation.pl</i> that actually generates the translation
+tuples.
+<br><pre>
+# make_seed_translation.pl
+#
+open(OUT1,">","SEED.inconsistencies.1") || die "could not open SEED.inconsistencies.1";
+open(OUT2,">","SEED.inconsistencies.2") || die "could not open SEED.inconsistencies.2";
+
+my $last = &lt;STDIN&gt;;
+while ($last && ($last =~ /(\S[^\t]*\S)\t(\S+)\t(\S+)\t(\S+)\t([^\t]*)\t(\S+)$/))
+{
+    my $role     = $1;
+    my $exemplar = $2;
+    my $md5      = $4;
+    my @match;
+    my @mismatch;
+    while ($last && ($last =~ /(\S[^\t]*\S)\t(\S+)\t(\S+)\t(\S+)\t([^\t]*)\t(\S+)$/) && ($4 eq $md5))
+    {
+	my $fid        = $3;
+	my $source_id  = $6;
+	my $function   = $5;
+	$function    =~ s/\s*#.*$//;
+	if ($function eq $role) 
+	{
+	    push(@match,[$source_id,$fid]);
+	}
+	else
+	{
+	    push(@mismatch,[$source_id,$fid]);
+	}
+        $last = &lt;STDIN&gt;;
+    }
+
+    if (@match > @mismatch)
+    {
+	foreach my $_ (@match)
+	{
+	    print join("\t",('SEED',@$_,$exemplar)),"\n";
+	}
+
+	foreach $_ (@mismatch)
+	{
+	    print OUT1 join("\t",(@$_,$exemplar)),"\n";
+	}
+    }
+    else
+    {
+	if (@match > 0)
+	{
+	    print OUT2 join("\t",map { @$_ } (@match,@mismatch)),"\n";
+	}
+    }
+}
+close(OUT1);
+close(OUT2);
+
+<br></pre>

@@ -1,0 +1,61 @@
+<h1>Getting Started with the KBase</h1>
+
+In order to use the KBase command line scripts as we discuss in these tutorials,
+you will need to install the KBase client software on your computer. This software is
+a collection of libraries and command scripts written in the perl programming language. There
+are several different routes toward installing this software; choosing the appropriate 
+one depends on your experience.
+
+<h2>CPAN installation</h2>
+
+The perl community maintains a site called the <a href="http://www.cpan.org/">
+Comprehensive Perl Archive Network</a>. This site is the canonical repository of 
+third-party perl code releases. The CPAN project maintains a 
+<a href="http://www.cpan.org/modules/INSTALL.html">general tutorial for 
+installing CPAN modules</a>.
+<p>
+The KBase developers publish stable snapshots of the KBase perl code to the
+CPAN repository on a regular basis. If you are familiar with the perl tools and have installed 
+packages using CPAN it will be a simple process to install the software
+using CPAN:
+<pre>
+   cpan Bio::KBase
+</pre>
+
+This command will download and install the latest version of the KBase software into
+your perl installation. Please note that if you are using for instance the system
+installation of perl on a Linux or Mac system that you will need to be able to have
+write access to the perl installation. In this case you will need to use the 
+<a href="http://en.wikipedia.org/wiki/Sudo">sudo</a> command to raise your privileges
+appropriately:
+<pre>
+  sudo cpan Bio::KBase
+</pre>
+
+If you have problems with using the cpan installation you may wish to install another
+tool called <i>cpanminus</i>. It is installed using cpan:
+<pre>
+  cpan App::cpanminus
+</pre>
+
+which then allows you to use the <i>cpanm</i> command:
+<pre>
+  cpanm Bio::Kbase
+</pre>
+
+<h2>Prepackaged Installations</h2>
+
+If you use a Windows or Mac computer there is a prepackaged alternative to the CPAN solution.
+The SEED project maintains a tool called myRAST which is a GUI-based genome browser and
+genome annotation system, but as a side benefit it includes a fully packaged installation of 
+perl with the prerequisites required for running the KBase software. 
+<p>
+<i>The myRAST version of the software is not yet ready for download.</i>
+
+<h2>Where to find software</h2>
+
+While we will be making the software public on CPAN, there is a lag between when it 
+is uploaded and when it appears on the CPAN mirror sites. The latest version will always
+be available at the KBase download site at 
+<a href="http://bio-admin-2.mcs.anl.gov/ksite/index.php/developers/downloads/">
+http://bio-admin-2.mcs.anl.gov/ksite/index.php/developers/downloads/</a>.
