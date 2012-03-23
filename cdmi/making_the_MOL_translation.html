@@ -36,7 +36,7 @@ Then, we create a table of data relating to the MOL genomes using
 	    <a href="http://kbase.us/index.php/developers/api-documentation/cdmi-api/#genomes_to_fids" target='_blank'>genomes_to_fids</a> peg | 
 	    cut -f 3 | 
 	    <a href="http://kbase.us/index.php/developers/api-documentation/cdmi-entity-api/#get_entity_Feature" target='_blank'>get_entity_Feature</a> -f source_id |
-	    <a href="http://kbase.us/index.php/developers/api-documentation/cdmi-api/#fids_to_proteins" target='_blank'>fids_to_proteins</a> -c 1 | 
+	    <a href="http://kbase.us/index.php/developers/api-documentation/cdmi-api/#fids_to_proteins" target='_blank'>fids_to_proteins</a> -c 1 2> /dev/null | 
 	    <a href="http://kbase.us/index.php/developers/api-documentation/cdmi-api/#fids_to_functions" target='_blank'>fids_to_functions</a> -c 1 |
 	    sort -k 3 > MOL.fid.source_id.md5.function
 <br></pre>

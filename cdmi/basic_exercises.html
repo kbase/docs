@@ -44,7 +44,7 @@ An entity-relationship model is an abstract description of the architecture
 of a database.  It describes the types of <i>entities</i>  and the <i>relationships</I>
 between entities.  The data fields associated with each entity type constitute most
 of the data in the CS.  However, fields can be associated with relationships, as well.
-For example, if two two entities of type Feature are related by a Relationship of type 
+For example, if two entities of type Feature are related by a Relationship of type 
 IsCoregulatedWith, then the Pearson correlation coefficient is an attribute of the relationship,
 and not of either of the related entities by themselves.  The entity types and relationship types
 are mapped into a standard relational database (in the case of the CS), but it might well be a good
@@ -93,17 +93,17 @@ minutes and verify the following:
             diagram, you need to hit the "Image" button -- not the
             back arrow on your browser.
 
-        <br><br><li>  To get from <b>ProteinSequence</b> to a related Feature that
-            encodes the protein, one crosses the IsProteinFor
+        <br><br><li>  To get from <b>ProteinSequence</b> to a related Feature 
+            linked to the protein, one crosses the IsProteinFor
             relationship (<i>ProteinSequence IsProteinFor Feature</i>).
 
         <br><br><li>   So, one interpretation of the original goal of seeing
-             which featuers in the CS connect to publications, is
+             which features in the CS connect to publications, is
 <blockquote>
 	        Start with the list of <b>Publication</b>s.  For each one,
 	         locate the <b>ProteinSequence</b>s described in the
-	         publication.  Then, trace these back to the Features
-	         that encode them and produce a 2-column table
+	         publication.  Then, use the protein sequences to find the Features
+	         and produce a 2-column table
 		      [Publication,Feature]
 </blockquote>
 <br>
@@ -339,7 +339,7 @@ number of contigs, and the size of the genome, you might use
 
 <h2>"Well-Trodden Paths"</h2>
 
-Besides the three classes of general tools, there are tools that
+Besides the three classes of general tools, there are scripts that
 handle frequently employed operations.  Here is a list that you might
 well find convenient:
 
@@ -596,13 +596,13 @@ well find convenient:
 	      kb|g.0.peg.118	211eeaac246f953b67ca2ccd0477fe3b
 <br></pre>
 	      
-<h3>fids_to_regulons</h3>
+<h3><a href="http://kbase.us/index.php/developers/api-documentation/cdmi-api/#fids_to_regulon_data" target='_blank'>fids_to_regulon_data</a></h3>
 	
 	Sets of co-regulated genes maintained at RegPrecise or other
         similar databases are maintained.  These regulons are sets of
         genes having a common regulatory mechanism, but not
         necessarily a common expression pattern.  The notion is that
-        of a set of genes effected by a transcriptional regulator.
+        of a set of genes affected by a transcriptional regulator.
         The notion is certainly closely related to that of atomic
         regulon, but not identical.  To see which CoregulatedSets we
         have in the CS, use
@@ -615,7 +615,7 @@ well find convenient:
         something like
 
 <br><pre>
-	     echo 'kb|g.0.peg.4288' | fids_to_regulons | <a href="http://kbase.us/index.php/developers/api-documentation/cdmi-api/#regulons_to_fids" target='_blank'>regulons_to_fids</a>
+	     echo 'kb|g.0.peg.4288' | <a href="http://kbase.us/index.php/developers/api-documentation/cdmi-api/#fids_to_regulon_data" target='_blank'>fids_to_regulon_data</a> | <a href="http://kbase.us/index.php/developers/api-documentation/cdmi-api/#regulons_to_fids" target='_blank'>regulons_to_fids</a>
 <br></pre>
 
 <h3><a href="http://kbase.us/index.php/developers/api-documentation/cdmi-api/#fids_to_roles" target='_blank'>fids_to_roles</a></h3>
