@@ -1,0 +1,100 @@
+<a name='___top' class='dummyTopAnchor' ></a>
+
+<h2><a class='u' href='#___top' title='click to go to top of document'
+name="external_ids_to_kbase_ids"
+>external_ids_to_kbase_ids</a></h2>
+
+<p>Given a set of external identifiers,
+look up the associated KBase identifiers.
+If no KBase ID is associated with the external id,
+no entry will be present in the return.</p>
+
+<p>Example:</p>
+
+<pre>    external_ids_to_kbase_ids DB-name &#60; input &#62; output</pre>
+
+<p>The standard input should be a tab-separated table (i.e., each line is a tab-separated set of fields). Normally, the last field in each line would contain the identifer. If another column contains the identifier use</p>
+
+<pre>    -c N</pre>
+
+<p>where N is the column (from 1) that contains the identifier.</p>
+
+<p>This is a pipe command. The input is taken from the standard input, and the output is to the standard output.</p>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Command-Line_Options"
+>Command-Line Options</a></h3>
+
+<dl>
+<dt><a name="DB-name"
+>DB-name</a></dt>
+
+<dd>
+<p>The name of the external database to look up.</p>
+
+<dt><a name="-c_Column"
+>-c Column</a></dt>
+
+<dd>
+<p>This is used only if the column containing the identifier is not the last column.</p>
+
+<dt><a name="-i_InputFile_[_use_InputFile,_rather_than_stdin_]"
+>-i InputFile [ use InputFile, rather than stdin ]</a></dt>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Output_Format"
+>Output Format</a></h3>
+
+<p>The standard output is a tab-delimited file. It consists of the input file with extra columns added.</p>
+
+<p>Input lines that cannot be extended are written to stderr.</p>
+<hr>
+<a name='___top' class='dummyTopAnchor' ></a>
+
+<h2><a class='u' href='#___top' title='click to go to top of document'
+name="kbase_ids_to_external_ids"
+>kbase_ids_to_external_ids</a></h2>
+
+<p>Given a set of KBase identifiers,
+look up the associated external identifiers.</p>
+
+<p>Example:</p>
+
+<pre>    kbase_ids_to_external_ids  &#60; input &#62; output</pre>
+
+<p>The standard input should be a tab-separated table (i.e., each line is a tab-separated set of fields). Normally, the last field in each line would contain the identifer. If another column contains the identifier use</p>
+
+<pre>    -c N</pre>
+
+<p>where N is the column (from 1) that contains the identifier.</p>
+
+<p>This is a pipe command. The input is taken from the standard input, and the output is to the standard output.</p>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Command-Line_Options"
+>Command-Line Options</a></h3>
+
+<dl>
+<dt><a name="-c_Column"
+>-c Column</a></dt>
+
+<dd>
+<p>This is used only if the column containing the identifier is not the last column.</p>
+
+<dt><a name="-i_InputFile"
+>-i InputFile</a></dt>
+
+<dd>
+<p>Read data from InputFile instead of from the standard input.</p>
+</dd>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Output_Format"
+>Output Format</a></h3>
+
+<p>The standard output is a tab-delimited file. It consists of the input file with extra columns added.</p>
+
+<p>Input lines that cannot be extended are written to stderr.</p>
+<hr>
