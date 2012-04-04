@@ -669,8 +669,8 @@ function CDMI_API(url) {
 	
 	//Send the proper header information along with the request
 	http.setRequestHeader("Content-type", "application/json");
-	http.setRequestHeader("Content-length", body.length);
-	http.setRequestHeader("Connection", "close");
+	//http.setRequestHeader("Content-length", body.length);
+	//http.setRequestHeader("Connection", "close");
 	return [http, body];
     }
     
