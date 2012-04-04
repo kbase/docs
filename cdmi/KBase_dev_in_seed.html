@@ -110,6 +110,17 @@ skeletal form for a new command (and you will fix it up, put it in
 add it to CVS, and commit it.  You should spiff up the 
 documentation before doing so.
 
+<p>
+To create the skeleton, you will need to move to the KBaseCDMI directory
+and run the command
+<pre>
+./generate_script_skeleton function-name > script_file.pl
+</pre>
+
+This will give you the basic script that you will need to read through, customize,
+test, and update the documentation. Once that is complete you should move
+the script into the scripts directory and "cvs add" it to the repository.
+
 <h2>Updating Tutorial Material</h2>
 
 The tutorial material is critical, at least at this initial stage of the

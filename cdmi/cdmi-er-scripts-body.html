@@ -25112,3 +25112,5465 @@ name="Output_Format"
 
 <p>The standard output is a tab-delimited file. It consists of the input file with an extra column added for each requested field. Input lines that cannot be extended are written to stderr.</p>
 <hr>
+<a name='___top' class='dummyTopAnchor' ></a>
+
+<h2><a class='u' href='#___top' title='click to go to top of document'
+name="query_entity_AlignmentTree"
+>query_entity_AlignmentTree</a></h2>
+
+<p>Query the entity AlignmentTree.</p>
+
+<p>An alignment arranges a group of protein sequences so that they match.
+Each alignment is associated with a phylogenetic tree that describes how the sequences developed and their evolutionary distance.
+The actual tree and alignment FASTA are stored in separate flat files.
+The Kbase will maintain a set of alignments and associated trees.
+The majority of these will be based on protein sequences.
+We will not have a comprehensive set but we will have tens of thousands of such alignments,
+and we view them as an imporant resource to support annotation.
+The alignments/trees will include the tools and parameters used to construct them.
+Access to the underlying sequences and trees in a form convenient to existing tools will be supported.</p>
+
+<p>Example:</p>
+
+<pre>    query_entity_AlignmentTree -a </pre>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Related_entities"
+>Related entities</a></h3>
+
+<p>The AlignmentTree entity has the following relationship links:</p>
+
+<dl>
+<dt><a name="Aligns_ProteinSequence"
+>Aligns ProteinSequence</a></dt>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Command-Line_Options"
+>Command-Line Options</a></h3>
+
+<dl>
+<dt><a name="-is_field,value"
+>-is field,value</a></dt>
+
+<dd>
+<p>Limit the results to entities where the given field has the given value.</p>
+
+<dt><a name="-like_field,value"
+>-like field,value</a></dt>
+
+<dd>
+<p>Limit the results to entities where the given field is LIKE (in the sql sense) the given value.</p>
+
+<dt><a name="-op_operator,field,value"
+>-op operator,field,value</a></dt>
+
+<dd>
+<p>Limit the results to entities where the given field is related to the given value based on the given operator.</p>
+
+<p>The operators supported are as follows. We provide text base alternatives to the comparison operators so that extra quoting is not required to keep the command-line shell from confusing them with shell I/O redirection operators.</p>
+
+<dl>
+<dt><a name="&#60;_or_lt"
+>&#60; or lt</a></dt>
+
+<dd>
+<dt><a name="&#62;_or_gt"
+>&#62; or gt</a></dt>
+
+<dd>
+<dt><a name="&#60;=_or_le"
+>&#60;= or le</a></dt>
+
+<dd>
+<dt><a name="&#62;=_or_ge"
+>&#62;= or ge</a></dt>
+
+<dd>
+<dt><a name="="
+>=</a></dt>
+
+<dd>
+<dt><a name="LIKE"
+>LIKE</a></dt>
+</dl>
+
+<dt><a name="-a"
+>-a</a></dt>
+
+<dd>
+<p>Return all fields.</p>
+
+<dt><a name="-h"
+>-h</a></dt>
+
+<dd>
+<p>Display a list of the fields available for use.</p>
+
+<dt><a name="-fields_field-list"
+>-fields field-list</a></dt>
+
+<dd>
+<p>Choose a set of fields to return. Field-list is a comma-separated list of strings. The following fields are available:</p>
+
+<dl>
+<dt><a name="alignment_method"
+>alignment_method</a></dt>
+
+<dd>
+<dt><a name="alignment_parameters"
+>alignment_parameters</a></dt>
+
+<dd>
+<dt><a name="alignment_properties"
+>alignment_properties</a></dt>
+
+<dd>
+<dt><a name="tree_method"
+>tree_method</a></dt>
+
+<dd>
+<dt><a name="tree_parameters"
+>tree_parameters</a></dt>
+
+<dd>
+<dt><a name="tree_properties"
+>tree_properties</a></dt>
+</dl>
+</dd>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Output_Format"
+>Output Format</a></h3>
+
+<p>The standard output is a tab-delimited file containing a column for each requested field.</p>
+<hr>
+<a name='___top' class='dummyTopAnchor' ></a>
+
+<h2><a class='u' href='#___top' title='click to go to top of document'
+name="query_entity_Annotation"
+>query_entity_Annotation</a></h2>
+
+<p>Query the entity Annotation.</p>
+
+<p>An annotation is a comment attached to a feature.
+Annotations are used to track the history of a feature&#39;s functional assignments and any related issues.
+The key is the feature ID followed by a colon and a complemented ten-digit sequence number.</p>
+
+<p>Example:</p>
+
+<pre>    query_entity_Annotation -a </pre>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Related_entities"
+>Related entities</a></h3>
+
+<p>The Annotation entity has the following relationship links:</p>
+
+<dl>
+<dt><a name="Annotates_Feature"
+>Annotates Feature</a></dt>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Command-Line_Options"
+>Command-Line Options</a></h3>
+
+<dl>
+<dt><a name="-is_field,value"
+>-is field,value</a></dt>
+
+<dd>
+<p>Limit the results to entities where the given field has the given value.</p>
+
+<dt><a name="-like_field,value"
+>-like field,value</a></dt>
+
+<dd>
+<p>Limit the results to entities where the given field is LIKE (in the sql sense) the given value.</p>
+
+<dt><a name="-op_operator,field,value"
+>-op operator,field,value</a></dt>
+
+<dd>
+<p>Limit the results to entities where the given field is related to the given value based on the given operator.</p>
+
+<p>The operators supported are as follows. We provide text base alternatives to the comparison operators so that extra quoting is not required to keep the command-line shell from confusing them with shell I/O redirection operators.</p>
+
+<dl>
+<dt><a name="&#60;_or_lt"
+>&#60; or lt</a></dt>
+
+<dd>
+<dt><a name="&#62;_or_gt"
+>&#62; or gt</a></dt>
+
+<dd>
+<dt><a name="&#60;=_or_le"
+>&#60;= or le</a></dt>
+
+<dd>
+<dt><a name="&#62;=_or_ge"
+>&#62;= or ge</a></dt>
+
+<dd>
+<dt><a name="="
+>=</a></dt>
+
+<dd>
+<dt><a name="LIKE"
+>LIKE</a></dt>
+</dl>
+
+<dt><a name="-a"
+>-a</a></dt>
+
+<dd>
+<p>Return all fields.</p>
+
+<dt><a name="-h"
+>-h</a></dt>
+
+<dd>
+<p>Display a list of the fields available for use.</p>
+
+<dt><a name="-fields_field-list"
+>-fields field-list</a></dt>
+
+<dd>
+<p>Choose a set of fields to return. Field-list is a comma-separated list of strings. The following fields are available:</p>
+
+<dl>
+<dt><a name="annotator"
+>annotator</a></dt>
+
+<dd>
+<dt><a name="comment"
+>comment</a></dt>
+
+<dd>
+<dt><a name="annotation_time"
+>annotation_time</a></dt>
+</dl>
+</dd>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Output_Format"
+>Output Format</a></h3>
+
+<p>The standard output is a tab-delimited file containing a column for each requested field.</p>
+<hr>
+<a name='___top' class='dummyTopAnchor' ></a>
+
+<h2><a class='u' href='#___top' title='click to go to top of document'
+name="query_entity_AtomicRegulon"
+>query_entity_AtomicRegulon</a></h2>
+
+<p>Query the entity AtomicRegulon.</p>
+
+<p>An atomic regulon is an indivisible group of coregulated features on a single genome.
+Atomic regulons are constructed so that a given feature can only belong to one.
+Because of this,
+the expression levels for atomic regulons represent in some sense the state of a cell.
+An atomicRegulon is a set of protein-encoding genes that are believed to have identical expression profiles (i.e.,
+they will all be expressed or none will be expressed in the vast majority of conditions).
+These are sometimes referred to as &#34;atomic regulons&#34;.
+Note that there are more common notions of &#34;coregulated set of genes&#34; based on the notion that a single regulatory mechanism impacts an entire set of genes.
+Since multiple other mechanisms may impact overlapping sets,
+the genes impacted by a regulatory mechanism need not all share the same expression profile.
+We use a distinct notion (CoregulatedSet) to reference sets of genes impacted by a single regulatory mechanism (i.e.,
+by a single transcription regulator).</p>
+
+<p>Example:</p>
+
+<pre>    query_entity_AtomicRegulon -a </pre>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Related_entities"
+>Related entities</a></h3>
+
+<p>The AtomicRegulon entity has the following relationship links:</p>
+
+<dl>
+<dt><a name="IsAffectedIn_Experiment"
+>IsAffectedIn Experiment</a></dt>
+
+<dd>
+<dt><a name="IsFormedOf_Feature"
+>IsFormedOf Feature</a></dt>
+
+<dd>
+<dt><a name="ReflectsStateOf_Genome"
+>ReflectsStateOf Genome</a></dt>
+
+<dd>
+<dt><a name="WasGeneratedFrom_ProbeSet"
+>WasGeneratedFrom ProbeSet</a></dt>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Command-Line_Options"
+>Command-Line Options</a></h3>
+
+<dl>
+<dt><a name="-is_field,value"
+>-is field,value</a></dt>
+
+<dd>
+<p>Limit the results to entities where the given field has the given value.</p>
+
+<dt><a name="-like_field,value"
+>-like field,value</a></dt>
+
+<dd>
+<p>Limit the results to entities where the given field is LIKE (in the sql sense) the given value.</p>
+
+<dt><a name="-op_operator,field,value"
+>-op operator,field,value</a></dt>
+
+<dd>
+<p>Limit the results to entities where the given field is related to the given value based on the given operator.</p>
+
+<p>The operators supported are as follows. We provide text base alternatives to the comparison operators so that extra quoting is not required to keep the command-line shell from confusing them with shell I/O redirection operators.</p>
+
+<dl>
+<dt><a name="&#60;_or_lt"
+>&#60; or lt</a></dt>
+
+<dd>
+<dt><a name="&#62;_or_gt"
+>&#62; or gt</a></dt>
+
+<dd>
+<dt><a name="&#60;=_or_le"
+>&#60;= or le</a></dt>
+
+<dd>
+<dt><a name="&#62;=_or_ge"
+>&#62;= or ge</a></dt>
+
+<dd>
+<dt><a name="="
+>=</a></dt>
+
+<dd>
+<dt><a name="LIKE"
+>LIKE</a></dt>
+</dl>
+
+<dt><a name="-a"
+>-a</a></dt>
+
+<dd>
+<p>Return all fields.</p>
+
+<dt><a name="-h"
+>-h</a></dt>
+
+<dd>
+<p>Display a list of the fields available for use.</p>
+
+<dt><a name="-fields_field-list"
+>-fields field-list</a></dt>
+
+<dd>
+<p>Choose a set of fields to return. Field-list is a comma-separated list of strings. The following fields are available:</p>
+</dd>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Output_Format"
+>Output Format</a></h3>
+
+<p>The standard output is a tab-delimited file containing a column for each requested field.</p>
+<hr>
+<a name='___top' class='dummyTopAnchor' ></a>
+
+<h2><a class='u' href='#___top' title='click to go to top of document'
+name="query_entity_Attribute"
+>query_entity_Attribute</a></h2>
+
+<p>Query the entity Attribute.</p>
+
+<p>An attribute describes a category of condition or characteristic for an experiment.
+The goals of the experiment can be inferred from its values for all the attributes of interest.</p>
+
+<p>Example:</p>
+
+<pre>    query_entity_Attribute -a </pre>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Related_entities"
+>Related entities</a></h3>
+
+<p>The Attribute entity has the following relationship links:</p>
+
+<dl>
+<dt><a name="HasValueIn_Experiment"
+>HasValueIn Experiment</a></dt>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Command-Line_Options"
+>Command-Line Options</a></h3>
+
+<dl>
+<dt><a name="-is_field,value"
+>-is field,value</a></dt>
+
+<dd>
+<p>Limit the results to entities where the given field has the given value.</p>
+
+<dt><a name="-like_field,value"
+>-like field,value</a></dt>
+
+<dd>
+<p>Limit the results to entities where the given field is LIKE (in the sql sense) the given value.</p>
+
+<dt><a name="-op_operator,field,value"
+>-op operator,field,value</a></dt>
+
+<dd>
+<p>Limit the results to entities where the given field is related to the given value based on the given operator.</p>
+
+<p>The operators supported are as follows. We provide text base alternatives to the comparison operators so that extra quoting is not required to keep the command-line shell from confusing them with shell I/O redirection operators.</p>
+
+<dl>
+<dt><a name="&#60;_or_lt"
+>&#60; or lt</a></dt>
+
+<dd>
+<dt><a name="&#62;_or_gt"
+>&#62; or gt</a></dt>
+
+<dd>
+<dt><a name="&#60;=_or_le"
+>&#60;= or le</a></dt>
+
+<dd>
+<dt><a name="&#62;=_or_ge"
+>&#62;= or ge</a></dt>
+
+<dd>
+<dt><a name="="
+>=</a></dt>
+
+<dd>
+<dt><a name="LIKE"
+>LIKE</a></dt>
+</dl>
+
+<dt><a name="-a"
+>-a</a></dt>
+
+<dd>
+<p>Return all fields.</p>
+
+<dt><a name="-h"
+>-h</a></dt>
+
+<dd>
+<p>Display a list of the fields available for use.</p>
+
+<dt><a name="-fields_field-list"
+>-fields field-list</a></dt>
+
+<dd>
+<p>Choose a set of fields to return. Field-list is a comma-separated list of strings. The following fields are available:</p>
+
+<dl>
+<dt><a name="description"
+>description</a></dt>
+</dl>
+</dd>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Output_Format"
+>Output Format</a></h3>
+
+<p>The standard output is a tab-delimited file containing a column for each requested field.</p>
+<hr>
+<a name='___top' class='dummyTopAnchor' ></a>
+
+<h2><a class='u' href='#___top' title='click to go to top of document'
+name="query_entity_Biomass"
+>query_entity_Biomass</a></h2>
+
+<p>Query the entity Biomass.</p>
+
+<p>A biomass is a collection of compounds in a specific ratio and in specific compartments that are necessary for a cell to function properly.
+The prediction of biomasses is key to the functioning of the model.</p>
+
+<p>Example:</p>
+
+<pre>    query_entity_Biomass -a </pre>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Related_entities"
+>Related entities</a></h3>
+
+<p>The Biomass entity has the following relationship links:</p>
+
+<dl>
+<dt><a name="IsComprisedOf_BiomassCompound"
+>IsComprisedOf BiomassCompound</a></dt>
+
+<dd>
+<dt><a name="IsManagedBy_Model"
+>IsManagedBy Model</a></dt>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Command-Line_Options"
+>Command-Line Options</a></h3>
+
+<dl>
+<dt><a name="-is_field,value"
+>-is field,value</a></dt>
+
+<dd>
+<p>Limit the results to entities where the given field has the given value.</p>
+
+<dt><a name="-like_field,value"
+>-like field,value</a></dt>
+
+<dd>
+<p>Limit the results to entities where the given field is LIKE (in the sql sense) the given value.</p>
+
+<dt><a name="-op_operator,field,value"
+>-op operator,field,value</a></dt>
+
+<dd>
+<p>Limit the results to entities where the given field is related to the given value based on the given operator.</p>
+
+<p>The operators supported are as follows. We provide text base alternatives to the comparison operators so that extra quoting is not required to keep the command-line shell from confusing them with shell I/O redirection operators.</p>
+
+<dl>
+<dt><a name="&#60;_or_lt"
+>&#60; or lt</a></dt>
+
+<dd>
+<dt><a name="&#62;_or_gt"
+>&#62; or gt</a></dt>
+
+<dd>
+<dt><a name="&#60;=_or_le"
+>&#60;= or le</a></dt>
+
+<dd>
+<dt><a name="&#62;=_or_ge"
+>&#62;= or ge</a></dt>
+
+<dd>
+<dt><a name="="
+>=</a></dt>
+
+<dd>
+<dt><a name="LIKE"
+>LIKE</a></dt>
+</dl>
+
+<dt><a name="-a"
+>-a</a></dt>
+
+<dd>
+<p>Return all fields.</p>
+
+<dt><a name="-h"
+>-h</a></dt>
+
+<dd>
+<p>Display a list of the fields available for use.</p>
+
+<dt><a name="-fields_field-list"
+>-fields field-list</a></dt>
+
+<dd>
+<p>Choose a set of fields to return. Field-list is a comma-separated list of strings. The following fields are available:</p>
+
+<dl>
+<dt><a name="mod_date"
+>mod_date</a></dt>
+
+<dd>
+<dt><a name="name"
+>name</a></dt>
+</dl>
+</dd>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Output_Format"
+>Output Format</a></h3>
+
+<p>The standard output is a tab-delimited file containing a column for each requested field.</p>
+<hr>
+<a name='___top' class='dummyTopAnchor' ></a>
+
+<h2><a class='u' href='#___top' title='click to go to top of document'
+name="query_entity_BiomassCompound"
+>query_entity_BiomassCompound</a></h2>
+
+<p>Query the entity BiomassCompound.</p>
+
+<p>A Biomass Compound represents the occurrence of a particular compound in a biomass.</p>
+
+<p>Example:</p>
+
+<pre>    query_entity_BiomassCompound -a </pre>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Related_entities"
+>Related entities</a></h3>
+
+<p>The BiomassCompound entity has the following relationship links:</p>
+
+<dl>
+<dt><a name="Comprises_Biomass"
+>Comprises Biomass</a></dt>
+
+<dd>
+<dt><a name="IsUsageOf_Compound"
+>IsUsageOf Compound</a></dt>
+
+<dd>
+<dt><a name="Targets_ModelCompartment"
+>Targets ModelCompartment</a></dt>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Command-Line_Options"
+>Command-Line Options</a></h3>
+
+<dl>
+<dt><a name="-is_field,value"
+>-is field,value</a></dt>
+
+<dd>
+<p>Limit the results to entities where the given field has the given value.</p>
+
+<dt><a name="-like_field,value"
+>-like field,value</a></dt>
+
+<dd>
+<p>Limit the results to entities where the given field is LIKE (in the sql sense) the given value.</p>
+
+<dt><a name="-op_operator,field,value"
+>-op operator,field,value</a></dt>
+
+<dd>
+<p>Limit the results to entities where the given field is related to the given value based on the given operator.</p>
+
+<p>The operators supported are as follows. We provide text base alternatives to the comparison operators so that extra quoting is not required to keep the command-line shell from confusing them with shell I/O redirection operators.</p>
+
+<dl>
+<dt><a name="&#60;_or_lt"
+>&#60; or lt</a></dt>
+
+<dd>
+<dt><a name="&#62;_or_gt"
+>&#62; or gt</a></dt>
+
+<dd>
+<dt><a name="&#60;=_or_le"
+>&#60;= or le</a></dt>
+
+<dd>
+<dt><a name="&#62;=_or_ge"
+>&#62;= or ge</a></dt>
+
+<dd>
+<dt><a name="="
+>=</a></dt>
+
+<dd>
+<dt><a name="LIKE"
+>LIKE</a></dt>
+</dl>
+
+<dt><a name="-a"
+>-a</a></dt>
+
+<dd>
+<p>Return all fields.</p>
+
+<dt><a name="-h"
+>-h</a></dt>
+
+<dd>
+<p>Display a list of the fields available for use.</p>
+
+<dt><a name="-fields_field-list"
+>-fields field-list</a></dt>
+
+<dd>
+<p>Choose a set of fields to return. Field-list is a comma-separated list of strings. The following fields are available:</p>
+
+<dl>
+<dt><a name="coefficient"
+>coefficient</a></dt>
+</dl>
+</dd>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Output_Format"
+>Output Format</a></h3>
+
+<p>The standard output is a tab-delimited file containing a column for each requested field.</p>
+<hr>
+<a name='___top' class='dummyTopAnchor' ></a>
+
+<h2><a class='u' href='#___top' title='click to go to top of document'
+name="query_entity_Compartment"
+>query_entity_Compartment</a></h2>
+
+<p>Query the entity Compartment.</p>
+
+<p>A compartment is a section of a single model that represents the environment in which a reaction takes place (e.g.
+cell wall).</p>
+
+<p>Example:</p>
+
+<pre>    query_entity_Compartment -a </pre>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Related_entities"
+>Related entities</a></h3>
+
+<p>The Compartment entity has the following relationship links:</p>
+
+<dl>
+<dt><a name="IsDefaultFor_Reaction"
+>IsDefaultFor Reaction</a></dt>
+
+<dd>
+<dt><a name="IsDefaultLocationOf_Reagent"
+>IsDefaultLocationOf Reagent</a></dt>
+
+<dd>
+<dt><a name="IsInstantiatedBy_ModelCompartment"
+>IsInstantiatedBy ModelCompartment</a></dt>
+
+<dd>
+<dt><a name="IsProposedLocationOf_ReactionRule"
+>IsProposedLocationOf ReactionRule</a></dt>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Command-Line_Options"
+>Command-Line Options</a></h3>
+
+<dl>
+<dt><a name="-is_field,value"
+>-is field,value</a></dt>
+
+<dd>
+<p>Limit the results to entities where the given field has the given value.</p>
+
+<dt><a name="-like_field,value"
+>-like field,value</a></dt>
+
+<dd>
+<p>Limit the results to entities where the given field is LIKE (in the sql sense) the given value.</p>
+
+<dt><a name="-op_operator,field,value"
+>-op operator,field,value</a></dt>
+
+<dd>
+<p>Limit the results to entities where the given field is related to the given value based on the given operator.</p>
+
+<p>The operators supported are as follows. We provide text base alternatives to the comparison operators so that extra quoting is not required to keep the command-line shell from confusing them with shell I/O redirection operators.</p>
+
+<dl>
+<dt><a name="&#60;_or_lt"
+>&#60; or lt</a></dt>
+
+<dd>
+<dt><a name="&#62;_or_gt"
+>&#62; or gt</a></dt>
+
+<dd>
+<dt><a name="&#60;=_or_le"
+>&#60;= or le</a></dt>
+
+<dd>
+<dt><a name="&#62;=_or_ge"
+>&#62;= or ge</a></dt>
+
+<dd>
+<dt><a name="="
+>=</a></dt>
+
+<dd>
+<dt><a name="LIKE"
+>LIKE</a></dt>
+</dl>
+
+<dt><a name="-a"
+>-a</a></dt>
+
+<dd>
+<p>Return all fields.</p>
+
+<dt><a name="-h"
+>-h</a></dt>
+
+<dd>
+<p>Display a list of the fields available for use.</p>
+
+<dt><a name="-fields_field-list"
+>-fields field-list</a></dt>
+
+<dd>
+<p>Choose a set of fields to return. Field-list is a comma-separated list of strings. The following fields are available:</p>
+
+<dl>
+<dt><a name="abbr"
+>abbr</a></dt>
+
+<dd>
+<dt><a name="mod_date"
+>mod_date</a></dt>
+
+<dd>
+<dt><a name="name"
+>name</a></dt>
+
+<dd>
+<dt><a name="msid"
+>msid</a></dt>
+</dl>
+</dd>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Output_Format"
+>Output Format</a></h3>
+
+<p>The standard output is a tab-delimited file containing a column for each requested field.</p>
+<hr>
+<a name='___top' class='dummyTopAnchor' ></a>
+
+<h2><a class='u' href='#___top' title='click to go to top of document'
+name="query_entity_Complex"
+>query_entity_Complex</a></h2>
+
+<p>Query the entity Complex.</p>
+
+<p>A complex is a set of chemical reactions that act in concert to effect a role.</p>
+
+<p>Example:</p>
+
+<pre>    query_entity_Complex -a </pre>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Related_entities"
+>Related entities</a></h3>
+
+<p>The Complex entity has the following relationship links:</p>
+
+<dl>
+<dt><a name="HasStep_ReactionRule"
+>HasStep ReactionRule</a></dt>
+
+<dd>
+<dt><a name="IsTriggeredBy_Role"
+>IsTriggeredBy Role</a></dt>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Command-Line_Options"
+>Command-Line Options</a></h3>
+
+<dl>
+<dt><a name="-is_field,value"
+>-is field,value</a></dt>
+
+<dd>
+<p>Limit the results to entities where the given field has the given value.</p>
+
+<dt><a name="-like_field,value"
+>-like field,value</a></dt>
+
+<dd>
+<p>Limit the results to entities where the given field is LIKE (in the sql sense) the given value.</p>
+
+<dt><a name="-op_operator,field,value"
+>-op operator,field,value</a></dt>
+
+<dd>
+<p>Limit the results to entities where the given field is related to the given value based on the given operator.</p>
+
+<p>The operators supported are as follows. We provide text base alternatives to the comparison operators so that extra quoting is not required to keep the command-line shell from confusing them with shell I/O redirection operators.</p>
+
+<dl>
+<dt><a name="&#60;_or_lt"
+>&#60; or lt</a></dt>
+
+<dd>
+<dt><a name="&#62;_or_gt"
+>&#62; or gt</a></dt>
+
+<dd>
+<dt><a name="&#60;=_or_le"
+>&#60;= or le</a></dt>
+
+<dd>
+<dt><a name="&#62;=_or_ge"
+>&#62;= or ge</a></dt>
+
+<dd>
+<dt><a name="="
+>=</a></dt>
+
+<dd>
+<dt><a name="LIKE"
+>LIKE</a></dt>
+</dl>
+
+<dt><a name="-a"
+>-a</a></dt>
+
+<dd>
+<p>Return all fields.</p>
+
+<dt><a name="-h"
+>-h</a></dt>
+
+<dd>
+<p>Display a list of the fields available for use.</p>
+
+<dt><a name="-fields_field-list"
+>-fields field-list</a></dt>
+
+<dd>
+<p>Choose a set of fields to return. Field-list is a comma-separated list of strings. The following fields are available:</p>
+
+<dl>
+<dt><a name="name"
+>name</a></dt>
+
+<dd>
+<dt><a name="msid"
+>msid</a></dt>
+
+<dd>
+<dt><a name="mod_date"
+>mod_date</a></dt>
+</dl>
+</dd>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Output_Format"
+>Output Format</a></h3>
+
+<p>The standard output is a tab-delimited file containing a column for each requested field.</p>
+<hr>
+<a name='___top' class='dummyTopAnchor' ></a>
+
+<h2><a class='u' href='#___top' title='click to go to top of document'
+name="query_entity_Compound"
+>query_entity_Compound</a></h2>
+
+<p>Query the entity Compound.</p>
+
+<p>A compound is a chemical that participates in a reaction.
+Both ligands and reaction components are treated as compounds.</p>
+
+<p>Example:</p>
+
+<pre>    query_entity_Compound -a </pre>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Related_entities"
+>Related entities</a></h3>
+
+<p>The Compound entity has the following relationship links:</p>
+
+<dl>
+<dt><a name="HasUsage_BiomassCompound"
+>HasUsage BiomassCompound</a></dt>
+
+<dd>
+<dt><a name="IsPresentIn_Media"
+>IsPresentIn Media</a></dt>
+
+<dd>
+<dt><a name="IsShownOn_Diagram"
+>IsShownOn Diagram</a></dt>
+
+<dd>
+<dt><a name="IsTerminusFor_Scenario"
+>IsTerminusFor Scenario</a></dt>
+
+<dd>
+<dt><a name="ParticipatesAs_Reagent"
+>ParticipatesAs Reagent</a></dt>
+
+<dd>
+<dt><a name="UsesAliasForCompound_Source"
+>UsesAliasForCompound Source</a></dt>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Command-Line_Options"
+>Command-Line Options</a></h3>
+
+<dl>
+<dt><a name="-is_field,value"
+>-is field,value</a></dt>
+
+<dd>
+<p>Limit the results to entities where the given field has the given value.</p>
+
+<dt><a name="-like_field,value"
+>-like field,value</a></dt>
+
+<dd>
+<p>Limit the results to entities where the given field is LIKE (in the sql sense) the given value.</p>
+
+<dt><a name="-op_operator,field,value"
+>-op operator,field,value</a></dt>
+
+<dd>
+<p>Limit the results to entities where the given field is related to the given value based on the given operator.</p>
+
+<p>The operators supported are as follows. We provide text base alternatives to the comparison operators so that extra quoting is not required to keep the command-line shell from confusing them with shell I/O redirection operators.</p>
+
+<dl>
+<dt><a name="&#60;_or_lt"
+>&#60; or lt</a></dt>
+
+<dd>
+<dt><a name="&#62;_or_gt"
+>&#62; or gt</a></dt>
+
+<dd>
+<dt><a name="&#60;=_or_le"
+>&#60;= or le</a></dt>
+
+<dd>
+<dt><a name="&#62;=_or_ge"
+>&#62;= or ge</a></dt>
+
+<dd>
+<dt><a name="="
+>=</a></dt>
+
+<dd>
+<dt><a name="LIKE"
+>LIKE</a></dt>
+</dl>
+
+<dt><a name="-a"
+>-a</a></dt>
+
+<dd>
+<p>Return all fields.</p>
+
+<dt><a name="-h"
+>-h</a></dt>
+
+<dd>
+<p>Display a list of the fields available for use.</p>
+
+<dt><a name="-fields_field-list"
+>-fields field-list</a></dt>
+
+<dd>
+<p>Choose a set of fields to return. Field-list is a comma-separated list of strings. The following fields are available:</p>
+
+<dl>
+<dt><a name="label"
+>label</a></dt>
+
+<dd>
+<dt><a name="abbr"
+>abbr</a></dt>
+
+<dd>
+<dt><a name="msid"
+>msid</a></dt>
+
+<dd>
+<dt><a name="ubiquitous"
+>ubiquitous</a></dt>
+
+<dd>
+<dt><a name="mod_date"
+>mod_date</a></dt>
+
+<dd>
+<dt><a name="uncharged_formula"
+>uncharged_formula</a></dt>
+
+<dd>
+<dt><a name="formula"
+>formula</a></dt>
+
+<dd>
+<dt><a name="mass"
+>mass</a></dt>
+</dl>
+</dd>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Output_Format"
+>Output Format</a></h3>
+
+<p>The standard output is a tab-delimited file containing a column for each requested field.</p>
+<hr>
+<a name='___top' class='dummyTopAnchor' ></a>
+
+<h2><a class='u' href='#___top' title='click to go to top of document'
+name="query_entity_Contig"
+>query_entity_Contig</a></h2>
+
+<p>Query the entity Contig.</p>
+
+<p>A contig is thought of as composing a part of the DNA associated with a specific genome.
+It is represented as an ID (including the genome ID) and a ContigSequence.
+We do not think of strings of DNA from,
+say,
+a metgenomic sample as &#34;contigs&#34;,
+since there is no associated genome (these would be considered ContigSequences).
+This use of the term &#34;ContigSequence&#34;,
+rather than just &#34;DNA sequence&#34;,
+may turn out to be a bad idea.
+For now,
+you should just realize that a Contig has an associated genome,
+but a ContigSequence does not.</p>
+
+<p>Example:</p>
+
+<pre>    query_entity_Contig -a </pre>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Related_entities"
+>Related entities</a></h3>
+
+<p>The Contig entity has the following relationship links:</p>
+
+<dl>
+<dt><a name="HasAsSequence_ContigSequence"
+>HasAsSequence ContigSequence</a></dt>
+
+<dd>
+<dt><a name="IsAlignedIn_Variation"
+>IsAlignedIn Variation</a></dt>
+
+<dd>
+<dt><a name="IsComponentOf_Genome"
+>IsComponentOf Genome</a></dt>
+
+<dd>
+<dt><a name="IsLocusFor_Feature"
+>IsLocusFor Feature</a></dt>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Command-Line_Options"
+>Command-Line Options</a></h3>
+
+<dl>
+<dt><a name="-is_field,value"
+>-is field,value</a></dt>
+
+<dd>
+<p>Limit the results to entities where the given field has the given value.</p>
+
+<dt><a name="-like_field,value"
+>-like field,value</a></dt>
+
+<dd>
+<p>Limit the results to entities where the given field is LIKE (in the sql sense) the given value.</p>
+
+<dt><a name="-op_operator,field,value"
+>-op operator,field,value</a></dt>
+
+<dd>
+<p>Limit the results to entities where the given field is related to the given value based on the given operator.</p>
+
+<p>The operators supported are as follows. We provide text base alternatives to the comparison operators so that extra quoting is not required to keep the command-line shell from confusing them with shell I/O redirection operators.</p>
+
+<dl>
+<dt><a name="&#60;_or_lt"
+>&#60; or lt</a></dt>
+
+<dd>
+<dt><a name="&#62;_or_gt"
+>&#62; or gt</a></dt>
+
+<dd>
+<dt><a name="&#60;=_or_le"
+>&#60;= or le</a></dt>
+
+<dd>
+<dt><a name="&#62;=_or_ge"
+>&#62;= or ge</a></dt>
+
+<dd>
+<dt><a name="="
+>=</a></dt>
+
+<dd>
+<dt><a name="LIKE"
+>LIKE</a></dt>
+</dl>
+
+<dt><a name="-a"
+>-a</a></dt>
+
+<dd>
+<p>Return all fields.</p>
+
+<dt><a name="-h"
+>-h</a></dt>
+
+<dd>
+<p>Display a list of the fields available for use.</p>
+
+<dt><a name="-fields_field-list"
+>-fields field-list</a></dt>
+
+<dd>
+<p>Choose a set of fields to return. Field-list is a comma-separated list of strings. The following fields are available:</p>
+
+<dl>
+<dt><a name="source_id"
+>source_id</a></dt>
+</dl>
+</dd>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Output_Format"
+>Output Format</a></h3>
+
+<p>The standard output is a tab-delimited file containing a column for each requested field.</p>
+<hr>
+<a name='___top' class='dummyTopAnchor' ></a>
+
+<h2><a class='u' href='#___top' title='click to go to top of document'
+name="query_entity_ContigChunk"
+>query_entity_ContigChunk</a></h2>
+
+<p>Query the entity ContigChunk.</p>
+
+<p>ContigChunks are strings of DNA thought of as being a string in a 4-character alphabet with an associated ID.
+We allow a broader alphabet that includes U (for RNA) and the standard ambiguity characters.
+The notion of ContigChunk was introduced to avoid transferring/manipulating huge contigs to access small substrings.
+A ContigSequence is formed by concatenating a set of one or more ContigChunks.
+Thus,
+ContigChunks are the basic units moved from the database to memory.
+Their existence should be hidden from users in most circumstances (users are expected to request substrings of ContigSequences,
+and the Kbase software locates the appropriate ContigChunks).</p>
+
+<p>Example:</p>
+
+<pre>    query_entity_ContigChunk -a </pre>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Related_entities"
+>Related entities</a></h3>
+
+<p>The ContigChunk entity has the following relationship links:</p>
+
+<dl>
+<dt><a name="IsSectionOf_ContigSequence"
+>IsSectionOf ContigSequence</a></dt>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Command-Line_Options"
+>Command-Line Options</a></h3>
+
+<dl>
+<dt><a name="-is_field,value"
+>-is field,value</a></dt>
+
+<dd>
+<p>Limit the results to entities where the given field has the given value.</p>
+
+<dt><a name="-like_field,value"
+>-like field,value</a></dt>
+
+<dd>
+<p>Limit the results to entities where the given field is LIKE (in the sql sense) the given value.</p>
+
+<dt><a name="-op_operator,field,value"
+>-op operator,field,value</a></dt>
+
+<dd>
+<p>Limit the results to entities where the given field is related to the given value based on the given operator.</p>
+
+<p>The operators supported are as follows. We provide text base alternatives to the comparison operators so that extra quoting is not required to keep the command-line shell from confusing them with shell I/O redirection operators.</p>
+
+<dl>
+<dt><a name="&#60;_or_lt"
+>&#60; or lt</a></dt>
+
+<dd>
+<dt><a name="&#62;_or_gt"
+>&#62; or gt</a></dt>
+
+<dd>
+<dt><a name="&#60;=_or_le"
+>&#60;= or le</a></dt>
+
+<dd>
+<dt><a name="&#62;=_or_ge"
+>&#62;= or ge</a></dt>
+
+<dd>
+<dt><a name="="
+>=</a></dt>
+
+<dd>
+<dt><a name="LIKE"
+>LIKE</a></dt>
+</dl>
+
+<dt><a name="-a"
+>-a</a></dt>
+
+<dd>
+<p>Return all fields.</p>
+
+<dt><a name="-h"
+>-h</a></dt>
+
+<dd>
+<p>Display a list of the fields available for use.</p>
+
+<dt><a name="-fields_field-list"
+>-fields field-list</a></dt>
+
+<dd>
+<p>Choose a set of fields to return. Field-list is a comma-separated list of strings. The following fields are available:</p>
+
+<dl>
+<dt><a name="sequence"
+>sequence</a></dt>
+</dl>
+</dd>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Output_Format"
+>Output Format</a></h3>
+
+<p>The standard output is a tab-delimited file containing a column for each requested field.</p>
+<hr>
+<a name='___top' class='dummyTopAnchor' ></a>
+
+<h2><a class='u' href='#___top' title='click to go to top of document'
+name="query_entity_ContigSequence"
+>query_entity_ContigSequence</a></h2>
+
+<p>Query the entity ContigSequence.</p>
+
+<p>ContigSequences are strings of DNA.
+Contigs have an associated genome,
+but ContigSequences do not..
+We can think of random samples of DNA as a set of ContigSequences.
+There are no length constraints imposed on ContigSequences -- they can be either very short or very long.
+The basic unit of data that is moved to/from the database is the ContigChunk,
+from which ContigSequences are formed.
+The key of a ContigSequence is the sequence&#39;s MD5 identifier.</p>
+
+<p>Example:</p>
+
+<pre>    query_entity_ContigSequence -a </pre>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Related_entities"
+>Related entities</a></h3>
+
+<p>The ContigSequence entity has the following relationship links:</p>
+
+<dl>
+<dt><a name="HasSection_ContigChunk"
+>HasSection ContigChunk</a></dt>
+
+<dd>
+<dt><a name="IsSequenceOf_Contig"
+>IsSequenceOf Contig</a></dt>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Command-Line_Options"
+>Command-Line Options</a></h3>
+
+<dl>
+<dt><a name="-is_field,value"
+>-is field,value</a></dt>
+
+<dd>
+<p>Limit the results to entities where the given field has the given value.</p>
+
+<dt><a name="-like_field,value"
+>-like field,value</a></dt>
+
+<dd>
+<p>Limit the results to entities where the given field is LIKE (in the sql sense) the given value.</p>
+
+<dt><a name="-op_operator,field,value"
+>-op operator,field,value</a></dt>
+
+<dd>
+<p>Limit the results to entities where the given field is related to the given value based on the given operator.</p>
+
+<p>The operators supported are as follows. We provide text base alternatives to the comparison operators so that extra quoting is not required to keep the command-line shell from confusing them with shell I/O redirection operators.</p>
+
+<dl>
+<dt><a name="&#60;_or_lt"
+>&#60; or lt</a></dt>
+
+<dd>
+<dt><a name="&#62;_or_gt"
+>&#62; or gt</a></dt>
+
+<dd>
+<dt><a name="&#60;=_or_le"
+>&#60;= or le</a></dt>
+
+<dd>
+<dt><a name="&#62;=_or_ge"
+>&#62;= or ge</a></dt>
+
+<dd>
+<dt><a name="="
+>=</a></dt>
+
+<dd>
+<dt><a name="LIKE"
+>LIKE</a></dt>
+</dl>
+
+<dt><a name="-a"
+>-a</a></dt>
+
+<dd>
+<p>Return all fields.</p>
+
+<dt><a name="-h"
+>-h</a></dt>
+
+<dd>
+<p>Display a list of the fields available for use.</p>
+
+<dt><a name="-fields_field-list"
+>-fields field-list</a></dt>
+
+<dd>
+<p>Choose a set of fields to return. Field-list is a comma-separated list of strings. The following fields are available:</p>
+
+<dl>
+<dt><a name="length"
+>length</a></dt>
+</dl>
+</dd>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Output_Format"
+>Output Format</a></h3>
+
+<p>The standard output is a tab-delimited file containing a column for each requested field.</p>
+<hr>
+<a name='___top' class='dummyTopAnchor' ></a>
+
+<h2><a class='u' href='#___top' title='click to go to top of document'
+name="query_entity_CoregulatedSet"
+>query_entity_CoregulatedSet</a></h2>
+
+<p>Query the entity CoregulatedSet.</p>
+
+<p>We need to represent sets of genes that are coregulated via some regulatory mechanism.
+In particular,
+we wish to represent genes that are coregulated using transcription binding sites and corresponding transcription regulatory proteins.
+We represent a coregulated set (which may,
+or may not,
+be considered an atomic regulon) using CoregulatedSet.</p>
+
+<p>Example:</p>
+
+<pre>    query_entity_CoregulatedSet -a </pre>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Related_entities"
+>Related entities</a></h3>
+
+<p>The CoregulatedSet entity has the following relationship links:</p>
+
+<dl>
+<dt><a name="IsBoundBy_Feature"
+>IsBoundBy Feature</a></dt>
+
+<dd>
+<dt><a name="IsControlledUsing_Feature"
+>IsControlledUsing Feature</a></dt>
+
+<dd>
+<dt><a name="IsRegulatedSetOf_Feature"
+>IsRegulatedSetOf Feature</a></dt>
+
+<dd>
+<dt><a name="WasFormulatedBy_Source"
+>WasFormulatedBy Source</a></dt>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Command-Line_Options"
+>Command-Line Options</a></h3>
+
+<dl>
+<dt><a name="-is_field,value"
+>-is field,value</a></dt>
+
+<dd>
+<p>Limit the results to entities where the given field has the given value.</p>
+
+<dt><a name="-like_field,value"
+>-like field,value</a></dt>
+
+<dd>
+<p>Limit the results to entities where the given field is LIKE (in the sql sense) the given value.</p>
+
+<dt><a name="-op_operator,field,value"
+>-op operator,field,value</a></dt>
+
+<dd>
+<p>Limit the results to entities where the given field is related to the given value based on the given operator.</p>
+
+<p>The operators supported are as follows. We provide text base alternatives to the comparison operators so that extra quoting is not required to keep the command-line shell from confusing them with shell I/O redirection operators.</p>
+
+<dl>
+<dt><a name="&#60;_or_lt"
+>&#60; or lt</a></dt>
+
+<dd>
+<dt><a name="&#62;_or_gt"
+>&#62; or gt</a></dt>
+
+<dd>
+<dt><a name="&#60;=_or_le"
+>&#60;= or le</a></dt>
+
+<dd>
+<dt><a name="&#62;=_or_ge"
+>&#62;= or ge</a></dt>
+
+<dd>
+<dt><a name="="
+>=</a></dt>
+
+<dd>
+<dt><a name="LIKE"
+>LIKE</a></dt>
+</dl>
+
+<dt><a name="-a"
+>-a</a></dt>
+
+<dd>
+<p>Return all fields.</p>
+
+<dt><a name="-h"
+>-h</a></dt>
+
+<dd>
+<p>Display a list of the fields available for use.</p>
+
+<dt><a name="-fields_field-list"
+>-fields field-list</a></dt>
+
+<dd>
+<p>Choose a set of fields to return. Field-list is a comma-separated list of strings. The following fields are available:</p>
+
+<dl>
+<dt><a name="source_id"
+>source_id</a></dt>
+</dl>
+</dd>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Output_Format"
+>Output Format</a></h3>
+
+<p>The standard output is a tab-delimited file containing a column for each requested field.</p>
+<hr>
+<a name='___top' class='dummyTopAnchor' ></a>
+
+<h2><a class='u' href='#___top' title='click to go to top of document'
+name="query_entity_Diagram"
+>query_entity_Diagram</a></h2>
+
+<p>Query the entity Diagram.</p>
+
+<p>A functional diagram describes a network of chemical reactions,
+often comprising a single subsystem.</p>
+
+<p>Example:</p>
+
+<pre>    query_entity_Diagram -a </pre>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Related_entities"
+>Related entities</a></h3>
+
+<p>The Diagram entity has the following relationship links:</p>
+
+<dl>
+<dt><a name="Displays_Reaction"
+>Displays Reaction</a></dt>
+
+<dd>
+<dt><a name="IncludesPartOf_Scenario"
+>IncludesPartOf Scenario</a></dt>
+
+<dd>
+<dt><a name="IsRelevantFor_Subsystem"
+>IsRelevantFor Subsystem</a></dt>
+
+<dd>
+<dt><a name="Shows_Compound"
+>Shows Compound</a></dt>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Command-Line_Options"
+>Command-Line Options</a></h3>
+
+<dl>
+<dt><a name="-is_field,value"
+>-is field,value</a></dt>
+
+<dd>
+<p>Limit the results to entities where the given field has the given value.</p>
+
+<dt><a name="-like_field,value"
+>-like field,value</a></dt>
+
+<dd>
+<p>Limit the results to entities where the given field is LIKE (in the sql sense) the given value.</p>
+
+<dt><a name="-op_operator,field,value"
+>-op operator,field,value</a></dt>
+
+<dd>
+<p>Limit the results to entities where the given field is related to the given value based on the given operator.</p>
+
+<p>The operators supported are as follows. We provide text base alternatives to the comparison operators so that extra quoting is not required to keep the command-line shell from confusing them with shell I/O redirection operators.</p>
+
+<dl>
+<dt><a name="&#60;_or_lt"
+>&#60; or lt</a></dt>
+
+<dd>
+<dt><a name="&#62;_or_gt"
+>&#62; or gt</a></dt>
+
+<dd>
+<dt><a name="&#60;=_or_le"
+>&#60;= or le</a></dt>
+
+<dd>
+<dt><a name="&#62;=_or_ge"
+>&#62;= or ge</a></dt>
+
+<dd>
+<dt><a name="="
+>=</a></dt>
+
+<dd>
+<dt><a name="LIKE"
+>LIKE</a></dt>
+</dl>
+
+<dt><a name="-a"
+>-a</a></dt>
+
+<dd>
+<p>Return all fields.</p>
+
+<dt><a name="-h"
+>-h</a></dt>
+
+<dd>
+<p>Display a list of the fields available for use.</p>
+
+<dt><a name="-fields_field-list"
+>-fields field-list</a></dt>
+
+<dd>
+<p>Choose a set of fields to return. Field-list is a comma-separated list of strings. The following fields are available:</p>
+
+<dl>
+<dt><a name="name"
+>name</a></dt>
+
+<dd>
+<dt><a name="content"
+>content</a></dt>
+</dl>
+</dd>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Output_Format"
+>Output Format</a></h3>
+
+<p>The standard output is a tab-delimited file containing a column for each requested field.</p>
+<hr>
+<a name='___top' class='dummyTopAnchor' ></a>
+
+<h2><a class='u' href='#___top' title='click to go to top of document'
+name="query_entity_EcNumber"
+>query_entity_EcNumber</a></h2>
+
+<p>Query the entity EcNumber.</p>
+
+<p>EC numbers are assigned by the Enzyme Commission,
+and consist of four numbers separated by periods,
+each indicating a successively smaller cateogry of enzymes.</p>
+
+<p>Example:</p>
+
+<pre>    query_entity_EcNumber -a </pre>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Related_entities"
+>Related entities</a></h3>
+
+<p>The EcNumber entity has the following relationship links:</p>
+
+<dl>
+<dt><a name="IsConsistentWith_Role"
+>IsConsistentWith Role</a></dt>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Command-Line_Options"
+>Command-Line Options</a></h3>
+
+<dl>
+<dt><a name="-is_field,value"
+>-is field,value</a></dt>
+
+<dd>
+<p>Limit the results to entities where the given field has the given value.</p>
+
+<dt><a name="-like_field,value"
+>-like field,value</a></dt>
+
+<dd>
+<p>Limit the results to entities where the given field is LIKE (in the sql sense) the given value.</p>
+
+<dt><a name="-op_operator,field,value"
+>-op operator,field,value</a></dt>
+
+<dd>
+<p>Limit the results to entities where the given field is related to the given value based on the given operator.</p>
+
+<p>The operators supported are as follows. We provide text base alternatives to the comparison operators so that extra quoting is not required to keep the command-line shell from confusing them with shell I/O redirection operators.</p>
+
+<dl>
+<dt><a name="&#60;_or_lt"
+>&#60; or lt</a></dt>
+
+<dd>
+<dt><a name="&#62;_or_gt"
+>&#62; or gt</a></dt>
+
+<dd>
+<dt><a name="&#60;=_or_le"
+>&#60;= or le</a></dt>
+
+<dd>
+<dt><a name="&#62;=_or_ge"
+>&#62;= or ge</a></dt>
+
+<dd>
+<dt><a name="="
+>=</a></dt>
+
+<dd>
+<dt><a name="LIKE"
+>LIKE</a></dt>
+</dl>
+
+<dt><a name="-a"
+>-a</a></dt>
+
+<dd>
+<p>Return all fields.</p>
+
+<dt><a name="-h"
+>-h</a></dt>
+
+<dd>
+<p>Display a list of the fields available for use.</p>
+
+<dt><a name="-fields_field-list"
+>-fields field-list</a></dt>
+
+<dd>
+<p>Choose a set of fields to return. Field-list is a comma-separated list of strings. The following fields are available:</p>
+
+<dl>
+<dt><a name="obsolete"
+>obsolete</a></dt>
+
+<dd>
+<dt><a name="replacedby"
+>replacedby</a></dt>
+</dl>
+</dd>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Output_Format"
+>Output Format</a></h3>
+
+<p>The standard output is a tab-delimited file containing a column for each requested field.</p>
+<hr>
+<a name='___top' class='dummyTopAnchor' ></a>
+
+<h2><a class='u' href='#___top' title='click to go to top of document'
+name="query_entity_Experiment"
+>query_entity_Experiment</a></h2>
+
+<p>Query the entity Experiment.</p>
+
+<p>An experiment is a combination of conditions for which gene expression information is desired.
+The result of the experiment is a set of expression levels for features under the given conditions.</p>
+
+<p>Example:</p>
+
+<pre>    query_entity_Experiment -a </pre>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Related_entities"
+>Related entities</a></h3>
+
+<p>The Experiment entity has the following relationship links:</p>
+
+<dl>
+<dt><a name="AffectsLevelOf_AtomicRegulon"
+>AffectsLevelOf AtomicRegulon</a></dt>
+
+<dd>
+<dt><a name="HasResultsFor_ProbeSet"
+>HasResultsFor ProbeSet</a></dt>
+
+<dd>
+<dt><a name="HasValueFor_Attribute"
+>HasValueFor Attribute</a></dt>
+
+<dd>
+<dt><a name="IndicatesSignalFor_Feature"
+>IndicatesSignalFor Feature</a></dt>
+
+<dd>
+<dt><a name="OperatesIn_Media"
+>OperatesIn Media</a></dt>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Command-Line_Options"
+>Command-Line Options</a></h3>
+
+<dl>
+<dt><a name="-is_field,value"
+>-is field,value</a></dt>
+
+<dd>
+<p>Limit the results to entities where the given field has the given value.</p>
+
+<dt><a name="-like_field,value"
+>-like field,value</a></dt>
+
+<dd>
+<p>Limit the results to entities where the given field is LIKE (in the sql sense) the given value.</p>
+
+<dt><a name="-op_operator,field,value"
+>-op operator,field,value</a></dt>
+
+<dd>
+<p>Limit the results to entities where the given field is related to the given value based on the given operator.</p>
+
+<p>The operators supported are as follows. We provide text base alternatives to the comparison operators so that extra quoting is not required to keep the command-line shell from confusing them with shell I/O redirection operators.</p>
+
+<dl>
+<dt><a name="&#60;_or_lt"
+>&#60; or lt</a></dt>
+
+<dd>
+<dt><a name="&#62;_or_gt"
+>&#62; or gt</a></dt>
+
+<dd>
+<dt><a name="&#60;=_or_le"
+>&#60;= or le</a></dt>
+
+<dd>
+<dt><a name="&#62;=_or_ge"
+>&#62;= or ge</a></dt>
+
+<dd>
+<dt><a name="="
+>=</a></dt>
+
+<dd>
+<dt><a name="LIKE"
+>LIKE</a></dt>
+</dl>
+
+<dt><a name="-a"
+>-a</a></dt>
+
+<dd>
+<p>Return all fields.</p>
+
+<dt><a name="-h"
+>-h</a></dt>
+
+<dd>
+<p>Display a list of the fields available for use.</p>
+
+<dt><a name="-fields_field-list"
+>-fields field-list</a></dt>
+
+<dd>
+<p>Choose a set of fields to return. Field-list is a comma-separated list of strings. The following fields are available:</p>
+
+<dl>
+<dt><a name="source"
+>source</a></dt>
+</dl>
+</dd>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Output_Format"
+>Output Format</a></h3>
+
+<p>The standard output is a tab-delimited file containing a column for each requested field.</p>
+<hr>
+<a name='___top' class='dummyTopAnchor' ></a>
+
+<h2><a class='u' href='#___top' title='click to go to top of document'
+name="query_entity_Family"
+>query_entity_Family</a></h2>
+
+<p>Query the entity Family.</p>
+
+<p>The Kbase will support the maintenance of protein families (as sets of Features with associated translations).
+We are initially only supporting the notion of a family as composed of a set of isofunctional homologs.
+That is,
+the families we initially support should be thought of as containing protein-encoding genes whose associated sequences all implement the same function (we do understand that the notion of &#34;function&#34; is somewhat ambiguous,
+so let us sweep this under the rug by calling a functional role a &#34;primitive concept&#34;).
+We currently support families in which the members are translations of features,
+and we think of Features as having an associated function.
+Identical protein sequences as products of translating distinct genes may or may not have identical functions,
+and we allow multiple members of the same Family to share identical protein sequences.
+This may be justified,
+since in a very,
+very,
+very few cases identical proteins do,
+in fact,
+have distinct functions.
+We would prefer to reach the point where our Families are sets of protein sequence,
+rather than sets of protein-encoding Features.</p>
+
+<p>Example:</p>
+
+<pre>    query_entity_Family -a </pre>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Related_entities"
+>Related entities</a></h3>
+
+<p>The Family entity has the following relationship links:</p>
+
+<dl>
+<dt><a name="HasMember_Feature"
+>HasMember Feature</a></dt>
+
+<dd>
+<dt><a name="IsCoupledTo_Family"
+>IsCoupledTo Family</a></dt>
+
+<dd>
+<dt><a name="IsCoupledWith_Family"
+>IsCoupledWith Family</a></dt>
+
+<dd>
+<dt><a name="IsFamilyFor_Role"
+>IsFamilyFor Role</a></dt>
+
+<dd>
+<dt><a name="IsRepresentedIn_Genome"
+>IsRepresentedIn Genome</a></dt>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Command-Line_Options"
+>Command-Line Options</a></h3>
+
+<dl>
+<dt><a name="-is_field,value"
+>-is field,value</a></dt>
+
+<dd>
+<p>Limit the results to entities where the given field has the given value.</p>
+
+<dt><a name="-like_field,value"
+>-like field,value</a></dt>
+
+<dd>
+<p>Limit the results to entities where the given field is LIKE (in the sql sense) the given value.</p>
+
+<dt><a name="-op_operator,field,value"
+>-op operator,field,value</a></dt>
+
+<dd>
+<p>Limit the results to entities where the given field is related to the given value based on the given operator.</p>
+
+<p>The operators supported are as follows. We provide text base alternatives to the comparison operators so that extra quoting is not required to keep the command-line shell from confusing them with shell I/O redirection operators.</p>
+
+<dl>
+<dt><a name="&#60;_or_lt"
+>&#60; or lt</a></dt>
+
+<dd>
+<dt><a name="&#62;_or_gt"
+>&#62; or gt</a></dt>
+
+<dd>
+<dt><a name="&#60;=_or_le"
+>&#60;= or le</a></dt>
+
+<dd>
+<dt><a name="&#62;=_or_ge"
+>&#62;= or ge</a></dt>
+
+<dd>
+<dt><a name="="
+>=</a></dt>
+
+<dd>
+<dt><a name="LIKE"
+>LIKE</a></dt>
+</dl>
+
+<dt><a name="-a"
+>-a</a></dt>
+
+<dd>
+<p>Return all fields.</p>
+
+<dt><a name="-h"
+>-h</a></dt>
+
+<dd>
+<p>Display a list of the fields available for use.</p>
+
+<dt><a name="-fields_field-list"
+>-fields field-list</a></dt>
+
+<dd>
+<p>Choose a set of fields to return. Field-list is a comma-separated list of strings. The following fields are available:</p>
+
+<dl>
+<dt><a name="type"
+>type</a></dt>
+
+<dd>
+<dt><a name="family_function"
+>family_function</a></dt>
+</dl>
+</dd>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Output_Format"
+>Output Format</a></h3>
+
+<p>The standard output is a tab-delimited file containing a column for each requested field.</p>
+<hr>
+<a name='___top' class='dummyTopAnchor' ></a>
+
+<h2><a class='u' href='#___top' title='click to go to top of document'
+name="query_entity_Feature"
+>query_entity_Feature</a></h2>
+
+<p>Query the entity Feature.</p>
+
+<p>A feature (sometimes also called a gene) is a part of a genome that is of special interest.
+Features may be spread across multiple DNA sequences (contigs) of a genome,
+but never across more than one genome.
+Each feature in the database has a unique ID that functions as its ID in this table.
+Normally a Feature is just a single contigous region on a contig.
+Features have types,
+and an appropriate choice of available types allows the support of protein-encoding genes,
+exons,
+RNA genes,
+binding sites,
+pathogenicity islands,
+or whatever.</p>
+
+<p>Example:</p>
+
+<pre>    query_entity_Feature -a </pre>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Related_entities"
+>Related entities</a></h3>
+
+<p>The Feature entity has the following relationship links:</p>
+
+<dl>
+<dt><a name="Controls_CoregulatedSet"
+>Controls CoregulatedSet</a></dt>
+
+<dd>
+<dt><a name="Encompasses_Feature"
+>Encompasses Feature</a></dt>
+
+<dd>
+<dt><a name="HasCoregulationWith_Feature"
+>HasCoregulationWith Feature</a></dt>
+
+<dd>
+<dt><a name="HasFunctional_Role"
+>HasFunctional Role</a></dt>
+
+<dd>
+<dt><a name="HasIndicatedSignalFrom_Experiment"
+>HasIndicatedSignalFrom Experiment</a></dt>
+
+<dd>
+<dt><a name="HasLevelsFrom_ProbeSet"
+>HasLevelsFrom ProbeSet</a></dt>
+
+<dd>
+<dt><a name="IsAnnotatedBy_Annotation"
+>IsAnnotatedBy Annotation</a></dt>
+
+<dd>
+<dt><a name="IsBindingSiteFor_CoregulatedSet"
+>IsBindingSiteFor CoregulatedSet</a></dt>
+
+<dd>
+<dt><a name="IsContainedIn_SSCell"
+>IsContainedIn SSCell</a></dt>
+
+<dd>
+<dt><a name="IsCoregulatedWith_Feature"
+>IsCoregulatedWith Feature</a></dt>
+
+<dd>
+<dt><a name="IsEncompassedIn_Feature"
+>IsEncompassedIn Feature</a></dt>
+
+<dd>
+<dt><a name="IsExemplarOf_Role"
+>IsExemplarOf Role</a></dt>
+
+<dd>
+<dt><a name="IsFormedInto_AtomicRegulon"
+>IsFormedInto AtomicRegulon</a></dt>
+
+<dd>
+<dt><a name="IsInPair_Pairing"
+>IsInPair Pairing</a></dt>
+
+<dd>
+<dt><a name="IsLocatedIn_Contig"
+>IsLocatedIn Contig</a></dt>
+
+<dd>
+<dt><a name="IsMemberOf_Family"
+>IsMemberOf Family</a></dt>
+
+<dd>
+<dt><a name="IsOwnedBy_Genome"
+>IsOwnedBy Genome</a></dt>
+
+<dd>
+<dt><a name="IsRegulatedIn_CoregulatedSet"
+>IsRegulatedIn CoregulatedSet</a></dt>
+
+<dd>
+<dt><a name="Produces_ProteinSequence"
+>Produces ProteinSequence</a></dt>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Command-Line_Options"
+>Command-Line Options</a></h3>
+
+<dl>
+<dt><a name="-is_field,value"
+>-is field,value</a></dt>
+
+<dd>
+<p>Limit the results to entities where the given field has the given value.</p>
+
+<dt><a name="-like_field,value"
+>-like field,value</a></dt>
+
+<dd>
+<p>Limit the results to entities where the given field is LIKE (in the sql sense) the given value.</p>
+
+<dt><a name="-op_operator,field,value"
+>-op operator,field,value</a></dt>
+
+<dd>
+<p>Limit the results to entities where the given field is related to the given value based on the given operator.</p>
+
+<p>The operators supported are as follows. We provide text base alternatives to the comparison operators so that extra quoting is not required to keep the command-line shell from confusing them with shell I/O redirection operators.</p>
+
+<dl>
+<dt><a name="&#60;_or_lt"
+>&#60; or lt</a></dt>
+
+<dd>
+<dt><a name="&#62;_or_gt"
+>&#62; or gt</a></dt>
+
+<dd>
+<dt><a name="&#60;=_or_le"
+>&#60;= or le</a></dt>
+
+<dd>
+<dt><a name="&#62;=_or_ge"
+>&#62;= or ge</a></dt>
+
+<dd>
+<dt><a name="="
+>=</a></dt>
+
+<dd>
+<dt><a name="LIKE"
+>LIKE</a></dt>
+</dl>
+
+<dt><a name="-a"
+>-a</a></dt>
+
+<dd>
+<p>Return all fields.</p>
+
+<dt><a name="-h"
+>-h</a></dt>
+
+<dd>
+<p>Display a list of the fields available for use.</p>
+
+<dt><a name="-fields_field-list"
+>-fields field-list</a></dt>
+
+<dd>
+<p>Choose a set of fields to return. Field-list is a comma-separated list of strings. The following fields are available:</p>
+
+<dl>
+<dt><a name="feature_type"
+>feature_type</a></dt>
+
+<dd>
+<dt><a name="source_id"
+>source_id</a></dt>
+
+<dd>
+<dt><a name="sequence_length"
+>sequence_length</a></dt>
+
+<dd>
+<dt><a name="function"
+>function</a></dt>
+</dl>
+</dd>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Output_Format"
+>Output Format</a></h3>
+
+<p>The standard output is a tab-delimited file containing a column for each requested field.</p>
+<hr>
+<a name='___top' class='dummyTopAnchor' ></a>
+
+<h2><a class='u' href='#___top' title='click to go to top of document'
+name="query_entity_Genome"
+>query_entity_Genome</a></h2>
+
+<p>Query the entity Genome.</p>
+
+<p>The Kbase houses a large and growing set of genomes.
+We often have multiple genomes that have identical DNA.
+These usually have distinct gene calls and annotations,
+but not always.
+We consider the Kbase to be a framework for managing hundreds of thousands of genomes and offering the tools needed to support compartive analysis on large sets of genomes,
+some of which are virtually identical.
+Each genome has an MD5 value computed from the DNA that is associated with the genome.
+Hence,
+it is easy to recognize when you have identical genomes,
+perhaps annotated by distinct groups.</p>
+
+<p>Example:</p>
+
+<pre>    query_entity_Genome -a </pre>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Related_entities"
+>Related entities</a></h3>
+
+<p>The Genome entity has the following relationship links:</p>
+
+<dl>
+<dt><a name="HadResultsProducedBy_ProbeSet"
+>HadResultsProducedBy ProbeSet</a></dt>
+
+<dd>
+<dt><a name="HasRepresentativeOf_Family"
+>HasRepresentativeOf Family</a></dt>
+
+<dd>
+<dt><a name="IsCollectedInto_OTU"
+>IsCollectedInto OTU</a></dt>
+
+<dd>
+<dt><a name="IsComposedOf_Contig"
+>IsComposedOf Contig</a></dt>
+
+<dd>
+<dt><a name="IsConfiguredBy_AtomicRegulon"
+>IsConfiguredBy AtomicRegulon</a></dt>
+
+<dd>
+<dt><a name="IsInTaxa_TaxonomicGrouping"
+>IsInTaxa TaxonomicGrouping</a></dt>
+
+<dd>
+<dt><a name="IsModeledBy_Model"
+>IsModeledBy Model</a></dt>
+
+<dd>
+<dt><a name="IsOwnerOf_Feature"
+>IsOwnerOf Feature</a></dt>
+
+<dd>
+<dt><a name="Uses_SSRow"
+>Uses SSRow</a></dt>
+
+<dd>
+<dt><a name="WasSubmittedBy_Source"
+>WasSubmittedBy Source</a></dt>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Command-Line_Options"
+>Command-Line Options</a></h3>
+
+<dl>
+<dt><a name="-is_field,value"
+>-is field,value</a></dt>
+
+<dd>
+<p>Limit the results to entities where the given field has the given value.</p>
+
+<dt><a name="-like_field,value"
+>-like field,value</a></dt>
+
+<dd>
+<p>Limit the results to entities where the given field is LIKE (in the sql sense) the given value.</p>
+
+<dt><a name="-op_operator,field,value"
+>-op operator,field,value</a></dt>
+
+<dd>
+<p>Limit the results to entities where the given field is related to the given value based on the given operator.</p>
+
+<p>The operators supported are as follows. We provide text base alternatives to the comparison operators so that extra quoting is not required to keep the command-line shell from confusing them with shell I/O redirection operators.</p>
+
+<dl>
+<dt><a name="&#60;_or_lt"
+>&#60; or lt</a></dt>
+
+<dd>
+<dt><a name="&#62;_or_gt"
+>&#62; or gt</a></dt>
+
+<dd>
+<dt><a name="&#60;=_or_le"
+>&#60;= or le</a></dt>
+
+<dd>
+<dt><a name="&#62;=_or_ge"
+>&#62;= or ge</a></dt>
+
+<dd>
+<dt><a name="="
+>=</a></dt>
+
+<dd>
+<dt><a name="LIKE"
+>LIKE</a></dt>
+</dl>
+
+<dt><a name="-a"
+>-a</a></dt>
+
+<dd>
+<p>Return all fields.</p>
+
+<dt><a name="-h"
+>-h</a></dt>
+
+<dd>
+<p>Display a list of the fields available for use.</p>
+
+<dt><a name="-fields_field-list"
+>-fields field-list</a></dt>
+
+<dd>
+<p>Choose a set of fields to return. Field-list is a comma-separated list of strings. The following fields are available:</p>
+
+<dl>
+<dt><a name="pegs"
+>pegs</a></dt>
+
+<dd>
+<dt><a name="rnas"
+>rnas</a></dt>
+
+<dd>
+<dt><a name="scientific_name"
+>scientific_name</a></dt>
+
+<dd>
+<dt><a name="complete"
+>complete</a></dt>
+
+<dd>
+<dt><a name="prokaryotic"
+>prokaryotic</a></dt>
+
+<dd>
+<dt><a name="dna_size"
+>dna_size</a></dt>
+
+<dd>
+<dt><a name="contigs"
+>contigs</a></dt>
+
+<dd>
+<dt><a name="domain"
+>domain</a></dt>
+
+<dd>
+<dt><a name="genetic_code"
+>genetic_code</a></dt>
+
+<dd>
+<dt><a name="gc_content"
+>gc_content</a></dt>
+
+<dd>
+<dt><a name="phenotype"
+>phenotype</a></dt>
+
+<dd>
+<dt><a name="md5"
+>md5</a></dt>
+
+<dd>
+<dt><a name="source_id"
+>source_id</a></dt>
+</dl>
+</dd>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Output_Format"
+>Output Format</a></h3>
+
+<p>The standard output is a tab-delimited file containing a column for each requested field.</p>
+<hr>
+<a name='___top' class='dummyTopAnchor' ></a>
+
+<h2><a class='u' href='#___top' title='click to go to top of document'
+name="query_entity_Identifier"
+>query_entity_Identifier</a></h2>
+
+<p>Query the entity Identifier.</p>
+
+<p>An identifier is an alternate name for a protein sequence.
+The identifier is typically stored in a prefixed form that indicates the database it came from.</p>
+
+<p>Example:</p>
+
+<pre>    query_entity_Identifier -a </pre>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Related_entities"
+>Related entities</a></h3>
+
+<p>The Identifier entity has the following relationship links:</p>
+
+<dl>
+<dt><a name="HasAssertionFrom_Source"
+>HasAssertionFrom Source</a></dt>
+
+<dd>
+<dt><a name="Names_ProteinSequence"
+>Names ProteinSequence</a></dt>
+
+<dd>
+<dt><a name="WasImportedFrom_Source"
+>WasImportedFrom Source</a></dt>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Command-Line_Options"
+>Command-Line Options</a></h3>
+
+<dl>
+<dt><a name="-is_field,value"
+>-is field,value</a></dt>
+
+<dd>
+<p>Limit the results to entities where the given field has the given value.</p>
+
+<dt><a name="-like_field,value"
+>-like field,value</a></dt>
+
+<dd>
+<p>Limit the results to entities where the given field is LIKE (in the sql sense) the given value.</p>
+
+<dt><a name="-op_operator,field,value"
+>-op operator,field,value</a></dt>
+
+<dd>
+<p>Limit the results to entities where the given field is related to the given value based on the given operator.</p>
+
+<p>The operators supported are as follows. We provide text base alternatives to the comparison operators so that extra quoting is not required to keep the command-line shell from confusing them with shell I/O redirection operators.</p>
+
+<dl>
+<dt><a name="&#60;_or_lt"
+>&#60; or lt</a></dt>
+
+<dd>
+<dt><a name="&#62;_or_gt"
+>&#62; or gt</a></dt>
+
+<dd>
+<dt><a name="&#60;=_or_le"
+>&#60;= or le</a></dt>
+
+<dd>
+<dt><a name="&#62;=_or_ge"
+>&#62;= or ge</a></dt>
+
+<dd>
+<dt><a name="="
+>=</a></dt>
+
+<dd>
+<dt><a name="LIKE"
+>LIKE</a></dt>
+</dl>
+
+<dt><a name="-a"
+>-a</a></dt>
+
+<dd>
+<p>Return all fields.</p>
+
+<dt><a name="-h"
+>-h</a></dt>
+
+<dd>
+<p>Display a list of the fields available for use.</p>
+
+<dt><a name="-fields_field-list"
+>-fields field-list</a></dt>
+
+<dd>
+<p>Choose a set of fields to return. Field-list is a comma-separated list of strings. The following fields are available:</p>
+
+<dl>
+<dt><a name="source"
+>source</a></dt>
+
+<dd>
+<dt><a name="natural_form"
+>natural_form</a></dt>
+</dl>
+</dd>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Output_Format"
+>Output Format</a></h3>
+
+<p>The standard output is a tab-delimited file containing a column for each requested field.</p>
+<hr>
+<a name='___top' class='dummyTopAnchor' ></a>
+
+<h2><a class='u' href='#___top' title='click to go to top of document'
+name="query_entity_Media"
+>query_entity_Media</a></h2>
+
+<p>Query the entity Media.</p>
+
+<p>A media describes the chemical content of the solution in which cells are grown in an experiment or for the purposes of a model.
+The key is the common media name.
+The nature of the media is described by its relationship to its constituent compounds.</p>
+
+<p>Example:</p>
+
+<pre>    query_entity_Media -a </pre>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Related_entities"
+>Related entities</a></h3>
+
+<p>The Media entity has the following relationship links:</p>
+
+<dl>
+<dt><a name="HasPresenceOf_Compound"
+>HasPresenceOf Compound</a></dt>
+
+<dd>
+<dt><a name="IsUtilizedIn_Experiment"
+>IsUtilizedIn Experiment</a></dt>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Command-Line_Options"
+>Command-Line Options</a></h3>
+
+<dl>
+<dt><a name="-is_field,value"
+>-is field,value</a></dt>
+
+<dd>
+<p>Limit the results to entities where the given field has the given value.</p>
+
+<dt><a name="-like_field,value"
+>-like field,value</a></dt>
+
+<dd>
+<p>Limit the results to entities where the given field is LIKE (in the sql sense) the given value.</p>
+
+<dt><a name="-op_operator,field,value"
+>-op operator,field,value</a></dt>
+
+<dd>
+<p>Limit the results to entities where the given field is related to the given value based on the given operator.</p>
+
+<p>The operators supported are as follows. We provide text base alternatives to the comparison operators so that extra quoting is not required to keep the command-line shell from confusing them with shell I/O redirection operators.</p>
+
+<dl>
+<dt><a name="&#60;_or_lt"
+>&#60; or lt</a></dt>
+
+<dd>
+<dt><a name="&#62;_or_gt"
+>&#62; or gt</a></dt>
+
+<dd>
+<dt><a name="&#60;=_or_le"
+>&#60;= or le</a></dt>
+
+<dd>
+<dt><a name="&#62;=_or_ge"
+>&#62;= or ge</a></dt>
+
+<dd>
+<dt><a name="="
+>=</a></dt>
+
+<dd>
+<dt><a name="LIKE"
+>LIKE</a></dt>
+</dl>
+
+<dt><a name="-a"
+>-a</a></dt>
+
+<dd>
+<p>Return all fields.</p>
+
+<dt><a name="-h"
+>-h</a></dt>
+
+<dd>
+<p>Display a list of the fields available for use.</p>
+
+<dt><a name="-fields_field-list"
+>-fields field-list</a></dt>
+
+<dd>
+<p>Choose a set of fields to return. Field-list is a comma-separated list of strings. The following fields are available:</p>
+
+<dl>
+<dt><a name="mod_date"
+>mod_date</a></dt>
+
+<dd>
+<dt><a name="name"
+>name</a></dt>
+
+<dd>
+<dt><a name="type"
+>type</a></dt>
+</dl>
+</dd>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Output_Format"
+>Output Format</a></h3>
+
+<p>The standard output is a tab-delimited file containing a column for each requested field.</p>
+<hr>
+<a name='___top' class='dummyTopAnchor' ></a>
+
+<h2><a class='u' href='#___top' title='click to go to top of document'
+name="query_entity_Model"
+>query_entity_Model</a></h2>
+
+<p>Query the entity Model.</p>
+
+<p>A model specifies a relationship between sets of features and reactions in a cell.
+It is used to simulate cell growth and gene knockouts to validate annotations.</p>
+
+<p>Example:</p>
+
+<pre>    query_entity_Model -a </pre>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Related_entities"
+>Related entities</a></h3>
+
+<p>The Model entity has the following relationship links:</p>
+
+<dl>
+<dt><a name="IsARequirementIn_Requirement"
+>IsARequirementIn Requirement</a></dt>
+
+<dd>
+<dt><a name="IsDividedInto_ModelCompartment"
+>IsDividedInto ModelCompartment</a></dt>
+
+<dd>
+<dt><a name="Manages_Biomass"
+>Manages Biomass</a></dt>
+
+<dd>
+<dt><a name="Models_Genome"
+>Models Genome</a></dt>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Command-Line_Options"
+>Command-Line Options</a></h3>
+
+<dl>
+<dt><a name="-is_field,value"
+>-is field,value</a></dt>
+
+<dd>
+<p>Limit the results to entities where the given field has the given value.</p>
+
+<dt><a name="-like_field,value"
+>-like field,value</a></dt>
+
+<dd>
+<p>Limit the results to entities where the given field is LIKE (in the sql sense) the given value.</p>
+
+<dt><a name="-op_operator,field,value"
+>-op operator,field,value</a></dt>
+
+<dd>
+<p>Limit the results to entities where the given field is related to the given value based on the given operator.</p>
+
+<p>The operators supported are as follows. We provide text base alternatives to the comparison operators so that extra quoting is not required to keep the command-line shell from confusing them with shell I/O redirection operators.</p>
+
+<dl>
+<dt><a name="&#60;_or_lt"
+>&#60; or lt</a></dt>
+
+<dd>
+<dt><a name="&#62;_or_gt"
+>&#62; or gt</a></dt>
+
+<dd>
+<dt><a name="&#60;=_or_le"
+>&#60;= or le</a></dt>
+
+<dd>
+<dt><a name="&#62;=_or_ge"
+>&#62;= or ge</a></dt>
+
+<dd>
+<dt><a name="="
+>=</a></dt>
+
+<dd>
+<dt><a name="LIKE"
+>LIKE</a></dt>
+</dl>
+
+<dt><a name="-a"
+>-a</a></dt>
+
+<dd>
+<p>Return all fields.</p>
+
+<dt><a name="-h"
+>-h</a></dt>
+
+<dd>
+<p>Display a list of the fields available for use.</p>
+
+<dt><a name="-fields_field-list"
+>-fields field-list</a></dt>
+
+<dd>
+<p>Choose a set of fields to return. Field-list is a comma-separated list of strings. The following fields are available:</p>
+
+<dl>
+<dt><a name="mod_date"
+>mod_date</a></dt>
+
+<dd>
+<dt><a name="name"
+>name</a></dt>
+
+<dd>
+<dt><a name="version"
+>version</a></dt>
+
+<dd>
+<dt><a name="type"
+>type</a></dt>
+
+<dd>
+<dt><a name="status"
+>status</a></dt>
+
+<dd>
+<dt><a name="reaction_count"
+>reaction_count</a></dt>
+
+<dd>
+<dt><a name="compound_count"
+>compound_count</a></dt>
+
+<dd>
+<dt><a name="annotation_count"
+>annotation_count</a></dt>
+</dl>
+</dd>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Output_Format"
+>Output Format</a></h3>
+
+<p>The standard output is a tab-delimited file containing a column for each requested field.</p>
+<hr>
+<a name='___top' class='dummyTopAnchor' ></a>
+
+<h2><a class='u' href='#___top' title='click to go to top of document'
+name="query_entity_ModelCompartment"
+>query_entity_ModelCompartment</a></h2>
+
+<p>Query the entity ModelCompartment.</p>
+
+<p>The Model Compartment represents a section of a cell (e.g.
+cell wall,
+cytoplasm) as it appears in a specific model.</p>
+
+<p>Example:</p>
+
+<pre>    query_entity_ModelCompartment -a </pre>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Related_entities"
+>Related entities</a></h3>
+
+<p>The ModelCompartment entity has the following relationship links:</p>
+
+<dl>
+<dt><a name="IsDivisionOf_Model"
+>IsDivisionOf Model</a></dt>
+
+<dd>
+<dt><a name="IsInstanceOf_Compartment"
+>IsInstanceOf Compartment</a></dt>
+
+<dd>
+<dt><a name="IsRealLocationOf_Requirement"
+>IsRealLocationOf Requirement</a></dt>
+
+<dd>
+<dt><a name="IsTargetOf_BiomassCompound"
+>IsTargetOf BiomassCompound</a></dt>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Command-Line_Options"
+>Command-Line Options</a></h3>
+
+<dl>
+<dt><a name="-is_field,value"
+>-is field,value</a></dt>
+
+<dd>
+<p>Limit the results to entities where the given field has the given value.</p>
+
+<dt><a name="-like_field,value"
+>-like field,value</a></dt>
+
+<dd>
+<p>Limit the results to entities where the given field is LIKE (in the sql sense) the given value.</p>
+
+<dt><a name="-op_operator,field,value"
+>-op operator,field,value</a></dt>
+
+<dd>
+<p>Limit the results to entities where the given field is related to the given value based on the given operator.</p>
+
+<p>The operators supported are as follows. We provide text base alternatives to the comparison operators so that extra quoting is not required to keep the command-line shell from confusing them with shell I/O redirection operators.</p>
+
+<dl>
+<dt><a name="&#60;_or_lt"
+>&#60; or lt</a></dt>
+
+<dd>
+<dt><a name="&#62;_or_gt"
+>&#62; or gt</a></dt>
+
+<dd>
+<dt><a name="&#60;=_or_le"
+>&#60;= or le</a></dt>
+
+<dd>
+<dt><a name="&#62;=_or_ge"
+>&#62;= or ge</a></dt>
+
+<dd>
+<dt><a name="="
+>=</a></dt>
+
+<dd>
+<dt><a name="LIKE"
+>LIKE</a></dt>
+</dl>
+
+<dt><a name="-a"
+>-a</a></dt>
+
+<dd>
+<p>Return all fields.</p>
+
+<dt><a name="-h"
+>-h</a></dt>
+
+<dd>
+<p>Display a list of the fields available for use.</p>
+
+<dt><a name="-fields_field-list"
+>-fields field-list</a></dt>
+
+<dd>
+<p>Choose a set of fields to return. Field-list is a comma-separated list of strings. The following fields are available:</p>
+
+<dl>
+<dt><a name="compartment_index"
+>compartment_index</a></dt>
+
+<dd>
+<dt><a name="label"
+>label</a></dt>
+
+<dd>
+<dt><a name="pH"
+>pH</a></dt>
+
+<dd>
+<dt><a name="potential"
+>potential</a></dt>
+</dl>
+</dd>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Output_Format"
+>Output Format</a></h3>
+
+<p>The standard output is a tab-delimited file containing a column for each requested field.</p>
+<hr>
+<a name='___top' class='dummyTopAnchor' ></a>
+
+<h2><a class='u' href='#___top' title='click to go to top of document'
+name="query_entity_OTU"
+>query_entity_OTU</a></h2>
+
+<p>Query the entity OTU.</p>
+
+<p>An OTU (Organism Taxonomic Unit) is a named group of related genomes.</p>
+
+<p>Example:</p>
+
+<pre>    query_entity_OTU -a </pre>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Related_entities"
+>Related entities</a></h3>
+
+<p>The OTU entity has the following relationship links:</p>
+
+<dl>
+<dt><a name="IsCollectionOf_Genome"
+>IsCollectionOf Genome</a></dt>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Command-Line_Options"
+>Command-Line Options</a></h3>
+
+<dl>
+<dt><a name="-is_field,value"
+>-is field,value</a></dt>
+
+<dd>
+<p>Limit the results to entities where the given field has the given value.</p>
+
+<dt><a name="-like_field,value"
+>-like field,value</a></dt>
+
+<dd>
+<p>Limit the results to entities where the given field is LIKE (in the sql sense) the given value.</p>
+
+<dt><a name="-op_operator,field,value"
+>-op operator,field,value</a></dt>
+
+<dd>
+<p>Limit the results to entities where the given field is related to the given value based on the given operator.</p>
+
+<p>The operators supported are as follows. We provide text base alternatives to the comparison operators so that extra quoting is not required to keep the command-line shell from confusing them with shell I/O redirection operators.</p>
+
+<dl>
+<dt><a name="&#60;_or_lt"
+>&#60; or lt</a></dt>
+
+<dd>
+<dt><a name="&#62;_or_gt"
+>&#62; or gt</a></dt>
+
+<dd>
+<dt><a name="&#60;=_or_le"
+>&#60;= or le</a></dt>
+
+<dd>
+<dt><a name="&#62;=_or_ge"
+>&#62;= or ge</a></dt>
+
+<dd>
+<dt><a name="="
+>=</a></dt>
+
+<dd>
+<dt><a name="LIKE"
+>LIKE</a></dt>
+</dl>
+
+<dt><a name="-a"
+>-a</a></dt>
+
+<dd>
+<p>Return all fields.</p>
+
+<dt><a name="-h"
+>-h</a></dt>
+
+<dd>
+<p>Display a list of the fields available for use.</p>
+
+<dt><a name="-fields_field-list"
+>-fields field-list</a></dt>
+
+<dd>
+<p>Choose a set of fields to return. Field-list is a comma-separated list of strings. The following fields are available:</p>
+</dd>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Output_Format"
+>Output Format</a></h3>
+
+<p>The standard output is a tab-delimited file containing a column for each requested field.</p>
+<hr>
+<a name='___top' class='dummyTopAnchor' ></a>
+
+<h2><a class='u' href='#___top' title='click to go to top of document'
+name="query_entity_Pairing"
+>query_entity_Pairing</a></h2>
+
+<p>Query the entity Pairing.</p>
+
+<p>A pairing indicates that two features are found close together in a genome.
+Not all possible pairings are stored in the database; only those that are considered for some reason to be significant for annotation purposes.The key of the pairing is the concatenation of the feature IDs in alphabetical order with an intervening colon.</p>
+
+<p>Example:</p>
+
+<pre>    query_entity_Pairing -a </pre>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Related_entities"
+>Related entities</a></h3>
+
+<p>The Pairing entity has the following relationship links:</p>
+
+<dl>
+<dt><a name="Determines_PairSet"
+>Determines PairSet</a></dt>
+
+<dd>
+<dt><a name="IsPairOf_Feature"
+>IsPairOf Feature</a></dt>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Command-Line_Options"
+>Command-Line Options</a></h3>
+
+<dl>
+<dt><a name="-is_field,value"
+>-is field,value</a></dt>
+
+<dd>
+<p>Limit the results to entities where the given field has the given value.</p>
+
+<dt><a name="-like_field,value"
+>-like field,value</a></dt>
+
+<dd>
+<p>Limit the results to entities where the given field is LIKE (in the sql sense) the given value.</p>
+
+<dt><a name="-op_operator,field,value"
+>-op operator,field,value</a></dt>
+
+<dd>
+<p>Limit the results to entities where the given field is related to the given value based on the given operator.</p>
+
+<p>The operators supported are as follows. We provide text base alternatives to the comparison operators so that extra quoting is not required to keep the command-line shell from confusing them with shell I/O redirection operators.</p>
+
+<dl>
+<dt><a name="&#60;_or_lt"
+>&#60; or lt</a></dt>
+
+<dd>
+<dt><a name="&#62;_or_gt"
+>&#62; or gt</a></dt>
+
+<dd>
+<dt><a name="&#60;=_or_le"
+>&#60;= or le</a></dt>
+
+<dd>
+<dt><a name="&#62;=_or_ge"
+>&#62;= or ge</a></dt>
+
+<dd>
+<dt><a name="="
+>=</a></dt>
+
+<dd>
+<dt><a name="LIKE"
+>LIKE</a></dt>
+</dl>
+
+<dt><a name="-a"
+>-a</a></dt>
+
+<dd>
+<p>Return all fields.</p>
+
+<dt><a name="-h"
+>-h</a></dt>
+
+<dd>
+<p>Display a list of the fields available for use.</p>
+
+<dt><a name="-fields_field-list"
+>-fields field-list</a></dt>
+
+<dd>
+<p>Choose a set of fields to return. Field-list is a comma-separated list of strings. The following fields are available:</p>
+</dd>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Output_Format"
+>Output Format</a></h3>
+
+<p>The standard output is a tab-delimited file containing a column for each requested field.</p>
+<hr>
+<a name='___top' class='dummyTopAnchor' ></a>
+
+<h2><a class='u' href='#___top' title='click to go to top of document'
+name="query_entity_PairSet"
+>query_entity_PairSet</a></h2>
+
+<p>Query the entity PairSet.</p>
+
+<p>A PairSet is a precompute set of pairs or genes.
+Each pair occurs close to one another of the chromosome.
+We believe that all of the first members of the pairs correspond to one another (are quite similar),
+as do all of the second members of the pairs.
+These pairs (from prokaryotic genomes) offer on of the most powerful clues relating to uncharacterized genes/peroteins.</p>
+
+<p>Example:</p>
+
+<pre>    query_entity_PairSet -a </pre>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Related_entities"
+>Related entities</a></h3>
+
+<p>The PairSet entity has the following relationship links:</p>
+
+<dl>
+<dt><a name="IsDeterminedBy_Pairing"
+>IsDeterminedBy Pairing</a></dt>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Command-Line_Options"
+>Command-Line Options</a></h3>
+
+<dl>
+<dt><a name="-is_field,value"
+>-is field,value</a></dt>
+
+<dd>
+<p>Limit the results to entities where the given field has the given value.</p>
+
+<dt><a name="-like_field,value"
+>-like field,value</a></dt>
+
+<dd>
+<p>Limit the results to entities where the given field is LIKE (in the sql sense) the given value.</p>
+
+<dt><a name="-op_operator,field,value"
+>-op operator,field,value</a></dt>
+
+<dd>
+<p>Limit the results to entities where the given field is related to the given value based on the given operator.</p>
+
+<p>The operators supported are as follows. We provide text base alternatives to the comparison operators so that extra quoting is not required to keep the command-line shell from confusing them with shell I/O redirection operators.</p>
+
+<dl>
+<dt><a name="&#60;_or_lt"
+>&#60; or lt</a></dt>
+
+<dd>
+<dt><a name="&#62;_or_gt"
+>&#62; or gt</a></dt>
+
+<dd>
+<dt><a name="&#60;=_or_le"
+>&#60;= or le</a></dt>
+
+<dd>
+<dt><a name="&#62;=_or_ge"
+>&#62;= or ge</a></dt>
+
+<dd>
+<dt><a name="="
+>=</a></dt>
+
+<dd>
+<dt><a name="LIKE"
+>LIKE</a></dt>
+</dl>
+
+<dt><a name="-a"
+>-a</a></dt>
+
+<dd>
+<p>Return all fields.</p>
+
+<dt><a name="-h"
+>-h</a></dt>
+
+<dd>
+<p>Display a list of the fields available for use.</p>
+
+<dt><a name="-fields_field-list"
+>-fields field-list</a></dt>
+
+<dd>
+<p>Choose a set of fields to return. Field-list is a comma-separated list of strings. The following fields are available:</p>
+
+<dl>
+<dt><a name="score"
+>score</a></dt>
+</dl>
+</dd>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Output_Format"
+>Output Format</a></h3>
+
+<p>The standard output is a tab-delimited file containing a column for each requested field.</p>
+<hr>
+<a name='___top' class='dummyTopAnchor' ></a>
+
+<h2><a class='u' href='#___top' title='click to go to top of document'
+name="query_entity_ProbeSet"
+>query_entity_ProbeSet</a></h2>
+
+<p>Query the entity ProbeSet.</p>
+
+<p>A probe set is a device containing multiple probe sequences for use in gene expression experiments.</p>
+
+<p>Example:</p>
+
+<pre>    query_entity_ProbeSet -a </pre>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Related_entities"
+>Related entities</a></h3>
+
+<p>The ProbeSet entity has the following relationship links:</p>
+
+<dl>
+<dt><a name="GeneratedLevelsFor_AtomicRegulon"
+>GeneratedLevelsFor AtomicRegulon</a></dt>
+
+<dd>
+<dt><a name="HasResultsIn_Experiment"
+>HasResultsIn Experiment</a></dt>
+
+<dd>
+<dt><a name="IndicatedLevelsFor_Feature"
+>IndicatedLevelsFor Feature</a></dt>
+
+<dd>
+<dt><a name="ProducedResultsFor_Genome"
+>ProducedResultsFor Genome</a></dt>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Command-Line_Options"
+>Command-Line Options</a></h3>
+
+<dl>
+<dt><a name="-is_field,value"
+>-is field,value</a></dt>
+
+<dd>
+<p>Limit the results to entities where the given field has the given value.</p>
+
+<dt><a name="-like_field,value"
+>-like field,value</a></dt>
+
+<dd>
+<p>Limit the results to entities where the given field is LIKE (in the sql sense) the given value.</p>
+
+<dt><a name="-op_operator,field,value"
+>-op operator,field,value</a></dt>
+
+<dd>
+<p>Limit the results to entities where the given field is related to the given value based on the given operator.</p>
+
+<p>The operators supported are as follows. We provide text base alternatives to the comparison operators so that extra quoting is not required to keep the command-line shell from confusing them with shell I/O redirection operators.</p>
+
+<dl>
+<dt><a name="&#60;_or_lt"
+>&#60; or lt</a></dt>
+
+<dd>
+<dt><a name="&#62;_or_gt"
+>&#62; or gt</a></dt>
+
+<dd>
+<dt><a name="&#60;=_or_le"
+>&#60;= or le</a></dt>
+
+<dd>
+<dt><a name="&#62;=_or_ge"
+>&#62;= or ge</a></dt>
+
+<dd>
+<dt><a name="="
+>=</a></dt>
+
+<dd>
+<dt><a name="LIKE"
+>LIKE</a></dt>
+</dl>
+
+<dt><a name="-a"
+>-a</a></dt>
+
+<dd>
+<p>Return all fields.</p>
+
+<dt><a name="-h"
+>-h</a></dt>
+
+<dd>
+<p>Display a list of the fields available for use.</p>
+
+<dt><a name="-fields_field-list"
+>-fields field-list</a></dt>
+
+<dd>
+<p>Choose a set of fields to return. Field-list is a comma-separated list of strings. The following fields are available:</p>
+</dd>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Output_Format"
+>Output Format</a></h3>
+
+<p>The standard output is a tab-delimited file containing a column for each requested field.</p>
+<hr>
+<a name='___top' class='dummyTopAnchor' ></a>
+
+<h2><a class='u' href='#___top' title='click to go to top of document'
+name="query_entity_ProteinSequence"
+>query_entity_ProteinSequence</a></h2>
+
+<p>Query the entity ProteinSequence.</p>
+
+<p>We use the concept of ProteinSequence as an amino acid string with an associated MD5 value.
+It is easy to access the set of Features that relate to a ProteinSequence.
+While function is still associated with Features (and may be for some time),
+publications are associated with ProteinSequences (and the inferred impact on Features is through the relationship connecting ProteinSequences to Features).</p>
+
+<p>Example:</p>
+
+<pre>    query_entity_ProteinSequence -a </pre>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Related_entities"
+>Related entities</a></h3>
+
+<p>The ProteinSequence entity has the following relationship links:</p>
+
+<dl>
+<dt><a name="IsATopicOf_Publication"
+>IsATopicOf Publication</a></dt>
+
+<dd>
+<dt><a name="IsAlignedBy_AlignmentTree"
+>IsAlignedBy AlignmentTree</a></dt>
+
+<dd>
+<dt><a name="IsNamedBy_Identifier"
+>IsNamedBy Identifier</a></dt>
+
+<dd>
+<dt><a name="IsProjectedOnto_ProteinSequence"
+>IsProjectedOnto ProteinSequence</a></dt>
+
+<dd>
+<dt><a name="IsProteinFor_Feature"
+>IsProteinFor Feature</a></dt>
+
+<dd>
+<dt><a name="ProjectsOnto_ProteinSequence"
+>ProjectsOnto ProteinSequence</a></dt>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Command-Line_Options"
+>Command-Line Options</a></h3>
+
+<dl>
+<dt><a name="-is_field,value"
+>-is field,value</a></dt>
+
+<dd>
+<p>Limit the results to entities where the given field has the given value.</p>
+
+<dt><a name="-like_field,value"
+>-like field,value</a></dt>
+
+<dd>
+<p>Limit the results to entities where the given field is LIKE (in the sql sense) the given value.</p>
+
+<dt><a name="-op_operator,field,value"
+>-op operator,field,value</a></dt>
+
+<dd>
+<p>Limit the results to entities where the given field is related to the given value based on the given operator.</p>
+
+<p>The operators supported are as follows. We provide text base alternatives to the comparison operators so that extra quoting is not required to keep the command-line shell from confusing them with shell I/O redirection operators.</p>
+
+<dl>
+<dt><a name="&#60;_or_lt"
+>&#60; or lt</a></dt>
+
+<dd>
+<dt><a name="&#62;_or_gt"
+>&#62; or gt</a></dt>
+
+<dd>
+<dt><a name="&#60;=_or_le"
+>&#60;= or le</a></dt>
+
+<dd>
+<dt><a name="&#62;=_or_ge"
+>&#62;= or ge</a></dt>
+
+<dd>
+<dt><a name="="
+>=</a></dt>
+
+<dd>
+<dt><a name="LIKE"
+>LIKE</a></dt>
+</dl>
+
+<dt><a name="-a"
+>-a</a></dt>
+
+<dd>
+<p>Return all fields.</p>
+
+<dt><a name="-h"
+>-h</a></dt>
+
+<dd>
+<p>Display a list of the fields available for use.</p>
+
+<dt><a name="-fields_field-list"
+>-fields field-list</a></dt>
+
+<dd>
+<p>Choose a set of fields to return. Field-list is a comma-separated list of strings. The following fields are available:</p>
+
+<dl>
+<dt><a name="sequence"
+>sequence</a></dt>
+</dl>
+</dd>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Output_Format"
+>Output Format</a></h3>
+
+<p>The standard output is a tab-delimited file containing a column for each requested field.</p>
+<hr>
+<a name='___top' class='dummyTopAnchor' ></a>
+
+<h2><a class='u' href='#___top' title='click to go to top of document'
+name="query_entity_Publication"
+>query_entity_Publication</a></h2>
+
+<p>Query the entity Publication.</p>
+
+<p>Annotators attach publications to ProteinSequences.
+The criteria we have used to gather such connections is a bit nonstandard.
+We have sought to attach publications to ProteinSequences when the publication includes an expert asserting a belief or estimate of function.
+The paper may not be the original characterization.
+Further,
+it may not even discuss a sequence protein (much of the literature is very valuable,
+but reports work on proteins in strains that have not yet been sequenced).
+On the other hand,
+reports of sequencing regions of a chromosome (with no specific assertion of a clear function) should not be attached.
+The attached publications give an ID (usually a Pubmed ID),
+a URL to the paper (when we have it),
+and a title (when we have it).</p>
+
+<p>Example:</p>
+
+<pre>    query_entity_Publication -a </pre>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Related_entities"
+>Related entities</a></h3>
+
+<p>The Publication entity has the following relationship links:</p>
+
+<dl>
+<dt><a name="Concerns_ProteinSequence"
+>Concerns ProteinSequence</a></dt>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Command-Line_Options"
+>Command-Line Options</a></h3>
+
+<dl>
+<dt><a name="-is_field,value"
+>-is field,value</a></dt>
+
+<dd>
+<p>Limit the results to entities where the given field has the given value.</p>
+
+<dt><a name="-like_field,value"
+>-like field,value</a></dt>
+
+<dd>
+<p>Limit the results to entities where the given field is LIKE (in the sql sense) the given value.</p>
+
+<dt><a name="-op_operator,field,value"
+>-op operator,field,value</a></dt>
+
+<dd>
+<p>Limit the results to entities where the given field is related to the given value based on the given operator.</p>
+
+<p>The operators supported are as follows. We provide text base alternatives to the comparison operators so that extra quoting is not required to keep the command-line shell from confusing them with shell I/O redirection operators.</p>
+
+<dl>
+<dt><a name="&#60;_or_lt"
+>&#60; or lt</a></dt>
+
+<dd>
+<dt><a name="&#62;_or_gt"
+>&#62; or gt</a></dt>
+
+<dd>
+<dt><a name="&#60;=_or_le"
+>&#60;= or le</a></dt>
+
+<dd>
+<dt><a name="&#62;=_or_ge"
+>&#62;= or ge</a></dt>
+
+<dd>
+<dt><a name="="
+>=</a></dt>
+
+<dd>
+<dt><a name="LIKE"
+>LIKE</a></dt>
+</dl>
+
+<dt><a name="-a"
+>-a</a></dt>
+
+<dd>
+<p>Return all fields.</p>
+
+<dt><a name="-h"
+>-h</a></dt>
+
+<dd>
+<p>Display a list of the fields available for use.</p>
+
+<dt><a name="-fields_field-list"
+>-fields field-list</a></dt>
+
+<dd>
+<p>Choose a set of fields to return. Field-list is a comma-separated list of strings. The following fields are available:</p>
+
+<dl>
+<dt><a name="title"
+>title</a></dt>
+
+<dd>
+<dt><a name="link"
+>link</a></dt>
+
+<dd>
+<dt><a name="pubdate"
+>pubdate</a></dt>
+</dl>
+</dd>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Output_Format"
+>Output Format</a></h3>
+
+<p>The standard output is a tab-delimited file containing a column for each requested field.</p>
+<hr>
+<a name='___top' class='dummyTopAnchor' ></a>
+
+<h2><a class='u' href='#___top' title='click to go to top of document'
+name="query_entity_Reaction"
+>query_entity_Reaction</a></h2>
+
+<p>Query the entity Reaction.</p>
+
+<p>A reaction is a chemical process that converts one set of compounds (substrate) to another set (products).</p>
+
+<p>Example:</p>
+
+<pre>    query_entity_Reaction -a </pre>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Related_entities"
+>Related entities</a></h3>
+
+<p>The Reaction entity has the following relationship links:</p>
+
+<dl>
+<dt><a name="Involves_Reagent"
+>Involves Reagent</a></dt>
+
+<dd>
+<dt><a name="IsDisplayedOn_Diagram"
+>IsDisplayedOn Diagram</a></dt>
+
+<dd>
+<dt><a name="IsRequiredBy_Requirement"
+>IsRequiredBy Requirement</a></dt>
+
+<dd>
+<dt><a name="IsUsedAs_ReactionRule"
+>IsUsedAs ReactionRule</a></dt>
+
+<dd>
+<dt><a name="ParticipatesIn_Scenario"
+>ParticipatesIn Scenario</a></dt>
+
+<dd>
+<dt><a name="RunsByDefaultIn_Compartment"
+>RunsByDefaultIn Compartment</a></dt>
+
+<dd>
+<dt><a name="UsesAliasForReaction_Source"
+>UsesAliasForReaction Source</a></dt>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Command-Line_Options"
+>Command-Line Options</a></h3>
+
+<dl>
+<dt><a name="-is_field,value"
+>-is field,value</a></dt>
+
+<dd>
+<p>Limit the results to entities where the given field has the given value.</p>
+
+<dt><a name="-like_field,value"
+>-like field,value</a></dt>
+
+<dd>
+<p>Limit the results to entities where the given field is LIKE (in the sql sense) the given value.</p>
+
+<dt><a name="-op_operator,field,value"
+>-op operator,field,value</a></dt>
+
+<dd>
+<p>Limit the results to entities where the given field is related to the given value based on the given operator.</p>
+
+<p>The operators supported are as follows. We provide text base alternatives to the comparison operators so that extra quoting is not required to keep the command-line shell from confusing them with shell I/O redirection operators.</p>
+
+<dl>
+<dt><a name="&#60;_or_lt"
+>&#60; or lt</a></dt>
+
+<dd>
+<dt><a name="&#62;_or_gt"
+>&#62; or gt</a></dt>
+
+<dd>
+<dt><a name="&#60;=_or_le"
+>&#60;= or le</a></dt>
+
+<dd>
+<dt><a name="&#62;=_or_ge"
+>&#62;= or ge</a></dt>
+
+<dd>
+<dt><a name="="
+>=</a></dt>
+
+<dd>
+<dt><a name="LIKE"
+>LIKE</a></dt>
+</dl>
+
+<dt><a name="-a"
+>-a</a></dt>
+
+<dd>
+<p>Return all fields.</p>
+
+<dt><a name="-h"
+>-h</a></dt>
+
+<dd>
+<p>Display a list of the fields available for use.</p>
+
+<dt><a name="-fields_field-list"
+>-fields field-list</a></dt>
+
+<dd>
+<p>Choose a set of fields to return. Field-list is a comma-separated list of strings. The following fields are available:</p>
+
+<dl>
+<dt><a name="mod_date"
+>mod_date</a></dt>
+
+<dd>
+<dt><a name="name"
+>name</a></dt>
+
+<dd>
+<dt><a name="msid"
+>msid</a></dt>
+
+<dd>
+<dt><a name="abbr"
+>abbr</a></dt>
+
+<dd>
+<dt><a name="equation"
+>equation</a></dt>
+
+<dd>
+<dt><a name="reversibility"
+>reversibility</a></dt>
+</dl>
+</dd>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Output_Format"
+>Output Format</a></h3>
+
+<p>The standard output is a tab-delimited file containing a column for each requested field.</p>
+<hr>
+<a name='___top' class='dummyTopAnchor' ></a>
+
+<h2><a class='u' href='#___top' title='click to go to top of document'
+name="query_entity_ReactionRule"
+>query_entity_ReactionRule</a></h2>
+
+<p>Query the entity ReactionRule.</p>
+
+<p>A reaction rule represents the way a reaction takes place within the context of a model.</p>
+
+<p>Example:</p>
+
+<pre>    query_entity_ReactionRule -a </pre>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Related_entities"
+>Related entities</a></h3>
+
+<p>The ReactionRule entity has the following relationship links:</p>
+
+<dl>
+<dt><a name="HasProposedLocationIn_Compartment"
+>HasProposedLocationIn Compartment</a></dt>
+
+<dd>
+<dt><a name="IsStepOf_Complex"
+>IsStepOf Complex</a></dt>
+
+<dd>
+<dt><a name="IsUseOf_Reaction"
+>IsUseOf Reaction</a></dt>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Command-Line_Options"
+>Command-Line Options</a></h3>
+
+<dl>
+<dt><a name="-is_field,value"
+>-is field,value</a></dt>
+
+<dd>
+<p>Limit the results to entities where the given field has the given value.</p>
+
+<dt><a name="-like_field,value"
+>-like field,value</a></dt>
+
+<dd>
+<p>Limit the results to entities where the given field is LIKE (in the sql sense) the given value.</p>
+
+<dt><a name="-op_operator,field,value"
+>-op operator,field,value</a></dt>
+
+<dd>
+<p>Limit the results to entities where the given field is related to the given value based on the given operator.</p>
+
+<p>The operators supported are as follows. We provide text base alternatives to the comparison operators so that extra quoting is not required to keep the command-line shell from confusing them with shell I/O redirection operators.</p>
+
+<dl>
+<dt><a name="&#60;_or_lt"
+>&#60; or lt</a></dt>
+
+<dd>
+<dt><a name="&#62;_or_gt"
+>&#62; or gt</a></dt>
+
+<dd>
+<dt><a name="&#60;=_or_le"
+>&#60;= or le</a></dt>
+
+<dd>
+<dt><a name="&#62;=_or_ge"
+>&#62;= or ge</a></dt>
+
+<dd>
+<dt><a name="="
+>=</a></dt>
+
+<dd>
+<dt><a name="LIKE"
+>LIKE</a></dt>
+</dl>
+
+<dt><a name="-a"
+>-a</a></dt>
+
+<dd>
+<p>Return all fields.</p>
+
+<dt><a name="-h"
+>-h</a></dt>
+
+<dd>
+<p>Display a list of the fields available for use.</p>
+
+<dt><a name="-fields_field-list"
+>-fields field-list</a></dt>
+
+<dd>
+<p>Choose a set of fields to return. Field-list is a comma-separated list of strings. The following fields are available:</p>
+
+<dl>
+<dt><a name="direction"
+>direction</a></dt>
+
+<dd>
+<dt><a name="transproton"
+>transproton</a></dt>
+</dl>
+</dd>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Output_Format"
+>Output Format</a></h3>
+
+<p>The standard output is a tab-delimited file containing a column for each requested field.</p>
+<hr>
+<a name='___top' class='dummyTopAnchor' ></a>
+
+<h2><a class='u' href='#___top' title='click to go to top of document'
+name="query_entity_Reagent"
+>query_entity_Reagent</a></h2>
+
+<p>Query the entity Reagent.</p>
+
+<p>This entity represents a compound as it is used by a specific reaction.
+A reaction involves many compounds,
+and a compound can be involved in many reactions.
+The reagent describes the use of the compound by a specific reaction.</p>
+
+<p>Example:</p>
+
+<pre>    query_entity_Reagent -a </pre>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Related_entities"
+>Related entities</a></h3>
+
+<p>The Reagent entity has the following relationship links:</p>
+
+<dl>
+<dt><a name="HasDefaultLocation_Compartment"
+>HasDefaultLocation Compartment</a></dt>
+
+<dd>
+<dt><a name="IsInvolvedIn_Reaction"
+>IsInvolvedIn Reaction</a></dt>
+
+<dd>
+<dt><a name="IsParticipationOf_Compound"
+>IsParticipationOf Compound</a></dt>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Command-Line_Options"
+>Command-Line Options</a></h3>
+
+<dl>
+<dt><a name="-is_field,value"
+>-is field,value</a></dt>
+
+<dd>
+<p>Limit the results to entities where the given field has the given value.</p>
+
+<dt><a name="-like_field,value"
+>-like field,value</a></dt>
+
+<dd>
+<p>Limit the results to entities where the given field is LIKE (in the sql sense) the given value.</p>
+
+<dt><a name="-op_operator,field,value"
+>-op operator,field,value</a></dt>
+
+<dd>
+<p>Limit the results to entities where the given field is related to the given value based on the given operator.</p>
+
+<p>The operators supported are as follows. We provide text base alternatives to the comparison operators so that extra quoting is not required to keep the command-line shell from confusing them with shell I/O redirection operators.</p>
+
+<dl>
+<dt><a name="&#60;_or_lt"
+>&#60; or lt</a></dt>
+
+<dd>
+<dt><a name="&#62;_or_gt"
+>&#62; or gt</a></dt>
+
+<dd>
+<dt><a name="&#60;=_or_le"
+>&#60;= or le</a></dt>
+
+<dd>
+<dt><a name="&#62;=_or_ge"
+>&#62;= or ge</a></dt>
+
+<dd>
+<dt><a name="="
+>=</a></dt>
+
+<dd>
+<dt><a name="LIKE"
+>LIKE</a></dt>
+</dl>
+
+<dt><a name="-a"
+>-a</a></dt>
+
+<dd>
+<p>Return all fields.</p>
+
+<dt><a name="-h"
+>-h</a></dt>
+
+<dd>
+<p>Display a list of the fields available for use.</p>
+
+<dt><a name="-fields_field-list"
+>-fields field-list</a></dt>
+
+<dd>
+<p>Choose a set of fields to return. Field-list is a comma-separated list of strings. The following fields are available:</p>
+
+<dl>
+<dt><a name="stoichiometry"
+>stoichiometry</a></dt>
+
+<dd>
+<dt><a name="cofactor"
+>cofactor</a></dt>
+
+<dd>
+<dt><a name="compartment_index"
+>compartment_index</a></dt>
+
+<dd>
+<dt><a name="transport_coefficient"
+>transport_coefficient</a></dt>
+</dl>
+</dd>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Output_Format"
+>Output Format</a></h3>
+
+<p>The standard output is a tab-delimited file containing a column for each requested field.</p>
+<hr>
+<a name='___top' class='dummyTopAnchor' ></a>
+
+<h2><a class='u' href='#___top' title='click to go to top of document'
+name="query_entity_Requirement"
+>query_entity_Requirement</a></h2>
+
+<p>Query the entity Requirement.</p>
+
+<p>A requirement describes the way a reaction fits into a model.</p>
+
+<p>Example:</p>
+
+<pre>    query_entity_Requirement -a </pre>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Related_entities"
+>Related entities</a></h3>
+
+<p>The Requirement entity has the following relationship links:</p>
+
+<dl>
+<dt><a name="HasRealLocationIn_ModelCompartment"
+>HasRealLocationIn ModelCompartment</a></dt>
+
+<dd>
+<dt><a name="IsARequirementOf_Model"
+>IsARequirementOf Model</a></dt>
+
+<dd>
+<dt><a name="Requires_Reaction"
+>Requires Reaction</a></dt>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Command-Line_Options"
+>Command-Line Options</a></h3>
+
+<dl>
+<dt><a name="-is_field,value"
+>-is field,value</a></dt>
+
+<dd>
+<p>Limit the results to entities where the given field has the given value.</p>
+
+<dt><a name="-like_field,value"
+>-like field,value</a></dt>
+
+<dd>
+<p>Limit the results to entities where the given field is LIKE (in the sql sense) the given value.</p>
+
+<dt><a name="-op_operator,field,value"
+>-op operator,field,value</a></dt>
+
+<dd>
+<p>Limit the results to entities where the given field is related to the given value based on the given operator.</p>
+
+<p>The operators supported are as follows. We provide text base alternatives to the comparison operators so that extra quoting is not required to keep the command-line shell from confusing them with shell I/O redirection operators.</p>
+
+<dl>
+<dt><a name="&#60;_or_lt"
+>&#60; or lt</a></dt>
+
+<dd>
+<dt><a name="&#62;_or_gt"
+>&#62; or gt</a></dt>
+
+<dd>
+<dt><a name="&#60;=_or_le"
+>&#60;= or le</a></dt>
+
+<dd>
+<dt><a name="&#62;=_or_ge"
+>&#62;= or ge</a></dt>
+
+<dd>
+<dt><a name="="
+>=</a></dt>
+
+<dd>
+<dt><a name="LIKE"
+>LIKE</a></dt>
+</dl>
+
+<dt><a name="-a"
+>-a</a></dt>
+
+<dd>
+<p>Return all fields.</p>
+
+<dt><a name="-h"
+>-h</a></dt>
+
+<dd>
+<p>Display a list of the fields available for use.</p>
+
+<dt><a name="-fields_field-list"
+>-fields field-list</a></dt>
+
+<dd>
+<p>Choose a set of fields to return. Field-list is a comma-separated list of strings. The following fields are available:</p>
+
+<dl>
+<dt><a name="direction"
+>direction</a></dt>
+
+<dd>
+<dt><a name="transproton"
+>transproton</a></dt>
+
+<dd>
+<dt><a name="proton"
+>proton</a></dt>
+</dl>
+</dd>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Output_Format"
+>Output Format</a></h3>
+
+<p>The standard output is a tab-delimited file containing a column for each requested field.</p>
+<hr>
+<a name='___top' class='dummyTopAnchor' ></a>
+
+<h2><a class='u' href='#___top' title='click to go to top of document'
+name="query_entity_Role"
+>query_entity_Role</a></h2>
+
+<p>Query the entity Role.</p>
+
+<p>A role describes a biological function that may be fulfilled by a feature.
+One of the main goals of the database is to assign features to roles.
+Most roles are effected by the construction of proteins.
+Some,
+however,
+deal with functional regulation and message transmission.</p>
+
+<p>Example:</p>
+
+<pre>    query_entity_Role -a </pre>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Related_entities"
+>Related entities</a></h3>
+
+<p>The Role entity has the following relationship links:</p>
+
+<dl>
+<dt><a name="DeterminesFunctionOf_Family"
+>DeterminesFunctionOf Family</a></dt>
+
+<dd>
+<dt><a name="HasAsExemplar_Feature"
+>HasAsExemplar Feature</a></dt>
+
+<dd>
+<dt><a name="IsConsistentTo_EcNumber"
+>IsConsistentTo EcNumber</a></dt>
+
+<dd>
+<dt><a name="IsFunctionalIn_Feature"
+>IsFunctionalIn Feature</a></dt>
+
+<dd>
+<dt><a name="IsIncludedIn_Subsystem"
+>IsIncludedIn Subsystem</a></dt>
+
+<dd>
+<dt><a name="IsRoleOf_SSCell"
+>IsRoleOf SSCell</a></dt>
+
+<dd>
+<dt><a name="Triggers_Complex"
+>Triggers Complex</a></dt>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Command-Line_Options"
+>Command-Line Options</a></h3>
+
+<dl>
+<dt><a name="-is_field,value"
+>-is field,value</a></dt>
+
+<dd>
+<p>Limit the results to entities where the given field has the given value.</p>
+
+<dt><a name="-like_field,value"
+>-like field,value</a></dt>
+
+<dd>
+<p>Limit the results to entities where the given field is LIKE (in the sql sense) the given value.</p>
+
+<dt><a name="-op_operator,field,value"
+>-op operator,field,value</a></dt>
+
+<dd>
+<p>Limit the results to entities where the given field is related to the given value based on the given operator.</p>
+
+<p>The operators supported are as follows. We provide text base alternatives to the comparison operators so that extra quoting is not required to keep the command-line shell from confusing them with shell I/O redirection operators.</p>
+
+<dl>
+<dt><a name="&#60;_or_lt"
+>&#60; or lt</a></dt>
+
+<dd>
+<dt><a name="&#62;_or_gt"
+>&#62; or gt</a></dt>
+
+<dd>
+<dt><a name="&#60;=_or_le"
+>&#60;= or le</a></dt>
+
+<dd>
+<dt><a name="&#62;=_or_ge"
+>&#62;= or ge</a></dt>
+
+<dd>
+<dt><a name="="
+>=</a></dt>
+
+<dd>
+<dt><a name="LIKE"
+>LIKE</a></dt>
+</dl>
+
+<dt><a name="-a"
+>-a</a></dt>
+
+<dd>
+<p>Return all fields.</p>
+
+<dt><a name="-h"
+>-h</a></dt>
+
+<dd>
+<p>Display a list of the fields available for use.</p>
+
+<dt><a name="-fields_field-list"
+>-fields field-list</a></dt>
+
+<dd>
+<p>Choose a set of fields to return. Field-list is a comma-separated list of strings. The following fields are available:</p>
+
+<dl>
+<dt><a name="hypothetical"
+>hypothetical</a></dt>
+</dl>
+</dd>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Output_Format"
+>Output Format</a></h3>
+
+<p>The standard output is a tab-delimited file containing a column for each requested field.</p>
+<hr>
+<a name='___top' class='dummyTopAnchor' ></a>
+
+<h2><a class='u' href='#___top' title='click to go to top of document'
+name="query_entity_Scenario"
+>query_entity_Scenario</a></h2>
+
+<p>Query the entity Scenario.</p>
+
+<p>A scenario is a partial instance of a subsystem with a defined set of reactions.
+Each scenario converts input compounds to output compounds using reactions.
+The scenario may use all of the reactions controlled by a subsystem or only some,
+and may also incorporate additional reactions.
+Because scenario names are not unique,
+the actual scenario ID is a number.</p>
+
+<p>Example:</p>
+
+<pre>    query_entity_Scenario -a </pre>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Related_entities"
+>Related entities</a></h3>
+
+<p>The Scenario entity has the following relationship links:</p>
+
+<dl>
+<dt><a name="HasAsTerminus_Compound"
+>HasAsTerminus Compound</a></dt>
+
+<dd>
+<dt><a name="HasParticipant_Reaction"
+>HasParticipant Reaction</a></dt>
+
+<dd>
+<dt><a name="Overlaps_Diagram"
+>Overlaps Diagram</a></dt>
+
+<dd>
+<dt><a name="Validates_Subsystem"
+>Validates Subsystem</a></dt>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Command-Line_Options"
+>Command-Line Options</a></h3>
+
+<dl>
+<dt><a name="-is_field,value"
+>-is field,value</a></dt>
+
+<dd>
+<p>Limit the results to entities where the given field has the given value.</p>
+
+<dt><a name="-like_field,value"
+>-like field,value</a></dt>
+
+<dd>
+<p>Limit the results to entities where the given field is LIKE (in the sql sense) the given value.</p>
+
+<dt><a name="-op_operator,field,value"
+>-op operator,field,value</a></dt>
+
+<dd>
+<p>Limit the results to entities where the given field is related to the given value based on the given operator.</p>
+
+<p>The operators supported are as follows. We provide text base alternatives to the comparison operators so that extra quoting is not required to keep the command-line shell from confusing them with shell I/O redirection operators.</p>
+
+<dl>
+<dt><a name="&#60;_or_lt"
+>&#60; or lt</a></dt>
+
+<dd>
+<dt><a name="&#62;_or_gt"
+>&#62; or gt</a></dt>
+
+<dd>
+<dt><a name="&#60;=_or_le"
+>&#60;= or le</a></dt>
+
+<dd>
+<dt><a name="&#62;=_or_ge"
+>&#62;= or ge</a></dt>
+
+<dd>
+<dt><a name="="
+>=</a></dt>
+
+<dd>
+<dt><a name="LIKE"
+>LIKE</a></dt>
+</dl>
+
+<dt><a name="-a"
+>-a</a></dt>
+
+<dd>
+<p>Return all fields.</p>
+
+<dt><a name="-h"
+>-h</a></dt>
+
+<dd>
+<p>Display a list of the fields available for use.</p>
+
+<dt><a name="-fields_field-list"
+>-fields field-list</a></dt>
+
+<dd>
+<p>Choose a set of fields to return. Field-list is a comma-separated list of strings. The following fields are available:</p>
+
+<dl>
+<dt><a name="common_name"
+>common_name</a></dt>
+</dl>
+</dd>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Output_Format"
+>Output Format</a></h3>
+
+<p>The standard output is a tab-delimited file containing a column for each requested field.</p>
+<hr>
+<a name='___top' class='dummyTopAnchor' ></a>
+
+<h2><a class='u' href='#___top' title='click to go to top of document'
+name="query_entity_Source"
+>query_entity_Source</a></h2>
+
+<p>Query the entity Source.</p>
+
+<p>A source is a user or organization that is permitted to assign its own identifiers or to submit bioinformatic objects to the database.</p>
+
+<p>Example:</p>
+
+<pre>    query_entity_Source -a </pre>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Related_entities"
+>Related entities</a></h3>
+
+<p>The Source entity has the following relationship links:</p>
+
+<dl>
+<dt><a name="Asserts_Identifier"
+>Asserts Identifier</a></dt>
+
+<dd>
+<dt><a name="Formulated_CoregulatedSet"
+>Formulated CoregulatedSet</a></dt>
+
+<dd>
+<dt><a name="HasCompoundAliasFrom_Compound"
+>HasCompoundAliasFrom Compound</a></dt>
+
+<dd>
+<dt><a name="HasReactionAliasFrom_Reaction"
+>HasReactionAliasFrom Reaction</a></dt>
+
+<dd>
+<dt><a name="Imported_Identifier"
+>Imported Identifier</a></dt>
+
+<dd>
+<dt><a name="Provided_Subsystem"
+>Provided Subsystem</a></dt>
+
+<dd>
+<dt><a name="Submitted_Genome"
+>Submitted Genome</a></dt>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Command-Line_Options"
+>Command-Line Options</a></h3>
+
+<dl>
+<dt><a name="-is_field,value"
+>-is field,value</a></dt>
+
+<dd>
+<p>Limit the results to entities where the given field has the given value.</p>
+
+<dt><a name="-like_field,value"
+>-like field,value</a></dt>
+
+<dd>
+<p>Limit the results to entities where the given field is LIKE (in the sql sense) the given value.</p>
+
+<dt><a name="-op_operator,field,value"
+>-op operator,field,value</a></dt>
+
+<dd>
+<p>Limit the results to entities where the given field is related to the given value based on the given operator.</p>
+
+<p>The operators supported are as follows. We provide text base alternatives to the comparison operators so that extra quoting is not required to keep the command-line shell from confusing them with shell I/O redirection operators.</p>
+
+<dl>
+<dt><a name="&#60;_or_lt"
+>&#60; or lt</a></dt>
+
+<dd>
+<dt><a name="&#62;_or_gt"
+>&#62; or gt</a></dt>
+
+<dd>
+<dt><a name="&#60;=_or_le"
+>&#60;= or le</a></dt>
+
+<dd>
+<dt><a name="&#62;=_or_ge"
+>&#62;= or ge</a></dt>
+
+<dd>
+<dt><a name="="
+>=</a></dt>
+
+<dd>
+<dt><a name="LIKE"
+>LIKE</a></dt>
+</dl>
+
+<dt><a name="-a"
+>-a</a></dt>
+
+<dd>
+<p>Return all fields.</p>
+
+<dt><a name="-h"
+>-h</a></dt>
+
+<dd>
+<p>Display a list of the fields available for use.</p>
+
+<dt><a name="-fields_field-list"
+>-fields field-list</a></dt>
+
+<dd>
+<p>Choose a set of fields to return. Field-list is a comma-separated list of strings. The following fields are available:</p>
+</dd>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Output_Format"
+>Output Format</a></h3>
+
+<p>The standard output is a tab-delimited file containing a column for each requested field.</p>
+<hr>
+<a name='___top' class='dummyTopAnchor' ></a>
+
+<h2><a class='u' href='#___top' title='click to go to top of document'
+name="query_entity_SSCell"
+>query_entity_SSCell</a></h2>
+
+<p>Query the entity SSCell.</p>
+
+<p>An SSCell (SpreadSheet Cell) represents a role as it occurs in a subsystem spreadsheet row.
+The key is a colon-delimited triple containing an MD5 hash of the subsystem ID followed by a genome ID (with optional region string) and a role abbreviation.</p>
+
+<p>Example:</p>
+
+<pre>    query_entity_SSCell -a </pre>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Related_entities"
+>Related entities</a></h3>
+
+<p>The SSCell entity has the following relationship links:</p>
+
+<dl>
+<dt><a name="Contains_Feature"
+>Contains Feature</a></dt>
+
+<dd>
+<dt><a name="HasRole_Role"
+>HasRole Role</a></dt>
+
+<dd>
+<dt><a name="IsRoleFor_SSRow"
+>IsRoleFor SSRow</a></dt>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Command-Line_Options"
+>Command-Line Options</a></h3>
+
+<dl>
+<dt><a name="-is_field,value"
+>-is field,value</a></dt>
+
+<dd>
+<p>Limit the results to entities where the given field has the given value.</p>
+
+<dt><a name="-like_field,value"
+>-like field,value</a></dt>
+
+<dd>
+<p>Limit the results to entities where the given field is LIKE (in the sql sense) the given value.</p>
+
+<dt><a name="-op_operator,field,value"
+>-op operator,field,value</a></dt>
+
+<dd>
+<p>Limit the results to entities where the given field is related to the given value based on the given operator.</p>
+
+<p>The operators supported are as follows. We provide text base alternatives to the comparison operators so that extra quoting is not required to keep the command-line shell from confusing them with shell I/O redirection operators.</p>
+
+<dl>
+<dt><a name="&#60;_or_lt"
+>&#60; or lt</a></dt>
+
+<dd>
+<dt><a name="&#62;_or_gt"
+>&#62; or gt</a></dt>
+
+<dd>
+<dt><a name="&#60;=_or_le"
+>&#60;= or le</a></dt>
+
+<dd>
+<dt><a name="&#62;=_or_ge"
+>&#62;= or ge</a></dt>
+
+<dd>
+<dt><a name="="
+>=</a></dt>
+
+<dd>
+<dt><a name="LIKE"
+>LIKE</a></dt>
+</dl>
+
+<dt><a name="-a"
+>-a</a></dt>
+
+<dd>
+<p>Return all fields.</p>
+
+<dt><a name="-h"
+>-h</a></dt>
+
+<dd>
+<p>Display a list of the fields available for use.</p>
+
+<dt><a name="-fields_field-list"
+>-fields field-list</a></dt>
+
+<dd>
+<p>Choose a set of fields to return. Field-list is a comma-separated list of strings. The following fields are available:</p>
+</dd>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Output_Format"
+>Output Format</a></h3>
+
+<p>The standard output is a tab-delimited file containing a column for each requested field.</p>
+<hr>
+<a name='___top' class='dummyTopAnchor' ></a>
+
+<h2><a class='u' href='#___top' title='click to go to top of document'
+name="query_entity_SSRow"
+>query_entity_SSRow</a></h2>
+
+<p>Query the entity SSRow.</p>
+
+<p>An SSRow (that is,
+a row in a subsystem spreadsheet) represents a collection of functional roles present in the Features of a single Genome.
+The roles are part of a designated subsystem,
+and the fids associated with each role are included in the row,
+That is,
+a row amounts to an instance of a subsystem as it exists in a specific,
+designated genome.</p>
+
+<p>Example:</p>
+
+<pre>    query_entity_SSRow -a </pre>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Related_entities"
+>Related entities</a></h3>
+
+<p>The SSRow entity has the following relationship links:</p>
+
+<dl>
+<dt><a name="Implements_Variant"
+>Implements Variant</a></dt>
+
+<dd>
+<dt><a name="IsRowOf_SSCell"
+>IsRowOf SSCell</a></dt>
+
+<dd>
+<dt><a name="IsUsedBy_Genome"
+>IsUsedBy Genome</a></dt>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Command-Line_Options"
+>Command-Line Options</a></h3>
+
+<dl>
+<dt><a name="-is_field,value"
+>-is field,value</a></dt>
+
+<dd>
+<p>Limit the results to entities where the given field has the given value.</p>
+
+<dt><a name="-like_field,value"
+>-like field,value</a></dt>
+
+<dd>
+<p>Limit the results to entities where the given field is LIKE (in the sql sense) the given value.</p>
+
+<dt><a name="-op_operator,field,value"
+>-op operator,field,value</a></dt>
+
+<dd>
+<p>Limit the results to entities where the given field is related to the given value based on the given operator.</p>
+
+<p>The operators supported are as follows. We provide text base alternatives to the comparison operators so that extra quoting is not required to keep the command-line shell from confusing them with shell I/O redirection operators.</p>
+
+<dl>
+<dt><a name="&#60;_or_lt"
+>&#60; or lt</a></dt>
+
+<dd>
+<dt><a name="&#62;_or_gt"
+>&#62; or gt</a></dt>
+
+<dd>
+<dt><a name="&#60;=_or_le"
+>&#60;= or le</a></dt>
+
+<dd>
+<dt><a name="&#62;=_or_ge"
+>&#62;= or ge</a></dt>
+
+<dd>
+<dt><a name="="
+>=</a></dt>
+
+<dd>
+<dt><a name="LIKE"
+>LIKE</a></dt>
+</dl>
+
+<dt><a name="-a"
+>-a</a></dt>
+
+<dd>
+<p>Return all fields.</p>
+
+<dt><a name="-h"
+>-h</a></dt>
+
+<dd>
+<p>Display a list of the fields available for use.</p>
+
+<dt><a name="-fields_field-list"
+>-fields field-list</a></dt>
+
+<dd>
+<p>Choose a set of fields to return. Field-list is a comma-separated list of strings. The following fields are available:</p>
+
+<dl>
+<dt><a name="curated"
+>curated</a></dt>
+
+<dd>
+<dt><a name="region"
+>region</a></dt>
+</dl>
+</dd>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Output_Format"
+>Output Format</a></h3>
+
+<p>The standard output is a tab-delimited file containing a column for each requested field.</p>
+<hr>
+<a name='___top' class='dummyTopAnchor' ></a>
+
+<h2><a class='u' href='#___top' title='click to go to top of document'
+name="query_entity_Subsystem"
+>query_entity_Subsystem</a></h2>
+
+<p>Query the entity Subsystem.</p>
+
+<p>A subsystem is a set of functional roles that have been annotated simultaneously (e.g.,
+the roles present in a specific pathway),
+with an associated subsystem spreadsheet which encodes the fids in each genome that implement the functional roles in the subsystem.</p>
+
+<p>Example:</p>
+
+<pre>    query_entity_Subsystem -a </pre>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Related_entities"
+>Related entities</a></h3>
+
+<p>The Subsystem entity has the following relationship links:</p>
+
+<dl>
+<dt><a name="Describes_Variant"
+>Describes Variant</a></dt>
+
+<dd>
+<dt><a name="Includes_Role"
+>Includes Role</a></dt>
+
+<dd>
+<dt><a name="IsInClass_SubsystemClass"
+>IsInClass SubsystemClass</a></dt>
+
+<dd>
+<dt><a name="IsRelevantTo_Diagram"
+>IsRelevantTo Diagram</a></dt>
+
+<dd>
+<dt><a name="IsSubInstanceOf_Scenario"
+>IsSubInstanceOf Scenario</a></dt>
+
+<dd>
+<dt><a name="WasProvidedBy_Source"
+>WasProvidedBy Source</a></dt>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Command-Line_Options"
+>Command-Line Options</a></h3>
+
+<dl>
+<dt><a name="-is_field,value"
+>-is field,value</a></dt>
+
+<dd>
+<p>Limit the results to entities where the given field has the given value.</p>
+
+<dt><a name="-like_field,value"
+>-like field,value</a></dt>
+
+<dd>
+<p>Limit the results to entities where the given field is LIKE (in the sql sense) the given value.</p>
+
+<dt><a name="-op_operator,field,value"
+>-op operator,field,value</a></dt>
+
+<dd>
+<p>Limit the results to entities where the given field is related to the given value based on the given operator.</p>
+
+<p>The operators supported are as follows. We provide text base alternatives to the comparison operators so that extra quoting is not required to keep the command-line shell from confusing them with shell I/O redirection operators.</p>
+
+<dl>
+<dt><a name="&#60;_or_lt"
+>&#60; or lt</a></dt>
+
+<dd>
+<dt><a name="&#62;_or_gt"
+>&#62; or gt</a></dt>
+
+<dd>
+<dt><a name="&#60;=_or_le"
+>&#60;= or le</a></dt>
+
+<dd>
+<dt><a name="&#62;=_or_ge"
+>&#62;= or ge</a></dt>
+
+<dd>
+<dt><a name="="
+>=</a></dt>
+
+<dd>
+<dt><a name="LIKE"
+>LIKE</a></dt>
+</dl>
+
+<dt><a name="-a"
+>-a</a></dt>
+
+<dd>
+<p>Return all fields.</p>
+
+<dt><a name="-h"
+>-h</a></dt>
+
+<dd>
+<p>Display a list of the fields available for use.</p>
+
+<dt><a name="-fields_field-list"
+>-fields field-list</a></dt>
+
+<dd>
+<p>Choose a set of fields to return. Field-list is a comma-separated list of strings. The following fields are available:</p>
+
+<dl>
+<dt><a name="version"
+>version</a></dt>
+
+<dd>
+<dt><a name="curator"
+>curator</a></dt>
+
+<dd>
+<dt><a name="notes"
+>notes</a></dt>
+
+<dd>
+<dt><a name="description"
+>description</a></dt>
+
+<dd>
+<dt><a name="usable"
+>usable</a></dt>
+
+<dd>
+<dt><a name="private"
+>private</a></dt>
+
+<dd>
+<dt><a name="cluster_based"
+>cluster_based</a></dt>
+
+<dd>
+<dt><a name="experimental"
+>experimental</a></dt>
+</dl>
+</dd>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Output_Format"
+>Output Format</a></h3>
+
+<p>The standard output is a tab-delimited file containing a column for each requested field.</p>
+<hr>
+<a name='___top' class='dummyTopAnchor' ></a>
+
+<h2><a class='u' href='#___top' title='click to go to top of document'
+name="query_entity_SubsystemClass"
+>query_entity_SubsystemClass</a></h2>
+
+<p>Query the entity SubsystemClass.</p>
+
+<p>Subsystem classes impose a hierarchical organization on the subsystems.</p>
+
+<p>Example:</p>
+
+<pre>    query_entity_SubsystemClass -a </pre>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Related_entities"
+>Related entities</a></h3>
+
+<p>The SubsystemClass entity has the following relationship links:</p>
+
+<dl>
+<dt><a name="IsClassFor_Subsystem"
+>IsClassFor Subsystem</a></dt>
+
+<dd>
+<dt><a name="IsSubclassOf_SubsystemClass"
+>IsSubclassOf SubsystemClass</a></dt>
+
+<dd>
+<dt><a name="IsSuperclassOf_SubsystemClass"
+>IsSuperclassOf SubsystemClass</a></dt>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Command-Line_Options"
+>Command-Line Options</a></h3>
+
+<dl>
+<dt><a name="-is_field,value"
+>-is field,value</a></dt>
+
+<dd>
+<p>Limit the results to entities where the given field has the given value.</p>
+
+<dt><a name="-like_field,value"
+>-like field,value</a></dt>
+
+<dd>
+<p>Limit the results to entities where the given field is LIKE (in the sql sense) the given value.</p>
+
+<dt><a name="-op_operator,field,value"
+>-op operator,field,value</a></dt>
+
+<dd>
+<p>Limit the results to entities where the given field is related to the given value based on the given operator.</p>
+
+<p>The operators supported are as follows. We provide text base alternatives to the comparison operators so that extra quoting is not required to keep the command-line shell from confusing them with shell I/O redirection operators.</p>
+
+<dl>
+<dt><a name="&#60;_or_lt"
+>&#60; or lt</a></dt>
+
+<dd>
+<dt><a name="&#62;_or_gt"
+>&#62; or gt</a></dt>
+
+<dd>
+<dt><a name="&#60;=_or_le"
+>&#60;= or le</a></dt>
+
+<dd>
+<dt><a name="&#62;=_or_ge"
+>&#62;= or ge</a></dt>
+
+<dd>
+<dt><a name="="
+>=</a></dt>
+
+<dd>
+<dt><a name="LIKE"
+>LIKE</a></dt>
+</dl>
+
+<dt><a name="-a"
+>-a</a></dt>
+
+<dd>
+<p>Return all fields.</p>
+
+<dt><a name="-h"
+>-h</a></dt>
+
+<dd>
+<p>Display a list of the fields available for use.</p>
+
+<dt><a name="-fields_field-list"
+>-fields field-list</a></dt>
+
+<dd>
+<p>Choose a set of fields to return. Field-list is a comma-separated list of strings. The following fields are available:</p>
+</dd>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Output_Format"
+>Output Format</a></h3>
+
+<p>The standard output is a tab-delimited file containing a column for each requested field.</p>
+<hr>
+<a name='___top' class='dummyTopAnchor' ></a>
+
+<h2><a class='u' href='#___top' title='click to go to top of document'
+name="query_entity_TaxonomicGrouping"
+>query_entity_TaxonomicGrouping</a></h2>
+
+<p>Query the entity TaxonomicGrouping.</p>
+
+<p>We associate with most genomes a &#34;taxonomy&#34; based on the NCBI taxonomy.
+This includes,
+for each genome,
+a list of ever larger taxonomic groups.</p>
+
+<p>Example:</p>
+
+<pre>    query_entity_TaxonomicGrouping -a </pre>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Related_entities"
+>Related entities</a></h3>
+
+<p>The TaxonomicGrouping entity has the following relationship links:</p>
+
+<dl>
+<dt><a name="IsGroupFor_TaxonomicGrouping"
+>IsGroupFor TaxonomicGrouping</a></dt>
+
+<dd>
+<dt><a name="IsInGroup_TaxonomicGrouping"
+>IsInGroup TaxonomicGrouping</a></dt>
+
+<dd>
+<dt><a name="IsTaxonomyOf_Genome"
+>IsTaxonomyOf Genome</a></dt>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Command-Line_Options"
+>Command-Line Options</a></h3>
+
+<dl>
+<dt><a name="-is_field,value"
+>-is field,value</a></dt>
+
+<dd>
+<p>Limit the results to entities where the given field has the given value.</p>
+
+<dt><a name="-like_field,value"
+>-like field,value</a></dt>
+
+<dd>
+<p>Limit the results to entities where the given field is LIKE (in the sql sense) the given value.</p>
+
+<dt><a name="-op_operator,field,value"
+>-op operator,field,value</a></dt>
+
+<dd>
+<p>Limit the results to entities where the given field is related to the given value based on the given operator.</p>
+
+<p>The operators supported are as follows. We provide text base alternatives to the comparison operators so that extra quoting is not required to keep the command-line shell from confusing them with shell I/O redirection operators.</p>
+
+<dl>
+<dt><a name="&#60;_or_lt"
+>&#60; or lt</a></dt>
+
+<dd>
+<dt><a name="&#62;_or_gt"
+>&#62; or gt</a></dt>
+
+<dd>
+<dt><a name="&#60;=_or_le"
+>&#60;= or le</a></dt>
+
+<dd>
+<dt><a name="&#62;=_or_ge"
+>&#62;= or ge</a></dt>
+
+<dd>
+<dt><a name="="
+>=</a></dt>
+
+<dd>
+<dt><a name="LIKE"
+>LIKE</a></dt>
+</dl>
+
+<dt><a name="-a"
+>-a</a></dt>
+
+<dd>
+<p>Return all fields.</p>
+
+<dt><a name="-h"
+>-h</a></dt>
+
+<dd>
+<p>Display a list of the fields available for use.</p>
+
+<dt><a name="-fields_field-list"
+>-fields field-list</a></dt>
+
+<dd>
+<p>Choose a set of fields to return. Field-list is a comma-separated list of strings. The following fields are available:</p>
+
+<dl>
+<dt><a name="domain"
+>domain</a></dt>
+
+<dd>
+<dt><a name="hidden"
+>hidden</a></dt>
+
+<dd>
+<dt><a name="scientific_name"
+>scientific_name</a></dt>
+
+<dd>
+<dt><a name="alias"
+>alias</a></dt>
+</dl>
+</dd>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Output_Format"
+>Output Format</a></h3>
+
+<p>The standard output is a tab-delimited file containing a column for each requested field.</p>
+<hr>
+<a name='___top' class='dummyTopAnchor' ></a>
+
+<h2><a class='u' href='#___top' title='click to go to top of document'
+name="query_entity_Variant"
+>query_entity_Variant</a></h2>
+
+<p>Query the entity Variant.</p>
+
+<p>Each subsystem may include the designation of distinct variants.
+Thus,
+there may be three closely-related,
+but distinguishable forms of histidine degradation.
+Each form would be called a &#34;variant&#34;,
+with an associated code,
+and all genomes implementing a specific variant can easily be accessed.</p>
+
+<p>Example:</p>
+
+<pre>    query_entity_Variant -a </pre>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Related_entities"
+>Related entities</a></h3>
+
+<p>The Variant entity has the following relationship links:</p>
+
+<dl>
+<dt><a name="IsDescribedBy_Subsystem"
+>IsDescribedBy Subsystem</a></dt>
+
+<dd>
+<dt><a name="IsImplementedBy_SSRow"
+>IsImplementedBy SSRow</a></dt>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Command-Line_Options"
+>Command-Line Options</a></h3>
+
+<dl>
+<dt><a name="-is_field,value"
+>-is field,value</a></dt>
+
+<dd>
+<p>Limit the results to entities where the given field has the given value.</p>
+
+<dt><a name="-like_field,value"
+>-like field,value</a></dt>
+
+<dd>
+<p>Limit the results to entities where the given field is LIKE (in the sql sense) the given value.</p>
+
+<dt><a name="-op_operator,field,value"
+>-op operator,field,value</a></dt>
+
+<dd>
+<p>Limit the results to entities where the given field is related to the given value based on the given operator.</p>
+
+<p>The operators supported are as follows. We provide text base alternatives to the comparison operators so that extra quoting is not required to keep the command-line shell from confusing them with shell I/O redirection operators.</p>
+
+<dl>
+<dt><a name="&#60;_or_lt"
+>&#60; or lt</a></dt>
+
+<dd>
+<dt><a name="&#62;_or_gt"
+>&#62; or gt</a></dt>
+
+<dd>
+<dt><a name="&#60;=_or_le"
+>&#60;= or le</a></dt>
+
+<dd>
+<dt><a name="&#62;=_or_ge"
+>&#62;= or ge</a></dt>
+
+<dd>
+<dt><a name="="
+>=</a></dt>
+
+<dd>
+<dt><a name="LIKE"
+>LIKE</a></dt>
+</dl>
+
+<dt><a name="-a"
+>-a</a></dt>
+
+<dd>
+<p>Return all fields.</p>
+
+<dt><a name="-h"
+>-h</a></dt>
+
+<dd>
+<p>Display a list of the fields available for use.</p>
+
+<dt><a name="-fields_field-list"
+>-fields field-list</a></dt>
+
+<dd>
+<p>Choose a set of fields to return. Field-list is a comma-separated list of strings. The following fields are available:</p>
+
+<dl>
+<dt><a name="role_rule"
+>role_rule</a></dt>
+
+<dd>
+<dt><a name="code"
+>code</a></dt>
+
+<dd>
+<dt><a name="type"
+>type</a></dt>
+
+<dd>
+<dt><a name="comment"
+>comment</a></dt>
+</dl>
+</dd>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Output_Format"
+>Output Format</a></h3>
+
+<p>The standard output is a tab-delimited file containing a column for each requested field.</p>
+<hr>
+<a name='___top' class='dummyTopAnchor' ></a>
+
+<h2><a class='u' href='#___top' title='click to go to top of document'
+name="query_entity_Variation"
+>query_entity_Variation</a></h2>
+
+<p>Query the entity Variation.</p>
+
+<p>A variation describes a set of aligned regions in two or more contigs.</p>
+
+<p>Example:</p>
+
+<pre>    query_entity_Variation -a </pre>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Related_entities"
+>Related entities</a></h3>
+
+<p>The Variation entity has the following relationship links:</p>
+
+<dl>
+<dt><a name="IsAlignmentFor_Contig"
+>IsAlignmentFor Contig</a></dt>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Command-Line_Options"
+>Command-Line Options</a></h3>
+
+<dl>
+<dt><a name="-is_field,value"
+>-is field,value</a></dt>
+
+<dd>
+<p>Limit the results to entities where the given field has the given value.</p>
+
+<dt><a name="-like_field,value"
+>-like field,value</a></dt>
+
+<dd>
+<p>Limit the results to entities where the given field is LIKE (in the sql sense) the given value.</p>
+
+<dt><a name="-op_operator,field,value"
+>-op operator,field,value</a></dt>
+
+<dd>
+<p>Limit the results to entities where the given field is related to the given value based on the given operator.</p>
+
+<p>The operators supported are as follows. We provide text base alternatives to the comparison operators so that extra quoting is not required to keep the command-line shell from confusing them with shell I/O redirection operators.</p>
+
+<dl>
+<dt><a name="&#60;_or_lt"
+>&#60; or lt</a></dt>
+
+<dd>
+<dt><a name="&#62;_or_gt"
+>&#62; or gt</a></dt>
+
+<dd>
+<dt><a name="&#60;=_or_le"
+>&#60;= or le</a></dt>
+
+<dd>
+<dt><a name="&#62;=_or_ge"
+>&#62;= or ge</a></dt>
+
+<dd>
+<dt><a name="="
+>=</a></dt>
+
+<dd>
+<dt><a name="LIKE"
+>LIKE</a></dt>
+</dl>
+
+<dt><a name="-a"
+>-a</a></dt>
+
+<dd>
+<p>Return all fields.</p>
+
+<dt><a name="-h"
+>-h</a></dt>
+
+<dd>
+<p>Display a list of the fields available for use.</p>
+
+<dt><a name="-fields_field-list"
+>-fields field-list</a></dt>
+
+<dd>
+<p>Choose a set of fields to return. Field-list is a comma-separated list of strings. The following fields are available:</p>
+
+<dl>
+<dt><a name="notes"
+>notes</a></dt>
+</dl>
+</dd>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Output_Format"
+>Output Format</a></h3>
+
+<p>The standard output is a tab-delimited file containing a column for each requested field.</p>
+<hr>
