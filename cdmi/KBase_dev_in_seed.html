@@ -4,7 +4,8 @@ The KBase development environment is still under construction.  To accelerate pr
 we have created a framework within the SEED environment that allows us to develop and test
 software, as well as creating and maintaining tutorials and documentation.
 At this stage, we have employed this environment to support
-worrk on the ID server, the CS and the documentation.  We intend to move to a native KBase development environment, once it is well-defined.  Until then, this document is intended to help
+work on the ID server, the CS and the documentation.  We intend to move to a native 
+KBase development environment, once it is well-defined.  Until then, this document is intended to help
 KBase developers with access to the SEED environment to get started.  
 To actually see documentation rendered in some format, 
 go to the 
@@ -71,11 +72,11 @@ get_relationship operations). You need to
 <li> Update the CS-API document type specifications kept in
 <i>base/KBaseCDMI/CDMI-API.spec</i>.  If you have not yet used the type
 compiler, we strongly recommend you work with someone who has to get started.
-<li> Run the type compiler.  This involves 
+<li> Run the type compiler.  This is done with
 <br><pre>
          recompile_typespec
 <br></pre>
-This rebuilds
+which rebuilds
 <br><pre>
          <i>base/KBaseCDMI/CDMI-EntityAPI.spec</i>
          <i>base/KBaseCDMI/Bio/KBase/CDMI/CDMI_EntityAPIImpl.pm</i>
@@ -88,6 +89,50 @@ or maintaining a well-trodden path routine.  However,
 <br></pre>
 will contain a new routine, and the routine is a skeletal form
 of the one you want.  You need to flesh it out and debug it.
+<br><br>
+There are issues in debugging CS-API routines that need discussing.
+<p>
+First, when you begin debugging a CS-API routine, we recommend constructing
+a simple test script that invokes it.  The test script should include lines similar to the following:
+<br><pre>
+use Data::Dumper;
+use Bio::KBase::CDMI::CDMIClient;
+use Bio::KBase::Utilities::ScriptThing;
+my $CS_API_Obj = Bio::KBase::CDMI::CDMIClient->new_for_script();
+
+my $results = $CS_API_Obj->rtn_name(arguments);
+print STDERR &Dumper($results);
+<br></pre>
+Then, when you run the script, <b>include the argument "-local" on the command line</b>.
+Thus, use
+<br><pre>
+    perl testit.pl -local
+<br></pre>
+This causes the code that is invoked to run locally, and you will get your normal error
+messages.  This is a very, very good thing.
+<p>
+There is another issue that has given grief to some of us.  When you are constructing
+a CS-API routine, you may wish to invoke either database services (we have a powerful set of
+operators against the CS) or you may wish to invoke other CS-API services.  To get at
+the underlying CS database, use
+<br><pre>
+      my $CS_DB_Obj = $self->{db};
+<br></pre>
+This gives you access to routines like
+<br><pre>
+      my $result = $CS_DB_Obj->Get(...)
+      my $result = $CS_DB_Obj->GetAll(...)
+      my $result = $CS_DB_Obj->GetFlat(...)
+<br></pre>
+These are ERDB functions for accessing the data in the CS.
+On the other hand, if you wish to invoke another CS-API routine,
+use
+<br><pre>
+      $self->routine(...)
+<br></pre>
+That is, when a CS-API routine is invoked, the first
+argument (which is normally <i>self</i>), is the object that
+offers access to the CS-API routines themselves.
 <br><br>
 <li>
 Once you have fleshed out the routine and debugged it, you need 
@@ -120,7 +165,7 @@ and run the command
 This will give you the basic script that you will need to read through, customize,
 test, and update the documentation. Once that is complete you should move
 the script into the scripts directory and "cvs add" it to the repository.
-
+<br><br>
 <h2>Updating Tutorial Material</h2>
 
 The tutorial material is critical, at least at this initial stage of the

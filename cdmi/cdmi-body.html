@@ -2038,6 +2038,72 @@ field_name is a string
 </dd>
 </dl>
 
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="corresponds"
+>corresponds</a></h3>
+
+<pre>  $return = $obj-&#62;corresponds($fids, $genome)</pre>
+
+<dl>
+<dt><a name="Parameter_and_return_types"
+>Parameter and return types</a></dt>
+
+<dd>
+<pre>
+$fids is a fids
+$genome is a genome
+$return is a reference to a hash where the key is a fid and the value is a correspondence
+fids is a reference to a list where each element is a fid
+fid is a string
+genome is a string
+correspondence is a reference to a hash where the following keys are defined:
+	to has a value which is a fid
+	iden has a value which is a float
+	ncontext has a value which is an int
+	b1 has a value which is an int
+	e1 has a value which is an int
+	ln1 has a value which is an int
+	b2 has a value which is an int
+	e2 has a value which is an int
+	ln2 has a value which is an int
+	score has a value which is an int
+
+
+</pre>
+
+
+<dt><a name="Description"
+>Description</a></dt>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="close_genomes"
+>close_genomes</a></h3>
+
+<pre>  $return = $obj-&#62;close_genomes($genomes, $how, $n)</pre>
+
+<dl>
+<dt><a name="Parameter_and_return_types"
+>Parameter and return types</a></dt>
+
+<dd>
+<pre>
+$genomes is a genomes
+$how is a how
+$n is an int
+$return is a reference to a hash where the key is a genome and the value is a genomes
+genomes is a reference to a list where each element is a genome
+genome is a string
+how is an int
+
+
+</pre>
+
+
+<dt><a name="Description"
+>Description</a></dt>
+</dl>
+
 <h2><a class='u' href='#___top' title='click to go to top of document'
 name="TYPES"
 >TYPES</a></h2>
@@ -3719,6 +3785,69 @@ a reference to a list containing 2 items:
 1: a reference to a hash where the key is a field_name and the value is a string
 
 
+</pre>
+
+</dd>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="correspondence"
+>correspondence</a></h3>
+
+<dl>
+<dt><a name="Description"
+>Description</a></dt>
+
+<dd>
+<p>A correspondence is generated as a mapping of fids to fids. The mapping attempts to map a fid to another that performs the same function. The correspondence describes the regions that are similar, the strength of the similarity, the number of genes in the chromosomal context that appear to &#34;correspond&#34; and a score from 0 to 1 that loosely corresponds to confidence in the correspondence.</p>
+
+<dt><a name="Definition"
+>Definition</a></dt>
+
+<dd>
+<pre>
+a reference to a hash where the following keys are defined:
+to has a value which is a fid
+iden has a value which is a float
+ncontext has a value which is an int
+b1 has a value which is an int
+e1 has a value which is an int
+ln1 has a value which is an int
+b2 has a value which is an int
+e2 has a value which is an int
+ln2 has a value which is an int
+score has a value which is an int
+
+
+</pre>
+
+</dd>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="how"
+>how</a></h3>
+
+<dl>
+<dt><a name="Description"
+>Description</a></dt>
+
+<dd>
+<p>A close_genomes is used to get a set of relatively close genomes (for each input genome, a set of close genomes is calculated, but the result should be viewed as quite approximate. &#34;how&#34; is a suggestion of which algorithm to use:</p>
+
+<pre>     0 - default (same genus)
+     1 - find genomes with the same genus name
+     2 - use the SSU rRNA, if possible
+     3 - use a set of &#34;universal proteins&#34;, if you can</pre>
+
+<p>Up to n genomes will be returned for each input genome.</p>
+
+<dt><a name="Definition"
+>Definition</a></dt>
+
+<dd>
+<pre>
+an int
 </pre>
 
 </dd>

@@ -119,6 +119,83 @@ name="Output_Format"
 <a name='___top' class='dummyTopAnchor' ></a>
 
 <h2><a class='u' href='#___top' title='click to go to top of document'
+name="close_genomes"
+>close_genomes</a></h2>
+
+<p>Example:</p>
+
+<pre>    close_genomes [arguments] &#60; input &#62; output</pre>
+
+<p>The standard input should be a tab-separated table (i.e., each line is a tab-separated set of fields). Normally, the last field in each line would contain the identifer. If another column contains the identifier use</p>
+
+<pre>    -c N</pre>
+
+<p>where N is the column (from 1) that contains the identifier.</p>
+
+<p>This is a pipe command. The input is taken from the standard input, and the output is to the standard output.</p>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Documentation_for_underlying_call"
+>Documentation for underlying call</a></h3>
+
+<p>This script is a wrapper for the CDMI-API call close_genomes. It is documented as follows:</p>
+
+<pre>  $return = $obj-&#62;close_genomes($genomes, $how, $n)</pre>
+
+<dl>
+<dt><a name="Parameter_and_return_types"
+>Parameter and return types</a></dt>
+
+<dd>
+<pre>
+$genomes is a genomes
+$how is a how
+$n is an int
+$return is a reference to a hash where the key is a genome and the value is a genomes
+genomes is a reference to a list where each element is a genome
+genome is a string
+how is an int
+
+
+</pre>
+
+</dd>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Command-Line_Options"
+>Command-Line Options</a></h3>
+
+<dl>
+<dt><a name="-c_Column"
+>-c Column</a></dt>
+
+<dd>
+<p>This is used only if the column containing the identifier is not the last column.</p>
+
+<dt><a name="-i_InputFile_[_use_InputFile,_rather_than_stdin_]"
+>-i InputFile [ use InputFile, rather than stdin ]</a></dt>
+
+<dd>
+<dt><a name="-n_N_[_N_is_the_number_of_close_genomes_desired_]"
+>-n N [ N is the number of close genomes desired ]</a></dt>
+
+<dd>
+<dt><a 
+>-how Algorithm [ optional: 0 -&#62; default, 1 -&#62; just match scientific names of genomes 2 -&#62; use SSU rRNA (not yet implemented) 3 -&#62; use &#34;universal proteins&#34; (not yet implemented) ]</a></dt>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Output_Format"
+>Output Format</a></h3>
+
+<p>The standard output is a tab-delimited file. It consists of the input file with an extra column added (a close genome)</p>
+
+<p>Input lines that cannot be extended are written to stderr.</p>
+<hr>
+<a name='___top' class='dummyTopAnchor' ></a>
+
+<h2><a class='u' href='#___top' title='click to go to top of document'
 name="co_occurrence_evidence"
 >co_occurrence_evidence</a></h2>
 
@@ -587,6 +664,104 @@ name="Output_Format"
 >Output Format</a></h3>
 
 <p>The standard output is a tab-delimited file. It consists of the input file with extra columns added.</p>
+
+<p>Input lines that cannot be extended are written to stderr.</p>
+<hr>
+<a name='___top' class='dummyTopAnchor' ></a>
+
+<h2><a class='u' href='#___top' title='click to go to top of document'
+name="corresponds"
+>corresponds</a></h2>
+
+<p>Example:</p>
+
+<pre>    corresponds [arguments] &#60; input &#62; output</pre>
+
+<p>The input file should be a table with one column containing fids to be projected to a designated genome.</p>
+
+<p>The standard input should be a tab-separated table (i.e., each line is a tab-separated set of fields). Normally, the last field in each line would contain the identifer. If another column contains the identifier use</p>
+
+<pre>    -c N</pre>
+
+<p>where N is the column (from 1) that contains the identifier.</p>
+
+<p>This is a pipe command. The input is taken from the standard input, and the output is to the standard output.</p>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Documentation_for_underlying_call"
+>Documentation for underlying call</a></h3>
+
+<p>This script is a wrapper for the CDMI-API call corresponds. It is documented as follows:</p>
+
+<pre>  $return = $obj-&#62;corresponds($fids, $genome)</pre>
+
+<dl>
+<dt><a name="Parameter_and_return_types"
+>Parameter and return types</a></dt>
+
+<dd>
+<pre>
+$fids is a fids
+$genome is a genome
+$return is a reference to a hash where the key is a fid and the value is a correspondence
+fids is a reference to a list where each element is a fid
+fid is a string
+genome is a string
+correspondence is a reference to a hash where the following keys are defined:
+	to has a value which is a fid
+	ncontext has a value which is an int
+	b1 has a value which is an int
+	e1 has a value which is an int
+	ln1 has a value which is an int
+	b2 has a value which is an int
+	e2 has a value which is an int
+	ln2 has a value which is an int
+	score has a value which is an int
+
+
+</pre>
+
+</dd>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Command-Line_Options"
+>Command-Line Options</a></h3>
+
+<dl>
+<dt><a name="-g_Genome"
+>-g Genome</a></dt>
+
+<dd>
+<p>This is used to designate a genome in the CS. The command will try to project fids from the input to fids in this designated genome.</p>
+
+<dt><a name="-tsg_Genome"
+>-tsg Genome</a></dt>
+
+<dd>
+<p>This is used to designate a genome in the default TS. The command will try to project fids from the input to fids in this designated genome. This argument and the &#60;b&#62;-g&#60;/b&#62; argument ar mutually exclusive. If they both are specified then the genome in the CS will be used.</p>
+
+<p>= item -a Cutoff</p>
+
+<p>This requests an abbreviated format in which only two columns are added: the projection score and the fid in the target genome. If this is not used 10 column are added. The Cutoff specifies a minimum projection score.</p>
+
+<dt><a name="-c_Column"
+>-c Column</a></dt>
+
+<dd>
+<p>This is used only if the column containing the identifier is not the last column.</p>
+
+<dt><a name="-i_InputFile_[_use_InputFile,_rather_than_stdin_]"
+>-i InputFile [ use InputFile, rather than stdin ]</a></dt>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Output_Format"
+>Output Format</a></h3>
+
+<p>The standard output is a tab-delimited file. It consists of the input file with extra columns added. If the abbreviated format is requested, two columns get added (sc and the fid projected to). If the abbreviated format is not requested, ten columns will be added</p>
+
+<p>[percent-identity,matching-context,b1,e1,ln1,b2,e2,ln2,sc,to-fid]</p>
 
 <p>Input lines that cannot be extended are written to stderr.</p>
 <hr>
@@ -1612,6 +1787,12 @@ name="Command-Line_Options"
 
 <dd>
 <p>This is used to request a fasta output file (dropping all of the other columns in the input lines). It defaults to outputing just a fasta entry.</p>
+
+<dt><a name="-fc_Columns_[_construct_comment_for_fasta_from_these_columns_]"
+>-fc Columns [ construct comment for fasta from these columns ]</a></dt>
+
+<dd>
+<p>This is used to ask for &#34;fasta comments&#34; formed from one or more columns (comma-separated)</p>
 </dd>
 </dl>
 
