@@ -1323,7 +1323,46 @@ name="Command-Line_Options"
 name="Output_Format"
 >Output Format</a></h3>
 
-<p>The standard output is a tab-delimited file. It consists of the input file with extra columns added in this order: feature_id feature_publications genome_name feature_location feature_length feature_function.</p>
+<p>The standard output is a tab-delimited file. It consists of the input file with extra columns added in this order:</p>
+
+<dl>
+<dt><a name="feature_id"
+>feature_id</a></dt>
+
+<dd>
+<p>Feature identifier</p>
+
+<dt><a name="feature_publications"
+>feature_publications</a></dt>
+
+<dd>
+<p>List of Pubmed identifiers for publications associated with this feature.</p>
+
+<dt><a name="genome_name"
+>genome_name</a></dt>
+
+<dd>
+<p>Name of the genome this feature is present in.</p>
+
+<dt><a name="feature_location"
+>feature_location</a></dt>
+
+<dd>
+<p>Location string describing the location of this feature in its genome.</p>
+
+<dt><a name="feature_length"
+>feature_length</a></dt>
+
+<dd>
+<p>Length of the DNA sequence of this feature.</p>
+
+<dt><a name="feature_function"
+>feature_function</a></dt>
+
+<dd>
+<p>The function currently assigned to this feature.</p>
+</dd>
+</dl>
 
 <p>Input lines that cannot be extended are written to stderr.</p>
 <hr>
