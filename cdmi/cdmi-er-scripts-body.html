@@ -92,6 +92,85 @@ name="Output_Format"
 <a name='___top' class='dummyTopAnchor' ></a>
 
 <h2><a class='u' href='#___top' title='click to go to top of document'
+name="all_entities_AlleleFrequency"
+>all_entities_AlleleFrequency</a></h2>
+
+<p>Return all instances of the AlleleFrequency entity.</p>
+
+<p>An allele frequency represents a summary of the major and minor allele frequencies for a position on a chromosome.</p>
+
+<p>Example:</p>
+
+<pre>    all_entities_AlleleFrequency -a </pre>
+
+<p>would retrieve all entities of type AlleleFrequency and include all fields in the entities in the output.</p>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Related_entities"
+>Related entities</a></h3>
+
+<p>The AlleleFrequency entity has the following relationship links:</p>
+
+<dl>
+<dt><a name="Summarizes_Variation"
+>Summarizes Variation</a></dt>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Command-Line_Options"
+>Command-Line Options</a></h3>
+
+<dl>
+<dt><a name="-a"
+>-a</a></dt>
+
+<dd>
+<p>Return all fields.</p>
+
+<dt><a name="-h"
+>-h</a></dt>
+
+<dd>
+<p>Display a list of the fields available for use.</p>
+
+<dt><a name="-fields_field-list"
+>-fields field-list</a></dt>
+
+<dd>
+<p>Choose a set of fields to return. Field-list is a comma-separated list of strings. The following fields are available:</p>
+
+<dl>
+<dt><a name="position"
+>position</a></dt>
+
+<dd>
+<dt><a name="minor_AF"
+>minor_AF</a></dt>
+
+<dd>
+<dt><a name="minor_allele"
+>minor_allele</a></dt>
+
+<dd>
+<dt><a name="major_AF"
+>major_AF</a></dt>
+
+<dd>
+<dt><a name="major_allele"
+>major_allele</a></dt>
+</dl>
+</dd>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Output_Format"
+>Output Format</a></h3>
+
+<p>The standard output is a tab-delimited file. It consists of the input file with an extra column added for each requested field. Input lines that cannot be extended are written to stderr.</p>
+<hr>
+<a name='___top' class='dummyTopAnchor' ></a>
+
+<h2><a class='u' href='#___top' title='click to go to top of document'
 name="all_entities_Annotation"
 >all_entities_Annotation</a></h2>
 
@@ -152,6 +231,73 @@ name="Command-Line_Options"
 <dd>
 <dt><a name="annotation_time"
 >annotation_time</a></dt>
+</dl>
+</dd>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Output_Format"
+>Output Format</a></h3>
+
+<p>The standard output is a tab-delimited file. It consists of the input file with an extra column added for each requested field. Input lines that cannot be extended are written to stderr.</p>
+<hr>
+<a name='___top' class='dummyTopAnchor' ></a>
+
+<h2><a class='u' href='#___top' title='click to go to top of document'
+name="all_entities_Assay"
+>all_entities_Assay</a></h2>
+
+<p>Return all instances of the Assay entity.</p>
+
+<p>An assay is an experimental design for determining alleles at specific chromosome positions.</p>
+
+<p>Example:</p>
+
+<pre>    all_entities_Assay -a </pre>
+
+<p>would retrieve all entities of type Assay and include all fields in the entities in the output.</p>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Related_entities"
+>Related entities</a></h3>
+
+<p>The Assay entity has the following relationship links:</p>
+
+<dl>
+<dt><a name="ResultsIn_Variation"
+>ResultsIn Variation</a></dt>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Command-Line_Options"
+>Command-Line Options</a></h3>
+
+<dl>
+<dt><a name="-a"
+>-a</a></dt>
+
+<dd>
+<p>Return all fields.</p>
+
+<dt><a name="-h"
+>-h</a></dt>
+
+<dd>
+<p>Display a list of the fields available for use.</p>
+
+<dt><a name="-fields_field-list"
+>-fields field-list</a></dt>
+
+<dd>
+<p>Choose a set of fields to return. Field-list is a comma-separated list of strings. The following fields are available:</p>
+
+<dl>
+<dt><a name="assay_type"
+>assay_type</a></dt>
+
+<dd>
+<dt><a name="positions"
+>positions</a></dt>
 </dl>
 </dd>
 </dl>
@@ -763,8 +909,8 @@ name="Related_entities"
 >HasAsSequence ContigSequence</a></dt>
 
 <dd>
-<dt><a name="IsAlignedIn_Variation"
->IsAlignedIn Variation</a></dt>
+<dt><a name="HasVariation_Variation"
+>HasVariation Variation</a></dt>
 
 <dd>
 <dt><a name="IsComponentOf_Genome"
@@ -968,7 +1114,7 @@ In particular,
 we wish to represent genes that are coregulated using transcription binding sites and corresponding transcription regulatory proteins.
 We represent a coregulated set (which may,
 or may not,
-be considered an atomic regulon) using CoregulatedSet.</p>
+be considered a regulon) using CoregulatedSet.</p>
 
 <p>Example:</p>
 
@@ -983,10 +1129,6 @@ name="Related_entities"
 <p>The CoregulatedSet entity has the following relationship links:</p>
 
 <dl>
-<dt><a name="IsBoundBy_Feature"
->IsBoundBy Feature</a></dt>
-
-<dd>
 <dt><a name="IsControlledUsing_Feature"
 >IsControlledUsing Feature</a></dt>
 
@@ -1025,6 +1167,10 @@ name="Command-Line_Options"
 <dl>
 <dt><a name="source_id"
 >source_id</a></dt>
+
+<dd>
+<dt><a name="binding_location"
+>binding_location</a></dt>
 </dl>
 </dd>
 </dl>
@@ -1307,6 +1453,10 @@ name="Related_entities"
 >HasMember Feature</a></dt>
 
 <dd>
+<dt><a name="HasProteinMember_ProteinSequence"
+>HasProteinMember ProteinSequence</a></dt>
+
+<dd>
 <dt><a name="IsCoupledTo_Family"
 >IsCoupledTo Family</a></dt>
 
@@ -1351,8 +1501,16 @@ name="Command-Line_Options"
 >type</a></dt>
 
 <dd>
+<dt><a name="release"
+>release</a></dt>
+
+<dd>
 <dt><a name="family_function"
 >family_function</a></dt>
+
+<dd>
+<dt><a name="alignment"
+>alignment</a></dt>
 </dl>
 </dd>
 </dl>
@@ -1423,10 +1581,6 @@ name="Related_entities"
 <dd>
 <dt><a name="IsAnnotatedBy_Annotation"
 >IsAnnotatedBy Annotation</a></dt>
-
-<dd>
-<dt><a name="IsBindingSiteFor_CoregulatedSet"
->IsBindingSiteFor CoregulatedSet</a></dt>
 
 <dd>
 <dt><a name="IsContainedIn_SSCell"
@@ -1511,6 +1665,10 @@ name="Command-Line_Options"
 <dd>
 <dt><a name="function"
 >function</a></dt>
+
+<dd>
+<dt><a name="alias"
+>alias</a></dt>
 </dl>
 </dd>
 </dl>
@@ -1583,6 +1741,10 @@ name="Related_entities"
 <dd>
 <dt><a name="IsOwnerOf_Feature"
 >IsOwnerOf Feature</a></dt>
+
+<dd>
+<dt><a name="IsReferencedBy_ObservationalUnit"
+>IsReferencedBy ObservationalUnit</a></dt>
 
 <dd>
 <dt><a name="Uses_SSRow"
@@ -1743,6 +1905,101 @@ name="Command-Line_Options"
 <dd>
 <dt><a name="natural_form"
 >natural_form</a></dt>
+</dl>
+</dd>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Output_Format"
+>Output Format</a></h3>
+
+<p>The standard output is a tab-delimited file. It consists of the input file with an extra column added for each requested field. Input lines that cannot be extended are written to stderr.</p>
+<hr>
+<a name='___top' class='dummyTopAnchor' ></a>
+
+<h2><a class='u' href='#___top' title='click to go to top of document'
+name="all_entities_Locality"
+>all_entities_Locality</a></h2>
+
+<p>Return all instances of the Locality entity.</p>
+
+<p>A locality is a geographic location.</p>
+
+<p>Example:</p>
+
+<pre>    all_entities_Locality -a </pre>
+
+<p>would retrieve all entities of type Locality and include all fields in the entities in the output.</p>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Related_entities"
+>Related entities</a></h3>
+
+<p>The Locality entity has the following relationship links:</p>
+
+<dl>
+<dt><a name="HasUnits_ObservationalUnit"
+>HasUnits ObservationalUnit</a></dt>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Command-Line_Options"
+>Command-Line Options</a></h3>
+
+<dl>
+<dt><a name="-a"
+>-a</a></dt>
+
+<dd>
+<p>Return all fields.</p>
+
+<dt><a name="-h"
+>-h</a></dt>
+
+<dd>
+<p>Display a list of the fields available for use.</p>
+
+<dt><a name="-fields_field-list"
+>-fields field-list</a></dt>
+
+<dd>
+<p>Choose a set of fields to return. Field-list is a comma-separated list of strings. The following fields are available:</p>
+
+<dl>
+<dt><a name="source_name"
+>source_name</a></dt>
+
+<dd>
+<dt><a name="city"
+>city</a></dt>
+
+<dd>
+<dt><a name="state"
+>state</a></dt>
+
+<dd>
+<dt><a name="country"
+>country</a></dt>
+
+<dd>
+<dt><a name="origcty"
+>origcty</a></dt>
+
+<dd>
+<dt><a name="elevation"
+>elevation</a></dt>
+
+<dd>
+<dt><a name="latitude"
+>latitude</a></dt>
+
+<dd>
+<dt><a name="longitude"
+>longitude</a></dt>
+
+<dd>
+<dt><a name="lo_accession"
+>lo_accession</a></dt>
 </dl>
 </dd>
 </dl>
@@ -2013,6 +2270,95 @@ name="Command-Line_Options"
 <dd>
 <dt><a name="potential"
 >potential</a></dt>
+</dl>
+</dd>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Output_Format"
+>Output Format</a></h3>
+
+<p>The standard output is a tab-delimited file. It consists of the input file with an extra column added for each requested field. Input lines that cannot be extended are written to stderr.</p>
+<hr>
+<a name='___top' class='dummyTopAnchor' ></a>
+
+<h2><a class='u' href='#___top' title='click to go to top of document'
+name="all_entities_ObservationalUnit"
+>all_entities_ObservationalUnit</a></h2>
+
+<p>Return all instances of the ObservationalUnit entity.</p>
+
+<p>An ObservationalUnit is an individual plant that 1) is part of an experiment or study,
+2) has measured traits,
+and 3) is assayed for the purpose of determining alleles.</p>
+
+<p>Example:</p>
+
+<pre>    all_entities_ObservationalUnit -a </pre>
+
+<p>would retrieve all entities of type ObservationalUnit and include all fields in the entities in the output.</p>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Related_entities"
+>Related entities</a></h3>
+
+<p>The ObservationalUnit entity has the following relationship links:</p>
+
+<dl>
+<dt><a name="DefinedBy_TaxonomicGrouping"
+>DefinedBy TaxonomicGrouping</a></dt>
+
+<dd>
+<dt><a name="HasTrait_Trait"
+>HasTrait Trait</a></dt>
+
+<dd>
+<dt><a name="HasVariant_Variation"
+>HasVariant Variation</a></dt>
+
+<dd>
+<dt><a name="IsLocated_Locality"
+>IsLocated Locality</a></dt>
+
+<dd>
+<dt><a name="IsPartOf_StudyExperiment"
+>IsPartOf StudyExperiment</a></dt>
+
+<dd>
+<dt><a name="UsesReference_Genome"
+>UsesReference Genome</a></dt>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Command-Line_Options"
+>Command-Line Options</a></h3>
+
+<dl>
+<dt><a name="-a"
+>-a</a></dt>
+
+<dd>
+<p>Return all fields.</p>
+
+<dt><a name="-h"
+>-h</a></dt>
+
+<dd>
+<p>Display a list of the fields available for use.</p>
+
+<dt><a name="-fields_field-list"
+>-fields field-list</a></dt>
+
+<dd>
+<p>Choose a set of fields to return. Field-list is a comma-separated list of strings. The following fields are available:</p>
+
+<dl>
+<dt><a name="source_name"
+>source_name</a></dt>
+
+<dd>
+<dt><a name="source_name2"
+>source_name2</a></dt>
 </dl>
 </dd>
 </dl>
@@ -2307,6 +2653,10 @@ name="Related_entities"
 <p>The ProteinSequence entity has the following relationship links:</p>
 
 <dl>
+<dt><a name="HasAssertedFunctionFrom_Source"
+>HasAssertedFunctionFrom Source</a></dt>
+
+<dd>
 <dt><a name="IsATopicOf_Publication"
 >IsATopicOf Publication</a></dt>
 
@@ -2315,16 +2665,16 @@ name="Related_entities"
 >IsAlignedBy AlignmentTree</a></dt>
 
 <dd>
-<dt><a name="IsNamedBy_Identifier"
->IsNamedBy Identifier</a></dt>
-
-<dd>
 <dt><a name="IsProjectedOnto_ProteinSequence"
 >IsProjectedOnto ProteinSequence</a></dt>
 
 <dd>
 <dt><a name="IsProteinFor_Feature"
 >IsProteinFor Feature</a></dt>
+
+<dd>
+<dt><a name="IsProteinMemberOf_Family"
+>IsProteinMemberOf Family</a></dt>
 
 <dd>
 <dt><a name="ProjectsOnto_ProteinSequence"
@@ -2564,7 +2914,7 @@ name="all_entities_ReactionRule"
 
 <p>Return all instances of the ReactionRule entity.</p>
 
-<p>A reaction rule represents the way a reaction takes place within the context of a model.</p>
+<p>A reaction rule represents the way a reaction takes place within the context of a complex.</p>
 
 <p>Example:</p>
 
@@ -2991,8 +3341,8 @@ name="Related_entities"
 <p>The Source entity has the following relationship links:</p>
 
 <dl>
-<dt><a name="Asserts_Identifier"
->Asserts Identifier</a></dt>
+<dt><a name="AssertsFunctionFor_ProteinSequence"
+>AssertsFunctionFor ProteinSequence</a></dt>
 
 <dd>
 <dt><a name="Formulated_CoregulatedSet"
@@ -3005,10 +3355,6 @@ name="Related_entities"
 <dd>
 <dt><a name="HasReactionAliasFrom_Reaction"
 >HasReactionAliasFrom Reaction</a></dt>
-
-<dd>
-<dt><a name="Imported_Identifier"
->Imported Identifier</a></dt>
 
 <dd>
 <dt><a name="Provided_Subsystem"
@@ -3188,6 +3534,78 @@ name="Command-Line_Options"
 <dd>
 <dt><a name="region"
 >region</a></dt>
+</dl>
+</dd>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Output_Format"
+>Output Format</a></h3>
+
+<p>The standard output is a tab-delimited file. It consists of the input file with an extra column added for each requested field. Input lines that cannot be extended are written to stderr.</p>
+<hr>
+<a name='___top' class='dummyTopAnchor' ></a>
+
+<h2><a class='u' href='#___top' title='click to go to top of document'
+name="all_entities_StudyExperiment"
+>all_entities_StudyExperiment</a></h2>
+
+<p>Return all instances of the StudyExperiment entity.</p>
+
+<p>An Experiment is a collection of observational units with one originator that are part of a specific study.
+An experiment may be conducted at more than one location and in more than one season or year.</p>
+
+<p>Example:</p>
+
+<pre>    all_entities_StudyExperiment -a </pre>
+
+<p>would retrieve all entities of type StudyExperiment and include all fields in the entities in the output.</p>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Related_entities"
+>Related entities</a></h3>
+
+<p>The StudyExperiment entity has the following relationship links:</p>
+
+<dl>
+<dt><a name="IncludesPart_ObservationalUnit"
+>IncludesPart ObservationalUnit</a></dt>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Command-Line_Options"
+>Command-Line Options</a></h3>
+
+<dl>
+<dt><a name="-a"
+>-a</a></dt>
+
+<dd>
+<p>Return all fields.</p>
+
+<dt><a name="-h"
+>-h</a></dt>
+
+<dd>
+<p>Display a list of the fields available for use.</p>
+
+<dt><a name="-fields_field-list"
+>-fields field-list</a></dt>
+
+<dd>
+<p>Choose a set of fields to return. Field-list is a comma-separated list of strings. The following fields are available:</p>
+
+<dl>
+<dt><a name="source_name"
+>source_name</a></dt>
+
+<dd>
+<dt><a name="design"
+>design</a></dt>
+
+<dd>
+<dt><a name="originator"
+>originator</a></dt>
 </dl>
 </dd>
 </dl>
@@ -3411,6 +3829,10 @@ name="Related_entities"
 >IsInGroup TaxonomicGrouping</a></dt>
 
 <dd>
+<dt><a name="IsRepresentedBy_ObservationalUnit"
+>IsRepresentedBy ObservationalUnit</a></dt>
+
+<dd>
 <dt><a name="IsTaxonomyOf_Genome"
 >IsTaxonomyOf Genome</a></dt>
 </dl>
@@ -3453,6 +3875,89 @@ name="Command-Line_Options"
 <dd>
 <dt><a name="alias"
 >alias</a></dt>
+</dl>
+</dd>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Output_Format"
+>Output Format</a></h3>
+
+<p>The standard output is a tab-delimited file. It consists of the input file with an extra column added for each requested field. Input lines that cannot be extended are written to stderr.</p>
+<hr>
+<a name='___top' class='dummyTopAnchor' ></a>
+
+<h2><a class='u' href='#___top' title='click to go to top of document'
+name="all_entities_Trait"
+>all_entities_Trait</a></h2>
+
+<p>Return all instances of the Trait entity.</p>
+
+<p>A Trait is a phenotypic quality that can be measured or observed for an observational unit.
+Examples include height,
+sugar content,
+color,
+or cold tolerance.</p>
+
+<p>Example:</p>
+
+<pre>    all_entities_Trait -a </pre>
+
+<p>would retrieve all entities of type Trait and include all fields in the entities in the output.</p>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Related_entities"
+>Related entities</a></h3>
+
+<p>The Trait entity has the following relationship links:</p>
+
+<dl>
+<dt><a name="IsImpactedBy_Variation"
+>IsImpactedBy Variation</a></dt>
+
+<dd>
+<dt><a name="Measures_ObservationalUnit"
+>Measures ObservationalUnit</a></dt>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Command-Line_Options"
+>Command-Line Options</a></h3>
+
+<dl>
+<dt><a name="-a"
+>-a</a></dt>
+
+<dd>
+<p>Return all fields.</p>
+
+<dt><a name="-h"
+>-h</a></dt>
+
+<dd>
+<p>Display a list of the fields available for use.</p>
+
+<dt><a name="-fields_field-list"
+>-fields field-list</a></dt>
+
+<dd>
+<p>Choose a set of fields to return. Field-list is a comma-separated list of strings. The following fields are available:</p>
+
+<dl>
+<dt><a name="trait_name"
+>trait_name</a></dt>
+
+<dd>
+<dt><a name="unit_of_measure"
+>unit_of_measure</a></dt>
+
+<dd>
+<dt><a name="TO_ID"
+>TO_ID</a></dt>
+
+<dd>
+<dt><a name="protocol"
+>protocol</a></dt>
 </dl>
 </dd>
 </dl>
@@ -3556,7 +4061,8 @@ name="all_entities_Variation"
 
 <p>Return all instances of the Variation entity.</p>
 
-<p>A variation describes a set of aligned regions in two or more contigs.</p>
+<p>A variation is a difference in DNA sequence between the reference genome and the observational unit.
+The variation has a position on a contig.</p>
 
 <p>Example:</p>
 
@@ -3571,8 +4077,24 @@ name="Related_entities"
 <p>The Variation entity has the following relationship links:</p>
 
 <dl>
-<dt><a name="IsAlignmentFor_Contig"
->IsAlignmentFor Contig</a></dt>
+<dt><a name="Impacts_Trait"
+>Impacts Trait</a></dt>
+
+<dd>
+<dt><a name="IsLocatedOn_Contig"
+>IsLocatedOn Contig</a></dt>
+
+<dd>
+<dt><a name="IsVariantOf_ObservationalUnit"
+>IsVariantOf ObservationalUnit</a></dt>
+
+<dd>
+<dt><a name="SummarizedBy_AlleleFrequency"
+>SummarizedBy AlleleFrequency</a></dt>
+
+<dd>
+<dt><a name="WasDetermiedBy_Assay"
+>WasDetermiedBy Assay</a></dt>
 </dl>
 
 <h3><a class='u' href='#___top' title='click to go to top of document'
@@ -3599,8 +4121,12 @@ name="Command-Line_Options"
 <p>Choose a set of fields to return. Field-list is a comma-separated list of strings. The following fields are available:</p>
 
 <dl>
-<dt><a name="notes"
->notes</a></dt>
+<dt><a name="position"
+>position</a></dt>
+
+<dd>
+<dt><a name="value"
+>value</a></dt>
 </dl>
 </dd>
 </dl>
@@ -3711,6 +4237,91 @@ name="Output_Format"
 <a name='___top' class='dummyTopAnchor' ></a>
 
 <h2><a class='u' href='#___top' title='click to go to top of document'
+name="get_entity_AlleleFrequency"
+>get_entity_AlleleFrequency</a></h2>
+
+<p>An allele frequency represents a summary of the major and minor allele frequencies for a position on a chromosome.</p>
+
+<p>Example:</p>
+
+<pre>    get_entity_AlleleFrequency -a &#60; ids &#62; table.with.fields.added</pre>
+
+<p>would read in a file of ids and add a column for each filed in the entity.</p>
+
+<p>The standard input should be a tab-separated table (i.e., each line is a tab-separated set of fields). Normally, the last field in each line would contain the id. If some other column contains the id, use</p>
+
+<pre>    -c N</pre>
+
+<p>where N is the column (from 1) that contains the id.</p>
+
+<p>This is a pipe command. The input is taken from the standard input, and the output is to the standard output.</p>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Related_entities"
+>Related entities</a></h3>
+
+<p>The AlleleFrequency entity has the following relationship links:</p>
+
+<dl>
+<dt><a name="Summarizes_Variation"
+>Summarizes Variation</a></dt>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Command-Line_Options"
+>Command-Line Options</a></h3>
+
+<dl>
+<dt><a name="-c_Column"
+>-c Column</a></dt>
+
+<dd>
+<p>Use the specified column to define the id of the entity to retrieve.</p>
+
+<dt><a name="-h"
+>-h</a></dt>
+
+<dd>
+<p>Display a list of the fields available for use.</p>
+
+<dt><a name="-fields_field-list"
+>-fields field-list</a></dt>
+
+<dd>
+<p>Choose a set of fields to return. Field-list is a comma-separated list of strings. The following fields are available:</p>
+
+<dl>
+<dt><a name="position"
+>position</a></dt>
+
+<dd>
+<dt><a name="minor_AF"
+>minor_AF</a></dt>
+
+<dd>
+<dt><a name="minor_allele"
+>minor_allele</a></dt>
+
+<dd>
+<dt><a name="major_AF"
+>major_AF</a></dt>
+
+<dd>
+<dt><a name="major_allele"
+>major_allele</a></dt>
+</dl>
+</dd>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Output_Format"
+>Output Format</a></h3>
+
+<p>The standard output is a tab-delimited file. It consists of the input file with an extra column added for each requested field. Input lines that cannot be extended are written to stderr.</p>
+<hr>
+<a name='___top' class='dummyTopAnchor' ></a>
+
+<h2><a class='u' href='#___top' title='click to go to top of document'
 name="get_entity_Annotation"
 >get_entity_Annotation</a></h2>
 
@@ -3777,6 +4388,79 @@ name="Command-Line_Options"
 <dd>
 <dt><a name="annotation_time"
 >annotation_time</a></dt>
+</dl>
+</dd>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Output_Format"
+>Output Format</a></h3>
+
+<p>The standard output is a tab-delimited file. It consists of the input file with an extra column added for each requested field. Input lines that cannot be extended are written to stderr.</p>
+<hr>
+<a name='___top' class='dummyTopAnchor' ></a>
+
+<h2><a class='u' href='#___top' title='click to go to top of document'
+name="get_entity_Assay"
+>get_entity_Assay</a></h2>
+
+<p>An assay is an experimental design for determining alleles at specific chromosome positions.</p>
+
+<p>Example:</p>
+
+<pre>    get_entity_Assay -a &#60; ids &#62; table.with.fields.added</pre>
+
+<p>would read in a file of ids and add a column for each filed in the entity.</p>
+
+<p>The standard input should be a tab-separated table (i.e., each line is a tab-separated set of fields). Normally, the last field in each line would contain the id. If some other column contains the id, use</p>
+
+<pre>    -c N</pre>
+
+<p>where N is the column (from 1) that contains the id.</p>
+
+<p>This is a pipe command. The input is taken from the standard input, and the output is to the standard output.</p>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Related_entities"
+>Related entities</a></h3>
+
+<p>The Assay entity has the following relationship links:</p>
+
+<dl>
+<dt><a name="ResultsIn_Variation"
+>ResultsIn Variation</a></dt>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Command-Line_Options"
+>Command-Line Options</a></h3>
+
+<dl>
+<dt><a name="-c_Column"
+>-c Column</a></dt>
+
+<dd>
+<p>Use the specified column to define the id of the entity to retrieve.</p>
+
+<dt><a name="-h"
+>-h</a></dt>
+
+<dd>
+<p>Display a list of the fields available for use.</p>
+
+<dt><a name="-fields_field-list"
+>-fields field-list</a></dt>
+
+<dd>
+<p>Choose a set of fields to return. Field-list is a comma-separated list of strings. The following fields are available:</p>
+
+<dl>
+<dt><a name="assay_type"
+>assay_type</a></dt>
+
+<dd>
+<dt><a name="positions"
+>positions</a></dt>
 </dl>
 </dd>
 </dl>
@@ -4436,8 +5120,8 @@ name="Related_entities"
 >HasAsSequence ContigSequence</a></dt>
 
 <dd>
-<dt><a name="IsAlignedIn_Variation"
->IsAlignedIn Variation</a></dt>
+<dt><a name="HasVariation_Variation"
+>HasVariation Variation</a></dt>
 
 <dd>
 <dt><a name="IsComponentOf_Genome"
@@ -4651,7 +5335,7 @@ In particular,
 we wish to represent genes that are coregulated using transcription binding sites and corresponding transcription regulatory proteins.
 We represent a coregulated set (which may,
 or may not,
-be considered an atomic regulon) using CoregulatedSet.</p>
+be considered a regulon) using CoregulatedSet.</p>
 
 <p>Example:</p>
 
@@ -4674,10 +5358,6 @@ name="Related_entities"
 <p>The CoregulatedSet entity has the following relationship links:</p>
 
 <dl>
-<dt><a name="IsBoundBy_Feature"
->IsBoundBy Feature</a></dt>
-
-<dd>
 <dt><a name="IsControlledUsing_Feature"
 >IsControlledUsing Feature</a></dt>
 
@@ -4716,6 +5396,10 @@ name="Command-Line_Options"
 <dl>
 <dt><a name="source_id"
 >source_id</a></dt>
+
+<dd>
+<dt><a name="binding_location"
+>binding_location</a></dt>
 </dl>
 </dd>
 </dl>
@@ -5022,6 +5706,10 @@ name="Related_entities"
 >HasMember Feature</a></dt>
 
 <dd>
+<dt><a name="HasProteinMember_ProteinSequence"
+>HasProteinMember ProteinSequence</a></dt>
+
+<dd>
 <dt><a name="IsCoupledTo_Family"
 >IsCoupledTo Family</a></dt>
 
@@ -5066,8 +5754,16 @@ name="Command-Line_Options"
 >type</a></dt>
 
 <dd>
+<dt><a name="release"
+>release</a></dt>
+
+<dd>
 <dt><a name="family_function"
 >family_function</a></dt>
+
+<dd>
+<dt><a name="alignment"
+>alignment</a></dt>
 </dl>
 </dd>
 </dl>
@@ -5144,10 +5840,6 @@ name="Related_entities"
 <dd>
 <dt><a name="IsAnnotatedBy_Annotation"
 >IsAnnotatedBy Annotation</a></dt>
-
-<dd>
-<dt><a name="IsBindingSiteFor_CoregulatedSet"
->IsBindingSiteFor CoregulatedSet</a></dt>
 
 <dd>
 <dt><a name="IsContainedIn_SSCell"
@@ -5232,6 +5924,10 @@ name="Command-Line_Options"
 <dd>
 <dt><a name="function"
 >function</a></dt>
+
+<dd>
+<dt><a name="alias"
+>alias</a></dt>
 </dl>
 </dd>
 </dl>
@@ -5310,6 +6006,10 @@ name="Related_entities"
 <dd>
 <dt><a name="IsOwnerOf_Feature"
 >IsOwnerOf Feature</a></dt>
+
+<dd>
+<dt><a name="IsReferencedBy_ObservationalUnit"
+>IsReferencedBy ObservationalUnit</a></dt>
 
 <dd>
 <dt><a name="Uses_SSRow"
@@ -5476,6 +6176,107 @@ name="Command-Line_Options"
 <dd>
 <dt><a name="natural_form"
 >natural_form</a></dt>
+</dl>
+</dd>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Output_Format"
+>Output Format</a></h3>
+
+<p>The standard output is a tab-delimited file. It consists of the input file with an extra column added for each requested field. Input lines that cannot be extended are written to stderr.</p>
+<hr>
+<a name='___top' class='dummyTopAnchor' ></a>
+
+<h2><a class='u' href='#___top' title='click to go to top of document'
+name="get_entity_Locality"
+>get_entity_Locality</a></h2>
+
+<p>A locality is a geographic location.</p>
+
+<p>Example:</p>
+
+<pre>    get_entity_Locality -a &#60; ids &#62; table.with.fields.added</pre>
+
+<p>would read in a file of ids and add a column for each filed in the entity.</p>
+
+<p>The standard input should be a tab-separated table (i.e., each line is a tab-separated set of fields). Normally, the last field in each line would contain the id. If some other column contains the id, use</p>
+
+<pre>    -c N</pre>
+
+<p>where N is the column (from 1) that contains the id.</p>
+
+<p>This is a pipe command. The input is taken from the standard input, and the output is to the standard output.</p>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Related_entities"
+>Related entities</a></h3>
+
+<p>The Locality entity has the following relationship links:</p>
+
+<dl>
+<dt><a name="HasUnits_ObservationalUnit"
+>HasUnits ObservationalUnit</a></dt>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Command-Line_Options"
+>Command-Line Options</a></h3>
+
+<dl>
+<dt><a name="-c_Column"
+>-c Column</a></dt>
+
+<dd>
+<p>Use the specified column to define the id of the entity to retrieve.</p>
+
+<dt><a name="-h"
+>-h</a></dt>
+
+<dd>
+<p>Display a list of the fields available for use.</p>
+
+<dt><a name="-fields_field-list"
+>-fields field-list</a></dt>
+
+<dd>
+<p>Choose a set of fields to return. Field-list is a comma-separated list of strings. The following fields are available:</p>
+
+<dl>
+<dt><a name="source_name"
+>source_name</a></dt>
+
+<dd>
+<dt><a name="city"
+>city</a></dt>
+
+<dd>
+<dt><a name="state"
+>state</a></dt>
+
+<dd>
+<dt><a name="country"
+>country</a></dt>
+
+<dd>
+<dt><a name="origcty"
+>origcty</a></dt>
+
+<dd>
+<dt><a name="elevation"
+>elevation</a></dt>
+
+<dd>
+<dt><a name="latitude"
+>latitude</a></dt>
+
+<dd>
+<dt><a name="longitude"
+>longitude</a></dt>
+
+<dd>
+<dt><a name="lo_accession"
+>lo_accession</a></dt>
 </dl>
 </dd>
 </dl>
@@ -5764,6 +6565,101 @@ name="Command-Line_Options"
 <dd>
 <dt><a name="potential"
 >potential</a></dt>
+</dl>
+</dd>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Output_Format"
+>Output Format</a></h3>
+
+<p>The standard output is a tab-delimited file. It consists of the input file with an extra column added for each requested field. Input lines that cannot be extended are written to stderr.</p>
+<hr>
+<a name='___top' class='dummyTopAnchor' ></a>
+
+<h2><a class='u' href='#___top' title='click to go to top of document'
+name="get_entity_ObservationalUnit"
+>get_entity_ObservationalUnit</a></h2>
+
+<p>An ObservationalUnit is an individual plant that 1) is part of an experiment or study,
+2) has measured traits,
+and 3) is assayed for the purpose of determining alleles.</p>
+
+<p>Example:</p>
+
+<pre>    get_entity_ObservationalUnit -a &#60; ids &#62; table.with.fields.added</pre>
+
+<p>would read in a file of ids and add a column for each filed in the entity.</p>
+
+<p>The standard input should be a tab-separated table (i.e., each line is a tab-separated set of fields). Normally, the last field in each line would contain the id. If some other column contains the id, use</p>
+
+<pre>    -c N</pre>
+
+<p>where N is the column (from 1) that contains the id.</p>
+
+<p>This is a pipe command. The input is taken from the standard input, and the output is to the standard output.</p>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Related_entities"
+>Related entities</a></h3>
+
+<p>The ObservationalUnit entity has the following relationship links:</p>
+
+<dl>
+<dt><a name="DefinedBy_TaxonomicGrouping"
+>DefinedBy TaxonomicGrouping</a></dt>
+
+<dd>
+<dt><a name="HasTrait_Trait"
+>HasTrait Trait</a></dt>
+
+<dd>
+<dt><a name="HasVariant_Variation"
+>HasVariant Variation</a></dt>
+
+<dd>
+<dt><a name="IsLocated_Locality"
+>IsLocated Locality</a></dt>
+
+<dd>
+<dt><a name="IsPartOf_StudyExperiment"
+>IsPartOf StudyExperiment</a></dt>
+
+<dd>
+<dt><a name="UsesReference_Genome"
+>UsesReference Genome</a></dt>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Command-Line_Options"
+>Command-Line Options</a></h3>
+
+<dl>
+<dt><a name="-c_Column"
+>-c Column</a></dt>
+
+<dd>
+<p>Use the specified column to define the id of the entity to retrieve.</p>
+
+<dt><a name="-h"
+>-h</a></dt>
+
+<dd>
+<p>Display a list of the fields available for use.</p>
+
+<dt><a name="-fields_field-list"
+>-fields field-list</a></dt>
+
+<dd>
+<p>Choose a set of fields to return. Field-list is a comma-separated list of strings. The following fields are available:</p>
+
+<dl>
+<dt><a name="source_name"
+>source_name</a></dt>
+
+<dd>
+<dt><a name="source_name2"
+>source_name2</a></dt>
 </dl>
 </dd>
 </dl>
@@ -6088,6 +6984,10 @@ name="Related_entities"
 <p>The ProteinSequence entity has the following relationship links:</p>
 
 <dl>
+<dt><a name="HasAssertedFunctionFrom_Source"
+>HasAssertedFunctionFrom Source</a></dt>
+
+<dd>
 <dt><a name="IsATopicOf_Publication"
 >IsATopicOf Publication</a></dt>
 
@@ -6096,16 +6996,16 @@ name="Related_entities"
 >IsAlignedBy AlignmentTree</a></dt>
 
 <dd>
-<dt><a name="IsNamedBy_Identifier"
->IsNamedBy Identifier</a></dt>
-
-<dd>
 <dt><a name="IsProjectedOnto_ProteinSequence"
 >IsProjectedOnto ProteinSequence</a></dt>
 
 <dd>
 <dt><a name="IsProteinFor_Feature"
 >IsProteinFor Feature</a></dt>
+
+<dd>
+<dt><a name="IsProteinMemberOf_Family"
+>IsProteinMemberOf Family</a></dt>
 
 <dd>
 <dt><a name="ProjectsOnto_ProteinSequence"
@@ -6355,7 +7255,7 @@ name="Output_Format"
 name="get_entity_ReactionRule"
 >get_entity_ReactionRule</a></h2>
 
-<p>A reaction rule represents the way a reaction takes place within the context of a model.</p>
+<p>A reaction rule represents the way a reaction takes place within the context of a complex.</p>
 
 <p>Example:</p>
 
@@ -6820,8 +7720,8 @@ name="Related_entities"
 <p>The Source entity has the following relationship links:</p>
 
 <dl>
-<dt><a name="Asserts_Identifier"
->Asserts Identifier</a></dt>
+<dt><a name="AssertsFunctionFor_ProteinSequence"
+>AssertsFunctionFor ProteinSequence</a></dt>
 
 <dd>
 <dt><a name="Formulated_CoregulatedSet"
@@ -6834,10 +7734,6 @@ name="Related_entities"
 <dd>
 <dt><a name="HasReactionAliasFrom_Reaction"
 >HasReactionAliasFrom Reaction</a></dt>
-
-<dd>
-<dt><a name="Imported_Identifier"
->Imported Identifier</a></dt>
 
 <dd>
 <dt><a name="Provided_Subsystem"
@@ -7029,6 +7925,84 @@ name="Command-Line_Options"
 <dd>
 <dt><a name="region"
 >region</a></dt>
+</dl>
+</dd>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Output_Format"
+>Output Format</a></h3>
+
+<p>The standard output is a tab-delimited file. It consists of the input file with an extra column added for each requested field. Input lines that cannot be extended are written to stderr.</p>
+<hr>
+<a name='___top' class='dummyTopAnchor' ></a>
+
+<h2><a class='u' href='#___top' title='click to go to top of document'
+name="get_entity_StudyExperiment"
+>get_entity_StudyExperiment</a></h2>
+
+<p>An Experiment is a collection of observational units with one originator that are part of a specific study.
+An experiment may be conducted at more than one location and in more than one season or year.</p>
+
+<p>Example:</p>
+
+<pre>    get_entity_StudyExperiment -a &#60; ids &#62; table.with.fields.added</pre>
+
+<p>would read in a file of ids and add a column for each filed in the entity.</p>
+
+<p>The standard input should be a tab-separated table (i.e., each line is a tab-separated set of fields). Normally, the last field in each line would contain the id. If some other column contains the id, use</p>
+
+<pre>    -c N</pre>
+
+<p>where N is the column (from 1) that contains the id.</p>
+
+<p>This is a pipe command. The input is taken from the standard input, and the output is to the standard output.</p>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Related_entities"
+>Related entities</a></h3>
+
+<p>The StudyExperiment entity has the following relationship links:</p>
+
+<dl>
+<dt><a name="IncludesPart_ObservationalUnit"
+>IncludesPart ObservationalUnit</a></dt>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Command-Line_Options"
+>Command-Line Options</a></h3>
+
+<dl>
+<dt><a name="-c_Column"
+>-c Column</a></dt>
+
+<dd>
+<p>Use the specified column to define the id of the entity to retrieve.</p>
+
+<dt><a name="-h"
+>-h</a></dt>
+
+<dd>
+<p>Display a list of the fields available for use.</p>
+
+<dt><a name="-fields_field-list"
+>-fields field-list</a></dt>
+
+<dd>
+<p>Choose a set of fields to return. Field-list is a comma-separated list of strings. The following fields are available:</p>
+
+<dl>
+<dt><a name="source_name"
+>source_name</a></dt>
+
+<dd>
+<dt><a name="design"
+>design</a></dt>
+
+<dd>
+<dt><a name="originator"
+>originator</a></dt>
 </dl>
 </dd>
 </dl>
@@ -7270,6 +8244,10 @@ name="Related_entities"
 >IsInGroup TaxonomicGrouping</a></dt>
 
 <dd>
+<dt><a name="IsRepresentedBy_ObservationalUnit"
+>IsRepresentedBy ObservationalUnit</a></dt>
+
+<dd>
 <dt><a name="IsTaxonomyOf_Genome"
 >IsTaxonomyOf Genome</a></dt>
 </dl>
@@ -7312,6 +8290,95 @@ name="Command-Line_Options"
 <dd>
 <dt><a name="alias"
 >alias</a></dt>
+</dl>
+</dd>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Output_Format"
+>Output Format</a></h3>
+
+<p>The standard output is a tab-delimited file. It consists of the input file with an extra column added for each requested field. Input lines that cannot be extended are written to stderr.</p>
+<hr>
+<a name='___top' class='dummyTopAnchor' ></a>
+
+<h2><a class='u' href='#___top' title='click to go to top of document'
+name="get_entity_Trait"
+>get_entity_Trait</a></h2>
+
+<p>A Trait is a phenotypic quality that can be measured or observed for an observational unit.
+Examples include height,
+sugar content,
+color,
+or cold tolerance.</p>
+
+<p>Example:</p>
+
+<pre>    get_entity_Trait -a &#60; ids &#62; table.with.fields.added</pre>
+
+<p>would read in a file of ids and add a column for each filed in the entity.</p>
+
+<p>The standard input should be a tab-separated table (i.e., each line is a tab-separated set of fields). Normally, the last field in each line would contain the id. If some other column contains the id, use</p>
+
+<pre>    -c N</pre>
+
+<p>where N is the column (from 1) that contains the id.</p>
+
+<p>This is a pipe command. The input is taken from the standard input, and the output is to the standard output.</p>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Related_entities"
+>Related entities</a></h3>
+
+<p>The Trait entity has the following relationship links:</p>
+
+<dl>
+<dt><a name="IsImpactedBy_Variation"
+>IsImpactedBy Variation</a></dt>
+
+<dd>
+<dt><a name="Measures_ObservationalUnit"
+>Measures ObservationalUnit</a></dt>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Command-Line_Options"
+>Command-Line Options</a></h3>
+
+<dl>
+<dt><a name="-c_Column"
+>-c Column</a></dt>
+
+<dd>
+<p>Use the specified column to define the id of the entity to retrieve.</p>
+
+<dt><a name="-h"
+>-h</a></dt>
+
+<dd>
+<p>Display a list of the fields available for use.</p>
+
+<dt><a name="-fields_field-list"
+>-fields field-list</a></dt>
+
+<dd>
+<p>Choose a set of fields to return. Field-list is a comma-separated list of strings. The following fields are available:</p>
+
+<dl>
+<dt><a name="trait_name"
+>trait_name</a></dt>
+
+<dd>
+<dt><a name="unit_of_measure"
+>unit_of_measure</a></dt>
+
+<dd>
+<dt><a name="TO_ID"
+>TO_ID</a></dt>
+
+<dd>
+<dt><a name="protocol"
+>protocol</a></dt>
 </dl>
 </dd>
 </dl>
@@ -7419,7 +8486,8 @@ name="Output_Format"
 name="get_entity_Variation"
 >get_entity_Variation</a></h2>
 
-<p>A variation describes a set of aligned regions in two or more contigs.</p>
+<p>A variation is a difference in DNA sequence between the reference genome and the observational unit.
+The variation has a position on a contig.</p>
 
 <p>Example:</p>
 
@@ -7442,8 +8510,24 @@ name="Related_entities"
 <p>The Variation entity has the following relationship links:</p>
 
 <dl>
-<dt><a name="IsAlignmentFor_Contig"
->IsAlignmentFor Contig</a></dt>
+<dt><a name="Impacts_Trait"
+>Impacts Trait</a></dt>
+
+<dd>
+<dt><a name="IsLocatedOn_Contig"
+>IsLocatedOn Contig</a></dt>
+
+<dd>
+<dt><a name="IsVariantOf_ObservationalUnit"
+>IsVariantOf ObservationalUnit</a></dt>
+
+<dd>
+<dt><a name="SummarizedBy_AlleleFrequency"
+>SummarizedBy AlleleFrequency</a></dt>
+
+<dd>
+<dt><a name="WasDetermiedBy_Assay"
+>WasDetermiedBy Assay</a></dt>
 </dl>
 
 <h3><a class='u' href='#___top' title='click to go to top of document'
@@ -7470,8 +8554,12 @@ name="Command-Line_Options"
 <p>Choose a set of fields to return. Field-list is a comma-separated list of strings. The following fields are available:</p>
 
 <dl>
-<dt><a name="notes"
->notes</a></dt>
+<dt><a name="position"
+>position</a></dt>
+
+<dd>
+<dt><a name="value"
+>value</a></dt>
 </dl>
 </dd>
 </dl>
@@ -7759,6 +8847,10 @@ name="Command-Line_Options"
 <dd>
 <dt><a name="function"
 >function</a></dt>
+
+<dd>
+<dt><a name="alias"
+>alias</a></dt>
 </dl>
 
 <dt><a name="-rel_field-list"
@@ -7893,6 +8985,109 @@ name="Command-Line_Options"
 <dl>
 <dt><a name="id"
 >id</a></dt>
+</dl>
+</dd>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Output_Format"
+>Output Format</a></h3>
+
+<p>The standard output is a tab-delimited file. It consists of the input file with an extra column added for each requested field. Input lines that cannot be extended are written to stderr.</p>
+<hr>
+<a name='___top' class='dummyTopAnchor' ></a>
+
+<h2><a class='u' href='#___top' title='click to go to top of document'
+name="get_relationship_AssertsFunctionFor"
+>get_relationship_AssertsFunctionFor</a></h2>
+
+<p>Sources (users) can make assertions about protein sequence function.
+The assertion is associated with an external identifier.</p>
+
+<p>Example:</p>
+
+<pre>    get_relationship_AssertsFunctionFor -a &#60; ids &#62; table.with.fields.added</pre>
+
+<p>would read in a file of ids and add a column for each field in the relationship.</p>
+
+<p>The standard input should be a tab-separated table (i.e., each line is a tab-separated set of fields). Normally, the last field in each line would contain the id. If some other column contains the id, use</p>
+
+<pre>    -c N</pre>
+
+<p>where N is the column (from 1) that contains the id.</p>
+
+<p>This is a pipe command. The input is taken from the standard input, and the output is to the standard output.</p>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Command-Line_Options"
+>Command-Line Options</a></h3>
+
+<dl>
+<dt><a name="-c_Column"
+>-c Column</a></dt>
+
+<dd>
+<p>This is used only if the column containing id is not the last.</p>
+
+<dt><a name="-from_field-list"
+>-from field-list</a></dt>
+
+<dd>
+<p>Choose a set of fields from the Source entity to return. Field-list is a comma-separated list of strings. The following fields are available:</p>
+
+<dl>
+<dt><a name="id"
+>id</a></dt>
+</dl>
+
+<dt><a name="-rel_field-list"
+>-rel field-list</a></dt>
+
+<dd>
+<p>Choose a set of fields from the relationship to return. Field-list is a comma-separated list of strings. The following fields are available:</p>
+
+<dl>
+<dt><a name="from_link"
+>from_link</a></dt>
+
+<dd>
+<dt><a name="to_link"
+>to_link</a></dt>
+
+<dd>
+<dt><a name="function"
+>function</a></dt>
+
+<dd>
+<dt><a name="external_id"
+>external_id</a></dt>
+
+<dd>
+<dt><a name="organism"
+>organism</a></dt>
+
+<dd>
+<dt><a name="gi_number"
+>gi_number</a></dt>
+
+<dd>
+<dt><a name="release_date"
+>release_date</a></dt>
+</dl>
+
+<dt><a name="-to_field-list"
+>-to field-list</a></dt>
+
+<dd>
+<p>Choose a set of fields from the ProteinSequence entity to return. Field-list is a comma-separated list of strings. The following fields are available:</p>
+
+<dl>
+<dt><a name="id"
+>id</a></dt>
+
+<dd>
+<dt><a name="sequence"
+>sequence</a></dt>
 </dl>
 </dd>
 </dl>
@@ -8173,6 +9368,10 @@ name="Command-Line_Options"
 <dd>
 <dt><a name="function"
 >function</a></dt>
+
+<dd>
+<dt><a name="alias"
+>alias</a></dt>
 </dl>
 </dd>
 </dl>
@@ -8241,6 +9440,10 @@ name="Command-Line_Options"
 <dd>
 <dt><a name="function"
 >function</a></dt>
+
+<dd>
+<dt><a name="alias"
+>alias</a></dt>
 </dl>
 
 <dt><a name="-rel_field-list"
@@ -8271,6 +9474,115 @@ name="Command-Line_Options"
 <dd>
 <dt><a name="source_id"
 >source_id</a></dt>
+
+<dd>
+<dt><a name="binding_location"
+>binding_location</a></dt>
+</dl>
+</dd>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Output_Format"
+>Output Format</a></h3>
+
+<p>The standard output is a tab-delimited file. It consists of the input file with an extra column added for each requested field. Input lines that cannot be extended are written to stderr.</p>
+<hr>
+<a name='___top' class='dummyTopAnchor' ></a>
+
+<h2><a class='u' href='#___top' title='click to go to top of document'
+name="get_relationship_DefinedBy"
+>get_relationship_DefinedBy</a></h2>
+
+<p>This relationship associates observational units with a genus,
+species,
+strain,
+and/or variety that was the source material.</p>
+
+<p>Example:</p>
+
+<pre>    get_relationship_DefinedBy -a &#60; ids &#62; table.with.fields.added</pre>
+
+<p>would read in a file of ids and add a column for each field in the relationship.</p>
+
+<p>The standard input should be a tab-separated table (i.e., each line is a tab-separated set of fields). Normally, the last field in each line would contain the id. If some other column contains the id, use</p>
+
+<pre>    -c N</pre>
+
+<p>where N is the column (from 1) that contains the id.</p>
+
+<p>This is a pipe command. The input is taken from the standard input, and the output is to the standard output.</p>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Command-Line_Options"
+>Command-Line Options</a></h3>
+
+<dl>
+<dt><a name="-c_Column"
+>-c Column</a></dt>
+
+<dd>
+<p>This is used only if the column containing id is not the last.</p>
+
+<dt><a name="-from_field-list"
+>-from field-list</a></dt>
+
+<dd>
+<p>Choose a set of fields from the TaxonomicGrouping entity to return. Field-list is a comma-separated list of strings. The following fields are available:</p>
+
+<dl>
+<dt><a name="id"
+>id</a></dt>
+
+<dd>
+<dt><a name="domain"
+>domain</a></dt>
+
+<dd>
+<dt><a name="hidden"
+>hidden</a></dt>
+
+<dd>
+<dt><a name="scientific_name"
+>scientific_name</a></dt>
+
+<dd>
+<dt><a name="alias"
+>alias</a></dt>
+</dl>
+
+<dt><a name="-rel_field-list"
+>-rel field-list</a></dt>
+
+<dd>
+<p>Choose a set of fields from the relationship to return. Field-list is a comma-separated list of strings. The following fields are available:</p>
+
+<dl>
+<dt><a name="from_link"
+>from_link</a></dt>
+
+<dd>
+<dt><a name="to_link"
+>to_link</a></dt>
+</dl>
+
+<dt><a name="-to_field-list"
+>-to field-list</a></dt>
+
+<dd>
+<p>Choose a set of fields from the ObservationalUnit entity to return. Field-list is a comma-separated list of strings. The following fields are available:</p>
+
+<dl>
+<dt><a name="id"
+>id</a></dt>
+
+<dd>
+<dt><a name="source_name"
+>source_name</a></dt>
+
+<dd>
+<dt><a name="source_name2"
+>source_name2</a></dt>
 </dl>
 </dd>
 </dl>
@@ -8544,8 +9856,16 @@ name="Command-Line_Options"
 >type</a></dt>
 
 <dd>
+<dt><a name="release"
+>release</a></dt>
+
+<dd>
 <dt><a name="family_function"
 >family_function</a></dt>
+
+<dd>
+<dt><a name="alignment"
+>alignment</a></dt>
 </dl>
 
 <dt><a name="-rel_field-list"
@@ -8762,6 +10082,10 @@ name="Command-Line_Options"
 <dd>
 <dt><a name="function"
 >function</a></dt>
+
+<dd>
+<dt><a name="alias"
+>alias</a></dt>
 </dl>
 
 <dt><a name="-rel_field-list"
@@ -8804,6 +10128,10 @@ name="Command-Line_Options"
 <dd>
 <dt><a name="function"
 >function</a></dt>
+
+<dd>
+<dt><a name="alias"
+>alias</a></dt>
 </dl>
 </dd>
 </dl>
@@ -8886,6 +10214,10 @@ name="Command-Line_Options"
 <dd>
 <dt><a name="source_id"
 >source_id</a></dt>
+
+<dd>
+<dt><a name="binding_location"
+>binding_location</a></dt>
 </dl>
 </dd>
 </dl>
@@ -9170,6 +10502,10 @@ name="Command-Line_Options"
 <dd>
 <dt><a name="function"
 >function</a></dt>
+
+<dd>
+<dt><a name="alias"
+>alias</a></dt>
 </dl>
 
 <dt><a name="-rel_field-list"
@@ -9288,6 +10624,109 @@ name="Command-Line_Options"
 <dd>
 <dt><a name="source_id"
 >source_id</a></dt>
+</dl>
+</dd>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Output_Format"
+>Output Format</a></h3>
+
+<p>The standard output is a tab-delimited file. It consists of the input file with an extra column added for each requested field. Input lines that cannot be extended are written to stderr.</p>
+<hr>
+<a name='___top' class='dummyTopAnchor' ></a>
+
+<h2><a class='u' href='#___top' title='click to go to top of document'
+name="get_relationship_HasAssertedFunctionFrom"
+>get_relationship_HasAssertedFunctionFrom</a></h2>
+
+<p>Sources (users) can make assertions about protein sequence function.
+The assertion is associated with an external identifier.</p>
+
+<p>Example:</p>
+
+<pre>    get_relationship_HasAssertedFunctionFrom -a &#60; ids &#62; table.with.fields.added</pre>
+
+<p>would read in a file of ids and add a column for each field in the relationship.</p>
+
+<p>The standard input should be a tab-separated table (i.e., each line is a tab-separated set of fields). Normally, the last field in each line would contain the id. If some other column contains the id, use</p>
+
+<pre>    -c N</pre>
+
+<p>where N is the column (from 1) that contains the id.</p>
+
+<p>This is a pipe command. The input is taken from the standard input, and the output is to the standard output.</p>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Command-Line_Options"
+>Command-Line Options</a></h3>
+
+<dl>
+<dt><a name="-c_Column"
+>-c Column</a></dt>
+
+<dd>
+<p>This is used only if the column containing id is not the last.</p>
+
+<dt><a name="-from_field-list"
+>-from field-list</a></dt>
+
+<dd>
+<p>Choose a set of fields from the Source entity to return. Field-list is a comma-separated list of strings. The following fields are available:</p>
+
+<dl>
+<dt><a name="id"
+>id</a></dt>
+</dl>
+
+<dt><a name="-rel_field-list"
+>-rel field-list</a></dt>
+
+<dd>
+<p>Choose a set of fields from the relationship to return. Field-list is a comma-separated list of strings. The following fields are available:</p>
+
+<dl>
+<dt><a name="from_link"
+>from_link</a></dt>
+
+<dd>
+<dt><a name="to_link"
+>to_link</a></dt>
+
+<dd>
+<dt><a name="function"
+>function</a></dt>
+
+<dd>
+<dt><a name="external_id"
+>external_id</a></dt>
+
+<dd>
+<dt><a name="organism"
+>organism</a></dt>
+
+<dd>
+<dt><a name="gi_number"
+>gi_number</a></dt>
+
+<dd>
+<dt><a name="release_date"
+>release_date</a></dt>
+</dl>
+
+<dt><a name="-to_field-list"
+>-to field-list</a></dt>
+
+<dd>
+<p>Choose a set of fields from the ProteinSequence entity to return. Field-list is a comma-separated list of strings. The following fields are available:</p>
+
+<dl>
+<dt><a name="id"
+>id</a></dt>
+
+<dd>
+<dt><a name="sequence"
+>sequence</a></dt>
 </dl>
 </dd>
 </dl>
@@ -9691,6 +11130,10 @@ name="Command-Line_Options"
 <dd>
 <dt><a name="function"
 >function</a></dt>
+
+<dd>
+<dt><a name="alias"
+>alias</a></dt>
 </dl>
 
 <dt><a name="-rel_field-list"
@@ -9737,6 +11180,10 @@ name="Command-Line_Options"
 <dd>
 <dt><a name="function"
 >function</a></dt>
+
+<dd>
+<dt><a name="alias"
+>alias</a></dt>
 </dl>
 </dd>
 </dl>
@@ -9945,6 +11392,10 @@ name="Command-Line_Options"
 <dd>
 <dt><a name="function"
 >function</a></dt>
+
+<dd>
+<dt><a name="alias"
+>alias</a></dt>
 </dl>
 </dd>
 </dl>
@@ -10014,6 +11465,10 @@ name="Command-Line_Options"
 <dd>
 <dt><a name="function"
 >function</a></dt>
+
+<dd>
+<dt><a name="alias"
+>alias</a></dt>
 </dl>
 
 <dt><a name="-rel_field-list"
@@ -10151,6 +11606,10 @@ name="Command-Line_Options"
 <dd>
 <dt><a name="function"
 >function</a></dt>
+
+<dd>
+<dt><a name="alias"
+>alias</a></dt>
 </dl>
 </dd>
 </dl>
@@ -10211,8 +11670,16 @@ name="Command-Line_Options"
 >type</a></dt>
 
 <dd>
+<dt><a name="release"
+>release</a></dt>
+
+<dd>
 <dt><a name="family_function"
 >family_function</a></dt>
+
+<dd>
+<dt><a name="alignment"
+>alignment</a></dt>
 </dl>
 
 <dt><a name="-rel_field-list"
@@ -10255,6 +11722,10 @@ name="Command-Line_Options"
 <dd>
 <dt><a name="function"
 >function</a></dt>
+
+<dd>
+<dt><a name="alias"
+>alias</a></dt>
 </dl>
 </dd>
 </dl>
@@ -10622,6 +12093,110 @@ name="Output_Format"
 <a name='___top' class='dummyTopAnchor' ></a>
 
 <h2><a class='u' href='#___top' title='click to go to top of document'
+name="get_relationship_HasProteinMember"
+>get_relationship_HasProteinMember</a></h2>
+
+<p>This relationship connects each feature family to its constituent protein sequences.
+A family always has many protein sequences,
+and a single sequence can be found in many families.</p>
+
+<p>Example:</p>
+
+<pre>    get_relationship_HasProteinMember -a &#60; ids &#62; table.with.fields.added</pre>
+
+<p>would read in a file of ids and add a column for each field in the relationship.</p>
+
+<p>The standard input should be a tab-separated table (i.e., each line is a tab-separated set of fields). Normally, the last field in each line would contain the id. If some other column contains the id, use</p>
+
+<pre>    -c N</pre>
+
+<p>where N is the column (from 1) that contains the id.</p>
+
+<p>This is a pipe command. The input is taken from the standard input, and the output is to the standard output.</p>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Command-Line_Options"
+>Command-Line Options</a></h3>
+
+<dl>
+<dt><a name="-c_Column"
+>-c Column</a></dt>
+
+<dd>
+<p>This is used only if the column containing id is not the last.</p>
+
+<dt><a name="-from_field-list"
+>-from field-list</a></dt>
+
+<dd>
+<p>Choose a set of fields from the Family entity to return. Field-list is a comma-separated list of strings. The following fields are available:</p>
+
+<dl>
+<dt><a name="id"
+>id</a></dt>
+
+<dd>
+<dt><a name="type"
+>type</a></dt>
+
+<dd>
+<dt><a name="release"
+>release</a></dt>
+
+<dd>
+<dt><a name="family_function"
+>family_function</a></dt>
+
+<dd>
+<dt><a name="alignment"
+>alignment</a></dt>
+</dl>
+
+<dt><a name="-rel_field-list"
+>-rel field-list</a></dt>
+
+<dd>
+<p>Choose a set of fields from the relationship to return. Field-list is a comma-separated list of strings. The following fields are available:</p>
+
+<dl>
+<dt><a name="from_link"
+>from_link</a></dt>
+
+<dd>
+<dt><a name="to_link"
+>to_link</a></dt>
+
+<dd>
+<dt><a name="source_id"
+>source_id</a></dt>
+</dl>
+
+<dt><a name="-to_field-list"
+>-to field-list</a></dt>
+
+<dd>
+<p>Choose a set of fields from the ProteinSequence entity to return. Field-list is a comma-separated list of strings. The following fields are available:</p>
+
+<dl>
+<dt><a name="id"
+>id</a></dt>
+
+<dd>
+<dt><a name="sequence"
+>sequence</a></dt>
+</dl>
+</dd>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Output_Format"
+>Output Format</a></h3>
+
+<p>The standard output is a tab-delimited file. It consists of the input file with an extra column added for each requested field. Input lines that cannot be extended are written to stderr.</p>
+<hr>
+<a name='___top' class='dummyTopAnchor' ></a>
+
+<h2><a class='u' href='#___top' title='click to go to top of document'
 name="get_relationship_HasReactionAliasFrom"
 >get_relationship_HasReactionAliasFrom</a></h2>
 
@@ -10966,8 +12541,16 @@ name="Command-Line_Options"
 >type</a></dt>
 
 <dd>
+<dt><a name="release"
+>release</a></dt>
+
+<dd>
 <dt><a name="family_function"
 >family_function</a></dt>
+
+<dd>
+<dt><a name="alignment"
+>alignment</a></dt>
 </dl>
 </dd>
 </dl>
@@ -11421,6 +13004,238 @@ name="Output_Format"
 <a name='___top' class='dummyTopAnchor' ></a>
 
 <h2><a class='u' href='#___top' title='click to go to top of document'
+name="get_relationship_HasTrait"
+>get_relationship_HasTrait</a></h2>
+
+<p>This relationship contains the measurement values of a trait on a specific observational Unit</p>
+
+<p>Example:</p>
+
+<pre>    get_relationship_HasTrait -a &#60; ids &#62; table.with.fields.added</pre>
+
+<p>would read in a file of ids and add a column for each field in the relationship.</p>
+
+<p>The standard input should be a tab-separated table (i.e., each line is a tab-separated set of fields). Normally, the last field in each line would contain the id. If some other column contains the id, use</p>
+
+<pre>    -c N</pre>
+
+<p>where N is the column (from 1) that contains the id.</p>
+
+<p>This is a pipe command. The input is taken from the standard input, and the output is to the standard output.</p>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Command-Line_Options"
+>Command-Line Options</a></h3>
+
+<dl>
+<dt><a name="-c_Column"
+>-c Column</a></dt>
+
+<dd>
+<p>This is used only if the column containing id is not the last.</p>
+
+<dt><a name="-from_field-list"
+>-from field-list</a></dt>
+
+<dd>
+<p>Choose a set of fields from the ObservationalUnit entity to return. Field-list is a comma-separated list of strings. The following fields are available:</p>
+
+<dl>
+<dt><a name="id"
+>id</a></dt>
+
+<dd>
+<dt><a name="source_name"
+>source_name</a></dt>
+
+<dd>
+<dt><a name="source_name2"
+>source_name2</a></dt>
+</dl>
+
+<dt><a name="-rel_field-list"
+>-rel field-list</a></dt>
+
+<dd>
+<p>Choose a set of fields from the relationship to return. Field-list is a comma-separated list of strings. The following fields are available:</p>
+
+<dl>
+<dt><a name="from_link"
+>from_link</a></dt>
+
+<dd>
+<dt><a name="to_link"
+>to_link</a></dt>
+
+<dd>
+<dt><a name="value"
+>value</a></dt>
+
+<dd>
+<dt><a name="statistic_type"
+>statistic_type</a></dt>
+</dl>
+
+<dt><a name="-to_field-list"
+>-to field-list</a></dt>
+
+<dd>
+<p>Choose a set of fields from the Trait entity to return. Field-list is a comma-separated list of strings. The following fields are available:</p>
+
+<dl>
+<dt><a name="id"
+>id</a></dt>
+
+<dd>
+<dt><a name="trait_name"
+>trait_name</a></dt>
+
+<dd>
+<dt><a name="unit_of_measure"
+>unit_of_measure</a></dt>
+
+<dd>
+<dt><a name="TO_ID"
+>TO_ID</a></dt>
+
+<dd>
+<dt><a name="protocol"
+>protocol</a></dt>
+</dl>
+</dd>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Output_Format"
+>Output Format</a></h3>
+
+<p>The standard output is a tab-delimited file. It consists of the input file with an extra column added for each requested field. Input lines that cannot be extended are written to stderr.</p>
+<hr>
+<a name='___top' class='dummyTopAnchor' ></a>
+
+<h2><a class='u' href='#___top' title='click to go to top of document'
+name="get_relationship_HasUnits"
+>get_relationship_HasUnits</a></h2>
+
+<p>This relationship associates observational units with the geographic location where the unit is planted.</p>
+
+<p>Example:</p>
+
+<pre>    get_relationship_HasUnits -a &#60; ids &#62; table.with.fields.added</pre>
+
+<p>would read in a file of ids and add a column for each field in the relationship.</p>
+
+<p>The standard input should be a tab-separated table (i.e., each line is a tab-separated set of fields). Normally, the last field in each line would contain the id. If some other column contains the id, use</p>
+
+<pre>    -c N</pre>
+
+<p>where N is the column (from 1) that contains the id.</p>
+
+<p>This is a pipe command. The input is taken from the standard input, and the output is to the standard output.</p>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Command-Line_Options"
+>Command-Line Options</a></h3>
+
+<dl>
+<dt><a name="-c_Column"
+>-c Column</a></dt>
+
+<dd>
+<p>This is used only if the column containing id is not the last.</p>
+
+<dt><a name="-from_field-list"
+>-from field-list</a></dt>
+
+<dd>
+<p>Choose a set of fields from the Locality entity to return. Field-list is a comma-separated list of strings. The following fields are available:</p>
+
+<dl>
+<dt><a name="id"
+>id</a></dt>
+
+<dd>
+<dt><a name="source_name"
+>source_name</a></dt>
+
+<dd>
+<dt><a name="city"
+>city</a></dt>
+
+<dd>
+<dt><a name="state"
+>state</a></dt>
+
+<dd>
+<dt><a name="country"
+>country</a></dt>
+
+<dd>
+<dt><a name="origcty"
+>origcty</a></dt>
+
+<dd>
+<dt><a name="elevation"
+>elevation</a></dt>
+
+<dd>
+<dt><a name="latitude"
+>latitude</a></dt>
+
+<dd>
+<dt><a name="longitude"
+>longitude</a></dt>
+
+<dd>
+<dt><a name="lo_accession"
+>lo_accession</a></dt>
+</dl>
+
+<dt><a name="-rel_field-list"
+>-rel field-list</a></dt>
+
+<dd>
+<p>Choose a set of fields from the relationship to return. Field-list is a comma-separated list of strings. The following fields are available:</p>
+
+<dl>
+<dt><a name="from_link"
+>from_link</a></dt>
+
+<dd>
+<dt><a name="to_link"
+>to_link</a></dt>
+</dl>
+
+<dt><a name="-to_field-list"
+>-to field-list</a></dt>
+
+<dd>
+<p>Choose a set of fields from the ObservationalUnit entity to return. Field-list is a comma-separated list of strings. The following fields are available:</p>
+
+<dl>
+<dt><a name="id"
+>id</a></dt>
+
+<dd>
+<dt><a name="source_name"
+>source_name</a></dt>
+
+<dd>
+<dt><a name="source_name2"
+>source_name2</a></dt>
+</dl>
+</dd>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Output_Format"
+>Output Format</a></h3>
+
+<p>The standard output is a tab-delimited file. It consists of the input file with an extra column added for each requested field. Input lines that cannot be extended are written to stderr.</p>
+<hr>
+<a name='___top' class='dummyTopAnchor' ></a>
+
+<h2><a class='u' href='#___top' title='click to go to top of document'
 name="get_relationship_HasUsage"
 >get_relationship_HasUsage</a></h2>
 
@@ -11704,6 +13519,300 @@ name="Command-Line_Options"
 <dd>
 <dt><a name="description"
 >description</a></dt>
+</dl>
+</dd>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Output_Format"
+>Output Format</a></h3>
+
+<p>The standard output is a tab-delimited file. It consists of the input file with an extra column added for each requested field. Input lines that cannot be extended are written to stderr.</p>
+<hr>
+<a name='___top' class='dummyTopAnchor' ></a>
+
+<h2><a class='u' href='#___top' title='click to go to top of document'
+name="get_relationship_HasVariant"
+>get_relationship_HasVariant</a></h2>
+
+<p>This relationship associates observational units with the variations that have been determined by assay.</p>
+
+<p>Example:</p>
+
+<pre>    get_relationship_HasVariant -a &#60; ids &#62; table.with.fields.added</pre>
+
+<p>would read in a file of ids and add a column for each field in the relationship.</p>
+
+<p>The standard input should be a tab-separated table (i.e., each line is a tab-separated set of fields). Normally, the last field in each line would contain the id. If some other column contains the id, use</p>
+
+<pre>    -c N</pre>
+
+<p>where N is the column (from 1) that contains the id.</p>
+
+<p>This is a pipe command. The input is taken from the standard input, and the output is to the standard output.</p>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Command-Line_Options"
+>Command-Line Options</a></h3>
+
+<dl>
+<dt><a name="-c_Column"
+>-c Column</a></dt>
+
+<dd>
+<p>This is used only if the column containing id is not the last.</p>
+
+<dt><a name="-from_field-list"
+>-from field-list</a></dt>
+
+<dd>
+<p>Choose a set of fields from the ObservationalUnit entity to return. Field-list is a comma-separated list of strings. The following fields are available:</p>
+
+<dl>
+<dt><a name="id"
+>id</a></dt>
+
+<dd>
+<dt><a name="source_name"
+>source_name</a></dt>
+
+<dd>
+<dt><a name="source_name2"
+>source_name2</a></dt>
+</dl>
+
+<dt><a name="-rel_field-list"
+>-rel field-list</a></dt>
+
+<dd>
+<p>Choose a set of fields from the relationship to return. Field-list is a comma-separated list of strings. The following fields are available:</p>
+
+<dl>
+<dt><a name="from_link"
+>from_link</a></dt>
+
+<dd>
+<dt><a name="to_link"
+>to_link</a></dt>
+</dl>
+
+<dt><a name="-to_field-list"
+>-to field-list</a></dt>
+
+<dd>
+<p>Choose a set of fields from the Variation entity to return. Field-list is a comma-separated list of strings. The following fields are available:</p>
+
+<dl>
+<dt><a name="id"
+>id</a></dt>
+
+<dd>
+<dt><a name="position"
+>position</a></dt>
+
+<dd>
+<dt><a name="value"
+>value</a></dt>
+</dl>
+</dd>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Output_Format"
+>Output Format</a></h3>
+
+<p>The standard output is a tab-delimited file. It consists of the input file with an extra column added for each requested field. Input lines that cannot be extended are written to stderr.</p>
+<hr>
+<a name='___top' class='dummyTopAnchor' ></a>
+
+<h2><a class='u' href='#___top' title='click to go to top of document'
+name="get_relationship_HasVariation"
+>get_relationship_HasVariation</a></h2>
+
+<p>This relationship associates variations with the reference contig.</p>
+
+<p>Example:</p>
+
+<pre>    get_relationship_HasVariation -a &#60; ids &#62; table.with.fields.added</pre>
+
+<p>would read in a file of ids and add a column for each field in the relationship.</p>
+
+<p>The standard input should be a tab-separated table (i.e., each line is a tab-separated set of fields). Normally, the last field in each line would contain the id. If some other column contains the id, use</p>
+
+<pre>    -c N</pre>
+
+<p>where N is the column (from 1) that contains the id.</p>
+
+<p>This is a pipe command. The input is taken from the standard input, and the output is to the standard output.</p>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Command-Line_Options"
+>Command-Line Options</a></h3>
+
+<dl>
+<dt><a name="-c_Column"
+>-c Column</a></dt>
+
+<dd>
+<p>This is used only if the column containing id is not the last.</p>
+
+<dt><a name="-from_field-list"
+>-from field-list</a></dt>
+
+<dd>
+<p>Choose a set of fields from the Contig entity to return. Field-list is a comma-separated list of strings. The following fields are available:</p>
+
+<dl>
+<dt><a name="id"
+>id</a></dt>
+
+<dd>
+<dt><a name="source_id"
+>source_id</a></dt>
+</dl>
+
+<dt><a name="-rel_field-list"
+>-rel field-list</a></dt>
+
+<dd>
+<p>Choose a set of fields from the relationship to return. Field-list is a comma-separated list of strings. The following fields are available:</p>
+
+<dl>
+<dt><a name="from_link"
+>from_link</a></dt>
+
+<dd>
+<dt><a name="to_link"
+>to_link</a></dt>
+</dl>
+
+<dt><a name="-to_field-list"
+>-to field-list</a></dt>
+
+<dd>
+<p>Choose a set of fields from the Variation entity to return. Field-list is a comma-separated list of strings. The following fields are available:</p>
+
+<dl>
+<dt><a name="id"
+>id</a></dt>
+
+<dd>
+<dt><a name="position"
+>position</a></dt>
+
+<dd>
+<dt><a name="value"
+>value</a></dt>
+</dl>
+</dd>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Output_Format"
+>Output Format</a></h3>
+
+<p>The standard output is a tab-delimited file. It consists of the input file with an extra column added for each requested field. Input lines that cannot be extended are written to stderr.</p>
+<hr>
+<a name='___top' class='dummyTopAnchor' ></a>
+
+<h2><a class='u' href='#___top' title='click to go to top of document'
+name="get_relationship_Impacts"
+>get_relationship_Impacts</a></h2>
+
+<p>This relationship contains the best scoring statistical correlations between measured traits and the responsible alleles.</p>
+
+<p>Example:</p>
+
+<pre>    get_relationship_Impacts -a &#60; ids &#62; table.with.fields.added</pre>
+
+<p>would read in a file of ids and add a column for each field in the relationship.</p>
+
+<p>The standard input should be a tab-separated table (i.e., each line is a tab-separated set of fields). Normally, the last field in each line would contain the id. If some other column contains the id, use</p>
+
+<pre>    -c N</pre>
+
+<p>where N is the column (from 1) that contains the id.</p>
+
+<p>This is a pipe command. The input is taken from the standard input, and the output is to the standard output.</p>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Command-Line_Options"
+>Command-Line Options</a></h3>
+
+<dl>
+<dt><a name="-c_Column"
+>-c Column</a></dt>
+
+<dd>
+<p>This is used only if the column containing id is not the last.</p>
+
+<dt><a name="-from_field-list"
+>-from field-list</a></dt>
+
+<dd>
+<p>Choose a set of fields from the Variation entity to return. Field-list is a comma-separated list of strings. The following fields are available:</p>
+
+<dl>
+<dt><a name="id"
+>id</a></dt>
+
+<dd>
+<dt><a name="position"
+>position</a></dt>
+
+<dd>
+<dt><a name="value"
+>value</a></dt>
+</dl>
+
+<dt><a name="-rel_field-list"
+>-rel field-list</a></dt>
+
+<dd>
+<p>Choose a set of fields from the relationship to return. Field-list is a comma-separated list of strings. The following fields are available:</p>
+
+<dl>
+<dt><a name="from_link"
+>from_link</a></dt>
+
+<dd>
+<dt><a name="to_link"
+>to_link</a></dt>
+
+<dd>
+<dt><a name="value"
+>value</a></dt>
+
+<dd>
+<dt><a name="statistic_type"
+>statistic_type</a></dt>
+</dl>
+
+<dt><a name="-to_field-list"
+>-to field-list</a></dt>
+
+<dd>
+<p>Choose a set of fields from the Trait entity to return. Field-list is a comma-separated list of strings. The following fields are available:</p>
+
+<dl>
+<dt><a name="id"
+>id</a></dt>
+
+<dd>
+<dt><a name="trait_name"
+>trait_name</a></dt>
+
+<dd>
+<dt><a name="unit_of_measure"
+>unit_of_measure</a></dt>
+
+<dd>
+<dt><a name="TO_ID"
+>TO_ID</a></dt>
+
+<dd>
+<dt><a name="protocol"
+>protocol</a></dt>
 </dl>
 </dd>
 </dl>
@@ -12038,6 +14147,104 @@ name="Output_Format"
 <a name='___top' class='dummyTopAnchor' ></a>
 
 <h2><a class='u' href='#___top' title='click to go to top of document'
+name="get_relationship_IncludesPart"
+>get_relationship_IncludesPart</a></h2>
+
+<p>This relationship associates observational units with the geographic location where the unit is planted.</p>
+
+<p>Example:</p>
+
+<pre>    get_relationship_IncludesPart -a &#60; ids &#62; table.with.fields.added</pre>
+
+<p>would read in a file of ids and add a column for each field in the relationship.</p>
+
+<p>The standard input should be a tab-separated table (i.e., each line is a tab-separated set of fields). Normally, the last field in each line would contain the id. If some other column contains the id, use</p>
+
+<pre>    -c N</pre>
+
+<p>where N is the column (from 1) that contains the id.</p>
+
+<p>This is a pipe command. The input is taken from the standard input, and the output is to the standard output.</p>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Command-Line_Options"
+>Command-Line Options</a></h3>
+
+<dl>
+<dt><a name="-c_Column"
+>-c Column</a></dt>
+
+<dd>
+<p>This is used only if the column containing id is not the last.</p>
+
+<dt><a name="-from_field-list"
+>-from field-list</a></dt>
+
+<dd>
+<p>Choose a set of fields from the StudyExperiment entity to return. Field-list is a comma-separated list of strings. The following fields are available:</p>
+
+<dl>
+<dt><a name="id"
+>id</a></dt>
+
+<dd>
+<dt><a name="source_name"
+>source_name</a></dt>
+
+<dd>
+<dt><a name="design"
+>design</a></dt>
+
+<dd>
+<dt><a name="originator"
+>originator</a></dt>
+</dl>
+
+<dt><a name="-rel_field-list"
+>-rel field-list</a></dt>
+
+<dd>
+<p>Choose a set of fields from the relationship to return. Field-list is a comma-separated list of strings. The following fields are available:</p>
+
+<dl>
+<dt><a name="from_link"
+>from_link</a></dt>
+
+<dd>
+<dt><a name="to_link"
+>to_link</a></dt>
+</dl>
+
+<dt><a name="-to_field-list"
+>-to field-list</a></dt>
+
+<dd>
+<p>Choose a set of fields from the ObservationalUnit entity to return. Field-list is a comma-separated list of strings. The following fields are available:</p>
+
+<dl>
+<dt><a name="id"
+>id</a></dt>
+
+<dd>
+<dt><a name="source_name"
+>source_name</a></dt>
+
+<dd>
+<dt><a name="source_name2"
+>source_name2</a></dt>
+</dl>
+</dd>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Output_Format"
+>Output Format</a></h3>
+
+<p>The standard output is a tab-delimited file. It consists of the input file with an extra column added for each requested field. Input lines that cannot be extended are written to stderr.</p>
+<hr>
+<a name='___top' class='dummyTopAnchor' ></a>
+
+<h2><a class='u' href='#___top' title='click to go to top of document'
 name="get_relationship_IncludesPartOf"
 >get_relationship_IncludesPartOf</a></h2>
 
@@ -12216,6 +14423,10 @@ name="Command-Line_Options"
 <dd>
 <dt><a name="function"
 >function</a></dt>
+
+<dd>
+<dt><a name="alias"
+>alias</a></dt>
 </dl>
 </dd>
 </dl>
@@ -12285,6 +14496,10 @@ name="Command-Line_Options"
 <dd>
 <dt><a name="function"
 >function</a></dt>
+
+<dd>
+<dt><a name="alias"
+>alias</a></dt>
 </dl>
 
 <dt><a name="-rel_field-list"
@@ -12924,6 +15139,10 @@ name="Command-Line_Options"
 <dd>
 <dt><a name="function"
 >function</a></dt>
+
+<dd>
+<dt><a name="alias"
+>alias</a></dt>
 </dl>
 
 <dt><a name="-rel_field-list"
@@ -14652,6 +16871,10 @@ name="Command-Line_Options"
 <dd>
 <dt><a name="function"
 >function</a></dt>
+
+<dd>
+<dt><a name="alias"
+>alias</a></dt>
 </dl>
 </dd>
 </dl>
@@ -14720,6 +16943,10 @@ name="Command-Line_Options"
 <dd>
 <dt><a name="function"
 >function</a></dt>
+
+<dd>
+<dt><a name="alias"
+>alias</a></dt>
 </dl>
 
 <dt><a name="-rel_field-list"
@@ -14750,6 +16977,10 @@ name="Command-Line_Options"
 <dd>
 <dt><a name="source_id"
 >source_id</a></dt>
+
+<dd>
+<dt><a name="binding_location"
+>binding_location</a></dt>
 </dl>
 </dd>
 </dl>
@@ -14818,6 +17049,10 @@ name="Command-Line_Options"
 <dd>
 <dt><a name="function"
 >function</a></dt>
+
+<dd>
+<dt><a name="alias"
+>alias</a></dt>
 </dl>
 
 <dt><a name="-rel_field-list"
@@ -14864,6 +17099,10 @@ name="Command-Line_Options"
 <dd>
 <dt><a name="function"
 >function</a></dt>
+
+<dd>
+<dt><a name="alias"
+>alias</a></dt>
 </dl>
 </dd>
 </dl>
@@ -14924,8 +17163,16 @@ name="Command-Line_Options"
 >type</a></dt>
 
 <dd>
+<dt><a name="release"
+>release</a></dt>
+
+<dd>
 <dt><a name="family_function"
 >family_function</a></dt>
+
+<dd>
+<dt><a name="alignment"
+>alignment</a></dt>
 </dl>
 
 <dt><a name="-rel_field-list"
@@ -14966,8 +17213,16 @@ name="Command-Line_Options"
 >type</a></dt>
 
 <dd>
+<dt><a name="release"
+>release</a></dt>
+
+<dd>
 <dt><a name="family_function"
 >family_function</a></dt>
+
+<dd>
+<dt><a name="alignment"
+>alignment</a></dt>
 </dl>
 </dd>
 </dl>
@@ -15028,8 +17283,16 @@ name="Command-Line_Options"
 >type</a></dt>
 
 <dd>
+<dt><a name="release"
+>release</a></dt>
+
+<dd>
 <dt><a name="family_function"
 >family_function</a></dt>
+
+<dd>
+<dt><a name="alignment"
+>alignment</a></dt>
 </dl>
 
 <dt><a name="-rel_field-list"
@@ -15070,8 +17333,16 @@ name="Command-Line_Options"
 >type</a></dt>
 
 <dd>
+<dt><a name="release"
+>release</a></dt>
+
+<dd>
 <dt><a name="family_function"
 >family_function</a></dt>
+
+<dd>
+<dt><a name="alignment"
+>alignment</a></dt>
 </dl>
 </dd>
 </dl>
@@ -15953,6 +18224,10 @@ name="Command-Line_Options"
 <dd>
 <dt><a name="function"
 >function</a></dt>
+
+<dd>
+<dt><a name="alias"
+>alias</a></dt>
 </dl>
 
 <dt><a name="-rel_field-list"
@@ -15995,6 +18270,10 @@ name="Command-Line_Options"
 <dd>
 <dt><a name="function"
 >function</a></dt>
+
+<dd>
+<dt><a name="alias"
+>alias</a></dt>
 </dl>
 </dd>
 </dl>
@@ -16063,6 +18342,10 @@ name="Command-Line_Options"
 <dd>
 <dt><a name="function"
 >function</a></dt>
+
+<dd>
+<dt><a name="alias"
+>alias</a></dt>
 </dl>
 
 <dt><a name="-rel_field-list"
@@ -16151,8 +18434,16 @@ name="Command-Line_Options"
 >type</a></dt>
 
 <dd>
+<dt><a name="release"
+>release</a></dt>
+
+<dd>
 <dt><a name="family_function"
 >family_function</a></dt>
+
+<dd>
+<dt><a name="alignment"
+>alignment</a></dt>
 </dl>
 
 <dt><a name="-rel_field-list"
@@ -16277,6 +18568,10 @@ name="Command-Line_Options"
 <dd>
 <dt><a name="function"
 >function</a></dt>
+
+<dd>
+<dt><a name="alias"
+>alias</a></dt>
 </dl>
 </dd>
 </dl>
@@ -16371,6 +18666,10 @@ name="Command-Line_Options"
 <dd>
 <dt><a name="function"
 >function</a></dt>
+
+<dd>
+<dt><a name="alias"
+>alias</a></dt>
 </dl>
 </dd>
 </dl>
@@ -16469,6 +18768,10 @@ name="Command-Line_Options"
 <dd>
 <dt><a name="function"
 >function</a></dt>
+
+<dd>
+<dt><a name="alias"
+>alias</a></dt>
 </dl>
 </dd>
 </dl>
@@ -16579,6 +18882,116 @@ name="Command-Line_Options"
 <dd>
 <dt><a name="alias"
 >alias</a></dt>
+</dl>
+</dd>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Output_Format"
+>Output Format</a></h3>
+
+<p>The standard output is a tab-delimited file. It consists of the input file with an extra column added for each requested field. Input lines that cannot be extended are written to stderr.</p>
+<hr>
+<a name='___top' class='dummyTopAnchor' ></a>
+
+<h2><a class='u' href='#___top' title='click to go to top of document'
+name="get_relationship_IsImpactedBy"
+>get_relationship_IsImpactedBy</a></h2>
+
+<p>This relationship contains the best scoring statistical correlations between measured traits and the responsible alleles.</p>
+
+<p>Example:</p>
+
+<pre>    get_relationship_IsImpactedBy -a &#60; ids &#62; table.with.fields.added</pre>
+
+<p>would read in a file of ids and add a column for each field in the relationship.</p>
+
+<p>The standard input should be a tab-separated table (i.e., each line is a tab-separated set of fields). Normally, the last field in each line would contain the id. If some other column contains the id, use</p>
+
+<pre>    -c N</pre>
+
+<p>where N is the column (from 1) that contains the id.</p>
+
+<p>This is a pipe command. The input is taken from the standard input, and the output is to the standard output.</p>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Command-Line_Options"
+>Command-Line Options</a></h3>
+
+<dl>
+<dt><a name="-c_Column"
+>-c Column</a></dt>
+
+<dd>
+<p>This is used only if the column containing id is not the last.</p>
+
+<dt><a name="-from_field-list"
+>-from field-list</a></dt>
+
+<dd>
+<p>Choose a set of fields from the Variation entity to return. Field-list is a comma-separated list of strings. The following fields are available:</p>
+
+<dl>
+<dt><a name="id"
+>id</a></dt>
+
+<dd>
+<dt><a name="position"
+>position</a></dt>
+
+<dd>
+<dt><a name="value"
+>value</a></dt>
+</dl>
+
+<dt><a name="-rel_field-list"
+>-rel field-list</a></dt>
+
+<dd>
+<p>Choose a set of fields from the relationship to return. Field-list is a comma-separated list of strings. The following fields are available:</p>
+
+<dl>
+<dt><a name="from_link"
+>from_link</a></dt>
+
+<dd>
+<dt><a name="to_link"
+>to_link</a></dt>
+
+<dd>
+<dt><a name="value"
+>value</a></dt>
+
+<dd>
+<dt><a name="statistic_type"
+>statistic_type</a></dt>
+</dl>
+
+<dt><a name="-to_field-list"
+>-to field-list</a></dt>
+
+<dd>
+<p>Choose a set of fields from the Trait entity to return. Field-list is a comma-separated list of strings. The following fields are available:</p>
+
+<dl>
+<dt><a name="id"
+>id</a></dt>
+
+<dd>
+<dt><a name="trait_name"
+>trait_name</a></dt>
+
+<dd>
+<dt><a name="unit_of_measure"
+>unit_of_measure</a></dt>
+
+<dd>
+<dt><a name="TO_ID"
+>TO_ID</a></dt>
+
+<dd>
+<dt><a name="protocol"
+>protocol</a></dt>
 </dl>
 </dd>
 </dl>
@@ -17108,6 +19521,10 @@ name="Command-Line_Options"
 <dd>
 <dt><a name="function"
 >function</a></dt>
+
+<dd>
+<dt><a name="alias"
+>alias</a></dt>
 </dl>
 
 <dt><a name="-rel_field-list"
@@ -17635,6 +20052,128 @@ name="Output_Format"
 <a name='___top' class='dummyTopAnchor' ></a>
 
 <h2><a class='u' href='#___top' title='click to go to top of document'
+name="get_relationship_IsLocated"
+>get_relationship_IsLocated</a></h2>
+
+<p>This relationship associates observational units with the geographic location where the unit is planted.</p>
+
+<p>Example:</p>
+
+<pre>    get_relationship_IsLocated -a &#60; ids &#62; table.with.fields.added</pre>
+
+<p>would read in a file of ids and add a column for each field in the relationship.</p>
+
+<p>The standard input should be a tab-separated table (i.e., each line is a tab-separated set of fields). Normally, the last field in each line would contain the id. If some other column contains the id, use</p>
+
+<pre>    -c N</pre>
+
+<p>where N is the column (from 1) that contains the id.</p>
+
+<p>This is a pipe command. The input is taken from the standard input, and the output is to the standard output.</p>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Command-Line_Options"
+>Command-Line Options</a></h3>
+
+<dl>
+<dt><a name="-c_Column"
+>-c Column</a></dt>
+
+<dd>
+<p>This is used only if the column containing id is not the last.</p>
+
+<dt><a name="-from_field-list"
+>-from field-list</a></dt>
+
+<dd>
+<p>Choose a set of fields from the Locality entity to return. Field-list is a comma-separated list of strings. The following fields are available:</p>
+
+<dl>
+<dt><a name="id"
+>id</a></dt>
+
+<dd>
+<dt><a name="source_name"
+>source_name</a></dt>
+
+<dd>
+<dt><a name="city"
+>city</a></dt>
+
+<dd>
+<dt><a name="state"
+>state</a></dt>
+
+<dd>
+<dt><a name="country"
+>country</a></dt>
+
+<dd>
+<dt><a name="origcty"
+>origcty</a></dt>
+
+<dd>
+<dt><a name="elevation"
+>elevation</a></dt>
+
+<dd>
+<dt><a name="latitude"
+>latitude</a></dt>
+
+<dd>
+<dt><a name="longitude"
+>longitude</a></dt>
+
+<dd>
+<dt><a name="lo_accession"
+>lo_accession</a></dt>
+</dl>
+
+<dt><a name="-rel_field-list"
+>-rel field-list</a></dt>
+
+<dd>
+<p>Choose a set of fields from the relationship to return. Field-list is a comma-separated list of strings. The following fields are available:</p>
+
+<dl>
+<dt><a name="from_link"
+>from_link</a></dt>
+
+<dd>
+<dt><a name="to_link"
+>to_link</a></dt>
+</dl>
+
+<dt><a name="-to_field-list"
+>-to field-list</a></dt>
+
+<dd>
+<p>Choose a set of fields from the ObservationalUnit entity to return. Field-list is a comma-separated list of strings. The following fields are available:</p>
+
+<dl>
+<dt><a name="id"
+>id</a></dt>
+
+<dd>
+<dt><a name="source_name"
+>source_name</a></dt>
+
+<dd>
+<dt><a name="source_name2"
+>source_name2</a></dt>
+</dl>
+</dd>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Output_Format"
+>Output Format</a></h3>
+
+<p>The standard output is a tab-delimited file. It consists of the input file with an extra column added for each requested field. Input lines that cannot be extended are written to stderr.</p>
+<hr>
+<a name='___top' class='dummyTopAnchor' ></a>
+
+<h2><a class='u' href='#___top' title='click to go to top of document'
 name="get_relationship_IsLocatedIn"
 >get_relationship_IsLocatedIn</a></h2>
 
@@ -17699,6 +20238,10 @@ name="Command-Line_Options"
 <dd>
 <dt><a name="function"
 >function</a></dt>
+
+<dd>
+<dt><a name="alias"
+>alias</a></dt>
 </dl>
 
 <dt><a name="-rel_field-list"
@@ -17745,6 +20288,96 @@ name="Command-Line_Options"
 <dd>
 <dt><a name="source_id"
 >source_id</a></dt>
+</dl>
+</dd>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Output_Format"
+>Output Format</a></h3>
+
+<p>The standard output is a tab-delimited file. It consists of the input file with an extra column added for each requested field. Input lines that cannot be extended are written to stderr.</p>
+<hr>
+<a name='___top' class='dummyTopAnchor' ></a>
+
+<h2><a class='u' href='#___top' title='click to go to top of document'
+name="get_relationship_IsLocatedOn"
+>get_relationship_IsLocatedOn</a></h2>
+
+<p>This relationship associates variations with the reference contig.</p>
+
+<p>Example:</p>
+
+<pre>    get_relationship_IsLocatedOn -a &#60; ids &#62; table.with.fields.added</pre>
+
+<p>would read in a file of ids and add a column for each field in the relationship.</p>
+
+<p>The standard input should be a tab-separated table (i.e., each line is a tab-separated set of fields). Normally, the last field in each line would contain the id. If some other column contains the id, use</p>
+
+<pre>    -c N</pre>
+
+<p>where N is the column (from 1) that contains the id.</p>
+
+<p>This is a pipe command. The input is taken from the standard input, and the output is to the standard output.</p>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Command-Line_Options"
+>Command-Line Options</a></h3>
+
+<dl>
+<dt><a name="-c_Column"
+>-c Column</a></dt>
+
+<dd>
+<p>This is used only if the column containing id is not the last.</p>
+
+<dt><a name="-from_field-list"
+>-from field-list</a></dt>
+
+<dd>
+<p>Choose a set of fields from the Contig entity to return. Field-list is a comma-separated list of strings. The following fields are available:</p>
+
+<dl>
+<dt><a name="id"
+>id</a></dt>
+
+<dd>
+<dt><a name="source_id"
+>source_id</a></dt>
+</dl>
+
+<dt><a name="-rel_field-list"
+>-rel field-list</a></dt>
+
+<dd>
+<p>Choose a set of fields from the relationship to return. Field-list is a comma-separated list of strings. The following fields are available:</p>
+
+<dl>
+<dt><a name="from_link"
+>from_link</a></dt>
+
+<dd>
+<dt><a name="to_link"
+>to_link</a></dt>
+</dl>
+
+<dt><a name="-to_field-list"
+>-to field-list</a></dt>
+
+<dd>
+<p>Choose a set of fields from the Variation entity to return. Field-list is a comma-separated list of strings. The following fields are available:</p>
+
+<dl>
+<dt><a name="id"
+>id</a></dt>
+
+<dd>
+<dt><a name="position"
+>position</a></dt>
+
+<dd>
+<dt><a name="value"
+>value</a></dt>
 </dl>
 </dd>
 </dl>
@@ -17822,6 +20455,10 @@ name="Command-Line_Options"
 <dd>
 <dt><a name="function"
 >function</a></dt>
+
+<dd>
+<dt><a name="alias"
+>alias</a></dt>
 </dl>
 
 <dt><a name="-rel_field-list"
@@ -18046,8 +20683,16 @@ name="Command-Line_Options"
 >type</a></dt>
 
 <dd>
+<dt><a name="release"
+>release</a></dt>
+
+<dd>
 <dt><a name="family_function"
 >family_function</a></dt>
+
+<dd>
+<dt><a name="alignment"
+>alignment</a></dt>
 </dl>
 
 <dt><a name="-rel_field-list"
@@ -18090,6 +20735,10 @@ name="Command-Line_Options"
 <dd>
 <dt><a name="function"
 >function</a></dt>
+
+<dd>
+<dt><a name="alias"
+>alias</a></dt>
 </dl>
 </dd>
 </dl>
@@ -18493,6 +21142,10 @@ name="Command-Line_Options"
 <dd>
 <dt><a name="function"
 >function</a></dt>
+
+<dd>
+<dt><a name="alias"
+>alias</a></dt>
 </dl>
 </dd>
 </dl>
@@ -18641,6 +21294,10 @@ name="Command-Line_Options"
 <dd>
 <dt><a name="function"
 >function</a></dt>
+
+<dd>
+<dt><a name="alias"
+>alias</a></dt>
 </dl>
 </dd>
 </dl>
@@ -18712,6 +21369,10 @@ name="Command-Line_Options"
 <dd>
 <dt><a name="function"
 >function</a></dt>
+
+<dd>
+<dt><a name="alias"
+>alias</a></dt>
 </dl>
 
 <dt><a name="-rel_field-list"
@@ -18864,6 +21525,104 @@ name="Command-Line_Options"
 <dd>
 <dt><a name="transport_coefficient"
 >transport_coefficient</a></dt>
+</dl>
+</dd>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Output_Format"
+>Output Format</a></h3>
+
+<p>The standard output is a tab-delimited file. It consists of the input file with an extra column added for each requested field. Input lines that cannot be extended are written to stderr.</p>
+<hr>
+<a name='___top' class='dummyTopAnchor' ></a>
+
+<h2><a class='u' href='#___top' title='click to go to top of document'
+name="get_relationship_IsPartOf"
+>get_relationship_IsPartOf</a></h2>
+
+<p>This relationship associates observational units with the geographic location where the unit is planted.</p>
+
+<p>Example:</p>
+
+<pre>    get_relationship_IsPartOf -a &#60; ids &#62; table.with.fields.added</pre>
+
+<p>would read in a file of ids and add a column for each field in the relationship.</p>
+
+<p>The standard input should be a tab-separated table (i.e., each line is a tab-separated set of fields). Normally, the last field in each line would contain the id. If some other column contains the id, use</p>
+
+<pre>    -c N</pre>
+
+<p>where N is the column (from 1) that contains the id.</p>
+
+<p>This is a pipe command. The input is taken from the standard input, and the output is to the standard output.</p>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Command-Line_Options"
+>Command-Line Options</a></h3>
+
+<dl>
+<dt><a name="-c_Column"
+>-c Column</a></dt>
+
+<dd>
+<p>This is used only if the column containing id is not the last.</p>
+
+<dt><a name="-from_field-list"
+>-from field-list</a></dt>
+
+<dd>
+<p>Choose a set of fields from the StudyExperiment entity to return. Field-list is a comma-separated list of strings. The following fields are available:</p>
+
+<dl>
+<dt><a name="id"
+>id</a></dt>
+
+<dd>
+<dt><a name="source_name"
+>source_name</a></dt>
+
+<dd>
+<dt><a name="design"
+>design</a></dt>
+
+<dd>
+<dt><a name="originator"
+>originator</a></dt>
+</dl>
+
+<dt><a name="-rel_field-list"
+>-rel field-list</a></dt>
+
+<dd>
+<p>Choose a set of fields from the relationship to return. Field-list is a comma-separated list of strings. The following fields are available:</p>
+
+<dl>
+<dt><a name="from_link"
+>from_link</a></dt>
+
+<dd>
+<dt><a name="to_link"
+>to_link</a></dt>
+</dl>
+
+<dt><a name="-to_field-list"
+>-to field-list</a></dt>
+
+<dd>
+<p>Choose a set of fields from the ObservationalUnit entity to return. Field-list is a comma-separated list of strings. The following fields are available:</p>
+
+<dl>
+<dt><a name="id"
+>id</a></dt>
+
+<dd>
+<dt><a name="source_name"
+>source_name</a></dt>
+
+<dd>
+<dt><a name="source_name2"
+>source_name2</a></dt>
 </dl>
 </dd>
 </dl>
@@ -19308,6 +22067,114 @@ name="Command-Line_Options"
 <dd>
 <dt><a name="function"
 >function</a></dt>
+
+<dd>
+<dt><a name="alias"
+>alias</a></dt>
+</dl>
+</dd>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Output_Format"
+>Output Format</a></h3>
+
+<p>The standard output is a tab-delimited file. It consists of the input file with an extra column added for each requested field. Input lines that cannot be extended are written to stderr.</p>
+<hr>
+<a name='___top' class='dummyTopAnchor' ></a>
+
+<h2><a class='u' href='#___top' title='click to go to top of document'
+name="get_relationship_IsProteinMemberOf"
+>get_relationship_IsProteinMemberOf</a></h2>
+
+<p>This relationship connects each feature family to its constituent protein sequences.
+A family always has many protein sequences,
+and a single sequence can be found in many families.</p>
+
+<p>Example:</p>
+
+<pre>    get_relationship_IsProteinMemberOf -a &#60; ids &#62; table.with.fields.added</pre>
+
+<p>would read in a file of ids and add a column for each field in the relationship.</p>
+
+<p>The standard input should be a tab-separated table (i.e., each line is a tab-separated set of fields). Normally, the last field in each line would contain the id. If some other column contains the id, use</p>
+
+<pre>    -c N</pre>
+
+<p>where N is the column (from 1) that contains the id.</p>
+
+<p>This is a pipe command. The input is taken from the standard input, and the output is to the standard output.</p>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Command-Line_Options"
+>Command-Line Options</a></h3>
+
+<dl>
+<dt><a name="-c_Column"
+>-c Column</a></dt>
+
+<dd>
+<p>This is used only if the column containing id is not the last.</p>
+
+<dt><a name="-from_field-list"
+>-from field-list</a></dt>
+
+<dd>
+<p>Choose a set of fields from the Family entity to return. Field-list is a comma-separated list of strings. The following fields are available:</p>
+
+<dl>
+<dt><a name="id"
+>id</a></dt>
+
+<dd>
+<dt><a name="type"
+>type</a></dt>
+
+<dd>
+<dt><a name="release"
+>release</a></dt>
+
+<dd>
+<dt><a name="family_function"
+>family_function</a></dt>
+
+<dd>
+<dt><a name="alignment"
+>alignment</a></dt>
+</dl>
+
+<dt><a name="-rel_field-list"
+>-rel field-list</a></dt>
+
+<dd>
+<p>Choose a set of fields from the relationship to return. Field-list is a comma-separated list of strings. The following fields are available:</p>
+
+<dl>
+<dt><a name="from_link"
+>from_link</a></dt>
+
+<dd>
+<dt><a name="to_link"
+>to_link</a></dt>
+
+<dd>
+<dt><a name="source_id"
+>source_id</a></dt>
+</dl>
+
+<dt><a name="-to_field-list"
+>-to field-list</a></dt>
+
+<dd>
+<p>Choose a set of fields from the ProteinSequence entity to return. Field-list is a comma-separated list of strings. The following fields are available:</p>
+
+<dl>
+<dt><a name="id"
+>id</a></dt>
+
+<dd>
+<dt><a name="sequence"
+>sequence</a></dt>
 </dl>
 </dd>
 </dl>
@@ -19433,6 +22300,145 @@ name="Output_Format"
 <a name='___top' class='dummyTopAnchor' ></a>
 
 <h2><a class='u' href='#___top' title='click to go to top of document'
+name="get_relationship_IsReferencedBy"
+>get_relationship_IsReferencedBy</a></h2>
+
+<p>This relationship associates observational units with the reference genome that it will be compared to.
+All variations will be differences between the observational unit and the reference.</p>
+
+<p>Example:</p>
+
+<pre>    get_relationship_IsReferencedBy -a &#60; ids &#62; table.with.fields.added</pre>
+
+<p>would read in a file of ids and add a column for each field in the relationship.</p>
+
+<p>The standard input should be a tab-separated table (i.e., each line is a tab-separated set of fields). Normally, the last field in each line would contain the id. If some other column contains the id, use</p>
+
+<pre>    -c N</pre>
+
+<p>where N is the column (from 1) that contains the id.</p>
+
+<p>This is a pipe command. The input is taken from the standard input, and the output is to the standard output.</p>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Command-Line_Options"
+>Command-Line Options</a></h3>
+
+<dl>
+<dt><a name="-c_Column"
+>-c Column</a></dt>
+
+<dd>
+<p>This is used only if the column containing id is not the last.</p>
+
+<dt><a name="-from_field-list"
+>-from field-list</a></dt>
+
+<dd>
+<p>Choose a set of fields from the Genome entity to return. Field-list is a comma-separated list of strings. The following fields are available:</p>
+
+<dl>
+<dt><a name="id"
+>id</a></dt>
+
+<dd>
+<dt><a name="pegs"
+>pegs</a></dt>
+
+<dd>
+<dt><a name="rnas"
+>rnas</a></dt>
+
+<dd>
+<dt><a name="scientific_name"
+>scientific_name</a></dt>
+
+<dd>
+<dt><a name="complete"
+>complete</a></dt>
+
+<dd>
+<dt><a name="prokaryotic"
+>prokaryotic</a></dt>
+
+<dd>
+<dt><a name="dna_size"
+>dna_size</a></dt>
+
+<dd>
+<dt><a name="contigs"
+>contigs</a></dt>
+
+<dd>
+<dt><a name="domain"
+>domain</a></dt>
+
+<dd>
+<dt><a name="genetic_code"
+>genetic_code</a></dt>
+
+<dd>
+<dt><a name="gc_content"
+>gc_content</a></dt>
+
+<dd>
+<dt><a name="phenotype"
+>phenotype</a></dt>
+
+<dd>
+<dt><a name="md5"
+>md5</a></dt>
+
+<dd>
+<dt><a name="source_id"
+>source_id</a></dt>
+</dl>
+
+<dt><a name="-rel_field-list"
+>-rel field-list</a></dt>
+
+<dd>
+<p>Choose a set of fields from the relationship to return. Field-list is a comma-separated list of strings. The following fields are available:</p>
+
+<dl>
+<dt><a name="from_link"
+>from_link</a></dt>
+
+<dd>
+<dt><a name="to_link"
+>to_link</a></dt>
+</dl>
+
+<dt><a name="-to_field-list"
+>-to field-list</a></dt>
+
+<dd>
+<p>Choose a set of fields from the ObservationalUnit entity to return. Field-list is a comma-separated list of strings. The following fields are available:</p>
+
+<dl>
+<dt><a name="id"
+>id</a></dt>
+
+<dd>
+<dt><a name="source_name"
+>source_name</a></dt>
+
+<dd>
+<dt><a name="source_name2"
+>source_name2</a></dt>
+</dl>
+</dd>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Output_Format"
+>Output Format</a></h3>
+
+<p>The standard output is a tab-delimited file. It consists of the input file with an extra column added for each requested field. Input lines that cannot be extended are written to stderr.</p>
+<hr>
+<a name='___top' class='dummyTopAnchor' ></a>
+
+<h2><a class='u' href='#___top' title='click to go to top of document'
 name="get_relationship_IsRegulatedIn"
 >get_relationship_IsRegulatedIn</a></h2>
 
@@ -19488,6 +22494,10 @@ name="Command-Line_Options"
 <dd>
 <dt><a name="function"
 >function</a></dt>
+
+<dd>
+<dt><a name="alias"
+>alias</a></dt>
 </dl>
 
 <dt><a name="-rel_field-list"
@@ -19518,6 +22528,10 @@ name="Command-Line_Options"
 <dd>
 <dt><a name="source_id"
 >source_id</a></dt>
+
+<dd>
+<dt><a name="binding_location"
+>binding_location</a></dt>
 </dl>
 </dd>
 </dl>
@@ -19586,6 +22600,10 @@ name="Command-Line_Options"
 <dd>
 <dt><a name="function"
 >function</a></dt>
+
+<dd>
+<dt><a name="alias"
+>alias</a></dt>
 </dl>
 
 <dt><a name="-rel_field-list"
@@ -19616,6 +22634,10 @@ name="Command-Line_Options"
 <dd>
 <dt><a name="source_id"
 >source_id</a></dt>
+
+<dd>
+<dt><a name="binding_location"
+>binding_location</a></dt>
 </dl>
 </dd>
 </dl>
@@ -19867,6 +22889,111 @@ name="Output_Format"
 <a name='___top' class='dummyTopAnchor' ></a>
 
 <h2><a class='u' href='#___top' title='click to go to top of document'
+name="get_relationship_IsRepresentedBy"
+>get_relationship_IsRepresentedBy</a></h2>
+
+<p>This relationship associates observational units with a genus,
+species,
+strain,
+and/or variety that was the source material.</p>
+
+<p>Example:</p>
+
+<pre>    get_relationship_IsRepresentedBy -a &#60; ids &#62; table.with.fields.added</pre>
+
+<p>would read in a file of ids and add a column for each field in the relationship.</p>
+
+<p>The standard input should be a tab-separated table (i.e., each line is a tab-separated set of fields). Normally, the last field in each line would contain the id. If some other column contains the id, use</p>
+
+<pre>    -c N</pre>
+
+<p>where N is the column (from 1) that contains the id.</p>
+
+<p>This is a pipe command. The input is taken from the standard input, and the output is to the standard output.</p>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Command-Line_Options"
+>Command-Line Options</a></h3>
+
+<dl>
+<dt><a name="-c_Column"
+>-c Column</a></dt>
+
+<dd>
+<p>This is used only if the column containing id is not the last.</p>
+
+<dt><a name="-from_field-list"
+>-from field-list</a></dt>
+
+<dd>
+<p>Choose a set of fields from the TaxonomicGrouping entity to return. Field-list is a comma-separated list of strings. The following fields are available:</p>
+
+<dl>
+<dt><a name="id"
+>id</a></dt>
+
+<dd>
+<dt><a name="domain"
+>domain</a></dt>
+
+<dd>
+<dt><a name="hidden"
+>hidden</a></dt>
+
+<dd>
+<dt><a name="scientific_name"
+>scientific_name</a></dt>
+
+<dd>
+<dt><a name="alias"
+>alias</a></dt>
+</dl>
+
+<dt><a name="-rel_field-list"
+>-rel field-list</a></dt>
+
+<dd>
+<p>Choose a set of fields from the relationship to return. Field-list is a comma-separated list of strings. The following fields are available:</p>
+
+<dl>
+<dt><a name="from_link"
+>from_link</a></dt>
+
+<dd>
+<dt><a name="to_link"
+>to_link</a></dt>
+</dl>
+
+<dt><a name="-to_field-list"
+>-to field-list</a></dt>
+
+<dd>
+<p>Choose a set of fields from the ObservationalUnit entity to return. Field-list is a comma-separated list of strings. The following fields are available:</p>
+
+<dl>
+<dt><a name="id"
+>id</a></dt>
+
+<dd>
+<dt><a name="source_name"
+>source_name</a></dt>
+
+<dd>
+<dt><a name="source_name2"
+>source_name2</a></dt>
+</dl>
+</dd>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Output_Format"
+>Output Format</a></h3>
+
+<p>The standard output is a tab-delimited file. It consists of the input file with an extra column added for each requested field. Input lines that cannot be extended are written to stderr.</p>
+<hr>
+<a name='___top' class='dummyTopAnchor' ></a>
+
+<h2><a class='u' href='#___top' title='click to go to top of document'
 name="get_relationship_IsRepresentedIn"
 >get_relationship_IsRepresentedIn</a></h2>
 
@@ -19992,8 +23119,16 @@ name="Command-Line_Options"
 >type</a></dt>
 
 <dd>
+<dt><a name="release"
+>release</a></dt>
+
+<dd>
 <dt><a name="family_function"
 >family_function</a></dt>
+
+<dd>
+<dt><a name="alignment"
+>alignment</a></dt>
 </dl>
 </dd>
 </dl>
@@ -22088,6 +25223,100 @@ name="Output_Format"
 <a name='___top' class='dummyTopAnchor' ></a>
 
 <h2><a class='u' href='#___top' title='click to go to top of document'
+name="get_relationship_IsVariantOf"
+>get_relationship_IsVariantOf</a></h2>
+
+<p>This relationship associates observational units with the variations that have been determined by assay.</p>
+
+<p>Example:</p>
+
+<pre>    get_relationship_IsVariantOf -a &#60; ids &#62; table.with.fields.added</pre>
+
+<p>would read in a file of ids and add a column for each field in the relationship.</p>
+
+<p>The standard input should be a tab-separated table (i.e., each line is a tab-separated set of fields). Normally, the last field in each line would contain the id. If some other column contains the id, use</p>
+
+<pre>    -c N</pre>
+
+<p>where N is the column (from 1) that contains the id.</p>
+
+<p>This is a pipe command. The input is taken from the standard input, and the output is to the standard output.</p>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Command-Line_Options"
+>Command-Line Options</a></h3>
+
+<dl>
+<dt><a name="-c_Column"
+>-c Column</a></dt>
+
+<dd>
+<p>This is used only if the column containing id is not the last.</p>
+
+<dt><a name="-from_field-list"
+>-from field-list</a></dt>
+
+<dd>
+<p>Choose a set of fields from the ObservationalUnit entity to return. Field-list is a comma-separated list of strings. The following fields are available:</p>
+
+<dl>
+<dt><a name="id"
+>id</a></dt>
+
+<dd>
+<dt><a name="source_name"
+>source_name</a></dt>
+
+<dd>
+<dt><a name="source_name2"
+>source_name2</a></dt>
+</dl>
+
+<dt><a name="-rel_field-list"
+>-rel field-list</a></dt>
+
+<dd>
+<p>Choose a set of fields from the relationship to return. Field-list is a comma-separated list of strings. The following fields are available:</p>
+
+<dl>
+<dt><a name="from_link"
+>from_link</a></dt>
+
+<dd>
+<dt><a name="to_link"
+>to_link</a></dt>
+</dl>
+
+<dt><a name="-to_field-list"
+>-to field-list</a></dt>
+
+<dd>
+<p>Choose a set of fields from the Variation entity to return. Field-list is a comma-separated list of strings. The following fields are available:</p>
+
+<dl>
+<dt><a name="id"
+>id</a></dt>
+
+<dd>
+<dt><a name="position"
+>position</a></dt>
+
+<dd>
+<dt><a name="value"
+>value</a></dt>
+</dl>
+</dd>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Output_Format"
+>Output Format</a></h3>
+
+<p>The standard output is a tab-delimited file. It consists of the input file with an extra column added for each requested field. Input lines that cannot be extended are written to stderr.</p>
+<hr>
+<a name='___top' class='dummyTopAnchor' ></a>
+
+<h2><a class='u' href='#___top' title='click to go to top of document'
 name="get_relationship_Manages"
 >get_relationship_Manages</a></h2>
 
@@ -22193,6 +25422,116 @@ name="Command-Line_Options"
 <dd>
 <dt><a name="name"
 >name</a></dt>
+</dl>
+</dd>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Output_Format"
+>Output Format</a></h3>
+
+<p>The standard output is a tab-delimited file. It consists of the input file with an extra column added for each requested field. Input lines that cannot be extended are written to stderr.</p>
+<hr>
+<a name='___top' class='dummyTopAnchor' ></a>
+
+<h2><a class='u' href='#___top' title='click to go to top of document'
+name="get_relationship_Measures"
+>get_relationship_Measures</a></h2>
+
+<p>This relationship contains the measurement values of a trait on a specific observational Unit</p>
+
+<p>Example:</p>
+
+<pre>    get_relationship_Measures -a &#60; ids &#62; table.with.fields.added</pre>
+
+<p>would read in a file of ids and add a column for each field in the relationship.</p>
+
+<p>The standard input should be a tab-separated table (i.e., each line is a tab-separated set of fields). Normally, the last field in each line would contain the id. If some other column contains the id, use</p>
+
+<pre>    -c N</pre>
+
+<p>where N is the column (from 1) that contains the id.</p>
+
+<p>This is a pipe command. The input is taken from the standard input, and the output is to the standard output.</p>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Command-Line_Options"
+>Command-Line Options</a></h3>
+
+<dl>
+<dt><a name="-c_Column"
+>-c Column</a></dt>
+
+<dd>
+<p>This is used only if the column containing id is not the last.</p>
+
+<dt><a name="-from_field-list"
+>-from field-list</a></dt>
+
+<dd>
+<p>Choose a set of fields from the ObservationalUnit entity to return. Field-list is a comma-separated list of strings. The following fields are available:</p>
+
+<dl>
+<dt><a name="id"
+>id</a></dt>
+
+<dd>
+<dt><a name="source_name"
+>source_name</a></dt>
+
+<dd>
+<dt><a name="source_name2"
+>source_name2</a></dt>
+</dl>
+
+<dt><a name="-rel_field-list"
+>-rel field-list</a></dt>
+
+<dd>
+<p>Choose a set of fields from the relationship to return. Field-list is a comma-separated list of strings. The following fields are available:</p>
+
+<dl>
+<dt><a name="from_link"
+>from_link</a></dt>
+
+<dd>
+<dt><a name="to_link"
+>to_link</a></dt>
+
+<dd>
+<dt><a name="value"
+>value</a></dt>
+
+<dd>
+<dt><a name="statistic_type"
+>statistic_type</a></dt>
+</dl>
+
+<dt><a name="-to_field-list"
+>-to field-list</a></dt>
+
+<dd>
+<p>Choose a set of fields from the Trait entity to return. Field-list is a comma-separated list of strings. The following fields are available:</p>
+
+<dl>
+<dt><a name="id"
+>id</a></dt>
+
+<dd>
+<dt><a name="trait_name"
+>trait_name</a></dt>
+
+<dd>
+<dt><a name="unit_of_measure"
+>unit_of_measure</a></dt>
+
+<dd>
+<dt><a name="TO_ID"
+>TO_ID</a></dt>
+
+<dd>
+<dt><a name="protocol"
+>protocol</a></dt>
 </dl>
 </dd>
 </dl>
@@ -23104,6 +26443,10 @@ name="Command-Line_Options"
 <dd>
 <dt><a name="function"
 >function</a></dt>
+
+<dd>
+<dt><a name="alias"
+>alias</a></dt>
 </dl>
 </dd>
 </dl>
@@ -23572,6 +26915,101 @@ name="Output_Format"
 <a name='___top' class='dummyTopAnchor' ></a>
 
 <h2><a class='u' href='#___top' title='click to go to top of document'
+name="get_relationship_ResultsIn"
+>get_relationship_ResultsIn</a></h2>
+
+<p>This relationship defines the assay design that resulted in the determination of the variation.
+One assay can result in the discovery of many variations.</p>
+
+<p>Example:</p>
+
+<pre>    get_relationship_ResultsIn -a &#60; ids &#62; table.with.fields.added</pre>
+
+<p>would read in a file of ids and add a column for each field in the relationship.</p>
+
+<p>The standard input should be a tab-separated table (i.e., each line is a tab-separated set of fields). Normally, the last field in each line would contain the id. If some other column contains the id, use</p>
+
+<pre>    -c N</pre>
+
+<p>where N is the column (from 1) that contains the id.</p>
+
+<p>This is a pipe command. The input is taken from the standard input, and the output is to the standard output.</p>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Command-Line_Options"
+>Command-Line Options</a></h3>
+
+<dl>
+<dt><a name="-c_Column"
+>-c Column</a></dt>
+
+<dd>
+<p>This is used only if the column containing id is not the last.</p>
+
+<dt><a name="-from_field-list"
+>-from field-list</a></dt>
+
+<dd>
+<p>Choose a set of fields from the Assay entity to return. Field-list is a comma-separated list of strings. The following fields are available:</p>
+
+<dl>
+<dt><a name="id"
+>id</a></dt>
+
+<dd>
+<dt><a name="assay_type"
+>assay_type</a></dt>
+
+<dd>
+<dt><a name="positions"
+>positions</a></dt>
+</dl>
+
+<dt><a name="-rel_field-list"
+>-rel field-list</a></dt>
+
+<dd>
+<p>Choose a set of fields from the relationship to return. Field-list is a comma-separated list of strings. The following fields are available:</p>
+
+<dl>
+<dt><a name="from_link"
+>from_link</a></dt>
+
+<dd>
+<dt><a name="to_link"
+>to_link</a></dt>
+</dl>
+
+<dt><a name="-to_field-list"
+>-to field-list</a></dt>
+
+<dd>
+<p>Choose a set of fields from the Variation entity to return. Field-list is a comma-separated list of strings. The following fields are available:</p>
+
+<dl>
+<dt><a name="id"
+>id</a></dt>
+
+<dd>
+<dt><a name="position"
+>position</a></dt>
+
+<dd>
+<dt><a name="value"
+>value</a></dt>
+</dl>
+</dd>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Output_Format"
+>Output Format</a></h3>
+
+<p>The standard output is a tab-delimited file. It consists of the input file with an extra column added for each requested field. Input lines that cannot be extended are written to stderr.</p>
+<hr>
+<a name='___top' class='dummyTopAnchor' ></a>
+
+<h2><a class='u' href='#___top' title='click to go to top of document'
 name="get_relationship_RunsByDefaultIn"
 >get_relationship_RunsByDefaultIn</a></h2>
 
@@ -23931,6 +27369,224 @@ name="Command-Line_Options"
 <dd>
 <dt><a name="source_id"
 >source_id</a></dt>
+</dl>
+</dd>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Output_Format"
+>Output Format</a></h3>
+
+<p>The standard output is a tab-delimited file. It consists of the input file with an extra column added for each requested field. Input lines that cannot be extended are written to stderr.</p>
+<hr>
+<a name='___top' class='dummyTopAnchor' ></a>
+
+<h2><a class='u' href='#___top' title='click to go to top of document'
+name="get_relationship_SummarizedBy"
+>get_relationship_SummarizedBy</a></h2>
+
+<p>This relationship associates observational units with a genus,
+species,
+strain,
+and/or variety that was the source material.</p>
+
+<p>Example:</p>
+
+<pre>    get_relationship_SummarizedBy -a &#60; ids &#62; table.with.fields.added</pre>
+
+<p>would read in a file of ids and add a column for each field in the relationship.</p>
+
+<p>The standard input should be a tab-separated table (i.e., each line is a tab-separated set of fields). Normally, the last field in each line would contain the id. If some other column contains the id, use</p>
+
+<pre>    -c N</pre>
+
+<p>where N is the column (from 1) that contains the id.</p>
+
+<p>This is a pipe command. The input is taken from the standard input, and the output is to the standard output.</p>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Command-Line_Options"
+>Command-Line Options</a></h3>
+
+<dl>
+<dt><a name="-c_Column"
+>-c Column</a></dt>
+
+<dd>
+<p>This is used only if the column containing id is not the last.</p>
+
+<dt><a name="-from_field-list"
+>-from field-list</a></dt>
+
+<dd>
+<p>Choose a set of fields from the AlleleFrequency entity to return. Field-list is a comma-separated list of strings. The following fields are available:</p>
+
+<dl>
+<dt><a name="id"
+>id</a></dt>
+
+<dd>
+<dt><a name="position"
+>position</a></dt>
+
+<dd>
+<dt><a name="minor_AF"
+>minor_AF</a></dt>
+
+<dd>
+<dt><a name="minor_allele"
+>minor_allele</a></dt>
+
+<dd>
+<dt><a name="major_AF"
+>major_AF</a></dt>
+
+<dd>
+<dt><a name="major_allele"
+>major_allele</a></dt>
+</dl>
+
+<dt><a name="-rel_field-list"
+>-rel field-list</a></dt>
+
+<dd>
+<p>Choose a set of fields from the relationship to return. Field-list is a comma-separated list of strings. The following fields are available:</p>
+
+<dl>
+<dt><a name="from_link"
+>from_link</a></dt>
+
+<dd>
+<dt><a name="to_link"
+>to_link</a></dt>
+</dl>
+
+<dt><a name="-to_field-list"
+>-to field-list</a></dt>
+
+<dd>
+<p>Choose a set of fields from the Variation entity to return. Field-list is a comma-separated list of strings. The following fields are available:</p>
+
+<dl>
+<dt><a name="id"
+>id</a></dt>
+
+<dd>
+<dt><a name="position"
+>position</a></dt>
+
+<dd>
+<dt><a name="value"
+>value</a></dt>
+</dl>
+</dd>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Output_Format"
+>Output Format</a></h3>
+
+<p>The standard output is a tab-delimited file. It consists of the input file with an extra column added for each requested field. Input lines that cannot be extended are written to stderr.</p>
+<hr>
+<a name='___top' class='dummyTopAnchor' ></a>
+
+<h2><a class='u' href='#___top' title='click to go to top of document'
+name="get_relationship_Summarizes"
+>get_relationship_Summarizes</a></h2>
+
+<p>This relationship associates observational units with a genus,
+species,
+strain,
+and/or variety that was the source material.</p>
+
+<p>Example:</p>
+
+<pre>    get_relationship_Summarizes -a &#60; ids &#62; table.with.fields.added</pre>
+
+<p>would read in a file of ids and add a column for each field in the relationship.</p>
+
+<p>The standard input should be a tab-separated table (i.e., each line is a tab-separated set of fields). Normally, the last field in each line would contain the id. If some other column contains the id, use</p>
+
+<pre>    -c N</pre>
+
+<p>where N is the column (from 1) that contains the id.</p>
+
+<p>This is a pipe command. The input is taken from the standard input, and the output is to the standard output.</p>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Command-Line_Options"
+>Command-Line Options</a></h3>
+
+<dl>
+<dt><a name="-c_Column"
+>-c Column</a></dt>
+
+<dd>
+<p>This is used only if the column containing id is not the last.</p>
+
+<dt><a name="-from_field-list"
+>-from field-list</a></dt>
+
+<dd>
+<p>Choose a set of fields from the AlleleFrequency entity to return. Field-list is a comma-separated list of strings. The following fields are available:</p>
+
+<dl>
+<dt><a name="id"
+>id</a></dt>
+
+<dd>
+<dt><a name="position"
+>position</a></dt>
+
+<dd>
+<dt><a name="minor_AF"
+>minor_AF</a></dt>
+
+<dd>
+<dt><a name="minor_allele"
+>minor_allele</a></dt>
+
+<dd>
+<dt><a name="major_AF"
+>major_AF</a></dt>
+
+<dd>
+<dt><a name="major_allele"
+>major_allele</a></dt>
+</dl>
+
+<dt><a name="-rel_field-list"
+>-rel field-list</a></dt>
+
+<dd>
+<p>Choose a set of fields from the relationship to return. Field-list is a comma-separated list of strings. The following fields are available:</p>
+
+<dl>
+<dt><a name="from_link"
+>from_link</a></dt>
+
+<dd>
+<dt><a name="to_link"
+>to_link</a></dt>
+</dl>
+
+<dt><a name="-to_field-list"
+>-to field-list</a></dt>
+
+<dd>
+<p>Choose a set of fields from the Variation entity to return. Field-list is a comma-separated list of strings. The following fields are available:</p>
+
+<dl>
+<dt><a name="id"
+>id</a></dt>
+
+<dd>
+<dt><a name="position"
+>position</a></dt>
+
+<dd>
+<dt><a name="value"
+>value</a></dt>
 </dl>
 </dd>
 </dl>
@@ -24507,6 +28163,145 @@ name="Output_Format"
 <a name='___top' class='dummyTopAnchor' ></a>
 
 <h2><a class='u' href='#___top' title='click to go to top of document'
+name="get_relationship_UsesReference"
+>get_relationship_UsesReference</a></h2>
+
+<p>This relationship associates observational units with the reference genome that it will be compared to.
+All variations will be differences between the observational unit and the reference.</p>
+
+<p>Example:</p>
+
+<pre>    get_relationship_UsesReference -a &#60; ids &#62; table.with.fields.added</pre>
+
+<p>would read in a file of ids and add a column for each field in the relationship.</p>
+
+<p>The standard input should be a tab-separated table (i.e., each line is a tab-separated set of fields). Normally, the last field in each line would contain the id. If some other column contains the id, use</p>
+
+<pre>    -c N</pre>
+
+<p>where N is the column (from 1) that contains the id.</p>
+
+<p>This is a pipe command. The input is taken from the standard input, and the output is to the standard output.</p>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Command-Line_Options"
+>Command-Line Options</a></h3>
+
+<dl>
+<dt><a name="-c_Column"
+>-c Column</a></dt>
+
+<dd>
+<p>This is used only if the column containing id is not the last.</p>
+
+<dt><a name="-from_field-list"
+>-from field-list</a></dt>
+
+<dd>
+<p>Choose a set of fields from the Genome entity to return. Field-list is a comma-separated list of strings. The following fields are available:</p>
+
+<dl>
+<dt><a name="id"
+>id</a></dt>
+
+<dd>
+<dt><a name="pegs"
+>pegs</a></dt>
+
+<dd>
+<dt><a name="rnas"
+>rnas</a></dt>
+
+<dd>
+<dt><a name="scientific_name"
+>scientific_name</a></dt>
+
+<dd>
+<dt><a name="complete"
+>complete</a></dt>
+
+<dd>
+<dt><a name="prokaryotic"
+>prokaryotic</a></dt>
+
+<dd>
+<dt><a name="dna_size"
+>dna_size</a></dt>
+
+<dd>
+<dt><a name="contigs"
+>contigs</a></dt>
+
+<dd>
+<dt><a name="domain"
+>domain</a></dt>
+
+<dd>
+<dt><a name="genetic_code"
+>genetic_code</a></dt>
+
+<dd>
+<dt><a name="gc_content"
+>gc_content</a></dt>
+
+<dd>
+<dt><a name="phenotype"
+>phenotype</a></dt>
+
+<dd>
+<dt><a name="md5"
+>md5</a></dt>
+
+<dd>
+<dt><a name="source_id"
+>source_id</a></dt>
+</dl>
+
+<dt><a name="-rel_field-list"
+>-rel field-list</a></dt>
+
+<dd>
+<p>Choose a set of fields from the relationship to return. Field-list is a comma-separated list of strings. The following fields are available:</p>
+
+<dl>
+<dt><a name="from_link"
+>from_link</a></dt>
+
+<dd>
+<dt><a name="to_link"
+>to_link</a></dt>
+</dl>
+
+<dt><a name="-to_field-list"
+>-to field-list</a></dt>
+
+<dd>
+<p>Choose a set of fields from the ObservationalUnit entity to return. Field-list is a comma-separated list of strings. The following fields are available:</p>
+
+<dl>
+<dt><a name="id"
+>id</a></dt>
+
+<dd>
+<dt><a name="source_name"
+>source_name</a></dt>
+
+<dd>
+<dt><a name="source_name2"
+>source_name2</a></dt>
+</dl>
+</dd>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Output_Format"
+>Output Format</a></h3>
+
+<p>The standard output is a tab-delimited file. It consists of the input file with an extra column added for each requested field. Input lines that cannot be extended are written to stderr.</p>
+<hr>
+<a name='___top' class='dummyTopAnchor' ></a>
+
+<h2><a class='u' href='#___top' title='click to go to top of document'
 name="get_relationship_Validates"
 >get_relationship_Validates</a></h2>
 
@@ -24623,6 +28418,101 @@ name="Output_Format"
 <a name='___top' class='dummyTopAnchor' ></a>
 
 <h2><a class='u' href='#___top' title='click to go to top of document'
+name="get_relationship_WasDetermiedBy"
+>get_relationship_WasDetermiedBy</a></h2>
+
+<p>This relationship defines the assay design that resulted in the determination of the variation.
+One assay can result in the discovery of many variations.</p>
+
+<p>Example:</p>
+
+<pre>    get_relationship_WasDetermiedBy -a &#60; ids &#62; table.with.fields.added</pre>
+
+<p>would read in a file of ids and add a column for each field in the relationship.</p>
+
+<p>The standard input should be a tab-separated table (i.e., each line is a tab-separated set of fields). Normally, the last field in each line would contain the id. If some other column contains the id, use</p>
+
+<pre>    -c N</pre>
+
+<p>where N is the column (from 1) that contains the id.</p>
+
+<p>This is a pipe command. The input is taken from the standard input, and the output is to the standard output.</p>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Command-Line_Options"
+>Command-Line Options</a></h3>
+
+<dl>
+<dt><a name="-c_Column"
+>-c Column</a></dt>
+
+<dd>
+<p>This is used only if the column containing id is not the last.</p>
+
+<dt><a name="-from_field-list"
+>-from field-list</a></dt>
+
+<dd>
+<p>Choose a set of fields from the Assay entity to return. Field-list is a comma-separated list of strings. The following fields are available:</p>
+
+<dl>
+<dt><a name="id"
+>id</a></dt>
+
+<dd>
+<dt><a name="assay_type"
+>assay_type</a></dt>
+
+<dd>
+<dt><a name="positions"
+>positions</a></dt>
+</dl>
+
+<dt><a name="-rel_field-list"
+>-rel field-list</a></dt>
+
+<dd>
+<p>Choose a set of fields from the relationship to return. Field-list is a comma-separated list of strings. The following fields are available:</p>
+
+<dl>
+<dt><a name="from_link"
+>from_link</a></dt>
+
+<dd>
+<dt><a name="to_link"
+>to_link</a></dt>
+</dl>
+
+<dt><a name="-to_field-list"
+>-to field-list</a></dt>
+
+<dd>
+<p>Choose a set of fields from the Variation entity to return. Field-list is a comma-separated list of strings. The following fields are available:</p>
+
+<dl>
+<dt><a name="id"
+>id</a></dt>
+
+<dd>
+<dt><a name="position"
+>position</a></dt>
+
+<dd>
+<dt><a name="value"
+>value</a></dt>
+</dl>
+</dd>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Output_Format"
+>Output Format</a></h3>
+
+<p>The standard output is a tab-delimited file. It consists of the input file with an extra column added for each requested field. Input lines that cannot be extended are written to stderr.</p>
+<hr>
+<a name='___top' class='dummyTopAnchor' ></a>
+
+<h2><a class='u' href='#___top' title='click to go to top of document'
 name="get_relationship_WasFormulatedBy"
 >get_relationship_WasFormulatedBy</a></h2>
 
@@ -24692,6 +28582,10 @@ name="Command-Line_Options"
 <dd>
 <dt><a name="source_id"
 >source_id</a></dt>
+
+<dd>
+<dt><a name="binding_location"
+>binding_location</a></dt>
 </dl>
 </dd>
 </dl>
@@ -25249,6 +29143,128 @@ name="Output_Format"
 <a name='___top' class='dummyTopAnchor' ></a>
 
 <h2><a class='u' href='#___top' title='click to go to top of document'
+name="query_entity_AlleleFrequency"
+>query_entity_AlleleFrequency</a></h2>
+
+<p>Query the entity AlleleFrequency.</p>
+
+<p>An allele frequency represents a summary of the major and minor allele frequencies for a position on a chromosome.</p>
+
+<p>Example:</p>
+
+<pre>    query_entity_AlleleFrequency -a </pre>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Related_entities"
+>Related entities</a></h3>
+
+<p>The AlleleFrequency entity has the following relationship links:</p>
+
+<dl>
+<dt><a name="Summarizes_Variation"
+>Summarizes Variation</a></dt>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Command-Line_Options"
+>Command-Line Options</a></h3>
+
+<dl>
+<dt><a name="-is_field,value"
+>-is field,value</a></dt>
+
+<dd>
+<p>Limit the results to entities where the given field has the given value.</p>
+
+<dt><a name="-like_field,value"
+>-like field,value</a></dt>
+
+<dd>
+<p>Limit the results to entities where the given field is LIKE (in the sql sense) the given value.</p>
+
+<dt><a name="-op_operator,field,value"
+>-op operator,field,value</a></dt>
+
+<dd>
+<p>Limit the results to entities where the given field is related to the given value based on the given operator.</p>
+
+<p>The operators supported are as follows. We provide text based alternatives to the comparison operators so that extra quoting is not required to keep the command-line shell from confusing them with shell I/O redirection operators.</p>
+
+<dl>
+<dt><a name="&#60;_or_lt"
+>&#60; or lt</a></dt>
+
+<dd>
+<dt><a name="&#62;_or_gt"
+>&#62; or gt</a></dt>
+
+<dd>
+<dt><a name="&#60;=_or_le"
+>&#60;= or le</a></dt>
+
+<dd>
+<dt><a name="&#62;=_or_ge"
+>&#62;= or ge</a></dt>
+
+<dd>
+<dt><a name="="
+>=</a></dt>
+
+<dd>
+<dt><a name="LIKE"
+>LIKE</a></dt>
+</dl>
+
+<dt><a name="-a"
+>-a</a></dt>
+
+<dd>
+<p>Return all fields.</p>
+
+<dt><a name="-h"
+>-h</a></dt>
+
+<dd>
+<p>Display a list of the fields available for use.</p>
+
+<dt><a name="-fields_field-list"
+>-fields field-list</a></dt>
+
+<dd>
+<p>Choose a set of fields to return. Field-list is a comma-separated list of strings. The following fields are available:</p>
+
+<dl>
+<dt><a name="position"
+>position</a></dt>
+
+<dd>
+<dt><a name="minor_AF"
+>minor_AF</a></dt>
+
+<dd>
+<dt><a name="minor_allele"
+>minor_allele</a></dt>
+
+<dd>
+<dt><a name="major_AF"
+>major_AF</a></dt>
+
+<dd>
+<dt><a name="major_allele"
+>major_allele</a></dt>
+</dl>
+</dd>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Output_Format"
+>Output Format</a></h3>
+
+<p>The standard output is a tab-delimited file containing a column for each requested field.</p>
+<hr>
+<a name='___top' class='dummyTopAnchor' ></a>
+
+<h2><a class='u' href='#___top' title='click to go to top of document'
 name="query_entity_Annotation"
 >query_entity_Annotation</a></h2>
 
@@ -25352,6 +29368,116 @@ name="Command-Line_Options"
 <dd>
 <dt><a name="annotation_time"
 >annotation_time</a></dt>
+</dl>
+</dd>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Output_Format"
+>Output Format</a></h3>
+
+<p>The standard output is a tab-delimited file containing a column for each requested field.</p>
+<hr>
+<a name='___top' class='dummyTopAnchor' ></a>
+
+<h2><a class='u' href='#___top' title='click to go to top of document'
+name="query_entity_Assay"
+>query_entity_Assay</a></h2>
+
+<p>Query the entity Assay.</p>
+
+<p>An assay is an experimental design for determining alleles at specific chromosome positions.</p>
+
+<p>Example:</p>
+
+<pre>    query_entity_Assay -a </pre>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Related_entities"
+>Related entities</a></h3>
+
+<p>The Assay entity has the following relationship links:</p>
+
+<dl>
+<dt><a name="ResultsIn_Variation"
+>ResultsIn Variation</a></dt>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Command-Line_Options"
+>Command-Line Options</a></h3>
+
+<dl>
+<dt><a name="-is_field,value"
+>-is field,value</a></dt>
+
+<dd>
+<p>Limit the results to entities where the given field has the given value.</p>
+
+<dt><a name="-like_field,value"
+>-like field,value</a></dt>
+
+<dd>
+<p>Limit the results to entities where the given field is LIKE (in the sql sense) the given value.</p>
+
+<dt><a name="-op_operator,field,value"
+>-op operator,field,value</a></dt>
+
+<dd>
+<p>Limit the results to entities where the given field is related to the given value based on the given operator.</p>
+
+<p>The operators supported are as follows. We provide text based alternatives to the comparison operators so that extra quoting is not required to keep the command-line shell from confusing them with shell I/O redirection operators.</p>
+
+<dl>
+<dt><a name="&#60;_or_lt"
+>&#60; or lt</a></dt>
+
+<dd>
+<dt><a name="&#62;_or_gt"
+>&#62; or gt</a></dt>
+
+<dd>
+<dt><a name="&#60;=_or_le"
+>&#60;= or le</a></dt>
+
+<dd>
+<dt><a name="&#62;=_or_ge"
+>&#62;= or ge</a></dt>
+
+<dd>
+<dt><a name="="
+>=</a></dt>
+
+<dd>
+<dt><a name="LIKE"
+>LIKE</a></dt>
+</dl>
+
+<dt><a name="-a"
+>-a</a></dt>
+
+<dd>
+<p>Return all fields.</p>
+
+<dt><a name="-h"
+>-h</a></dt>
+
+<dd>
+<p>Display a list of the fields available for use.</p>
+
+<dt><a name="-fields_field-list"
+>-fields field-list</a></dt>
+
+<dd>
+<p>Choose a set of fields to return. Field-list is a comma-separated list of strings. The following fields are available:</p>
+
+<dl>
+<dt><a name="assay_type"
+>assay_type</a></dt>
+
+<dd>
+<dt><a name="positions"
+>positions</a></dt>
 </dl>
 </dd>
 </dl>
@@ -26262,8 +30388,8 @@ name="Related_entities"
 >HasAsSequence ContigSequence</a></dt>
 
 <dd>
-<dt><a name="IsAlignedIn_Variation"
->IsAlignedIn Variation</a></dt>
+<dt><a name="HasVariation_Variation"
+>HasVariation Variation</a></dt>
 
 <dd>
 <dt><a name="IsComponentOf_Genome"
@@ -26598,7 +30724,7 @@ In particular,
 we wish to represent genes that are coregulated using transcription binding sites and corresponding transcription regulatory proteins.
 We represent a coregulated set (which may,
 or may not,
-be considered an atomic regulon) using CoregulatedSet.</p>
+be considered a regulon) using CoregulatedSet.</p>
 
 <p>Example:</p>
 
@@ -26611,10 +30737,6 @@ name="Related_entities"
 <p>The CoregulatedSet entity has the following relationship links:</p>
 
 <dl>
-<dt><a name="IsBoundBy_Feature"
->IsBoundBy Feature</a></dt>
-
-<dd>
 <dt><a name="IsControlledUsing_Feature"
 >IsControlledUsing Feature</a></dt>
 
@@ -26698,6 +30820,10 @@ name="Command-Line_Options"
 <dl>
 <dt><a name="source_id"
 >source_id</a></dt>
+
+<dd>
+<dt><a name="binding_location"
+>binding_location</a></dt>
 </dl>
 </dd>
 </dl>
@@ -27107,6 +31233,10 @@ name="Related_entities"
 >HasMember Feature</a></dt>
 
 <dd>
+<dt><a name="HasProteinMember_ProteinSequence"
+>HasProteinMember ProteinSequence</a></dt>
+
+<dd>
 <dt><a name="IsCoupledTo_Family"
 >IsCoupledTo Family</a></dt>
 
@@ -27196,8 +31326,16 @@ name="Command-Line_Options"
 >type</a></dt>
 
 <dd>
+<dt><a name="release"
+>release</a></dt>
+
+<dd>
 <dt><a name="family_function"
 >family_function</a></dt>
+
+<dd>
+<dt><a name="alignment"
+>alignment</a></dt>
 </dl>
 </dd>
 </dl>
@@ -27266,10 +31404,6 @@ name="Related_entities"
 <dd>
 <dt><a name="IsAnnotatedBy_Annotation"
 >IsAnnotatedBy Annotation</a></dt>
-
-<dd>
-<dt><a name="IsBindingSiteFor_CoregulatedSet"
->IsBindingSiteFor CoregulatedSet</a></dt>
 
 <dd>
 <dt><a name="IsContainedIn_SSCell"
@@ -27399,6 +31533,10 @@ name="Command-Line_Options"
 <dd>
 <dt><a name="function"
 >function</a></dt>
+
+<dd>
+<dt><a name="alias"
+>alias</a></dt>
 </dl>
 </dd>
 </dl>
@@ -27469,6 +31607,10 @@ name="Related_entities"
 <dd>
 <dt><a name="IsOwnerOf_Feature"
 >IsOwnerOf Feature</a></dt>
+
+<dd>
+<dt><a name="IsReferencedBy_ObservationalUnit"
+>IsReferencedBy ObservationalUnit</a></dt>
 
 <dd>
 <dt><a name="Uses_SSRow"
@@ -27717,6 +31859,144 @@ name="Command-Line_Options"
 <dd>
 <dt><a name="natural_form"
 >natural_form</a></dt>
+</dl>
+</dd>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Output_Format"
+>Output Format</a></h3>
+
+<p>The standard output is a tab-delimited file containing a column for each requested field.</p>
+<hr>
+<a name='___top' class='dummyTopAnchor' ></a>
+
+<h2><a class='u' href='#___top' title='click to go to top of document'
+name="query_entity_Locality"
+>query_entity_Locality</a></h2>
+
+<p>Query the entity Locality.</p>
+
+<p>A locality is a geographic location.</p>
+
+<p>Example:</p>
+
+<pre>    query_entity_Locality -a </pre>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Related_entities"
+>Related entities</a></h3>
+
+<p>The Locality entity has the following relationship links:</p>
+
+<dl>
+<dt><a name="HasUnits_ObservationalUnit"
+>HasUnits ObservationalUnit</a></dt>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Command-Line_Options"
+>Command-Line Options</a></h3>
+
+<dl>
+<dt><a name="-is_field,value"
+>-is field,value</a></dt>
+
+<dd>
+<p>Limit the results to entities where the given field has the given value.</p>
+
+<dt><a name="-like_field,value"
+>-like field,value</a></dt>
+
+<dd>
+<p>Limit the results to entities where the given field is LIKE (in the sql sense) the given value.</p>
+
+<dt><a name="-op_operator,field,value"
+>-op operator,field,value</a></dt>
+
+<dd>
+<p>Limit the results to entities where the given field is related to the given value based on the given operator.</p>
+
+<p>The operators supported are as follows. We provide text based alternatives to the comparison operators so that extra quoting is not required to keep the command-line shell from confusing them with shell I/O redirection operators.</p>
+
+<dl>
+<dt><a name="&#60;_or_lt"
+>&#60; or lt</a></dt>
+
+<dd>
+<dt><a name="&#62;_or_gt"
+>&#62; or gt</a></dt>
+
+<dd>
+<dt><a name="&#60;=_or_le"
+>&#60;= or le</a></dt>
+
+<dd>
+<dt><a name="&#62;=_or_ge"
+>&#62;= or ge</a></dt>
+
+<dd>
+<dt><a name="="
+>=</a></dt>
+
+<dd>
+<dt><a name="LIKE"
+>LIKE</a></dt>
+</dl>
+
+<dt><a name="-a"
+>-a</a></dt>
+
+<dd>
+<p>Return all fields.</p>
+
+<dt><a name="-h"
+>-h</a></dt>
+
+<dd>
+<p>Display a list of the fields available for use.</p>
+
+<dt><a name="-fields_field-list"
+>-fields field-list</a></dt>
+
+<dd>
+<p>Choose a set of fields to return. Field-list is a comma-separated list of strings. The following fields are available:</p>
+
+<dl>
+<dt><a name="source_name"
+>source_name</a></dt>
+
+<dd>
+<dt><a name="city"
+>city</a></dt>
+
+<dd>
+<dt><a name="state"
+>state</a></dt>
+
+<dd>
+<dt><a name="country"
+>country</a></dt>
+
+<dd>
+<dt><a name="origcty"
+>origcty</a></dt>
+
+<dd>
+<dt><a name="elevation"
+>elevation</a></dt>
+
+<dd>
+<dt><a name="latitude"
+>latitude</a></dt>
+
+<dd>
+<dt><a name="longitude"
+>longitude</a></dt>
+
+<dd>
+<dt><a name="lo_accession"
+>lo_accession</a></dt>
 </dl>
 </dd>
 </dl>
@@ -28116,6 +32396,138 @@ name="Command-Line_Options"
 <dd>
 <dt><a name="potential"
 >potential</a></dt>
+</dl>
+</dd>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Output_Format"
+>Output Format</a></h3>
+
+<p>The standard output is a tab-delimited file containing a column for each requested field.</p>
+<hr>
+<a name='___top' class='dummyTopAnchor' ></a>
+
+<h2><a class='u' href='#___top' title='click to go to top of document'
+name="query_entity_ObservationalUnit"
+>query_entity_ObservationalUnit</a></h2>
+
+<p>Query the entity ObservationalUnit.</p>
+
+<p>An ObservationalUnit is an individual plant that 1) is part of an experiment or study,
+2) has measured traits,
+and 3) is assayed for the purpose of determining alleles.</p>
+
+<p>Example:</p>
+
+<pre>    query_entity_ObservationalUnit -a </pre>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Related_entities"
+>Related entities</a></h3>
+
+<p>The ObservationalUnit entity has the following relationship links:</p>
+
+<dl>
+<dt><a name="DefinedBy_TaxonomicGrouping"
+>DefinedBy TaxonomicGrouping</a></dt>
+
+<dd>
+<dt><a name="HasTrait_Trait"
+>HasTrait Trait</a></dt>
+
+<dd>
+<dt><a name="HasVariant_Variation"
+>HasVariant Variation</a></dt>
+
+<dd>
+<dt><a name="IsLocated_Locality"
+>IsLocated Locality</a></dt>
+
+<dd>
+<dt><a name="IsPartOf_StudyExperiment"
+>IsPartOf StudyExperiment</a></dt>
+
+<dd>
+<dt><a name="UsesReference_Genome"
+>UsesReference Genome</a></dt>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Command-Line_Options"
+>Command-Line Options</a></h3>
+
+<dl>
+<dt><a name="-is_field,value"
+>-is field,value</a></dt>
+
+<dd>
+<p>Limit the results to entities where the given field has the given value.</p>
+
+<dt><a name="-like_field,value"
+>-like field,value</a></dt>
+
+<dd>
+<p>Limit the results to entities where the given field is LIKE (in the sql sense) the given value.</p>
+
+<dt><a name="-op_operator,field,value"
+>-op operator,field,value</a></dt>
+
+<dd>
+<p>Limit the results to entities where the given field is related to the given value based on the given operator.</p>
+
+<p>The operators supported are as follows. We provide text based alternatives to the comparison operators so that extra quoting is not required to keep the command-line shell from confusing them with shell I/O redirection operators.</p>
+
+<dl>
+<dt><a name="&#60;_or_lt"
+>&#60; or lt</a></dt>
+
+<dd>
+<dt><a name="&#62;_or_gt"
+>&#62; or gt</a></dt>
+
+<dd>
+<dt><a name="&#60;=_or_le"
+>&#60;= or le</a></dt>
+
+<dd>
+<dt><a name="&#62;=_or_ge"
+>&#62;= or ge</a></dt>
+
+<dd>
+<dt><a name="="
+>=</a></dt>
+
+<dd>
+<dt><a name="LIKE"
+>LIKE</a></dt>
+</dl>
+
+<dt><a name="-a"
+>-a</a></dt>
+
+<dd>
+<p>Return all fields.</p>
+
+<dt><a name="-h"
+>-h</a></dt>
+
+<dd>
+<p>Display a list of the fields available for use.</p>
+
+<dt><a name="-fields_field-list"
+>-fields field-list</a></dt>
+
+<dd>
+<p>Choose a set of fields to return. Field-list is a comma-separated list of strings. The following fields are available:</p>
+
+<dl>
+<dt><a name="source_name"
+>source_name</a></dt>
+
+<dd>
+<dt><a name="source_name2"
+>source_name2</a></dt>
 </dl>
 </dd>
 </dl>
@@ -28580,6 +32992,10 @@ name="Related_entities"
 <p>The ProteinSequence entity has the following relationship links:</p>
 
 <dl>
+<dt><a name="HasAssertedFunctionFrom_Source"
+>HasAssertedFunctionFrom Source</a></dt>
+
+<dd>
 <dt><a name="IsATopicOf_Publication"
 >IsATopicOf Publication</a></dt>
 
@@ -28588,16 +33004,16 @@ name="Related_entities"
 >IsAlignedBy AlignmentTree</a></dt>
 
 <dd>
-<dt><a name="IsNamedBy_Identifier"
->IsNamedBy Identifier</a></dt>
-
-<dd>
 <dt><a name="IsProjectedOnto_ProteinSequence"
 >IsProjectedOnto ProteinSequence</a></dt>
 
 <dd>
 <dt><a name="IsProteinFor_Feature"
 >IsProteinFor Feature</a></dt>
+
+<dd>
+<dt><a name="IsProteinMemberOf_Family"
+>IsProteinMemberOf Family</a></dt>
 
 <dd>
 <dt><a name="ProjectsOnto_ProteinSequence"
@@ -28968,7 +33384,7 @@ name="query_entity_ReactionRule"
 
 <p>Query the entity ReactionRule.</p>
 
-<p>A reaction rule represents the way a reaction takes place within the context of a model.</p>
+<p>A reaction rule represents the way a reaction takes place within the context of a complex.</p>
 
 <p>Example:</p>
 
@@ -29608,8 +34024,8 @@ name="Related_entities"
 <p>The Source entity has the following relationship links:</p>
 
 <dl>
-<dt><a name="Asserts_Identifier"
->Asserts Identifier</a></dt>
+<dt><a name="AssertsFunctionFor_ProteinSequence"
+>AssertsFunctionFor ProteinSequence</a></dt>
 
 <dd>
 <dt><a name="Formulated_CoregulatedSet"
@@ -29622,10 +34038,6 @@ name="Related_entities"
 <dd>
 <dt><a name="HasReactionAliasFrom_Reaction"
 >HasReactionAliasFrom Reaction</a></dt>
-
-<dd>
-<dt><a name="Imported_Identifier"
->Imported Identifier</a></dt>
 
 <dd>
 <dt><a name="Provided_Subsystem"
@@ -29949,6 +34361,121 @@ name="Output_Format"
 <a name='___top' class='dummyTopAnchor' ></a>
 
 <h2><a class='u' href='#___top' title='click to go to top of document'
+name="query_entity_StudyExperiment"
+>query_entity_StudyExperiment</a></h2>
+
+<p>Query the entity StudyExperiment.</p>
+
+<p>An Experiment is a collection of observational units with one originator that are part of a specific study.
+An experiment may be conducted at more than one location and in more than one season or year.</p>
+
+<p>Example:</p>
+
+<pre>    query_entity_StudyExperiment -a </pre>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Related_entities"
+>Related entities</a></h3>
+
+<p>The StudyExperiment entity has the following relationship links:</p>
+
+<dl>
+<dt><a name="IncludesPart_ObservationalUnit"
+>IncludesPart ObservationalUnit</a></dt>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Command-Line_Options"
+>Command-Line Options</a></h3>
+
+<dl>
+<dt><a name="-is_field,value"
+>-is field,value</a></dt>
+
+<dd>
+<p>Limit the results to entities where the given field has the given value.</p>
+
+<dt><a name="-like_field,value"
+>-like field,value</a></dt>
+
+<dd>
+<p>Limit the results to entities where the given field is LIKE (in the sql sense) the given value.</p>
+
+<dt><a name="-op_operator,field,value"
+>-op operator,field,value</a></dt>
+
+<dd>
+<p>Limit the results to entities where the given field is related to the given value based on the given operator.</p>
+
+<p>The operators supported are as follows. We provide text based alternatives to the comparison operators so that extra quoting is not required to keep the command-line shell from confusing them with shell I/O redirection operators.</p>
+
+<dl>
+<dt><a name="&#60;_or_lt"
+>&#60; or lt</a></dt>
+
+<dd>
+<dt><a name="&#62;_or_gt"
+>&#62; or gt</a></dt>
+
+<dd>
+<dt><a name="&#60;=_or_le"
+>&#60;= or le</a></dt>
+
+<dd>
+<dt><a name="&#62;=_or_ge"
+>&#62;= or ge</a></dt>
+
+<dd>
+<dt><a name="="
+>=</a></dt>
+
+<dd>
+<dt><a name="LIKE"
+>LIKE</a></dt>
+</dl>
+
+<dt><a name="-a"
+>-a</a></dt>
+
+<dd>
+<p>Return all fields.</p>
+
+<dt><a name="-h"
+>-h</a></dt>
+
+<dd>
+<p>Display a list of the fields available for use.</p>
+
+<dt><a name="-fields_field-list"
+>-fields field-list</a></dt>
+
+<dd>
+<p>Choose a set of fields to return. Field-list is a comma-separated list of strings. The following fields are available:</p>
+
+<dl>
+<dt><a name="source_name"
+>source_name</a></dt>
+
+<dd>
+<dt><a name="design"
+>design</a></dt>
+
+<dd>
+<dt><a name="originator"
+>originator</a></dt>
+</dl>
+</dd>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Output_Format"
+>Output Format</a></h3>
+
+<p>The standard output is a tab-delimited file containing a column for each requested field.</p>
+<hr>
+<a name='___top' class='dummyTopAnchor' ></a>
+
+<h2><a class='u' href='#___top' title='click to go to top of document'
 name="query_entity_Subsystem"
 >query_entity_Subsystem</a></h2>
 
@@ -30243,6 +34770,10 @@ name="Related_entities"
 >IsInGroup TaxonomicGrouping</a></dt>
 
 <dd>
+<dt><a name="IsRepresentedBy_ObservationalUnit"
+>IsRepresentedBy ObservationalUnit</a></dt>
+
+<dd>
 <dt><a name="IsTaxonomyOf_Genome"
 >IsTaxonomyOf Genome</a></dt>
 </dl>
@@ -30330,6 +34861,132 @@ name="Command-Line_Options"
 <dd>
 <dt><a name="alias"
 >alias</a></dt>
+</dl>
+</dd>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Output_Format"
+>Output Format</a></h3>
+
+<p>The standard output is a tab-delimited file containing a column for each requested field.</p>
+<hr>
+<a name='___top' class='dummyTopAnchor' ></a>
+
+<h2><a class='u' href='#___top' title='click to go to top of document'
+name="query_entity_Trait"
+>query_entity_Trait</a></h2>
+
+<p>Query the entity Trait.</p>
+
+<p>A Trait is a phenotypic quality that can be measured or observed for an observational unit.
+Examples include height,
+sugar content,
+color,
+or cold tolerance.</p>
+
+<p>Example:</p>
+
+<pre>    query_entity_Trait -a </pre>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Related_entities"
+>Related entities</a></h3>
+
+<p>The Trait entity has the following relationship links:</p>
+
+<dl>
+<dt><a name="IsImpactedBy_Variation"
+>IsImpactedBy Variation</a></dt>
+
+<dd>
+<dt><a name="Measures_ObservationalUnit"
+>Measures ObservationalUnit</a></dt>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Command-Line_Options"
+>Command-Line Options</a></h3>
+
+<dl>
+<dt><a name="-is_field,value"
+>-is field,value</a></dt>
+
+<dd>
+<p>Limit the results to entities where the given field has the given value.</p>
+
+<dt><a name="-like_field,value"
+>-like field,value</a></dt>
+
+<dd>
+<p>Limit the results to entities where the given field is LIKE (in the sql sense) the given value.</p>
+
+<dt><a name="-op_operator,field,value"
+>-op operator,field,value</a></dt>
+
+<dd>
+<p>Limit the results to entities where the given field is related to the given value based on the given operator.</p>
+
+<p>The operators supported are as follows. We provide text based alternatives to the comparison operators so that extra quoting is not required to keep the command-line shell from confusing them with shell I/O redirection operators.</p>
+
+<dl>
+<dt><a name="&#60;_or_lt"
+>&#60; or lt</a></dt>
+
+<dd>
+<dt><a name="&#62;_or_gt"
+>&#62; or gt</a></dt>
+
+<dd>
+<dt><a name="&#60;=_or_le"
+>&#60;= or le</a></dt>
+
+<dd>
+<dt><a name="&#62;=_or_ge"
+>&#62;= or ge</a></dt>
+
+<dd>
+<dt><a name="="
+>=</a></dt>
+
+<dd>
+<dt><a name="LIKE"
+>LIKE</a></dt>
+</dl>
+
+<dt><a name="-a"
+>-a</a></dt>
+
+<dd>
+<p>Return all fields.</p>
+
+<dt><a name="-h"
+>-h</a></dt>
+
+<dd>
+<p>Display a list of the fields available for use.</p>
+
+<dt><a name="-fields_field-list"
+>-fields field-list</a></dt>
+
+<dd>
+<p>Choose a set of fields to return. Field-list is a comma-separated list of strings. The following fields are available:</p>
+
+<dl>
+<dt><a name="trait_name"
+>trait_name</a></dt>
+
+<dd>
+<dt><a name="unit_of_measure"
+>unit_of_measure</a></dt>
+
+<dd>
+<dt><a name="TO_ID"
+>TO_ID</a></dt>
+
+<dd>
+<dt><a name="protocol"
+>protocol</a></dt>
 </dl>
 </dd>
 </dl>
@@ -30476,7 +35133,8 @@ name="query_entity_Variation"
 
 <p>Query the entity Variation.</p>
 
-<p>A variation describes a set of aligned regions in two or more contigs.</p>
+<p>A variation is a difference in DNA sequence between the reference genome and the observational unit.
+The variation has a position on a contig.</p>
 
 <p>Example:</p>
 
@@ -30489,8 +35147,24 @@ name="Related_entities"
 <p>The Variation entity has the following relationship links:</p>
 
 <dl>
-<dt><a name="IsAlignmentFor_Contig"
->IsAlignmentFor Contig</a></dt>
+<dt><a name="Impacts_Trait"
+>Impacts Trait</a></dt>
+
+<dd>
+<dt><a name="IsLocatedOn_Contig"
+>IsLocatedOn Contig</a></dt>
+
+<dd>
+<dt><a name="IsVariantOf_ObservationalUnit"
+>IsVariantOf ObservationalUnit</a></dt>
+
+<dd>
+<dt><a name="SummarizedBy_AlleleFrequency"
+>SummarizedBy AlleleFrequency</a></dt>
+
+<dd>
+<dt><a name="WasDetermiedBy_Assay"
+>WasDetermiedBy Assay</a></dt>
 </dl>
 
 <h3><a class='u' href='#___top' title='click to go to top of document'
@@ -30562,8 +35236,12 @@ name="Command-Line_Options"
 <p>Choose a set of fields to return. Field-list is a comma-separated list of strings. The following fields are available:</p>
 
 <dl>
-<dt><a name="notes"
->notes</a></dt>
+<dt><a name="position"
+>position</a></dt>
+
+<dd>
+<dt><a name="value"
+>value</a></dt>
 </dl>
 </dd>
 </dl>

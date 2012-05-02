@@ -2104,6 +2104,172 @@ how is an int
 >Description</a></dt>
 </dl>
 
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="representative_sequences"
+>representative_sequences</a></h3>
+
+<pre>  $return_1, $return_2 = $obj-&#62;representative_sequences($seq_set, $rep_seq_parms)</pre>
+
+<dl>
+<dt><a name="Parameter_and_return_types"
+>Parameter and return types</a></dt>
+
+<dd>
+<pre>
+$seq_set is a seq_set
+$rep_seq_parms is a rep_seq_parms
+$return_1 is an id_set
+$return_2 is a reference to a list where each element is an id_set
+seq_set is a reference to a list where each element is a seq_triple
+seq_triple is a reference to a list containing 3 items:
+	0: an id
+	1: a comment
+	2: a sequence
+id is a string
+comment is a string
+sequence is a string
+rep_seq_parms is a reference to a hash where the following keys are defined:
+	existing_reps has a value which is a seq_set
+	order has a value which is a string
+	alg has a value which is an int
+	type_sim has a value which is a string
+	cutoff has a value which is a float
+id_set is a reference to a list where each element is an id
+
+
+</pre>
+
+
+<dt><a name="Description"
+>Description</a></dt>
+
+<dd>
+<p>we return two arguments. The first is the list of representative triples, and the second is the list of sets (the first entry always being the representative sequence)</p>
+</dd>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="align_sequences"
+>align_sequences</a></h3>
+
+<pre>  $return = $obj-&#62;align_sequences($seq_set, $align_seq_parms)</pre>
+
+<dl>
+<dt><a name="Parameter_and_return_types"
+>Parameter and return types</a></dt>
+
+<dd>
+<pre>
+$seq_set is a seq_set
+$align_seq_parms is an align_seq_parms
+$return is a seq_set
+seq_set is a reference to a list where each element is a seq_triple
+seq_triple is a reference to a list containing 3 items:
+	0: an id
+	1: a comment
+	2: a sequence
+id is a string
+comment is a string
+sequence is a string
+align_seq_parms is a reference to a hash where the following keys are defined:
+	muscle_parms has a value which is a muscle_parms_t
+	mafft_parms has a value which is a mafft_parms_t
+	tool has a value which is a string
+	align_ends_with_clustal has a value which is an int
+muscle_parms_t is a reference to a hash where the following keys are defined:
+	anchors has a value which is an int
+	brenner has a value which is an int
+	cluster has a value which is an int
+	dimer has a value which is an int
+	diags has a value which is an int
+	diags1 has a value which is an int
+	diags2 has a value which is an int
+	le has a value which is an int
+	noanchors has a value which is an int
+	sp has a value which is an int
+	spn has a value which is an int
+	stable has a value which is an int
+	sv has a value which is an int
+	anchorspacing has a value which is a string
+	center has a value which is a string
+	cluster1 has a value which is a string
+	cluster2 has a value which is a string
+	diagbreak has a value which is a string
+	diaglength has a value which is a string
+	diagmargin has a value which is a string
+	distance1 has a value which is a string
+	distance2 has a value which is a string
+	gapopen has a value which is a string
+	log has a value which is a string
+	loga has a value which is a string
+	matrix has a value which is a string
+	maxhours has a value which is a string
+	maxiters has a value which is a string
+	maxmb has a value which is a string
+	maxtrees has a value which is a string
+	minbestcolscore has a value which is a string
+	minsmoothscore has a value which is a string
+	objscore has a value which is a string
+	refinewindow has a value which is a string
+	root1 has a value which is a string
+	root2 has a value which is a string
+	scorefile has a value which is a string
+	seqtype has a value which is a string
+	smoothscorecell has a value which is a string
+	smoothwindow has a value which is a string
+	spscore has a value which is a string
+	SUEFF has a value which is a string
+	usetree has a value which is a string
+	weight1 has a value which is a string
+	weight2 has a value which is a string
+mafft_parms_t is a reference to a hash where the following keys are defined:
+	sixmerpair has a value which is an int
+	amino has a value which is an int
+	anysymbol has a value which is an int
+	auto has a value which is an int
+	clustalout has a value which is an int
+	dpparttree has a value which is an int
+	fastapair has a value which is an int
+	fastaparttree has a value which is an int
+	fft has a value which is an int
+	fmodel has a value which is an int
+	genafpair has a value which is an int
+	globalpair has a value which is an int
+	inputorder has a value which is an int
+	localpair has a value which is an int
+	memsave has a value which is an int
+	nofft has a value which is an int
+	noscore has a value which is an int
+	parttree has a value which is an int
+	reorder has a value which is an int
+	treeout has a value which is an int
+	alg has a value which is a string
+	aamatrix has a value which is a string
+	bl has a value which is a string
+	ep has a value which is a string
+	groupsize has a value which is a string
+	jtt has a value which is a string
+	lap has a value which is a string
+	lep has a value which is a string
+	lepx has a value which is a string
+	LOP has a value which is a string
+	LEXP has a value which is a string
+	maxiterate has a value which is a string
+	op has a value which is a string
+	partsize has a value which is a string
+	retree has a value which is a string
+	thread has a value which is a string
+	tm has a value which is a string
+	weighti has a value which is a string
+
+
+</pre>
+
+
+<dt><a name="Description"
+>Description</a></dt>
+</dl>
+
 <h2><a class='u' href='#___top' title='click to go to top of document'
 name="TYPES"
 >TYPES</a></h2>
@@ -3848,6 +4014,251 @@ name="how"
 <dd>
 <pre>
 an int
+</pre>
+
+</dd>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="sequence"
+>sequence</a></h3>
+
+<dl>
+<dt><a name="Definition"
+>Definition</a></dt>
+
+<dd>
+<pre>
+a string
+</pre>
+
+</dd>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="seq_triple"
+>seq_triple</a></h3>
+
+<dl>
+<dt><a name="Definition"
+>Definition</a></dt>
+
+<dd>
+<pre>
+a reference to a list containing 3 items:
+0: an id
+1: a comment
+2: a sequence
+
+
+</pre>
+
+</dd>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="seq_set"
+>seq_set</a></h3>
+
+<dl>
+<dt><a name="Definition"
+>Definition</a></dt>
+
+<dd>
+<pre>
+a reference to a list where each element is a seq_triple
+</pre>
+
+</dd>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="id_set"
+>id_set</a></h3>
+
+<dl>
+<dt><a name="Definition"
+>Definition</a></dt>
+
+<dd>
+<pre>
+a reference to a list where each element is an id
+</pre>
+
+</dd>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="rep_seq_parms"
+>rep_seq_parms</a></h3>
+
+<dl>
+<dt><a name="Description"
+>Description</a></dt>
+
+<dd>
+<p>fractions or bits</p>
+
+<dt><a name="Definition"
+>Definition</a></dt>
+
+<dd>
+<pre>
+a reference to a hash where the following keys are defined:
+existing_reps has a value which is a seq_set
+order has a value which is a string
+alg has a value which is an int
+type_sim has a value which is a string
+cutoff has a value which is a float
+
+
+</pre>
+
+</dd>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="muscle_parms_t"
+>muscle_parms_t</a></h3>
+
+<dl>
+<dt><a name="Definition"
+>Definition</a></dt>
+
+<dd>
+<pre>
+a reference to a hash where the following keys are defined:
+anchors has a value which is an int
+brenner has a value which is an int
+cluster has a value which is an int
+dimer has a value which is an int
+diags has a value which is an int
+diags1 has a value which is an int
+diags2 has a value which is an int
+le has a value which is an int
+noanchors has a value which is an int
+sp has a value which is an int
+spn has a value which is an int
+stable has a value which is an int
+sv has a value which is an int
+anchorspacing has a value which is a string
+center has a value which is a string
+cluster1 has a value which is a string
+cluster2 has a value which is a string
+diagbreak has a value which is a string
+diaglength has a value which is a string
+diagmargin has a value which is a string
+distance1 has a value which is a string
+distance2 has a value which is a string
+gapopen has a value which is a string
+log has a value which is a string
+loga has a value which is a string
+matrix has a value which is a string
+maxhours has a value which is a string
+maxiters has a value which is a string
+maxmb has a value which is a string
+maxtrees has a value which is a string
+minbestcolscore has a value which is a string
+minsmoothscore has a value which is a string
+objscore has a value which is a string
+refinewindow has a value which is a string
+root1 has a value which is a string
+root2 has a value which is a string
+scorefile has a value which is a string
+seqtype has a value which is a string
+smoothscorecell has a value which is a string
+smoothwindow has a value which is a string
+spscore has a value which is a string
+SUEFF has a value which is a string
+usetree has a value which is a string
+weight1 has a value which is a string
+weight2 has a value which is a string
+
+
+</pre>
+
+</dd>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="mafft_parms_t"
+>mafft_parms_t</a></h3>
+
+<dl>
+<dt><a name="Description"
+>Description</a></dt>
+
+<dd>
+<p>linsi | einsi | ginsi | nwnsi | nwns | fftnsi | fftns (D)</p>
+
+<dt><a name="Definition"
+>Definition</a></dt>
+
+<dd>
+<pre>
+a reference to a hash where the following keys are defined:
+sixmerpair has a value which is an int
+amino has a value which is an int
+anysymbol has a value which is an int
+auto has a value which is an int
+clustalout has a value which is an int
+dpparttree has a value which is an int
+fastapair has a value which is an int
+fastaparttree has a value which is an int
+fft has a value which is an int
+fmodel has a value which is an int
+genafpair has a value which is an int
+globalpair has a value which is an int
+inputorder has a value which is an int
+localpair has a value which is an int
+memsave has a value which is an int
+nofft has a value which is an int
+noscore has a value which is an int
+parttree has a value which is an int
+reorder has a value which is an int
+treeout has a value which is an int
+alg has a value which is a string
+aamatrix has a value which is a string
+bl has a value which is a string
+ep has a value which is a string
+groupsize has a value which is a string
+jtt has a value which is a string
+lap has a value which is a string
+lep has a value which is a string
+lepx has a value which is a string
+LOP has a value which is a string
+LEXP has a value which is a string
+maxiterate has a value which is a string
+op has a value which is a string
+partsize has a value which is a string
+retree has a value which is a string
+thread has a value which is a string
+tm has a value which is a string
+weighti has a value which is a string
+
+
+</pre>
+
+</dd>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="align_seq_parms"
+>align_seq_parms</a></h3>
+
+<dl>
+<dt><a name="Definition"
+>Definition</a></dt>
+
+<dd>
+<pre>
+a reference to a hash where the following keys are defined:
+muscle_parms has a value which is a muscle_parms_t
+mafft_parms has a value which is a mafft_parms_t
+tool has a value which is a string
+align_ends_with_clustal has a value which is an int
+
+
 </pre>
 
 </dd>

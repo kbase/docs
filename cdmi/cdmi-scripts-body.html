@@ -4032,6 +4032,135 @@ name="Output_Format"
 <a name='___top' class='dummyTopAnchor' ></a>
 
 <h2><a class='u' href='#___top' title='click to go to top of document'
+name="representative_sequences"
+>representative_sequences</a></h2>
+
+<p>Example:</p>
+
+<pre>    representative_sequences [arguments] &#60; input &#62; output</pre>
+
+<p>This is a pipe command. The input is taken from the standard input, and the output is to the standard output.</p>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Documentation_for_underlying_call"
+>Documentation for underlying call</a></h3>
+
+<p>This script is a wrapper for the CDMI-API call representative_sequences. It is documented as follows:</p>
+
+<p>we return two arguments. The first is the list of representative triples, and the second is the list of sets (the first entry always being the representative sequence)</p>
+
+<dl>
+<dt><a name="-e_Existing_Representatives"
+>-e Existing Representatives</a></dt>
+
+<dd>
+<p>These are sequences that are currently represenatives and the command extends this set.</p>
+
+<dt><a name="-o_order-option"
+>-o order-option</a></dt>
+
+<dd>
+<p>order sequences using the designated option (note that -b is another way to get a long-to-short ordering). Supported options are</p>
+
+<pre>    long-to-short
+    default (as is)</pre>
+
+<dt><a name="-b"
+>-b</a></dt>
+
+<dd>
+<p>order input sequences by size (long to short)</p>
+
+<dt><a name="-c_cluster_type"
+>-c cluster_type</a></dt>
+
+<dd>
+<p>behavior of clustering algorithm (0 or 1, D=1)</p>
+
+<p>cluster_type 0 is the original method, which has only the representative for each group in the blast database. This can randomly segregate distant members of groups, regardless of the placement of other very similar sequences.</p>
+
+<p>cluster_type 1 adds more diverse representatives of a group in the blast database. This is slightly more expensive, but is much less likely to split close relatives into different groups.</p>
+
+<dt><a name="-d_seq_clust_dir_-_directory_for_files_of_clustered_sequencees"
+>-d seq_clust_dir - directory for files of clustered sequencees</a></dt>
+
+<dd>
+<p>With the -d option, each cluster of sequences is written to a distinct file in the specified directory.</p>
+
+<dt><a name="-f_id_clust_file_-_file_with_one_line_per_cluster,_listing_its_ids"
+>-f id_clust_file - file with one line per cluster, listing its ids</a></dt>
+
+<dd>
+<p>With the -f option, for each cluster, a tab-separated list of ids is written to the specified file.</p>
+
+<dt><a name="-m_measure_of_sim_-_measure_of_similarity_to_use:"
+>-m measure_of_sim - measure of similarity to use:</a></dt>
+
+<dd>
+<p>Sequences are removed if there similarity to a &#34;kept&#34; sequence exceeds a specified threshold (see -similarity below)</p>
+
+<p>The possible measures of similarity that you can specify are as follows:</p>
+
+<p>identity_fraction (default), positive_fraction (proteins only), or score_per_position (0-2 bits)</p>
+
+<dt><a name="-s_similarity_-_similarity_required_to_be_clustered_(D_=_0.8)"
+>-s similarity - similarity required to be clustered (D = 0.8)</a></dt>
+
+<dd>
+<p>The similarity threshhold used to determine when sequences are deleted (but represented by a kept sequence).</p>
+
+<dt><a name="Parameter_and_return_types"
+>Parameter and return types</a></dt>
+
+<dd>
+<pre>
+$seq_set is a seq_set
+$rep_seq_parms is a rep_seq_parms
+$return_1 is an id_set
+$return_2 is a reference to a list where each element is an id_set
+seq_set is a reference to a list where each element is a seq_triple
+seq_triple is a reference to a list containing 3 items:
+	0: an id
+	1: a comment
+	2: a sequence
+id is a string
+comment is a string
+sequence is a string
+rep_seq_parms is a reference to a hash where the following keys are defined:
+	existing_reps has a value which is a seq_set
+	order has a value which is an int
+	alg has a value which is an int
+	type_sim has a value which is an int
+	cutoff has a value which is a float
+id_set is a reference to a list where each element is an id
+
+
+</pre>
+
+</dd>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Input_Format"
+>Input Format</a></h3>
+
+<pre>    The input is a fasta-formatted set of sequences.  These sequences
+    should not contain indels.</pre>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Output_Format"
+>Output Format</a></h3>
+
+<pre>    FASTA output of the representatives is always written to STDOUT.
+
+    The -d option will cause a directory to be built containing the clusters.
+
+    The -f option will cause an abbreviated format of the clusters (just IDs) to
+    be written</pre>
+<hr>
+<a name='___top' class='dummyTopAnchor' ></a>
+
+<h2><a class='u' href='#___top' title='click to go to top of document'
 name="roles_to_complexes"
 >roles_to_complexes</a></h2>
 
