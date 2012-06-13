@@ -2,17 +2,17 @@
   <head>
   </head>
   <body>
-    <h1>The Issue of Retrieving Functional Coupling Data</h1> As we proceed to improve <a name="annotations321">annotations</a> of gene function, precision of metabolic models, and estimates of regulatory architecture, we will need access to the clues that support estimates of &quot;functional coupling&quot;. In this short example, we allow the user to designate a genome within the set stored in the CS (presumably a prokaryotic genome), and we retrieve data relating to co-occurrence (in close proximity on multiple genomes) and co-expression (when we have data available ). Here is the short program that accesses both the co-occurrence data and the co-expression data: <br /><pre>
+    <h1>The Issue of Retrieving Functional Coupling Data</h1> As we proceed to improve <a name="annotations322">annotations</a> of gene function, precision of metabolic models, and estimates of regulatory architecture, we will need access to the clues that support estimates of &quot;functional coupling&quot;. In this short example, we allow the user to designate a genome within the set stored in the CS (presumably a prokaryotic genome), and we retrieve data relating to co-occurrence (in close proximity on multiple genomes) and co-expression (when we have data available ). Here is the short program that accesses both the co-occurrence data and the co-expression data: <br /><pre>
 use CDMI_APIClient;
 my $kbO = CDMI_APIClient-&gt;new;
 
 my $g = shift @ARGV;  # Just grab the first and only argument - it should be a Kbase genome
 
-my $genH       = $kbO-&gt;<a href="http://kbase.us/developer-zone/api-documentation/cdmi-api/#genomes_to_fids" target='_blank'>genomes_to_fids</a>([$g],[&#39;peg&#39;]);
+my $genH       = $kbO-&gt;<a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#genomes_to_fids" target='_blank'>genomes_to_fids</a>([$g],[&#39;peg&#39;]);
 my $fids       = $genH-&gt;{$g};
-my $funcH      = $kbO-&gt;<a href="http://kbase.us/developer-zone/api-documentation/cdmi-api/#fids_to_functions" target='_blank'>fids_to_functions</a>($fids);
-my $fid_occH   = $kbO-&gt;<a href="http://kbase.us/developer-zone/api-documentation/cdmi-api/#fids_to_co_occurring_fids" target='_blank'>fids_to_co_occurring_fids</a>($fids);
-my $fid_expH   = $kbO-&gt;<a href="http://kbase.us/developer-zone/api-documentation/cdmi-api/#fids_to_coexpressed_fids" target='_blank'>fids_to_coexpressed_fids</a>($fids);
+my $funcH      = $kbO-&gt;<a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#fids_to_functions" target='_blank'>fids_to_functions</a>($fids);
+my $fid_occH   = $kbO-&gt;<a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#fids_to_co_occurring_fids" target='_blank'>fids_to_co_occurring_fids</a>($fids);
+my $fid_expH   = $kbO-&gt;<a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#fids_to_coexpressed_fids" target='_blank'>fids_to_coexpressed_fids</a>($fids);
 
 foreach my $fid1 (@$fids)
 {
@@ -55,23 +55,23 @@ foreach my $fid1 (@$fids)
     }
 }
 <br /></pre> The program begins by accessing the protein-encoding genes, their functions, and the functional coupling data. <br /><pre>
-my $genH       = $kbO-&gt;<a href="http://kbase.us/developer-zone/api-documentation/cdmi-api/#genomes_to_fids" target='_blank'>genomes_to_fids</a>([$g],[&#39;peg&#39;]);
+my $genH       = $kbO-&gt;<a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#genomes_to_fids" target='_blank'>genomes_to_fids</a>([$g],[&#39;peg&#39;]);
 my $fids       = $genH-&gt;{$g};
-my $funcH      = $kbO-&gt;<a href="http://kbase.us/developer-zone/api-documentation/cdmi-api/#fids_to_functions" target='_blank'>fids_to_functions</a>($fids);
-my $fid_occH   = $kbO-&gt;<a href="http://kbase.us/developer-zone/api-documentation/cdmi-api/#fids_to_co_occurring_fids" target='_blank'>fids_to_co_occurring_fids</a>($fids);
-my $fid_expH   = $kbO-&gt;<a href="http://kbase.us/developer-zone/api-documentation/cdmi-api/#fids_to_coexpressed_fids" target='_blank'>fids_to_coexpressed_fids</a>($fids);
+my $funcH      = $kbO-&gt;<a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#fids_to_functions" target='_blank'>fids_to_functions</a>($fids);
+my $fid_occH   = $kbO-&gt;<a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#fids_to_co_occurring_fids" target='_blank'>fids_to_co_occurring_fids</a>($fids);
+my $fid_expH   = $kbO-&gt;<a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#fids_to_coexpressed_fids" target='_blank'>fids_to_coexpressed_fids</a>($fids);
 <br /></pre> It then goes through the genes gathering the related genes for each of the values of $fid1. <br />
     <br /> The program produces output like the following: <br /><pre>
 kb|g.0.peg.2571 kb|g.0.peg.2679 911     0.982   SSU ribosomal protein S10p (S20e)                       LSU ribosomal protein L3p (L3e)
 kb|g.0.peg.2679 kb|g.0.peg.2571 911     0.982   LSU ribosomal protein L3p (L3e)                         SSU ribosomal protein S10p (S20e)
 kb|g.0.peg.2771 kb|g.0.peg.3193 905     0.864   Preprotein translocase secY subunit (TC 3.A.5.1.1)      LSU ribosomal protein L24p (L26e)
 kb|g.0.peg.3193 kb|g.0.peg.2771 905     0.864   LSU ribosomal protein L24p (L26e)                       Preprotein translocase secY subunit (TC 3.A.5.1.1)
-<br /></pre> The first two columns are the possiblyu related PEG IDs. The third column is a count of the number of distinct OTUs in which pairs of genes similar to these two occur close to one another. The fourth column gives the <a name="Pearson Correlation Coefficient322">Pearson Correlation Coefficient</a>. The fifth and sixth columns contain the functions asserted for the two genes. Note that the lines we are showing have very strong correlation values. <br />
+<br /></pre> The first two columns are the possiblyu related PEG IDs. The third column is a count of the number of distinct OTUs in which pairs of genes similar to these two occur close to one another. The fourth column gives the <a name="Pearson Correlation Coefficient323">Pearson Correlation Coefficient</a>. The fifth and sixth columns contain the functions asserted for the two genes. Note that the lines we are showing have very strong correlation values. <br />
     <br /> We might ask &quot;<i>What is the strongest evidence relating to a gene of unknown function?</i>&quot; Here is certainly a good candidate: <br /><pre>
 kb|g.0.peg.3658 kb|g.0.peg.4040 580     0.861   DNA polymerase III subunits gamma and tau (EC 2.7.7.7)	FIG000557: hypothetical protein co-occurring with RecR
-<br /></pre> Note that kb|g.0.<a name="peg323">peg</a>.4040, whic is annotated as <br /><pre>
+<br /></pre> Note that kb|g.0.<a name="peg324">peg</a>.4040, whic is annotated as <br /><pre>
      FIG000557: hypothetical protein co-occurring with RecR
 <br /></pre> occurs close ot a gene annotated as <br /><pre>
      DNA polymerase III subunits gamma and tau (EC 2.7.7.7)
-<br /></pre> and it occurs close in genomes occurring in 580 distinct OTUs. The Pearson correlation coefficient based on expression profiles is 0.861. You should ne able to use this simple program, run it on genomes in the KBase for which expression data exists, and then extract lines containing the word &quot;hypothetical&quot;. If you <a name="sort324">sort</a> them by the third and fourth columns, you will see some astonishingly suggestive clues. </body>
+<br /></pre> and it occurs close in genomes occurring in 580 distinct OTUs. The Pearson correlation coefficient based on expression profiles is 0.861. You should ne able to use this simple program, run it on genomes in the KBase for which expression data exists, and then extract lines containing the word &quot;hypothetical&quot;. If you <a name="sort325">sort</a> them by the third and fourth columns, you will see some astonishingly suggestive clues. </body>
 </html>

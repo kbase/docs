@@ -2,8 +2,8 @@
   <head>
   </head>
   <body>
-    <h1>Comparing the Functional Roles in Two Genomes</h1> As the KBase begins to be used to support development and maintenance of metabolic models, it becomes important that we be able to rapidly compare the functional roles that are implemented by protein-encoding genes in a pair of genomes. In the most common case, we will be looking for errors in <a name="annotations316">annotations</a> between very close genomes. In that case, most of the discrepancies will reflect errors in gene calling and <a name="annotations317">annotations</a>. In the cases of more distant genomes, it becomes possible to infer metabolic differences from the discrepancies. <br />
-    <br /> In any event, here we give a short program using the KBase <a name="API318">API</a> for extracting data from the CS and compasring the functional roles that occur in two genomes stored in the CS. <br />
+    <h1>Comparing the Functional Roles in Two Genomes</h1> As the KBase begins to be used to support development and maintenance of metabolic models, it becomes important that we be able to rapidly compare the functional roles that are implemented by protein-encoding genes in a pair of genomes. In the most common case, we will be looking for errors in <a name="annotations317">annotations</a> between very close genomes. In that case, most of the discrepancies will reflect errors in gene calling and <a name="annotations318">annotations</a>. In the cases of more distant genomes, it becomes possible to infer metabolic differences from the discrepancies. <br />
+    <br /> In any event, here we give a short program using the KBase <a name="API319">API</a> for extracting data from the CS and compasring the functional roles that occur in two genomes stored in the CS. <br />
     <br /> Here is the actual program: <br /><pre>
 use CDMI_APIClient;
 my $kbO = CDMI_APIClient-&gt;new;
@@ -17,12 +17,12 @@ my($g1,$g2);
 )
     || die $usage;
 
-my $genH   = $kbO-&gt;<a href="http://kbase.us/developer-zone/api-documentation/cdmi-api/#genomes_to_fids" target='_blank'>genomes_to_fids</a>([$g1,$g2],[&#39;peg&#39;]);
+my $genH   = $kbO-&gt;<a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#genomes_to_fids" target='_blank'>genomes_to_fids</a>([$g1,$g2],[&#39;peg&#39;]);
 my $fids1  = $genH-&gt;{$g1};
 my $fids2  = $genH-&gt;{$g2};
-my $funcH1 = $kbO-&gt;<a href="http://kbase.us/developer-zone/api-documentation/cdmi-api/#fids_to_functions" target='_blank'>fids_to_functions</a>($fids1);
-my $funcH2 = $kbO-&gt;<a href="http://kbase.us/developer-zone/api-documentation/cdmi-api/#fids_to_functions" target='_blank'>fids_to_functions</a>($fids2);
-my %roles_used_in_models = map { $_ =&gt; 1 } @{ $kbO-&gt;<a href="http://kbase.us/developer-zone/api-documentation/cdmi-api/#all_roles_used_in_models" target='_blank'>all_roles_used_in_models</a>() };
+my $funcH1 = $kbO-&gt;<a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#fids_to_functions" target='_blank'>fids_to_functions</a>($fids1);
+my $funcH2 = $kbO-&gt;<a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#fids_to_functions" target='_blank'>fids_to_functions</a>($fids2);
+my %roles_used_in_models = map { $_ =&gt; 1 } @{ $kbO-&gt;<a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#all_roles_used_in_models" target='_blank'>all_roles_used_in_models</a>() };
 
 my %roles1 = map { $roles_used_in_models{$_} ? ($_ =&gt; 1) : () } 
              map { &amp;roles_of_function($_) } 
@@ -57,14 +57,14 @@ sub roles_of_function {
     return @retVal;
 }
 <br /></pre> The program takes in two arguments from the command line -- the IDs of the KBase genomes that are two be compared. It uses <br /><pre>
-my $genH   = $kbO-&gt;<a href="http://kbase.us/developer-zone/api-documentation/cdmi-api/#genomes_to_fids" target='_blank'>genomes_to_fids</a>([$g1,$g2],[&#39;peg&#39;]);
+my $genH   = $kbO-&gt;<a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#genomes_to_fids" target='_blank'>genomes_to_fids</a>([$g1,$g2],[&#39;peg&#39;]);
 my $fids1  = $genH-&gt;{$g1};
 my $fids2  = $genH-&gt;{$g2};
-my $funcH1 = $kbO-&gt;<a href="http://kbase.us/developer-zone/api-documentation/cdmi-api/#fids_to_functions" target='_blank'>fids_to_functions</a>($fids1);
-my $funcH2 = $kbO-&gt;<a href="http://kbase.us/developer-zone/api-documentation/cdmi-api/#fids_to_functions" target='_blank'>fids_to_functions</a>($fids2);
-<br /></pre> to retrieve the protein encoding genes from each genome ($genH is a hash keyed on the genome ID with values comprised of the PEGs associated with the genome), and then retrieving the functions associated with each of the Features of type &#39;<a name="peg319">peg</a>&#39;. The line <br /><pre>
+my $funcH1 = $kbO-&gt;<a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#fids_to_functions" target='_blank'>fids_to_functions</a>($fids1);
+my $funcH2 = $kbO-&gt;<a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#fids_to_functions" target='_blank'>fids_to_functions</a>($fids2);
+<br /></pre> to retrieve the protein encoding genes from each genome ($genH is a hash keyed on the genome ID with values comprised of the PEGs associated with the genome), and then retrieving the functions associated with each of the Features of type &#39;<a name="peg320">peg</a>&#39;. The line <br /><pre>
 
-my %roles_used_in_models = map { $_ =&gt; 1 } @{ $kbO-&gt;<a href="http://kbase.us/developer-zone/api-documentation/cdmi-api/#all_roles_used_in_models" target='_blank'>all_roles_used_in_models</a>() };
+my %roles_used_in_models = map { $_ =&gt; 1 } @{ $kbO-&gt;<a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#all_roles_used_in_models" target='_blank'>all_roles_used_in_models</a>() };
 <br /></pre> retrieves the roles that are used in models. We will restrict our analysis to this set, since the other roles tend to be poorly characterized. <br />
     <br /> We use <br /><pre>
 
@@ -99,5 +99,5 @@ sub roles_of_function {
     my @common = sort grep { $roles2{$_} }   keys(%roles1);
     my @just1  = sort grep { ! $roles2{$_} } keys(%roles1);
     my @just2  = sort grep { ! $roles1{$_} } keys(%roles2);
-<br /></pre> compute the roles in common, those that occur in just $g1 and those that occur in just $g2. The program prints the three sets and exists. It is a simple program, but it can be used to effectively get a sense of the performance supported by the KBase <a name="API320">API</a> and the utility of the operations. </body>
+<br /></pre> compute the roles in common, those that occur in just $g1 and those that occur in just $g2. The program prints the three sets and exists. It is a simple program, but it can be used to effectively get a sense of the performance supported by the KBase <a name="API321">API</a> and the utility of the operations. </body>
 </html>
