@@ -1,75 +1,43 @@
-<h1>Towards a Controlled Vocabulary Part 3: Making the MOL Translation to the Abstract Function Vocabulary</h1>
-
-We have described how to define an abstract vocabulary of function using exemplars
-in <a href="http://kbase.us/index.php/developers/tutorials/towards-a-controlled-vocabulary-part-1-defining-exemplars/"l>Part 1: Defining Exemplars</a>.
-Next, we described how to generate the SEED mapping from SEED ids to the abstract
-vocabulary imposed by exemplars 
-<a href="http://kbase.us/index.php/developers/tutorials/towards-a-controlled-vocabulary-part-2-mapping-to-exemplars/">Part 2: Mapping to Exemplars</a>.
-
-We complete this discussion of how to reach consistent annotations in an abstract vocabulary by
-discussing how one might map MicrobesOnLine (MOL) features to the abstract vocabulary.
-<br><br>
-The overall strategy is as follows:
-<ol>
-<li>
-We start with the SEED translation, represented as 4-tuples of the form
-
-<br><pre>
+<html>
+  <head>
+  </head>
+  <body>
+    <h1>Towards a Controlled Vocabulary Part 3: Making the MOL Translation to the Abstract Function Vocabulary</h1> We have described how to define an abstract vocabulary of function using exemplars in <a href="http://kbase.us/developer-zone/tutorials/command-line-scripts/command-line-applications/towards-a-controlled-vocabulary-part-1-defining-exemplars/" l="l">Part 1: Defining <a name="Exemplars389">Exemplars</a></a>. Next, we described how to generate the <a name="SEED390">SEED</a> mapping from <a name="SEED391">SEED</a> ids to the abstract vocabulary imposed by exemplars <a href="http://kbase.us/developer-zone/tutorials/command-line-scripts/command-line-applications/towards-a-controlled-vocabulary-part-2-mapping-to-exemplars/">Part 2: Mapping to <a name="Exemplars392">Exemplars</a></a>. We complete this discussion of how to reach consistent <a name="annotations393">annotations</a> in an abstract vocabulary by discussing how one might map <a name="MicrobesOnLine394">MicrobesOnLine</a> (MOL) features to the abstract vocabulary. <br />
+    <br /> The overall strategy is as follows: <ol>
+      <li> We start with the <a name="SEED395">SEED</a> translation, represented as 4-tuples of the form <br /><pre>
            [source,source-id,fid,exemplar]
-<br></pre>
-where the <i>source</i> is <i>SEED</i>.  Here, the <i>fid</i> field is the KBase ID of
-the SEED <i>source_id</i>.  We begin by adding a column containing the md5 values using
-
-<br><pre>
-           <a href="http://kbase.us/index.php/developers/api-documentation/cdmi-api/#fids_to_proteins" target='_blank'>fids_to_proteins</a> -c 3 < seed.translation.table > seed.translation.with.md5
-<br></pre>
-and we sort them on the md5 value using
-<br><pre>
-            sort -u -k 5 seed.translation.with.md5 > sorted.seed.with.md5
-<br></pre>
-<li>
-Then, we create a table of data relating to the MOL genomes using
-
-<br><pre>
+<br /></pre> where the <i>source</i> is <i><a name="SEED396">SEED</a></i>. Here, the <i>fid</i> field is the KBase ID of the <a name="SEED397">SEED</a> <i>source_id</i>. We begin by adding a column containing the <a name="md5398">md5</a> values using <br /><pre>
+           <a href="http://kbase.us/developer-zone/api-documentation/cdmi-api/#fids_to_proteins" target='_blank'>fids_to_proteins</a> -c 3 &lt; seed.translation.table &gt; seed.translation.with.md5
+<br /></pre> and we <a name="sort399">sort</a> them on the <a name="md5400">md5</a> value using <br /><pre>
+            sort -u -k 5 seed.translation.with.md5 &gt; sorted.seed.with.md5
+<br /></pre><li> Then, we create a table of data relating to the MOL genomes using <br /><pre>
             echo MOL | 
-	    <a href="http://kbase.us/index.php/developers/api-documentation/cdmi-entity-api/#get_relationship_Submitted" target='_blank'>get_relationship_Submitted</a> -to id | 
-	    <a href="http://kbase.us/index.php/developers/api-documentation/cdmi-api/#genomes_to_fids" target='_blank'>genomes_to_fids</a> peg | 
+	    <a href="http://kbase.us/developer-zone/api-documentation/cdmi-entity-api/#get_relationship_Submitted" target='_blank'>get_relationship_Submitted</a> -to id | 
+	    <a href="http://kbase.us/developer-zone/api-documentation/cdmi-api/#genomes_to_fids" target='_blank'>genomes_to_fids</a> peg | 
 	    cut -f 3 | 
-	    <a href="http://kbase.us/index.php/developers/api-documentation/cdmi-entity-api/#get_entity_Feature" target='_blank'>get_entity_Feature</a> -f source_id |
-	    <a href="http://kbase.us/index.php/developers/api-documentation/cdmi-api/#fids_to_proteins" target='_blank'>fids_to_proteins</a> -c 1 2> /dev/null | 
-	    <a href="http://kbase.us/index.php/developers/api-documentation/cdmi-api/#fids_to_functions" target='_blank'>fids_to_functions</a> -c 1 |
-	    sort -k 3 > MOL.fid.source_id.md5.function
-<br></pre>
-Now, we have two fairy large files, <i>seed.translation.with.md5</i> and <i>MOL.fid.md5.function</i>,
-both sorted on md5 values.
-We can now make a single pass through the two files, compiling the data we will need to construct
-an initial translation file for MOL.  Essentially, as we pass through the two files, we detect
-cases in which an MOL fid had an identical md5 to a SEED fid; we use this to take the corresponding 
-exemplar and the MOL function and increment a count of the times this function occurred with
-that exemplar.  After the pass, we simply take, for each exemplar the string that MOL most often
-used to describe the abstract function, and we write out a file of inconsistent sets to support
-MOL in detecting and correcting inconsistencies.
-This is accomplished by the following short perl program:
-
-<br><pre>
+	    <a href="http://kbase.us/developer-zone/api-documentation/cdmi-entity-api/#get_entity_Feature" target='_blank'>get_entity_Feature</a> -f source_id |
+	    <a href="http://kbase.us/developer-zone/api-documentation/cdmi-api/#fids_to_proteins" target='_blank'>fids_to_proteins</a> -c 1 2&gt; /dev/null | 
+	    <a href="http://kbase.us/developer-zone/api-documentation/cdmi-api/#fids_to_functions" target='_blank'>fids_to_functions</a> -c 1 |
+	    sort -k 3 &gt; MOL.fid.source_id.md5.function
+<br /></pre> Now, we have two fairy large files, <i>seed.translation.with.<a name="md5401">md5</a></i> and <i>MOL.fid.<a name="md5402">md5</a>.function</i>, both sorted on <a name="md5403">md5</a> values. We can now make a single pass through the two files, compiling the data we will need to construct an initial translation file for MOL. Essentially, as we pass through the two files, we detect cases in which an MOL fid had an identical <a name="md5404">md5</a> to a <a name="SEED405">SEED</a> fid; we use this to take the corresponding exemplar and the MOL function and increment a count of the times this function occurred with that exemplar. After the pass, we simply take, for each exemplar the string that MOL most often used to describe the abstract function, and we write out a file of inconsistent sets to support MOL in detecting and correcting inconsistencies. This is accomplished by the following short perl program: <br /><pre>
 #
 # make_MOL_translation.pl
 #
-open(IN1,"<","MOL.fid.source_id.md5.function") || die "could not open MOL.fid.source_id.md5.function";
-open(IN2,"<","sorted.seed.with.md5")           || die "could not open sorted.seed.with.md5";
+open(IN1,&quot;&lt;&quot;,&quot;MOL.fid.source_id.md5.function&quot;) || die &quot;could not open MOL.fid.source_id.md5.function&quot;;
+open(IN2,&quot;&lt;&quot;,&quot;sorted.seed.with.md5&quot;)           || die &quot;could not open sorted.seed.with.md5&quot;;
 
 my %counts;
 my $row1 = &lt;IN1&gt;;
 my $row2 = &lt;IN2&gt;;
 my $n=1;
-while ($row1 && $row2)
+while ($row1 &amp;&amp; $row2)
 {
     my($fid_MOL,$source_id_MOL,$md5_MOL,$function_MOL) 
 	= ($row1 =~ /^(\S+)\t(\S+)\t(\S+)\t(.*)/);
     my($source_id_SEED,$exemplar,$md5_SEED) 
 	= ($row2 =~ /^\S+\t(\S+)\t\S+\t(\S+)\t(\S+)/);
 
-    if (($md5_MOL lt $md5_SEED) || &hypo($function_MOL))
+    if (($md5_MOL lt $md5_SEED) || &amp;hypo($function_MOL))
     {
 	$row1 = &lt;IN1&gt;;
     }
@@ -79,7 +47,7 @@ while ($row1 && $row2)
     }
     else
     {
-	$counts{$exemplar}->{$function_MOL}++;
+	$counts{$exemplar}-&gt;{$function_MOL}++;
 	$row1 = &lt;IN1&gt;;
     }
 }
@@ -88,8 +56,8 @@ close(IN2);
 
 foreach my $exemplar (keys(%counts))
 {
-    my @funcs = sort { $counts{$exemplar}->{$b} <=> $counts{$exemplar}->{$a} } keys(%{$counts{$exemplar}});
-    print join("\t",($exemplar,$funcs[0])),"\n";
+    my @funcs = sort { $counts{$exemplar}-&gt;{$b} &lt;=&gt; $counts{$exemplar}-&gt;{$a} } keys(%{$counts{$exemplar}});
+    print join(&quot;\t&quot;,($exemplar,$funcs[0])),&quot;\n&quot;;
 }
 
 # a modest attempt to catch most hypothetical roles
@@ -136,18 +104,9 @@ sub hypo {
     return 0;
 }
 
-<br></pre>
-
-The program outputs a set of 2-tuples:
-
-<br><pre>
+<br /></pre> The program outputs a set of 2-tuples: <br /><pre>
            [exemplar,MOL-function]
-<br></pre>
-
-On our initial uses of the program approximately 80% of the functional roles used in modelling
-were included in the initial MOL tranlation table.
-<br><br>
-We have attempted to weed out hypothetical assignments from consideration.
-We make no attempt to identify inconsistencies in the MOL assignments.  All we give is a table
-that maps the abstract roles (exemplars) to an MOL function that is used at least as often as any other
-to represent the role.
+<br /></pre> On our initial uses of the program approximately 80% of the functional roles used in modelling were included in the initial MOL tranlation table. <br />
+        <br /> We have attempted to weed out hypothetical assignments from consideration. We make no attempt to identify inconsistencies in the MOL assignments. All we give is a table that maps the abstract roles (exemplars) to an MOL function that is used at least as often as any other to represent the role. </ol>
+  </body>
+</html>

@@ -1,75 +1,50 @@
-<h1>Looking for Features with Identical Sequence that have Different Annotations</h1>
-
-In this short example, I write code that reads in a file in which each
-line is supposed to contain the ID of a feature of type 'peg'
-(protein-encoding gene).  For each of these input pegs we gather all
-features that have exactly the same translation (i.e., protein sequence),
-gathe their annotations, and check to see if they are all identical.
-If not, the set of features and inconsistent annotations gets displayed.
-<br>
-Here is the program I will describe:
-<br><pre>
+<html>
+  <head>
+  </head>
+  <body>
+    <h1>Looking for Features with Identical Sequence that have Different Annotations</h1> In this short example, I write code that reads in a file in which each line is supposed to contain the ID of a feature of type &#39;<a name="peg312">peg</a>&#39; (protein-encoding gene). For each of these input pegs we gather all features that have exactly the same translation (i.e., protein sequence), gathe their <a name="annotations313">annotations</a>, and check to see if they are all identical. If not, the set of features and inconsistent <a name="annotations314">annotations</a> gets displayed. <br /> Here is the program I will describe: <br /><pre>
 use CDMI_APIClient;
-my $kbO = CDMI_APIClient->new;
+my $kbO = CDMI_APIClient-&gt;new;
 
 my @fids = &lt;STDIN&gt;;
 chop @fids;
-my $fidH = $kbO-><a href="http://kbase.us/index.php/developers/api-documentation/cdmi-api/#fids_to_proteins" target='_blank'>fids_to_proteins</a>(\@fids);
+my $fidH = $kbO-&gt;<a href="http://kbase.us/developer-zone/api-documentation/cdmi-api/#fids_to_proteins" target='_blank'>fids_to_proteins</a>(\@fids);
 foreach my $fid (@fids)
 {
-    my $md5 = $fidH->{$fid};
-    my $md5H = $kbO-><a href="http://kbase.us/index.php/developers/api-documentation/cdmi-api/#proteins_to_fids" target='_blank'>proteins_to_fids</a>([$md5]);
-    my $fids_with_same_sequence = $md5H->{$md5};
+    my $md5 = $fidH-&gt;{$fid};
+    my $md5H = $kbO-&gt;<a href="http://kbase.us/developer-zone/api-documentation/cdmi-api/#proteins_to_fids" target='_blank'>proteins_to_fids</a>([$md5]);
+    my $fids_with_same_sequence = $md5H-&gt;{$md5};
 
-    if ($fids_with_same_sequence && (@$fids_with_same_sequence > 1))
+    if ($fids_with_same_sequence &amp;&amp; (@$fids_with_same_sequence &gt; 1))
     {
-        my $fidH = $kbO-><a href="http://kbase.us/index.php/developers/api-documentation/cdmi-api/#fids_to_functions" target='_blank'>fids_to_functions</a>($fids_with_same_sequence);
+        my $fidH = $kbO-&gt;<a href="http://kbase.us/developer-zone/api-documentation/cdmi-api/#fids_to_functions" target='_blank'>fids_to_functions</a>($fids_with_same_sequence);
         my %counts;
         foreach $_ (keys(%$fidH))
         {
-            $counts{$fidH->{$_}}++ ;
+            $counts{$fidH-&gt;{$_}}++ ;
         }
-        if (keys(%counts) > 1)   # inconsistent functions
+        if (keys(%counts) &gt; 1)   # inconsistent functions
         {
             foreach my $fid1 (@$fids_with_same_sequence)
             {
-                print join("\t",($fid1,                     # Feature ID
-		                 $counts{$fidH->{$fid1}},   # with same function
-                                 $fidH->{$fid1}             # function
-                                )),"\n";
+                print join(&quot;\t&quot;,($fid1,                     # Feature ID
+		                 $counts{$fidH-&gt;{$fid1}},   # with same function
+                                 $fidH-&gt;{$fid1}             # function
+                                )),&quot;\n&quot;;
             }
-            print "//\n";
+            print &quot;//\n&quot;;
         }
     }
 }
-<br></pre>
-
-For each input feature, the MD5 hash value of the
-protein sequence associated with the feature is retrieved. 
-This is achieved by 
-<br><pre>
+<br /></pre> For each input feature, the MD5 hash value of the protein sequence associated with the feature is retrieved. This is achieved by <br /><pre>
 my @fids = &lt;STDIN&gt;;
 chop @fids;
-my $fidH = $kbO-><a href="http://kbase.us/index.php/developers/api-documentation/cdmi-api/#fids_to_proteins" target='_blank'>fids_to_proteins</a>(\@fids);
-<br></pre>
-
-Then for each of the input features we compute the set of feature IDs
-that all have the same sequence using
-
-<br><pre>
-    my $md5 = $fidH->{$fid};
-    my $md5H = $kbO-><a href="http://kbase.us/index.php/developers/api-documentation/cdmi-api/#proteins_to_fids" target='_blank'>proteins_to_fids</a>([$md5]);
-    my $fids_with_same_sequence = $md5H->{$md5};
-<br></pre>
-
-The program then looks up the functions associated with each of these
-features using
-
-<br><pre>
-        my $fidH = $kbO-><a href="http://kbase.us/index.php/developers/api-documentation/cdmi-api/#fids_to_functions" target='_blank'>fids_to_functions</a>($fids_with_same_sequence);
-<br></pre>
-
-It then creates a hash with the function as a key and the number
-of occurrences as the value.  If there are inconsistent annotations,
-all of the features and functions are displayed.
-
+my $fidH = $kbO-&gt;<a href="http://kbase.us/developer-zone/api-documentation/cdmi-api/#fids_to_proteins" target='_blank'>fids_to_proteins</a>(\@fids);
+<br /></pre> Then for each of the input features we compute the set of feature IDs that all have the same sequence using <br /><pre>
+    my $md5 = $fidH-&gt;{$fid};
+    my $md5H = $kbO-&gt;<a href="http://kbase.us/developer-zone/api-documentation/cdmi-api/#proteins_to_fids" target='_blank'>proteins_to_fids</a>([$md5]);
+    my $fids_with_same_sequence = $md5H-&gt;{$md5};
+<br /></pre> The program then looks up the functions associated with each of these features using <br /><pre>
+        my $fidH = $kbO-&gt;<a href="http://kbase.us/developer-zone/api-documentation/cdmi-api/#fids_to_functions" target='_blank'>fids_to_functions</a>($fids_with_same_sequence);
+<br /></pre> It then creates a hash with the function as a key and the number of occurrences as the value. If there are inconsistent <a name="annotations315">annotations</a>, all of the features and functions are displayed. </body>
+</html>
