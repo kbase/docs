@@ -3730,6 +3730,63 @@ name="Output_Format"
 <a name='___top' class='dummyTopAnchor' ></a>
 
 <h2><a class='u' href='#___top' title='click to go to top of document'
+name="proteins_to_sequences"
+>proteins_to_sequences</a></h2>
+
+<p>proteins_to_sequences allows the user to look up the amino acid sequences corresponding to each of a set of proteins (represented as MD5 hash values) This command allows you to get back formatted fasta files.</p>
+
+<p>Example:</p>
+
+<pre>    proteins_to_sequences [arguments] &#60; input &#62; output</pre>
+
+<p>The standard input should be a tab-separated table (i.e., each line is a tab-separated set of fields). Normally, the last field in each line would contain the identifer. If another column contains the identifier use</p>
+
+<pre>    -c N</pre>
+
+<p>where N is the column (from 1) that contains the subsystem.</p>
+
+<p>This is a pipe command. The input is taken from the standard input, and the output is to the standard output.</p>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Command-Line_Options"
+>Command-Line Options</a></h3>
+
+<dl>
+<dt><a name="-c_Column"
+>-c Column</a></dt>
+
+<dd>
+<p>This is used only if the column containing the subsystem is not the last column.</p>
+
+<dt><a name="-i_InputFile_[_use_InputFile,_rather_than_stdin_]"
+>-i InputFile [ use InputFile, rather than stdin ]</a></dt>
+
+<dd>
+<dt><a name="-fasta"
+>-fasta</a></dt>
+
+<dd>
+<p>This is used to request a fasta output file (dropping all of the other columns in the input lines). It defaults to outputing just a fasta entry.</p>
+
+<dt><a name="-fc_Columns_[_construct_comment_for_fasta_from_these_columns_]"
+>-fc Columns [ construct comment for fasta from these columns ]</a></dt>
+
+<dd>
+<p>This is used to ask for &#34;fasta comments&#34; formed from one or more columns (comma-separated)</p>
+</dd>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Output_Format"
+>Output Format</a></h3>
+
+<p>The standard output is jsut a fasta file with the sequence. You can also get a tab-delimited file by using -fasta=0. The tab-delimited format consists of the input file with an extra column of sequence added.</p>
+
+<p>Input lines that cannot be extended are written to stderr.</p>
+<hr>
+<a name='___top' class='dummyTopAnchor' ></a>
+
+<h2><a class='u' href='#___top' title='click to go to top of document'
 name="reaction_strings"
 >reaction_strings</a></h2>
 

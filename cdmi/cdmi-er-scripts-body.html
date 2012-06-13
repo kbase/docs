@@ -909,8 +909,8 @@ name="Related_entities"
 >HasAsSequence ContigSequence</a></dt>
 
 <dd>
-<dt><a name="HasVariation_Variation"
->HasVariation Variation</a></dt>
+<dt><a name="IsAlignedIn_Variation"
+>IsAlignedIn Variation</a></dt>
 
 <dd>
 <dt><a name="IsComponentOf_Genome"
@@ -1453,10 +1453,6 @@ name="Related_entities"
 >HasMember Feature</a></dt>
 
 <dd>
-<dt><a name="HasProteinMember_ProteinSequence"
->HasProteinMember ProteinSequence</a></dt>
-
-<dd>
 <dt><a name="IsCoupledTo_Family"
 >IsCoupledTo Family</a></dt>
 
@@ -1501,16 +1497,8 @@ name="Command-Line_Options"
 >type</a></dt>
 
 <dd>
-<dt><a name="release"
->release</a></dt>
-
-<dd>
 <dt><a name="family_function"
 >family_function</a></dt>
-
-<dd>
-<dt><a name="alignment"
->alignment</a></dt>
 </dl>
 </dd>
 </dl>
@@ -1741,10 +1729,6 @@ name="Related_entities"
 <dd>
 <dt><a name="IsOwnerOf_Feature"
 >IsOwnerOf Feature</a></dt>
-
-<dd>
-<dt><a name="IsReferencedBy_ObservationalUnit"
->IsReferencedBy ObservationalUnit</a></dt>
 
 <dd>
 <dt><a name="Uses_SSRow"
@@ -2671,10 +2655,6 @@ name="Related_entities"
 <dd>
 <dt><a name="IsProteinFor_Feature"
 >IsProteinFor Feature</a></dt>
-
-<dd>
-<dt><a name="IsProteinMemberOf_Family"
->IsProteinMemberOf Family</a></dt>
 
 <dd>
 <dt><a name="ProjectsOnto_ProteinSequence"
@@ -3829,10 +3809,6 @@ name="Related_entities"
 >IsInGroup TaxonomicGrouping</a></dt>
 
 <dd>
-<dt><a name="IsRepresentedBy_ObservationalUnit"
->IsRepresentedBy ObservationalUnit</a></dt>
-
-<dd>
 <dt><a name="IsTaxonomyOf_Genome"
 >IsTaxonomyOf Genome</a></dt>
 </dl>
@@ -4061,8 +4037,7 @@ name="all_entities_Variation"
 
 <p>Return all instances of the Variation entity.</p>
 
-<p>A variation is a difference in DNA sequence between the reference genome and the observational unit.
-The variation has a position on a contig.</p>
+<p>A variation describes a set of aligned regions in two or more contigs.</p>
 
 <p>Example:</p>
 
@@ -4077,24 +4052,8 @@ name="Related_entities"
 <p>The Variation entity has the following relationship links:</p>
 
 <dl>
-<dt><a name="Impacts_Trait"
->Impacts Trait</a></dt>
-
-<dd>
-<dt><a name="IsLocatedOn_Contig"
->IsLocatedOn Contig</a></dt>
-
-<dd>
-<dt><a name="IsVariantOf_ObservationalUnit"
->IsVariantOf ObservationalUnit</a></dt>
-
-<dd>
-<dt><a name="SummarizedBy_AlleleFrequency"
->SummarizedBy AlleleFrequency</a></dt>
-
-<dd>
-<dt><a name="WasDetermiedBy_Assay"
->WasDetermiedBy Assay</a></dt>
+<dt><a name="IsAlignmentFor_Contig"
+>IsAlignmentFor Contig</a></dt>
 </dl>
 
 <h3><a class='u' href='#___top' title='click to go to top of document'
@@ -4121,12 +4080,8 @@ name="Command-Line_Options"
 <p>Choose a set of fields to return. Field-list is a comma-separated list of strings. The following fields are available:</p>
 
 <dl>
-<dt><a name="position"
->position</a></dt>
-
-<dd>
-<dt><a name="value"
->value</a></dt>
+<dt><a name="notes"
+>notes</a></dt>
 </dl>
 </dd>
 </dl>
@@ -5120,8 +5075,8 @@ name="Related_entities"
 >HasAsSequence ContigSequence</a></dt>
 
 <dd>
-<dt><a name="HasVariation_Variation"
->HasVariation Variation</a></dt>
+<dt><a name="IsAlignedIn_Variation"
+>IsAlignedIn Variation</a></dt>
 
 <dd>
 <dt><a name="IsComponentOf_Genome"
@@ -5706,10 +5661,6 @@ name="Related_entities"
 >HasMember Feature</a></dt>
 
 <dd>
-<dt><a name="HasProteinMember_ProteinSequence"
->HasProteinMember ProteinSequence</a></dt>
-
-<dd>
 <dt><a name="IsCoupledTo_Family"
 >IsCoupledTo Family</a></dt>
 
@@ -5754,16 +5705,8 @@ name="Command-Line_Options"
 >type</a></dt>
 
 <dd>
-<dt><a name="release"
->release</a></dt>
-
-<dd>
 <dt><a name="family_function"
 >family_function</a></dt>
-
-<dd>
-<dt><a name="alignment"
->alignment</a></dt>
 </dl>
 </dd>
 </dl>
@@ -6006,10 +5949,6 @@ name="Related_entities"
 <dd>
 <dt><a name="IsOwnerOf_Feature"
 >IsOwnerOf Feature</a></dt>
-
-<dd>
-<dt><a name="IsReferencedBy_ObservationalUnit"
->IsReferencedBy ObservationalUnit</a></dt>
 
 <dd>
 <dt><a name="Uses_SSRow"
@@ -7002,10 +6941,6 @@ name="Related_entities"
 <dd>
 <dt><a name="IsProteinFor_Feature"
 >IsProteinFor Feature</a></dt>
-
-<dd>
-<dt><a name="IsProteinMemberOf_Family"
->IsProteinMemberOf Family</a></dt>
 
 <dd>
 <dt><a name="ProjectsOnto_ProteinSequence"
@@ -8244,10 +8179,6 @@ name="Related_entities"
 >IsInGroup TaxonomicGrouping</a></dt>
 
 <dd>
-<dt><a name="IsRepresentedBy_ObservationalUnit"
->IsRepresentedBy ObservationalUnit</a></dt>
-
-<dd>
 <dt><a name="IsTaxonomyOf_Genome"
 >IsTaxonomyOf Genome</a></dt>
 </dl>
@@ -8486,8 +8417,7 @@ name="Output_Format"
 name="get_entity_Variation"
 >get_entity_Variation</a></h2>
 
-<p>A variation is a difference in DNA sequence between the reference genome and the observational unit.
-The variation has a position on a contig.</p>
+<p>A variation describes a set of aligned regions in two or more contigs.</p>
 
 <p>Example:</p>
 
@@ -8510,24 +8440,8 @@ name="Related_entities"
 <p>The Variation entity has the following relationship links:</p>
 
 <dl>
-<dt><a name="Impacts_Trait"
->Impacts Trait</a></dt>
-
-<dd>
-<dt><a name="IsLocatedOn_Contig"
->IsLocatedOn Contig</a></dt>
-
-<dd>
-<dt><a name="IsVariantOf_ObservationalUnit"
->IsVariantOf ObservationalUnit</a></dt>
-
-<dd>
-<dt><a name="SummarizedBy_AlleleFrequency"
->SummarizedBy AlleleFrequency</a></dt>
-
-<dd>
-<dt><a name="WasDetermiedBy_Assay"
->WasDetermiedBy Assay</a></dt>
+<dt><a name="IsAlignmentFor_Contig"
+>IsAlignmentFor Contig</a></dt>
 </dl>
 
 <h3><a class='u' href='#___top' title='click to go to top of document'
@@ -8554,12 +8468,8 @@ name="Command-Line_Options"
 <p>Choose a set of fields to return. Field-list is a comma-separated list of strings. The following fields are available:</p>
 
 <dl>
-<dt><a name="position"
->position</a></dt>
-
-<dd>
-<dt><a name="value"
->value</a></dt>
+<dt><a name="notes"
+>notes</a></dt>
 </dl>
 </dd>
 </dl>
@@ -9856,16 +9766,8 @@ name="Command-Line_Options"
 >type</a></dt>
 
 <dd>
-<dt><a name="release"
->release</a></dt>
-
-<dd>
 <dt><a name="family_function"
 >family_function</a></dt>
-
-<dd>
-<dt><a name="alignment"
->alignment</a></dt>
 </dl>
 
 <dt><a name="-rel_field-list"
@@ -11670,16 +11572,8 @@ name="Command-Line_Options"
 >type</a></dt>
 
 <dd>
-<dt><a name="release"
->release</a></dt>
-
-<dd>
 <dt><a name="family_function"
 >family_function</a></dt>
-
-<dd>
-<dt><a name="alignment"
->alignment</a></dt>
 </dl>
 
 <dt><a name="-rel_field-list"
@@ -12541,16 +12435,8 @@ name="Command-Line_Options"
 >type</a></dt>
 
 <dd>
-<dt><a name="release"
->release</a></dt>
-
-<dd>
 <dt><a name="family_function"
 >family_function</a></dt>
-
-<dd>
-<dt><a name="alignment"
->alignment</a></dt>
 </dl>
 </dd>
 </dl>
@@ -17163,16 +17049,8 @@ name="Command-Line_Options"
 >type</a></dt>
 
 <dd>
-<dt><a name="release"
->release</a></dt>
-
-<dd>
 <dt><a name="family_function"
 >family_function</a></dt>
-
-<dd>
-<dt><a name="alignment"
->alignment</a></dt>
 </dl>
 
 <dt><a name="-rel_field-list"
@@ -17213,16 +17091,8 @@ name="Command-Line_Options"
 >type</a></dt>
 
 <dd>
-<dt><a name="release"
->release</a></dt>
-
-<dd>
 <dt><a name="family_function"
 >family_function</a></dt>
-
-<dd>
-<dt><a name="alignment"
->alignment</a></dt>
 </dl>
 </dd>
 </dl>
@@ -17283,16 +17153,8 @@ name="Command-Line_Options"
 >type</a></dt>
 
 <dd>
-<dt><a name="release"
->release</a></dt>
-
-<dd>
 <dt><a name="family_function"
 >family_function</a></dt>
-
-<dd>
-<dt><a name="alignment"
->alignment</a></dt>
 </dl>
 
 <dt><a name="-rel_field-list"
@@ -17333,16 +17195,8 @@ name="Command-Line_Options"
 >type</a></dt>
 
 <dd>
-<dt><a name="release"
->release</a></dt>
-
-<dd>
 <dt><a name="family_function"
 >family_function</a></dt>
-
-<dd>
-<dt><a name="alignment"
->alignment</a></dt>
 </dl>
 </dd>
 </dl>
@@ -18434,16 +18288,8 @@ name="Command-Line_Options"
 >type</a></dt>
 
 <dd>
-<dt><a name="release"
->release</a></dt>
-
-<dd>
 <dt><a name="family_function"
 >family_function</a></dt>
-
-<dd>
-<dt><a name="alignment"
->alignment</a></dt>
 </dl>
 
 <dt><a name="-rel_field-list"
@@ -20683,16 +20529,8 @@ name="Command-Line_Options"
 >type</a></dt>
 
 <dd>
-<dt><a name="release"
->release</a></dt>
-
-<dd>
 <dt><a name="family_function"
 >family_function</a></dt>
-
-<dd>
-<dt><a name="alignment"
->alignment</a></dt>
 </dl>
 
 <dt><a name="-rel_field-list"
@@ -23119,16 +22957,8 @@ name="Command-Line_Options"
 >type</a></dt>
 
 <dd>
-<dt><a name="release"
->release</a></dt>
-
-<dd>
 <dt><a name="family_function"
 >family_function</a></dt>
-
-<dd>
-<dt><a name="alignment"
->alignment</a></dt>
 </dl>
 </dd>
 </dl>
@@ -30388,8 +30218,8 @@ name="Related_entities"
 >HasAsSequence ContigSequence</a></dt>
 
 <dd>
-<dt><a name="HasVariation_Variation"
->HasVariation Variation</a></dt>
+<dt><a name="IsAlignedIn_Variation"
+>IsAlignedIn Variation</a></dt>
 
 <dd>
 <dt><a name="IsComponentOf_Genome"
@@ -31233,10 +31063,6 @@ name="Related_entities"
 >HasMember Feature</a></dt>
 
 <dd>
-<dt><a name="HasProteinMember_ProteinSequence"
->HasProteinMember ProteinSequence</a></dt>
-
-<dd>
 <dt><a name="IsCoupledTo_Family"
 >IsCoupledTo Family</a></dt>
 
@@ -31326,16 +31152,8 @@ name="Command-Line_Options"
 >type</a></dt>
 
 <dd>
-<dt><a name="release"
->release</a></dt>
-
-<dd>
 <dt><a name="family_function"
 >family_function</a></dt>
-
-<dd>
-<dt><a name="alignment"
->alignment</a></dt>
 </dl>
 </dd>
 </dl>
@@ -31607,10 +31425,6 @@ name="Related_entities"
 <dd>
 <dt><a name="IsOwnerOf_Feature"
 >IsOwnerOf Feature</a></dt>
-
-<dd>
-<dt><a name="IsReferencedBy_ObservationalUnit"
->IsReferencedBy ObservationalUnit</a></dt>
 
 <dd>
 <dt><a name="Uses_SSRow"
@@ -33010,10 +32824,6 @@ name="Related_entities"
 <dd>
 <dt><a name="IsProteinFor_Feature"
 >IsProteinFor Feature</a></dt>
-
-<dd>
-<dt><a name="IsProteinMemberOf_Family"
->IsProteinMemberOf Family</a></dt>
 
 <dd>
 <dt><a name="ProjectsOnto_ProteinSequence"
@@ -34770,10 +34580,6 @@ name="Related_entities"
 >IsInGroup TaxonomicGrouping</a></dt>
 
 <dd>
-<dt><a name="IsRepresentedBy_ObservationalUnit"
->IsRepresentedBy ObservationalUnit</a></dt>
-
-<dd>
 <dt><a name="IsTaxonomyOf_Genome"
 >IsTaxonomyOf Genome</a></dt>
 </dl>
@@ -35133,8 +34939,7 @@ name="query_entity_Variation"
 
 <p>Query the entity Variation.</p>
 
-<p>A variation is a difference in DNA sequence between the reference genome and the observational unit.
-The variation has a position on a contig.</p>
+<p>A variation describes a set of aligned regions in two or more contigs.</p>
 
 <p>Example:</p>
 
@@ -35147,24 +34952,8 @@ name="Related_entities"
 <p>The Variation entity has the following relationship links:</p>
 
 <dl>
-<dt><a name="Impacts_Trait"
->Impacts Trait</a></dt>
-
-<dd>
-<dt><a name="IsLocatedOn_Contig"
->IsLocatedOn Contig</a></dt>
-
-<dd>
-<dt><a name="IsVariantOf_ObservationalUnit"
->IsVariantOf ObservationalUnit</a></dt>
-
-<dd>
-<dt><a name="SummarizedBy_AlleleFrequency"
->SummarizedBy AlleleFrequency</a></dt>
-
-<dd>
-<dt><a name="WasDetermiedBy_Assay"
->WasDetermiedBy Assay</a></dt>
+<dt><a name="IsAlignmentFor_Contig"
+>IsAlignmentFor Contig</a></dt>
 </dl>
 
 <h3><a class='u' href='#___top' title='click to go to top of document'
@@ -35236,12 +35025,8 @@ name="Command-Line_Options"
 <p>Choose a set of fields to return. Field-list is a comma-separated list of strings. The following fields are available:</p>
 
 <dl>
-<dt><a name="position"
->position</a></dt>
-
-<dd>
-<dt><a name="value"
->value</a></dt>
+<dt><a name="notes"
+>notes</a></dt>
 </dl>
 </dd>
 </dl>
