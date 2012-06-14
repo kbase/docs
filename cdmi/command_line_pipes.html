@@ -1,18 +1,19 @@
 <h1>Getting What You Need from the CS Using Command-Line Scripts</h1>
- The <a name="Central Store195">Central Store</a>
+ The <a name="Central Store200">Central Store</a>
  (<b>CS</b>
-) is the KBase integration of the data needed to support the creation and validation of metabolic and regulatory models. It will certainly be used for many other purposes, but its creation is being driven by the needs of the modelling community. <br />
+) is the KBase integration of the data needed to support the creation and validation of <a name="metabolic201">metabolic</a>
+ and regulatory models. It will certainly be used for many other purposes, but its creation is being driven by the needs of the modelling community. <br />
 <br />
  We have described many details of how to access the contents of the CS via command-line tools already in <a href="http://kbase.us/developer-zone/tutorials/getting-started/some-basic-exercises-using-the-doe-kbase/">Some Basic Exercises Using the DOE KBase</a>
 . This document is designed to complement that tutorial. We hope to explain an overview of the approach of piping KBase tools together on the command-line, as well as some very minimal notes relating to a subset of the Unix tools. <br />
 <br />
- To understand the contents of either tutorial you really do need to be able to bring up the entity-relationship model describing the contents of the CS and understand the contents of that model, which is often called the <a name="Central Data Model196">Central Data Model</a>
- (<b><a name="CDM197">CDM</a></b>
-). See the start of the companion tutorial to get an overview of the <a name="CDM198">CDM</a>
+ To understand the contents of either tutorial you really do need to be able to bring up the entity-relationship model describing the contents of the CS and understand the contents of that model, which is often called the <a name="Central Data Model202">Central Data Model</a>
+ (<b><a name="CDM203">CDM</a></b>
+). See the start of the companion tutorial to get an overview of the <a name="CDM204">CDM</a>
  and how to get started. <br />
 <br />
  We realize that most users will utlimately use user interfaces that obviate the need to do anything at the command-line. We look forward to that day. Until then, there is a great deal of use that can be made of the CS in its present form, using the rather primitive environment supported by the command-line. <h2>The Basic Philosophy of the CS Command-line Tools</h2>
- We think of most of the KBase command-line tools as taking in a file containing a tab-separated table and outputting a modified table. The most common modification is the addition of one or more columns. We create "pipelines" of these tools to implement fairly complex transformations leading to the final table containing the desired output. For example, consider the following little <a name="pipeline199">pipeline</a>
+ We think of most of the KBase command-line tools as taking in a file containing a tab-separated table and outputting a modified table. The most common modification is the addition of one or more columns. We create "pipelines" of these tools to implement fairly complex transformations leading to the final table containing the desired output. For example, consider the following little <a name="pipeline205">pipeline</a>
 : <br />
 <pre>
            <a href="http://kbase.us/developer-zone/api-documentation/cdm-entity-relationship-command-scripts/#all_entities_Genome" target='_blank'>all_entities_Genome</a> -f scientific_name | grep &quot;Streptococcus pneumoniae&quot;
@@ -22,8 +23,8 @@
 <pre>
            [genome-ID,genome-name]
 <br /></pre>
- This 2-column table is fed into a Unix command called <i><a name="grep200">grep</a></i>
-, which keeps lines that "match" its argument. In this case, the <i><a name="grep201">grep</a></i>
+ This 2-column table is fed into a Unix command called <i><a name="grep206">grep</a></i>
+, which keeps lines that "match" its argument. In this case, the <i><a name="grep207">grep</a></i>
  extracts rows in the table that "match" the string "Streptococcus pneumoniae." Thus, we get as a result a 2-column table in which each row contains "Streptococcus pneumoniae." Upon running the command, we got <br />
 <pre>
 kb|g.1340	Streptococcus pneumoniae SP19-BS75
@@ -66,12 +67,12 @@ kb|g.3478	Streptococcus pneumoniae SPN034183	kb|g.3478.peg.287	Triosephosphate i
 .
 <br /></pre>
  Here, some extra comments are necessary: <ol>
- <li><i><a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#genomes_to_fids" target='_blank'>genomes_to_fids</a></i> is a KBase command that takes a tab-separated table as input, and one of the columns in the table must contain KBase genome IDs. By default, that column is the last column in the table (i.e., the rightmost). If the column of genome IDs is not the last, use the &quot;-c N&quot; argument to say that the column is the Nth. <li><i><a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#fids_to_functions" target='_blank'>fids_to_functions</a></i> is a KBase command that takes a table containing a column of feature ids (i.e., fids), which by default is the last column, and extends the table with one more column, the function assigned to the feature. <li> Finally, the &quot;-i&quot; argument to <i><a name="grep202">grep</a></i> makes the match case insensitive. <i><a name="grep203">grep</a></i> is an extremely powerful command with a number of useful options (you can select all rows that do not match, rows that match some specified pattern, etc.) </ol>
+ <li><i><a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#genomes_to_fids" target='_blank'>genomes_to_fids</a></i> is a KBase command that takes a tab-separated table as input, and one of the columns in the table must contain KBase genome IDs. By default, that column is the last column in the table (i.e., the rightmost). If the column of genome IDs is not the last, use the &quot;-c N&quot; argument to say that the column is the Nth. <li><i><a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#fids_to_functions" target='_blank'>fids_to_functions</a></i> is a KBase command that takes a table containing a column of feature ids (i.e., fids), which by default is the last column, and extends the table with one more column, the function assigned to the feature. <li> Finally, the &quot;-i&quot; argument to <i><a name="grep208">grep</a></i> makes the match case insensitive. <i><a name="grep209">grep</a></i> is an extremely powerful command with a number of useful options (you can select all rows that do not match, rows that match some specified pattern, etc.) </ol>
 <h2> A Short Exercise</h2>
- Now, as an exercise, try to show the IDs and functions of all fids that have precisely the same function as <i>kb|g.9772.<a name="peg204">peg</a>.2175</i>
+ Now, as an exercise, try to show the IDs and functions of all fids that have precisely the same function as <i>kb|g.9772.<a name="peg210">peg</a>.2175</i>
 , You should spend a few minutes, if necessary, and try to solve this yourself before looking at our approach. <br />
 <br />
- We would likely use the following <a name="pipeline205">pipeline</a>
+ We would likely use the following <a name="pipeline211">pipeline</a>
 : <br />
 <pre>
            echo &#39;kb|g.9772.peg.2175&#39; | <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#fids_to_proteins" target='_blank'>fids_to_proteins</a> | <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#proteins_to_fids" target='_blank'>proteins_to_fids</a> | <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#fids_to_functions" target='_blank'>fids_to_functions</a>
@@ -79,37 +80,37 @@ kb|g.3478	Streptococcus pneumoniae SPN034183	kb|g.3478.peg.287	Triosephosphate i
  In some sense, this is probably not terribly efficient, but you do get the answer back in a few seconds (and, we think that the answer itself poses at least one interesting question). <br />
 <br />
 <h2>The Abstract View</h2>
- A <a name="pipeline206">pipeline</a>
- begins with a <i><a name="generator207">generator</a></i>
+ A <a name="pipeline212">pipeline</a>
+ begins with a <i><a name="generator213">generator</a></i>
  -- that is, a command that takes no input, but outputs a table. <i>Generators</i>
  come in two flavors: one generates a table for every instance of a designated entity, and the other a single instance of an entity. For example, <br />
 <pre>
         <a href="http://kbase.us/developer-zone/api-documentation/cdm-entity-relationship-command-scripts/#all_entities_Genome" target='_blank'>all_entities_Genome</a> 
 <br /></pre>
- is a <a name="generator208">generator</a>
+ is a <a name="generator214">generator</a>
  that outputs a single column containing the IDs of all genomes in KBase. Similarly, <br />
 <pre>
         <a href="http://kbase.us/developer-zone/api-documentation/cdm-entity-relationship-command-scripts/#all_entities_Genome" target='_blank'>all_entities_Genome</a> -f &#39;dna_size,contigs,scientific_name&#39;
 <br /></pre>
- is a <a name="generator209">generator</a>
+ is a <a name="generator215">generator</a>
  that would output a 4-column table. (Try it.) The <i>all_entities_ENTITY</i>
- commands are <a name="generators210">generators</a>
- that you may depend on being present (i.e., if you see the entity in the ER-model, the corresponding <a name="generator211">generator</a>
+ commands are <a name="generators216">generators</a>
+ that you may depend on being present (i.e., if you see the entity in the ER-model, the corresponding <a name="generator217">generator</a>
  may be assumed to be present). <br />
 <pre>
         echo &#39;kb|g.9772.peg.2175&#39;
 <br /></pre>
- was an example of a <a name="generator212">generator</a>
- that produced a single instance of an entity. Now, it is true that you might begin a <a name="pipeline213">pipeline</a>
- wihout a <a name="generator214">generator</a>
+ was an example of a <a name="generator218">generator</a>
+ that produced a single instance of an entity. Now, it is true that you might begin a <a name="pipeline219">pipeline</a>
+ wihout a <a name="generator220">generator</a>
 , using something like <br />
 <pre>
         <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#fids_to_proteins" target='_blank'>fids_to_proteins</a> &lt; file.of.saved.fid.ids
 <br /></pre>
-<p>In this case, you might consider this a &quot;restarted <a name="pipeline215">pipeline</a>&quot;, or you might amend our previous assertion that pipelines begin with <a name="generators216">generators</a>. In either case, if you wish to debate the issue, we claim to have succeeded in clarifying the concepts. 
+<p>In this case, you might consider this a &quot;restarted <a name="pipeline221">pipeline</a>&quot;, or you might amend our previous assertion that pipelines begin with <a name="generators222">generators</a>. In either case, if you wish to debate the issue, we claim to have succeeded in clarifying the concepts. 
 <br />
 <br />
- There is one more type of <a name="generator217">generator</a>
+ There is one more type of <a name="generator223">generator</a>
  that you will occasionally find extremely useful. Suppose that you wished to find all of the Features (fids) that have been assigned the function <br />
 <br />
 <pre>
@@ -134,24 +135,24 @@ kb|g.3478	Streptococcus pneumoniae SPN034183	kb|g.3478.peg.287	Triosephosphate i
        echo &#39;kb|g.9772.peg.2175&#39; | <a href="http://kbase.us/developer-zone/api-documentation/cdm-entity-relationship-command-scripts/#get_relationship_IsOwnedBy" target='_blank'>get_relationship_IsOwnedBy</a> -from source_id -to &#39;scientific_name,id&#39;
 <br /></pre> takes the input IDs of Features, crosses the IsOwnedBy relationship, and adds three columns (one from the <i>from entity</i> and two from the <i>to entity</i>). </ol>
 <br />
- We have supplemented the standard <a name="generators218">generators</a>
+ We have supplemented the standard <a name="generators224">generators</a>
  (all_entity_ENTITY routines) and the standard transformation commands (get_entity_ENTITY and get_relationship_RELATIONSHIP) with a set of commands representing what we call "well-trodden paths." When we see these recurring patterns of use, sometimes we can reduce the requirred effort to extract the desired data. Thus, <br />
 <pre>
        <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#all_roles_used_in_models" target='_blank'>all_roles_used_in_models</a>
 <br /></pre>
- is a customized <a name="generator219">generator</a>
+ is a customized <a name="generator225">generator</a>
  that outputs a table containing roles that are used in building models. If you wanted to get the number of unique protein sequences that connect to these roles, you might use <br />
 <pre>
        <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#all_roles_used_in_models" target='_blank'>all_roles_used_in_models</a> | <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#roles_to_proteins" target='_blank'>roles_to_proteins</a> | cut -f 2 | sort -u | wc
 <br /></pre>
  The <i><a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#roles_to_proteins" target='_blank'>roles_to_proteins</a></i>
  transformation command is an example of one of these commands added to transformation commands. The following Unix commands are worth noting: <ul>
- <li><b><a name="cut220">cut</a> -f 2</b> says &quot;extract just the second column&quot; (the one containing <a name="md5221">md5</a> values representing protein sequences). <li><b><a name="sort222">sort</a> -u</b> says &quot;<a name="sort223">sort</a> the input table removing duplicate lines&quot;, and <li><b><a name="wc224">wc</a></b> says &quot;count the lines, word, and characters in the input file&quot; </ul>
+ <li><b><a name="cut226">cut</a> -f 2</b> says &quot;extract just the second column&quot; (the one containing <a name="md5227">md5</a> values representing protein sequences). <li><b><a name="sort228">sort</a> -u</b> says &quot;<a name="sort229">sort</a> the input table removing duplicate lines&quot;, and <li><b><a name="wc230">wc</a></b> says &quot;count the lines, word, and characters in the input file&quot; </ul>
 <br />
- Well, that is basically it. We end by attempting to convey just one picky detail. The <a name="sort225">sort</a>
- command allows you to <a name="sort226">sort</a>
+ Well, that is basically it. We end by attempting to convey just one picky detail. The <a name="sort231">sort</a>
+ command allows you to <a name="sort232">sort</a>
  lines on specific fields using the <b>-k N</b>
- argument. The problem is that it breaks a line into fields using transitions between whitespace characters and non-whitespace characters, and this is not the behavior you always want. If you are dealing with tab-delimited fields (as we are), then you want the <i><a name="sort227">sort</a></i>
+ argument. The problem is that it breaks a line into fields using transitions between whitespace characters and non-whitespace characters, and this is not the behavior you always want. If you are dealing with tab-delimited fields (as we are), then you want the <i><a name="sort233">sort</a></i>
  command to split the line into fields properly. This can be done by executing <br />
 <pre>
             export TAB=`echo -e &quot;\t&quot;`
@@ -160,5 +161,5 @@ kb|g.3478	Streptococcus pneumoniae SPN034183	kb|g.3478.peg.287	Triosephosphate i
 <pre>
             sort -t &quot;$TAB&quot; -k 4 
 <br /></pre>
- to <a name="sort228">sort</a>
+ to <a name="sort234">sort</a>
  on the 4th field in a tab-delimited table. Within our KBase exercises, you will usually need to worry about this only if you have "role" or "function" columns in your tables (they have embedded whitespace).

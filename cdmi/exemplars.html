@@ -1,11 +1,12 @@
 <h1>Towards a Controlled Vocabulary Part 1: Defining Exemplars</h1>
  Much has been said about the desirability of a controlled vocabulary for protein function and how it might be achieved. One of the central goals of the KBase effort will be to develop detailed, predictive models of microbes. A consistent, controlled vocabulary of protein function will be needed to support automated generation of these models. <br />
 <br />
- The KBase will include a major effort to automatically construct metabolic models of organisms directly from sequenced genomes. Much of the technology used by KBase will come directly from the <a name="SEED331">SEED</a>
- and <a name="Model332">Model</a>
- <a name="SEED333">SEED</a>
- Projects which utilize the vocabulary established by the <a name="SEED334">SEED</a>
- Project. We wish to remove this dependency on the <a name="SEED335">SEED</a>
+ The KBase will include a major effort to automatically construct <a name="metabolic341">metabolic</a>
+ models of organisms directly from sequenced genomes. Much of the technology used by KBase will come directly from the <a name="SEED342">SEED</a>
+ and <a name="Model343">Model</a>
+ <a name="SEED344">SEED</a>
+ Projects which utilize the vocabulary established by the <a name="SEED345">SEED</a>
+ Project. We wish to remove this dependency on the <a name="SEED346">SEED</a>
  voabulary as quickly as possible, and this short note sketches out the plan for achieving this and how to begin implementing it. <br />
 <br />
 <h2>Limiting the Scope</h2>
@@ -14,15 +15,18 @@
 <br />
  a plan can be formulated that could be implemented by modest resources and good will. <br />
 <br />
- So, how many functional roles are now used in the construction of metabolic models? It is clear that ultimately we wish to include regulatory models, and eventually all functional roles that occur in living organisms, but for now let us confine ourselves to the set of functional roles needed to support metabolic modeling. You can just use the command <br />
+ So, how many functional roles are now used in the construction of <a name="metabolic347">metabolic</a>
+ models? It is clear that ultimately we wish to include regulatory models, and eventually all functional roles that occur in living organisms, but for now let us confine ourselves to the set of functional roles needed to support <a name="metabolic348">metabolic</a>
+ modeling. You can just use the command <br />
 <pre>
     <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#all_roles_used_in_models" target='_blank'>all_roles_used_in_models</a> 
 <br /></pre>
- to get the current list of functional roles used in metabolic models. Currently, there are about 2000-2500. This is a manageable number. <h2>The Concept of <i>Exemplars</i></h2>
+ to get the current list of functional roles used in <a name="metabolic349">metabolic</a>
+ models. Currently, there are about 2000-2500. This is a manageable number. <h2>The Concept of <i>Exemplars</i></h2>
  The key to a rapid and straightforward path to supporting models built using differing vocabularies of function is the concept of <b>exemplar</b>
 . We choose a sequence for which <ul>
- <li> we believe that we know the function of the sequence (ideally through experimentation reported in the <a name="literature336">literature</a>), and <li> the sequence has been annotated by a number of groups (and we conjecture that they believe their functions to be reliable due to the <a name="literature337">literature</a>). </ul>
- Let's begin with connecting the roles used in models to <a name="literature338">literature</a>
+ <li> we believe that we know the function of the sequence (ideally through experimentation reported in the <a name="literature350">literature</a>), and <li> the sequence has been annotated by a number of groups (and we conjecture that they believe their functions to be reliable due to the <a name="literature351">literature</a>). </ul>
+ Let's begin with connecting the roles used in models to <a name="literature352">literature</a>
 . A simple, but somewhat slow, way to do this is using <br />
 <pre>
          <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#all_roles_used_in_models" target='_blank'>all_roles_used_in_models</a> | 
@@ -31,15 +35,15 @@
 <br /></pre>
  This requires some explanation. First, many of the command-line scripts that cross from one entity type to another write input lines that could not be matched up to <i>stderr</i>
 . Thus, roles that cannot be connected to fids get written to <i>roles.without.fids</i>
-, and fids that cannot be lined to <a name="literature339">literature</a>
- cause lines to be written to <i>roles.fids.no.<a name="literature340">literature</a></i>
+, and fids that cannot be lined to <a name="literature353">literature</a>
+ cause lines to be written to <i>roles.fids.no.<a name="literature354">literature</a></i>
 . Roles that cannot be connected to fids result from functions that may have been renamed (without renaming the functional role) or roles that have been conjectured but simply have not yet been connect to specific genes. They represent a set of issues that need to be processed manually. When I last ran this command, I found 148 such roles. <br />
 <br />
  If we now run, <br />
 <pre>
       cut -f1,2 role.fid.pubmed | <a href="http://kbase.us/developer-zone/api-documentation/cdm-entity-relationship-command-scripts/#get_relationship_Produces" target='_blank'>get_relationship_Produces</a> -to id | sort -u &gt; role.fid.md5
 <br /></pre>
- we get a table showing roles and fids, where each of the fids connnects to a least one pubmed reference. The <i><a name="cut341">cut</a></i>
+ we get a table showing roles and fids, where each of the fids connnects to a least one pubmed reference. The <i><a name="cut355">cut</a></i>
  picks up the first two fields (<i>role</i>
  and <i>fid</i>
 , dropping the <i>pubmed id</i>
@@ -47,13 +51,13 @@
 <pre>
         <a href="http://kbase.us/developer-zone/api-documentation/cdm-entity-relationship-command-scripts/#get_relationship_Produces" target='_blank'>get_relationship_Produces</a> -to id
 <br /></pre>
- is used to pick up the <a name="md5342">md5</a>
- value of the <a name="ProteinSequence343">ProteinSequence</a>
+ is used to pick up the <a name="md5356">md5</a>
+ value of the <a name="ProteinSequence357">ProteinSequence</a>
  corresponding to a fid. To understand how this works, you need to know that the relationship <i>Produces</i>
- connects <i><a name="Feature344">Feature</a></i>
- entities to <i><a name="ProteinSequence345">ProteinSequence</a></i>
- entities, and that the <a name="md5346">md5</a>
- hash values are used as IDs for the <i><a name="ProteinSequence347">ProteinSequence</a></i>
+ connects <i><a name="Feature358">Feature</a></i>
+ entities to <i><a name="ProteinSequence359">ProteinSequence</a></i>
+ entities, and that the <a name="md5360">md5</a>
+ hash values are used as IDs for the <i><a name="ProteinSequence361">ProteinSequence</a></i>
  entities. To see how this works, you might try running <br />
 <pre>
         echo &#39;kb|g.0.peg.2659&#39; | <a href="http://kbase.us/developer-zone/api-documentation/cdm-entity-relationship-command-scripts/#get_relationship_Produces" target='_blank'>get_relationship_Produces</a> -to id
@@ -71,9 +75,9 @@
 .
 .
 <br /></pre>
- We have over 200 distinct fids that all are believed to implement the functional role and can be linked to at least one pubmed reference. It is worth noting that the pubmed articles (<a name="Publication348">Publication</a>
- entities) are linked to <a name="ProteinSequence349">ProteinSequence</a>
- entities, and then through them to Features. This means that we may see many Fids that share identical protein sequence (note the <a name="md5350">md5</a>
+ We have over 200 distinct fids that all are believed to implement the functional role and can be linked to at least one pubmed reference. It is worth noting that the pubmed articles (<a name="Publication362">Publication</a>
+ entities) are linked to <a name="ProteinSequence363">ProteinSequence</a>
+ entities, and then through them to Features. This means that we may see many Fids that share identical protein sequence (note the <a name="md5364">md5</a>
  values in the initial output). <br />
 <br />
  Now we are ready to illustrate the concept of an exemplar. Rather than saying <br />
@@ -86,13 +90,13 @@
       which has a sequence with an md5 hash of 9f6606c2e93c6ac75fdc60dff2f54955.
 <br /></pre>
  Thus, we have an <i>abstract function</i>
- which we represent with a specific feature ID (<i>kb|g.0.<a name="peg351">peg</a>.2659</i>
+ which we represent with a specific feature ID (<i>kb|g.0.<a name="peg365">peg</a>.2659</i>
 ). When we say <i>&quot;The function of feature X is the same as that of exemplar Y&quot;</i>
- anyone can look up the sequence of the exemplar in KBase, they can access any attached <a name="literature352">literature</a>
+ anyone can look up the sequence of the exemplar in KBase, they can access any attached <a name="literature366">literature</a>
 , and they can investigate the potential role of <i>X</i>
  in modelling. Further, they can do all this without arguing about how to precisely label the abstract function. <br />
 <br />
- Now let us consider how we might use the data in the file <i>role.fid.<a name="md5353">md5</a></i>
+ Now let us consider how we might use the data in the file <i>role.fid.<a name="md5367">md5</a></i>
  to select an appropriate exemplar for each functional role. It really should not matter which ones we pick. However, we have chosen to use <i>Escherichia coli</i>
  and <i>Bacillus subtilis</i>
  features when possible. We consider these to be relatively stable. We begin by just getting a 3-column table <br />
@@ -148,13 +152,13 @@ sub better {
 <pre>
           perl choose_exemplars.pl &lt; role.fid.genome.function  &gt; exemplars.with.literature
 <br /></pre>
- For each functional role that is used in construction of KBase models, and for which we can find a <a name="literature354">literature</a>
+ For each functional role that is used in construction of KBase models, and for which we can find a <a name="literature368">literature</a>
  reference identifying a feature that implements the role, we have selected a feature to act as an exemplar. The feature has been the topic of at least one paper, and we believe that the paper supports the position that the exemplar feature implements the corresponding role. <br />
 <br />
- We now have a set of functional roles that are represented by exemplars that are supported by <a name="literature355">literature</a>
+ We now have a set of functional roles that are represented by exemplars that are supported by <a name="literature369">literature</a>
  references. We have captured the roles that cannot be connected to any fids in <i>roles.without.fids</i>
-. Finally, we are left with roles that are connected to fids, but not to any fid that we have connected to <a name="literature356">literature</a>
-. The connections between roles and possible exemplars was captured in <i>roles.fids.no.<a name="literature357">literature</a></i>
+. Finally, we are left with roles that are connected to fids, but not to any fid that we have connected to <a name="literature370">literature</a>
+. The connections between roles and possible exemplars was captured in <i>roles.fids.no.<a name="literature371">literature</a></i>
  We need to delete from this file all roles for which exemplars have been chosen, and then select exemplars from those that are left. We can make fairly arbitrary choices to get initial exemplars. Perhaps the easiest way to make an initial choice is to just use <br />
 <pre>
                 perl delete_roles_with_exemplars.pl exemplars.with.literature &lt; roles.fids.no.literature | 
@@ -183,5 +187,5 @@ while ($_ = )
 <br /></pre>
  Out of the 2000-2500 roles used in the curent collection of models, there are often a small number for which no attachment to a sequence exists. These require manual curation and need to be continuously reviewed. In any event, we will have to curate the set of exemplars as new experiemental evidence becomes available. <br />
 <br />
- The choice of exemplars constitutes step 1 of the process of reaching interchangable <a name="annotations358">annotations</a>
+ The choice of exemplars constitutes step 1 of the process of reaching interchangable <a name="annotations372">annotations</a>
  via controlled vocabularies. 
