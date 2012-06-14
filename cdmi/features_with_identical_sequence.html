@@ -1,5 +1,5 @@
 <h1>Looking for Features with Identical Sequence that have Different Annotations</h1>
-<p>In this short example, I write code that reads in a file in which each line is supposed to contain the ID of a feature of type &#39;<a name="peg322">peg</a>&#39; (protein-encoding gene). For each of these input pegs we gather all features that have exactly the same translation (i.e., protein sequence), gather their <a name="annotations323">annotations</a>, and check to see if they are all identical. If not, the set of features and inconsistent <a name="annotations324">annotations</a> gets displayed. <br />
+<p>In this short example, I write code that reads in a file in which each line is supposed to contain the ID of a feature of type &#39;<a name="peg337">peg</a>&#39; (protein-encoding gene). For each of these input pegs we gather all features that have exactly the same translation (i.e., protein sequence), gather their <a name="annotations338">annotations</a>, and check to see if they are all identical. If not, the set of features and inconsistent <a name="annotations339">annotations</a> gets displayed. <br />
 <h2>A Program to Look Up Functions Associated with Feature IDs</h2>
 <p>Here is the program I will describe: <br />
 <pre>
@@ -37,7 +37,7 @@ foreach my $fid (@fids)
     }
 }
 <br /></pre>
- For each input feature, the <a name="md5325">md5</a>
+ For each input feature, the <a name="md5340">md5</a>
  hash value of the protein sequence associated with the feature is retrieved. This is achieved by <br />
 <pre>
 my @fids = &lt;STDIN&gt;;
@@ -54,5 +54,5 @@ my $fidH = $kbO-&gt;<a href="http://kbase.us/developer-zone/api-documentation/cd
 <pre>
         my $fidH = $kbO-&gt;<a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#fids_to_functions" target='_blank'>fids_to_functions</a>($fids_with_same_sequence);
 <br /></pre>
- It then creates a hash with the function as a key and the number of occurrences as the value. If there are inconsistent <a name="annotations326">annotations</a>
+ It then creates a hash with the function as a key and the number of occurrences as the value. If there are inconsistent <a name="annotations341">annotations</a>
 , all of the features and functions are displayed. 
