@@ -1,6 +1,5 @@
 <h1>Towards a Controlled Vocabulary Part 3: Making the MOL Translation to the Abstract Function Vocabulary</h1>
-<p>We have described how to define an abstract vocabulary of function using exemplars in <a href="http://kbase.us/developer-zone/tutorials/command-line-scripts/command-line-applications/towards-a-controlled-vocabulary-part-1-defining-exemplars/" l="l" name="Exemplars422">Part 1: Defining Exemplars</a>. Next, we described how to generate the <a name="SEED423">SEED</a> mapping from <a name="SEED424">SEED</a> IDs to the abstract vocabulary imposed by exemplars <a href="http://kbase.us/developer-zone/tutorials/command-line-scripts/command-line-applications/towards-a-controlled-vocabulary-part-2-mapping-to-exemplars/" name="Exemplars425">Part 2: Mapping to Exemplars</a>. We complete this discussion of how to reach consistent <a name="annotations426">annotations</a> in an abstract vocabulary by discussing how one might map <a name="MicrobesOnLine427">MicrobesOnLine</a> (MOL) features to the abstract vocabulary. <br />
- <br /> The overall strategy follows two main steps, as explained in the sections below.
+<p>We have described how to define an abstract vocabulary of function using exemplars in <a href="http://kbase.us/developer-zone/tutorials/command-line-scripts/command-line-applications/towards-a-controlled-vocabulary-part-1-defining-exemplars/" l="l" name="Exemplars422">Part 1: Defining Exemplars</a>. Next, we described how to generate the <a name="SEED423">SEED</a> mapping from <a name="SEED424">SEED</a> IDs to the abstract vocabulary imposed by exemplars <a href="http://kbase.us/developer-zone/tutorials/command-line-scripts/command-line-applications/towards-a-controlled-vocabulary-part-2-mapping-to-exemplars/" name="Exemplars425">Part 2: Mapping to Exemplars</a>. We complete this discussion of how to reach consistent <a name="annotations426">annotations</a> in an abstract vocabulary by discussing how one might map <a name="MicrobesOnLine427">MicrobesOnLine</a> (MOL) features to the abstract vocabulary. <br /><br /> The overall strategy follows two main steps, as explained in the sections below.
 <h2>Begin with the SEED Translation</h2>
 <p>Begin with the <a name="SEED428">SEED</a> translation, represented as 4-tuples of the form <br />
 <pre>
@@ -37,8 +36,7 @@
 	    sort -k 3 &gt; MOL.fid.source_id.md5.function
 <br /></pre>
 <p>Now, we have two fairy large files, <i>seed.translation.with.<a name="md5434">md5</a></i> and <i>MOL.fid.<a name="md5435">md5</a>.function</i>, both sorted on <a name="md5436">md5</a> values. We can now make a single pass through the two files, compiling the data we will need to construct an initial translation file for MOL. Essentially, as we pass through the two files, we detect cases in which an MOL fid had an identical <a name="md5437">md5</a> to a <a name="SEED438">SEED</a> fid; we use this to take the corresponding exemplar and the MOL function and increment a count of the times this function occurred with that exemplar. After the pass, we simply take, for each exemplar the string that MOL most often used to describe the abstract function, and we write out a file of inconsistent sets to support MOL in detecting and correcting inconsistencies. This is accomplished by the following short perl program:
-<h2>A Short Perl Program supporting MOL in Correcting Inconsistencies<br />
-</h2>
+<h2>A Short Perl Program supporting MOL in Correcting Inconsistencies<br /></h2>
 <pre>
 #
 # make_MOL_translation.pl

@@ -14,13 +14,7 @@
  genomes. In each case we will also construct sets of inconsistencies that will need to be resolved. <br />
 <br />
  Let us begin by creating the translation table for the <a name="SEED393">SEED</a>
-. The strategy here is as follows: <ol>
- <li>For each exemplar <b>E</b>, locate all <a name="SEED394">SEED</a> fids that have the same function as the KBase function assigned to <b>E</b>. Call this set <b>S</b>. <li>Then, for each <a name="SEED395">SEED</a> fid <b>F</b> in <b>S</b>, get all <a name="SEED396">SEED</a> fids that have identical <a name="md5397">md5</a> values. Call this set <b>FS</b>. Then, form a 2-tuple: [<b>F</b>,<b>FS</b>]. <li>For each two-tuple [<b>F</b>, <b>FS</b>], split <b>FS</b> into <br />
-  <br />
-  <ul>
-   <li>those genes with function identical to that of <b>E</b> and <li>those genes with functions that differ from <b>E</b>. </ul>
-  <br />
-  <br /> If a majority of genes with a common <a name="md5398">md5</a> have a function identical to that of <b>E</b>, write tuples <br /><pre>
+. The strategy here is as follows: <ol><li>For each exemplar <b>E</b>, locate all <a name="SEED394">SEED</a> fids that have the same function as the KBase function assigned to <b>E</b>. Call this set <b>S</b>. <li>Then, for each <a name="SEED395">SEED</a> fid <b>F</b> in <b>S</b>, get all <a name="SEED396">SEED</a> fids that have identical <a name="md5397">md5</a> values. Call this set <b>FS</b>. Then, form a 2-tuple: [<b>F</b>,<b>FS</b>]. <li>For each two-tuple [<b>F</b>, <b>FS</b>], split <b>FS</b> into <br /><br /><ul><li>those genes with function identical to that of <b>E</b> and <li>those genes with functions that differ from <b>E</b>. </ul><br /><br /> If a majority of genes with a common <a name="md5398">md5</a> have a function identical to that of <b>E</b>, write tuples <br /><pre>
     [SEED,SEED-id,fid,E] 
 <br /></pre> as part of the translation table, and for cases in which a fid has a distinct function from the exemplar, write entries of the form <br /><pre>
     [SEED-id,fid,E] 
@@ -58,7 +52,7 @@
 <pre>
             [role,exemplar-fid,genome_name]
 <br /></pre>
- These 3-tuples define our "abstract vocabulary of function". Then, look at <br />
+ These 3-tuples define our &quot;abstract vocabulary of function&quot;. Then, look at <br />
 <pre>
             cut -f1,2 exemplars |
             <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#roles_to_fids" target='_blank'>roles_to_fids</a> -c 1 |

@@ -2,8 +2,7 @@
 <h2>Introduction</h2>
 <p>As the KBase begins to be used to support development and maintenance of <a name="metabolic342">metabolic</a> models, it becomes important that we be able to rapidly compare the functional roles that are implemented by protein-encoding genes in a pair of genomes. In the most common case, we will be looking for errors in <a name="annotations343">annotations</a> between very close genomes. In that case, most of the discrepancies will reflect errors in gene calling and <a name="annotations344">annotations</a>. In the cases of more distant genomes, it becomes possible to infer <a name="metabolic345">metabolic</a> differences from the discrepancies. 
 <h2>A Short Program for Extracting Data from the CS</h2>
-<p>In any event, here we give a short program using the KBase <a name="API346">API</a> for extracting data from the CS and comparing the functional roles that occur in two genomes stored in the CS. <br />
- <br /> Here is the actual program: <br />
+<p>In any event, here we give a short program using the KBase <a name="API346">API</a> for extracting data from the CS and comparing the functional roles that occur in two genomes stored in the CS. <br /><br /> Here is the actual program: <br />
 <pre>
 use CDMI_APIClient;
 my $kbO = CDMI_APIClient-&gt;new;
@@ -65,8 +64,8 @@ my $fids2  = $genH-&gt;{$g2};
 my $funcH1 = $kbO-&gt;<a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#fids_to_functions" target='_blank'>fids_to_functions</a>($fids1);
 my $funcH2 = $kbO-&gt;<a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#fids_to_functions" target='_blank'>fids_to_functions</a>($fids2);
 <br /></pre>
- to retrieve the protein encoding genes from each genome ($genH is a hash keyed on the genome ID with values comprised of the PEGs associated with the genome), and then retrieving the functions associated with each of the Features of type '<a name="peg347">peg</a>
-'. The line <br />
+ to retrieve the protein encoding genes from each genome ($genH is a hash keyed on the genome ID with values comprised of the PEGs associated with the genome), and then retrieving the functions associated with each of the Features of type &#39;<a name="peg347">peg</a>
+&#39;. The line <br />
 <pre>
 
 my %roles_used_in_models = map { $_ =&gt; 1 } @{ $kbO-&gt;<a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#all_roles_used_in_models" target='_blank'>all_roles_used_in_models</a>() };

@@ -10,8 +10,7 @@
  voabulary as quickly as possible, and this short note sketches out the plan for achieving this and how to begin implementing it. <br />
 <br />
 <h2>Limiting the Scope</h2>
- Unifying the distinct vocabularies of function would require a major effort. However, if one circumscribes the goal to <ul>
- <li>identifying the functional roles needed to support modeling, <li>creating an abstract representation for each role in this limited set, and <li>buiilding translation dictionaries to and from this set of abstract functions, </ul>
+ Unifying the distinct vocabularies of function would require a major effort. However, if one circumscribes the goal to <ul><li>identifying the functional roles needed to support modeling, <li>creating an abstract representation for each role in this limited set, and <li>buiilding translation dictionaries to and from this set of abstract functions, </ul>
 <br />
  a plan can be formulated that could be implemented by modest resources and good will. <br />
 <br />
@@ -24,9 +23,8 @@
  to get the current list of functional roles used in <a name="metabolic364">metabolic</a>
  models. Currently, there are about 2000-2500. This is a manageable number. <h2>The Concept of <i>Exemplars</i></h2>
  The key to a rapid and straightforward path to supporting models built using differing vocabularies of function is the concept of <b>exemplar</b>
-. We choose a sequence for which <ul>
- <li> we believe that we know the function of the sequence (ideally through experimentation reported in the <a name="literature365">literature</a>), and <li> the sequence has been annotated by a number of groups (and we conjecture that they believe their functions to be reliable due to the <a name="literature366">literature</a>). </ul>
- Let's begin with connecting the roles used in models to <a name="literature367">literature</a>
+. We choose a sequence for which <ul><li> we believe that we know the function of the sequence (ideally through experimentation reported in the <a name="literature365">literature</a>), and <li> the sequence has been annotated by a number of groups (and we conjecture that they believe their functions to be reliable due to the <a name="literature366">literature</a>). </ul>
+ Let&#39;s begin with connecting the roles used in models to <a name="literature367">literature</a>
 . A simple, but somewhat slow, way to do this is using <br />
 <pre>
          <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#all_roles_used_in_models" target='_blank'>all_roles_used_in_models</a> | 

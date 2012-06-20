@@ -11,14 +11,14 @@
 <br /></pre>
  You might decide that <i>Streptococcus pneumoniae TIGR4</i>
  is a good genome to start with. Its KBase id is <i>kb|g.161</i>
-. Can you find it in the list of genomes you got back? Now, let's get a local copy of the contigs of that genome. <h2>Extracting a FASTA File of Contigs from the CS</h2>
+. Can you find it in the list of genomes you got back? Now, let&#39;s get a local copy of the contigs of that genome. <h2>Extracting a FASTA File of Contigs from the CS</h2>
  Note that you could just upload whatever set of contigs you wanted from a file in your local machine to your IRIS workarea. However, in this case we want to get the contigs from the CS. To do that, we would use <br />
 <pre>
   echo &#39;kb|g.161&#39; | <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#genomes_to_contigs" target='_blank'>genomes_to_contigs</a> | <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#contigs_to_sequences" target='_blank'>contigs_to_sequences</a> &gt; g.161.contigs
 <br /></pre>
  Try it and verify that you have easy access to any of the CS genomes. <h2>Creating Projects</h2>
- You will find it convenient to create subdirectories (i.e., folders) to contain your separate projects. Otherwise, your IRIS workspace will become pretty cluttered quickly. Let's create a subdirectory called <i>g.161</i>
- where we will annotate kb|g.161 (we encourage you to not use any special characters in your filenames -- it is asking for trouble; hence, we left of the 'kb|' prefix). We suggest that you try <br />
+ You will find it convenient to create subdirectories (i.e., folders) to contain your separate projects. Otherwise, your IRIS workspace will become pretty cluttered quickly. Let&#39;s create a subdirectory called <i>g.161</i>
+ where we will annotate kb|g.161 (we encourage you to not use any special characters in your filenames -- it is asking for trouble; hence, we left of the &#39;kb|&#39; prefix). We suggest that you try <br />
 <pre>
 
   mkdir g.161
@@ -26,7 +26,7 @@
   cd g.161
   ls
 </pre>
- The first command creates the subdirectory, the second moves our contigs into the subdirectory, the third moves our "position" to the subdirectory, and the last display the contents of the subdirectory. We urge you to verify tht it all works as described. <h2>Creating a Genome Object to be Annotated</h2>
+ The first command creates the subdirectory, the second moves our contigs into the subdirectory, the third moves our &quot;position&quot; to the subdirectory, and the last display the contents of the subdirectory. We urge you to verify tht it all works as described. <h2>Creating a Genome Object to be Annotated</h2>
  The next step is to use the FASTA file of contigs to create a <i>genome object</i>
 , which is done using <br />
 <pre>
@@ -34,8 +34,8 @@
   fasta_to_genome &#39;Streptococcus pneumoniae TIGR4&#39; Bacteria 11 &lt; g.161.contigs &gt; genome
 
 </pre>
- This creates a "genome object" in the file <i>genome</i>
-. The object contains the contigs, the scientific name of the organism, the domain (we specified 'B' for <i>Bacteria</i>
+ This creates a &quot;genome object&quot; in the file <i>genome</i>
+. The object contains the contigs, the scientific name of the organism, the domain (we specified &#39;B&#39; for <i>Bacteria</i>
 ), and the genetic code for the organism (i.e., 11, which is the code most commonly used with prokaryotic genomes). Use an <b>ls</b>
  to see the file, and then you could click on it to see the encoded fields). Note that, while we have named our project subdirectory <i>g.161</i>
  that reflects the name of the genome whose contigs we copied. We are going to re-annotate the contigs, generating a whole new genome, which is what <b>fasta_to_genome</b>
@@ -59,8 +59,8 @@
  <br /></pre>
  Use <b>ls</b>
  to see it and explore the contents. <h2>Building a Metabolic Reconstruction from an Annotated Genome</h2>
- This is not the place to characterize what is meant by "<a name="metabolic293">metabolic</a>
- reconstruction", but as we use the term here we mean roughly <i>a set of <a href="http://www.theseed.org/wiki/Glossary#Subsystem" name="subsystems294" target="blank_"> subsystems</a> that are believed to be present in the genome, along with the relevant variant codes</i>
+ This is not the place to characterize what is meant by &quot;<a name="metabolic293">metabolic</a>
+ reconstruction&quot;, but as we use the term here we mean roughly <i>a set of <a href="http://www.theseed.org/wiki/Glossary#Subsystem" name="subsystems294" target="blank_"> subsystems</a> that are believed to be present in the genome, along with the relevant variant codes</i>
 . You can get a <a name="metabolic295">metabolic</a>
  reconstruction for the annotated genome using a command like <br />
 <pre>

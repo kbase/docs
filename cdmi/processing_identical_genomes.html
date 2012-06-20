@@ -1,6 +1,6 @@
 <h1>Processing Identical Genomes</h1>
 <h2>Introduction</h2>
- The KBase is intended as an environment in which identical genomes, annotated by distinct groups, can reside and be compared. We anticipate that there will soon be thousands of "essentially identical" genomes, due to the rapid increase in sequencing capacity. We will cover "very similar" genomes in other tutorials. This short document will only make comments relating to the use of identical genomes. <br />
+ The KBase is intended as an environment in which identical genomes, annotated by distinct groups, can reside and be compared. We anticipate that there will soon be thousands of &quot;essentially identical&quot; genomes, due to the rapid increase in sequencing capacity. We will cover &quot;very similar&quot; genomes in other tutorials. This short document will only make comments relating to the use of identical genomes. <br />
 <br />
 <h2>Finding identical genomes</h2>
  So, how do you know what identical genomes exist within the KBase? You might start by simply running a command like <br />
@@ -20,9 +20,7 @@ kb|g.9347	003169b175a34753e219ae11682ce08a	Myxococcus fulvus
 .
 .
 <br /></pre>
- The command says <blockquote> Give me all genomes. For each genome, give me 3 fields: <ol>
-  <li> the ID (by default -- you do not have to list it), <li> the <a name="md5322">md5</a> hash value of the contigs that make up the genome, and <li> the scientific name of the genome. </ol>
-</blockquote>
+ The command says <blockquote> Give me all genomes. For each genome, give me 3 fields: <ol><li> the ID (by default -- you do not have to list it), <li> the <a name="md5322">md5</a> hash value of the contigs that make up the genome, and <li> the scientific name of the genome. </ol></blockquote>
 <br />
  Looking at the initial lines of output, it is clear that <i>kb|g.392</i>
  and <i>kb|8843</i>
@@ -39,8 +37,7 @@ kb|g.9430	0eb6bdaa44b9b24488debd7d7cf3003f	Escherichia coli E110019
 kb|g.958 	0eb6bdaa44b9b24488debd7d7cf3003f	Escherichia coli E110019
 kb|g.959 	a4a937e222aed004f9778feae4d01f5d	Escherichia coli E110019
 <br /></pre>
-<p>which would indicate that we have three copies of the genome, two of which are identical. <br />
- <br /> Suppose that you wished to construct a table where each row contained a set of tab-separated IDs for identical genomes. This be handy in many contexts. Here is one way to build the table using a small Perl program that invokes the <a name="CS-API324">CS-API</a> routines:
+<p>which would indicate that we have three copies of the genome, two of which are identical. <br /><br /> Suppose that you wished to construct a table where each row contained a set of tab-separated IDs for identical genomes. This be handy in many contexts. Here is one way to build the table using a small Perl program that invokes the <a name="CS-API324">CS-API</a> routines:
 <h2>A Small Perl Program to Invoke the CS-API Routines</h2>
 <pre>
 
@@ -75,14 +72,13 @@ my $csO = $kb-&gt;central_store();
     my $genH = $csO-&gt;<a href="http://kbase.us/developer-zone/api-documentation/cdm-entity-relationship-command-scripts/#all_entities_Genome" target='_blank'>all_entities_Genome</a>(0,100000,[&#39;md5&#39;]);
 <br /></pre>
  asks for access to the <i><a name="md5326">md5</a></i>
- field for the first up to 100,000 genomes. This issue of "chunking" the output from the servers is discussed below. For now, just think of this line as asking for acces to the <i><a name="md5327">md5</a></i>
+ field for the first up to 100,000 genomes. This issue of &quot;chunking&quot; the output from the servers is discussed below. For now, just think of this line as asking for acces to the <i><a name="md5327">md5</a></i>
  values for all of the genomes. The lines <br />
 <pre>
     my $md5 = $genH-&gt;{$genome}-&gt;{md5};
     push(@{$by_md5{$md5}},$genome);
 <br /></pre>
-<p>lead to the construction of <i>%by_md5</i> as a hash with the <a name="md5328">md5</a> values as keys and lists of genomes having the same <a name="md5329">md5</a> hashes as the values. <br />
- <br /> Once the hash is constructed, it is straightforward to dump the lists from the hash table. <br />
+<p>lead to the construction of <i>%by_md5</i> as a hash with the <a name="md5328">md5</a> values as keys and lists of genomes having the same <a name="md5329">md5</a> hashes as the values. <br /><br /> Once the hash is constructed, it is straightforward to dump the lists from the hash table. <br />
 <h2>Controlling the Output </h2>
 <p>Now let us revisit this issue of getting back &quot;chunks&quot; of the output, rather than everything all at once. This avoids overloading the client memory and causes output to be &quot;streamed&quot; in a much more controlled fashion. In the case of asking for all genomes, you could get them all back without doing too much damage. If you asked for all Features and their protein sequences, you might well get back a lot of data. Most modern machines can absorb hundreds of gigabytes, but as volumes grow it will just be a lot easier if we implement basic flow control. With that in mid, we recommend using a program like <br />
 <pre>
@@ -112,15 +108,13 @@ foreach my $md5 (keys(%by_md5))
 <br /></pre>
 <p>So far, we have discussed the simple issue of how to find out which genomes are completely identical (in the sense that they have an identical set of contigs, but probably have differing gene calls and <a name="annotations330">annotations</a>). <br />
 <h2>Correspondence Between Genes from Two Identical Genomes</h2>
-<p>Let us now consider the issue of how to create a correspondence between genes from two identical genomes. This is somewhat different than asking for gene correspondences between very, very similar genomes; in the case of identical genomes one can detect correspondence based on location. That is, two genes that have location strings that differ only in the genome ids then clearly correspond. This solves the bulk of the problem, although there remains the topic of how to handle pairs of protein-encoding genes that differ only in start location. <br />
- <br /> So, given two genomes that you know are identical, (say, kb|g.3383 and kb|g.19998), and you want to see the correspondence between the protein-encoding genes from the two genomes. <br />
- <br /> You might begin with something like <br />
+<p>Let us now consider the issue of how to create a correspondence between genes from two identical genomes. This is somewhat different than asking for gene correspondences between very, very similar genomes; in the case of identical genomes one can detect correspondence based on location. That is, two genes that have location strings that differ only in the genome ids then clearly correspond. This solves the bulk of the problem, although there remains the topic of how to handle pairs of protein-encoding genes that differ only in start location. <br /><br /> So, given two genomes that you know are identical, (say, kb|g.3383 and kb|g.19998), and you want to see the correspondence between the protein-encoding genes from the two genomes. <br /><br /> You might begin with something like <br />
 <pre>
     echo &#39;kb|g.3383&#39;  | <a href="http://kbase.us/developer-zone/api-documentation/cdm-entity-relationship-command-scripts/#get_entity_Genome" target='_blank'>get_entity_Genome</a> -f md5 
     echo &#39;kb|g.19998&#39; | <a href="http://kbase.us/developer-zone/api-documentation/cdm-entity-relationship-command-scripts/#get_entity_Genome" target='_blank'>get_entity_Genome</a> -f md5 
 <br /></pre>
  to verify that the two gnomes are really the same (they should both produce an <a name="md5331">md5</a>
- of "f26f59daae18a385bdfcf89aa6b0bc1c"). <br />
+ of &quot;f26f59daae18a385bdfcf89aa6b0bc1c&quot;). <br />
 <br />
  Then you might try making a file that contained just the two genome IDs (that is, a file called <i>genomes</i>
  that contained <br />
@@ -139,11 +133,9 @@ kb|g.19998
 <pre>
          [genome,fid,location,translation]
 <br /></pre>
-<p>sorted on translation. You can peruse this file to locate matches and mismatches and to get a sense of how well the gene calls match up. <br />
- <br /> While there is a great deal that can be learned quickly by accessing the data via command-line tools, what is needed is more control; that probably requires using the <a name="CS-API332">CS-API</a>. 
+<p>sorted on translation. You can peruse this file to locate matches and mismatches and to get a sense of how well the gene calls match up. <br /><br /> While there is a great deal that can be learned quickly by accessing the data via command-line tools, what is needed is more control; that probably requires using the <a name="CS-API332">CS-API</a>. 
 <h2>A Short Program: Two Genes Correspond IFF Locations Are Identical </h2>
-<p>Here is a short program that takes as inut two genome IDs (<i>g1</i> and <i>g2</i>) and prints out a two-column table. The first column represents a gene in <i>g1</i> that <a name="corresponds333"><a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#corresponds" target='_blank'>corresponds</a></a> to the gene in the second colum from <i>g2</i>. If one of the columns is empty, then we have a case where a gene fails to correspond to a gene in the other genome. <br />
- <br /> We will do a simple program here that just implements the notion that two genes correspond IFF they have identical locations. This is not a completely trivial notion, since unique KBase IDs have been assigned to the contigs in each genome. However, since the key of a <b><a name="Contig334">Contig</a></b> is a unique Kbase ID, but the key of the related <b><a name="ContigSequence335">ContigSequence</a></b> is an <a name="md5336">md5</a> hash, equivalence of locations is easily computed. Here is the program: <br />
+<p>Here is a short program that takes as inut two genome IDs (<i>g1</i> and <i>g2</i>) and prints out a two-column table. The first column represents a gene in <i>g1</i> that <a name="corresponds333"><a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#corresponds" target='_blank'>corresponds</a></a> to the gene in the second colum from <i>g2</i>. If one of the columns is empty, then we have a case where a gene fails to correspond to a gene in the other genome. <br /><br /> We will do a simple program here that just implements the notion that two genes correspond IFF they have identical locations. This is not a completely trivial notion, since unique KBase IDs have been assigned to the contigs in each genome. However, since the key of a <b><a name="Contig334">Contig</a></b> is a unique Kbase ID, but the key of the related <b><a name="ContigSequence335">ContigSequence</a></b> is an <a name="md5336">md5</a> hash, equivalence of locations is easily computed. Here is the program: <br />
 <pre>
 use Bio::KBase;
 my $kb  = Bio::KBase-&gt;new;
