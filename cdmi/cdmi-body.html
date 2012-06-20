@@ -2077,6 +2077,63 @@ correspondence is a reference to a hash where the following keys are defined:
 </dl>
 
 <h3><a class='u' href='#___top' title='click to go to top of document'
+name="corresponds_from_sequences"
+>corresponds_from_sequences</a></h3>
+
+<pre>  $return = $obj-&#62;corresponds_from_sequences($g1_sequences, $g1_locations, $g2_sequences, $g2_locations)</pre>
+
+<dl>
+<dt><a name="Parameter_and_return_types"
+>Parameter and return types</a></dt>
+
+<dd>
+<pre>
+$g1_sequences is a reference to a list where each element is a reference to a list containing 2 items:
+	0: a fid
+	1: a protein_sequence
+$g1_locations is a reference to a list where each element is a reference to a list containing 2 items:
+	0: a fid
+	1: a location
+$g2_sequences is a reference to a list where each element is a reference to a list containing 2 items:
+	0: a fid
+	1: a protein_sequence
+$g2_locations is a reference to a list where each element is a reference to a list containing 2 items:
+	0: a fid
+	1: a location
+$return is a reference to a hash where the key is a fid and the value is a correspondence
+fid is a string
+protein_sequence is a string
+location is a reference to a list where each element is a region_of_dna
+region_of_dna is a reference to a list containing 4 items:
+	0: a contig
+	1: a begin
+	2: a strand
+	3: a length
+contig is a string
+begin is an int
+strand is a string
+length is an int
+correspondence is a reference to a hash where the following keys are defined:
+	to has a value which is a fid
+	iden has a value which is a float
+	ncontext has a value which is an int
+	b1 has a value which is an int
+	e1 has a value which is an int
+	ln1 has a value which is an int
+	b2 has a value which is an int
+	e2 has a value which is an int
+	ln2 has a value which is an int
+	score has a value which is an int
+
+
+</pre>
+
+
+<dt><a name="Description"
+>Description</a></dt>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
 name="close_genomes"
 >close_genomes</a></h3>
 

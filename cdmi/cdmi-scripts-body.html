@@ -675,84 +675,29 @@ name="corresponds"
 
 <p>Example:</p>
 
-<pre>    corresponds [arguments] &#60; input &#62; output</pre>
-
-<p>The input file should be a table with one column containing fids to be projected to a designated genome.</p>
-
-<p>The standard input should be a tab-separated table (i.e., each line is a tab-separated set of fields). Normally, the last field in each line would contain the identifer. If another column contains the identifier use</p>
-
-<pre>    -c N</pre>
-
-<p>where N is the column (from 1) that contains the identifier.</p>
-
-<p>This is a pipe command. The input is taken from the standard input, and the output is to the standard output.</p>
-
-<h3><a class='u' href='#___top' title='click to go to top of document'
-name="Documentation_for_underlying_call"
->Documentation for underlying call</a></h3>
-
-<p>This script is a wrapper for the CDMI-API call corresponds. It is documented as follows:</p>
-
-<pre>  $return = $obj-&#62;corresponds($fids, $genome)</pre>
-
-<dl>
-<dt><a name="Parameter_and_return_types"
->Parameter and return types</a></dt>
-
-<dd>
-<pre>
-$fids is a fids
-$genome is a genome
-$return is a reference to a hash where the key is a fid and the value is a correspondence
-fids is a reference to a list where each element is a fid
-fid is a string
-genome is a string
-correspondence is a reference to a hash where the following keys are defined:
-	to has a value which is a fid
-	ncontext has a value which is an int
-	b1 has a value which is an int
-	e1 has a value which is an int
-	ln1 has a value which is an int
-	b2 has a value which is an int
-	e2 has a value which is an int
-	ln2 has a value which is an int
-	score has a value which is an int
-
-
-</pre>
-
-</dd>
-</dl>
+<pre>    corresponds [-a cutoff] genome-1 genome-2</pre>
 
 <h3><a class='u' href='#___top' title='click to go to top of document'
 name="Command-Line_Options"
 >Command-Line Options</a></h3>
 
 <dl>
-<dt><a name="-g_Genome"
->-g Genome</a></dt>
+<dt><a name="-a_Cutoff"
+>-a Cutoff</a></dt>
 
 <dd>
-<p>This is used to designate a genome in the CS. The command will try to project fids from the input to fids in this designated genome.</p>
-
-<dt><a name="-tsg_Genome"
->-tsg Genome</a></dt>
-
-<dd>
-<p>This is used to designate a genome in the default TS. The command will try to project fids from the input to fids in this designated genome. This argument and the &#60;b&#62;-g&#60;/b&#62; argument ar mutually exclusive. If they both are specified then the genome in the CS will be used.</p>
-
-<p>= item -a Cutoff</p>
-
 <p>This requests an abbreviated format in which only two columns are added: the projection score and the fid in the target genome. If this is not used 10 column are added. The Cutoff specifies a minimum projection score.</p>
 
-<dt><a name="-c_Column"
->-c Column</a></dt>
+<dt><a name="genome-1"
+>genome-1</a></dt>
 
 <dd>
-<p>This is used only if the column containing the identifier is not the last column.</p>
+<dt><a name="genome-2"
+>genome-2</a></dt>
 
-<dt><a name="-i_InputFile_[_use_InputFile,_rather_than_stdin_]"
->-i InputFile [ use InputFile, rather than stdin ]</a></dt>
+<dd>
+<p>Input genomes. These are either filenames which are expected to contain genome typed-objects (as created by annotate_genome, for instances) or they are KBase genome IDs.</p>
+</dd>
 </dl>
 
 <h3><a class='u' href='#___top' title='click to go to top of document'

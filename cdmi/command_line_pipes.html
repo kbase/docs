@@ -17,55 +17,53 @@
  We think of most of the KBase command-line tools as taking in a file containing a tab-separated table and outputting a modified table. The most common modification is the addition of one or more columns. We create "pipelines" of these tools to implement fairly complex transformations leading to the final table containing the desired output. For example, consider the following little <a name="pipeline205">pipeline</a>
 : <br />
 <pre>
-           <a href="http://kbase.us/developer-zone/api-documentation/cdm-entity-relationship-command-scripts/#all_entities_Genome" target='_blank'>all_entities_Genome</a> -f scientific_name | grep &quot;Streptococcus pneumoniae&quot;
+  <a href="http://kbase.us/developer-zone/api-documentation/cdm-entity-relationship-command-scripts/#all_entities_Genome" target='_blank'>all_entities_Genome</a> -f scientific_name | grep &quot;Streptococcus pneumoniae&quot;
 <br /></pre>
  The <i><a href="http://kbase.us/developer-zone/api-documentation/cdm-entity-relationship-command-scripts/#all_entities_Genome" target='_blank'>all_entities_Genome</a></i>
  command is thought of as producing a table in which the first column (by default) is the genome ID, and any extra columns come from the arguments of the command. In this case, we get a 2-column table <br />
 <pre>
-           [genome-ID,genome-name]
+  [genome-ID,genome-name]
 <br /></pre>
  This 2-column table is fed into a Unix command called <i><a name="grep206">grep</a></i>
 , which keeps lines that "match" its argument. In this case, the <i><a name="grep207">grep</a></i>
  extracts rows in the table that "match" the string "Streptococcus pneumoniae." Thus, we get as a result a 2-column table in which each row contains "Streptococcus pneumoniae." Upon running the command, we got <br />
-<pre>
-kb|g.1340	Streptococcus pneumoniae SP19-BS75
-kb|g.1880	Streptococcus pneumoniae BS457
-kb|g.3485	Streptococcus pneumoniae SPN7465
-kb|g.9772	Streptococcus pneumoniae SP18-BS74
-kb|g.3478	Streptococcus pneumoniae SPN034183
-kb|g.1784	Streptococcus pneumoniae JJA
-kb|g.9944	Streptococcus pneumoniae CDC1873-00
-kb|g.3474	Streptococcus pneumoniae OXC141
-kb|g.3484	Streptococcus pneumoniae SPN033038
-kb|g.1881	Streptococcus pneumoniae BS458
-kb|g.110	Streptococcus pneumoniae OXC141
-kb|g.1334	Streptococcus pneumoniae SP3-BS71
-.
-.
-.
+<pre>  kb|g.1340	Streptococcus pneumoniae SP19-BS75
+  kb|g.1880	Streptococcus pneumoniae BS457
+  kb|g.3485	Streptococcus pneumoniae SPN7465
+  kb|g.9772	Streptococcus pneumoniae SP18-BS74
+  kb|g.3478	Streptococcus pneumoniae SPN034183
+  kb|g.1784	Streptococcus pneumoniae JJA
+  kb|g.9944	Streptococcus pneumoniae CDC1873-00
+  kb|g.3474	Streptococcus pneumoniae OXC141
+  kb|g.3484	Streptococcus pneumoniae SPN033038
+  kb|g.1881	Streptococcus pneumoniae BS458
+  kb|g.110	Streptococcus pneumoniae OXC141
+  kb|g.1334	Streptococcus pneumoniae SP3-BS71
+  .
+  .
+  .
 <br /></pre>
  Transforming tables by extracting rows that contain a given string (or, more generally, a pattern), extracting columns from a table, or sorting the rows in a table is the basic style we advocate. For example, suppose that you wanted to find all features of <i>Streptococcus pneumoniae</i>
  that had been assigned a specific function (say, <i>triosephosphate isomerase</i>
 ). You might try using <br />
 <pre>
 	
-    	<a href="http://kbase.us/developer-zone/api-documentation/cdm-entity-relationship-command-scripts/#all_entities_Genome" target='_blank'>all_entities_Genome</a> -f scientific_name |
-    	grep &quot;Streptococcus pneumoniae&quot; |
-    	<a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#genomes_to_fids" target='_blank'>genomes_to_fids</a> CDS -c 1 | 
-    	<a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#fids_to_functions" target='_blank'>fids_to_functions</a> | 
-    	grep -i &quot;triosephosphate isomerase&quot;
+  <a href="http://kbase.us/developer-zone/api-documentation/cdm-entity-relationship-command-scripts/#all_entities_Genome" target='_blank'>all_entities_Genome</a> -f scientific_name |
+  grep &quot;Streptococcus pneumoniae&quot; |
+  <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#genomes_to_fids" target='_blank'>genomes_to_fids</a> CDS -c 1 | 
+  <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#fids_to_functions" target='_blank'>fids_to_functions</a> | 
+  grep -i &quot;triosephosphate isomerase&quot;
 <br /></pre>
  This produces output like <br />
-<pre>
-kb|g.1340	Streptococcus pneumoniae SP19-BS75	kb|g.1340.peg.783	Triosephosphate isomerase (EC 5.3.1.1)
-kb|g.9772	Streptococcus pneumoniae SP18-BS74	kb|g.9772.peg.1261	triosephosphate isomerase
-kb|g.9772	Streptococcus pneumoniae SP18-BS74	kb|g.9772.peg.1663	triosephosphate isomerase
-kb|g.9772	Streptococcus pneumoniae SP18-BS74	kb|g.9772.peg.2175	triosephosphate isomerase
-kb|g.9772	Streptococcus pneumoniae SP18-BS74	kb|g.9772.peg.2207	triosephosphate isomerase
-kb|g.3478	Streptococcus pneumoniae SPN034183	kb|g.3478.peg.287	Triosephosphate isomerase (EC 5.3.1.1)
-.
-.
-.
+<pre>  kb|g.1340  Streptococcus pneumoniae SP19-BS75  kb|g.1340.peg.783   Triosephosphate isomerase (EC 5.3.1.1)
+  kb|g.9772  Streptococcus pneumoniae SP18-BS74  kb|g.9772.peg.1261  triosephosphate isomerase
+  kb|g.9772  Streptococcus pneumoniae SP18-BS74  kb|g.9772.peg.1663  triosephosphate isomerase
+  kb|g.9772  Streptococcus pneumoniae SP18-BS74  kb|g.9772.peg.2175  triosephosphate isomerase
+  kb|g.9772  Streptococcus pneumoniae SP18-BS74  kb|g.9772.peg.2207  triosephosphate isomerase
+  kb|g.3478  Streptococcus pneumoniae SPN034183  kb|g.3478.peg.287   Triosephosphate isomerase (EC 5.3.1.1)
+  .
+  .
+  .
 <br /></pre>
  Here, some extra comments are necessary: <ol>
  <li><i><a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#genomes_to_fids" target='_blank'>genomes_to_fids</a></i> is a KBase command that takes a tab-separated table as input, and one of the columns in the table must contain KBase genome IDs. By default, that column is the last column in the table (i.e., the rightmost). If the column of genome IDs is not the last, use the &quot;-c N&quot; argument to say that the column is the Nth. <li><i><a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#fids_to_functions" target='_blank'>fids_to_functions</a></i> is a KBase command that takes a table containing a column of feature ids (i.e., fids), which by default is the last column, and extends the table with one more column, the function assigned to the feature. <li> Finally, the &quot;-i&quot; argument to <i><a name="grep208">grep</a></i> makes the match case insensitive. <i><a name="grep209">grep</a></i> is an extremely powerful command with a number of useful options (you can select all rows that do not match, rows that match some specified pattern, etc.) </ol>
@@ -76,7 +74,7 @@ kb|g.3478	Streptococcus pneumoniae SPN034183	kb|g.3478.peg.287	Triosephosphate i
  We would likely use the following <a name="pipeline211">pipeline</a>
 : <br />
 <pre>
-           echo &#39;kb|g.9772.peg.2175&#39; | <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#fids_to_proteins" target='_blank'>fids_to_proteins</a> | <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#proteins_to_fids" target='_blank'>proteins_to_fids</a> | <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#fids_to_functions" target='_blank'>fids_to_functions</a>
+  echo &#39;kb|g.9772.peg.2175&#39; | <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#fids_to_proteins" target='_blank'>fids_to_proteins</a> | <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#proteins_to_fids" target='_blank'>proteins_to_fids</a> | <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#fids_to_functions" target='_blank'>fids_to_functions</a>
 <br /></pre>
  In some sense, this is probably not terribly efficient, but you do get the answer back in a few seconds (and, we think that the answer itself poses at least one interesting question). <br />
 <br />
@@ -86,12 +84,12 @@ kb|g.3478	Streptococcus pneumoniae SPN034183	kb|g.3478.peg.287	Triosephosphate i
  -- that is, a command that takes no input, but outputs a table. <i>Generators</i>
  come in two flavors: one generates a table for every instance of a designated entity, and the other a single instance of an entity. For example, <br />
 <pre>
-        <a href="http://kbase.us/developer-zone/api-documentation/cdm-entity-relationship-command-scripts/#all_entities_Genome" target='_blank'>all_entities_Genome</a> 
+  <a href="http://kbase.us/developer-zone/api-documentation/cdm-entity-relationship-command-scripts/#all_entities_Genome" target='_blank'>all_entities_Genome</a> 
 <br /></pre>
  is a <a name="generator214">generator</a>
  that outputs a single column containing the IDs of all genomes in KBase. Similarly, <br />
 <pre>
-        <a href="http://kbase.us/developer-zone/api-documentation/cdm-entity-relationship-command-scripts/#all_entities_Genome" target='_blank'>all_entities_Genome</a> -f &#39;dna_size,contigs,scientific_name&#39;
+  <a href="http://kbase.us/developer-zone/api-documentation/cdm-entity-relationship-command-scripts/#all_entities_Genome" target='_blank'>all_entities_Genome</a> -f &#39;dna_size,contigs,scientific_name&#39;
 <br /></pre>
  is a <a name="generator215">generator</a>
  that would output a 4-column table. (Try it.) The <i>all_entities_ENTITY</i>
@@ -99,14 +97,14 @@ kb|g.3478	Streptococcus pneumoniae SPN034183	kb|g.3478.peg.287	Triosephosphate i
  that you may depend on being present (i.e., if you see the entity in the ER-model, the corresponding <a name="generator217">generator</a>
  may be assumed to be present). <br />
 <pre>
-        echo &#39;kb|g.9772.peg.2175&#39;
+  echo &#39;kb|g.9772.peg.2175&#39;
 <br /></pre>
  was an example of a <a name="generator218">generator</a>
  that produced a single instance of an entity. Now, it is true that you might begin a <a name="pipeline219">pipeline</a>
  wihout a <a name="generator220">generator</a>
 , using something like <br />
 <pre>
-        <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#fids_to_proteins" target='_blank'>fids_to_proteins</a> &lt; file.of.saved.fid.ids
+  <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#fids_to_proteins" target='_blank'>fids_to_proteins</a> &lt; file.of.saved.fid.ids
 <br /></pre>
 <p>In this case, you might consider this a &quot;restarted <a name="pipeline221">pipeline</a>&quot;, or you might amend our previous assertion that pipelines begin with <a name="generators222">generators</a>. In either case, if you wish to debate the issue, we claim to have succeeded in clarifying the concepts. 
 <br />
@@ -115,36 +113,36 @@ kb|g.3478	Streptococcus pneumoniae SPN034183	kb|g.3478.peg.287	Triosephosphate i
  that you will occasionally find extremely useful. Suppose that you wished to find all of the Features (fids) that have been assigned the function <br />
 <br />
 <pre>
- SSU ribosomal protein S9p (S16e)
+  SSU ribosomal protein S9p (S16e)
 <br /></pre>
  Using the tools we have described so far, this is not easy to do (and the results are quite inefficient). To search for instances of an Entity that have a desired value of one of the fields, you can use commands like <br />
 <br />
 <pre>
- <a href="http://kbase.us/developer-zone/api-documentation/cdm-entity-relationship-command-scripts/#query_entity_Feature" target='_blank'>query_entity_Feature</a> -is &#39;function,SSU ribosomal protein S9p (S16e)&#39;
+  <a href="http://kbase.us/developer-zone/api-documentation/cdm-entity-relationship-command-scripts/#query_entity_Feature" target='_blank'>query_entity_Feature</a> -is &#39;function,SSU ribosomal protein S9p (S16e)&#39;
 
- <a href="http://kbase.us/developer-zone/api-documentation/cdm-entity-relationship-command-scripts/#query_entity_Feature" target='_blank'>query_entity_Feature</a> -like &#39;function,SSU ribosomal protein%&#39;
+  <a href="http://kbase.us/developer-zone/api-documentation/cdm-entity-relationship-command-scripts/#query_entity_Feature" target='_blank'>query_entity_Feature</a> -like &#39;function,SSU ribosomal protein%&#39;
 <br /></pre>
  The first command looks up the fids for features that have been assigned the given function, while the second locates all SSDU ribsomal proteins. <br />
 <p>
  <br /> There are two classes of KBase <b>transformation commands</b> that you may depend on being present. These transformation commands take as input a table and add columns to it: 
 <ol>
  <li><b>get_entity_ENTITY</b> commands are used to take as input a table that contains a column containing <b>ENTITY</b> IDs. These commands are used to add columns corresponding to fields from the referenced <b>ENTITY</b>. Thus, <br /><pre>
-        echo &#39;kb|g.9772.peg.2175&#39; | <a href="http://kbase.us/developer-zone/api-documentation/cdm-entity-relationship-command-scripts/#get_entity_Feature" target='_blank'>get_entity_Feature</a> -f &#39;function,source_id&#39;
+  echo &#39;kb|g.9772.peg.2175&#39; | <a href="http://kbase.us/developer-zone/api-documentation/cdm-entity-relationship-command-scripts/#get_entity_Feature" target='_blank'>get_entity_Feature</a> -f &#39;function,source_id&#39;
 <br /></pre> is an example <i><a href="http://kbase.us/developer-zone/api-documentation/cdm-entity-relationship-command-scripts/#get_entity_Feature" target='_blank'>get_entity_Feature</a></i> that adds two columns to the (admittedly limited) input stream. <br />
   <br />
  <li> The <b>get_relationship_RELATIONSHIP</b> commands are used for &quot;crossing&quot; a relationship from one type of entity (called the <i>from entity</i>) to another (called the <i>to entity</i>). The input must be a table with a column containing IDs of the <i>from entity</i>. The output is formed by tacking on columns of data from three sources: the <i>from entity</i>, the relationship, and the <i>to entity</i>. For example, <br /><pre>
-       echo &#39;kb|g.9772.peg.2175&#39; | <a href="http://kbase.us/developer-zone/api-documentation/cdm-entity-relationship-command-scripts/#get_relationship_IsOwnedBy" target='_blank'>get_relationship_IsOwnedBy</a> -from source_id -to &#39;scientific_name,id&#39;
+  echo &#39;kb|g.9772.peg.2175&#39; | <a href="http://kbase.us/developer-zone/api-documentation/cdm-entity-relationship-command-scripts/#get_relationship_IsOwnedBy" target='_blank'>get_relationship_IsOwnedBy</a> -from source_id -to &#39;scientific_name,id&#39;
 <br /></pre> takes the input IDs of Features, crosses the IsOwnedBy relationship, and adds three columns (one from the <i>from entity</i> and two from the <i>to entity</i>). </ol>
 <br />
  We have supplemented the standard <a name="generators224">generators</a>
  (all_entity_ENTITY routines) and the standard transformation commands (get_entity_ENTITY and get_relationship_RELATIONSHIP) with a set of commands representing what we call "well-trodden paths." When we see these recurring patterns of use, sometimes we can reduce the requirred effort to extract the desired data. Thus, <br />
 <pre>
-       <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#all_roles_used_in_models" target='_blank'>all_roles_used_in_models</a>
+  <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#all_roles_used_in_models" target='_blank'>all_roles_used_in_models</a>
 <br /></pre>
  is a customized <a name="generator225">generator</a>
  that outputs a table containing roles that are used in building models. If you wanted to get the number of unique protein sequences that connect to these roles, you might use <br />
 <pre>
-       <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#all_roles_used_in_models" target='_blank'>all_roles_used_in_models</a> | <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#roles_to_proteins" target='_blank'>roles_to_proteins</a> | cut -f 2 | sort -u | wc
+  <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#all_roles_used_in_models" target='_blank'>all_roles_used_in_models</a> | <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#roles_to_proteins" target='_blank'>roles_to_proteins</a> | cut -f 2 | sort -u | wc
 <br /></pre>
  The <i><a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#roles_to_proteins" target='_blank'>roles_to_proteins</a></i>
  transformation command is an example of one of these commands added to transformation commands. The following Unix commands are worth noting: <ul>
@@ -156,11 +154,11 @@ kb|g.3478	Streptococcus pneumoniae SPN034183	kb|g.3478.peg.287	Triosephosphate i
  argument. The problem is that it breaks a line into fields using transitions between whitespace characters and non-whitespace characters, and this is not the behavior you always want. If you are dealing with tab-delimited fields (as we are), then you want the <i><a name="sort233">sort</a></i>
  command to split the line into fields properly. This can be done by executing <br />
 <pre>
-            export TAB=`echo -e &quot;\t&quot;`
+  export TAB=`echo -e &quot;\t&quot;`
 <br /></pre>
  and then using something like <br />
 <pre>
-            sort -t &quot;$TAB&quot; -k 4 
+  sort -t &quot;$TAB&quot; -k 4 
 <br /></pre>
  to <a name="sort234">sort</a>
  on the 4th field in a tab-delimited table. Within our KBase exercises, you will usually need to worry about this only if you have "role" or "function" columns in your tables (they have embedded whitespace). 
