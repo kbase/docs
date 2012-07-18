@@ -1,0 +1,16 @@
+<h1>Developing Software in the KBase Environment</h1>
+<h2>Introduction</h2>
+<p>We define a standard design for the environment in which KBase application and service code is developed.
+<p>This design assumes the understanding of some concepts that should be familiar to most Linux software developers:
+<ul><li>Navigation in the Unix filesystem<li>Basic shell commands<br /><li>Make and makefiles</ul>
+<p> All development happens in a directory that we are calling a <span style="font-style: italic;">development container</span>. The development container provides a framework that provides the necessary build and installation support for the creation of new software modules.
+<p>The initial language target for code development is Perl. This document outlines KBase development in terms of Perl development. As we develop the tools and infrastructure for other languages we will expand our writeups to include them.
+<h2>Prerequisites</h2>
+<p>We assume that you are starting with an operational KBase environment. There are a number of ways to obtain such an environment.
+<p>If you have an Apple Mac computer, you can download a pre-packaged Mac application that includes all the developent tools. This is available from the <a href="http://kbase.us/downloads" target="_blank">tools page on the KBase developer website</a>.
+<p>Moving forward we will also provide a Windows package. The KBase login nodes (for KBase developers with access to the KBase linux infrastructure) also contains a KBase environment.
+<h2>Creating a Development Container</h2>
+<p>The first step in setting up for development is to create a development container in which to work. This is done using the <span style="font-family: monospace;">create-kb-dev-container</span> program:
+<pre> $ create-kb-dev-container /home/olson/container-work kb_typecomp <br /></pre>
+<p>This will create a new development container in <span style="font-family: monospace;">/home/olson/container-work</span> and initialize it with the kb_typecomp module.<br />
+<p>
