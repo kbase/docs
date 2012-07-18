@@ -794,6 +794,96 @@ name="Output_Format"
 <a name='___top' class='dummyTopAnchor' ></a>
 
 <h2><a class='u' href='#___top' title='click to go to top of document'
+name="ermodel_to_text"
+>ermodel_to_text</a></h2>
+
+<p>Given the XML description of an Entity-Relationship model on stdin,
+dump the description of the model as an easy-to-parse tab-delimited text file.</p>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Command-line_options"
+>Command-line options</a></h3>
+
+<dl>
+<dt><a name="--decamelize"
+>--decamelize</a></dt>
+
+<dd>
+<p>If set,
+convert all entity,
+relationship,
+and field names to a decamelized form.</p>
+</dd>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Output_Format"
+>Output Format</a></h3>
+
+<p>The output is a tab-delimited file.
+It contains blocks of data delimited by lines containing only the string &#34;//&#34;.</p>
+
+<p>Each block of data describes either an entity or a relationship.
+A single line defines the entity or relationship name and the associated metadata.
+The remaining lines in the block define the field data associated with the entity or relationship.</p>
+
+<p>An entity line contains the following fields:</p>
+
+<dl>
+<dt><a name="The_string_&#34;entity&#34;"
+>The string &#34;entity&#34;</a></dt>
+
+<dd>
+<dt><a name="The_entity_name"
+>The entity name</a></dt>
+</dl>
+
+<p>A relationship line contains the following fields:</p>
+
+<dl>
+<dt><a name="The_string_&#34;relationship&#34;"
+>The string &#34;relationship&#34;</a></dt>
+
+<dd>
+<dt><a name="The_relationship_name"
+>The relationship name</a></dt>
+
+<dd>
+<dt><a name="The_name_of_the_&#34;from&#34;_entity."
+>The name of the &#34;from&#34; entity.</a></dt>
+
+<dd>
+<dt><a name="The_name_of_the_&#34;to&#34;_entity."
+>The name of the &#34;to&#34; entity.</a></dt>
+
+<dd>
+<dt><a name="The_arity_of_the_relationship_(1M_or_MM)."
+>The arity of the relationship (1M or MM).</a></dt>
+
+<dd>
+<dt><a name="The_name_of_the_converse_relationship."
+>The name of the converse relationship.</a></dt>
+</dl>
+
+<p>Each field description line contains the following fields:</p>
+
+<dl>
+<dt><a name="The_name_of_the_field"
+>The name of the field</a></dt>
+
+<dd>
+<dt><a name="The_field_type"
+>The field type</a></dt>
+
+<dd>
+<dt><a name="The_name_of_a_relation,_if_the_field_data_is_stored_in_a_separate_relation."
+>The name of a relation,
+if the field data is stored in a separate relation.</a></dt>
+</dl>
+<hr>
+<a name='___top' class='dummyTopAnchor' ></a>
+
+<h2><a class='u' href='#___top' title='click to go to top of document'
 name="fids_to_annotations"
 >fids_to_annotations</a></h2>
 
