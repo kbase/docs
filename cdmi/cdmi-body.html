@@ -25,13 +25,38 @@ These routines all take as input a list of ids referencing instances of a single
 They construct as output a mapping which takes as input an id and associates as output a set of fields from that instance of the entity.
 Each routine allows the user to specify which fields are desired.</p>
 
-<pre>        NEEDS EXAMPLE</pre>
+<p>For example,
+assume you have an input file &#34;Staphylococci,&#34; which is a list of genome IDs for each species of Staphylococcus in the database.
+The get_entity_Genome command is used to retrieve detailed information about each genome in the file.
+By using different modifiers,
+you can specify what kind of information you want to display.
+In this example,
+the modifier &#34;contigs&#34; was used.
+Thus,
+the number next to the genome ID in the output file indicates the number of contigs each Staphylococcus genome has.
+For a list of available modifiers relating to each identity,
+please refer to the ER model.</p>
+
+<pre>        &#62; / cat Staphylococci | cut -f 1 | get_entity_Genome - f contigs
+        kb|g.134        2
+        kb|g.636        1
+        kb|g.2506        15
+        kb|g.9303        1
+        kb|g.3801        87
+        kb|g.2025        46
+        kb|g.2516        13
+        kb|g.2603        33
+        kb|g.19928        2
+        kb|g.1852        131
+        kb|g.8476        1
+        kb|g.2742        46</pre>
 
 <p>To use these routines effectively, a user will need to gradually become familiar with the entities supported in the CDM. We suggest perusing the entity-relationship model that underlies the CDM to get a good introduction.</p>
 
-<p>The next simplest set of routines provide the &#34;get relationship&#34; routines. These take as input a list of ids for a specific entity type, and the give access to the relationship nodes associated with each entity. Thus,</p>
+<p>The next simplest set of routines provide the &#34;get relationship&#34; routines. These take as input a list of ids for a specific entity type, and the give access to the relationship nodes associated with each entity. Thus, get_relationship_WasSubmittedBy takes the input genome ID and outputs the ID with an added column showing the source of that particular genome. It is essential to be able to navigate the ER model to successfully implement these commands, since not all relationship types are applicable to each entity.</p>
 
-<pre>        NEEDS EXAMPLE</pre>
+<pre>        &#62; / echo &#39;kb|g.0&#39; | get_relationship_WasSubmittedBy -to id
+        kb|g.0        SEED</pre>
 
 <p>Of the remaining CDMI-API routines, most are used to extract data by &#34;crossing one or more relationships&#34;. Thus,</p>
 
@@ -359,6 +384,192 @@ fid is a string
 <dd>
 <p>It is frequently the case that one wishes to look up the genes that occur in a given region of a contig. Location_to_fids can be used to extract such sets of genes for each region in the input set of regions. We define a gene as &#34;occuring&#34; in a region if the location of the gene overlaps the designated region.</p>
 </dd>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="alleles_to_bp_locs"
+>alleles_to_bp_locs</a></h3>
+
+<pre>  $return = $obj-&#62;alleles_to_bp_locs($alleles)</pre>
+
+<dl>
+<dt><a name="Parameter_and_return_types"
+>Parameter and return types</a></dt>
+
+<dd>
+<pre>
+$alleles is an alleles
+$return is a reference to a hash where the key is an allele and the value is a bp_loc
+alleles is a reference to a list where each element is an allele
+allele is a string
+bp_loc is a reference to a list containing 2 items:
+	0: a contig
+	1: an int
+contig is a string
+
+
+</pre>
+
+
+<dt><a name="Description"
+>Description</a></dt>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="region_to_fids"
+>region_to_fids</a></h3>
+
+<pre>  $return = $obj-&#62;region_to_fids($region_of_dna)</pre>
+
+<dl>
+<dt><a name="Parameter_and_return_types"
+>Parameter and return types</a></dt>
+
+<dd>
+<pre>
+$region_of_dna is a region_of_dna
+$return is a fids
+region_of_dna is a reference to a list containing 4 items:
+	0: a contig
+	1: a begin
+	2: a strand
+	3: a length
+contig is a string
+begin is an int
+strand is a string
+length is an int
+fids is a reference to a list where each element is a fid
+fid is a string
+
+
+</pre>
+
+
+<dt><a name="Description"
+>Description</a></dt>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="region_to_alleles"
+>region_to_alleles</a></h3>
+
+<pre>  $return = $obj-&#62;region_to_alleles($region_of_dna)</pre>
+
+<dl>
+<dt><a name="Parameter_and_return_types"
+>Parameter and return types</a></dt>
+
+<dd>
+<pre>
+$region_of_dna is a region_of_dna
+$return is a reference to a list where each element is a reference to a list containing 2 items:
+	0: an allele
+	1: an int
+region_of_dna is a reference to a list containing 4 items:
+	0: a contig
+	1: a begin
+	2: a strand
+	3: a length
+contig is a string
+begin is an int
+strand is a string
+length is an int
+allele is a string
+
+
+</pre>
+
+
+<dt><a name="Description"
+>Description</a></dt>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="alleles_to_traits"
+>alleles_to_traits</a></h3>
+
+<pre>  $return = $obj-&#62;alleles_to_traits($alleles)</pre>
+
+<dl>
+<dt><a name="Parameter_and_return_types"
+>Parameter and return types</a></dt>
+
+<dd>
+<pre>
+$alleles is an alleles
+$return is a reference to a hash where the key is an allele and the value is a traits
+alleles is a reference to a list where each element is an allele
+allele is a string
+traits is a reference to a list where each element is a trait
+trait is a string
+
+
+</pre>
+
+
+<dt><a name="Description"
+>Description</a></dt>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="traits_to_alleles"
+>traits_to_alleles</a></h3>
+
+<pre>  $return = $obj-&#62;traits_to_alleles($traits)</pre>
+
+<dl>
+<dt><a name="Parameter_and_return_types"
+>Parameter and return types</a></dt>
+
+<dd>
+<pre>
+$traits is a traits
+$return is a reference to a hash where the key is a trait and the value is an alleles
+traits is a reference to a list where each element is a trait
+trait is a string
+alleles is a reference to a list where each element is an allele
+allele is a string
+
+
+</pre>
+
+
+<dt><a name="Description"
+>Description</a></dt>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="ous_with_trait"
+>ous_with_trait</a></h3>
+
+<pre>  $return = $obj-&#62;ous_with_trait($genome, $trait, $measurement_type, $min_value, $max_value)</pre>
+
+<dl>
+<dt><a name="Parameter_and_return_types"
+>Parameter and return types</a></dt>
+
+<dd>
+<pre>
+$genome is a genome
+$trait is a trait
+$measurement_type is a measurement_type
+$min_value is a float
+$max_value is a float
+$return is a reference to a list where each element is a reference to a list containing 2 items:
+	0: an ou
+	1: a measurement_value
+genome is a string
+trait is a string
+measurement_type is a string
+ou is a string
+measurement_value is a float
+
+
+</pre>
+
+
+<dt><a name="Description"
+>Description</a></dt>
 </dl>
 
 <h3><a class='u' href='#___top' title='click to go to top of document'
@@ -1055,7 +1266,7 @@ contig is a string
 >Description</a></dt>
 
 <dd>
-<p>The routine genomes_to_contigs can be used to retrieve the IDs of the contigs associated with each of a list of input genomes. The routine constructs a mapping from genome ID to the list of contigs included in the genome.</p>
+<p>The routine genomes_to_con`tigs can be used to retrieve the IDs of the contigs associated with each of a list of input genomes. The routine constructs a mapping from genome ID to the list of contigs included in the genome.</p>
 </dd>
 </dl>
 
@@ -1550,15 +1761,13 @@ $return is a reference to a hash where the key is a protein and the value is a f
 proteins is a reference to a list where each element is a protein
 protein is a string
 function_assertions is a reference to a list where each element is a function_assertion
-function_assertion is a reference to a list containing 4 items:
+function_assertion is a reference to a list containing 3 items:
 	0: an id
 	1: a function
 	2: a source
-	3: an expert
 id is a string
 function is a string
 source is a string
-expert is a string
 
 
 </pre>
@@ -2137,7 +2346,7 @@ correspondence is a reference to a hash where the following keys are defined:
 name="close_genomes"
 >close_genomes</a></h3>
 
-<pre>  $return = $obj-&#62;close_genomes($genomes, $how, $n)</pre>
+<pre>  $return = $obj-&#62;close_genomes($genomes, $n)</pre>
 
 <dl>
 <dt><a name="Parameter_and_return_types"
@@ -2146,12 +2355,12 @@ name="close_genomes"
 <dd>
 <pre>
 $genomes is a genomes
-$how is a how
 $n is an int
-$return is a reference to a hash where the key is a genome and the value is a genomes
+$return is a reference to a hash where the key is a genome and the value is a reference to a list where each element is a reference to a list containing 2 items:
+	0: a genome
+	1: a float
 genomes is a reference to a list where each element is a genome
 genome is a string
-how is an int
 
 
 </pre>
@@ -2159,6 +2368,12 @@ how is an int
 
 <dt><a name="Description"
 >Description</a></dt>
+
+<dd>
+<p>A close_genomes is used to get a set of relatively close genomes (for each input genome, a set of close genomes is calculated, but the result should be viewed as quite approximate. It is quite slow, using similarities for a universal protein as the basis for the assessments. It produces estimates of degree of similarity for the universal proteins it samples.</p>
+
+<p>Up to n genomes will be returned for each input genome.</p>
+</dd>
 </dl>
 
 <h3><a class='u' href='#___top' title='click to go to top of document'
@@ -3379,6 +3594,160 @@ a reference to a list where each element is a fc_protein_family
 </dl>
 
 <h3><a class='u' href='#___top' title='click to go to top of document'
+name="allele"
+>allele</a></h3>
+
+<dl>
+<dt><a name="Description"
+>Description</a></dt>
+
+<dd>
+<p>We now have a number of types and functions relating to ObservationalUnits (ous), alleles and traits. We think of a reference genome and a set of ous that have measured differences (SNPs) when compared to the reference genome. Each allele is associated with a position on a contig of the reference genome. Prior analysis has associated traits with the alleles that impact them. We are interested in supporting operations that locate genes in the region of an allele (i.e., genes of the reference genome that are in a region containining an allele). Similarly, we wish to locate the alleles that impact a trait, map the alleles to regions, loacte the possibly impacted genes, relate these to subsystems, etc.</p>
+
+<dt><a name="Definition"
+>Definition</a></dt>
+
+<dd>
+<pre>
+a string
+</pre>
+
+</dd>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="alleles"
+>alleles</a></h3>
+
+<dl>
+<dt><a name="Definition"
+>Definition</a></dt>
+
+<dd>
+<pre>
+a reference to a list where each element is an allele
+</pre>
+
+</dd>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="trait"
+>trait</a></h3>
+
+<dl>
+<dt><a name="Definition"
+>Definition</a></dt>
+
+<dd>
+<pre>
+a string
+</pre>
+
+</dd>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="traits"
+>traits</a></h3>
+
+<dl>
+<dt><a name="Definition"
+>Definition</a></dt>
+
+<dd>
+<pre>
+a reference to a list where each element is a trait
+</pre>
+
+</dd>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="ou"
+>ou</a></h3>
+
+<dl>
+<dt><a name="Definition"
+>Definition</a></dt>
+
+<dd>
+<pre>
+a string
+</pre>
+
+</dd>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="ous"
+>ous</a></h3>
+
+<dl>
+<dt><a name="Definition"
+>Definition</a></dt>
+
+<dd>
+<pre>
+a reference to a list where each element is an ou
+</pre>
+
+</dd>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="bp_loc"
+>bp_loc</a></h3>
+
+<dl>
+<dt><a name="Definition"
+>Definition</a></dt>
+
+<dd>
+<pre>
+a reference to a list containing 2 items:
+0: a contig
+1: an int
+
+
+</pre>
+
+</dd>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="measurement_type"
+>measurement_type</a></h3>
+
+<dl>
+<dt><a name="Definition"
+>Definition</a></dt>
+
+<dd>
+<pre>
+a string
+</pre>
+
+</dd>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="measurement_value"
+>measurement_value</a></h3>
+
+<dl>
+<dt><a name="Definition"
+>Definition</a></dt>
+
+<dd>
+<pre>
+a float
+</pre>
+
+</dd>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
 name="aux"
 >aux</a></h3>
 
@@ -3732,11 +4101,10 @@ name="function_assertion"
 
 <dd>
 <pre>
-a reference to a list containing 4 items:
+a reference to a list containing 3 items:
 0: an id
 1: a function
 2: a source
-3: an expert
 
 
 </pre>
@@ -4042,35 +4410,6 @@ ln2 has a value which is an int
 score has a value which is an int
 
 
-</pre>
-
-</dd>
-</dl>
-
-<h3><a class='u' href='#___top' title='click to go to top of document'
-name="how"
->how</a></h3>
-
-<dl>
-<dt><a name="Description"
->Description</a></dt>
-
-<dd>
-<p>A close_genomes is used to get a set of relatively close genomes (for each input genome, a set of close genomes is calculated, but the result should be viewed as quite approximate. &#34;how&#34; is a suggestion of which algorithm to use:</p>
-
-<pre>     0 - default (same genus)
-     1 - find genomes with the same genus name
-     2 - use the SSU rRNA, if possible
-     3 - use a set of &#34;universal proteins&#34;, if you can</pre>
-
-<p>Up to n genomes will be returned for each input genome.</p>
-
-<dt><a name="Definition"
->Definition</a></dt>
-
-<dd>
-<pre>
-an int
 </pre>
 
 </dd>

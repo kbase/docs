@@ -1,30 +1,30 @@
 <h1>Towards a Controlled Vocabulary Part 2: Mapping to Exemplars</h1>
- In the first tutorial relating to creating and maintaining a controlled vocabulary of function (<a href="http://kbase.us/developer-zone/tutorials/command-line-scripts/command-line-applications/towards-a-controlled-vocabulary-part-1-defining-exemplars/" name="Exemplars388">Part 1: Defining Exemplars</a>
-) we discussed the creation of a set of exemplars. These exemplars allowed us to make statements like <blockquote><i>The function of protein X is the same as that of exemplar E, where the exemplar is the ID of a <a name="Feature389">Feature</a> stored in KBase.</i></blockquote>
+ In the first tutorial relating to creating and maintaining a controlled vocabulary of function (<a href="http://kbase.us/developer-zone/tutorials/command-line-scripts/command-line-applications/towards-a-controlled-vocabulary-part-1-defining-exemplars/" name="Exemplars434">Part 1: Defining Exemplars</a>
+) we discussed the creation of a set of exemplars. These exemplars allowed us to make statements like <blockquote><i>The function of protein X is the same as that of exemplar E, where the exemplar is the ID of a <a name="Feature435">Feature</a> stored in KBase.</i></blockquote>
 <h2>Creating a Translation Table</h2>
 <p>We now consider the issue of creating a translation table <br />
 <pre>
            [source,source-id,fid,exemplar]
 <br /></pre>
- that maps fids from some sources of <a name="annotations390">annotations</a>
+ that maps fids from some sources of <a name="annotations436">annotations</a>
  into the exemplars. In these tuples, <i>source_id</i>
  is the ID used in the source database, while <i>fid</i>
- is the registered KBase ID. To be concrete we will construct these tables for both <a name="MicrobesOnLine391">MicrobesOnLine</a>
- (MOL) genomes and the <a name="SEED392">SEED</a>
+ is the registered KBase ID. To be concrete we will construct these tables for both <a name="MicrobesOnLine437">MicrobesOnLine</a>
+ (MOL) genomes and the <a name="SEED438">SEED</a>
  genomes. In each case we will also construct sets of inconsistencies that will need to be resolved. <br />
 <br />
- Let us begin by creating the translation table for the <a name="SEED393">SEED</a>
-. The strategy here is as follows: <ol><li>For each exemplar <b>E</b>, locate all <a name="SEED394">SEED</a> fids that have the same function as the KBase function assigned to <b>E</b>. Call this set <b>S</b>. <li>Then, for each <a name="SEED395">SEED</a> fid <b>F</b> in <b>S</b>, get all <a name="SEED396">SEED</a> fids that have identical <a name="md5397">md5</a> values. Call this set <b>FS</b>. Then, form a 2-tuple: [<b>F</b>,<b>FS</b>]. <li>For each two-tuple [<b>F</b>, <b>FS</b>], split <b>FS</b> into <br /><br /><ul><li>those genes with function identical to that of <b>E</b> and <li>those genes with functions that differ from <b>E</b>. </ul><br /><br /> If a majority of genes with a common <a name="md5398">md5</a> have a function identical to that of <b>E</b>, write tuples <br /><pre>
+ Let us begin by creating the translation table for the <a name="SEED439">SEED</a>
+. The strategy here is as follows: <ol><li>For each exemplar <b>E</b>, locate all <a name="SEED440">SEED</a> fids that have the same function as the KBase function assigned to <b>E</b>. Call this set <b>S</b>. <li>Then, for each <a name="SEED441">SEED</a> fid <b>F</b> in <b>S</b>, get all <a name="SEED442">SEED</a> fids that have identical <a name="md5443">md5</a> values. Call this set <b>FS</b>. Then, form a 2-tuple: [<b>F</b>,<b>FS</b>]. <li>For each two-tuple [<b>F</b>, <b>FS</b>], split <b>FS</b> into <br /><br /><ul><li>those genes with function identical to that of <b>E</b> and <li>those genes with functions that differ from <b>E</b>. </ul><br /><br /> If a majority of genes with a common <a name="md5444">md5</a> have a function identical to that of <b>E</b>, write tuples <br /><pre>
     [SEED,SEED-id,fid,E] 
 <br /></pre> as part of the translation table, and for cases in which a fid has a distinct function from the exemplar, write entries of the form <br /><pre>
     [SEED-id,fid,E] 
-<br /></pre> as a 3-tuple to the file <i><a name="SEED399">SEED</a>.inconsistencies.1</i>. Otherwise, write the entire set of inconsistent fids to the file <i><a name="SEED400">SEED</a>.inconsistencies.2</i>. </ol>
+<br /></pre> as a 3-tuple to the file <i><a name="SEED445">SEED</a>.inconsistencies.1</i>. Otherwise, write the entire set of inconsistent fids to the file <i><a name="SEED446">SEED</a>.inconsistencies.2</i>. </ol>
 <br />
 <br />
- This simple procedure constructs a mapping of the <a name="SEED401">SEED</a>
- fids to the exemplars, a set of <a name="SEED402">SEED</a>
- fids that should probably be automatically reassigned a function to match an exemplar (<i><a name="SEED403">SEED</a>.inconsistencies.1</i>
-), and a set of clear inconsistencies that need to be resolved (<i><a name="SEED404">SEED</a>.inconsistencies.2</i>
+ This simple procedure constructs a mapping of the <a name="SEED447">SEED</a>
+ fids to the exemplars, a set of <a name="SEED448">SEED</a>
+ fids that should probably be automatically reassigned a function to match an exemplar (<i><a name="SEED449">SEED</a>.inconsistencies.1</i>
+), and a set of clear inconsistencies that need to be resolved (<i><a name="SEED450">SEED</a>.inconsistencies.2</i>
 ). <br />
 <br />
  Here is how we implement this strategy: <br />
@@ -59,16 +59,16 @@
             <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#fids_to_genomes" target='_blank'>fids_to_genomes</a> | <a href="http://kbase.us/developer-zone/api-documentation/cdm-entity-relationship-command-scripts/#get_relationship_WasSubmittedBy" target='_blank'>get_relationship_WasSubmittedBy</a> -to id | grep &quot;SEED$&quot; | cut -f1,2,3 |
 <br /></pre>
  These three lines take the first two fields of the 3-tuples (dropping the <i>genome_name</i>
-), extend the table with fids that are believed to implement the role, and then the last line has the effect of keeping only entries that originated in the <a name="SEED405">SEED</a>
+), extend the table with fids that are believed to implement the role, and then the last line has the effect of keeping only entries that originated in the <a name="SEED451">SEED</a>
 . The output will be 3-tuples <br />
 <pre>
             [role,exemplar-fid,KBase-id-of-SEED-fid]
 <br /></pre>
- Then, we add columns for the <a name="md5406">md5</a>
- of the <a name="SEED407">SEED</a>
--fid, the function of the <a name="SEED408">SEED</a>
--fid, and the <a name="SEED409">SEED</a>
--id of the <a name="SEED410">SEED</a>
+ Then, we add columns for the <a name="md5452">md5</a>
+ of the <a name="SEED453">SEED</a>
+-fid, the function of the <a name="SEED454">SEED</a>
+-fid, and the <a name="SEED455">SEED</a>
+-id of the <a name="SEED456">SEED</a>
 -fid. <br />
 <pre>
             <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#fids_to_proteins" target='_blank'>fids_to_proteins</a> |
@@ -84,29 +84,29 @@
 	     SEED-id]
 <br /></pre>
 <h2>Generating the SEED Translations</h2>
-<p>Finally, we <a name="sort411">sort</a> the table on the <a name="md5412">md5</a> values and use a simple perl program to generate the <a name="SEED413">SEED</a> translations: <br />
+<p>Finally, we <a name="sort457">sort</a> the table on the <a name="md5458">md5</a> values and use a simple perl program to generate the <a name="SEED459">SEED</a> translations: <br />
 <pre>
             export TAB=`echo -e &quot;\t&quot;`
             sort -t &quot;$TAB&quot; -k 4 role.exemplar.fid.md5.function.source_id |
             perl make_seed_translation.pl &gt; seed.translation.table
 <br /></pre>
  The <i>export</i>
- is a minor ugliness needed to tell the <a name="sort414">sort</a>
- command that tabs are being used to delimit fields (this assumes use of the bash shell). By sorting the tuples on <a name="md5415">md5</a>
+ is a minor ugliness needed to tell the <a name="sort460">sort</a>
+ command that tabs are being used to delimit fields (this assumes use of the bash shell). By sorting the tuples on <a name="md5461">md5</a>
  values, you group rows that represent the same protein sequence (and should, hence, be consistently annotated). The program <i>make_seed_translation.pl</i>
- just forms the groups of rows with the same <a name="md5416">md5</a>
- values, checks to verify if they are consistently annotated (or can easily be made to be consistent), and writes out the desired <a name="SEED417">SEED</a>
+ just forms the groups of rows with the same <a name="md5462">md5</a>
+ values, checks to verify if they are consistently annotated (or can easily be made to be consistent), and writes out the desired <a name="SEED463">SEED</a>
  translation as the 4-tuples <br />
 <pre>
            [source,source-id,fid,exemplar]
 <br /></pre>
  where <i>source</i>
- will always be <i><a name="SEED418">SEED</a></i>
+ will always be <i><a name="SEED464">SEED</a></i>
 . <br />
 <br />
- The last time that we generated the <a name="SEED419">SEED</a>
- translations, the program produced somewhat over 1.8 million tuples. These impose a relatively consistent set of <a name="annotations420">annotations</a>
- on the <a name="SEED421">SEED</a>
+ The last time that we generated the <a name="SEED465">SEED</a>
+ translations, the program produced somewhat over 1.8 million tuples. These impose a relatively consistent set of <a name="annotations466">annotations</a>
+ on the <a name="SEED467">SEED</a>
  features. <br />
 <br />
  Here is the program <i>make_seed_translation.pl</i>

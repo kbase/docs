@@ -1,0 +1,80 @@
+<h1>Computing Pan Genomes for OTU&#39;s</h1>
+<h2>Invoking CS Command scripts from Perl</h2>
+ To illustrate the invocation of CS command scripts from Perl, let us consider a simple program that computes protein sets for the genomes in an <a name="OTU706">OTU</a>
+ (i.e., for a set of relatively &quot;close&quot; genomes). This can be thought of as a rough approximation of the <i>pan genome</i>
+. <p> Here is a first, simple version: 
+<h2> Example 1</h2>
+<pre>
+use strict;
+use Data::Dumper;
+
+my $usage = &quot;usage: pan_genome OTU &gt; protein.families&quot;;
+my $otu = shift @ARGV;
+if (! defined($otu)) { die $usage };
+
+my @genomes = map { chop; $_ } `echo $otu | <a href="http://kbase.us/developer-zone/api-documentation/cdm-entity-relationship-command-scripts/#get_relationship_IsCollectionOf" target='_blank'>get_relationship_IsCollectionOf</a> -to id | cut -f2`;
+
+open(CLUSTER,&quot;| cluster_objects&quot;) || die &quot;could not open clustering&quot;;
+foreach my $x (@genomes)
+{
+    foreach my $y (@genomes)
+    {
+	if ($x lt $y)
+	{
+	    my @output = `<a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#corresponds" target='_blank'>corresponds</a> &quot;$x&quot; &quot;$y&quot; -a 0.6 2&gt; /dev/null`;
+	    foreach $_ (@output)
+	    {
+		chomp;
+		my($peg1,$sc,$peg2) = split(/\t/,$_);
+		print CLUSTER &quot;$peg1\t$peg2\n&quot;;
+	    }
+	}
+    }
+}
+close(CLUSTER);
+<br /><br /></pre>
+<h2> Example 2</h2>
+ The first program can run for quite a while for OTUs that contain more than about 10 genomes. If you wish to make it work reasonably well on OTUs with hundreds of members, then something like the following might be used: <br />
+<br />
+<pre>
+use strict;
+use Data::Dumper;
+
+my $usage = &quot;usage: pan_genome OTU &gt; protein.families&quot;;
+my $otu = shift @ARGV;
+if (! defined($otu)) { die $usage };
+
+my @genomes = map { chop; $_ } `echo $otu | <a href="http://kbase.us/developer-zone/api-documentation/cdm-entity-relationship-command-scripts/#get_relationship_IsCollectionOf" target='_blank'>get_relationship_IsCollectionOf</a> -to id | cut -f2`;
+
+open(CLUSTER,&quot;| cluster_objects&quot;) || die &quot;could not open clustering&quot;;
+foreach my $x (@genomes)
+{
+    my @randomized = &amp;randomize(\@genomes);
+    if (@randomized &gt; 10) { $#randomized = 9 }
+    foreach my $y (@randomized)
+    {
+	if ($x ne $y)
+	{
+	    my @output = `<a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#corresponds" target='_blank'>corresponds</a> -a 0.6 &quot;$x&quot; &quot;$y&quot; 2&gt; /dev/null`;
+	    foreach $_ (@output)
+	    {
+		chomp;
+		my($peg1,$sc,$peg2) = split(/\t/,$_);
+		print CLUSTER &quot;$peg1\t$peg2\n&quot;;
+	    }
+	}
+    }
+}
+close(CLUSTER);
+
+use List::Util qw(shuffle);
+sub randomize {
+    my($list) = @_;
+    my @random = &amp;shuffle(@$list);
+    return @random;
+}
+
+<br /><br /></pre>
+ This will make the cost of a run linear in the number of genomes in the <a name="OTU707">OTU</a>
+, so it can still get quite time consuming. Basically, each genome in the <a name="OTU708">OTU</a>
+ is compared to up to 10 other genomes, and the connections that are established are used to form the protein sets. 

@@ -49,6 +49,188 @@ name="Output_Format"
 <a name='___top' class='dummyTopAnchor' ></a>
 
 <h2><a class='u' href='#___top' title='click to go to top of document'
+name="all_roles_used_in_models_and_subsystems"
+>all_roles_used_in_models_and_subsystems</a></h2>
+
+<p>The all_roles_used_in_models_and_subsystems allows a user to access the set of roles that are included in current models and subsystems.
+This is important.
+There are far fewer roles used in models than overall.
+Hence,
+the returned set represents the minimal set we need to clean up in order to properly support modeling.</p>
+
+<p>Example:</p>
+
+<pre>    all_roles_used_in_models_and_subsystems &#62; output</pre>
+
+<p>This is a pipe command. The is no input, and the output is to the standard output.</p>
+
+<dl>
+<dt><a name="Parameter_and_return_types"
+>Parameter and return types</a></dt>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Output_Format"
+>Output Format</a></h3>
+
+<p>The output is a file in which each line contains just a role used in the construction of models or occurring in a subsystem.</p>
+
+<h2><a class='u' href='#___top' title='click to go to top of document'
+name="POD_ERRORS"
+>POD ERRORS</a></h2>
+
+<p>Hey! <b>The above document had some coding errors, which are explained below:</b></p>
+
+<dl>
+<dt><a name="Around_line_29:"
+>Around line 29:</a></dt>
+
+<dd>
+<p>You forgot a &#39;=back&#39; before &#39;=head2&#39;</p>
+</dd>
+</dl>
+<hr>
+<a name='___top' class='dummyTopAnchor' ></a>
+
+<h2><a class='u' href='#___top' title='click to go to top of document'
+name="alleles_to_bp_locs"
+>alleles_to_bp_locs</a></h2>
+
+<p>This command can be used to find the contig and position corresponding to each of a set of alleles.
+The command takes in a table with a designated column containing allele IDs.
+It adds a column containing the location corresponding to the allele</p>
+
+<p>Example:</p>
+
+<pre>    alleles_to_bp_locs [arguments] &#60; input &#62; output</pre>
+
+<p>The standard input should be a tab-separated table (i.e., each line is a tab-separated set of fields). Normally, the last field in each line would contain the identifer. If another column contains the identifier use</p>
+
+<pre>    -c N</pre>
+
+<p>where N is the column (from 1) that contains the identifier.</p>
+
+<p>This is a pipe command. The input is taken from the standard input, and the output is to the standard output.</p>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Documentation_for_underlying_call"
+>Documentation for underlying call</a></h3>
+
+<p>This script is a wrapper for the CDMI-API call alleles_to_bp_locs. It is documented as follows:</p>
+
+<dl>
+<dt><a name="Parameter_and_return_types"
+>Parameter and return types</a></dt>
+
+<dd>
+<pre>
+$alleles is an alleles
+$return is a reference to a hash where the key is an allele and the value is a bp_loc
+alleles is a reference to a list where each element is an allele
+allele is a string
+bp_loc is a reference to a list containing 2 items:
+	0: a contig
+	1: an int
+contig is a string
+
+
+</pre>
+
+</dd>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Command-Line_Options"
+>Command-Line Options</a></h3>
+
+<dl>
+<dt><a name="-c_Column"
+>-c Column</a></dt>
+
+<dd>
+<p>This is used only if the column containing the identifier is not the last column.</p>
+
+<dt><a name="-i_InputFile_[_use_InputFile,_rather_than_stdin_]"
+>-i InputFile [ use InputFile, rather than stdin ]</a></dt>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Output_Format"
+>Output Format</a></h3>
+
+<p>The standard output is a tab-delimited file. It consists of the input file with extra columns added.</p>
+
+<p>Input lines that cannot be extended are written to stderr.</p>
+<hr>
+<a name='___top' class='dummyTopAnchor' ></a>
+
+<h2><a class='u' href='#___top' title='click to go to top of document'
+name="alleles_to_traits"
+>alleles_to_traits</a></h2>
+
+<p>Example:</p>
+
+<pre>    alleles_to_traits [arguments] &#60; input &#62; output</pre>
+
+<p>The standard input should be a tab-separated table (i.e., each line is a tab-separated set of fields). Normally, the last field in each line would contain the identifer. If another column contains the identifier use</p>
+
+<pre>    -c N</pre>
+
+<p>where N is the column (from 1) that contains the identifier.</p>
+
+<p>This is a pipe command. The input is taken from the standard input, and the output is to the standard output.</p>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Documentation_for_underlying_call"
+>Documentation for underlying call</a></h3>
+
+<p>This script is a wrapper for the CDMI-API call alleles_to_traits. It is documented as follows:</p>
+
+<dl>
+<dt><a name="Parameter_and_return_types"
+>Parameter and return types</a></dt>
+
+<dd>
+<pre>
+$alleles is an alleles
+$return is a reference to a hash where the key is an allele and the value is a traits
+alleles is a reference to a list where each element is an allele
+allele is a string
+traits is a reference to a list where each element is a trait
+trait is a string
+
+
+</pre>
+
+</dd>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Command-Line_Options"
+>Command-Line Options</a></h3>
+
+<dl>
+<dt><a name="-c_Column"
+>-c Column</a></dt>
+
+<dd>
+<p>This is used only if the column containing the identifier is not the last column.</p>
+
+<dt><a name="-i_InputFile_[_use_InputFile,_rather_than_stdin_]"
+>-i InputFile [ use InputFile, rather than stdin ]</a></dt>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Output_Format"
+>Output Format</a></h3>
+
+<p>The standard output is a tab-delimited file. It consists of the input file with extra columns added.</p>
+
+<p>Input lines that cannot be extended are written to stderr.</p>
+<hr>
+<a name='___top' class='dummyTopAnchor' ></a>
+
+<h2><a class='u' href='#___top' title='click to go to top of document'
 name="atomic_regulons_to_fids"
 >atomic_regulons_to_fids</a></h2>
 
@@ -126,7 +308,20 @@ name="close_genomes"
 
 <pre>    close_genomes [arguments] &#60; input &#62; output</pre>
 
-<p>The standard input should be a tab-separated table (i.e., each line is a tab-separated set of fields). Normally, the last field in each line would contain the identifer. If another column contains the identifier use</p>
+<p>This is a strange command. It has two quite distinct uses:</p>
+
+<pre>    1. it can be used to find genomes close to existing genomes (stored in either
+       the KBase CS or the PubSEED).  
+    2. Alternatively, it can be used to compute close genomes for a new genome
+       encoded in a JSON file.</pre>
+
+<p>The second use will be performed iff the</p>
+
+<pre>     -g Encoded_JSON_directory</pre>
+
+<p>is used. In that case, the updated genome directory will be written to STDOUT.</p>
+
+<p>If the input is to be one or more genomes from the CS, then the standard input should be a tab-separated table (i.e., each line is a tab-separated set of fields). Normally, the last field in each line would contain the identifer. If another column contains the identifier use</p>
 
 <pre>    -c N</pre>
 
@@ -179,19 +374,13 @@ name="Command-Line_Options"
 <dd>
 <dt><a name="-n_N_[_N_is_the_number_of_close_genomes_desired_]"
 >-n N [ N is the number of close genomes desired ]</a></dt>
-
-<dd>
-<dt><a 
->-how Algorithm [ optional: 0 -&#62; default, 1 -&#62; just match scientific names of genomes 2 -&#62; use SSU rRNA (not yet implemented) 3 -&#62; use &#34;universal proteins&#34; (not yet implemented) ]</a></dt>
 </dl>
 
 <h3><a class='u' href='#___top' title='click to go to top of document'
 name="Output_Format"
 >Output Format</a></h3>
 
-<p>The standard output is a tab-delimited file. It consists of the input file with an extra column added (a close genome)</p>
-
-<p>Input lines that cannot be extended are written to stderr.</p>
+<p>If close genomes are being computed for genomes in the CS, then the input is a tab-delimited file, and the output will have two extra columns: [projected degree of identity,close-genome]. If the -g option is used, then an updated genome structure will be encoded and written to STDOUT.</p>
 <hr>
 <a name='___top' class='dummyTopAnchor' ></a>
 
@@ -709,6 +898,35 @@ name="Output_Format"
 <p>[percent-identity,matching-context,b1,e1,ln1,b2,e2,ln2,sc,to-fid]</p>
 
 <p>Input lines that cannot be extended are written to stderr.</p>
+<hr>
+<a name='___top' class='dummyTopAnchor' ></a>
+
+<h2><a class='u' href='#___top' title='click to go to top of document'
+name="dump_relationship_relname"
+>dump_relationship relname</a></h2>
+
+<p>Dump all the from/to data for the given relname.
+This command talks directly to the Sapling database and thus must run within the KB infrastructure (in other words,
+this is not a general purpose command).</p>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Command-line_options"
+>Command-line options</a></h3>
+
+<dl>
+<dt><a name="relname"
+>relname</a></dt>
+
+<dd>
+<p>Name of the relationship to dump.</p>
+</dd>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Output_Format"
+>Output Format</a></h3>
+
+<p>Tab delimited file containing to and from links for the given relationship.</p>
 <hr>
 <a name='___top' class='dummyTopAnchor' ></a>
 
@@ -1270,7 +1488,7 @@ name="Command-Line_Options"
 name="Output_Format"
 >Output Format</a></h3>
 
-<p>The standard output is jsut a fasta file with the sequence. You can also get a tab-delimited file by using -fasta=0. The tab-delimited format consists of the input file with an extra column of sequence added.</p>
+<p>The standard output is just a fasta file with the sequence. You can also get a tab-delimited file by using -fasta=0. The tab-delimited format consists of the input file with an extra column of sequence added.</p>
 
 <p>Input lines that cannot be extended are written to stderr.</p>
 <hr>
@@ -2736,6 +2954,8 @@ name="Output_Format"
 <p>Input lines that cannot be extended are written to stderr.</p>
 <hr>
 <a name='___top' class='dummyTopAnchor' ></a>
+<hr>
+<a name='___top' class='dummyTopAnchor' ></a>
 
 <h2><a class='u' href='#___top' title='click to go to top of document'
 name="locations_to_dna_sequences"
@@ -3044,6 +3264,95 @@ name="Output_Format"
 >Output Format</a></h3>
 
 <p>The standard output is a tab-delimited file. It consists of the input file with an extra column (a genome from the same OTU) added. If there are N genomes in the OTU for the genome in an input line, then N output lines will be generated, each containing a single genome ID from the same OTU.</p>
+
+<p>Input lines that cannot be extended are written to stderr.</p>
+<hr>
+<a name='___top' class='dummyTopAnchor' ></a>
+
+<h2><a class='u' href='#___top' title='click to go to top of document'
+name="ous_with_trait"
+>ous_with_trait</a></h2>
+
+<p>Example:</p>
+
+<pre>    ous_with_trait -g Genome -mtype MeasurementType -min MinVal -max MaxVal &#60; traits_input &#62; output_with_ous</pre>
+
+<p>The standard input should be a tab-separated table (i.e., each line is a tab-separated set of fields). Normally, the last field in each line would contain the identifer. If another column contains the identifier use</p>
+
+<pre>    -c N</pre>
+
+<p>where N is the column (from 1) that contains the identifier.</p>
+
+<p>This is a pipe command. The input is taken from the standard input, and the output is to the standard output.</p>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Documentation_for_underlying_call"
+>Documentation for underlying call</a></h3>
+
+<p>This script is a wrapper for the CDMI-API call ous_with_trait. It is documented as follows:</p>
+
+<dl>
+<dt><a name="Parameter_and_return_types"
+>Parameter and return types</a></dt>
+
+<dd>
+<pre>
+$genome is a genome
+$trait is a trait
+$measurement_type is a measurement_type
+$min_value is a float
+$max_value is a float
+$return is a reference to a list where each element is a reference to a list containing 2 items:
+	0: an ou
+	1: a measurement_value
+genome is a string
+trait is a string
+measurement_type is a string
+ou is a string
+measurement_value is a float
+
+
+</pre>
+
+</dd>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Command-Line_Options"
+>Command-Line Options</a></h3>
+
+<dl>
+<dt><a name="-c_Column"
+>-c Column</a></dt>
+
+<dd>
+<p>This is used only if the column containing the identifier is not the last column.</p>
+
+<dt><a name="-g_genome_[_We_are_extracting_ous_for_which_this_is_the_reference_genome_]"
+>-g genome [ We are extracting ous for which this is the reference genome ]</a></dt>
+
+<dd>
+<dt><a name="-i_InputFile_[_use_InputFile,_rather_than_stdin_]"
+>-i InputFile [ use InputFile, rather than stdin ]</a></dt>
+
+<dd>
+<dt><a name="-mtype_Type_[_Measurement_Type_]"
+>-mtype Type [ Measurement Type ]</a></dt>
+
+<dd>
+<dt><a name="-min_MinVal_[_Minimum_value_of_measurement_]"
+>-min MinVal [ Minimum value of measurement ]</a></dt>
+
+<dd>
+<dt><a name="-max_MaxVale_[_maximum_value_of_measurement_]"
+>-max MaxVale [ maximum value of measurement ]</a></dt>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Output_Format"
+>Output Format</a></h3>
+
+<p>The standard output is a tab-delimited file. It consists of the input file with extra columns added (the measurement vlue and an ou with that value).</p>
 
 <p>Input lines that cannot be extended are written to stderr.</p>
 <hr>
@@ -3963,6 +4272,164 @@ name="Output_Format"
 >Output Format</a></h3>
 
 <p>The standard output is a tab-delimited file. It consists of the input file with an extra column (the complex ID) added.</p>
+
+<p>Input lines that cannot be extended are written to stderr.</p>
+<hr>
+<a name='___top' class='dummyTopAnchor' ></a>
+
+<h2><a class='u' href='#___top' title='click to go to top of document'
+name="region_to_alleles"
+>region_to_alleles</a></h2>
+
+<p>Example:</p>
+
+<pre>    region_to_alleles [-d 10000] &#60; input &#62; output</pre>
+
+<p>Here the region will be 20kb centered on the input positions.</p>
+
+<p>The standard input should be a tab-separated table (i.e., each line is a tab-separated set of fields). Normally, the last field in each line would contain the identifer. If another column contains the identifier use</p>
+
+<pre>    -c N</pre>
+
+<p>where N is the column (from 1) that contains the identifier.</p>
+
+<p>This is a pipe command. The input is taken from the standard input, and the output is to the standard output.</p>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Documentation_for_underlying_call"
+>Documentation for underlying call</a></h3>
+
+<p>This script is a wrapper for the CDMI-API call region_to_alleles. It is documented as follows:</p>
+
+<dl>
+<dt><a name="Parameter_and_return_types"
+>Parameter and return types</a></dt>
+
+<dd>
+<pre>
+$region_of_dna is a region_of_dna
+$return is a reference to a list where each element is a reference to a list containing 2 items:
+	0: an allele
+	1: an int
+region_of_dna is a reference to a list containing 4 items:
+	0: a contig
+	1: a begin
+	2: a strand
+	3: a length
+contig is a string
+begin is an int
+strand is a string
+length is an int
+allele is a string
+
+
+</pre>
+
+</dd>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Command-Line_Options"
+>Command-Line Options</a></h3>
+
+<dl>
+<dt><a name="-c_Column"
+>-c Column</a></dt>
+
+<dd>
+<p>This is used only if the column containing the identifier is not the last column.</p>
+
+<dt><a name="-i_InputFile_[_use_InputFile,_rather_than_stdin_]"
+>-i InputFile [ use InputFile, rather than stdin ]</a></dt>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Output_Format"
+>Output Format</a></h3>
+
+<p>The standard output is a tab-delimited file. It consists of the input file with extra columns added.</p>
+
+<p>Input lines that cannot be extended are written to stderr.</p>
+<hr>
+<a name='___top' class='dummyTopAnchor' ></a>
+
+<h2><a class='u' href='#___top' title='click to go to top of document'
+name="region_to_fids"
+>region_to_fids</a></h2>
+
+<p>This command is used to take positions in contigs and to find fids that ocur within a specified distance of each position.
+It differs from locations_to_fids in which locations (list of regions) are explicitly given.</p>
+
+<p>Example:</p>
+
+<pre>    region_to_fids -d 10000 &#60; input &#62; output [gets fids within 10kb of the positions]</pre>
+
+<p>The standard input should be a tab-separated table (i.e., each line is a tab-separated set of fields). Normally, the last field in each line would contain the position. If another column contains the positions use</p>
+
+<pre>    -c N</pre>
+
+<p>where N is the column (from 1) that contains the identifier.</p>
+
+<p>Positions are represented as Contig_Pos or Contig_Pos+1.</p>
+
+<p>This is a pipe command. The input is taken from the standard input, and the output is to the standard output.</p>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Documentation_for_underlying_call"
+>Documentation for underlying call</a></h3>
+
+<p>This script is a wrapper for the CDMI-API call region_to_fids. It is documented as follows:</p>
+
+<dl>
+<dt><a name="Parameter_and_return_types"
+>Parameter and return types</a></dt>
+
+<dd>
+<pre>
+$region_of_dna is a region_of_dna
+$return is a fids
+region_of_dna is a reference to a list containing 4 items:
+	0: a contig
+	1: a begin
+	2: a strand
+	3: a length
+contig is a string
+begin is an int
+strand is a string
+length is an int
+fids is a reference to a list where each element is a fid
+fid is a string
+
+
+</pre>
+
+</dd>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Command-Line_Options"
+>Command-Line Options</a></h3>
+
+<dl>
+<dt><a name="-c_Column"
+>-c Column</a></dt>
+
+<dd>
+<p>This is used only if the column containing the position is not the last column.</p>
+
+<dt><a name="-i_InputFile_[_use_InputFile,_rather_than_stdin_]"
+>-i InputFile [ use InputFile, rather than stdin ]</a></dt>
+
+<dd>
+<dt><a name="-d_Distance_[_all_fids_that_are_within_this_distance_will_be_reported_]"
+>-d Distance [ all fids that are within this distance will be reported ]</a></dt>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Output_Format"
+>Output Format</a></h3>
+
+<p>The standard output is a tab-delimited file. It consists of the input file with extra columns added.</p>
 
 <p>Input lines that cannot be extended are written to stderr.</p>
 <hr>
@@ -5005,6 +5472,72 @@ name="Command-Line_Options"
 
 <dd>
 <p>This is used only if the column containing the subsystem is not the last column.</p>
+
+<dt><a name="-i_InputFile_[_use_InputFile,_rather_than_stdin_]"
+>-i InputFile [ use InputFile, rather than stdin ]</a></dt>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Output_Format"
+>Output Format</a></h3>
+
+<p>The standard output is a tab-delimited file. It consists of the input file with extra columns added.</p>
+
+<p>Input lines that cannot be extended are written to stderr.</p>
+<hr>
+<a name='___top' class='dummyTopAnchor' ></a>
+
+<h2><a class='u' href='#___top' title='click to go to top of document'
+name="traits_to_alleles"
+>traits_to_alleles</a></h2>
+
+<p>Example:</p>
+
+<pre>    traits_to_alleles [arguments] &#60; input &#62; output</pre>
+
+<p>The standard input should be a tab-separated table (i.e., each line is a tab-separated set of fields). Normally, the last field in each line would contain the identifer. If another column contains the identifier use</p>
+
+<pre>    -c N</pre>
+
+<p>where N is the column (from 1) that contains the identifier.</p>
+
+<p>This is a pipe command. The input is taken from the standard input, and the output is to the standard output.</p>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Documentation_for_underlying_call"
+>Documentation for underlying call</a></h3>
+
+<p>This script is a wrapper for the CDMI-API call traits_to_alleles. It is documented as follows:</p>
+
+<dl>
+<dt><a name="Parameter_and_return_types"
+>Parameter and return types</a></dt>
+
+<dd>
+<pre>
+$traits is a traits
+$return is a reference to a hash where the key is a trait and the value is an alleles
+traits is a reference to a list where each element is a trait
+trait is a string
+alleles is a reference to a list where each element is an allele
+allele is a string
+
+
+</pre>
+
+</dd>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Command-Line_Options"
+>Command-Line Options</a></h3>
+
+<dl>
+<dt><a name="-c_Column"
+>-c Column</a></dt>
+
+<dd>
+<p>This is used only if the column containing the identifier is not the last column.</p>
 
 <dt><a name="-i_InputFile_[_use_InputFile,_rather_than_stdin_]"
 >-i InputFile [ use InputFile, rather than stdin ]</a></dt>

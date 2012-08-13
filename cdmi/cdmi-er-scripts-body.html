@@ -140,6 +140,10 @@ name="Command-Line_Options"
 <p>Choose a set of fields to return. Field-list is a comma-separated list of strings. The following fields are available:</p>
 
 <dl>
+<dt><a name="source_id"
+>source_id</a></dt>
+
+<dd>
 <dt><a name="position"
 >position</a></dt>
 
@@ -158,6 +162,10 @@ name="Command-Line_Options"
 <dd>
 <dt><a name="major_allele"
 >major_allele</a></dt>
+
+<dd>
+<dt><a name="obs_unit_count"
+>obs_unit_count</a></dt>
 </dl>
 </dd>
 </dl>
@@ -264,8 +272,8 @@ name="Related_entities"
 <p>The Assay entity has the following relationship links:</p>
 
 <dl>
-<dt><a name="IsLocatedOn_StudyExperiment"
->IsLocatedOn StudyExperiment</a></dt>
+<dt><a name="IsAssayOf_StudyExperiment"
+>IsAssayOf StudyExperiment</a></dt>
 </dl>
 
 <h3><a class='u' href='#___top' title='click to go to top of document'
@@ -292,6 +300,10 @@ name="Command-Line_Options"
 <p>Choose a set of fields to return. Field-list is a comma-separated list of strings. The following fields are available:</p>
 
 <dl>
+<dt><a name="source_id"
+>source_id</a></dt>
+
+<dd>
 <dt><a name="assay_type"
 >assay_type</a></dt>
 
@@ -925,8 +937,8 @@ name="Related_entities"
 >IsLocusFor Feature</a></dt>
 
 <dd>
-<dt><a name="SummarizedBy_AlleleFrequency"
->SummarizedBy AlleleFrequency</a></dt>
+<dt><a name="IsSummarizedBy_AlleleFrequency"
+>IsSummarizedBy AlleleFrequency</a></dt>
 </dl>
 
 <h3><a class='u' href='#___top' title='click to go to top of document'
@@ -4286,6 +4298,10 @@ name="Command-Line_Options"
 <p>Choose a set of fields to return. Field-list is a comma-separated list of strings. The following fields are available:</p>
 
 <dl>
+<dt><a name="source_id"
+>source_id</a></dt>
+
+<dd>
 <dt><a name="position"
 >position</a></dt>
 
@@ -4304,6 +4320,10 @@ name="Command-Line_Options"
 <dd>
 <dt><a name="major_allele"
 >major_allele</a></dt>
+
+<dd>
+<dt><a name="obs_unit_count"
+>obs_unit_count</a></dt>
 </dl>
 </dd>
 </dl>
@@ -4422,8 +4442,8 @@ name="Related_entities"
 <p>The Assay entity has the following relationship links:</p>
 
 <dl>
-<dt><a name="IsLocatedOn_StudyExperiment"
->IsLocatedOn StudyExperiment</a></dt>
+<dt><a name="IsAssayOf_StudyExperiment"
+>IsAssayOf StudyExperiment</a></dt>
 </dl>
 
 <h3><a class='u' href='#___top' title='click to go to top of document'
@@ -4450,6 +4470,10 @@ name="Command-Line_Options"
 <p>Choose a set of fields to return. Field-list is a comma-separated list of strings. The following fields are available:</p>
 
 <dl>
+<dt><a name="source_id"
+>source_id</a></dt>
+
+<dd>
 <dt><a name="assay_type"
 >assay_type</a></dt>
 
@@ -5131,8 +5155,8 @@ name="Related_entities"
 >IsLocusFor Feature</a></dt>
 
 <dd>
-<dt><a name="SummarizedBy_AlleleFrequency"
->SummarizedBy AlleleFrequency</a></dt>
+<dt><a name="IsSummarizedBy_AlleleFrequency"
+>IsSummarizedBy AlleleFrequency</a></dt>
 </dl>
 
 <h3><a class='u' href='#___top' title='click to go to top of document'
@@ -15602,23 +15626,23 @@ name="Command-Line_Options"
 >-from field-list</a></dt>
 
 <dd>
-<p>Choose a set of fields from the StudyExperiment entity to return. Field-list is a comma-separated list of strings. The following fields are available:</p>
+<p>Choose a set of fields from the Assay entity to return. Field-list is a comma-separated list of strings. The following fields are available:</p>
 
 <dl>
 <dt><a name="id"
 >id</a></dt>
 
 <dd>
-<dt><a name="source_name"
->source_name</a></dt>
+<dt><a name="source_id"
+>source_id</a></dt>
 
 <dd>
-<dt><a name="design"
->design</a></dt>
+<dt><a name="assay_type"
+>assay_type</a></dt>
 
 <dd>
-<dt><a name="originator"
->originator</a></dt>
+<dt><a name="assay_type_id"
+>assay_type_id</a></dt>
 </dl>
 
 <dt><a name="-rel_field-list"
@@ -15640,11 +15664,79 @@ name="Command-Line_Options"
 >-to field-list</a></dt>
 
 <dd>
+<p>Choose a set of fields from the StudyExperiment entity to return. Field-list is a comma-separated list of strings. The following fields are available:</p>
+
+<dl>
+<dt><a name="id"
+>id</a></dt>
+
+<dd>
+<dt><a name="source_name"
+>source_name</a></dt>
+
+<dd>
+<dt><a name="design"
+>design</a></dt>
+
+<dd>
+<dt><a name="originator"
+>originator</a></dt>
+</dl>
+</dd>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Output_Format"
+>Output Format</a></h3>
+
+<p>The standard output is a tab-delimited file. It consists of the input file with an extra column added for each requested field. Input lines that cannot be extended are written to stderr.</p>
+<hr>
+<a name='___top' class='dummyTopAnchor' ></a>
+
+<h2><a class='u' href='#___top' title='click to go to top of document'
+name="get_relationship_IsAssayOf"
+>get_relationship_IsAssayOf</a></h2>
+
+<p>This relationship associates each assay with the relevant experiments.</p>
+
+<p>Example:</p>
+
+<pre>    get_relationship_IsAssayOf -a &#60; ids &#62; table.with.fields.added</pre>
+
+<p>would read in a file of ids and add a column for each field in the relationship.</p>
+
+<p>The standard input should be a tab-separated table (i.e., each line is a tab-separated set of fields). Normally, the last field in each line would contain the id. If some other column contains the id, use</p>
+
+<pre>    -c N</pre>
+
+<p>where N is the column (from 1) that contains the id.</p>
+
+<p>This is a pipe command. The input is taken from the standard input, and the output is to the standard output.</p>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Command-Line_Options"
+>Command-Line Options</a></h3>
+
+<dl>
+<dt><a name="-c_Column"
+>-c Column</a></dt>
+
+<dd>
+<p>This is used only if the column containing id is not the last.</p>
+
+<dt><a name="-from_field-list"
+>-from field-list</a></dt>
+
+<dd>
 <p>Choose a set of fields from the Assay entity to return. Field-list is a comma-separated list of strings. The following fields are available:</p>
 
 <dl>
 <dt><a name="id"
 >id</a></dt>
+
+<dd>
+<dt><a name="source_id"
+>source_id</a></dt>
 
 <dd>
 <dt><a name="assay_type"
@@ -15653,6 +15745,44 @@ name="Command-Line_Options"
 <dd>
 <dt><a name="assay_type_id"
 >assay_type_id</a></dt>
+</dl>
+
+<dt><a name="-rel_field-list"
+>-rel field-list</a></dt>
+
+<dd>
+<p>Choose a set of fields from the relationship to return. Field-list is a comma-separated list of strings. The following fields are available:</p>
+
+<dl>
+<dt><a name="from_link"
+>from_link</a></dt>
+
+<dd>
+<dt><a name="to_link"
+>to_link</a></dt>
+</dl>
+
+<dt><a name="-to_field-list"
+>-to field-list</a></dt>
+
+<dd>
+<p>Choose a set of fields from the StudyExperiment entity to return. Field-list is a comma-separated list of strings. The following fields are available:</p>
+
+<dl>
+<dt><a name="id"
+>id</a></dt>
+
+<dd>
+<dt><a name="source_name"
+>source_name</a></dt>
+
+<dd>
+<dt><a name="design"
+>design</a></dt>
+
+<dd>
+<dt><a name="originator"
+>originator</a></dt>
 </dl>
 </dd>
 </dl>
@@ -24356,6 +24486,120 @@ name="Output_Format"
 <a name='___top' class='dummyTopAnchor' ></a>
 
 <h2><a class='u' href='#___top' title='click to go to top of document'
+name="get_relationship_IsSummarizedBy"
+>get_relationship_IsSummarizedBy</a></h2>
+
+<p>This relationship describes the statistical frequencies of the most common alleles in various positions on the reference contig.</p>
+
+<p>Example:</p>
+
+<pre>    get_relationship_IsSummarizedBy -a &#60; ids &#62; table.with.fields.added</pre>
+
+<p>would read in a file of ids and add a column for each field in the relationship.</p>
+
+<p>The standard input should be a tab-separated table (i.e., each line is a tab-separated set of fields). Normally, the last field in each line would contain the id. If some other column contains the id, use</p>
+
+<pre>    -c N</pre>
+
+<p>where N is the column (from 1) that contains the id.</p>
+
+<p>This is a pipe command. The input is taken from the standard input, and the output is to the standard output.</p>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Command-Line_Options"
+>Command-Line Options</a></h3>
+
+<dl>
+<dt><a name="-c_Column"
+>-c Column</a></dt>
+
+<dd>
+<p>This is used only if the column containing id is not the last.</p>
+
+<dt><a name="-from_field-list"
+>-from field-list</a></dt>
+
+<dd>
+<p>Choose a set of fields from the Contig entity to return. Field-list is a comma-separated list of strings. The following fields are available:</p>
+
+<dl>
+<dt><a name="id"
+>id</a></dt>
+
+<dd>
+<dt><a name="source_id"
+>source_id</a></dt>
+</dl>
+
+<dt><a name="-rel_field-list"
+>-rel field-list</a></dt>
+
+<dd>
+<p>Choose a set of fields from the relationship to return. Field-list is a comma-separated list of strings. The following fields are available:</p>
+
+<dl>
+<dt><a name="from_link"
+>from_link</a></dt>
+
+<dd>
+<dt><a name="to_link"
+>to_link</a></dt>
+
+<dd>
+<dt><a name="position"
+>position</a></dt>
+</dl>
+
+<dt><a name="-to_field-list"
+>-to field-list</a></dt>
+
+<dd>
+<p>Choose a set of fields from the AlleleFrequency entity to return. Field-list is a comma-separated list of strings. The following fields are available:</p>
+
+<dl>
+<dt><a name="id"
+>id</a></dt>
+
+<dd>
+<dt><a name="source_id"
+>source_id</a></dt>
+
+<dd>
+<dt><a name="position"
+>position</a></dt>
+
+<dd>
+<dt><a name="minor_AF"
+>minor_AF</a></dt>
+
+<dd>
+<dt><a name="minor_allele"
+>minor_allele</a></dt>
+
+<dd>
+<dt><a name="major_AF"
+>major_AF</a></dt>
+
+<dd>
+<dt><a name="major_allele"
+>major_allele</a></dt>
+
+<dd>
+<dt><a name="obs_unit_count"
+>obs_unit_count</a></dt>
+</dl>
+</dd>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Output_Format"
+>Output Format</a></h3>
+
+<p>The standard output is a tab-delimited file. It consists of the input file with an extra column added for each requested field. Input lines that cannot be extended are written to stderr.</p>
+<hr>
+<a name='___top' class='dummyTopAnchor' ></a>
+
+<h2><a class='u' href='#___top' title='click to go to top of document'
 name="get_relationship_IsSuperclassOf"
 >get_relationship_IsSuperclassOf</a></h2>
 
@@ -27898,31 +28142,15 @@ name="Command-Line_Options"
 >-from field-list</a></dt>
 
 <dd>
-<p>Choose a set of fields from the AlleleFrequency entity to return. Field-list is a comma-separated list of strings. The following fields are available:</p>
+<p>Choose a set of fields from the Contig entity to return. Field-list is a comma-separated list of strings. The following fields are available:</p>
 
 <dl>
 <dt><a name="id"
 >id</a></dt>
 
 <dd>
-<dt><a name="position"
->position</a></dt>
-
-<dd>
-<dt><a name="minor_AF"
->minor_AF</a></dt>
-
-<dd>
-<dt><a name="minor_allele"
->minor_allele</a></dt>
-
-<dd>
-<dt><a name="major_AF"
->major_AF</a></dt>
-
-<dd>
-<dt><a name="major_allele"
->major_allele</a></dt>
+<dt><a name="source_id"
+>source_id</a></dt>
 </dl>
 
 <dt><a name="-rel_field-list"
@@ -27948,7 +28176,7 @@ name="Command-Line_Options"
 >-to field-list</a></dt>
 
 <dd>
-<p>Choose a set of fields from the Contig entity to return. Field-list is a comma-separated list of strings. The following fields are available:</p>
+<p>Choose a set of fields from the AlleleFrequency entity to return. Field-list is a comma-separated list of strings. The following fields are available:</p>
 
 <dl>
 <dt><a name="id"
@@ -27957,6 +28185,30 @@ name="Command-Line_Options"
 <dd>
 <dt><a name="source_id"
 >source_id</a></dt>
+
+<dd>
+<dt><a name="position"
+>position</a></dt>
+
+<dd>
+<dt><a name="minor_AF"
+>minor_AF</a></dt>
+
+<dd>
+<dt><a name="minor_allele"
+>minor_allele</a></dt>
+
+<dd>
+<dt><a name="major_AF"
+>major_AF</a></dt>
+
+<dd>
+<dt><a name="major_allele"
+>major_allele</a></dt>
+
+<dd>
+<dt><a name="obs_unit_count"
+>obs_unit_count</a></dt>
 </dl>
 </dd>
 </dl>
@@ -29608,6 +29860,10 @@ name="Command-Line_Options"
 <p>Choose a set of fields to return. Field-list is a comma-separated list of strings. The following fields are available:</p>
 
 <dl>
+<dt><a name="source_id"
+>source_id</a></dt>
+
+<dd>
 <dt><a name="position"
 >position</a></dt>
 
@@ -29626,6 +29882,10 @@ name="Command-Line_Options"
 <dd>
 <dt><a name="major_allele"
 >major_allele</a></dt>
+
+<dd>
+<dt><a name="obs_unit_count"
+>obs_unit_count</a></dt>
 </dl>
 </dd>
 </dl>
@@ -29773,8 +30033,8 @@ name="Related_entities"
 <p>The Assay entity has the following relationship links:</p>
 
 <dl>
-<dt><a name="IsLocatedOn_StudyExperiment"
->IsLocatedOn StudyExperiment</a></dt>
+<dt><a name="IsAssayOf_StudyExperiment"
+>IsAssayOf StudyExperiment</a></dt>
 </dl>
 
 <h3><a class='u' href='#___top' title='click to go to top of document'
@@ -29846,6 +30106,10 @@ name="Command-Line_Options"
 <p>Choose a set of fields to return. Field-list is a comma-separated list of strings. The following fields are available:</p>
 
 <dl>
+<dt><a name="source_id"
+>source_id</a></dt>
+
+<dd>
 <dt><a name="assay_type"
 >assay_type</a></dt>
 
@@ -30778,8 +31042,8 @@ name="Related_entities"
 >IsLocusFor Feature</a></dt>
 
 <dd>
-<dt><a name="SummarizedBy_AlleleFrequency"
->SummarizedBy AlleleFrequency</a></dt>
+<dt><a name="IsSummarizedBy_AlleleFrequency"
+>IsSummarizedBy AlleleFrequency</a></dt>
 </dl>
 
 <h3><a class='u' href='#___top' title='click to go to top of document'
