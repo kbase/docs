@@ -1,0 +1,150 @@
+<h1>Identify Variants</h1>
+
+<p>
+<strong>Purpose: </strong>
+This tutorial demonstrates how to align reads to a reference genome and identify
+variants using a combination of Bowtie2 and SAMTools.
+</p>
+
+<p><strong>Required Prerequisite Activities:</strong> SSH access to kbase-b.knoxville.kbase.us</p>
+<p><strong>Required Prerequisite Activities:</strong> Getting Started with KBase</p>
+<p><strong>Suggested Prerequesite Activities: </strong>Basic Exercises Using KBase</p>
+<p><strong>Related Tutorials: </strong> </p>
+
+<h2>Connect to kbase-b</h2>
+Follow the system administrator instructions to ssh to kbase-b. Briefly, you first
+ssh to dtn01.knoxville.kbase.us and then from there ssh to kbase-b.knoxville.kbase.us
+
+<h2>Configure jkbase client</h2>
+
+<p>
+Client software is already installed on kbase-b to configure it:
+</p>
+
+1. Create the directory ~/.jnomics
+<pre>
+  $ mkdir ~/.jnomics
+</pre>
+
+2. Copy and edit the properties file
+<pre>
+ $ cp /usr/local/etc/jnomics/jnomics-kbase-client.properties ~/.jnomics
+ $ vim ~/.jnomics/jnomics-kbase-client.properties
+</pre>
+
+<p>
+Change the username to your kbase-b username. The properties file only
+needs to be edited once.
+</p>
+
+
+<h2>Aligning reads to a reference genome</h2>
+
+<p>
+The <i>jkbase</i> script is the command line interface to the service.
+The first step in most genomic analysis is the alignment of sequencing
+reads to a reference genome. 
+</p>
+
+<p>
+This tutorial will focus on paired-end illumina sequencing files. Single-end
+experiments will work as well by substituting `se` for `pe` in the commands below. 
+</p>
+
+
+<h3>1. Load reads into the cluster</h3>
+
+<p>
+Import the experiment reads into your home directory on the cluster. 
+Paired-end reads should be kept together during alignment so there is a special
+command for uploading paired-end reads. It is assumed that you have two files
+with paired reads in fastq format, the files can be either plain text, gzip'd
+or bzip2'd.
+</p>
+
+<pre>
+  $ jkbase fs -put_pe reads.1.fq.gz reads.2.fq.gz reads
+</pre>
+
+<p>
+This will pair the reads and upload them to the cluster. The last argument is the base
+name of the file that will be found in your home directory on the cluster. Because
+this is a paired-end experiment the extension `.pe` will be added automatically.
+After the upload process is complete, a file named reads.pe should be your home directory.
+</p>
+
+<p>
+Standard filesystem commands can be listed with `jkbase fs`.
+</p>
+
+
+<h3>2. Align with Bowtie</h3>
+
+<p>
+To align the reads to a reference genome simply call jkbase compute with the bowtie argument.
+</p>
+
+<pre>
+  $ jkbase compute bowtie -in reads.pe -organism maize -out reads_bowtie_align
+</pre>
+   
+<p>
+The organism flag selects the reference used in alignment. The organism must be supported by
+the kbase infrastructure as a part of the controlled genome vocabulary. To list the available
+genomes/organisms use:
+</p>
+
+<pre>
+ $ jkbase compute list_genomes
+</pre>
+
+
+<h3>3. Check status of running Job</h3>
+
+<p>
+When the alignment task it started, the command will immediately return with a job reference id.
+This reference id can be used to poll the status of the job using the commandline client.
+</p>
+
+<pre>
+  $ jkbase compute status -job &lt;jobID&gt;
+</pre>
+
+
+<h2>Identify SNPs and download VCF file</h2>
+
+<h3>1. Call SNPs with SAMTools</h3>
+<p>
+Calling SNPs takes the output from the alignment steps above and calls SNPs
+using the selected reference.
+</p>
+
+<pre>
+ $ jkbase compute snp -in reads_bowtie_align -organism maize -out reads_snps
+</pre>
+
+<h3>2. Merge VCF files</h3>
+<p>
+Because SNPs are called in parallel across the genome multiple files are created
+by the previous command.  To join the SNPs into a single VCF file use jkbase's
+vcfmerge function
+</p>
+
+<pre>
+ $ jkbase compute vcf_merge -in reads_snps -alignments reads_bowtie_align -out reads.vcf
+</pre>
+
+<h3>3. Download VCF file</h3>
+<p>
+Download the combined vcf file to the client machine for local viewing.
+</p>
+
+<pre>
+  $ jkbase fs -get reads.vcf
+</pre>
+
+<p>
+A local file named reads.vcf will be created containing all of the SNPs called
+by the pipeline.
+</p>
+
