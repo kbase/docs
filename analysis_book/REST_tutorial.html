@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<title>IPython Notebook</title>
+<link rel="stylesheet" href="tutorial_files/REST_tutorial_files/jquery-ui.css" type="text/css">
+<link rel="stylesheet" href="tutorial_files/REST_tutorial_files/boilerplate.css" type="text/css">
+<link rel="stylesheet" href="tutorial_files/REST_tutorial_files/fbm.css" type="text/css">
+<link rel="stylesheet" href="tutorial_files/REST_tutorial_files/page.css" type="text/css">
+
+
+<script type="text/javascript" src="tutorial_files/REST_tutorial_files/MathJax.js" charset="utf-8"></script>
+
+<script type="text/javascript">
+// MathJax disabled, set as null to distingish from *missing* MathJax,
+// where it will be undefined, and should prompt a dialog later.
+window.mathjax_url = "http://cdn.mathjax.org/mathjax/latest/MathJax.js";
+</script>
+<link rel="stylesheet" href="tutorial_files/REST_tutorial_files/codemirror.css">
+<link rel="stylesheet" href="tutorial_files/REST_tutorial_files/ipython.css">
+<link rel="stylesheet" href="tutorial_files/REST_tutorial_files/prettify.css">
+<link rel="stylesheet" href="tutorial_files/REST_tutorial_files/notebook.css" type="text/css">
+<link rel="stylesheet" href="tutorial_files/REST_tutorial_files/printnotebook.css" type="text/css">
+<link rel="stylesheet" href="tutorial_files/REST_tutorial_files/renderedhtml.css" type="text/css">
+
+
+
+<style type="text/css">.MathJax_Hover_Frame {border-radius: .25em; -webkit-border-radius: .25em; -moz-border-radius: .25em; -khtml-border-radius: .25em; box-shadow: 0px 0px 15px #83A; -webkit-box-shadow: 0px 0px 15px #83A; -moz-box-shadow: 0px 0px 15px #83A; -khtml-box-shadow: 0px 0px 15px #83A; border: 1px solid #A6D ! important; display: inline-block; position: absolute}
+.MathJax_Hover_Arrow {position: absolute; width: 15px; height: 11px; cursor: pointer}
+</style><style type="text/css">#MathJax_About {position: fixed; left: 50%; width: auto; text-align: center; border: 3px outset; padding: 1em 2em; background-color: #DDDDDD; color: black; cursor: default; font-family: message-box; font-size: 120%; font-style: normal; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; border-radius: 15px; -webkit-border-radius: 15px; -moz-border-radius: 15px; -khtml-border-radius: 15px; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+.MathJax_Menu {position: absolute; background-color: white; color: black; width: auto; padding: 5px 0px; border: 1px solid #CCCCCC; margin: 0; cursor: default; font: menu; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; border-radius: 5px; -webkit-border-radius: 5px; -moz-border-radius: 5px; -khtml-border-radius: 5px; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+.MathJax_MenuItem {padding: 1px 2em; background: transparent}
+.MathJax_MenuTitle {background-color: #CCCCCC; margin: -5px 0 0 0; text-align: center; font-style: italic; font-size: 80%; color: #444444; padding: 2px 0; overflow: hidden}
+.MathJax_MenuArrow {position: absolute; right: .5em; color: #666666}
+.MathJax_MenuActive .MathJax_MenuArrow {color: white}
+.MathJax_MenuCheck {position: absolute; left: .7em}
+.MathJax_MenuRadioCheck {position: absolute; left: .7em}
+.MathJax_MenuLabel {padding: 1px 2em 3px 1.33em; font-style: italic}
+.MathJax_MenuRule {border-top: 1px solid #DDDDDD; margin: 4px 3px}
+.MathJax_MenuDisabled {color: GrayText}
+.MathJax_MenuActive {background-color: #606872; color: white}
+.MathJax_Menu_Close {position: absolute; width: 31px; height: 31px; top: -15px; left: -15px}
+</style><style type="text/css">#MathJax_Zoom {position: absolute; background-color: #F0F0F0; overflow: auto; display: block; z-index: 301; padding: .5em; border: 1px solid black; margin: 0; font-weight: normal; font-style: normal; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; box-shadow: 5px 5px 15px #AAAAAA; -webkit-box-shadow: 5px 5px 15px #AAAAAA; -moz-box-shadow: 5px 5px 15px #AAAAAA; -khtml-box-shadow: 5px 5px 15px #AAAAAA; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+#MathJax_ZoomOverlay {position: absolute; left: 0; top: 0; z-index: 300; display: inline-block; width: 100%; height: 100%; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+#MathJax_ZoomEventTrap {position: absolute; left: 0; top: 0; z-index: 302; display: inline-block; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+</style><style type="text/css">.MathJax_Preview {color: #888}
+#MathJax_Message {position: fixed; left: 1px; bottom: 2px; background-color: #E6E6E6; border: 1px solid #959595; margin: 0px; padding: 2px 8px; z-index: 102; color: black; font-size: 80%; width: auto; white-space: nowrap}
+#MathJax_MSIE_Frame {position: absolute; top: 0; left: 0; width: 0px; z-index: 101; border: 0px; margin: 0px; padding: 0px}
+.MathJax_Error {color: #CC0000; font-style: italic}
+</style></head>
+<body data-project="/kb/deployment/services/analysis_book/notebook" data-base-project-url="/" data-base-kernel-url="/" data-read-only="False" data-notebook-id="ab4912a0-63ad-4ce1-8911-8ace6e2a6a72"><div style="display: none;" id="MathJax_Message"></div>
+<div style="border-top-style: none; border-left-style: none; border-right-style: none;" class="border-box-sizing ui-widget ui-widget-content" id="header">
+<span id="ipython_notebook"><h1><a href="http://140.221.92.53:7051/" alt="dashboard"><img src="tutorial_files/REST_tutorial_files/ipynblogo.png" alt="IPython Notebook"></a></h1></span>
+
+<span id="login_widget">
+
+<button aria-disabled="false" role="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" id="logout"><span class="ui-button-text">Logout</span></button>
+
+</span>
+
+
+
+</div>
+<div style="display: block;" class="border-box-sizing" id="site">
+
+<div class="border-box-sizing ui-widget" id="main_app">
+<div class="border-box-sizing ui-widget" id="notebook_panel">
+<div class="border-box-sizing" id="notebook"><div tabindex="2" class="cell border-box-sizing code_cell vbox ui-widget-content ui-corner-all"><div class="input hbox"><div class="prompt input_prompt">In&nbsp;[1]:</div><div class="input_area box-flex1"><div class="CodeMirror CodeMirror-focused"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 5.71667px; left: 5.71666px;"><textarea style="position: absolute; padding: 0; width: 1px; height: 1em" wrap="off" autocorrect="off" autocapitalize="off"></textarea></div><div class="CodeMirror-scroll cm-s-ipython" tabindex="-1"><div style="position: relative; height: 223.2px;"><div style="position: relative; top: 0px;"><div style="display: none;" class="CodeMirror-gutter"><div class="CodeMirror-gutter-text"></div></div><div class="CodeMirror-lines"><div draggable="true" style="position: relative; z-index: 0; outline: medium none;"><div style="position: absolute; width: 100%; height: 0; overflow: hidden; visibility: hidden; outline: 5px auto none"></div><pre style="top: 0px; left: 0px;" class="CodeMirror-cursor">&nbsp;</pre><div style="position: relative; z-index: -1; display: none;"></div><div style=""><pre><span class="cm-keyword">import</span> <span class="cm-variable">json</span></pre><pre><span class="cm-variable">gut_samples</span> = [[<span class="cm-string">'chic_1'</span>, <span class="cm-string">"mgm4440283.3"</span>],</pre><pre>[<span class="cm-string">'chic_2'</span>, <span class="cm-string">"mgm4440284.3"</span>],</pre><pre>[<span class="cm-string">'chic_3'</span>, <span class="cm-string">"mgm4440285.3"</span>],</pre><pre>[<span class="cm-string">'chic_4'</span>, <span class="cm-string">"mgm4440286.3"</span>],</pre><pre>[<span class="cm-string">'cow_1'</span>, <span class="cm-string">"mgm4441679.3"</span>],</pre><pre>[<span class="cm-string">'cow_2'</span>, <span class="cm-string">"mgm4441680.3"</span>],</pre><pre>[<span class="cm-string">'cow_3'</span>, <span class="cm-string">"mgm4441682.3"</span>],</pre><pre>[<span class="cm-string">'mus_1'</span>, <span class="cm-string">"mgm4440463.3"</span>],</pre><pre>[<span class="cm-string">'mus_2'</span>, <span class="cm-string">"mgm4440464.3"</span>],</pre><pre>[<span class="cm-string">'fish_1'</span>, <span class="cm-string">"mgm4441695.3"</span>],</pre><pre>[<span class="cm-string">'fish_2'</span>, <span class="cm-string">"mgm4441696.3"</span>]]</pre></div></div></div></div></div></div></div></div></div><div class="output_wrapper"><div title="click to expand outout; double click to hide output" class="out_prompt_overlay prompt" style="display: block;"></div><div style="display: -moz-box;" class="output vbox"></div><div title="click to expand outout" role="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only output_collapsed vbox" style="display: none;">. . .</div></div></div><div tabindex="2" class="cell border-box-sizing code_cell vbox"><div class="input hbox"><div class="prompt input_prompt">In&nbsp;[2]:</div><div class="input_area box-flex1"><div class="CodeMirror"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 5.71667px; left: 5.71666px;"><textarea style="position: absolute; padding: 0; width: 1px; height: 1em" wrap="off" autocorrect="off" autocapitalize="off"></textarea></div><div class="CodeMirror-scroll cm-s-ipython" tabindex="-1"><div style="position: relative; height: 117.6px;"><div style="position: relative; top: 0px;"><div style="display: none;" class="CodeMirror-gutter"><div class="CodeMirror-gutter-text"></div></div><div class="CodeMirror-lines"><div draggable="true" style="position: relative; z-index: 0; outline: medium none;"><div style="position: absolute; width: 100%; height: 0; overflow: hidden; visibility: hidden; outline: 5px auto none"></div><pre style="top: 0px; left: 0px;" class="CodeMirror-cursor">&nbsp;</pre><div style="position: relative; z-index: -1; display: none;"></div><div style=""><pre><span class="cm-variable">chic_1</span> = <span class="cm-variable">gut_samples</span>[<span class="cm-number">0</span>][<span class="cm-number">1</span>]</pre><pre><span class="cm-variable">chic_1_data</span> = <span class="cm-operator">!</span> <span class="cm-variable">wget</span> <span class="cm-operator">-</span><span class="cm-variable">q</span> <span class="cm-operator">-</span><span class="cm-variable">O</span> <span class="cm-operator">-</span> <span class="cm-string">"http://api.metagenomics.anl.gov/metagenome/$chic_1"</span></pre><pre><span class="cm-variable">chic_1_obj</span> = <span class="cm-variable">json.loads</span>(<span class="cm-variable">chic_1_data</span>[<span class="cm-number">0</span>])</pre><pre><span class="cm-keyword">print</span> <span class="cm-variable">chic_1_obj</span>[<span class="cm-string">'name'</span>]</pre><pre><span class="cm-keyword">print</span> <span class="cm-variable">chic_1_obj</span>[<span class="cm-string">'id'</span>]</pre><pre><span class="cm-keyword">print</span> <span class="cm-variable">chic_1_obj</span>[<span class="cm-string">'metadata'</span>][<span class="cm-string">'sample'</span>]</pre></div></div></div></div></div></div></div></div></div><div class="output_wrapper"><div title="click to expand outout; double click to hide output" class="out_prompt_overlay prompt" style="display: block;"></div><div style="display: -moz-box;" class="output vbox"><div class="hbox output_area"><div class="prompt"></div><div class="box-flex1 output_subarea output_text output_stream output_stdout"><pre>Chicken Cecum A
+mgm4440283.3
+{u'data': {u'biome': u'animal-associated habitat', u'samp_mat_process': u'DNA extraction', u'material': u'animal-associated habitat', u'geodetic_system': u'wgs_84', u'samp_collect_device': u'Fourteen days post challenge, birds from two pens (A&amp;B) were euthanized and ceca collected for further analysis. Fresh cecal samples from two (C. jejuni-inoculated and C. jejuni-uninoculated) 28-day old chickens were analyzed. Cecal contents were collected using aseptic techniques. Samples were stored at &amp;#8722;80\xb0C until DNA extraction.', u'country': u'United States of America', u'env_package': u'host-associated', u'feature': u'animal-associated habitat', u'longitude': u'-88.2073', u'isol_growth_condt': u'18698407', u'location': u'Urbana, IL', u'latitude': u'40.1106', u'collection_timezone': u'UTC', u'continent': u'north_america'}, u'name': u'mgs11882', u'id': u'mgs11882'}
+</pre></div></div></div><div title="click to expand outout" role="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only output_collapsed vbox" style="display: none;">. . .</div></div></div><div tabindex="2" class="cell border-box-sizing code_cell vbox"><div class="input hbox"><div class="prompt input_prompt">In&nbsp;[3]:</div><div class="input_area box-flex1"><div class="CodeMirror"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 5.71667px; left: 5.71666px;"><textarea style="position: absolute; padding: 0; width: 1px; height: 1em" wrap="off" autocorrect="off" autocapitalize="off"></textarea></div><div class="CodeMirror-scroll cm-s-ipython" tabindex="-1"><div style="position: relative; height: 64.8px;"><div style="position: relative; top: 0px;"><div style="display: none;" class="CodeMirror-gutter"><div class="CodeMirror-gutter-text"></div></div><div class="CodeMirror-lines"><div draggable="true" style="position: relative; z-index: 0; outline: medium none;"><div style="position: absolute; width: 100%; height: 0; overflow: hidden; visibility: hidden; outline: 5px auto none"></div><pre style="top: 0px; left: 0px;" class="CodeMirror-cursor">&nbsp;</pre><div style="position: relative; z-index: -1; display: none;"></div><div style=""><pre><span class="cm-variable">gut_ids</span>  = <span class="cm-string">"&amp;"</span><span class="cm-variable">.join</span>( <span class="cm-builtin">map</span>(<span class="cm-keyword">lambda</span> <span class="cm-variable">x</span>: <span class="cm-string">"id="</span><span class="cm-operator">+</span><span class="cm-variable">x</span>[<span class="cm-number">1</span>], <span class="cm-variable">gut_samples</span>) )</pre><pre><span class="cm-variable">gut_data</span> = <span class="cm-operator">!</span> <span class="cm-variable">wget</span> <span class="cm-operator">-</span><span class="cm-variable">q</span> <span class="cm-operator">-</span><span class="cm-variable">O</span> <span class="cm-operator">-</span> <span class="cm-string">"http://api.metagenomics.anl.gov/matrix/function?$gut_ids"</span></pre><pre><span class="cm-variable">gut_objs</span> = <span class="cm-variable">json.loads</span>(<span class="cm-variable">gut_data</span>[<span class="cm-number">0</span>])</pre></div></div></div></div></div></div></div></div></div><div class="output_wrapper"><div title="click to expand outout; double click to hide output" class="out_prompt_overlay prompt" style="display: block;"></div><div style="display: -moz-box;" class="output vbox"></div><div title="click to expand outout" role="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only output_collapsed vbox" style="display: none;">. . .</div></div></div><div tabindex="2" class="cell border-box-sizing code_cell vbox"><div class="input hbox"><div class="prompt input_prompt">In&nbsp;[4]:</div><div class="input_area box-flex1"><div class="CodeMirror"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 5.71667px; left: 5.71666px;"><textarea style="position: absolute; padding: 0; width: 1px; height: 1em" wrap="off" autocorrect="off" autocapitalize="off"></textarea></div><div class="CodeMirror-scroll cm-s-ipython" tabindex="-1"><div style="position: relative; height: 64.8px;"><div style="position: relative; top: 0px;"><div style="display: none;" class="CodeMirror-gutter"><div class="CodeMirror-gutter-text"></div></div><div class="CodeMirror-lines"><div draggable="true" style="position: relative; z-index: 0; outline: medium none;"><div style="position: absolute; width: 100%; height: 0; overflow: hidden; visibility: hidden; outline: 5px auto none"></div><pre style="top: 0px; left: 0px;" class="CodeMirror-cursor">&nbsp;</pre><div style="position: relative; z-index: -1; display: none;"></div><div style=""><pre><span class="cm-keyword">print</span> <span class="cm-variable">gut_objs</span>[<span class="cm-string">'format'</span>]</pre><pre><span class="cm-keyword">print</span> <span class="cm-variable">gut_objs</span>[<span class="cm-string">'columns'</span>]</pre><pre><span class="cm-variable">gut_objs</span>[<span class="cm-string">'rows'</span>][:<span class="cm-number">10</span>]</pre></div></div></div></div></div></div></div></div></div><div class="output_wrapper"><div title="click to expand outout; double click to hide output" class="out_prompt_overlay prompt" style="display: block;"></div><div style="display: -moz-box;" class="output vbox"><div class="hbox output_area"><div class="prompt"></div><div class="box-flex1 output_subarea output_text output_stream output_stdout"><pre>Biological Observation Matrix 1.0
+[{u'id': u'mgm4440283.3', u'metadata': None}, {u'id': u'mgm4440284.3', u'metadata': None}, {u'id': u'mgm4440285.3', u'metadata': None}, {u'id': u'mgm4440286.3', u'metadata': None}, {u'id': u'mgm4440463.3', u'metadata': None}, {u'id': u'mgm4440464.3', u'metadata': None}, {u'id': u'mgm4441679.3', u'metadata': None}, {u'id': u'mgm4441680.3', u'metadata': None}, {u'id': u'mgm4441682.3', u'metadata': None}, {u'id': u'mgm4441695.3', u'metadata': None}, {u'id': u'mgm4441696.3', u'metadata': None}]
+</pre></div></div><div class="hbox output_area"><div class="prompt output_prompt">Out[4]:</div><div class="box-flex1 output_subarea output_text"><pre>[{u'id': u'SS00001',
+  u'metadata': {u'ontology': [u'RNA Metabolism',
+    u'RNA processing and modification',
+    u'16S_rRNA_modification_within_P_site_of_ribosome',
+    u'BH2577 unknown conserved protein in B. subtilis']}},
+ {u'id': u'SS00002',
+  u'metadata': {u'ontology': [u'RNA Metabolism',
+    u'RNA processing and modification',
+    u'16S_rRNA_modification_within_P_site_of_ribosome',
+    u'Cell division protein FtsI [Peptidoglycan synthetase] (EC 2.4.1.129)']}},
+ {u'id': u'SS00004',
+  u'metadata': {u'ontology': [u'RNA Metabolism',
+    u'RNA processing and modification',
+    u'16S_rRNA_modification_within_P_site_of_ribosome',
+    u'Cell division protein MraZ']}},
+ {u'id': u'SS00005',
+  u'metadata': {u'ontology': [u'RNA Metabolism',
+    u'RNA processing and modification',
+    u'16S_rRNA_modification_within_P_site_of_ribosome',
+    u'Penicillin-binding protein 2B']}},
+ {u'id': u'SS00006',
+  u'metadata': {u'ontology': [u'RNA Metabolism',
+    u'RNA processing and modification',
+    u'16S_rRNA_modification_within_P_site_of_ribosome',
+    u'Penicillin-binding protein 2 (PBP-2)']}},
+ {u'id': u'SS00007',
+  u'metadata': {u'ontology': [u'RNA Metabolism',
+    u'RNA processing and modification',
+    u'16S_rRNA_modification_within_P_site_of_ribosome',
+    u'Penicillin-binding protein 3']}},
+ {u'id': u'SS00008',
+  u'metadata': {u'ontology': [u'RNA Metabolism',
+    u'RNA processing and modification',
+    u'16S_rRNA_modification_within_P_site_of_ribosome',
+    u'rRNA small subunit methyltransferase H']}},
+ {u'id': u'SS00009',
+  u'metadata': {u'ontology': [u'RNA Metabolism',
+    u'RNA processing and modification',
+    u'16S_rRNA_modification_within_P_site_of_ribosome',
+    u'rRNA small subunit methyltransferase I']}},
+ {u'id': u'SS00010',
+  u'metadata': {u'ontology': [u'RNA Metabolism',
+    u'RNA processing and modification',
+    u'16S_rRNA_modification_within_P_site_of_ribosome',
+    u'Stage V sporulation protein D (Sporulation-specific penicillin-binding protein)']}},
+ {u'id': u'SS00036',
+  u'metadata': {u'ontology': [u'Carbohydrates',
+    u'Monosaccharides',
+    u'2-Ketogluconate_Utilization',
+    u'2-ketogluconate 6-phosphate reductase (EC 1.1.1.43)']}}]</pre></div></div></div><div title="click to expand outout" role="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only output_collapsed vbox" style="display: none;">. . .</div></div></div><div tabindex="2" class="cell border-box-sizing code_cell vbox"><div class="input hbox"><div class="prompt input_prompt">In&nbsp;[5]:</div><div class="input_area box-flex1"><div class="CodeMirror"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 5.71667px; left: 5.71666px;"><textarea style="position: absolute; padding: 0; width: 1px; height: 1em" wrap="off" autocorrect="off" autocapitalize="off"></textarea></div><div class="CodeMirror-scroll cm-s-ipython" tabindex="-1"><div style="position: relative; height: 64.8px;"><div style="position: relative; top: 0px;"><div style="display: none;" class="CodeMirror-gutter"><div class="CodeMirror-gutter-text"></div></div><div class="CodeMirror-lines"><div draggable="true" style="position: relative; z-index: 0; outline: medium none;"><div style="position: absolute; width: 100%; height: 0; overflow: hidden; visibility: hidden; outline: 5px auto none"></div><pre style="top: 0px; left: 0px;" class="CodeMirror-cursor">&nbsp;</pre><div style="position: relative; z-index: -1; display: none;"></div><div style=""><pre><span class="cm-keyword">print</span> <span class="cm-variable">gut_objs</span>[<span class="cm-string">'matrix_type'</span>]</pre><pre><span class="cm-keyword">print</span> <span class="cm-variable">gut_objs</span>[<span class="cm-string">'shape'</span>]</pre><pre><span class="cm-keyword">print</span> <span class="cm-variable">gut_objs</span>[<span class="cm-string">'data'</span>][:<span class="cm-number">10</span>]</pre></div></div></div></div></div></div></div></div></div><div class="output_wrapper"><div title="click to expand outout; double click to hide output" class="out_prompt_overlay prompt" style="display: block;"></div><div style="display: -moz-box;" class="output vbox"><div class="hbox output_area"><div class="prompt"></div><div class="box-flex1 output_subarea output_text output_stream output_stdout"><pre>sparse
+[8473, 11]
+[[0, 10, 1], [1, 0, 74], [1, 1, 37], [1, 2, 10], [1, 3, 3], [1, 4, 6], [1, 5, 6], [1, 6, 22], [1, 7, 7], [1, 8, 14]]
+</pre></div></div></div><div title="click to expand outout" role="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only output_collapsed vbox" style="display: none;">. . .</div></div></div><div tabindex="2" class="cell border-box-sizing code_cell vbox"><div class="input hbox"><div class="prompt input_prompt">In&nbsp;[5]:</div><div class="input_area box-flex1"><div class="CodeMirror"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 5.71667px; left: 5.71666px;"><textarea style="position: absolute; padding: 0; width: 1px; height: 1em" wrap="off" autocorrect="off" autocapitalize="off"></textarea></div><div class="CodeMirror-scroll cm-s-ipython" tabindex="-1"><div style="position: relative; height: 29.6px;"><div style="position: relative; top: 0px;"><div style="display: none;" class="CodeMirror-gutter"><div class="CodeMirror-gutter-text"></div></div><div class="CodeMirror-lines"><div draggable="true" style="position: relative; z-index: 0; outline: medium none;"><div style="position: absolute; width: 100%; height: 0; overflow: hidden; visibility: hidden; outline: 5px auto none"></div><pre style="top: 0px; left: 0px;" class="CodeMirror-cursor">&nbsp;</pre><div style="position: relative; z-index: -1; display: none;"></div><div style=""><pre> </pre></div></div></div></div></div></div></div></div></div><div class="output_wrapper"><div title="click to expand outout; double click to hide output" class="out_prompt_overlay prompt" style="display: block;"></div><div style="display: -moz-box;" class="output vbox"></div><div title="click to expand outout" role="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only output_collapsed vbox" style="display: none;">. . .</div></div></div><div style="height: 30%;" class="end_space"></div></div>
+</div>
+</div>
+
+</div>
+<script src="tutorial_files/REST_tutorial_files/jquery-1.js" type="text/javascript" charset="utf-8"></script>
+<script src="tutorial_files/REST_tutorial_files/jquery-ui.js" type="text/javascript" charset="utf-8"></script>
+<script src="tutorial_files/REST_tutorial_files/namespace.js" type="text/javascript" charset="utf-8"></script>
+<script src="tutorial_files/REST_tutorial_files/page.js" type="text/javascript" charset="utf-8"></script>
+<script src="tutorial_files/REST_tutorial_files/loginwidget.js" type="text/javascript" charset="utf-8"></script>
+
+<script src="tutorial_files/REST_tutorial_files/codemirror.js" charset="utf-8"></script>
+<script src="tutorial_files/REST_tutorial_files/python.js" charset="utf-8"></script>
+<script src="tutorial_files/REST_tutorial_files/htmlmixed.js" charset="utf-8"></script>
+<script src="tutorial_files/REST_tutorial_files/xml.js" charset="utf-8"></script>
+<script src="tutorial_files/REST_tutorial_files/javascript.js" charset="utf-8"></script>
+<script src="tutorial_files/REST_tutorial_files/css.js" charset="utf-8"></script>
+<script src="tutorial_files/REST_tutorial_files/rst.js" charset="utf-8"></script>
+<script src="tutorial_files/REST_tutorial_files/markdown.js" charset="utf-8"></script>
+<script src="tutorial_files/REST_tutorial_files/Markdown.js" charset="utf-8"></script>
+<script src="tutorial_files/REST_tutorial_files/prettify.js" charset="utf-8"></script>
+<script src="tutorial_files/REST_tutorial_files/date.js" charset="utf-8"></script>
+<script src="tutorial_files/REST_tutorial_files/events.js" type="text/javascript" charset="utf-8"></script>
+<script src="tutorial_files/REST_tutorial_files/utils.js" type="text/javascript" charset="utf-8"></script>
+<script src="tutorial_files/REST_tutorial_files/initmathjax.js" type="text/javascript" charset="utf-8"></script>
+<script src="tutorial_files/REST_tutorial_files/outputarea.js" type="text/javascript" charset="utf-8"></script>
+<script src="tutorial_files/REST_tutorial_files/cell.js" type="text/javascript" charset="utf-8"></script>
+<script src="tutorial_files/REST_tutorial_files/codecell.js" type="text/javascript" charset="utf-8"></script>
+<script src="tutorial_files/REST_tutorial_files/textcell.js" type="text/javascript" charset="utf-8"></script>
+<script src="tutorial_files/REST_tutorial_files/kernel.js" type="text/javascript" charset="utf-8"></script>
+<script src="tutorial_files/REST_tutorial_files/notebook.js" type="text/javascript" charset="utf-8"></script>
+<script src="tutorial_files/REST_tutorial_files/printnotebookmain.js" type="text/javascript" charset="utf-8"></script>
+
+
+
+</body></html>

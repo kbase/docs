@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<title>IPython Notebook</title>
+<link rel="stylesheet" href="tutorial_files/CDM_tutorial_files/jquery-ui.css" type="text/css">
+<link rel="stylesheet" href="tutorial_files/CDM_tutorial_files/boilerplate.css" type="text/css">
+<link rel="stylesheet" href="tutorial_files/CDM_tutorial_files/fbm.css" type="text/css">
+<link rel="stylesheet" href="tutorial_files/CDM_tutorial_files/page.css" type="text/css">
+
+
+<script type="text/javascript" src="tutorial_files/CDM_tutorial_files/MathJax.js" charset="utf-8"></script>
+
+<script type="text/javascript">
+// MathJax disabled, set as null to distingish from *missing* MathJax,
+// where it will be undefined, and should prompt a dialog later.
+window.mathjax_url = "http://cdn.mathjax.org/mathjax/latest/MathJax.js";
+</script>
+<link rel="stylesheet" href="tutorial_files/CDM_tutorial_files/codemirror.css">
+<link rel="stylesheet" href="tutorial_files/CDM_tutorial_files/ipython.css">
+<link rel="stylesheet" href="tutorial_files/CDM_tutorial_files/prettify.css">
+<link rel="stylesheet" href="tutorial_files/CDM_tutorial_files/notebook.css" type="text/css">
+<link rel="stylesheet" href="tutorial_files/CDM_tutorial_files/printnotebook.css" type="text/css">
+<link rel="stylesheet" href="tutorial_files/CDM_tutorial_files/renderedhtml.css" type="text/css">
+
+
+
+<style type="text/css">.MathJax_Hover_Frame {border-radius: .25em; -webkit-border-radius: .25em; -moz-border-radius: .25em; -khtml-border-radius: .25em; box-shadow: 0px 0px 15px #83A; -webkit-box-shadow: 0px 0px 15px #83A; -moz-box-shadow: 0px 0px 15px #83A; -khtml-box-shadow: 0px 0px 15px #83A; border: 1px solid #A6D ! important; display: inline-block; position: absolute}
+.MathJax_Hover_Arrow {position: absolute; width: 15px; height: 11px; cursor: pointer}
+</style><style type="text/css">#MathJax_About {position: fixed; left: 50%; width: auto; text-align: center; border: 3px outset; padding: 1em 2em; background-color: #DDDDDD; color: black; cursor: default; font-family: message-box; font-size: 120%; font-style: normal; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; border-radius: 15px; -webkit-border-radius: 15px; -moz-border-radius: 15px; -khtml-border-radius: 15px; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+.MathJax_Menu {position: absolute; background-color: white; color: black; width: auto; padding: 5px 0px; border: 1px solid #CCCCCC; margin: 0; cursor: default; font: menu; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; border-radius: 5px; -webkit-border-radius: 5px; -moz-border-radius: 5px; -khtml-border-radius: 5px; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+.MathJax_MenuItem {padding: 1px 2em; background: transparent}
+.MathJax_MenuTitle {background-color: #CCCCCC; margin: -5px 0 0 0; text-align: center; font-style: italic; font-size: 80%; color: #444444; padding: 2px 0; overflow: hidden}
+.MathJax_MenuArrow {position: absolute; right: .5em; color: #666666}
+.MathJax_MenuActive .MathJax_MenuArrow {color: white}
+.MathJax_MenuCheck {position: absolute; left: .7em}
+.MathJax_MenuRadioCheck {position: absolute; left: .7em}
+.MathJax_MenuLabel {padding: 1px 2em 3px 1.33em; font-style: italic}
+.MathJax_MenuRule {border-top: 1px solid #DDDDDD; margin: 4px 3px}
+.MathJax_MenuDisabled {color: GrayText}
+.MathJax_MenuActive {background-color: #606872; color: white}
+.MathJax_Menu_Close {position: absolute; width: 31px; height: 31px; top: -15px; left: -15px}
+</style><style type="text/css">#MathJax_Zoom {position: absolute; background-color: #F0F0F0; overflow: auto; display: block; z-index: 301; padding: .5em; border: 1px solid black; margin: 0; font-weight: normal; font-style: normal; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; box-shadow: 5px 5px 15px #AAAAAA; -webkit-box-shadow: 5px 5px 15px #AAAAAA; -moz-box-shadow: 5px 5px 15px #AAAAAA; -khtml-box-shadow: 5px 5px 15px #AAAAAA; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+#MathJax_ZoomOverlay {position: absolute; left: 0; top: 0; z-index: 300; display: inline-block; width: 100%; height: 100%; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+#MathJax_ZoomEventTrap {position: absolute; left: 0; top: 0; z-index: 302; display: inline-block; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+</style><style type="text/css">.MathJax_Preview {color: #888}
+#MathJax_Message {position: fixed; left: 1px; bottom: 2px; background-color: #E6E6E6; border: 1px solid #959595; margin: 0px; padding: 2px 8px; z-index: 102; color: black; font-size: 80%; width: auto; white-space: nowrap}
+#MathJax_MSIE_Frame {position: absolute; top: 0; left: 0; width: 0px; z-index: 101; border: 0px; margin: 0px; padding: 0px}
+.MathJax_Error {color: #CC0000; font-style: italic}
+</style></head>
+<body data-project="/kb/deployment/services/analysis_book/notebook" data-base-project-url="/" data-base-kernel-url="/" data-read-only="False" data-notebook-id="9bf4ad03-58c8-4060-a6f4-cf0bce1dd9e5"><div style="display: none;" id="MathJax_Message"></div>
+<div style="border-top-style: none; border-left-style: none; border-right-style: none;" class="border-box-sizing ui-widget ui-widget-content" id="header">
+<span id="ipython_notebook"><h1><a href="http://140.221.92.53:7051/" alt="dashboard"><img src="tutorial_files/CDM_tutorial_files/ipynblogo.png" alt="IPython Notebook"></a></h1></span>
+
+<span id="login_widget">
+
+<button aria-disabled="false" role="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" id="logout"><span class="ui-button-text">Logout</span></button>
+
+</span>
+
+
+
+</div>
+<div style="display: block;" class="border-box-sizing" id="site">
+
+<div class="border-box-sizing ui-widget" id="main_app">
+<div class="border-box-sizing ui-widget" id="notebook_panel">
+<div class="border-box-sizing" id="notebook"><div tabindex="2" class="cell border-box-sizing code_cell vbox ui-widget-content ui-corner-all"><div class="input hbox"><div class="prompt input_prompt">In&nbsp;[1]:</div><div class="input_area box-flex1"><div class="CodeMirror CodeMirror-focused"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 5.71655px; left: 5.71666px;"><textarea style="position: absolute; padding: 0; width: 1px; height: 1em" wrap="off" autocorrect="off" autocapitalize="off"></textarea></div><div class="CodeMirror-scroll cm-s-ipython" tabindex="-1"><div style="position: relative; height: 29.6px;"><div style="position: relative; top: 0px;"><div style="display: none;" class="CodeMirror-gutter"><div class="CodeMirror-gutter-text"></div></div><div class="CodeMirror-lines"><div draggable="true" style="position: relative; z-index: 0; outline: medium none;"><div style="position: absolute; width: 100%; height: 0; overflow: hidden; visibility: hidden; outline: 5px auto none"></div><pre style="top: 0px; left: 0px; visibility: hidden;" class="CodeMirror-cursor">&nbsp;</pre><div style="position: relative; z-index: -1; display: none;"></div><div style=""><pre><span class="cm-operator">!</span> <span class="cm-variable">all_entities_Genome</span> <span class="cm-operator">-</span><span class="cm-variable">show</span><span class="cm-operator">-</span><span class="cm-variable">fields</span></pre></div></div></div></div></div></div></div></div></div><div class="output_wrapper"><div title="click to expand outout; double click to hide output" class="out_prompt_overlay prompt" style="display: block;"></div><div style="display: -moz-box;" class="output vbox"><div class="hbox output_area"><div class="prompt"></div><div class="box-flex1 output_subarea output_text output_stream output_stdout"><pre>Available fields: pegs rnas scientific_name complete prokaryotic dna_size contigs domain genetic_code gc_content phenotype md5 source_id
+</pre></div></div></div><div title="click to expand outout" role="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only output_collapsed vbox" style="display: none;">. . .</div></div></div><div tabindex="2" class="cell border-box-sizing code_cell vbox"><div class="input hbox"><div class="prompt input_prompt">In&nbsp;[2]:</div><div class="input_area box-flex1"><div class="CodeMirror"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 5.71666px; left: 5.71666px;"><textarea style="position: absolute; padding: 0; width: 1px; height: 1em" wrap="off" autocorrect="off" autocapitalize="off"></textarea></div><div class="CodeMirror-scroll cm-s-ipython" tabindex="-1"><div style="position: relative; height: 29.6px;"><div style="position: relative; top: 0px;"><div style="display: none;" class="CodeMirror-gutter"><div class="CodeMirror-gutter-text"></div></div><div class="CodeMirror-lines"><div draggable="true" style="position: relative; z-index: 0; outline: medium none;"><div style="position: absolute; width: 100%; height: 0; overflow: hidden; visibility: hidden; outline: 5px auto none"></div><pre style="top: 0px; left: 0px;" class="CodeMirror-cursor">&nbsp;</pre><div style="position: relative; z-index: -1; display: none;"></div><div style=""><pre><span class="cm-operator">!</span> <span class="cm-variable">all_entities_Genome</span> <span class="cm-operator">-</span><span class="cm-variable">f</span> <span class="cm-variable">scientific_name</span> <span class="cm-operator">|</span> <span class="cm-variable">grep</span> <span class="cm-string">"Streptococcus pneumoniae"</span></pre></div></div></div></div></div></div></div></div></div><div class="output_wrapper"><div title="click to expand outout; double click to hide output" class="out_prompt_overlay prompt" style="display: block;"></div><div style="display: -moz-box;" class="output vbox"><div class="hbox output_area"><div class="prompt"></div><div class="box-flex1 output_subarea output_text output_stream output_stdout"><pre>kb|g.3478	Streptococcus pneumoniae SPN034183
+kb|g.3264	Streptococcus pneumoniae GA47901
+kb|g.21524	Streptococcus pneumoniae SP9-BS68
+kb|g.10034	Streptococcus pneumoniae 70585
+kb|g.162	Streptococcus pneumoniae R6
+kb|g.21849	Streptococcus pneumoniae ATCC 700669
+kb|g.3483	Streptococcus pneumoniae SPN032672
+kb|g.1116	Streptococcus pneumoniae D39
+kb|g.3576	Streptococcus pneumoniae GA17545
+kb|g.1878	Streptococcus pneumoniae G54
+kb|g.1779	Streptococcus pneumoniae Taiwan19F-14
+kb|g.9774	Streptococcus pneumoniae SP23-BS72
+kb|g.161	Streptococcus pneumoniae TIGR4
+kb|g.1785	Streptococcus pneumoniae P1031
+kb|g.9944	Streptococcus pneumoniae CDC1873-00
+kb|g.3484	Streptococcus pneumoniae SPN033038
+kb|g.2032	Streptococcus pneumoniae TCH8431/19A
+kb|g.1341	Streptococcus pneumoniae SP23-BS72
+kb|g.1339	Streptococcus pneumoniae SP18-BS74
+kb|g.1804	Streptococcus pneumoniae SP14-BS292
+kb|g.160	Streptococcus pneumoniae TIGR4
+kb|g.21723	Streptococcus pneumoniae Taiwan19F-14
+kb|g.9570	Streptococcus pneumoniae D39
+kb|g.21523	Streptococcus pneumoniae SP6-BS73
+kb|g.1340	Streptococcus pneumoniae SP19-BS75
+kb|g.3485	Streptococcus pneumoniae SPN7465
+kb|g.1881	Streptococcus pneumoniae BS458
+kb|g.9945	Streptococcus pneumoniae SP195
+kb|g.1780	Streptococcus pneumoniae Hungary19A-6
+kb|g.1574	Streptococcus pneumoniae CDC1873-00
+kb|g.1900	Streptococcus pneumoniae CGSP14
+kb|g.109	Streptococcus pneumoniae INV200
+kb|g.21724	Streptococcus pneumoniae Hungary19A-6
+kb|g.21649	Streptococcus pneumoniae CDC1087-00
+kb|g.1573	Streptococcus pneumoniae CDC1087-00
+kb|g.1880	Streptococcus pneumoniae BS457
+kb|g.1337	Streptococcus pneumoniae SP11-BS70
+kb|g.1879	Streptococcus pneumoniae BS397
+kb|g.3262	Streptococcus pneumoniae GA41317
+kb|g.3263	Streptococcus pneumoniae GA47368
+kb|g.3515	Streptococcus pneumoniae SPN061370
+kb|g.3480	Streptococcus pneumoniae SPN021198
+kb|g.20651	Streptococcus pneumoniae
+kb|g.1336	Streptococcus pneumoniae SP9-BS68
+kb|g.2593	Streptococcus pneumoniae BS455
+kb|g.21725	Streptococcus pneumoniae JJA
+kb|g.3477	Streptococcus pneumoniae SPN034156
+kb|g.3475	Streptococcus pneumoniae INV200
+kb|g.1334	Streptococcus pneumoniae SP3-BS71
+kb|g.1338	Streptococcus pneumoniae SP14-BS69
+kb|g.3476	Streptococcus pneumoniae INV104
+kb|g.1335	Streptococcus pneumoniae SP6-BS73
+kb|g.3260	Streptococcus pneumoniae GA17570
+kb|g.187	Streptococcus pneumoniae 670-6B
+kb|g.3474	Streptococcus pneumoniae OXC141
+kb|g.1576	Streptococcus pneumoniae CDC0288-04
+kb|g.9770	Streptococcus pneumoniae SP3-BS71
+kb|g.3261	Streptococcus pneumoniae GA41301
+kb|g.21650	Streptococcus pneumoniae CDC0288-04
+kb|g.3479	Streptococcus pneumoniae SPN072838
+kb|g.1575	Streptococcus pneumoniae SP195
+kb|g.9771	Streptococcus pneumoniae SP14-BS69
+kb|g.110	Streptococcus pneumoniae OXC141
+kb|g.8666	Streptococcus pneumoniae R6
+kb|g.108	Streptococcus pneumoniae INV104B
+kb|g.20736	Streptococcus pneumoniae TIGR4
+kb|g.1578	Streptococcus pneumoniae MLV-016
+kb|g.2031	Streptococcus pneumoniae TCH8431/19A
+kb|g.21778	Streptococcus pneumoniae CGSP14
+kb|g.3481	Streptococcus pneumoniae SPNA45
+kb|g.1783	Streptococcus pneumoniae 70585
+kb|g.1805	Streptococcus pneumoniae SP-BS293
+kb|g.2440	Streptococcus pneumoniae AP200
+kb|g.21651	Streptococcus pneumoniae CDC3059-06
+kb|g.9772	Streptococcus pneumoniae SP18-BS74
+kb|g.1784	Streptococcus pneumoniae JJA
+kb|g.21525	Streptococcus pneumoniae SP11-BS70
+kb|g.398	Streptococcus pneumoniae 23F
+kb|g.3482	Streptococcus pneumoniae SPN1041
+kb|g.10035	Streptococcus pneumoniae P1031
+kb|g.9773	Streptococcus pneumoniae SP19-BS75
+kb|g.10086	Streptococcus pneumoniae G54
+kb|g.1577	Streptococcus pneumoniae CDC3059-06
+kb|g.3259	Streptococcus pneumoniae GA04375
+kb|g.21652	Streptococcus pneumoniae MLV-016
+</pre></div></div></div><div title="click to expand outout" role="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only output_collapsed vbox" style="display: none;">. . .</div></div></div><div tabindex="2" class="cell border-box-sizing code_cell vbox"><div class="input hbox"><div class="prompt input_prompt">In&nbsp;[3]:</div><div class="input_area box-flex1"><div class="CodeMirror"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 5.71667px; left: 5.71666px;"><textarea style="position: absolute; padding: 0; width: 1px; height: 1em" wrap="off" autocorrect="off" autocapitalize="off"></textarea></div><div class="CodeMirror-scroll cm-s-ipython" tabindex="-1"><div style="position: relative; height: 29.6px;"><div style="position: relative; top: 0px;"><div style="display: none;" class="CodeMirror-gutter"><div class="CodeMirror-gutter-text"></div></div><div class="CodeMirror-lines"><div draggable="true" style="position: relative; z-index: 0; outline: medium none;"><div style="position: absolute; width: 100%; height: 0; overflow: hidden; visibility: hidden; outline: 5px auto none"></div><pre style="top: 0px; left: 0px;" class="CodeMirror-cursor">&nbsp;</pre><div style="position: relative; z-index: -1; display: none;"></div><div style=""><pre><span class="cm-operator">!</span> <span class="cm-variable">all_entities_Genome</span> <span class="cm-operator">-</span><span class="cm-variable">f</span> <span class="cm-variable">scientific_name</span> <span class="cm-operator">|</span> <span class="cm-variable">grep</span> <span class="cm-string">"Streptococcus pneumoniae"</span> <span class="cm-operator">|</span> <span class="cm-variable">genomes_to_fids</span> <span class="cm-variable">CDS</span> <span class="cm-operator">-</span><span class="cm-variable">c</span> <span class="cm-number">1</span> <span class="cm-operator">|</span> <span class="cm-variable">fids_to_functions</span> <span class="cm-operator">|</span> <span class="cm-variable">grep</span> <span class="cm-operator">-</span><span class="cm-variable">i</span> <span class="cm-string">"triosephosphate isomerase"</span></pre></div></div></div></div></div></div></div></div></div><div class="output_wrapper"><div title="click to expand outout; double click to hide output" class="out_prompt_overlay prompt" style="display: block;"></div><div style="display: -moz-box;" class="output vbox"><div class="hbox output_area"><div class="prompt"></div><div class="box-flex1 output_subarea output_text output_stream output_stdout"><pre>kb|g.3478	Streptococcus pneumoniae SPN034183	kb|g.3478.peg.287	Triosephosphate isomerase (EC 5.3.1.1)
+kb|g.21524	Streptococcus pneumoniae SP9-BS68	kb|g.21524.CDS.1282	triosephosphate isomerase
+kb|g.21524	Streptococcus pneumoniae SP9-BS68	kb|g.21524.CDS.1614	triosephosphate isomerase
+kb|g.162	Streptococcus pneumoniae R6	kb|g.162.peg.336	Triosephosphate isomerase (EC 5.3.1.1)
+kb|g.21849	Streptococcus pneumoniae ATCC 700669	kb|g.21849.CDS.1471	triosephosphate isomerase
+kb|g.3483	Streptococcus pneumoniae SPN032672	kb|g.3483.peg.1960	Triosephosphate isomerase (EC 5.3.1.1)
+kb|g.1116	Streptococcus pneumoniae D39	kb|g.1116.peg.63	Triosephosphate isomerase (EC 5.3.1.1)
+kb|g.1878	Streptococcus pneumoniae G54	kb|g.1878.peg.102	Triosephosphate isomerase (EC 5.3.1.1)
+kb|g.1779	Streptococcus pneumoniae Taiwan19F-14	kb|g.1779.peg.617	Triosephosphate isomerase (EC 5.3.1.1)
+kb|g.9774	Streptococcus pneumoniae SP23-BS72	kb|g.9774.peg.1174	triosephosphate isomerase
+kb|g.9774	Streptococcus pneumoniae SP23-BS72	kb|g.9774.peg.1418	triosephosphate isomerase
+kb|g.161	Streptococcus pneumoniae TIGR4	kb|g.161.peg.903	Triosephosphate isomerase (EC 5.3.1.1)
+kb|g.1785	Streptococcus pneumoniae P1031	kb|g.1785.peg.461	Triosephosphate isomerase (EC 5.3.1.1)
+^C
+</pre></div></div></div><div title="click to expand outout" role="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only output_collapsed vbox" style="display: none;">. . .</div></div></div><div tabindex="2" class="cell border-box-sizing code_cell vbox"><div class="input hbox"><div class="prompt input_prompt">In&nbsp;[4]:</div><div class="input_area box-flex1"><div class="CodeMirror"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 5.71667px; left: 5.71666px;"><textarea style="position: absolute; padding: 0; width: 1px; height: 1em" wrap="off" autocorrect="off" autocapitalize="off"></textarea></div><div class="CodeMirror-scroll cm-s-ipython" tabindex="-1"><div style="position: relative; height: 135.2px;"><div style="position: relative; top: 0px;"><div style="display: none;" class="CodeMirror-gutter"><div class="CodeMirror-gutter-text"></div></div><div class="CodeMirror-lines"><div draggable="true" style="position: relative; z-index: 0; outline: medium none;"><div style="position: absolute; width: 100%; height: 0; overflow: hidden; visibility: hidden; outline: 5px auto none"></div><pre style="top: 0px; left: 0px;" class="CodeMirror-cursor">&nbsp;</pre><div style="position: relative; z-index: -1; display: none;"></div><div style=""><pre><span class="cm-operator">%%</span><span class="cm-variable">bash</span></pre><pre><span class="cm-variable">all_entities_Genome</span> <span class="cm-operator">-</span><span class="cm-variable">f</span> <span class="cm-variable">scientific_name</span> <span class="cm-operator">|</span> <span class="cm-variable">grep</span> <span class="cm-string">"Streptococcus pneumonia"</span>  <span class="cm-operator">&gt;</span> <span class="cm-variable">all_strep</span></pre><pre><span class="cm-variable">ls</span> <span class="cm-operator">-</span><span class="cm-variable">a</span></pre><pre><span class="cm-variable">echo</span> <span class="cm-string">"&gt;&gt;&gt;&gt;&gt; head"</span></pre><pre><span class="cm-variable">head</span> <span class="cm-variable">all_strep</span></pre><pre><span class="cm-variable">echo</span> <span class="cm-string">"&gt;&gt;&gt;&gt;&gt; tail"</span></pre><pre><span class="cm-variable">tail</span> <span class="cm-variable">all_strep</span></pre></div></div></div></div></div></div></div></div></div><div class="output_wrapper"><div title="click to expand outout; double click to hide output" class="out_prompt_overlay prompt" style="display: block;"></div><div style="display: -moz-box;" class="output vbox"><div class="hbox output_area"><div class="prompt"></div><div class="box-flex1 output_subarea output_text output_stream output_stdout"><pre>.
+..
+all_strep
+CDMI_tutorial.ipynb
+communities_analysis_tutorial.ipynb
+diverse_metagenome_compairison.ipynb
+g.2860
+genome_analysis_tutorial.ipynb
+images
+js
+matr_tutorial.ipynb
+qc_tutorial.ipynb
+REST_tutorial.ipynb
+Rplots.pdf
+&gt;&gt;&gt;&gt;&gt; head
+kb|g.3478	Streptococcus pneumoniae SPN034183
+kb|g.3264	Streptococcus pneumoniae GA47901
+kb|g.21524	Streptococcus pneumoniae SP9-BS68
+kb|g.10034	Streptococcus pneumoniae 70585
+kb|g.162	Streptococcus pneumoniae R6
+kb|g.21849	Streptococcus pneumoniae ATCC 700669
+kb|g.3483	Streptococcus pneumoniae SPN032672
+kb|g.1116	Streptococcus pneumoniae D39
+kb|g.3576	Streptococcus pneumoniae GA17545
+kb|g.1878	Streptococcus pneumoniae G54
+&gt;&gt;&gt;&gt;&gt; tail
+kb|g.21525	Streptococcus pneumoniae SP11-BS70
+kb|g.398	Streptococcus pneumoniae 23F
+kb|g.3482	Streptococcus pneumoniae SPN1041
+kb|g.1115	Streptococcus pneumonia pneumoniae D39
+kb|g.10035	Streptococcus pneumoniae P1031
+kb|g.9773	Streptococcus pneumoniae SP19-BS75
+kb|g.10086	Streptococcus pneumoniae G54
+kb|g.1577	Streptococcus pneumoniae CDC3059-06
+kb|g.3259	Streptococcus pneumoniae GA04375
+kb|g.21652	Streptococcus pneumoniae MLV-016
+</pre></div></div></div><div title="click to expand outout" role="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only output_collapsed vbox" style="display: none;">. . .</div></div></div><div tabindex="2" class="cell border-box-sizing code_cell vbox"><div class="input hbox"><div class="prompt input_prompt">In&nbsp;[5]:</div><div class="input_area box-flex1"><div class="CodeMirror"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 5.71667px; left: 5.71666px;"><textarea style="position: absolute; padding: 0; width: 1px; height: 1em" wrap="off" autocorrect="off" autocapitalize="off"></textarea></div><div class="CodeMirror-scroll cm-s-ipython" tabindex="-1"><div style="position: relative; height: 29.6px;"><div style="position: relative; top: 0px;"><div style="display: none;" class="CodeMirror-gutter"><div class="CodeMirror-gutter-text"></div></div><div class="CodeMirror-lines"><div draggable="true" style="position: relative; z-index: 0; outline: medium none;"><div style="position: absolute; width: 100%; height: 0; overflow: hidden; visibility: hidden; outline: 5px auto none"></div><pre style="top: 0px; left: 0px;" class="CodeMirror-cursor">&nbsp;</pre><div style="position: relative; z-index: -1; display: none;"></div><div style=""><pre><span class="cm-operator">!</span> <span class="cm-variable">all_entities_Publication</span> <span class="cm-operator">-</span><span class="cm-variable">a</span> <span class="cm-operator">|</span> <span class="cm-variable">head</span></pre></div></div></div></div></div></div></div></div></div><div class="output_wrapper"><div title="click to expand outout; double click to hide output" class="out_prompt_overlay prompt" style="display: block;"></div><div style="display: -moz-box;" class="output vbox"><div class="hbox output_area"><div class="prompt"></div><div class="box-flex1 output_subarea output_text output_stream output_stdout"><pre>2673545	SPT15, the gene encoding the yeast TATA binding factor TFIID, is required for normal transcription initiation in vivo.	http://www.ncbi.nlm.nih.gov/pubmed/2673545	1331480968
+10613857	Role of HrcA and CIRCE in the heat shock regulatory network of Bradyrhizobium japonicum.	http://www.ncbi.nlm.nih.gov/pubmed/10613857	1331479535
+7961401	Sulfide dehydrogenase from the hyperthermophilic archaeon Pyrococcus furiosus: a new multifunctional enzyme involved in the reduction of elemental sulfur.	http://www.ncbi.nlm.nih.gov/pubmed/7961401	1331160047
+8165147	A putative regulatory gene downstream of recA is conserved in gram-negative and gram-positive bacteria.	http://www.ncbi.nlm.nih.gov/pubmed/8165147	1331526910
+8487307	Primary structure and crystallization of orotate phosphoribosyltransferase from Salmonella typhimurium.	http://www.ncbi.nlm.nih.gov/pubmed/8487307	1331526958
+10644761	Thioredoxin-dependent hydroperoxide peroxidase activity of bacterioferritin comigratory protein (BCP) as a new member of the thiol-specific antioxidant protein (TSA)/Alkyl hydroperoxide peroxidase C (AhpC) family.	http://www.ncbi.nlm.nih.gov/pubmed/10644761	1331479544
+9030723	Identification and purification of translation initiation factor 2 (IF2) from Thermus thermophilus.	http://www.ncbi.nlm.nih.gov/pubmed/9030723	1331527025
+16216571	YjjX: from structure "Tu" function.	http://www.ncbi.nlm.nih.gov/pubmed/16216571	1331159922
+15209499	Nickel superoxide dismutase structure and mechanism.	http://www.ncbi.nlm.nih.gov/pubmed/15209499	1331480208
+9103608	Citrate synthase gene comparison, a new tool for phylogenetic analysis, and its application for the rickettsiae.	http://www.ncbi.nlm.nih.gov/pubmed/9103608	1331527032
+</pre></div></div></div><div title="click to expand outout" role="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only output_collapsed vbox" style="display: none;">. . .</div></div></div><div tabindex="2" class="cell border-box-sizing code_cell vbox"><div class="input hbox"><div class="prompt input_prompt">In&nbsp;[6]:</div><div class="input_area box-flex1"><div class="CodeMirror"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 5.71667px; left: 5.71666px;"><textarea style="position: absolute; padding: 0; width: 1px; height: 1em" wrap="off" autocorrect="off" autocapitalize="off"></textarea></div><div class="CodeMirror-scroll cm-s-ipython" tabindex="-1"><div style="position: relative; height: 29.6px;"><div style="position: relative; top: 0px;"><div style="display: none;" class="CodeMirror-gutter"><div class="CodeMirror-gutter-text"></div></div><div class="CodeMirror-lines"><div draggable="true" style="position: relative; z-index: 0; outline: medium none;"><div style="position: absolute; width: 100%; height: 0; overflow: hidden; visibility: hidden; outline: 5px auto none"></div><pre style="top: 0px; left: 0px;" class="CodeMirror-cursor">&nbsp;</pre><div style="position: relative; z-index: -1; display: none;"></div><div style=""><pre><span class="cm-operator">!</span> <span class="cm-variable">echo</span> <span class="cm-string">'kb|g.0'</span> <span class="cm-operator">|</span> <span class="cm-variable">get_entity_Genome</span> <span class="cm-operator">-</span><span class="cm-variable">f</span> <span class="cm-string">'scientific_name,contigs,dna_size'</span></pre></div></div></div></div></div></div></div></div></div><div class="output_wrapper"><div title="click to expand outout; double click to hide output" class="out_prompt_overlay prompt" style="display: block;"></div><div style="display: -moz-box;" class="output vbox"><div class="hbox output_area"><div class="prompt"></div><div class="box-flex1 output_subarea output_text output_stream output_stdout"><pre>kb|g.0	Escherichia coli K12	1	4639221
+</pre></div></div></div><div title="click to expand outout" role="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only output_collapsed vbox" style="display: none;">. . .</div></div></div><div tabindex="2" class="cell border-box-sizing code_cell vbox"><div class="input hbox"><div class="prompt input_prompt">In&nbsp;[7]:</div><div class="input_area box-flex1"><div class="CodeMirror"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 5.71667px; left: 5.71666px;"><textarea style="position: absolute; padding: 0; width: 1px; height: 1em" wrap="off" autocorrect="off" autocapitalize="off"></textarea></div><div class="CodeMirror-scroll cm-s-ipython" tabindex="-1"><div style="position: relative; height: 100px;"><div style="position: relative; top: 0px;"><div style="display: none;" class="CodeMirror-gutter"><div class="CodeMirror-gutter-text"></div></div><div class="CodeMirror-lines"><div draggable="true" style="position: relative; z-index: 0; outline: medium none;"><div style="position: absolute; width: 100%; height: 0; overflow: hidden; visibility: hidden; outline: 5px auto none"></div><pre style="top: 0px; left: 0px;" class="CodeMirror-cursor">&nbsp;</pre><div style="position: relative; z-index: -1; display: none;"></div><div style=""><pre><span class="cm-operator">%%</span><span class="cm-variable">bash</span></pre><pre><span class="cm-variable">echo</span> <span class="cm-string">'kb|g.2860'</span> <span class="cm-operator">|</span> <span class="cm-variable">genomes_to_contigs</span> <span class="cm-operator">|</span> <span class="cm-variable">contigs_to_sequences</span> <span class="cm-operator">&gt;</span> <span class="cm-variable">g</span><span class="cm-number">.2860</span><span class="cm-variable">.contigs</span></pre><pre><span class="cm-variable">mkdir</span> <span class="cm-variable">g</span><span class="cm-number">.2860</span></pre><pre><span class="cm-variable">mv</span> <span class="cm-variable">g</span><span class="cm-number">.2860</span><span class="cm-variable">.contigs</span> <span class="cm-variable">g</span><span class="cm-number">.2860</span></pre><pre><span class="cm-variable">ls</span> <span class="cm-variable">g</span><span class="cm-number">.2860</span></pre></div></div></div></div></div></div></div></div></div><div class="output_wrapper"><div title="click to expand outout; double click to hide output" class="out_prompt_overlay prompt" style="display: block;"></div><div style="display: -moz-box;" class="output vbox"><div class="hbox output_area"><div class="prompt"></div><div class="box-flex1 output_subarea output_text output_stream output_stdout"><pre>g.2860.contigs
+</pre></div></div><div class="hbox output_area"><div class="prompt"></div><div class="box-flex1 output_subarea output_text output_stream output_stderr"><pre>mkdir: cannot create directory `g.2860': File exists
+</pre></div></div></div><div title="click to expand outout" role="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only output_collapsed vbox" style="display: none;">. . .</div></div></div><div tabindex="2" class="cell border-box-sizing code_cell vbox"><div class="input hbox"><div class="prompt input_prompt">In&nbsp;[8]:</div><div class="input_area box-flex1"><div class="CodeMirror"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 5.71667px; left: 5.71666px;"><textarea style="position: absolute; padding: 0; width: 1px; height: 1em" wrap="off" autocorrect="off" autocapitalize="off"></textarea></div><div class="CodeMirror-scroll cm-s-ipython" tabindex="-1"><div style="position: relative; height: 29.6px;"><div style="position: relative; top: 0px;"><div style="display: none;" class="CodeMirror-gutter"><div class="CodeMirror-gutter-text"></div></div><div class="CodeMirror-lines"><div draggable="true" style="position: relative; z-index: 0; outline: medium none;"><div style="position: absolute; width: 100%; height: 0; overflow: hidden; visibility: hidden; outline: 5px auto none"></div><pre style="top: 0px; left: 0px;" class="CodeMirror-cursor">&nbsp;</pre><div style="position: relative; z-index: -1; display: none;"></div><div style=""><pre><span class="cm-operator">!</span> <span class="cm-variable">fasta_to_genome</span> <span class="cm-string">'Geobacter sulfurreducens KN400'</span> <span class="cm-variable">Bacteria</span> <span class="cm-number">11</span> <span class="cm-operator">&lt;</span> <span class="cm-variable">g</span><span class="cm-number">.2860</span><span class="cm-operator">/</span><span class="cm-variable">g</span><span class="cm-number">.2860</span><span class="cm-variable">.contigs</span></pre></div></div></div></div></div></div></div></div></div><div class="output_wrapper"><div title="click to expand outout; double click to hide output" class="out_prompt_overlay prompt" style="display: block;"></div><div style="display: -moz-box;" class="output vbox"><div class="hbox output_area"><div class="prompt"></div><div class="box-flex1 output_subarea output_text output_stream output_stdout"><pre>Can't locate Bio/KBase/IDServer/Client.pm in @INC (@INC contains: /kb/deployment/lib /kb/runtime/lib/perl5/site_perl/5.16.0/x86_64-linux /kb/runtime/lib/perl5/site_perl/5.16.0 /kb/runtime/lib/perl5/5.16.0/x86_64-linux /kb/runtime/lib/perl5/5.16.0 /kb/runtime/lib/perl5/site_perl/5.12.4 /kb/runtime/lib/perl5/site_perl .) at /kb/deployment/plbin/fasta_to_genome.pl line 32.
+BEGIN failed--compilation aborted at /kb/deployment/plbin/fasta_to_genome.pl line 32.
+</pre></div></div></div><div title="click to expand outout" role="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only output_collapsed vbox" style="display: none;">. . .</div></div></div><div tabindex="2" class="cell border-box-sizing code_cell vbox"><div class="input hbox"><div class="prompt input_prompt">In&nbsp;[8]:</div><div class="input_area box-flex1"><div class="CodeMirror"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 5.71667px; left: 5.71666px;"><textarea style="position: absolute; padding: 0; width: 1px; height: 1em" wrap="off" autocorrect="off" autocapitalize="off"></textarea></div><div class="CodeMirror-scroll cm-s-ipython" tabindex="-1"><div style="position: relative; height: 29.6px;"><div style="position: relative; top: 0px;"><div style="display: none;" class="CodeMirror-gutter"><div class="CodeMirror-gutter-text"></div></div><div class="CodeMirror-lines"><div draggable="true" style="position: relative; z-index: 0; outline: medium none;"><div style="position: absolute; width: 100%; height: 0; overflow: hidden; visibility: hidden; outline: 5px auto none"></div><pre style="top: 0px; left: 0px;" class="CodeMirror-cursor">&nbsp;</pre><div style="position: relative; z-index: -1; display: none;"></div><div style=""><pre> </pre></div></div></div></div></div></div></div></div></div><div class="output_wrapper"><div title="click to expand outout; double click to hide output" class="out_prompt_overlay prompt" style="display: block;"></div><div style="display: -moz-box;" class="output vbox"></div><div title="click to expand outout" role="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only output_collapsed vbox" style="display: none;">. . .</div></div></div><div style="height: 30%;" class="end_space"></div></div>
+</div>
+</div>
+
+</div>
+<script src="tutorial_files/tutorial_files/CDM_tutorial_files/jquery-1.js" type="text/javascript" charset="utf-8"></script>
+<script src="tutorial_files/CDM_tutorial_files/jquery-ui.js" type="text/javascript" charset="utf-8"></script>
+<script src="tutorial_files/CDM_tutorial_files/namespace.js" type="text/javascript" charset="utf-8"></script>
+<script src="tutorial_files/CDM_tutorial_files/page.js" type="text/javascript" charset="utf-8"></script>
+<script src="tutorial_files/CDM_tutorial_files/loginwidget.js" type="text/javascript" charset="utf-8"></script>
+
+<script src="tutorial_files/CDM_tutorial_files/codemirror.js" charset="utf-8"></script>
+<script src="tutorial_files/CDM_tutorial_files/python.js" charset="utf-8"></script>
+<script src="tutorial_files/CDM_tutorial_files/htmlmixed.js" charset="utf-8"></script>
+<script src="tutorial_files/CDM_tutorial_files/xml.js" charset="utf-8"></script>
+<script src="tutorial_files/CDM_tutorial_files/javascript.js" charset="utf-8"></script>
+<script src="tutorial_files/CDM_tutorial_files/css.js" charset="utf-8"></script>
+<script src="tutorial_files/CDM_tutorial_files/rst.js" charset="utf-8"></script>
+<script src="tutorial_files/CDM_tutorial_files/markdown.js" charset="utf-8"></script>
+<script src="tutorial_files/CDM_tutorial_files/Markdown.js" charset="utf-8"></script>
+<script src="tutorial_files/CDM_tutorial_files/prettify.js" charset="utf-8"></script>
+<script src="tutorial_files/CDM_tutorial_files/date.js" charset="utf-8"></script>
+<script src="tutorial_files/CDM_tutorial_files/events.js" type="text/javascript" charset="utf-8"></script>
+<script src="tutorial_files/CDM_tutorial_files/utils.js" type="text/javascript" charset="utf-8"></script>
+<script src="tutorial_files/CDM_tutorial_files/initmathjax.js" type="text/javascript" charset="utf-8"></script>
+<script src="tutorial_files/CDM_tutorial_files/outputarea.js" type="text/javascript" charset="utf-8"></script>
+<script src="tutorial_files/CDM_tutorial_files/cell.js" type="text/javascript" charset="utf-8"></script>
+<script src="tutorial_files/CDM_tutorial_files/codecell.js" type="text/javascript" charset="utf-8"></script>
+<script src="tutorial_files/CDM_tutorial_files/textcell.js" type="text/javascript" charset="utf-8"></script>
+<script src="tutorial_files/CDM_tutorial_files/kernel.js" type="text/javascript" charset="utf-8"></script>
+<script src="tutorial_files/CDM_tutorial_files/notebook.js" type="text/javascript" charset="utf-8"></script>
+<script src="tutorial_files/CDM_tutorial_files/printnotebookmain.js" type="text/javascript" charset="utf-8"></script>
+
+
+
+</body></html>
