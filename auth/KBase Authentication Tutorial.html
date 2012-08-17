@@ -22,36 +22,25 @@ Some features of the Globus Nexus service:<br>
 &#8211;Supports delegation<br>
 <br>
 Benefits<br>
-&#8226;Service is already in operation and has production support<br>
-&#8211;User registration service is done<br>
-&#8211;OAuth 2.0 support in place<br>
-&#8211;More developers and users banging on code, converges faster on stable high performance authentication service<br>
-&#8211;Globus Online will provide custom skinned login instance at appropriate URL<br>
+&#8226;Service is already in operation and has production support<br>&nbsp;&nbsp;&nbsp; &#8211;User registration service is done<br>&nbsp;&nbsp;&nbsp; &#8211;OAuth 2.0 support in place<br>&nbsp;&nbsp;&nbsp;
+&#8211;More developers and users banging on code, converges faster on stable
+high performance authentication service<br>&nbsp;&nbsp;&nbsp; &#8211;Globus Online will provide custom skinned login instance at appropriate URL<br>
 &#8226;Instant tie-in with Globus Online high performance data transfer service<br>
 &#8226;Federated logins &#8211; users with accounts in the inCommon Federation have
 &#8220;single sign-on&#8221;, linking their home institution accounts into Globus
 (more useful for web based apps)<br>
 <br>
 Drawbacks<br>
-&#8226;No longer in control of user profiles &#8211; we are a client, not the master<br>
-&#8211;We control authorization via groups, instead of directly manipulating accounts<br>
-&#8226;We are dependent on another group for feature changes on backend<br>
-&#8211;The Globus Online guys are mostly ANL guys, and the ANL KBase guys have ready access to them<br>
+&#8226;No longer in control of user profiles &#8211; we are a client, not the master<br>&nbsp;&nbsp;&nbsp; &#8211;We control authorization via groups, instead of directly manipulating accounts<br>
+&#8226;We are dependent on another group for feature changes on backend<br>&nbsp;&nbsp;&nbsp; &#8211;The Globus Online guys are mostly ANL guys, and the ANL KBase guys have ready access to them<br>
 &#8226;We have outsourced identity to Globus Online<br>
 &#8226;We manage authorization internally<br>
 &#8226;We can create service accounts within Globus Nexus<br>
-&#8226;Tokens are &#8220;bearer tokens&#8221;<br>
-&#8211;Tokens are not tied to URL, and possession is considered proof of identity<br>
-&#8226;Tokens are acquired through several forms of credentials<br>
-&#8211;RSA signature authentication using SSH public keys<br>
-&#8211;Normal passwords<br>
-&#8211;X509 client certificates possible (not currently supports in Kbase libraries)<br>
+&#8226;Tokens are &#8220;bearer tokens&#8221;<br>&nbsp;&nbsp;&nbsp; &#8211;Tokens are not tied to URL, and possession is considered proof of identity<br>
+&#8226;Tokens are acquired through several forms of credentials<br>&nbsp;&nbsp;&nbsp; &#8211;RSA signature authentication using SSH public keys<br>&nbsp;&nbsp;&nbsp; &#8211;Normal passwords<br>&nbsp;&nbsp;&nbsp; &#8211;X509 client certificates possible (not currently supports in Kbase libraries)<br>
 &#8226;Backend Django service replaced by Globus Online REST service<br>
-&#8226;Client API refactored based on observations<br>
-&#8211;Developers only really seemed to be interested in working with tokens and getting user profiles<br>
-&#8211;Abstraction based on Client side vs Server side was too heavyweight<br>
-&#8226;Tokens are signed using RSA public keys<br>
-&#8211;No more shared secrets<br>
+&#8226;Client API refactored based on observations<br>&nbsp;&nbsp;&nbsp; &#8211;Developers only really seemed to be interested in working with tokens and getting user profiles<br>&nbsp;&nbsp;&nbsp; &#8211;Abstraction based on Client side vs Server side was too heavyweight<br>
+&#8226;Tokens are signed using RSA public keys<br>&nbsp;&nbsp;&nbsp; &#8211;No more shared secrets<br>
 <br>
 <h2>Important URLs</h2>
 <br><span style="font-weight: bold;">
@@ -90,9 +79,8 @@ curl -k -# --user papa:papa
 ######################################################################## 100.0%<br>
 <br>
 {<br>
-<br>&nbsp;&nbsp;&nbsp; "code":
+&nbsp;&nbsp;&nbsp; "code":
 "un=papa|clientid=papa|expiry=1376522845|SigningSubject=https://graph.api.test.globuscs.info/goauth/keys/861eb8e0-e634-11e1-ac2c-1231381a5994|sig=3fb54b56c7bb9a5c13ea0027e24118dca5b9805a7e401982e4def932a6d78aec34800582c0233da814b57bf438022b0581f013c3aded56bada7479b476c1d67c8aff1dc05627473255a97e93cd7e13e8add6dbdf7f8b23f88b66681fa119a347b8750a33596ae7ca74cfc6355e8e5ba4e32137379abe17fbedeb4520d351315b",<br>
-<br>
 &nbsp;&nbsp;&nbsp; "state": null<br>
 <br>
 }<br>
@@ -100,13 +88,9 @@ curl -k -# --user papa:papa
 Token Structure<br>
 <br>
 un=papa|<br>
-<br>
 clientid=papa|<br>
-<br>
 expiry=1376522845|<br>
-<br>
 SigningSubject=https://graph.api.test.globuscs.info/goauth/keys/861eb8e0-e634-11e1-ac2c-1231381a5994|<br>
-<br>
 sig=3fb54b56c7bb9a5c13ea0027e24118dca5b9805a7e401982e4def932a6d78aec34800582c0233da814b57bf438022b0581f013c3aded56bada7479b476c1d67c8aff1dc05627473255a97e93cd7e13e8add6dbdf7f8b23f88b66681fa119a347b8750a33596ae7ca74cfc6355e8e5ba4e32137379abe17fbedeb4520d351315b<br>
 <br>
 <h3>
@@ -131,15 +115,13 @@ un=papa|clientid=papa|expiry=1376522845|SigningSubject=https://graph.api.test.gl
 <h3>
 Getting a Token on the commandline using perl libraries</h3>
 
-<br>
-Username/Password<br>
+<br>Using username/password authentication:<br>
 <br>
 sychan$ perl -MBio::KBase::AuthToken -e 'print
 Bio::KBase::AuthToken-&gt;new( user_id =&gt; "papa", password =&gt;
 "papa")-&gt;token,"\n";'<br>
 <br>un=papa|clientid=papa|expiry=1376542920|SigningSubject=https://graph.api.test.globuscs.info/goauth/keys/861eb8e0-e634-11e1-ac2c-1231381a5994|sig=2e81ffa18b1803588228f475d35ae9d8c1b5c582a46dbbb49d7944662dc349791b6b0ac5e4a6b89c406de1dc83eff1a961cb9892a45398636809fce4ff7f70b2a76a384cd3361a4f6bdd25d72b1affb413717abf6b499ecffff19037cce7fd2367135c3e736398c1c26d429ecb827635a3aae8a92c7beae1c87760df958eecb2<br>
-<br>
-Username/RSA<br>
+<br>Using username/RSA authentication:<br>
 <br>
 sychan$ perl -MBio::KBase::AuthToken -e '$key=`cat ~/.ssh/id_rsa`;
 print Bio::KBase::AuthToken-&gt;new( user_id =&gt; "sychan",
@@ -342,5 +324,46 @@ Client: Recieved a response: 401 You failed to login: Failed to verify
 token: Token lacks signature fields at lib/Bio/KBase/AuthToken.pm line
 237.<br>
 <br>
+<h3>Validating Authentication Tokens</h3>
+Sample Token:<br>
+<span style="background-color: rgb(153, 255, 153);">un=kbasetest|clientid=kbasetest|expiry=1376547165|SigningSubject=https://graph.api.test.globuscs.info/goauth/keys/861eb8e0-e634-11e1-ac2c-1231381a5994</span>|<span style="background-color: rgb(51, 204, 255);">sig=9a8fcd2a41e877aec5b0ed5a0d0315c258b5466d4862d17b5ce33f2703d2a32e8179556579998a8379271360251593b9db86430fb9bd1b9bf081b39dc6ff978bde834a9a9cb19eacc46f0b4ada93048c10b8aa2bfa2325ba5fab6993042b51bc7e3ab1545831c261e96972f3789fd20b6c1c5742f937ffda8a6f08c3019ca0d1</span><br>
+Token Contents = Green<br>
+Token Signature = Blue<br>
+<br>
+From sample token:<br>
+SigningSubject=https://graph.api.test.globuscs.info/goauth/keys/861eb8e0-e634-11e1-ac2c-1231381a5994<br>
+<br>
+SigningSubject points to JSON object:<br>
+{<br>
+&nbsp;&nbsp;&nbsp; "expiry": 1345569705.0, <br>
+&nbsp;&nbsp;&nbsp; "id": "861eb8e0-e634-11e1-ac2c-1231381a5994", <br>
+&nbsp;&nbsp;&nbsp; "pubkey": "-----BEGIN RSA PUBLIC
+KEY-----\nMIGJAoGBAOI4NghMHlbChfx07ZeLY4eiOiJUb9ofnv+cnFOFEmP+BrxZObT3RpuD\nC2jjIX78lj16LaQPxz5iaFth3FJCxERgcjnlQ5nvgHAwisRG+76Y8fIpgGAdWL5S\nzrlgDOXVieYs+N06fGPmlsMRtQVEzy0fUa5421epiNRKy5QYZskPAgMBAAE=\n-----END
+RSA PUBLIC KEY-----\n", <br>
+&nbsp;&nbsp;&nbsp; "valid": true<br>
+}<br>
+<br>
+Pseudocode for token validation, given the "pubkey" in the JSON object referenced above:<br>
+<br>
+<span style="background-color: rgb(153, 255, 153);">un=kbasetest|clientid=kbasetest|expiry=1376547165|SigningSubject=https://graph.api.test.globuscs.info/goauth/keys/861eb8e0-e634-11e1-ac2c-1231381a5994</span>|<span style="background-color: rgb(51, 204, 255);">sig=9a8fcd2a41e877aec5b0ed5a0d0315c258b5466d4862d17b5ce33f2703d2a32e8179556579998a8379271360251593b9db86430fb9bd1b9bf081b39dc6ff978bde834a9a9cb19eacc46f0b4ada93048c10b8aa2bfa2325ba5fab6993042b51bc7e3ab1545831c261e96972f3789fd20b6c1c5742f937ffda8a6f08c3019ca0d1</span><br>
+If (RSA_SHA1_Base64(Green Stuff, pubkey) == Blue Stuff) {<br>
+&nbsp;&nbsp;&nbsp; # Happiness!!<br>
+} else {<br>
+&nbsp;&nbsp;&nbsp; # Sucks<br>
+}<br>
+<br>
+OAuth 2.0 compliant &#8230;but&#8230;<br>
+<ul>
+  <li>OAuth 2.0 bearer token structure undefined</li>
+  <li>The Globus Online bearer tokens are custom and use our own validation scheme</li>
+  <li>Focus has been on REST interface for authentication, have not
+pushed on full OAuth browser flowsweb interfaces with callbacks not
+yet implemented</li>
+</ul>
+Globus Online has assigned a hierarchy of groups rooted at &#8220;kbase&#8221;<br>
+<ul>
+  <li>See groups API at http://globusonline.github.com/nexus-docs/api.html#groups</li>
+  <li>Create an account on Globus, and we can assign admin privs on that tree to that account</li>
+</ul>
 <br>
 </body></html>
