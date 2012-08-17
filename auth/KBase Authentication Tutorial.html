@@ -1,6 +1,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html><head>
-<meta content="text/html; charset=ISO-8859-1" http-equiv="content-type"><title>KBase Authentication Tutorial</title></head><body>KBase Authentication<br>
+<meta content="text/html; charset=ISO-8859-1" http-equiv="content-type"><title>KBase Authentication Tutorial</title></head><body>
+<h1>KBase Authentication</h1>
+
+<h1>Introduction</h1>
 <br>
 The KBase authentication system is based on OAuth 2.0 with RSA SHA1
 signatures for token signing. KBase has partnered with Globus Online to
@@ -50,34 +53,35 @@ Drawbacks<br>
 &#8226;Tokens are signed using RSA public keys<br>
 &#8211;No more shared secrets<br>
 <br>
-Web interface to test and production instances:<br>
-<br>
+<h2>Important URLs</h2>
+<br><span style="font-weight: bold;">
+Web interface to test and production instances:</span><br>
 https://test.globuscs.info/ (test)<br>
-<br>
 https://www.globusonline.org/ (production)<br>
-<br>
-REST API access:<br>
-<br>
+<br><span style="font-weight: bold;">
+REST API access:</span><br>
 https://graph.api.test.globuscs.info/ (test)<br>
 https://graph.api.globusonline.org/ (production)<br>
-<br>
-REST API documentation:<br>
+<br><span style="font-weight: bold;">
+REST API documentation:</span><br>
 http://globusonline.github.com/nexus-docs/api.html<br>
-<br>
-Globus Nexus Python Client Git Repo:<br>
+<br><span style="font-weight: bold;">
+Globus Nexus Python Client Git Repo:</span><br>
 https://github.com/globusonline/python-nexus-client.git<br>
-<br>
-KBase Auth Code Git Repo:<br>
+<br><span style="font-weight: bold;">
+KBase Auth Code Git Repo:</span><br>
 https://github.com/kbase/auth.git<br>
-<br>
-Java code to validate Globus Tokens:<br>
+<br><span style="font-weight: bold;">
+Java code to validate Globus Tokens:</span><br>
 ssh://kbase@git.kbase.us/persistent_store.git<br>
-<br>
-&nbsp; persistent_store/DocumentStoreREST/src/Auth<br>
+&nbsp; ...persistent_store/DocumentStoreREST/src/Auth/KBaseAuthValidateToken.java<br>
 <br>
 &nbsp;<br>
+<h2>Working with KBase Authentication Tokens</h2>
 <br>
-Acquiring an authentication token<br>
+<h3>
+Acquiring an authentication token</h3>
+
 <br>
 curl -k -# --user papa:papa
 'https://graph.api.test.globuscs.info/goauth/authorize?response_type=code&amp;client_id=papa'
@@ -86,8 +90,7 @@ curl -k -# --user papa:papa
 ######################################################################## 100.0%<br>
 <br>
 {<br>
-<br>
-&nbsp;&nbsp;&nbsp; "code":
+<br>&nbsp;&nbsp;&nbsp; "code":
 "un=papa|clientid=papa|expiry=1376522845|SigningSubject=https://graph.api.test.globuscs.info/goauth/keys/861eb8e0-e634-11e1-ac2c-1231381a5994|sig=3fb54b56c7bb9a5c13ea0027e24118dca5b9805a7e401982e4def932a6d78aec34800582c0233da814b57bf438022b0581f013c3aded56bada7479b476c1d67c8aff1dc05627473255a97e93cd7e13e8add6dbdf7f8b23f88b66681fa119a347b8750a33596ae7ca74cfc6355e8e5ba4e32137379abe17fbedeb4520d351315b",<br>
 <br>
 &nbsp;&nbsp;&nbsp; "state": null<br>
@@ -106,9 +109,10 @@ SigningSubject=https://graph.api.test.globuscs.info/goauth/keys/861eb8e0-e634-11
 <br>
 sig=3fb54b56c7bb9a5c13ea0027e24118dca5b9805a7e401982e4def932a6d78aec34800582c0233da814b57bf438022b0581f013c3aded56bada7479b476c1d67c8aff1dc05627473255a97e93cd7e13e8add6dbdf7f8b23f88b66681fa119a347b8750a33596ae7ca74cfc6355e8e5ba4e32137379abe17fbedeb4520d351315b<br>
 <br>
-Using authentication to fetch user profile<br>
-<br>
-curl -k -# -H "X-GLOBUS-GOAUTHTOKEN:
+<h3>
+Using authentication token to fetch user profile</h3>
+
+<br>curl -k -# -H "X-GLOBUS-GOAUTHTOKEN:
 un=papa|clientid=papa|expiry=1376522845|SigningSubject=https://graph.api.test.globuscs.info/goauth/keys/861eb8e0-e634-11e1-ac2c-1231381a5994|sig=3fb54b56c7bb9a5c13ea0027e24118dca5b9805a7e401982e4def932a6d78aec34800582c0233da814b57bf438022b0581f013c3aded56bada7479b476c1d67c8aff1dc05627473255a97e93cd7e13e8add6dbdf7f8b23f88b66681fa119a347b8750a33596ae7ca74cfc6355e8e5ba4e32137379abe17fbedeb4520d351315b"
 'https://graph.api.test.globuscs.info/users/papa' | python -m json.tool<br>
 <br>
@@ -124,15 +128,16 @@ un=papa|clientid=papa|expiry=1376522845|SigningSubject=https://graph.api.test.gl
 &nbsp;&nbsp;&nbsp; "username": "papa"<br>
 }<br>
 <br>
-Getting a Token on the commandline for the ADD:<br>
+<h3>
+Getting a Token on the commandline using perl libraries</h3>
+
 <br>
 Username/Password<br>
 <br>
 sychan$ perl -MBio::KBase::AuthToken -e 'print
 Bio::KBase::AuthToken-&gt;new( user_id =&gt; "papa", password =&gt;
 "papa")-&gt;token,"\n";'<br>
-<br>
-un=papa|clientid=papa|expiry=1376542920|SigningSubject=https://graph.api.test.globuscs.info/goauth/keys/861eb8e0-e634-11e1-ac2c-1231381a5994|sig=2e81ffa18b1803588228f475d35ae9d8c1b5c582a46dbbb49d7944662dc349791b6b0ac5e4a6b89c406de1dc83eff1a961cb9892a45398636809fce4ff7f70b2a76a384cd3361a4f6bdd25d72b1affb413717abf6b499ecffff19037cce7fd2367135c3e736398c1c26d429ecb827635a3aae8a92c7beae1c87760df958eecb2<br>
+<br>un=papa|clientid=papa|expiry=1376542920|SigningSubject=https://graph.api.test.globuscs.info/goauth/keys/861eb8e0-e634-11e1-ac2c-1231381a5994|sig=2e81ffa18b1803588228f475d35ae9d8c1b5c582a46dbbb49d7944662dc349791b6b0ac5e4a6b89c406de1dc83eff1a961cb9892a45398636809fce4ff7f70b2a76a384cd3361a4f6bdd25d72b1affb413717abf6b499ecffff19037cce7fd2367135c3e736398c1c26d429ecb827635a3aae8a92c7beae1c87760df958eecb2<br>
 <br>
 Username/RSA<br>
 <br>
@@ -142,6 +147,9 @@ client_secret =&gt; $key)-&gt;token,"\n";&#8217;<br>
 <br>
 un=sychan|clientid=sychan|expiry=1376543282|SigningSubject=https://graph.api.test.globuscs.info/goauth/keys/861eb8e0-e634-11e1-ac2c-1231381a5994|sig=afa6f7ad6389f3775a1142cc16b9f223e299d0e75e154182731e8405167ac447281ba70b6eee97939276463f71ecdb466f65ab70f6b96ebec9666e443b81fb795eace1b9fe1d05a055edb6afb623bbf601330f2363db0701c82656de81a10e58fa0c955b4794e08c0407a48771e1c660ad78cd2d0338c6b4a72e514892d32f2<br>
 <br>
+<br>
+<h3>Sample Perl script</h3>
+<h4>Basic AuthToken and AuthUser usage</h4>
 <br>
 use Bio::KBase::AuthToken;<br>
 use Bio::KBase::AuthUser;<br>
@@ -238,7 +246,9 @@ undef<br>
 <br>
 &nbsp;<br>
 <br>
-Example Client and Server code using AuthToken and AuthUser:<br>
+<h4>
+Example Client and Server code using AuthToken and AuthUser:</h4>
+
 <br>
 use lib "../lib/";<br>
 use lib "lib";<br>
@@ -319,4 +329,18 @@ kill 9, $child;<br>
 <br>
 <br>
 
+Output from the sample script:<br>
+<br>
+Server listening at http://127.0.0.1:54079/<br>
+Server: User KBase Test Account (kbasetest) found for token
+un=kbasetest|clientid=kbasetest|expiry=1376547165|SigningSubject=https://graph.api.test.globuscs.info/goauth/keys/861eb8e0-e634-11e1-ac2c-1231381a5994|sig=9a8fcd2a41e877aec5b0ed5a0d0315c258b5466d4862d17b5ce33f2703d2a32e8179556579998a8379271360251593b9db86430fb9bd1b9bf081b39dc6ff978bde834a9a9cb19eacc46f0b4ada93048c10b8aa2bfa2325ba5fab6993042b51bc7e3ab1545831c261e96972f3789fd20b6c1c5742f937ffda8a6f08c3019ca0d1.<br>
+Client: Recieved a response: 200 Successfully logged in as user kbasetest<br>
+<br>
+Client: Sending bad request: GET http://127.0.0.1:54079/someurl (expecting failure)<br>
+Server: token failed validation.<br>
+Client: Recieved a response: 401 You failed to login: Failed to verify
+token: Token lacks signature fields at lib/Bio/KBase/AuthToken.pm line
+237.<br>
+<br>
+<br>
 </body></html>
