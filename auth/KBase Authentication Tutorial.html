@@ -1,0 +1,322 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+<meta content="text/html; charset=ISO-8859-1" http-equiv="content-type"><title>KBase Authentication Tutorial</title></head><body>KBase Authentication<br>
+<br>
+The KBase authentication system is based on OAuth 2.0 with RSA SHA1
+signatures for token signing. KBase has partnered with Globus Online to
+use the Globus Nexus service to provide a centralized, cross site
+identity service. This means that Globus Online operates a service on
+our behalf to handle logins, user profiles and group membership. As a
+benefit of this, all KBase users automatically get high performance
+file transfer through Globus Online, and they are able to link their
+home institutions login to their Globus Online account (similar to
+linking your account to Facebook or Google/GMail).<br>
+<br>
+Some features of the Globus Nexus service:<br>
+&#8211;OAuth 2.0 compliant<br>
+&#8211;REST based backend service for user profiles and groups<br>
+&#8211;Supports interactive and programmatic interfaces<br>
+&#8211;Supports delegation<br>
+<br>
+Benefits<br>
+&#8226;Service is already in operation and has production support<br>
+&#8211;User registration service is done<br>
+&#8211;OAuth 2.0 support in place<br>
+&#8211;More developers and users banging on code, converges faster on stable high performance authentication service<br>
+&#8211;Globus Online will provide custom skinned login instance at appropriate URL<br>
+&#8226;Instant tie-in with Globus Online high performance data transfer service<br>
+&#8226;Federated logins &#8211; users with accounts in the inCommon Federation have
+&#8220;single sign-on&#8221;, linking their home institution accounts into Globus
+(more useful for web based apps)<br>
+<br>
+Drawbacks<br>
+&#8226;No longer in control of user profiles &#8211; we are a client, not the master<br>
+&#8211;We control authorization via groups, instead of directly manipulating accounts<br>
+&#8226;We are dependent on another group for feature changes on backend<br>
+&#8211;The Globus Online guys are mostly ANL guys, and the ANL KBase guys have ready access to them<br>
+&#8226;We have outsourced identity to Globus Online<br>
+&#8226;We manage authorization internally<br>
+&#8226;We can create service accounts within Globus Nexus<br>
+&#8226;Tokens are &#8220;bearer tokens&#8221;<br>
+&#8211;Tokens are not tied to URL, and possession is considered proof of identity<br>
+&#8226;Tokens are acquired through several forms of credentials<br>
+&#8211;RSA signature authentication using SSH public keys<br>
+&#8211;Normal passwords<br>
+&#8211;X509 client certificates possible (not currently supports in Kbase libraries)<br>
+&#8226;Backend Django service replaced by Globus Online REST service<br>
+&#8226;Client API refactored based on observations<br>
+&#8211;Developers only really seemed to be interested in working with tokens and getting user profiles<br>
+&#8211;Abstraction based on Client side vs Server side was too heavyweight<br>
+&#8226;Tokens are signed using RSA public keys<br>
+&#8211;No more shared secrets<br>
+<br>
+Web interface to test and production instances:<br>
+<br>
+https://test.globuscs.info/ (test)<br>
+<br>
+https://www.globusonline.org/ (production)<br>
+<br>
+REST API access:<br>
+<br>
+https://graph.api.test.globuscs.info/ (test)<br>
+https://graph.api.globusonline.org/ (production)<br>
+<br>
+REST API documentation:<br>
+http://globusonline.github.com/nexus-docs/api.html<br>
+<br>
+Globus Nexus Python Client Git Repo:<br>
+https://github.com/globusonline/python-nexus-client.git<br>
+<br>
+KBase Auth Code Git Repo:<br>
+https://github.com/kbase/auth.git<br>
+<br>
+Java code to validate Globus Tokens:<br>
+ssh://kbase@git.kbase.us/persistent_store.git<br>
+<br>
+&nbsp; persistent_store/DocumentStoreREST/src/Auth<br>
+<br>
+&nbsp;<br>
+<br>
+Acquiring an authentication token<br>
+<br>
+curl -k -# --user papa:papa
+'https://graph.api.test.globuscs.info/goauth/authorize?response_type=code&amp;client_id=papa'
+| python -m json.tool<br>
+<br>
+######################################################################## 100.0%<br>
+<br>
+{<br>
+<br>
+&nbsp;&nbsp;&nbsp; "code":
+"un=papa|clientid=papa|expiry=1376522845|SigningSubject=https://graph.api.test.globuscs.info/goauth/keys/861eb8e0-e634-11e1-ac2c-1231381a5994|sig=3fb54b56c7bb9a5c13ea0027e24118dca5b9805a7e401982e4def932a6d78aec34800582c0233da814b57bf438022b0581f013c3aded56bada7479b476c1d67c8aff1dc05627473255a97e93cd7e13e8add6dbdf7f8b23f88b66681fa119a347b8750a33596ae7ca74cfc6355e8e5ba4e32137379abe17fbedeb4520d351315b",<br>
+<br>
+&nbsp;&nbsp;&nbsp; "state": null<br>
+<br>
+}<br>
+<br>
+Token Structure<br>
+<br>
+un=papa|<br>
+<br>
+clientid=papa|<br>
+<br>
+expiry=1376522845|<br>
+<br>
+SigningSubject=https://graph.api.test.globuscs.info/goauth/keys/861eb8e0-e634-11e1-ac2c-1231381a5994|<br>
+<br>
+sig=3fb54b56c7bb9a5c13ea0027e24118dca5b9805a7e401982e4def932a6d78aec34800582c0233da814b57bf438022b0581f013c3aded56bada7479b476c1d67c8aff1dc05627473255a97e93cd7e13e8add6dbdf7f8b23f88b66681fa119a347b8750a33596ae7ca74cfc6355e8e5ba4e32137379abe17fbedeb4520d351315b<br>
+<br>
+Using authentication to fetch user profile<br>
+<br>
+curl -k -# -H "X-GLOBUS-GOAUTHTOKEN:
+un=papa|clientid=papa|expiry=1376522845|SigningSubject=https://graph.api.test.globuscs.info/goauth/keys/861eb8e0-e634-11e1-ac2c-1231381a5994|sig=3fb54b56c7bb9a5c13ea0027e24118dca5b9805a7e401982e4def932a6d78aec34800582c0233da814b57bf438022b0581f013c3aded56bada7479b476c1d67c8aff1dc05627473255a97e93cd7e13e8add6dbdf7f8b23f88b66681fa119a347b8750a33596ae7ca74cfc6355e8e5ba4e32137379abe17fbedeb4520d351315b"
+'https://graph.api.test.globuscs.info/users/papa' | python -m json.tool<br>
+<br>
+######################################################################## 100.0%<br>
+<br>
+{<br>
+&nbsp;&nbsp;&nbsp; "custom_fields": {},<br>
+&nbsp;&nbsp;&nbsp; "email": "papa@smurfs.nz",<br>
+&nbsp;&nbsp;&nbsp; "email_validated": true,<br>
+&nbsp;&nbsp;&nbsp; "fullname": "Papa Smurf",<br>
+&nbsp;&nbsp;&nbsp; "opt_in": null,<br>
+&nbsp;&nbsp;&nbsp; "system_admin": true,<br>
+&nbsp;&nbsp;&nbsp; "username": "papa"<br>
+}<br>
+<br>
+Getting a Token on the commandline for the ADD:<br>
+<br>
+Username/Password<br>
+<br>
+sychan$ perl -MBio::KBase::AuthToken -e 'print
+Bio::KBase::AuthToken-&gt;new( user_id =&gt; "papa", password =&gt;
+"papa")-&gt;token,"\n";'<br>
+<br>
+un=papa|clientid=papa|expiry=1376542920|SigningSubject=https://graph.api.test.globuscs.info/goauth/keys/861eb8e0-e634-11e1-ac2c-1231381a5994|sig=2e81ffa18b1803588228f475d35ae9d8c1b5c582a46dbbb49d7944662dc349791b6b0ac5e4a6b89c406de1dc83eff1a961cb9892a45398636809fce4ff7f70b2a76a384cd3361a4f6bdd25d72b1affb413717abf6b499ecffff19037cce7fd2367135c3e736398c1c26d429ecb827635a3aae8a92c7beae1c87760df958eecb2<br>
+<br>
+Username/RSA<br>
+<br>
+sychan$ perl -MBio::KBase::AuthToken -e '$key=`cat ~/.ssh/id_rsa`;
+print Bio::KBase::AuthToken-&gt;new( user_id =&gt; "sychan",
+client_secret =&gt; $key)-&gt;token,"\n";&#8217;<br>
+<br>
+un=sychan|clientid=sychan|expiry=1376543282|SigningSubject=https://graph.api.test.globuscs.info/goauth/keys/861eb8e0-e634-11e1-ac2c-1231381a5994|sig=afa6f7ad6389f3775a1142cc16b9f223e299d0e75e154182731e8405167ac447281ba70b6eee97939276463f71ecdb466f65ab70f6b96ebec9666e443b81fb795eace1b9fe1d05a055edb6afb623bbf601330f2363db0701c82656de81a10e58fa0c955b4794e08c0407a48771e1c660ad78cd2d0338c6b4a72e514892d32f2<br>
+<br>
+<br>
+use Bio::KBase::AuthToken;<br>
+use Bio::KBase::AuthUser;<br>
+use Data::Dumper;<br>
+<br>
+$t = Bio::KBase::AuthToken-&gt;new( user_id =&gt; "papa",<br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; password
+=&gt; "papa");<br>
+<br>
+if ($t-&gt;validate()) {<br>
+&nbsp;&nbsp;&nbsp; print "Yeehaw!!! It works!\n";<br>
+&nbsp;&nbsp;&nbsp; print Dumper( $t);<br>
+&nbsp;&nbsp;&nbsp; $u = Bio::KBase::AuthUser-&gt;new( token =&gt; $t-&gt;token);<br>
+&nbsp;&nbsp;&nbsp; if ($t-&gt;user_id()) {<br>
+&nbsp; &nbsp;&nbsp;&nbsp; print "And here's my profile object:\n";<br>
+&nbsp; &nbsp;&nbsp;&nbsp; print Dumper( $u);<br>
+&nbsp;&nbsp;&nbsp; }<br>
+} else {<br>
+&nbsp;&nbsp;&nbsp; die "Doh!\n";<br>
+}<br>
+<br>
+Yeehaw!!! It works!<br>
+<br>
+$VAR1 = bless( {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; 'password'
+=&gt; 'papa',<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+'error_message' =&gt; undef,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; 'user_id'
+=&gt; 'papa',<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; 'token' =&gt;
+'un=papa|clientid=papa|expiry=1376544425|SigningSubject=https://graph.api.test.globuscs.info/goauth/keys/861eb8e0-e634-11e1-ac2c-1231381a5994|sig=805ab020da27e5b77416ce8e76431cd5941a1a2c527ef3c89ff04a4b2a2de1fa94e7e40517364224b89aeec19269aabb960435a6d144b7911ee62801b2143c5061808504f9815930dd7f55150cbdfec7203331466c744b9dd62d674d459b4efbd39f2ff2d3249ae8f2d4eb41d17d5263ae6ddd8a43bed0a555005c2edc299076'<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; },
+'Bio::KBase::AuthToken' );<br>
+<br>
+And here's my profile object:<br>
+<br>
+$VAR1 = bless( {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; 'system_admin'
+=&gt; 1,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; 'name' =&gt;
+'Papa Smurf',<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; 'phone' =&gt;
+'8888888888',<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; 'email' =&gt;
+'papa@smurfs.nz',<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; 'oauth_creds'
+=&gt; {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; 'auth_token'
+=&gt;
+'un=papa|clientid=papa|expiry=1376544425|SigningSubject=https://graph.api.test.globuscs.info/goauth/keys/861eb8e0-e634-11e1-ac2c-1231381a5994|sig=805ab020da27e5b77416ce8e76431cd5941a1a2c527ef3c89ff04a4b2a2de1fa94e7e40517364224b89aeec19269aabb960435a6d144b7911ee62801b2143c5061808504f9815930dd7f55150cbdfec7203331466c744b9dd62d674d459b4efbd39f2ff2d3249ae8f2d4eb41d17d5263ae6ddd8a43bed0a555005c2edc299076'<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+},<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+'error_message' =&gt; undef,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; 'current_project_name' =&gt; 'Papa',<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; 'verified'
+=&gt; 1,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; 'user_id'
+=&gt; 'papa',<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; 'token' =&gt;
+undef,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; 'organization'
+=&gt; 'papa',<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; 'institution'
+=&gt; 'papa',<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; 'opt_in' =&gt;
+undef<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; },
+'Bio::KBase::AuthUser' );<br>
+<br>
+&nbsp;<br>
+<br>
+Example Client and Server code using AuthToken and AuthUser:<br>
+<br>
+use lib "../lib/";<br>
+use lib "lib";<br>
+use Data::Dumper;<br>
+use HTTP::Daemon;<br>
+use HTTP::Request;<br>
+use LWP::UserAgent;<br>
+use JSON;<br>
+use Bio::KBase::AuthToken;<br>
+use Bio::KBase::AuthUser;<br>
+<br>
+sub testServer {<br>
+&nbsp;&nbsp;&nbsp; my $d = shift;<br>
+&nbsp;&nbsp;&nbsp; my $res = new HTTP::Response;<br>
+&nbsp;&nbsp;&nbsp; my $msg = new HTTP::Message;<br>
+&nbsp;&nbsp;&nbsp; my $at = new Bio::KBase::AuthToken;<br>
+&nbsp;&nbsp;&nbsp; while (my $c = $d-&gt;accept()) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; while (my $r = $c-&gt;get_request) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; my $token = $r-&gt;header('Authorization');<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; $at-&gt;token( $token);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if ($at-&gt;validate()) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; $res-&gt;code(200);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+$body = sprintf( "Successfully logged in as user %s\n",
+$at-&gt;user_id);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+$au = Bio::KBase::AuthUser-&gt;new( 'token' =&gt; $at-&gt;token);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+printf "Server: User %s (%s) found for token %s.\n",
+$au-&gt;name,$au-&gt;user_id, $at-&gt;token;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; } else {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; $res-&gt;code(401);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+printf "Server: token failed validation.\n";<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+$body = sprintf("You failed to login: %s\n", $at-&gt;error_message);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; $res-&gt;content( $body);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; $c-&gt;send_response($res);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; $c-&gt;close;<br>
+&nbsp;&nbsp;&nbsp; }<br>
+}<br>
+<br>
+sub testClient {<br>
+&nbsp;&nbsp;&nbsp; my $server = shift; my $ua =
+LWP::UserAgent-&gt;new(); my $req = HTTP::Request-&gt;new( GET =&gt;
+$server. "someurl" );<br>
+<br>
+&nbsp;&nbsp;&nbsp; $at = Bio::KBase::AuthToken-&gt;new('user_id' =&gt; 'kbasetest', 'password' =&gt; '@Suite525');<br>
+&nbsp;&nbsp;&nbsp; $req-&gt;header("Authorization" =&gt; $at-&gt;token);<br>
+<br>
+&nbsp;&nbsp;&nbsp; $res = $ua-&gt;request( $req);<br>
+&nbsp;&nbsp;&nbsp; printf "Client: Recieved a response: %d %s\n", $res-&gt;code, $res-&gt;content;<br>
+<br>
+&nbsp;&nbsp;&nbsp; # As a sanity check, trash the oauth_secret and make sure that<br>
+&nbsp;&nbsp;&nbsp; # we get a negative result<br>
+&nbsp;&nbsp;&nbsp; $req-&gt;header("Authorization" =&gt; "bogo token");<br>
+<br>
+&nbsp;&nbsp;&nbsp; printf "Client: Sending bad request: %s %s (expecting failure)\n",$req-&gt;method,$req-&gt;url-&gt;as_string;<br>
+&nbsp;&nbsp;&nbsp; $res = $ua-&gt;request( $req);<br>
+&nbsp;&nbsp;&nbsp; printf "Client: Recieved a response: %d %s\n", $res-&gt;code, $res-&gt;content;<br>
+<br>
+}<br>
+<br>
+$d = HTTP::Daemon-&gt;new( LocalAddr =&gt; '127.0.0.1');<br>
+<br>
+printf "Server listening at %s\n",$d-&gt;url;<br>
+<br>
+my $child = fork();<br>
+if ($child) {<br>
+&nbsp;&nbsp;&nbsp; testClient( $d-&gt;url);<br>
+} else {<br>
+&nbsp;&nbsp;&nbsp; testServer( $d);<br>
+}<br>
+<br>
+kill 9, $child;<br>
+<br>
+<br>
+
+</body></html>
