@@ -1,9 +1,20 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html><head>
+
 <meta content="text/html; charset=ISO-8859-1" http-equiv="content-type"><title>KBase Authentication Tutorial</title></head><body>
 <h1>KBase Authentication</h1>
 
-<h1>Introduction</h1>
+<h2>Prerequisites</h2>
+This tutorial assumes that you have downloaded and installed the Perl
+Bio::KBase::Auth* libraries from the git repo at
+ssh://git@github.com/kbase/auth.git or ssh://kbase@git.kbase.us/auth.git<br>
+<br>
+Checkout a copy of the auth repo, and use the make target "install-libs" to install the libraries in your local environment.<br>
+<br>
+You will also need the commandline utility "curl" installed in order to test the commandline token examples.<br>
+<br>
+<h2>Introduction</h2>
+
 <br>
 The KBase authentication system is based on OAuth 2.0 with RSA SHA1
 signatures for token signing. KBase has partnered with Globus Online to
@@ -20,6 +31,9 @@ Some features of the Globus Nexus service:<br>
 &#8211;REST based backend service for user profiles and groups<br>
 &#8211;Supports interactive and programmatic interfaces<br>
 &#8211;Supports delegation<br>
+
+&#8211;Supports Username/Password, and RSA key based authentication (using OpenSSH rsa keys)<br>
+
 <br>
 Benefits<br>
 &#8226;Service is already in operation and has production support<br>&nbsp;&nbsp;&nbsp; &#8211;User registration service is done<br>&nbsp;&nbsp;&nbsp; &#8211;OAuth 2.0 support in place<br>&nbsp;&nbsp;&nbsp;
@@ -42,32 +56,91 @@ Drawbacks<br>
 &#8226;Client API refactored based on observations<br>&nbsp;&nbsp;&nbsp; &#8211;Developers only really seemed to be interested in working with tokens and getting user profiles<br>&nbsp;&nbsp;&nbsp; &#8211;Abstraction based on Client side vs Server side was too heavyweight<br>
 &#8226;Tokens are signed using RSA public keys<br>&nbsp;&nbsp;&nbsp; &#8211;No more shared secrets<br>
 <br>
-<h2>Important URLs</h2>
-<br><span style="font-weight: bold;">
-Web interface to test and production instances:</span><br>
-https://test.globuscs.info/ (test)<br>
-https://www.globusonline.org/ (production)<br>
-<br><span style="font-weight: bold;">
-REST API access:</span><br>
-https://graph.api.test.globuscs.info/ (test)<br>
-https://graph.api.globusonline.org/ (production)<br>
-<br><span style="font-weight: bold;">
-REST API documentation:</span><br>
-http://globusonline.github.com/nexus-docs/api.html<br>
-<br><span style="font-weight: bold;">
-Globus Nexus Python Client Git Repo:</span><br>
-https://github.com/globusonline/python-nexus-client.git<br>
-<br><span style="font-weight: bold;">
-KBase Auth Code Git Repo:</span><br>
-https://github.com/kbase/auth.git<br>
-<br><span style="font-weight: bold;">
-Java code to validate Globus Tokens:</span><br>
+<h3>Important URLs</h3>
+&nbsp;&nbsp;&nbsp; Here is a list of important URLs related to the authentication system:<br>
+<br>
+<table style="text-align: left; width: 679px; height: 148px;" border="1" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;"><span style="font-weight: bold;">Browser interface to Globus Online test instance</span></td>
+      <td style="vertical-align: top;">
+https://test.globuscs.info/ </td>
+      <td style="vertical-align: top;">Currently we are testing on this instance. Go here to create test accounts<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top; font-weight: bold;">
+Browser interface to Globus Online production instance <br>
+      </td>
+      <td style="vertical-align: top;">
+https://www.globusonline.org/</td>
+      <td style="vertical-align: top;">This is the main production instance<br>
+for Globus Online, we will migrate to<br>
+this instance when appropriate<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><span style="font-weight: bold;">Test instance REST API Access</span><br>
+      </td>
+      <td style="vertical-align: top;">
+https://graph.api.test.globuscs.info/</td>
+      <td style="vertical-align: top;">Base URL for the REST API, test instance<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><span style="font-weight: bold;">Production REST API Access</span><br>
+      </td>
+      <td style="vertical-align: top;">
+https://graph.api.globusonline.org/</td>
+      <td style="vertical-align: top;">Base URL for the REST API, production<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><span style="font-weight: bold;">REST API Documentation</span><br>
+      </td>
+      <td style="vertical-align: top;">
+http://globusonline.github.com/nexus-docs/api.html</td>
+      <td style="vertical-align: top;">Documents the REST API<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><span style="font-weight: bold;">Globus Nexus Python Client git repository</span><br>
+      </td>
+      <td style="vertical-align: top;">
+https://github.com/globusonline/python-nexus-client.git</td>
+      <td style="vertical-align: top;">Python client code from Globus<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><span style="font-weight: bold;">KBase Authentication git repository</span><br>
+      </td>
+      <td style="vertical-align: top;">
+https://github.com/kbase/auth.git</td>
+      <td style="vertical-align: top;">KBase Perl client code<br>
+      <span style="font-weight: bold; font-style: italic;">used for this tutorial</span><br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><span style="font-weight: bold;">Sample Java code for token validation</span><br>
+      </td>
+      <td style="vertical-align: top;">
 ssh://kbase@git.kbase.us/persistent_store.git<br>
-&nbsp; ...persistent_store/DocumentStoreREST/src/Auth/KBaseAuthValidateToken.java<br>
-<br>
-&nbsp;<br>
+ DocumentStoreREST/src/Auth<br>
+.../KBaseAuthValidateToken.java<br>
+      </td>
+      <td style="vertical-align: top;">Sample code in Java<br>
+for token validation<br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<br><span style="font-weight: bold;"></span><br>
 <h2>Working with KBase Authentication Tokens</h2>
-<br>
+In the most basic usage, we want to directly authenticate as a user and
+acquire a token, that we can use for subsequent access to KBase
+services. We will first show how to do this from the command line,
+using the "curl" utility and then show how to do the same thing using
+the KBase Perl libraries.<br>
 <h3>
 Acquiring an authentication token</h3>
 
