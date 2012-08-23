@@ -1,24 +1,24 @@
 <h1>Some Basic Exercises Using the DOE KBase</h1>
 <h2>Introduction</h2>
- The DOE KBase includes an integrated database of genomic data called the <a name="Central Store55">Central Store</a>
+ The DOE KBase includes an integrated database of genomic data called the <a name="Central Store76">Central Store</a>
  (<b>CS</b>
-). Extracting data from the CS can be achieved using a defined <a name="API56">API</a>
+). Extracting data from the CS can be achieved using a defined <a name="API77">API</a>
  (see <a href="http://kbase.us/index.php/developers/api-documentation/" target="_blank">the reference documentation</a>
-). It can also be accessed via a set of command-line scripts that allow a fairly simple and consistent mechanism for access, once a few general principles are understood. <p> The steps that are needed to get started are roughly as follows: <ol><li> You need to gain some familiarity with the entity-relationship model that describes the <a name="Central Data Model57">Central Data Model</a> (<b><a name="CDM58">CDM</a></b>) underlying the CS. The <a href="http://pubseed.theseed.org/ErdbDocWidget.cgi?xmlFileName=/home/parrello/FIGdisk/dist/releases/current/KBaseCDMI/KSaplingDBD.xml" name="ER-Model59" target="_blank">ER-Model</a> includes the precise description of which fields are implemented in the database and the paths through which they can be accessed. <br /><br /><li> The most simple way to access the data in the CS is using command-line scripts that produce tab-separated tables that can be examined using common tools. We will demonstrate the basic tools we provide below. <br /><br /><li> The first time you try to use these tools, they will probably induce a certain level of trauma. Hence, we urge you to go slowly through a few examples in this tutorial, typing the actual commands and verifying that you understand the details as we try to present them to you. </ol><br /><br />
+). It can also be accessed via a set of command-line scripts that allow a fairly simple and consistent mechanism for access, once a few general principles are understood. <p> The steps that are needed to get started are roughly as follows: <ol><li> You need to gain some familiarity with the entity-relationship model that describes the <a name="Central Data Model78">Central Data Model</a> (<b><a name="CDM79">CDM</a></b>) underlying the CS. The <a href="http://pubseed.theseed.org/ErdbDocWidget.cgi?xmlFileName=/home/parrello/FIGdisk/dist/releases/current/KBaseCDMI/KSaplingDBD.xml" name="ER-Model80" target="_blank">ER-Model</a> includes the precise description of which fields are implemented in the database and the paths through which they can be accessed. <br /><br /><li> The most simple way to access the data in the CS is using command-line scripts that produce tab-separated tables that can be examined using common tools. We will demonstrate the basic tools we provide below. <br /><br /><li> The first time you try to use these tools, they will probably induce a certain level of trauma. Hence, we urge you to go slowly through a few examples in this tutorial, typing the actual commands and verifying that you understand the details as we try to present them to you. </ol><br /><br />
 <h2>How to Work with the CDM Entity-Relationship Model</h2>
  It is important that you gain some familiarity with the ER-model that describes the contents of the KBase CS. An entity-relationship model is an abstract description of the architecture of a database. It describes the types of <i>entities</i>
  and the <i>relationships</i>
- between entities. The data fields associated with each entity type constitute most of the data in the CS. However, fields can be associated with relationships, as well. For example, if two entities of type <a name="Feature60">Feature</a>
- are related by a Relationship of type <a name="IsCoregulatedWith61">IsCoregulatedWith</a>
-, then the Pearson correlation coefficient is an attribute of the relationship, and not of either of the related entities by themselves. The entity types and relationship types are mapped into a standard relational database (in the case of the CS), but it might well be a good idea to peruse the ER-model and attempt to gain at least a rudimentary understanding of the types of data we have included. <p> There are three standard tools for accessing fields in entities and relationships, and there is also a set of customized tools. We are going to illustrate these tools with simple examples. Let&#39;s first try to find out <i>What features in the CS are connected to publications?</i> Presumably this would be useful to gain some insight as to the reliability of function assignments. You should begin by looking at the <a name="CDM62">CDM</a> ER-model (it is a shame, but you will need to become inured to the use of these abbreviations. In this case they refer to the entity-relationship model that describes the overall architecture of the <i><a name="Central Data Model63">Central Data Model</a></i>, which describes the entities and relationships that make up the <i><a name="Central Store64">Central Store</a></i>). If you go to the <a href="http://pubseed.theseed.org/ErdbDocWidget.cgi?xmlFileName=/home/parrello/FIGdisk/dist/releases/current/KBaseCDMI/KSaplingDBD.xml" name="ER-Model65" target="_blank">ER-Model</a>, look for the path from the entity <b><a name="Publication66">Publication</a></b> to the entity <b><a name="Feature67">Feature</a></b>. Take a few minutes and verify the following: <ol><li><b><a name="Publication68">Publication</a></b> is an entity that connects to the entity <b><a name="ProteinSequence69">ProteinSequence</a></b> via the relationship <b><a name="Concerns70">Concerns</a></b>. That is, you may think of it as <i><a name="Publication71">Publication</a> <a name="Concerns72">Concerns</a> <a name="ProteinSequence73">ProteinSequence</a></i>. This describes crossing the relationship from <b><a name="Publication74">Publication</a></b> to <b><a name="ProteinSequence75">ProteinSequence</a></b>. There is a relationship going in the other direction, as well -- even though the diagram only explicitly lists the name of the one going from <b><a name="Publication76">Publication</a></b> to <b><a name="ProteinSequence77">ProteinSequence</a></b>. If you click on the entity <b><a name="Publication78">Publication</a></b>, it describes the relationships that entity type participates in. Similarly, if you click on <b><a name="ProteinSequence79">ProteinSequence</a></b>, you will see that the connection going from <b><a name="ProteinSequence80">ProteinSequence</a></b> to <b><a name="Publication81">Publication</a></b> is named <b>IsATopicOf</b> (<i><a name="ProteinSequence82">ProteinSequence</a> IsATopicOf <a name="Publication83">Publication</a></i>). You need to be comfortable seeing what fields are in specific entities and relationships, as well as understanding the names of the relationships connecting entities. Note that, if you are looking at the description of a single entity or relationship, and you wish to go back to see the overall diagram, you need to hit the &quot;Image&quot; button -- not the back arrow on your browser. <br /><br /><li> To get from <b><a name="ProteinSequence84">ProteinSequence</a></b> to a related <a name="Feature85">Feature</a> linked to the protein, one crosses the <a name="IsProteinFor86">IsProteinFor</a> relationship (<i><a name="ProteinSequence87">ProteinSequence</a> <a name="IsProteinFor88">IsProteinFor</a> <a name="Feature89">Feature</a></i>). <br /><br /><li> So, one interpretation of the original goal of seeing which features in the CS connect to publications, is <blockquote> Start with the list of <b><a name="Publication90">Publication</a></b>s. For each one, locate the <b><a name="ProteinSequence91">ProteinSequence</a></b> described in the publication. Then, use the protein sequences to find the Features and produce a 2-column table [<a name="Publication92">Publication</a>,<a name="Feature93">Feature</a>] </blockquote><br /> Note that you could start with Features and trace back to <b><a name="Publication94">Publication</a></b>s, but there are millions of Features and only thousands of <b><a name="Publication95">Publication</a></b>s in the CS. It will probably be faster to look up the features connected to the publications, rather than the other way around. <br /><br /><li> Now, to see a table of the <b><a name="Publication96">Publication</a></b> entities just type <br /><pre>
+ between entities. The data fields associated with each entity type constitute most of the data in the CS. However, fields can be associated with relationships, as well. For example, if two entities of type <a name="Feature81">Feature</a>
+ are related by a Relationship of type <a name="IsCoregulatedWith82">IsCoregulatedWith</a>
+, then the Pearson correlation coefficient is an attribute of the relationship, and not of either of the related entities by themselves. The entity types and relationship types are mapped into a standard relational database (in the case of the CS), but it might well be a good idea to peruse the ER-model and attempt to gain at least a rudimentary understanding of the types of data we have included. <p> There are three standard tools for accessing fields in entities and relationships, and there is also a set of customized tools. We are going to illustrate these tools with simple examples. Let&#39;s first try to find out <i>What features in the CS are connected to publications?</i> Presumably this would be useful to gain some insight as to the reliability of function assignments. You should begin by looking at the <a name="CDM83">CDM</a> ER-model (it is a shame, but you will need to become inured to the use of these abbreviations. In this case they refer to the entity-relationship model that describes the overall architecture of the <i><a name="Central Data Model84">Central Data Model</a></i>, which describes the entities and relationships that make up the <i><a name="Central Store85">Central Store</a></i>). If you go to the <a href="http://pubseed.theseed.org/ErdbDocWidget.cgi?xmlFileName=/home/parrello/FIGdisk/dist/releases/current/KBaseCDMI/KSaplingDBD.xml" name="ER-Model86" target="_blank">ER-Model</a>, look for the path from the entity <b><a name="Publication87">Publication</a></b> to the entity <b><a name="Feature88">Feature</a></b>. Take a few minutes and verify the following: <ol><li><b><a name="Publication89">Publication</a></b> is an entity that connects to the entity <b><a name="ProteinSequence90">ProteinSequence</a></b> via the relationship <b><a name="Concerns91">Concerns</a></b>. That is, you may think of it as <i><a name="Publication92">Publication</a> <a name="Concerns93">Concerns</a> <a name="ProteinSequence94">ProteinSequence</a></i>. This describes crossing the relationship from <b><a name="Publication95">Publication</a></b> to <b><a name="ProteinSequence96">ProteinSequence</a></b>. There is a relationship going in the other direction, as well -- even though the diagram only explicitly lists the name of the one going from <b><a name="Publication97">Publication</a></b> to <b><a name="ProteinSequence98">ProteinSequence</a></b>. If you click on the entity <b><a name="Publication99">Publication</a></b>, it describes the relationships that entity type participates in. Similarly, if you click on <b><a name="ProteinSequence100">ProteinSequence</a></b>, you will see that the connection going from <b><a name="ProteinSequence101">ProteinSequence</a></b> to <b><a name="Publication102">Publication</a></b> is named <b>IsATopicOf</b> (<i><a name="ProteinSequence103">ProteinSequence</a> IsATopicOf <a name="Publication104">Publication</a></i>). You need to be comfortable seeing what fields are in specific entities and relationships, as well as understanding the names of the relationships connecting entities. Note that, if you are looking at the description of a single entity or relationship, and you wish to go back to see the overall diagram, you need to hit the &quot;Image&quot; button -- not the back arrow on your browser. <br /><br /><li> To get from <b><a name="ProteinSequence105">ProteinSequence</a></b> to a related <a name="Feature106">Feature</a> linked to the protein, one crosses the <a name="IsProteinFor107">IsProteinFor</a> relationship (<i><a name="ProteinSequence108">ProteinSequence</a> <a name="IsProteinFor109">IsProteinFor</a> <a name="Feature110">Feature</a></i>). <br /><br /><li> So, one interpretation of the original goal of seeing which features in the CS connect to publications, is <blockquote> Start with the list of <b><a name="Publication111">Publication</a></b>s. For each one, locate the <b><a name="ProteinSequence112">ProteinSequence</a></b> described in the publication. Then, use the protein sequences to find the Features and produce a 2-column table [<a name="Publication113">Publication</a>,<a name="Feature114">Feature</a>] </blockquote><br /> Note that you could start with Features and trace back to <b><a name="Publication115">Publication</a></b>s, but there are millions of Features and only thousands of <b><a name="Publication116">Publication</a></b>s in the CS. It will probably be faster to look up the features connected to the publications, rather than the other way around. <br /><br /><li> Now, to see a table of the <b><a name="Publication117">Publication</a></b> entities just type <br /><pre>
   <a href="http://kbase.us/developer-zone/api-documentation/cdm-entity-relationship-command-scripts/#all_entities_Publication" target='_blank'>all_entities_Publication</a> -a | head
 <br /></pre> For every entity type in the CS there exists a command like this to display the instances of that entity. We encourage you to try it out (we pipe the output to &quot;head&quot; which just shows the head of a file). <br /><br /> Can you easily determine which Genomes are in the CS? Is it obvious that <br /><pre>
   <a href="http://kbase.us/developer-zone/api-documentation/cdm-entity-relationship-command-scripts/#all_entities_Genome" target='_blank'>all_entities_Genome</a> -a
 <br /></pre> would do it? If you leave the &quot;-a&quot; option off, what happens? Try <br /><pre>
   <a href="http://kbase.us/developer-zone/api-documentation/cdm-entity-relationship-command-scripts/#all_entities_Genome" target='_blank'>all_entities_Genome</a> -show-fields
-<br /></pre> to see what fields the <b><a name="Genome97">Genome</a></b> entity contains (compare this against the <a name="ER-Model98">ER-Model</a> description of the fields). Finally, note what <br /><pre>
+<br /></pre> to see what fields the <b><a name="Genome118">Genome</a></b> entity contains (compare this against the <a name="ER-Model119">ER-Model</a> description of the fields). Finally, note what <br /><pre>
   <a href="http://kbase.us/developer-zone/api-documentation/cdm-entity-relationship-command-scripts/#all_entities_Genome" target='_blank'>all_entities_Genome</a> -f &#39;contigs,domain,scientific_name&#39;
-<br /></pre> produces. The Unix command &quot;<a name="grep99">grep</a>&quot; can be used to filter out lines containing a desired string. Thus, <br /><pre>
+<br /></pre> produces. The Unix command &quot;<a name="grep120">grep</a>&quot; can be used to filter out lines containing a desired string. Thus, <br /><pre>
   <a href="http://kbase.us/developer-zone/api-documentation/cdm-entity-relationship-command-scripts/#all_entities_Genome" target='_blank'>all_entities_Genome</a> -f scientific_name | grep Streptococcus
 <br /></pre> would give you the IDs of the <i>Streptococcus</i> genomes in KBase. <br /><br /><li> Now, run <br /><pre>
   <a href="http://kbase.us/developer-zone/api-documentation/cdm-entity-relationship-command-scripts/#all_entities_Publication" target='_blank'>all_entities_Publication</a> | <a href="http://kbase.us/developer-zone/api-documentation/cdm-entity-relationship-command-scripts/#get_relationship_Concerns" target='_blank'>get_relationship_Concerns</a> -to id
@@ -28,7 +28,7 @@
   get_relationship_<b>REL</b> -from Fields1 -rel RelFields -to Fields2
 <br /></pre> The effect of running the command is to append columns to the input table. The columns correspond to the fields designated in <i>Fields1, RelFields</i>, and <i>Fields2</i>. <br /><br /> Thus, <br /><pre>
   echo &#39;kb|g.0&#39; | <a href="http://kbase.us/developer-zone/api-documentation/cdm-entity-relationship-command-scripts/#get_relationship_IsOwnerOf" target='_blank'>get_relationship_IsOwnerOf</a> -to id
-<br /></pre> would produce a 2-column table containing [GenomeID,FeatureID] where all of the GenomeID fields would contain kb|g.0, the CS ID for <i><a name="E.coli100">E.coli</a></i>. <br /><br /><li> Finally, <br /><pre>
+<br /></pre> would produce a 2-column table containing [GenomeID,FeatureID] where all of the GenomeID fields would contain kb|g.0, the CS ID for <i><a name="E.coli121">E.coli</a></i>. <br /><br /><li> Finally, <br /><pre>
   <a href="http://kbase.us/developer-zone/api-documentation/cdm-entity-relationship-command-scripts/#all_entities_Publication" target='_blank'>all_entities_Publication</a> | 
   <a href="http://kbase.us/developer-zone/api-documentation/cdm-entity-relationship-command-scripts/#get_relationship_Concerns" target='_blank'>get_relationship_Concerns</a> -to id |
   <a href="http://kbase.us/developer-zone/api-documentation/cdm-entity-relationship-command-scripts/#get_relationship_IsProteinFor" target='_blank'>get_relationship_IsProteinFor</a> -to id
@@ -38,7 +38,7 @@
   cut -f1,3
 <br /></pre> to get just <br /><pre>
   [pubmed-id,feature-id]
-<br /></pre></ol><br /> Now, we suggest that you do a similar exercise to get the <b>Reactions</b> and <b>Roles</b> (i.e., the functional roles) that can be connected to <b>Features</b> connected to <b>Publications</b>. To do this you need to realize that the overall ER-model is large and subsets are normally examined. You should examine both the &quot;main&quot; and &quot;Models&quot; subsets -- you need to construct a path starting at the entity <a name="Reaction101">Reaction</a> (in the <a name="Model102">Model</a> subset of the overall diagram) and trace it through to <b><a name="Publication103">Publication</a></b> (in the Main subset). You need to begin by making a list of the entities and relationships in the path: <br /><pre>
+<br /></pre></ol><br /> Now, we suggest that you do a similar exercise to get the <b>Reactions</b> and <b>Roles</b> (i.e., the functional roles) that can be connected to <b>Features</b> connected to <b>Publications</b>. To do this you need to realize that the overall ER-model is large and subsets are normally examined. You should examine both the &quot;main&quot; and &quot;Models&quot; subsets -- you need to construct a path starting at the entity <a name="Reaction122">Reaction</a> (in the <a name="Model123">Model</a> subset of the overall diagram) and trace it through to <b><a name="Publication124">Publication</a></b> (in the Main subset). You need to begin by making a list of the entities and relationships in the path: <br /><pre>
   Reaction        	IsUsedAs       	ReactionRule
   ReactionRule    	IsStepOf       	Complex
   Complex         	IsTriggeredBy  	Role
@@ -53,7 +53,7 @@
   <a href="http://kbase.us/developer-zone/api-documentation/cdm-entity-relationship-command-scripts/#get_relationship_IsFunctionalIn" target='_blank'>get_relationship_IsFunctionalIn</a> -to id |
   <a href="http://kbase.us/developer-zone/api-documentation/cdm-entity-relationship-command-scripts/#get_relationship_Produces" target='_blank'>get_relationship_Produces</a> -to id |
   <a href="http://kbase.us/developer-zone/api-documentation/cdm-entity-relationship-command-scripts/#get_relationship_IsATopicOf" target='_blank'>get_relationship_IsATopicOf</a> -to id 
-<br /></pre> If you think about it, this picks up all of the Features used in models on the way to getting them connected to <b><a name="Publication104">Publication</a></b>s. It will probably be more effiient to use <br /><pre>
+<br /></pre> If you think about it, this picks up all of the Features used in models on the way to getting them connected to <b><a name="Publication125">Publication</a></b>s. It will probably be more effiient to use <br /><pre>
 
   Publication        Concerns           ProteinSequence
   ProteinSequence    IsProteinFor       Feature
@@ -75,7 +75,7 @@
   <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#reaction_strings" target='_blank'>reaction_strings</a>
 <br /></pre> which appends a column containing readable version of the reaction. 
 <h2>Extracting Fields from a Set of Instances of an Entity</h2>
- At this point, we have covered the notions of sketching out a path in the <a name="ER-Model105">ER-Model</a>
+ At this point, we have covered the notions of sketching out a path in the <a name="ER-Model126">ER-Model</a>
  and collecting fields from the entities and relationships. We employed two classes of commands <br />
 <pre>
   all_entities_<b>ENTITY</b>
@@ -93,7 +93,7 @@
 <pre>
   echo &#39;kb|g.0&#39; | <a href="http://kbase.us/developer-zone/api-documentation/cdm-entity-relationship-command-scripts/#get_entity_Genome" target='_blank'>get_entity_Genome</a> -a
 <br /></pre>
- returns all of the fields from the <b><a name="Genome106">Genome</a></b>
+ returns all of the fields from the <b><a name="Genome127">Genome</a></b>
  entity representing data about an <i>Escherichia coli</i>
  genome. If you wished to see just the name, number of contigs, and the size of the genome, you might use <br />
 <pre>
@@ -101,14 +101,14 @@
 <br /></pre>
 <h2>&quot;Well-Trodden Paths&quot;</h2>
  Besides the three classes of general tools, there are scripts that handle frequently employed operations. Here is a list that you might find convenient: <h3><a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#atomic_regulons_to_fids" target='_blank'>atomic_regulons_to_fids</a></h3>
- An atomic <a name="regulon107">regulon</a>
- is a set of genes that we believe have identical expression profiles. This command takes as input a table with a column containing &quot;atomic <a name="regulon108">regulon</a>
-&quot; IDs and adds a column for the features that occur in the atomic <a name="regulon109">regulon</a>
+ An atomic <a name="regulon128">regulon</a>
+ is a set of genes that we believe have identical expression profiles. This command takes as input a table with a column containing &quot;atomic <a name="regulon129">regulon</a>
+&quot; IDs and adds a column for the features that occur in the atomic <a name="regulon130">regulon</a>
 . Try <br />
 <pre>
   <a href="http://kbase.us/developer-zone/api-documentation/cdm-entity-relationship-command-scripts/#all_entities_AtomicRegulon" target='_blank'>all_entities_AtomicRegulon</a> | <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#atomic_regulons_to_fids" target='_blank'>atomic_regulons_to_fids</a>
 <br /></pre>
- to get a 2-column table for the atomic <a name="regulons110">regulons</a>
+ to get a 2-column table for the atomic <a name="regulons131">regulons</a>
  in the current release of the CS. <h3><a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#contigs_to_lengths" target='_blank'>contigs_to_lengths</a></h3>
  It is frequently useful to easily get the lengths of the contigs that make up a genome. The following command list the contigs in a designated genome, along with their lengths: <h3><a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#contigs_to_sequences" target='_blank'>contigs_to_sequences</a></h3>
  You may wish to extract the sequence of specific contigs (or for all contigs for a given genome). You have the option of outputting an extra column with the sequence (use -fasta=0 to get sequence added as a column). Thus, <br />
@@ -122,11 +122,11 @@
 <pre>
   echo &#39;kb|g.0.peg.1089&#39; | <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#fids_to_annotations" target='_blank'>fids_to_annotations</a>
 <br /></pre>
- can be used to produce a list of <a name="annotations111">annotations</a>
+ can be used to produce a list of <a name="annotations132">annotations</a>
  (most recent first) separated by &quot;//&quot; lines. <h3><a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#fids_to_atomic_regulons" target='_blank'>fids_to_atomic_regulons</a></h3>
- This command is used to cross from a <a name="Feature112">Feature</a>
- to the AtomicRegulons that contain it. It adds two columns: one with the size of an atomic <a name="regulon113">regulon</a>
-, and the other with the atomic <a name="regulon114">regulon</a>
+ This command is used to cross from a <a name="Feature133">Feature</a>
+ to the AtomicRegulons that contain it. It adds two columns: one with the size of an atomic <a name="regulon134">regulon</a>
+, and the other with the atomic <a name="regulon135">regulon</a>
  ID. Thus <br />
 <pre>
   echo &#39;kb|g.0.peg.4288&#39; | <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#fids_to_atomic_regulons" target='_blank'>fids_to_atomic_regulons</a> | <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#atomic_regulons_to_fids" target='_blank'>atomic_regulons_to_fids</a>
@@ -150,7 +150,7 @@
   .
 <br /></pre>
  The last column is a co-expressed fid, and the one before it is the Pearson correlation coefficient. <h3><a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#fids_to_co_occurring_fids" target='_blank'>fids_to_co_occurring_fids</a></h3>
- One of the major clues to function for genes in prokaryotic genomes relates to the tendency for functionally related genes to co-occur close to one another on the <a name="chromosome115">chromosome</a>
+ One of the major clues to function for genes in prokaryotic genomes relates to the tendency for functionally related genes to co-occur close to one another on the <a name="chromosome136">chromosome</a>
  (often in operons). This command checks to see if we have detected co-occurrence. For example, <br />
 <pre>
   echo &#39;kb|g.0.peg.4288&#39; | <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#fids_to_co_occurring_fids" target='_blank'>fids_to_co_occurring_fids</a>
@@ -169,13 +169,13 @@
   &#39;kb|g.0.peg.4288:kb|g.0.peg.2173&#39;
 <br /></pre>
  occur in 139 genomes from distinct OTUs. That is, there is substantial evidence that these genes are functionally related. The last pair only occur in 14 distinct OTUs, so the evidence here is pretty weak. You will need to look at many pairs for which you know the functions to get insight into the significance of different values of the score. <h3><a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#fids_to_dna_sequences" target='_blank'>fids_to_dna_sequences</a></h3>
- You can create either a tab-separated file in which <a name="DNA116">DNA</a>
- sequence is the added column, or you can produce a FASTA file containing the <a name="DNA117">DNA</a>
+ You can create either a tab-separated file in which <a name="DNA137">DNA</a>
+ sequence is the added column, or you can produce a FASTA file containing the <a name="DNA138">DNA</a>
  sequence of a set of fids. The default behavior is just to produce the FASTA file. Try <br />
 <pre>
   echo &#39;kb|g.8776&#39; | <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#genomes_to_fids" target='_blank'>genomes_to_fids</a> | <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#fids_to_dna_sequences" target='_blank'>fids_to_dna_sequences</a>
 <br /></pre>
- to get the <a name="DNA118">DNA</a>
+ to get the <a name="DNA139">DNA</a>
  sequences of the genes of <i>Buchnera aphidicola</i>
  str. Sg. <h3><a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#fids_to_functions" target='_blank'>fids_to_functions</a></h3>
  This command is used to take an input table in which fids are in a column (the last column by default) and tacks on an extra column with the functions of the fids. Thus, <br />
@@ -184,7 +184,7 @@
 <br /></pre>
  could be used to get the current function assignments for the genes in the <em>Buchnera</em>
  genome. <h3><a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#fids_to_literature" target='_blank'>fids_to_literature</a></h3>
- This command can be used to extract the <a name="literature119">literature</a>
+ This command can be used to extract the <a name="literature140">literature</a>
  references connected to one or more fids. It takes as input a table with a column containing fids. It outputs a table with an extra column containing a pubmed ID. Lines without a connection to any papers are written to stderr. Try <br />
 <pre>
   echo &#39;kb|g.0.peg.118&#39; | <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#fids_to_literature" target='_blank'>fids_to_literature</a>
@@ -199,10 +199,10 @@
 <pre>
   kb|g.0.peg.118	kb|g.0.c.1_1146590+174
 <br /></pre>
- which illustrates the KBase encoding of gene locations. A gene location is a sequence of contiguous regions separated by commas. A contiguous region is represented as a <a name="contig120">contig</a>
+ which illustrates the KBase encoding of gene locations. A gene location is a sequence of contiguous regions separated by commas. A contiguous region is represented as a <a name="contig141">contig</a>
  ID followed by an underscore, followed by a starting location (from 1), followed by the strand (&#39;+&#39; or &#39;-&#39;), followed by the length of the region. <h3><a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#fids_to_protein_families" target='_blank'>fids_to_protein_families</a></h3>
- KBase supports a collection of <a name="protein families121">protein families</a>
-. If a fid is in one or more <a name="families122">families</a>
+ KBase supports a collection of <a name="protein families142">protein families</a>
+. If a fid is in one or more <a name="families143">families</a>
 , that can be determined using this command. Try, <br />
 <pre>
   echo &#39;kb|g.0.peg.118&#39; | <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#fids_to_protein_families" target='_blank'>fids_to_protein_families</a>
@@ -215,18 +215,18 @@
 <pre>
   echo &#39;kb|g.0.peg.118&#39; | <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#fids_to_protein_families" target='_blank'>fids_to_protein_families</a> | <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#protein_families_to_functions" target='_blank'>protein_families_to_functions</a>
 <br /></pre>
- which should add on the function of the <a name="family123">family</a>
+ which should add on the function of the <a name="family144">family</a>
 . <h3><a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#fids_to_protein_sequences" target='_blank'>fids_to_protein_sequences</a></h3>
  You can create either a tab-separated file in which protein sequence is the added column, or you can produce a FASTA file containing the translations of a set of fids. The default behavior is just to produce the FASTA file. Try <br />
 <pre>
   echo &#39;kb|g.8776&#39; | <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#genomes_to_fids" target='_blank'>genomes_to_fids</a> | <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#fids_to_protein_sequences" target='_blank'>fids_to_protein_sequences</a> 2&gt; /dev/null
 <br /></pre>
  to get the protein sequences of the genes of <em>Buchnera aphidicola</em>
- str. Sg. The lines corresponding to Features that do not get translated (e.g., RNAs) are just written to stderr. This routine is used to get translations of fids. If you want to get the protein IDs (i.e., the <a name="md5124">md5</a>
- hashes that we use as keys), then you would use <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#fids_to_proteins" target='_blank'>fids_to_proteins</a>, which always adds a column with the <a name="md5125">md5</a>
+ str. Sg. The lines corresponding to Features that do not get translated (e.g., RNAs) are just written to stderr. This routine is used to get translations of fids. If you want to get the protein IDs (i.e., the <a name="md5145">md5</a>
+ hashes that we use as keys), then you would use <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#fids_to_proteins" target='_blank'>fids_to_proteins</a>, which always adds a column with the <a name="md5146">md5</a>
  values. <h3><a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#fids_to_proteins" target='_blank'>fids_to_proteins</a></h3>
- Protein sequences are represented by fixed-length hash values called <a name="md5126">md5</a>
- values. To get the <a name="md5127">md5</a>
+ Protein sequences are represented by fixed-length hash values called <a name="md5147">md5</a>
+ values. To get the <a name="md5148">md5</a>
  values corresponding to a fid (or to a set of fids represented as a column in the input table), use <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#fids_to_proteins" target='_blank'>fids_to_proteins</a>. Thus, <br />
 <pre>
   echo &#39;kb|g.0.peg.118&#39; | <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#fids_to_proteins" target='_blank'>fids_to_proteins</a>
@@ -236,21 +236,21 @@
   kb|g.0.peg.118	211eeaac246f953b67ca2ccd0477fe3b
 <br /></pre>
 <h3><a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#fids_to_regulon_data" target='_blank'>fids_to_regulon_data</a></h3>
- Sets of <a name="co-regulated128">co-regulated</a>
- genes maintained at <a name="RegPrecise129">RegPrecise</a>
- or other similar databases are maintained. These <a name="regulons130">regulons</a>
- are sets of genes having a common regulatory mechanism, but not necessarily a common expression pattern. The notion is that of a set of genes affected by a transcriptional regulator. The notion is certainly closely related to that of atomic <a name="regulon131">regulon</a>
+ Sets of <a name="co-regulated149">co-regulated</a>
+ genes maintained at <a name="RegPrecise150">RegPrecise</a>
+ or other similar databases are maintained. These <a name="regulons151">regulons</a>
+ are sets of genes having a common regulatory mechanism, but not necessarily a common expression pattern. The notion is that of a set of genes affected by a transcriptional regulator. The notion is certainly closely related to that of atomic <a name="regulon152">regulon</a>
 , but not identical. To see which CoregulatedSets we have in the CS, use <br />
 <pre>
   <a href="http://kbase.us/developer-zone/api-documentation/cdm-entity-relationship-command-scripts/#all_entities_CoregulatedSet" target='_blank'>all_entities_CoregulatedSet</a> | <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#regulons_to_fids" target='_blank'>regulons_to_fids</a>
 <br /></pre>
- To get a table showing the <a name="regulons132">regulons</a>
+ To get a table showing the <a name="regulons153">regulons</a>
  for a given genome, use something like <br />
 <pre>
   echo &#39;kb|g.0.peg.4288&#39; | <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#fids_to_regulon_data" target='_blank'>fids_to_regulon_data</a> | <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#regulons_to_fids" target='_blank'>regulons_to_fids</a>
 <br /></pre>
 <h3><a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#fids_to_roles" target='_blank'>fids_to_roles</a></h3>
- Each fid is thought of as implementing one or more &quot;functional roles&quot;. The majority implement a single role, but <a name="multifunctional genes133">multifunctional genes</a>
+ Each fid is thought of as implementing one or more &quot;functional roles&quot;. The majority implement a single role, but <a name="multifunctional genes154">multifunctional genes</a>
  (via the proteins they encode) implement several. Thus, <br />
 <pre>
   echo &#39;kb|g.0.peg.133&#39; | <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#fids_to_roles" target='_blank'>fids_to_roles</a>
@@ -261,9 +261,9 @@
   kb|g.0.peg.133	PTS system, glucose-specific IIC component (EC 2.7.1.69)
 <br /></pre>
  since the gene encodes two roles that often occur separately. <h3><a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#fids_to_subsystem_data" target='_blank'>fids_to_subsystem_data</a></h3>
- fids_to_subsystems_data was implemented to allow a user to extract all of the [<a name="subsystem134">subsystem</a>
-,variant,<a name="Role135">Role</a>
-] tuples representing <a name="subsystems136">subsystems</a>
+ fids_to_subsystems_data was implemented to allow a user to extract all of the [<a name="subsystem155">subsystem</a>
+,variant,<a name="Role156">Role</a>
+] tuples representing <a name="subsystems157">subsystems</a>
  containing a given fid. Thus, <br />
 <pre>
   echo &#39;kb|g.0.peg.1082&#39; | <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#fids_to_subsystem_data" target='_blank'>fids_to_subsystem_data</a>
@@ -273,7 +273,7 @@
   kb|g.0.peg.1082	Ribosome LSU bacterial	1	LSU ribosomal protein L35p
 <br /></pre>
 <h3><a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#fids_to_subsystems" target='_blank'>fids_to_subsystems</a></h3>
- If you just want to get the <a name="subsystems137">subsystems</a>
+ If you just want to get the <a name="subsystems158">subsystems</a>
  a fid is part of (and you do not need the variant code and functional role), just use something like <br />
 <pre>
   echo &#39;kb|g.0.peg.1082&#39; | <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#fids_to_subsystems" target='_blank'>fids_to_subsystems</a>
@@ -293,15 +293,15 @@
   echo &#39;kb|g.3857&#39; | <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#genomes_to_contigs" target='_blank'>genomes_to_contigs</a> rna
 <br /></pre>
  would restrict output to fids of type &#39;rna&#39;. <h3><a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#genomes_to_md5s" target='_blank'>genomes_to_md5s</a></h3>
- <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#genomes_to_md5s" target='_blank'>genomes_to_md5s</a> can be used to retrieve the <a name="md5138">md5</a>
- hash value for any genome in KBase. Then, using md5_to_genomes you can find the set of genomes with identical <a name="DNA139">DNA</a>
+ <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#genomes_to_md5s" target='_blank'>genomes_to_md5s</a> can be used to retrieve the <a name="md5159">md5</a>
+ hash value for any genome in KBase. Then, using md5_to_genomes you can find the set of genomes with identical <a name="DNA160">DNA</a>
  sequence (but not necessarily gene calls, assignments or function, etc.) that are in KBase. Try <br />
 <pre>
   echo &#39;kb|g.3857&#39; | <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#genomes_to_md5s" target='_blank'>genomes_to_md5s</a> |  <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#md5s_to_genomes" target='_blank'>md5s_to_genomes</a>
 <br /></pre>
  to see how this works. <h3><a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#genomes_to_subsystems" target='_blank'>genomes_to_subsystems</a></h3>
- If you want to find out which <a name="subsystems140">subsystems</a>
- with active variants have been associated with specific genomes, you can use <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#genomes_to_subsystems" target='_blank'>genomes_to_subsystems</a>. Thus, to see which <a name="subsystems141">subsystems</a>
+ If you want to find out which <a name="subsystems161">subsystems</a>
+ with active variants have been associated with specific genomes, you can use <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#genomes_to_subsystems" target='_blank'>genomes_to_subsystems</a>. Thus, to see which <a name="subsystems162">subsystems</a>
  are in <i>E. coli</i>
 , you might use <br />
 <pre>
@@ -323,9 +323,9 @@
 		Escherichia coli K-12
 <br /></pre>
 <h3><a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#locations_to_dna_sequences" target='_blank'>locations_to_dna_sequences</a></h3>
- <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#locations_to_dna_sequences" target='_blank'>locations_to_dna_sequences</a> can be used to extract <a name="DNA142">DNA</a>
- from a genome. A location is a sequence of contiguous regions separated by commas. A contiguous region is represented as a <a name="contig143">contig</a>
- ID followed by an underscore, followed by a starting location (from 1), followed by the strand (&#39;+&#39; or &#39;-&#39;), followed by the length of the region. You need to note that the genome ID is computable from a <a name="contig144">contig</a>
+ <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#locations_to_dna_sequences" target='_blank'>locations_to_dna_sequences</a> can be used to extract <a name="DNA163">DNA</a>
+ from a genome. A location is a sequence of contiguous regions separated by commas. A contiguous region is represented as a <a name="contig164">contig</a>
+ ID followed by an underscore, followed by a starting location (from 1), followed by the strand (&#39;+&#39; or &#39;-&#39;), followed by the length of the region. You need to note that the genome ID is computable from a <a name="contig165">contig</a>
  ID; hence, no explicit genome ID is required. <br />
 <pre>
   echo &#39;kb|g.0.peg.118&#39; | <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#fids_to_locations" target='_blank'>fids_to_locations</a> 
@@ -335,7 +335,7 @@
   kb|g.0.peg.118	kb|g.0.c.1_1146590+174
 <br /></pre>
  Hence, kb|g.0.c.1_1146490+177 should produce the upstream 100 bp, as well as the start codon. <h3><a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#locations_to_fids" target='_blank'>locations_to_fids</a></h3>
- It is frequently the case that one wishes to look up the genes that occur in a given region of a <a name="contig145">contig</a>
+ It is frequently the case that one wishes to look up the genes that occur in a given region of a <a name="contig166">contig</a>
 . Location_to_fids can be used to extract such sets of genes for each region in the input set of regions. We define a gene as &quot;occurring&quot; in a region if the location of the gene overlaps the designated region. For example, <br />
 <pre>
   echo &#39;kb|g.0.c.1_1146490+177&#39; | <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#locations_to_fids" target='_blank'>locations_to_fids</a>
@@ -346,32 +346,32 @@
   kb|g.0.c.1_1146490+177	kb|g.0.peg.77
 <br /></pre>
 <h3><a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#md5s_to_genomes" target='_blank'>md5s_to_genomes</a></h3>
- Given the <a name="md5146">md5</a>
- hash value for a genome, it is straightforward to determine which genomes in KBase have identical <a name="DNA147">DNA</a>
- sequence. The rules for computing the <a name="md5148">md5</a>
- of a genome (presumably not in KBase -- for KBase genomes, you can just ask for the <a name="md5149">md5</a>
+ Given the <a name="md5167">md5</a>
+ hash value for a genome, it is straightforward to determine which genomes in KBase have identical <a name="DNA168">DNA</a>
+ sequence. The rules for computing the <a name="md5169">md5</a>
+ of a genome (presumably not in KBase -- for KBase genomes, you can just ask for the <a name="md5170">md5</a>
  hash) are described in &lt;&lt;&lt;&lt; &gt;&gt;&gt;&gt;&gt; <h3><a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#protein_families_to_co_occurring_families" target='_blank'>protein_families_to_co_occurring_families</a></h3>
- We have tabulated instance in which members of the same two <a name="protein families150">protein families</a>
+ We have tabulated instance in which members of the same two <a name="protein families171">protein families</a>
  tend to occur close to one another (evidence of functional coupling). Try <br />
 <pre>
   echo &#39;kb|g.0.peg.4288&#39; | <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#fids_to_protein_families" target='_blank'>fids_to_protein_families</a> | <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#protein_families_to_co_occurring_families" target='_blank'>protein_families_to_co_occurring_families</a>
 <br /></pre>
- Note that <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#fids_to_protein_families" target='_blank'>fids_to_protein_families</a> added one column (the <a name="family151">family</a>
- containing the input fid) and <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#protein_families_to_co_occurring_families" target='_blank'>protein_families_to_co_occurring_families</a> added three columns: the score, the function of the related <a name="family152">family</a>
-, and the <a name="family153">family</a>
+ Note that <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#fids_to_protein_families" target='_blank'>fids_to_protein_families</a> added one column (the <a name="family172">family</a>
+ containing the input fid) and <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#protein_families_to_co_occurring_families" target='_blank'>protein_families_to_co_occurring_families</a> added three columns: the score, the function of the related <a name="family173">family</a>
+, and the <a name="family174">family</a>
  ID. <h3><a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#protein_families_to_fids" target='_blank'>protein_families_to_fids</a></h3>
- When you work with a <a name="protein family154">protein family</a>
+ When you work with a <a name="protein family175">protein family</a>
 , you will often want just a list of its members. Try <br />
 <pre>
   echo FIG00000134 | <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#protein_families_to_fids" target='_blank'>protein_families_to_fids</a>
 <br /></pre>
- If you just wanted the size of the <a name="family155">family</a>
+ If you just wanted the size of the <a name="family176">family</a>
 , you might use <br />
 <pre>
   echo FIG00000134 | <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#protein_families_to_fids" target='_blank'>protein_families_to_fids</a> | wc
 <br /></pre>
 <h3><a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#protein_families_to_functions" target='_blank'>protein_families_to_functions</a></h3>
- It is often important to be able to get the functions of one or more <a name="protein families156">protein families</a>
+ It is often important to be able to get the functions of one or more <a name="protein families177">protein families</a>
 . To do so, you might use something like <br />
 <pre>
   echo FIG00000134 | <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#protein_families_to_functions" target='_blank'>protein_families_to_functions</a>
@@ -381,9 +381,9 @@
   FIG00000134	Threonine synthase (EC 4.2.3.1)
 <br /></pre>
 <h3><a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#protein_families_to_proteins" target='_blank'>protein_families_to_proteins</a></h3>
- As we get more and more very similar genomes, it becomes more useful to think in terms of what unique sequences are members of a <a name="protein family157">protein family</a>
-. We represent protein IDs as <a name="md5158">md5</a>
- hash values. So, if you wanted to know how many unique sequences (rather than how many members) a <a name="protein family159">protein family</a>
+ As we get more and more very similar genomes, it becomes more useful to think in terms of what unique sequences are members of a <a name="protein family178">protein family</a>
+. We represent protein IDs as <a name="md5179">md5</a>
+ hash values. So, if you wanted to know how many unique sequences (rather than how many members) a <a name="protein family180">protein family</a>
  had, you could find out using <br />
 <pre>
   echo FIG00000134 | <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#protein_families_to_proteins" target='_blank'>protein_families_to_proteins</a> | wc
@@ -397,7 +397,7 @@
   echo FIG00000134 | <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#protein_families_to_fids" target='_blank'>protein_families_to_fids</a> | wc
 <br /></pre>
  produced a count of 3903. <h3><a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#proteins_to_fids" target='_blank'>proteins_to_fids</a></h3>
- proteins to fids allows you to take one or more proteins (represented by <a name="md5160">md5</a>
+ proteins to fids allows you to take one or more proteins (represented by <a name="md5181">md5</a>
  hash values) and retrieve the set of known features that encode that protein. Thus, <br />
 <pre>
   echo &#39;kb|g.0.peg.4288&#39; | <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#fids_to_proteins" target='_blank'>fids_to_proteins</a> | <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#proteins_to_fids" target='_blank'>proteins_to_fids</a>
@@ -418,9 +418,9 @@
   kb|g.0.peg.4288  3fe5ee9bcebd44132d18e2b50b8b92c3  kb|g.9268.peg.816
   kb|g.0.peg.4288  3fe5ee9bcebd44132d18e2b50b8b92c3  kb|g.9269.peg.415
 <br /></pre>
- indicating that KBase has 13 fids that encode the same protein sequence (which has an <a name="md5161">md5</a>
+ indicating that KBase has 13 fids that encode the same protein sequence (which has an <a name="md5182">md5</a>
  hash value of 3fe5ee9bcebd44132d18e2b50b8b92c3). <h3><a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#proteins_to_functions" target='_blank'>proteins_to_functions</a></h3>
- <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#proteins_to_functions" target='_blank'>proteins_to_functions</a> can be used to gather the functions assigned to features that have the given <a name="md5162">md5</a>
+ <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#proteins_to_functions" target='_blank'>proteins_to_functions</a> can be used to gather the functions assigned to features that have the given <a name="md5183">md5</a>
  hashes. For example, <br />
 <pre>
   echo &#39;3fe5ee9bcebd44132d18e2b50b8b92c3&#39; | <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#proteins_to_functions" target='_blank'>proteins_to_functions</a>
@@ -439,18 +439,18 @@
   3fe5ee9bcebd44132d18e2b50b8b92c3  kb|g.9268.peg.816	threonine synthase
   3fe5ee9bcebd44132d18e2b50b8b92c3  kb|g.9269.peg.415	threonine synthase
 <br /></pre>
- I think that should be a bit sobering: 3 of 11 assignments are inconsistent with the majority view, and if we reconstructed models of metabolism for the corresponding organisms, gaps would appear in the <a name="metabolic163">metabolic</a>
+ I think that should be a bit sobering: 3 of 11 assignments are inconsistent with the majority view, and if we reconstructed models of metabolism for the corresponding organisms, gaps would appear in the <a name="metabolic184">metabolic</a>
  network, requiring manual efforts to clean up what are obviously trivial inconsistencies. <h3><a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#proteins_to_literature" target='_blank'>proteins_to_literature</a></h3>
- In KBase, <a name="literature164">literature</a>
+ In KBase, <a name="literature185">literature</a>
  references are attached to proteins, rather than to collection of Features that share the same sequence. Thus, <br />
 <pre>
   echo &#39;211eeaac246f953b67ca2ccd0477fe3b&#39; | <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#proteins_to_literature" target='_blank'>proteins_to_literature</a>
 <br /></pre>
- returns at least two pubmed IDs that are relevant to the function of proteins with the designated <a name="md5165">md5</a>
+ returns at least two pubmed IDs that are relevant to the function of proteins with the designated <a name="md5186">md5</a>
  hash. <h3><a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#proteins_to_protein_families" target='_blank'>proteins_to_protein_families</a></h3>
- <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#proteins_to_protein_families" target='_blank'>proteins_to_protein_families</a> allows you to find the <a name="protein families166">protein families</a>
- that contain proteins with the designated <a name="md5167">md5</a>
- hash values. We anticipate that this will become particularly valuable once we have multiple collections of <a name="protein families168">protein families</a>
+ <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#proteins_to_protein_families" target='_blank'>proteins_to_protein_families</a> allows you to find the <a name="protein families187">protein families</a>
+ that contain proteins with the designated <a name="md5188">md5</a>
+ hash values. We anticipate that this will become particularly valuable once we have multiple collections of <a name="protein families189">protein families</a>
  accessible via KBase. <h3><a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#proteins_to_roles" target='_blank'>proteins_to_roles</a></h3>
  <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#proteins_to_roles" target='_blank'>proteins_to_roles</a> can be used to explore inconsistencies, among other things. Try, <br />
 <pre>
@@ -490,15 +490,15 @@
   all_entities_REaction | <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#reaction_strings" target='_blank'>reaction_strings</a>
 <br /></pre>
  will give you access to the current library of reactions in a readable form. <h3><a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#regulons_to_fids" target='_blank'>regulons_to_fids</a></h3>
- <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#regulons_to_fids" target='_blank'>regulons_to_fids</a> is used to go from a set of <a name="regulon169">regulon</a>
- IDs to the fids they contain. We think of a <a name="regulon170">regulon</a>
- as a set of genes impacted by a common transcription factor. An entire <a name="regulon171">regulon</a>
- may or may not be part of an &quot;atomic <a name="regulon172">regulon</a>
+ <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#regulons_to_fids" target='_blank'>regulons_to_fids</a> is used to go from a set of <a name="regulon190">regulon</a>
+ IDs to the fids they contain. We think of a <a name="regulon191">regulon</a>
+ as a set of genes impacted by a common transcription factor. An entire <a name="regulon192">regulon</a>
+ may or may not be part of an &quot;atomic <a name="regulon193">regulon</a>
 &quot;. Try <br />
 <pre>
   <a href="http://kbase.us/developer-zone/api-documentation/cdm-entity-relationship-command-scripts/#all_entities_CoregulatedSet" target='_blank'>all_entities_CoregulatedSet</a> | <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#regulons_to_fids" target='_blank'>regulons_to_fids</a> | <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#fids_to_functions" target='_blank'>fids_to_functions</a>
 <br /></pre>
- to get a picture of what <a name="regulons173">regulons</a>
+ to get a picture of what <a name="regulons194">regulons</a>
  have been installed. <h3><a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#roles_to_complexes" target='_blank'>roles_to_complexes</a></h3>
  <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#roles_to_complexes" target='_blank'>roles_to_complexes</a> can be used to find out which complexes (which often implement reactions) a role occurs in. Try <br />
 <pre>
@@ -514,15 +514,15 @@
   echo &#39;LSU ribosomal protein L24p (L26e)&#39; | <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#roles_to_fids" target='_blank'>roles_to_fids</a> | wc
 <br /></pre>
  to see how many of the fids in KBase implement the given role (note that using <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#roles_to_proteins" target='_blank'>roles_to_proteins</a> would give you the number of unique protein sequences associated with the function). <h3><a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#roles_to_protein_families" target='_blank'>roles_to_protein_families</a></h3>
- It is occasionally convenient to be able to look up the set of <a name="protein families174">protein families</a>
- that implement a given role. Note that this makes sense only if the roles and <a name="family175">family</a>
+ It is occasionally convenient to be able to look up the set of <a name="protein families195">protein families</a>
+ that implement a given role. Note that this makes sense only if the roles and <a name="family196">family</a>
  functions conform to the same controlled vocabulary. We are not completely there yet, but we are getting close. Try <br />
 <pre>
   <a href="http://kbase.us/developer-zone/api-documentation/cdm-entity-relationship-command-scripts/#all_entities_Role" target='_blank'>all_entities_Role</a> | 
   <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#roles_to_protein_families" target='_blank'>roles_to_protein_families</a> |
   <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#protein_families_to_functions" target='_blank'>protein_families_to_functions</a>
 <br /></pre>
- to get an inventory of the <a name="protein families176">protein families</a>
+ to get an inventory of the <a name="protein families197">protein families</a>
  (and their functions) for each functional role. If you wanted just this for just the roles that are used in model construction, you would use <br />
 <pre>
   <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#all_roles_used_in_models" target='_blank'>all_roles_used_in_models</a> | 
@@ -530,7 +530,7 @@
   <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#protein_families_to_functions" target='_blank'>protein_families_to_functions</a>
 <br /></pre>
 <h3><a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#roles_to_proteins" target='_blank'>roles_to_proteins</a></h3>
- You can use this to find out the <a name="md5177">md5</a>
+ You can use this to find out the <a name="md5198">md5</a>
  hash values of the proteins that implement this functional role. For example, try <br />
 <pre>
   echo &#39;LSU ribosomal protein L24p (L26e)&#39; | <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#roles_to_proteins" target='_blank'>roles_to_proteins</a>
@@ -545,14 +545,14 @@
   .
 <br /></pre>
 <h3><a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#roles_to_subsystems" target='_blank'>roles_to_subsystems</a></h3>
- You may wish locate the set of <a name="subsystems178">subsystems</a>
+ You may wish locate the set of <a name="subsystems199">subsystems</a>
  that contain a given role. Try <br />
 <pre>
   echo &#39;Threonine synthase (EC 4.2.3.1)&#39; | <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#roles_to_subsystems" target='_blank'>roles_to_subsystems</a>
 <br /></pre>
- as one way to do it. You will probably get back one <a name="subsystem179">subsystem</a>
+ as one way to do it. You will probably get back one <a name="subsystem200">subsystem</a>
  that you would expect (&quot;Threonine and Homoserine Biosynthesis&quot;), but you may well get back some others that you were not expecting. These were done by individuals for a variety of reasons. Often they were done to consistently annotate conserved clusters of genes. In any event, look carefully at what you get back. <h3><a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#subsystems_to_fids" target='_blank'>subsystems_to_fids</a></h3>
- One frequently wishes to get the fids in a genome that participate in a single <a name="subsystem180">subsystem</a>
+ One frequently wishes to get the fids in a genome that participate in a single <a name="subsystem201">subsystem</a>
 . Try <br />
 <pre>
   echo &#39;Threonine and Homoserine Biosynthesis&#39; | 
@@ -568,21 +568,21 @@
   spreadsheet.
 <br /></pre>
 <h3><a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#subsystems_to_genomes" target='_blank'>subsystems_to_genomes</a></h3>
- You may find yourself asking what genomes have been placed into a given <a name="subsystem181">subsystem</a>
+ You may find yourself asking what genomes have been placed into a given <a name="subsystem202">subsystem</a>
 . Try something like <br />
 <pre>
   echo &#39;Threonine and Homoserine Biosynthesis&#39; | <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#subsystems_to_genomes" target='_blank'>subsystems_to_genomes</a>
 <br /></pre>
- as an example. You should get back a 3-column table [<a name="subsystem182">subsystem</a>
-,variant-code,genome-id] You should be aware that not all genomes have been added to specific <a name="subsystems183">subsystems</a>
-. The construction and maintenance of <a name="subsystems184">subsystems</a>
+ as an example. You should get back a 3-column table [<a name="subsystem203">subsystem</a>
+,variant-code,genome-id] You should be aware that not all genomes have been added to specific <a name="subsystems204">subsystems</a>
+. The construction and maintenance of <a name="subsystems205">subsystems</a>
  is an ongoing effort. <h3><a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#subsystems_to_roles" target='_blank'>subsystems_to_roles</a></h3>
- Subsystems are collections of roles that are simultaneously curated. A <a name="subsystem185">subsystem</a>
- spreadsheet is a spreadsheet that shows which fids in which genomes map to the <a name="subsystem186">subsystem</a>
- roles. The <a name="subsystem187">subsystem</a>
- plus the <a name="subsystem188">subsystem</a>
- spreadsheet is referred to as a populated <a name="subsystem189">subsystem</a>
-. To see the roles included in a <a name="subsystem190">subsystem</a>
+ Subsystems are collections of roles that are simultaneously curated. A <a name="subsystem206">subsystem</a>
+ spreadsheet is a spreadsheet that shows which fids in which genomes map to the <a name="subsystem207">subsystem</a>
+ roles. The <a name="subsystem208">subsystem</a>
+ plus the <a name="subsystem209">subsystem</a>
+ spreadsheet is referred to as a populated <a name="subsystem210">subsystem</a>
+. To see the roles included in a <a name="subsystem211">subsystem</a>
 , try <br />
 <pre>
   echo &#39;Threonine and Homoserine Biosynthesis&#39; | <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#subsystems_to_roles" target='_blank'>subsystems_to_roles</a>
@@ -597,13 +597,13 @@
   .
 <br /></pre>
 <h3><a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#subsystems_to_spreadsheets" target='_blank'>subsystems_to_spreadsheets</a></h3>
- Subsystems are collections of roles that are simultaneously curated. A <a name="subsystem191">subsystem</a>
- spreadsheet is a spreadsheet that shows which fids in which genomes map to the <a name="subsystem192">subsystem</a>
- roles. The <a name="subsystem193">subsystem</a>
- plus the <a name="subsystem194">subsystem</a>
- spreadsheet is referred to as a populated <a name="subsystem195">subsystem</a>
-. To see the <a name="subsystem196">subsystem</a>
- spreadsheet associated with a given <a name="subsystem197">subsystem</a>
+ Subsystems are collections of roles that are simultaneously curated. A <a name="subsystem212">subsystem</a>
+ spreadsheet is a spreadsheet that shows which fids in which genomes map to the <a name="subsystem213">subsystem</a>
+ roles. The <a name="subsystem214">subsystem</a>
+ plus the <a name="subsystem215">subsystem</a>
+ spreadsheet is referred to as a populated <a name="subsystem216">subsystem</a>
+. To see the <a name="subsystem217">subsystem</a>
+ spreadsheet associated with a given <a name="subsystem218">subsystem</a>
 , try something like <br />
 <pre>
   echo &#39;Threonine and Homoserine Biosynthesis&#39; | <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#subsystems_to_spreadsheets" target='_blank'>subsystems_to_spreadsheets</a> &#39;kb|g.0&#39;
@@ -613,6 +613,6 @@
   [subsystem,genome,variant-code,role,fid]
 <br /></pre>
 <h2>Summary</h2>
- We have attempted to introduce you the <a name="Entity-Relationship Model198">Entity-Relationship Model</a>
- used to construct the CS and the command-line tools that you can use to expose the data in it. Of course, we do offer an <a name="API199">API</a>
+ We have attempted to introduce you the <a name="Entity-Relationship Model219">Entity-Relationship Model</a>
+ used to construct the CS and the command-line tools that you can use to expose the data in it. Of course, we do offer an <a name="API220">API</a>
  to support programmatic access, and a number of user interfaces (UIs) are being constructed to support access that is somewhat less painful. However, for now we suggest that you may wish to use these basic tools to extract data. 
