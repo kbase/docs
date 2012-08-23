@@ -1,24 +1,24 @@
 <h1>Towards a Controlled Vocabulary Part 3: Making the MOL Translation to the Abstract Function Vocabulary</h1>
-<p>We have described how to define an abstract vocabulary of function using exemplars in <a href="http://kbase.us/developer-zone/tutorials/command-line-scripts/command-line-applications/towards-a-controlled-vocabulary-part-1-defining-exemplars/" l="l" name="Exemplars468">Part 1: Defining Exemplars</a>. Next, we described how to generate the <a name="SEED469">SEED</a> mapping from <a name="SEED470">SEED</a> IDs to the abstract vocabulary imposed by exemplars <a href="http://kbase.us/developer-zone/tutorials/command-line-scripts/command-line-applications/towards-a-controlled-vocabulary-part-2-mapping-to-exemplars/" name="Exemplars471">Part 2: Mapping to Exemplars</a>. We complete this discussion of how to reach consistent <a name="annotations472">annotations</a> in an abstract vocabulary by discussing how one might map <a name="MicrobesOnLine473">MicrobesOnLine</a> (MOL) features to the abstract vocabulary. <br /><br /> The overall strategy follows two main steps, as explained in the sections below.
+<p>We have described how to define an abstract vocabulary of function using exemplars in <a href="http://kbase.us/developer-zone/tutorials/command-line-scripts/command-line-applications/towards-a-controlled-vocabulary-part-1-defining-exemplars/" l="l" name="Exemplars489">Part 1: Defining Exemplars</a>. Next, we described how to generate the <a name="SEED490">SEED</a> mapping from <a name="SEED491">SEED</a> IDs to the abstract vocabulary imposed by exemplars <a href="http://kbase.us/developer-zone/tutorials/command-line-scripts/command-line-applications/towards-a-controlled-vocabulary-part-2-mapping-to-exemplars/" name="Exemplars492">Part 2: Mapping to Exemplars</a>. We complete this discussion of how to reach consistent <a name="annotations493">annotations</a> in an abstract vocabulary by discussing how one might map <a name="MicrobesOnLine494">MicrobesOnLine</a> (MOL) features to the abstract vocabulary. <br /><br /> The overall strategy follows two main steps, as explained in the sections below.
 <h2>Begin with the SEED Translation</h2>
-<p>Begin with the <a name="SEED474">SEED</a> translation, represented as 4-tuples of the form <br />
+<p>Begin with the <a name="SEED495">SEED</a> translation, represented as 4-tuples of the form <br />
 <pre>
            [source,source-id,fid,exemplar]
 <br />
   </pre>
  where the <i>source</i>
- is <i><a name="SEED475">SEED</a></i>
+ is <i><a name="SEED496">SEED</a></i>
 . Here, the <i>fid</i>
- field is the KBase ID of the <a name="SEED476">SEED</a>
+ field is the KBase ID of the <a name="SEED497">SEED</a>
  <i>source_id</i>
-. We begin by adding a column containing the <a name="md5477">md5</a>
+. We begin by adding a column containing the <a name="md5498">md5</a>
  values using <br />
 <pre>
            <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#fids_to_proteins" target='_blank'>fids_to_proteins</a> -c 3 &lt; seed.translation.table &gt; seed.translation.with.md5
 <br />
   </pre>
- and we <a name="sort478">sort</a>
- them on the <a name="md5479">md5</a>
+ and we <a name="sort499">sort</a>
+ them on the <a name="md5500">md5</a>
  value using <br />
 <pre>
             sort -u -k 5 seed.translation.with.md5 &gt; sorted.seed.with.md5
@@ -35,7 +35,7 @@
 	    <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#fids_to_functions" target='_blank'>fids_to_functions</a> -c 1 |
 	    sort -k 3 &gt; MOL.fid.source_id.md5.function
 <br /></pre>
-<p>Now, we have two fairy large files, <i>seed.translation.with.<a name="md5480">md5</a></i> and <i>MOL.fid.<a name="md5481">md5</a>.function</i>, both sorted on <a name="md5482">md5</a> values. We can now make a single pass through the two files, compiling the data we will need to construct an initial translation file for MOL. Essentially, as we pass through the two files, we detect cases in which an MOL fid had an identical <a name="md5483">md5</a> to a <a name="SEED484">SEED</a> fid; we use this to take the corresponding exemplar and the MOL function and increment a count of the times this function occurred with that exemplar. After the pass, we simply take, for each exemplar the string that MOL most often used to describe the abstract function, and we write out a file of inconsistent sets to support MOL in detecting and correcting inconsistencies. This is accomplished by the following short perl program:
+<p>Now, we have two fairy large files, <i>seed.translation.with.<a name="md5501">md5</a></i> and <i>MOL.fid.<a name="md5502">md5</a>.function</i>, both sorted on <a name="md5503">md5</a> values. We can now make a single pass through the two files, compiling the data we will need to construct an initial translation file for MOL. Essentially, as we pass through the two files, we detect cases in which an MOL fid had an identical <a name="md5504">md5</a> to a <a name="SEED505">SEED</a> fid; we use this to take the corresponding exemplar and the MOL function and increment a count of the times this function occurred with that exemplar. After the pass, we simply take, for each exemplar the string that MOL most often used to describe the abstract function, and we write out a file of inconsistent sets to support MOL in detecting and correcting inconsistencies. This is accomplished by the following short perl program:
 <h2>A Short Perl Program supporting MOL in Correcting Inconsistencies<br /></h2>
 <pre>
 #

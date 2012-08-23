@@ -335,7 +335,7 @@ name="Documentation_for_underlying_call"
 
 <p>This script is a wrapper for the CDMI-API call close_genomes. It is documented as follows:</p>
 
-<pre>  $return = $obj-&#62;close_genomes($genomes, $how, $n)</pre>
+<pre>  $return = $obj-&#62;close_genomes($seq_set, $n)</pre>
 
 <dl>
 <dt><a name="Parameter_and_return_types"
@@ -343,13 +343,20 @@ name="Documentation_for_underlying_call"
 
 <dd>
 <pre>
-$genomes is a genomes
-$how is a how
+$seq_set is a seq_set
 $n is an int
-$return is a reference to a hash where the key is a genome and the value is a genomes
-genomes is a reference to a list where each element is a genome
+$return is a reference to a list where each element is a reference to a list containing 2 items:
+	0: a genome
+	1: a float
+seq_set is a reference to a list where each element is a seq_triple
+seq_triple is a reference to a list containing 3 items:
+	0: an id
+	1: a comment
+	2: a sequence
+id is a string
+comment is a string
+sequence is a string
 genome is a string
-how is an int
 
 
 </pre>

@@ -1300,7 +1300,7 @@ fid is a string
 >Description</a></dt>
 
 <dd>
-<p>genomes_to_fids is used to get the fids included in specific genomes. It is often the case that you want just one or two types of fids -- hence, the types_of_fids argument.</p>
+<p>genomes_to_fids bis used to get the fids included in specific genomes. It is often the case that you want just one or two types of fids -- hence, the types_of_fids argument.</p>
 </dd>
 </dl>
 
@@ -2346,7 +2346,7 @@ correspondence is a reference to a hash where the following keys are defined:
 name="close_genomes"
 >close_genomes</a></h3>
 
-<pre>  $return = $obj-&#62;close_genomes($genomes, $n)</pre>
+<pre>  $return = $obj-&#62;close_genomes($seq_set, $n)</pre>
 
 <dl>
 <dt><a name="Parameter_and_return_types"
@@ -2354,12 +2354,19 @@ name="close_genomes"
 
 <dd>
 <pre>
-$genomes is a genomes
+$seq_set is a seq_set
 $n is an int
-$return is a reference to a hash where the key is a genome and the value is a reference to a list where each element is a reference to a list containing 2 items:
+$return is a reference to a list where each element is a reference to a list containing 2 items:
 	0: a genome
 	1: a float
-genomes is a reference to a list where each element is a genome
+seq_set is a reference to a list where each element is a seq_triple
+seq_triple is a reference to a list containing 3 items:
+	0: an id
+	1: a comment
+	2: a sequence
+id is a string
+comment is a string
+sequence is a string
 genome is a string
 
 
@@ -2368,12 +2375,6 @@ genome is a string
 
 <dt><a name="Description"
 >Description</a></dt>
-
-<dd>
-<p>A close_genomes is used to get a set of relatively close genomes (for each input genome, a set of close genomes is calculated, but the result should be viewed as quite approximate. It is quite slow, using similarities for a universal protein as the basis for the assessments. It produces estimates of degree of similarity for the universal proteins it samples.</p>
-
-<p>Up to n genomes will be returned for each input genome.</p>
-</dd>
 </dl>
 
 <h3><a class='u' href='#___top' title='click to go to top of document'
@@ -4420,6 +4421,14 @@ name="sequence"
 >sequence</a></h3>
 
 <dl>
+<dt><a name="Description"
+>Description</a></dt>
+
+<dd>
+<p>A close_genomes is used to get a set of relatively close genomes (for each input genome, a set of close genomes is calculated, but the result should be viewed as quite approximate. It is quite slow, using similarities for a universal protein as the basis for the assessments. It produces estimates of degree of similarity for the universal proteins it samples.</p>
+
+<p>Up to n genomes will be returned for each input genome.</p>
+
 <dt><a name="Definition"
 >Definition</a></dt>
 
