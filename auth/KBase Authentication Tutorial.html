@@ -9,7 +9,16 @@ This tutorial assumes that you have downloaded and installed the Perl
 Bio::KBase::Auth* libraries from the git repo at
 ssh://git@github.com/kbase/auth.git or ssh://kbase@git.kbase.us/auth.git<br>
 <br>
-Checkout a copy of the auth repo, and use the make target "install-libs" to install the libraries in your local environment.<br>
+After checking a copy of the auth repo, if you are in a normal KBase VM
+deployment environment you can use the "install-libs" target in the top
+level Makefile. If you are on a laptop or local environment change into
+the Bio-KBase-Auth subdirectory and run the following commands:<br>
+<br>
+perl ./Build.PL<br>
+perl ./Build installdeps<br>
+perl ./Build install<br>
+<br>
+This will create the appropriate installer script, then install the dependencies and then install the libraries themselves.<br>
 <br>
 You will also need the commandline utility "curl" installed in order to test the commandline token examples.<br>
 <br>
