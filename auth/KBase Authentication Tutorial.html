@@ -215,7 +215,7 @@ your own username and the path to your own ssh private key.<br>
 <br>
 sychan$ perl -MBio::KBase::AuthToken -e '$key=`cat ~/.ssh/id_rsa`;
 print Bio::KBase::AuthToken-&gt;new( user_id =&gt; "sychan",
-client_secret =&gt; $key)-&gt;token,"\n";&#8217;<br>
+client_secret =&gt; $key)-&gt;token,"\n";'<br>
 <br>un=sychan|clientid=sychan|expiry=1376543282|SigningSubject=https://graph.api.test.globuscs.info/goauth/keys/861eb8e0-e634-11e1-ac2c-1231381a5994|sig=afa6f7ad6389f3775a1142cc16b9f223e299d0e75e154182731e8405167ac447281ba70b6eee97939276463f71ecdb466f65ab70f6b96ebec9666e443b81fb795eace1b9fe1d05a055edb6afb623bbf601330f2363db0701c82656de81a10e58fa0c955b4794e08c0407a48771e1c660ad78cd2d0338c6b4a72e514892d32f2<br>
 <br>
 <h3>Sample Perl script</h3>
