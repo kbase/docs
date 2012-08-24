@@ -1,5 +1,5 @@
 <h1>Extracting Genomes, Features, and Sequences from the KBase CS</h1>
- Students and researchers working in bioinformatics often need to extract raw data to set up an environment to develop and test new tools. In this short tutorial we discuss some basic techniques for accessing genomes and features from the KBase <a name="Central Store345">Central Store</a>
+ Students and researchers working in bioinformatics often need to extract raw data to set up an environment to develop and test new tools. In this short tutorial we discuss some basic techniques for accessing genomes and features from the KBase <a name="Central Store347">Central Store</a>
  (CS). There are alternative mechanisms for accessing KBase commands, and this discussion will not introduce you to those alternatives; however, we do recommend the <a http://kbase.us/developer-zone/tutorials/iris/some-basic-exercises-using-the-doe-kbase-iris-interface/="http://kbase.us/developer-zone/tutorials/iris/some-basic-exercises-using-the-doe-kbase-iris-interface/">tutorial</a>
  to get started using the <i>IRIS</i>
  interface. <h2>Exploring the Collection of Genomes in the CS</h2>
@@ -8,13 +8,13 @@
 </pre>
  This command creates a 4-column table: <ol><li><b>id</b> of the genome (i.e., the KBase id). You do not have to ask for this field explicitly, since the command assumes that you want it. <li><b>scientific_name</b> is the normal name of the genome (e.g., <i>Rickettsia rickettsii str. Iowa</i>). <li>the <b>dna_size</b>, which is the number of base pairs in the genome. This can be used to recognize whether you have a complete genome, a phage genome, or whatever. <li><b>contigs</b>, which is the number of contigs in the genome. This can be used to get a sense of the quality of the sequence (hundreds of contigs usually indicates an early draft). </ol>
 <br />
- To get a specific subset, we recommend the <i><a name="grep346">grep</a></i>
+ To get a specific subset, we recommend the <i><a name="grep348">grep</a></i>
  command. Thus, <pre>
       <a href="http://kbase.us/developer-zone/api-documentation/cdm-entity-relationship-command-scripts/#all_entities_Genome" target='_blank'>all_entities_Genome</a> -f scientific_name,dna_size,contigs | grep Streptococcus
 </pre>
  would get you a list of the <i>Streptococcus</i>
  genomes. <h2>Extracting the Genomic Contigs in FASTA Format</h2>
- Now, suppose that you wished to extract the <a name="DNA347">DNA</a>
+ Now, suppose that you wished to extract the <a name="DNA349">DNA</a>
  sequence of one of these genomes as a FASTA formatted file. You would use something like <pre>
       echo &#39;kb|g.3285&#39; | <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#genomes_to_contigs" target='_blank'>genomes_to_contigs</a> | <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#contigs_to_sequences" target='_blank'>contigs_to_sequences</a> &gt; contigs
 </pre>
@@ -30,18 +30,18 @@
        kb|g.3285.c.9_30898-73
 </pre>
  The first part (<i>kb|g.3285.c.9</i>
-) is a <a name="contig348">contig</a>
+) is a <a name="contig350">contig</a>
  id (which begins with the genome id). The second part (30898) is the <i>start position</i>
 . The start position is followed by a single character giving the strand (in this case the minus strand), and that is followed by the length of the feature. <p> If you had wished just the protein-encoding genes, try <pre>
        echo &#39;kb|g.3285&#39; | <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#genomes_to_fids" target='_blank'>genomes_to_fids</a> | grep peg | <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#fids_to_feature_data" target='_blank'>fids_to_feature_data</a> | cut -f 3,6,8 | sort_by_locs &gt; feature.data
 </pre> Had you wished the table sorted by features ids, you could replace <i>sort_by_loc</i> with <i>sort_by_id</i>. 
 <p>
 <h2>Getting the Sequences of Features</h2>
- To get the <a name="DNA349">DNA</a>
+ To get the <a name="DNA351">DNA</a>
  sequences of the features, you should probably use <pre>
     echo &#39;kb|g.3285&#39; | <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#genomes_to_fids" target='_blank'>genomes_to_fids</a> | sort_by_id | <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#fids_to_dna_sequences" target='_blank'>fids_to_dna_sequences</a> &gt; dna.fasta
 </pre>
- You will need the <a name="DNA350">DNA</a>
+ You will need the <a name="DNA352">DNA</a>
  sequences for problems relating to, say, codon usage data. <p> To get the protein sequences of the features, you would use <pre>
     echo &#39;kb|g.3285&#39; | <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#genomes_to_fids" target='_blank'>genomes_to_fids</a> | sort_by_id | <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#fids_to_protein_sequences" target='_blank'>fids_to_protein_sequences</a> &gt; prot.fasta
 </pre>

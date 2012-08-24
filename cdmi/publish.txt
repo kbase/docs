@@ -1,8 +1,8 @@
 overview.html	Tutorials to Help you Get Started	tutorials-to-help-you-get-started	Overview/overview.html
 tutorial_index.html	Index of Terms in KBase Tutorials	index-of-terms-in-kbase-tutorials	Overview/tutorial_index.html
 IRIS-RAST2.html	Constructing RAST2 in the IRIS Environment	constructing-rast2-in-the-iris-environment	IRIS/IRIS-RAST2.html
-IRIS.html	Some Basic Exercises using the DOE KBase IRIS interface	some-basic-exercises-using-the-doe-kbase-iris-interface	IRIS/IRIS.html
-getting_started.html	Getting Started with the KBase	getting-started-with-the-kbase	Basic_exercises/getting_started.html
+IRIS.html	Some Basic Exercises using the KBase IRIS interface	some-basic-exercises-using-the-kbase-iris-interface	IRIS/IRIS.html
+getting_started.html	Getting Started with KBase	getting-started-with-kbase	Basic_exercises/getting_started.html
 basic_exercises.html	Some Basic Exercises Using KBase	some-basic-exercises-using-kbase	Basic_exercises/basic_exercises.html
 command_line_pipes.html	Getting What You Need from the CS Using Command-Line Scripts	getting-what-you-need-from-the-cs-using-command-line-scripts	Basic_exercises/command_line_pipes.html
 CS-API_UI.html	Extracting Data from the CS Using the CS-API: Some Typical Examples	extracting-data-from-the-cs-using-the-cs-api-some-typical-examples	Basic_exercises/CS-API_UI.html

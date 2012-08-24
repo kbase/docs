@@ -1,11 +1,11 @@
 <h1>Annotate a Genome Using KBase Tools </h1>
-<p><strong>Purpose: </strong>This tutorial demonstrates how to annotate a set of closely related genomes using KBase tools. For example, the genus <i>Geobacter</i> can be used to study the pan-genome and construct <a name="metabolic312">metabolic</a> models to clarify differences between strains. 
+<p><strong>Purpose: </strong>This tutorial demonstrates how to annotate a set of closely related genomes using KBase tools. For example, the genus <i>Geobacter</i> can be used to study the pan-genome and construct <a name="metabolic314">metabolic</a> models to clarify differences between strains. 
 <p><strong>Required Prerequisite Activities:</strong> Getting Started with KBase
 <p><strong>Suggested Prerequesite Activities: </strong>Basic Exercises Using KBase
 <p><strong>Related Tutorials: </strong>(List all related tutorials)
 <h2>Select a genome</h2>
  To see which <i>Geobacter</i>
- genomes are in the <i><a name="Central Store313">Central Store</a> (CS)</i>
+ genomes are in the <i><a name="Central Store315">Central Store</a> (CS)</i>
  of KBase, use<br />
 <pre>
   <a href="http://kbase.us/developer-zone/api-documentation/cdm-entity-relationship-command-scripts/#all_entities_Genome" target='_blank'>all_entities_Genome</a> -f scientific_name | grep Geobacter
@@ -48,7 +48,7 @@ which reflects the name of the genome whose contigs we copied. We are going to r
 
 </pre>
  This causes an initial annotation to be generated. It may take several minutes for large genomes. You can issue other commands while you wait, and the completion message will display below the command when the annotation is complete. When it completes, use <b>ls</b>
- to see the generated file, and click on it to see the encoded <a name="annotations314">annotations</a>
+ to see the generated file, and click on it to see the encoded <a name="annotations316">annotations</a>
 . Alternatively, to the the features generated and placed in the annotated genome object (stored in <i>annotated.genome</i>
 ), try <br />
 <pre>
@@ -60,9 +60,9 @@ which reflects the name of the genome whose contigs we copied. We are going to r
  <br /></pre>
  Use <em>ls</em>
  to see it and explore the contents. <h2>Build a metabolic reconstruction from an annotated genome</h2>
- The term &quot;<a name="metabolic315">metabolic</a>
- reconstruction&quot; as used here roughly means <i>a set of <a href="http://www.theseed.org/wiki/Glossary#Subsystem" name="subsystems316" target="blank_"> subsystems</a> that are believed to be present in the genome, along with the relevant variant codes</i>
-. Obtain a <a name="metabolic317">metabolic</a>
+ The term &quot;<a name="metabolic317">metabolic</a>
+ reconstruction&quot; as used here roughly means <i>a set of <a href="http://www.theseed.org/wiki/Glossary#Subsystem" name="subsystems318" target="blank_"> subsystems</a> that are believed to be present in the genome, along with the relevant variant codes</i>
+. Obtain a <a name="metabolic319">metabolic</a>
  reconstruction for the annotated genome using <br />
 <pre>
   genomeTO_to_reconstructionTO &lt; annotated.genome &gt; reconstruction
@@ -71,16 +71,16 @@ which reflects the name of the genome whose contigs we copied. We are going to r
 <pre>
   reconstructionTO_to_roles &lt; reconstruction &gt; roles
 <br /></pre>
- To see the <a name="subsystems318">subsystems</a>
+ To see the <a name="subsystems320">subsystems</a>
  (along with the variant codes that seemed appropriate), use <br />
 <pre>
   reconstructionTO_to_subsystems &lt; reconstruction &gt; subsystems
 <br /></pre>
 <h2>Get roles that might impact metabolic models</h2>
- How good are the <a name="annotations319">annotations</a>
+ How good are the <a name="annotations321">annotations</a>
  for your newly-annotated genome? One way to assess this is to focus on the <i>Roles </i>
- that might impact <a name="metabolic320">metabolic</a>
- models. We can look at the ones that were found and then compare them against those that exist in a similar, manually-curated genome. Begin by getting the subset of the Roles that might impact the <a name="metabolic321">metabolic</a>
+ that might impact <a name="metabolic322">metabolic</a>
+ models. We can look at the ones that were found and then compare them against those that exist in a similar, manually-curated genome. Begin by getting the subset of the Roles that might impact the <a name="metabolic323">metabolic</a>
  models:<br />
 <pre>
   <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#all_roles_used_in_models" target='_blank'>all_roles_used_in_models</a> &gt; all.roles
@@ -97,15 +97,15 @@ which reflects the name of the genome whose contigs we copied. We are going to r
  writes error messages when it cannot match a fid to any Roles. <p> Now use <br /><pre>
   a_and_b roles.in.g.9032 all.roles &gt; roles.for.models.g.9032
   a_not_b roles.for.models roles.for.models.g.9032 &gt; roles.to.search.for
-<br /></pre> to create a file of Roles in <i>kb|g.9032</i> that are not yet found in the <a name="annotations322">annotations</a> we got back for our new version of <i>g.2860</i>. 
+<br /></pre> to create a file of Roles in <i>kb|g.9032</i> that are not yet found in the <a name="annotations324">annotations</a> we got back for our new version of <i>g.2860</i>. 
 <h2>Create an initial metabolic model</h2>
- Now that we have an annotated genome, create an initial <a name="metabolic323">metabolic</a>
+ Now that we have an annotated genome, create an initial <a name="metabolic325">metabolic</a>
  model using <br />
 <pre>
   genome_to_fbamodel &lt; annotated.genome &gt; initial.model
 </pre>
 <p>&nbsp;
-<p>After a minute or two, a <a name="metabolic324">metabolic</a> model object is stored in <i>initial.model</i>. 
+<p>After a minute or two, a <a name="metabolic326">metabolic</a> model object is stored in <i>initial.model</i>. 
 <h2>View the model</h2>
  We can convert this model into readable HTML to see what it contains: <pre>
   fbamodel_to_html &lt; initial.model &gt; initial.model.html
@@ -132,7 +132,7 @@ which reflects the name of the genome whose contigs we copied. We are going to r
 <p>&nbsp;
 <p>Once this command completes, use <em>ls</em> and click on the HTML produced by the FBA command. Your FBA solution should now include a nonzero objective value as well as numerous compound and reaction fluxes.
 <h2>Export the model to external tools</h2>
- Many other tools now exist that enable the analysis of genome-scale <a name="metabolic325">metabolic</a>
+ Many other tools now exist that enable the analysis of genome-scale <a name="metabolic327">metabolic</a>
  models (e.g., the Cobra toolbox). Most of these tools read models printed in SBML format. Print the gapfilled model in SBML format so the model can be used with these tools: <pre>
   fbamodel_to_sbml &lt; gapfilled.model &gt; gapfilled.model.sbml
 </pre>
