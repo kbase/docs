@@ -1,6 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html><head>
 
+
 <meta content="text/html; charset=ISO-8859-1" http-equiv="content-type"><title>KBase Authentication Tutorial</title></head><body>
 <h1>KBase Authentication</h1>
 
@@ -198,11 +199,11 @@ un=papa|clientid=papa|expiry=1376522845|SigningSubject=https://graph.api.test.gl
 Getting a Token on the commandline using perl libraries</h3>
 
 <br>Using username/password authentication:<br>
-<br>
+<br><span style="font-family: monospace;">
 sychan$ perl -MBio::KBase::AuthToken -e 'print
 Bio::KBase::AuthToken-&gt;new( user_id =&gt; "papa", password =&gt;
-"papa")-&gt;token,"\n";'<br>
-<br>un=papa|clientid=papa|expiry=1376542920|SigningSubject=https://graph.api.test.globuscs.info/goauth/keys/861eb8e0-e634-11e1-ac2c-1231381a5994|sig=2e81ffa18b1803588228f475d35ae9d8c1b5c582a46dbbb49d7944662dc349791b6b0ac5e4a6b89c406de1dc83eff1a961cb9892a45398636809fce4ff7f70b2a76a384cd3361a4f6bdd25d72b1affb413717abf6b499ecffff19037cce7fd2367135c3e736398c1c26d429ecb827635a3aae8a92c7beae1c87760df958eecb2<br>
+"papa")-&gt;token,"\n";'</span><br style="font-family: monospace;">
+<br style="font-family: monospace;"><span style="font-family: monospace;">un=papa|clientid=papa|expiry=1376542920|SigningSubject=https://graph.api.test.globuscs.info/goauth/keys/861eb8e0-e634-11e1-ac2c-1231381a5994|sig=2e81ffa18b1803588228f475d35ae9d8c1b5c582a46dbbb49d7944662dc349791b6b0ac5e4a6b89c406de1dc83eff1a961cb9892a45398636809fce4ff7f70b2a76a384cd3361a4f6bdd25d72b1affb413717abf6b499ecffff19037cce7fd2367135c3e736398c1c26d429ecb827635a3aae8a92c7beae1c87760df958eecb2</span><br>
 <br>Using username/RSA authentication:<br>
 <br>
 This example assumes that you have an account on the globus online
@@ -211,12 +212,16 @@ to the service. After creating an account, you can go to <a href="https://test.g
 <br>
 In the example below, the "sychan" account is used and sychan's ssh
 private key is assumed to be stored in ~/.ssh/id_rsa. Please substitute
-your own username and the path to your own ssh private key.<br>
-<br>
+your own username and the path to your own ssh private key. The private is also assumed to be <span style="font-weight: bold; font-style: italic;">unencrypted</span>
+for this example. If you have a passphrase on the private key, you will
+need to generate a new, passphraseless private key, or else remove the
+passphrase using the "ssh-keygen -p" option (see the ssh-keygen manual
+page):<br>
+<br><span style="font-family: monospace;">
 sychan$ perl -MBio::KBase::AuthToken -e '$key=`cat ~/.ssh/id_rsa`;
 print Bio::KBase::AuthToken-&gt;new( user_id =&gt; "sychan",
-client_secret =&gt; $key)-&gt;token,"\n";'<br>
-<br>un=sychan|clientid=sychan|expiry=1376543282|SigningSubject=https://graph.api.test.globuscs.info/goauth/keys/861eb8e0-e634-11e1-ac2c-1231381a5994|sig=afa6f7ad6389f3775a1142cc16b9f223e299d0e75e154182731e8405167ac447281ba70b6eee97939276463f71ecdb466f65ab70f6b96ebec9666e443b81fb795eace1b9fe1d05a055edb6afb623bbf601330f2363db0701c82656de81a10e58fa0c955b4794e08c0407a48771e1c660ad78cd2d0338c6b4a72e514892d32f2<br>
+client_secret =&gt; $key)-&gt;token,"\n";'</span><br style="font-family: monospace;">
+<br style="font-family: monospace;"><span style="font-family: monospace;">un=sychan|clientid=sychan|expiry=1376543282|SigningSubject=https://graph.api.test.globuscs.info/goauth/keys/861eb8e0-e634-11e1-ac2c-1231381a5994|sig=afa6f7ad6389f3775a1142cc16b9f223e299d0e75e154182731e8405167ac447281ba70b6eee97939276463f71ecdb466f65ab70f6b96ebec9666e443b81fb795eace1b9fe1d05a055edb6afb623bbf601330f2363db0701c82656de81a10e58fa0c955b4794e08c0407a48771e1c660ad78cd2d0338c6b4a72e514892d32f2</span><br style="font-family: monospace;">
 <br>
 <h3>Sample Perl script</h3>
 <h4>Basic AuthToken and AuthUser usage</h4>
