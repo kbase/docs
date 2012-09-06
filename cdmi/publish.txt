@@ -6,7 +6,7 @@ getting_started.html	Getting Started with KBase	getting-started-with-kbase	Basic
 basic_exercises.html	Some Basic Exercises Using KBase	some-basic-exercises-using-kbase	Basic_exercises/basic_exercises.html
 command_line_pipes.html	Getting What You Need from the CS Using Command-Line Scripts	getting-what-you-need-from-the-cs-using-command-line-scripts	Basic_exercises/command_line_pipes.html
 CS-API_UI.html	Extracting Data from the CS Using the CS-API: Some Typical Examples	extracting-data-from-the-cs-using-the-cs-api-some-typical-examples	Basic_exercises/CS-API_UI.html
-annotating_a_genome.html	Annotate a Genome Using KBase Tools 	annotate-a-genome-using-kbase-tools-	Basic_exercises/annotating_a_genome.html
+annotating_a_genome.html	Annotating a Genome Using KBase Tools 	annotating-a-genome-using-kbase-tools-	Basic_exercises/annotating_a_genome.html
 ER-Model.html	The CDM Represented as an Entity-Relationship Model	the-cdm-represented-as-an-entity-relationship-model	ERDB/ER-Model.html
 getting_genomes_and_features.html	Extracting Genomes, Features, and Sequences from the KBase CS	extracting-genomes-features-and-sequences-from-the-kbase-cs	Getting_Genomes_and_Features/getting_genomes_and_features.html
 processing_identical_genomes.html	Processing Identical Genomes	processing-identical-genomes	Processing_identical_genomes/processing_identical_genomes.html
@@ -27,6 +27,7 @@ GettingStartedKBaseToolsMacEdition.html	Getting Started with the KBase Tools: Ma
 KBaseClientApplicationReleaseEngineeringNotes.html	KBaseClientApplicationReleaseEngineeringNotes.html	kbaseclientapplicationreleaseengineeringnoteshtml	Development/KBaseClientApplicationReleaseEngineeringNotes.html
 PublishingNewCSSoftwareRevision.html	Publishing a New Central Store Software Revision	publishing-a-new-central-store-software-revision	Development/PublishingNewCSSoftwareRevision.html
 developing_software.html	Developing Software in the KBase Environment	developing-software-in-the-kbase-environment	Development/developing_software.html
+header_extensions_for_messaging.html	HTTP Header Extensions for KBase Messaging	http-header-extensions-for-kbase-messaging	Development/header_extensions_for_messaging.html
 comparing_functional_roles.html	Comparing the Functional Roles in Two Genomes	comparing-the-functional-roles-in-two-genomes	Comparing_the_functional_roles_in_two_genomes/comparing_functional_roles.html
 computing_pan_genomes_for_otus.html	Computing Pan Genomes for OTU's	computing-pan-genomes-for-otus	PanGenomes/computing_pan_genomes_for_otus.html
 Accessing_annotations_from_the_central_store.html	Accessing Annotations from the Central Store (CS)	accessing-annotations-from-the-central-store-cs	Accessing_annotations_from_the_central_store/Accessing_annotations_from_the_central_store.html
