@@ -6,7 +6,7 @@ getting_started.html	Getting Started with KBase	getting-started-with-kbase	Basic
 basic_exercises.html	Some Basic Exercises Using KBase	some-basic-exercises-using-kbase	Basic_exercises/basic_exercises.html
 command_line_pipes.html	Getting What You Need from the CS Using Command-Line Scripts	getting-what-you-need-from-the-cs-using-command-line-scripts	Basic_exercises/command_line_pipes.html
 CS-API_UI.html	Extracting Data from the CS Using the CS-API: Some Typical Examples	extracting-data-from-the-cs-using-the-cs-api-some-typical-examples	Basic_exercises/CS-API_UI.html
-annotating_a_genome.html	Annotating a Genome Using KBase Tools 	annotating-a-genome-using-kbase-tools-	Basic_exercises/annotating_a_genome.html
+annotating_a_genome.html	Annotating a Genome Using KBase Tools	annotating-a-genome-using-kbase-tools	Basic_exercises/annotating_a_genome.html
 ER-Model.html	The CDM Represented as an Entity-Relationship Model	the-cdm-represented-as-an-entity-relationship-model	ERDB/ER-Model.html
 getting_genomes_and_features.html	Extracting Genomes, Features, and Sequences from the KBase CS	extracting-genomes-features-and-sequences-from-the-kbase-cs	Getting_Genomes_and_Features/getting_genomes_and_features.html
 processing_identical_genomes.html	Processing Identical Genomes	processing-identical-genomes	Processing_identical_genomes/processing_identical_genomes.html
