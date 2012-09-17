@@ -2,6 +2,7 @@
 <html><head>
 
 
+
 <meta content="text/html; charset=ISO-8859-1" http-equiv="content-type"><title>KBase Authentication Tutorial</title></head><body>
 <h1>KBase Authentication</h1>
 
@@ -154,32 +155,40 @@ the KBase Perl libraries.<br>
 <h3>
 Acquiring an authentication token</h3>
 
-<br>
-curl -k -# --user papa:papa
-'https://graph.api.test.globuscs.info/goauth/authorize?response_type=code&amp;client_id=papa'
-| python -m json.tool<br>
-<br>
+<br>curl -k -# --user papa:papa
+'https://graph.api.test.globuscs.info/goauth/token?client_id=papa&amp;grant_type=client_credentials'
+| python -mjson.tool<br>
 ######################################################################## 100.0%<br>
+{&nbsp;&nbsp;&nbsp; "access_token":
+"un=papa|tokenid=de70d1ce-0112-11e2-85ab-1231381a5994|expiry=1379455132|client_id=papa|token_type=Bearer|SigningSubject=https://graph.api.test.globuscs.info/goauth/keys/e40f7fe6-fc16-11e1-b8b5-1231381a5994|sig=02ab5c3789f2bea4669de27d69e301d60dfa78c44be1703380ed706b4aff905f83e51d9749dd5af1cca8515afca4642afe63c7095090c6ed5de36169e3fc223473aa6ca465fadcda7ffa7a4b9b3c977ea543d7221b3e4ccede6e7c1f3e21dfbf7e0b768022be27563e8da52d942abeae11cf43b5ab02cb1ea02904a1f4853013",
 <br>
-{<br>
-&nbsp;&nbsp;&nbsp; "code":
-"un=papa|clientid=papa|expiry=1376522845|SigningSubject=https://graph.api.test.globuscs.info/goauth/keys/861eb8e0-e634-11e1-ac2c-1231381a5994|sig=3fb54b56c7bb9a5c13ea0027e24118dca5b9805a7e401982e4def932a6d78aec34800582c0233da814b57bf438022b0581f013c3aded56bada7479b476c1d67c8aff1dc05627473255a97e93cd7e13e8add6dbdf7f8b23f88b66681fa119a347b8750a33596ae7ca74cfc6355e8e5ba4e32137379abe17fbedeb4520d351315b",<br>
-&nbsp;&nbsp;&nbsp; "state": null<br>
+&nbsp;&nbsp;&nbsp; "access_token_hash":
+"736372797074000d0000000800000001cc1c1689adcb7a3fbcf359dc236bd48ffcd30fdd88bf39f7fba42ff80f5e892c55a0e96cfe1d6fca1d14de7c2205366ce9ad71a7aaf881b4d830f47156d91e67571b5cdedce990dc84c4c2fb0e282acd8a7bab660d494694255a45c3eec24f843ebefac6de36af2d1df78f414888c4c416a162f88b881a0760a48903f6615be17bbec723dcc274ab4c59d018f7ae282663ca9c7d5f1f945610cb42e85ab4ad69e62d82487f51cf2d23c5179a6aa257cd",
 <br>
+&nbsp;&nbsp;&nbsp; "client_id": "papa", <br>
+&nbsp;&nbsp;&nbsp; "expires_in": 31536000, <br>
+&nbsp;&nbsp;&nbsp; "expiry": 1379455132, <br>
+&nbsp;&nbsp;&nbsp; "issued_on": 1347919132, <br>
+&nbsp;&nbsp;&nbsp; "lifetime": 31536000, <br>
+&nbsp;&nbsp;&nbsp; "scopes": [], <br>
+&nbsp;&nbsp;&nbsp; "token_id": "de70d1ce-0112-11e2-85ab-1231381a5994", <br>
+&nbsp;&nbsp;&nbsp; "token_type": "Bearer", <br>
+&nbsp;&nbsp;&nbsp; "user_name": "papa"<br>
 }<br>
 <br>
 Token Structure<br>
-<br>
-un=papa|<br>
-clientid=papa|<br>
-expiry=1376522845|<br>
-SigningSubject=https://graph.api.test.globuscs.info/goauth/keys/861eb8e0-e634-11e1-ac2c-1231381a5994|<br>
-sig=3fb54b56c7bb9a5c13ea0027e24118dca5b9805a7e401982e4def932a6d78aec34800582c0233da814b57bf438022b0581f013c3aded56bada7479b476c1d67c8aff1dc05627473255a97e93cd7e13e8add6dbdf7f8b23f88b66681fa119a347b8750a33596ae7ca74cfc6355e8e5ba4e32137379abe17fbedeb4520d351315b<br>
-<br>
+un=papa<br>
+tokenid=de70d1ce-0112-11e2-85ab-1231381a5994<br>
+expiry=1379455132<br>
+client_id=papa<br>
+token_type=Bearer<br>
+SigningSubject=https://graph.api.test.globuscs.info/goauth/keys/e40f7fe6-fc16-11e1-b8b5-1231381a5994<br>
+sig=02ab5c3789f2bea4669de27d69e301d60dfa78c44be1703380ed706b4aff905f83e51d9749dd5af1cca8515afca4642afe63c7095090c6ed5de36169e3fc223473aa6ca465fadcda7ffa7a4b9b3c977ea543d7221b3e4ccede6e7c1f3e21dfbf7e0b768022be27563e8da52d942abeae11cf43b5ab02cb1ea02904a1f4853013<br>
+<br><br>
 <h3>
 Using authentication token to fetch user profile</h3>
 
-<br>curl -k -# -H "X-GLOBUS-GOAUTHTOKEN:
+<br>curl -k -# -H "Authorization: Globus-Goauthtoken
 un=papa|clientid=papa|expiry=1376522845|SigningSubject=https://graph.api.test.globuscs.info/goauth/keys/861eb8e0-e634-11e1-ac2c-1231381a5994|sig=3fb54b56c7bb9a5c13ea0027e24118dca5b9805a7e401982e4def932a6d78aec34800582c0233da814b57bf438022b0581f013c3aded56bada7479b476c1d67c8aff1dc05627473255a97e93cd7e13e8add6dbdf7f8b23f88b66681fa119a347b8750a33596ae7ca74cfc6355e8e5ba4e32137379abe17fbedeb4520d351315b"
 'https://graph.api.test.globuscs.info/users/papa' | python -m json.tool<br>
 <br>
@@ -203,7 +212,7 @@ Getting a Token on the commandline using perl libraries</h3>
 sychan$ perl -MBio::KBase::AuthToken -e 'print
 Bio::KBase::AuthToken-&gt;new( user_id =&gt; "papa", password =&gt;
 "papa")-&gt;token,"\n";'</span><br style="font-family: monospace;">
-<br style="font-family: monospace;"><span style="font-family: monospace;">un=papa|clientid=papa|expiry=1376542920|SigningSubject=https://graph.api.test.globuscs.info/goauth/keys/861eb8e0-e634-11e1-ac2c-1231381a5994|sig=2e81ffa18b1803588228f475d35ae9d8c1b5c582a46dbbb49d7944662dc349791b6b0ac5e4a6b89c406de1dc83eff1a961cb9892a45398636809fce4ff7f70b2a76a384cd3361a4f6bdd25d72b1affb413717abf6b499ecffff19037cce7fd2367135c3e736398c1c26d429ecb827635a3aae8a92c7beae1c87760df958eecb2</span><br>
+<br style="font-family: monospace;"><span style="font-family: monospace;">un=papa|tokenid=33658058-0113-11e2-85ab-1231381a5994|expiry=1379455275|client_id=papa|token_type=Bearer|SigningSubject=https://graph.api.test.globuscs.info/goauth/keys/e40f7fe6-fc16-11e1-b8b5-1231381a5994|sig=5e844f2876d9f4ed38638f3d4795d9545cb1ba05d9785152d93b70ab4129f0061f5ed0f1810995d5e8ab1975ed62c472df9dc44b886894e3d87e5b5766c58d639324040e3f653163a0a5ae1d47b3ac59e4178f01156217b8ceba32182b1e654c814607f828f0f84ef852ec7e9abe114f8bdacab23119c69df7fbe481d35bb420</span><br>
 <br>Using username/RSA authentication:<br>
 <br>
 This example assumes that you have an account on the globus online
@@ -221,7 +230,7 @@ page):<br>
 sychan$ perl -MBio::KBase::AuthToken -e '$key=`cat ~/.ssh/id_rsa`;
 print Bio::KBase::AuthToken-&gt;new( user_id =&gt; "sychan",
 client_secret =&gt; $key)-&gt;token,"\n";'</span><br style="font-family: monospace;">
-<br style="font-family: monospace;"><span style="font-family: monospace;">un=sychan|clientid=sychan|expiry=1376543282|SigningSubject=https://graph.api.test.globuscs.info/goauth/keys/861eb8e0-e634-11e1-ac2c-1231381a5994|sig=afa6f7ad6389f3775a1142cc16b9f223e299d0e75e154182731e8405167ac447281ba70b6eee97939276463f71ecdb466f65ab70f6b96ebec9666e443b81fb795eace1b9fe1d05a055edb6afb623bbf601330f2363db0701c82656de81a10e58fa0c955b4794e08c0407a48771e1c660ad78cd2d0338c6b4a72e514892d32f2</span><br style="font-family: monospace;">
+<br style="font-family: monospace;"><span style="font-family: monospace;">un=sychan|tokenid=45719caa-0113-11e2-b0b8-1231381a5994|expiry=1379455305|client_id=sychan|token_type=Bearer|SigningSubject=https://graph.api.test.globuscs.info/goauth/keys/e40f7fe6-fc16-11e1-b8b5-1231381a5994|sig=1cba07321527494bccfd8c17b8080e3592debb4480a6ad6580752e421a0a48fe912665debb4d26d7ef6c26224301a70cc31fe3ef93d1fb034ba0b76c22a16e07af2412aa8656726431d0b43ff4ecc15f6accba775de1b9cc4343e1dee1bc9a244cdcf8313cf4d4e23f0537977f264a78b0559966c6a203393ac44ff65e04e385</span><br style="font-family: monospace;">
 <br>
 <h3>Sample Perl script</h3>
 <h4>Basic AuthToken and AuthUser usage</h4>
