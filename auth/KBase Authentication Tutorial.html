@@ -4,6 +4,7 @@
 
 
 
+
 <meta content="text/html; charset=ISO-8859-1" http-equiv="content-type"><title>KBase Authentication Tutorial</title></head><body>
 <h1>KBase Authentication</h1>
 
@@ -355,58 +356,58 @@ use LWP::UserAgent;</span><br style="font-family: monospace;"><span style="font-
 use JSON;</span><br style="font-family: monospace;"><span style="font-family: monospace;">
 use Bio::KBase::AuthToken;</span><br style="font-family: monospace;"><span style="font-family: monospace;">
 use Bio::KBase::AuthUser;</span><br style="font-family: monospace;">
-<br style="font-family: monospace;"><span style="font-family: monospace;">
-sub testServer {</span><br style="font-family: monospace;"><span style="font-family: monospace;">
-&nbsp;&nbsp;&nbsp; my $d = shift;</span><br style="font-family: monospace;"><span style="font-family: monospace;">
-&nbsp;&nbsp;&nbsp; my $res = new HTTP::Response;</span><br style="font-family: monospace;"><span style="font-family: monospace;">
-&nbsp;&nbsp;&nbsp; my $msg = new HTTP::Message;</span><br style="font-family: monospace;"><span style="font-family: monospace;">
-&nbsp;&nbsp;&nbsp; my $at = new Bio::KBase::AuthToken;</span><br style="font-family: monospace;"><span style="font-family: monospace;">
-&nbsp;&nbsp;&nbsp; while (my $c = $d-&gt;accept()) {</span><br style="font-family: monospace;"><span style="font-family: monospace;">
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; while (my $r = $c-&gt;get_request) {</span><br style="font-family: monospace;"><span style="font-family: monospace;">
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; my $token = $r-&gt;header('Authorization');</span><br style="font-family: monospace;"><span style="font-family: monospace;">
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; $at-&gt;token( $token);</span><br style="font-family: monospace;"><span style="font-family: monospace;">
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if ($at-&gt;validate()) {</span><br style="font-family: monospace;"><span style="font-family: monospace;">
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; $res-&gt;code(200);</span><br style="font-family: monospace;"><span style="font-family: monospace;">
+<br style="font-family: monospace;"><span style="font-family: monospace;">sub testServer {<br>
+&nbsp;&nbsp;&nbsp; my $d = shift;<br>
+&nbsp;&nbsp;&nbsp; my $res = new HTTP::Response;<br>
+&nbsp;&nbsp;&nbsp; my $msg = new HTTP::Message;<br>
+&nbsp;&nbsp;&nbsp; my $at = new Bio::KBase::AuthToken;<br>
+&nbsp;&nbsp;&nbsp; while (my $c = $d-&gt;accept()) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; while (my $r = $c-&gt;get_request) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; my ($token) = $r-&gt;header('Authorization') =~ /OAuth (.+)/;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; $at-&gt;token( $token);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if ($at-&gt;validate()) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; $res-&gt;code(200);<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 $body = sprintf( "Successfully logged in as user %s\n",
-$at-&gt;user_id);</span><br style="font-family: monospace;"><span style="font-family: monospace;">
+$at-&gt;user_id);<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-$au = Bio::KBase::AuthUser-&gt;new( 'token' =&gt; $at-&gt;token);</span><br style="font-family: monospace;"><span style="font-family: monospace;">
+$au = Bio::KBase::AuthUser-&gt;new( 'token' =&gt; $at-&gt;token);<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 printf "Server: User %s (%s) found for token %s.\n",
-$au-&gt;name,$au-&gt;user_id, $at-&gt;token;</span><br style="font-family: monospace;"><span style="font-family: monospace;">
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; } else {</span><br style="font-family: monospace;"><span style="font-family: monospace;">
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; $res-&gt;code(401);</span><br style="font-family: monospace;"><span style="font-family: monospace;">
+$au-&gt;name,$au-&gt;user_id, $at-&gt;token;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; } else {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; $res-&gt;code(401);<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-printf "Server: token failed validation.\n";</span><br style="font-family: monospace;"><span style="font-family: monospace;">
+printf "Server: token failed validation.\n";<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-$body = sprintf("You failed to login: %s\n", $at-&gt;error_message);</span><br style="font-family: monospace;"><span style="font-family: monospace;">
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }</span><br style="font-family: monospace;"><span style="font-family: monospace;">
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; $res-&gt;content( $body);</span><br style="font-family: monospace;"><span style="font-family: monospace;">
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; $c-&gt;send_response($res);</span><br style="font-family: monospace;"><span style="font-family: monospace;">
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }</span><br style="font-family: monospace;"><span style="font-family: monospace;">
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; $c-&gt;close;</span><br style="font-family: monospace;"><span style="font-family: monospace;">
-&nbsp;&nbsp;&nbsp; }</span><br style="font-family: monospace;"><span style="font-family: monospace;">
+$body = sprintf("You failed to login: %s\n", $at-&gt;error_message);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; $res-&gt;content( $body);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; $c-&gt;send_response($res);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; $c-&gt;close;<br>
+&nbsp;&nbsp;&nbsp; }<br>
+}<br>
+<br>
+sub testClient {<br>
+&nbsp;&nbsp;&nbsp; my $server = shift; my $ua = LWP::UserAgent-&gt;new();<br>
+<br>
+&nbsp;&nbsp;&nbsp; $at = Bio::KBase::AuthToken-&gt;new('user_id' =&gt; 'kbasetest', 'password' =&gt; '@Suite525');<br>
+&nbsp;&nbsp;&nbsp; $ua-&gt;default_header( "Authorization" =&gt; "OAuth " . $at-&gt;token);<br>
+<br>
+<br>
+&nbsp;&nbsp;&nbsp; $res = $ua-&gt;get( $server. "someurl" );<br>
+&nbsp;&nbsp;&nbsp; printf "Client: Recieved a response: %d %s\n", $res-&gt;code, $res-&gt;content;<br>
+<br>
+&nbsp;&nbsp;&nbsp; # As a sanity check, trash the oauth_secret and make sure that<br>
+&nbsp;&nbsp;&nbsp; # we get a negative result<br>
+&nbsp;&nbsp;&nbsp; $ua-&gt;default_header( "Authorization" =&gt; "OAuth Bogotoken");<br>
+<br>
+&nbsp;&nbsp;&nbsp; printf "Client: Sending bad request.\n";<br>
+&nbsp;&nbsp;&nbsp; $res = $ua-&gt;get( $server. "someurl" );<br>
+&nbsp;&nbsp;&nbsp; printf "Client: Recieved a response: %d %s\n", $res-&gt;code, $res-&gt;content;<br>
+<br>
 }</span><br style="font-family: monospace;">
-<br style="font-family: monospace;"><span style="font-family: monospace;">
-sub testClient {</span><br style="font-family: monospace;"><span style="font-family: monospace;">
-&nbsp;&nbsp;&nbsp; my $server = shift; my $ua =
-LWP::UserAgent-&gt;new(); my $req = HTTP::Request-&gt;new( GET =&gt;
-$server. "someurl" );</span><br style="font-family: monospace;">
-<br style="font-family: monospace;"><span style="font-family: monospace;">
-&nbsp;&nbsp;&nbsp; $at = Bio::KBase::AuthToken-&gt;new('user_id' =&gt; 'kbasetest', 'password' =&gt; '@Suite525');</span><br style="font-family: monospace;"><span style="font-family: monospace;">
-&nbsp;&nbsp;&nbsp; $req-&gt;header("Authorization" =&gt; $at-&gt;token);</span><br style="font-family: monospace;">
-<br style="font-family: monospace;"><span style="font-family: monospace;">
-&nbsp;&nbsp;&nbsp; $res = $ua-&gt;request( $req);</span><br style="font-family: monospace;"><span style="font-family: monospace;">
-&nbsp;&nbsp;&nbsp; printf "Client: Recieved a response: %d %s\n", $res-&gt;code, $res-&gt;content;</span><br style="font-family: monospace;">
-<br style="font-family: monospace;"><span style="font-family: monospace;">
-&nbsp;&nbsp;&nbsp; # As a sanity check, trash the oauth_secret and make sure that</span><br style="font-family: monospace;"><span style="font-family: monospace;">
-&nbsp;&nbsp;&nbsp; # we get a negative result</span><br style="font-family: monospace;"><span style="font-family: monospace;">
-&nbsp;&nbsp;&nbsp; $req-&gt;header("Authorization" =&gt; "bogo token");</span><br style="font-family: monospace;">
-<span style="font-family: monospace;">&nbsp;&nbsp;&nbsp; printf "Client: Sending bad request: %s %s (expecting failure)\n",$req-&gt;method,$req-&gt;url-&gt;as_string;</span><br style="font-family: monospace;"><span style="font-family: monospace;">
-&nbsp;&nbsp;&nbsp; $res = $ua-&gt;request( $req);</span><br style="font-family: monospace;"><span style="font-family: monospace;">
-&nbsp;&nbsp;&nbsp; printf "Client: Recieved a response: %d %s\n", $res-&gt;code, $res-&gt;content;</span><br style="font-family: monospace;">
-<span style="font-family: monospace;">}</span><br style="font-family: monospace;">
 <br style="font-family: monospace;"><span style="font-family: monospace;">
 $d = HTTP::Daemon-&gt;new( LocalAddr =&gt; '127.0.0.1');</span><br style="font-family: monospace;">
 <br style="font-family: monospace;"><span style="font-family: monospace;">
