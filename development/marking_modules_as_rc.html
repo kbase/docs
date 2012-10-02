@@ -10,7 +10,7 @@ The aims for the release procedure are to:
   <li>allow testing a module that is dependent on a second module</li>
 </ul>
 <h2>Release Process</h2>
-
+<img src="images/process_chart.png" width="700" >
 Figure 1. Typical process chart for the set of modules making up a system build.
 
 <h2>Prepare Release Candidate Branch</h2>
@@ -19,7 +19,7 @@ In order to enable testing and validation before releasing as production, we nee
 The module owner or developer creates an RC branch after successful developer build.<br>
 <pre>
 git branch RC          # See endnote[i]
-git push origin RC     # origin=git.kbase.us or github.com/kbase
+git push origin RC     # origin=<a href="https://git.kbase.us">git.kbase.us</a> or <a href="github.com/kbase">github.com/kbase</a>
 </pre>
 The team performing independent testing and independent build will start with the RC branch:
  <pre>
@@ -27,5 +27,4 @@ git fetch origin       # This will make the RC branch visible on local
 git checkout RC
 </pre>
 At this point, all changes that result from the independent testing and independent build are committed to the RC branch. These changes can be ported to the master branch later.
-
 </html>
