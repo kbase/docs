@@ -18,7 +18,7 @@ In order to enable testing and validation before releasing as production, we nee
 <br>
 The module owner or developer creates an RC branch after successful developer build.<br>
 <pre>
-git branch RC          # See endnote[i]
+git branch RC          # See endnote <a href="#1">[i]</a>
 git push origin RC     # origin=<a href="https://git.kbase.us">git.kbase.us</a> or <a href="github.com/kbase">github.com/kbase</a>
 </pre>
 The team performing independent testing and independent build will start with the RC branch:
@@ -27,4 +27,8 @@ git fetch origin       # This will make the RC branch visible on local
 git checkout RC
 </pre>
 At this point, all changes that result from the independent testing and independent build are committed to the RC branch. These changes can be ported to the master branch later.
+<br>
+<br>
+<hr>
+<a name="1"><b>[i]</b></a> If the creation of the RC branch fails because one already exists, then you need to move the existing RC branch in the local and push to the remote (git ls-remote origin; git mv RC RC-O1; etc.)
 </html>
