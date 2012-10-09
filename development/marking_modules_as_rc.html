@@ -13,21 +13,26 @@ The aims for the release procedure are to:
 <img src="/docs/development/images/process_chart.png" width="600" >
 Figure 1. Typical process chart for the set of modules making up a system build.
 
+<h2>Release Candidate Version Numbers</h2>
+In order to avoid renaming of release candidate branches, a sequential release candidate number is used. The general form takes the following syntax <b>RC-n</b> where <b>n</b> is a sequentially increaseing integer starting at 1. This number is referred to as the Release Candidate (or RC) version number.
+
 <h2>Prepare Release Candidate Branch</h2>
-In order to enable testing and validation before releasing as production, we need to stabilize and test a snapshot of current development branch. This is accomplished by forking a release candidate (RC) a few days before release of the RC branch to production. The RC branch is created by the owner of the module immediately after the <i>developer build</i> is complete. This RC branch will be used for hot-fixing during and after <i>independent testing</i> and <i>deployment onto production hardware.</i>
+In order to enable testing and validation before releasing as production, we need to stabilize and test a snapshot of current development branch. This is accomplished by forking a release candidate (RC-1, RC-2, etc.) a few days before release of the RC branch to production. The RC branch is created by the owner of the module immediately after the <i>developer build</i> is complete. This RC branch will be used for hot-fixing during and after <i>independent testing</i> and <i>deployment onto production hardware.</i>
 <br>
 The module owner or developer creates an RC branch after successful developer build.<br>
 <pre>
+git ls-remote origin   # this will display all the branches, so you can select the next available RC version number
+git fetch origin       # just to ensure that your local module has all the same branch references as the remote
 git branch RC          # See endnote <a href="#1">[i]</a>
 git push origin RC     # origin=<a href="https://git.kbase.us">git.kbase.us</a> or <a href="http://github.com/kbase">github.com/kbase</a>
 </pre>
-The team performing independent testing and independent build will start with the RC branch:
+The team performing independent testing and independent build will start with the RC branch with the highest RC version number. The easiest way to do this is to start with a fresh clone of the RC branch:
  <pre>
-git fetch origin       # This will make the RC branch visible on local
-git checkout RC
+git ls-remote origin   # to determine highest RC version number
+git clone -b RC-n kbase@git.kbase.us:modulename    # where n is the highest RC version number
 </pre>
 At this point, all changes that result from the independent testing and independent build are committed to the RC branch. These changes can be ported to the master branch later.
 <br><br><br>
 <hr>
-<a name="1"><b>[i]</b></a> If the creation of the RC branch fails because one already exists, then you need to move the existing RC branch in the local and push to the remote (git ls-remote origin; git mv RC RC-O1; etc.)
+<a name="1"><b>[i]</b></a> If the creation of the RC branch fails because one already exists, then you need to move the existing RC branch in the local and push to the remote (git ls-remote origin; git fetch origin; git mv RC RC-O1; etc.)
 </html>
