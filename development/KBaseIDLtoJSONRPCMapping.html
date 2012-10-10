@@ -1,0 +1,103 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <meta content="text/html; charset=ISO-8859-1"
+      http-equiv="content-type">
+    <title>KBase IDL to JSON-RPC Mapping</title>
+  </head>
+  <body>
+    <h1>KBase IDL to JSON-RPC Mapping</h1>
+    <p>In this document we define the mapping between language construts
+      in the KBase interface description language to their corresponding
+      constructs in the JSON-RPC wire protocol.</p>
+    <h2>Service Naming</h2>
+    <p>Service names do not appear explicitly in the wire protocol
+      mapping. Instead, we assume that the JSON-RPC endpoint for each
+      service is well-known via a mechanism outside the scope of this
+      document (e.g. the KBase infrastructure project defines common
+      well-known names of the form
+      http://api.kbase.us/services/&lt;service_name&gt; for each
+      service, and the hosting infrastructure arranges for requests to
+      those names to be routed to the appropriate service handlers).</p>
+    <h2>Modules</h2>
+    <p>A service may be composed of multiple modules. The decomposition
+      into modules allows the implementor of a service to split the
+      implementation between multiple source code bases. For example,
+      the Central Store service is composed of two modules, the CDMI-API
+      which contains the hand-written API routines and the
+      CDMI-EntityAPI which contains the routines that are automatically
+      generated from the XML description of the database.</p>
+    <h2> Function Invocation</h2>
+    <p>A function definition in KIDL maps to a JSON-RPC RPC call. The
+      method name in the RPC call is the concatenation of the KIDL
+      module name and the KIDL function name.</p>
+    <p>The parameters to the function are encoded by position as a JSON
+      Array. Each parameter is encoded using the data encoding mechanism
+      discussed below.</p>
+    <p>The return values from the function are encoded as a JSON Array
+      with one element per return value. A void function will return an
+      empty Array. A function returning one value will return an Array
+      containing one element.</p>
+    <h2>Error Returns</h2>
+    <p>There are a number of possible causes for error returns from a
+      function call. Where possible error returns are noted using the
+      JSON-RPC error object response mechanism. These errors include an
+      error code, a message string, and optional data. If the error was
+      triggered by an exception on the server side as much information
+      as possible (stack traces, etc.) will be included in the data
+      return.</p>
+    <h2>Data Mapping<br>
+    </h2>
+    <p>The KIDL data types map to JSON as follows.</p>
+    <table border="1" cellpadding="2" cellspacing="2" width="100%">
+      <tbody>
+        <tr>
+          <td valign="top">string<br>
+          </td>
+          <td valign="top">string<br>
+          </td>
+        </tr>
+        <tr>
+          <td valign="top">int<br>
+          </td>
+          <td valign="top">number<br>
+          </td>
+        </tr>
+        <tr>
+          <td valign="top">float / double<br>
+          </td>
+          <td valign="top">number<br>
+          </td>
+        </tr>
+        <tr>
+          <td valign="top">struct <br>
+          </td>
+          <td valign="top">Object. The names of the struct items are the
+            names in the Object.<br>
+          </td>
+        </tr>
+        <tr>
+          <td valign="top">list&lt;&gt;<br>
+          </td>
+          <td valign="top">Array<br>
+          </td>
+        </tr>
+        <tr>
+          <td valign="top">tuple&lt;&gt;<br>
+          </td>
+          <td valign="top">Array<br>
+          </td>
+        </tr>
+        <tr>
+          <td valign="top">mapping&lt;&gt;<br>
+          </td>
+          <td valign="top">Object. The keys of the mapping are the names
+            in the Object.<br>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <p><br>
+    </p>
+  </body>
+</html>
