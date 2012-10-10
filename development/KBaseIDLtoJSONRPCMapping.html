@@ -97,7 +97,12 @@
         </tr>
       </tbody>
     </table>
-    <p><br>
-    </p>
+    <h2>Discussion</h2>
+    <p>I am not entirely convinced the separation of module and service
+      at the protocol level is a good idea; while it makes sense at the
+      implementation level it may be too much detail to expose to the
+      protocol. Since namespaces between modules in a service must be
+      unique anyway, a service implementation can maintain a mapping on
+      its own to direct the request to the appropriate handler.</p>
   </body>
 </html>
