@@ -47,7 +47,7 @@ username and password.
   [Username:] ***GLOBUS_ONLINE_ACCOUNT***
   [Password:] ***GLOBUS_ONLINE_PASSWORD***
   Created: $HOME/.jnomics/globus_auth.properties
-<pre>
+</pre>
 
 <h2>Aligning reads to a reference genome</h2>
 
@@ -134,7 +134,7 @@ E. coli loaded into the infrastructure.
 </pre>
 
 
-<h3>3. Align reads with Bowtie2
+<h3>3. Align reads with Bowtie2</h3>
 
 <p>
 To align the reads to a reference genome simply call jkbase compute with the bowtie argument.
@@ -167,7 +167,7 @@ using the commandline client.
 <pre>
   $ jkbase compute status -job &lt;jobID&gt;
 
-                           ID:                     &lt;jobID&gt;
+                           ID:                        &lt;jobID&gt;
                      Username:    ***GLOBUS_ONLINE_ACCOUNT***
                      Complete:                          false
                 Running State:                              1
@@ -177,14 +177,16 @@ using the commandline client.
 </pre>
 
 <p>
-You will know the job is complete when "Complete" is set to true. 
-Here the alignments are 80.5% complete
+You will know the job is complete when "Complete" is set to true.  Make sure you
+wait for the job to complete before continuing to the next step. Here the
+alignments are only 80.5% complete, but here is how it looks when the job
+completes.
 </p>
 
 <pre>
   $ jkbase compute status -job &lt;jobID&gt;
 
-                           ID:                     &lt;jobID&gt;
+                           ID:                        &lt;jobID&gt;
                      Username:    ***GLOBUS_ONLINE_ACCOUNT***
                      Complete:                           true
                 Running State:                              2
