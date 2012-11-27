@@ -1,0 +1,35 @@
+<h1>Finding Operons for a Microbial Gene</h1>
+<p>
+<strong>Purpose:</strong> Learn how to use the Protein Info service to find operons for a microbial gene
+<p>
+<strong>Required Prerequisites:</strong> <a href="http://kbase.us/developer-zone/tutorials/getting-started/getting-started-with-kbase/">Getting Started with KBase</a>
+<p>
+<strong>Suggested Prerequisites:</strong> None
+<p>
+<strong>Related Tutorials:</strong>  <a href="http://kbase.us/developer-zone/tutorials/apis/getting-started-with-kbase-apis/extracting-data-from-the-cs-using-the-cs-api-some-typical-examples/">Extracting Data from the CS Using the CS-API: Some Typical Examples</a>, Translating Microbes Online IDs to and from KBase ids
+<p>
+<h2>Introduction</h2>
+This tutorial is intended to teach developers how to use the Protein
+Info service to get information on the operon a microbial gene belongs to.
+<p>
+<h2>Sample Program to look up Operons for a Microbial Gene</h2>
+<pre>
+#!/usr/bin/perl
+
+use strict;
+use Data::Dumper;
+use Bio::KBase::ProteinInfoService::Client;
+
+my $client=Bio::KBase::ProteinInfoService::Client->new("http://localhost:7057");
+
+my $fids=$client->fids_to_operons(["kb|g.20029.peg.3202"]);
+warn Dumper($fids);
+</pre>
+<p>
+
+The above program assumes that you're running the service locally; if not,
+replace "localhost" with the IP address of the machine running the
+service.
+
+The above program should return "???" FIXME--could not be tested; hangs for >1 hr.
+<pre>
