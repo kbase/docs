@@ -1,189 +1,116 @@
 <h1>Towards a Controlled Vocabulary Part 1: Defining Exemplars</h1>
- Much has been said about the desirability of a controlled vocabulary for protein function and how it might be achieved. One of the central goals of the KBase effort will be to develop detailed, predictive models of microbes. A consistent, controlled vocabulary of protein function will be needed to support automated generation of these models. <br />
-<br />
+ Much has been said about the desirability of a controlled vocabulary for protein function and how it might be achieved. One of the central goals of the KBase effort will be to develop detailed, predictive models of microbes. A consistent, controlled vocabulary of protein function will be needed to support automated generation of these models. <br>
+<br>
  The KBase will include a major effort to automatically construct <a name="metabolic426">metabolic</a>
  models of organisms directly from sequenced genomes. Much of the technology used by KBase will come directly from the <a name="SEED427">SEED</a>
  and <a name="Model428">Model</a>
+
  <a name="SEED429">SEED</a>
  Projects which utilize the vocabulary established by the <a name="SEED430">SEED</a>
  Project. We wish to remove this dependency on the <a name="SEED431">SEED</a>
- voabulary as quickly as possible, and this short note sketches out the plan for achieving this and how to begin implementing it. <br />
-<br />
+ vocabulary as quickly as possible, and this short note sketches out the plan for achieving this and how to begin implementing it. <br>
+<br>
 <h2>Limiting the Scope</h2>
- Unifying the distinct vocabularies of function would require a major effort. However, if one circumscribes the goal to <ul><li>identifying the functional roles needed to support modeling, <li>creating an abstract representation for each role in this limited set, and <li>buiilding translation dictionaries to and from this set of abstract functions, </ul>
-<br />
- a plan can be formulated that could be implemented by modest resources and good will. <br />
-<br />
+
+ Unifying the distinct vocabularies of function would require a major effort. However, if one circumscribes the goal to <ul><li>identifying the functional roles needed to support modeling, </li><li>creating an abstract representation for each role in this limited set, and </li><li>buiilding translation dictionaries to and from this set of abstract functions, </li></ul>
+<br>
+ a plan can be formulated that could be implemented by modest resources and good will. <br>
+<br>
  So, how many functional roles are now used in the construction of <a name="metabolic432">metabolic</a>
  models? It is clear that ultimately we wish to include regulatory models, and eventually all functional roles that occur in living organisms, but for now let us confine ourselves to the set of functional roles needed to support <a name="metabolic433">metabolic</a>
- modeling. You can just use the command <br />
-<pre>
-    <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#all_roles_used_in_models" target='_blank'>all_roles_used_in_models</a> 
-<br /></pre>
+
+ modeling. You can just use the command <br>
+<pre>    <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#all_roles_used_in_models" target="_blank">all_roles_used_in_models</a> <br><br></pre>
  to get the current list of functional roles used in <a name="metabolic434">metabolic</a>
  models. Currently, there are about 2000-2500. This is a manageable number. <h2>The Concept of <i>Exemplars</i></h2>
  The key to a rapid and straightforward path to supporting models built using differing vocabularies of function is the concept of <b>exemplar</b>
-. We choose a sequence for which <ul><li> we believe that we know the function of the sequence (ideally through experimentation reported in the <a name="literature435">literature</a>), and <li> the sequence has been annotated by a number of groups (and we conjecture that they believe their functions to be reliable due to the <a name="literature436">literature</a>). </ul>
- Let&#39;s begin with connecting the roles used in models to <a name="literature437">literature</a>
-. A simple, but somewhat slow, way to do this is using <br />
-<pre>
-         <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#all_roles_used_in_models" target='_blank'>all_roles_used_in_models</a> | 
-	 <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#roles_to_fids" target='_blank'>roles_to_fids</a> 2&gt; roles.without.fids | 
-	 <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#fids_to_literature" target='_blank'>fids_to_literature</a> 2&gt; roles.fids.no.literature &gt; role.fid.pubmed 
-<br /></pre>
+
+. We choose a sequence for which <ul><li> we believe that we know the function of the sequence (ideally through experimentation reported in the <a name="literature435">literature</a>), and </li><li> the sequence has been annotated by a number of groups (and we conjecture that they believe their functions to be reliable due to the <a name="literature436">literature</a>). </li></ul>
+ Let's begin with connecting the roles used in models to <a name="literature437">literature</a>
+. A simple, but somewhat slow, way to do this is using <br>
+<pre>         <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#all_roles_used_in_models" target="_blank">all_roles_used_in_models</a> | <br>	 <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#roles_to_fids" target="_blank">roles_to_fids</a> 2&gt; roles.without.fids | <br>	 <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#fids_to_literature" target="_blank">fids_to_literature</a> 2&gt; roles.fids.no.literature &gt; role.fid.pubmed <br><br></pre>
+
  This requires some explanation. First, many of the command-line scripts that cross from one entity type to another write input lines that could not be matched up to <i>stderr</i>
 . Thus, roles that cannot be connected to fids get written to <i>roles.without.fids</i>
 , and fids that cannot be lined to <a name="literature438">literature</a>
  cause lines to be written to <i>roles.fids.no.<a name="literature439">literature</a></i>
-. Roles that cannot be connected to fids result from functions that may have been renamed (without renaming the functional role) or roles that have been conjectured but simply have not yet been connect to specific genes. They represent a set of issues that need to be processed manually. When I last ran this command, I found 148 such roles. <br />
-<br />
- If we now run, <br />
-<pre>
-      cut -f1,2 role.fid.pubmed | <a href="http://kbase.us/developer-zone/api-documentation/cdm-entity-relationship-command-scripts/#get_relationship_Produces" target='_blank'>get_relationship_Produces</a> -to id | sort -u &gt; role.fid.md5
-<br /></pre>
+. Roles that cannot be connected to fids result from functions that may have been renamed (without renaming the functional role) or roles that have been conjectured but simply have not yet been connect to specific genes. They represent a set of issues that need to be processed manually. When I last ran this command, I found 148 such roles. <br>
+
+<br>
+ If we now run, <br>
+<pre>      cut -f1,2 role.fid.pubmed | <a href="http://kbase.us/developer-zone/api-documentation/cdm-entity-relationship-command-scripts/#get_relationship_Produces" target="_blank">get_relationship_Produces</a> -to id | sort -u &gt; role.fid.md5<br><br></pre>
  we get a table showing roles and fids, where each of the fids connnects to a least one pubmed reference. The <i><a name="cut440">cut</a></i>
  picks up the first two fields (<i>role</i>
+
  and <i>fid</i>
 , dropping the <i>pubmed id</i>
-). Then the <br />
-<pre>
-        <a href="http://kbase.us/developer-zone/api-documentation/cdm-entity-relationship-command-scripts/#get_relationship_Produces" target='_blank'>get_relationship_Produces</a> -to id
-<br /></pre>
+). Then the <br>
+<pre>        <a href="http://kbase.us/developer-zone/api-documentation/cdm-entity-relationship-command-scripts/#get_relationship_Produces" target="_blank">get_relationship_Produces</a> -to id<br><br></pre>
  is used to pick up the <a name="md5441">md5</a>
+
  value of the <a name="ProteinSequence442">ProteinSequence</a>
  corresponding to a fid. To understand how this works, you need to know that the relationship <i>Produces</i>
  connects <i><a name="Feature443">Feature</a></i>
  entities to <i><a name="ProteinSequence444">ProteinSequence</a></i>
  entities, and that the <a name="md5445">md5</a>
+
  hash values are used as IDs for the <i><a name="ProteinSequence446">ProteinSequence</a></i>
- entities. To see how this works, you might try running <br />
-<pre>
-        echo &#39;kb|g.0.peg.2659&#39; | <a href="http://kbase.us/developer-zone/api-documentation/cdm-entity-relationship-command-scripts/#get_relationship_Produces" target='_blank'>get_relationship_Produces</a> -to id
-<br /></pre>
- and study what comes out. Now, let us look at a portion of the table representing fids that can be connected to a critical enzyme of glycolysis: <br />
-<pre>
-6-phosphofructokinase (EC 2.7.1.11)	kb|g.0.peg.2659	        9f6606c2e93c6ac75fdc60dff2f54955
-6-phosphofructokinase (EC 2.7.1.11)	kb|g.1052.peg.2290	9f6606c2e93c6ac75fdc60dff2f54955
-6-phosphofructokinase (EC 2.7.1.11)	kb|g.1053.peg.2771	9f6606c2e93c6ac75fdc60dff2f54955
-6-phosphofructokinase (EC 2.7.1.11)	kb|g.1081.peg.3424	9f6606c2e93c6ac75fdc60dff2f54955
-6-phosphofructokinase (EC 2.7.1.11)     kb|g.1406.peg.856       1c183b0fa280f9dc25b4e88d234f10f6
-6-phosphofructokinase (EC 2.7.1.11)     kb|g.1445.peg.3274      9f6606c2e93c6ac75fdc60dff2f54955
-6-phosphofructokinase (EC 2.7.1.11)     kb|g.1478.peg.3901      9f6606c2e93c6ac75fdc60dff2f54955
-.
-.
-.
-<br /></pre>
+ entities. To see how this works, you might try running <br>
+<pre>        echo 'kb|g.0.peg.2659' | <a href="http://kbase.us/developer-zone/api-documentation/cdm-entity-relationship-command-scripts/#get_relationship_Produces" target="_blank">get_relationship_Produces</a> -to id<br><br></pre>
+ and study what comes out. Now, let us look at a portion of the table representing fids that can be connected to a critical enzyme of glycolysis: <br>
+<pre>6-phosphofructokinase (EC 2.7.1.11)	kb|g.0.peg.2659	        9f6606c2e93c6ac75fdc60dff2f54955<br>6-phosphofructokinase (EC 2.7.1.11)	kb|g.1052.peg.2290	9f6606c2e93c6ac75fdc60dff2f54955<br>6-phosphofructokinase (EC 2.7.1.11)	kb|g.1053.peg.2771	9f6606c2e93c6ac75fdc60dff2f54955<br>6-phosphofructokinase (EC 2.7.1.11)	kb|g.1081.peg.3424	9f6606c2e93c6ac75fdc60dff2f54955<br>6-phosphofructokinase (EC 2.7.1.11)     kb|g.1406.peg.856       1c183b0fa280f9dc25b4e88d234f10f6<br>6-phosphofructokinase (EC 2.7.1.11)     kb|g.1445.peg.3274      9f6606c2e93c6ac75fdc60dff2f54955<br>6-phosphofructokinase (EC 2.7.1.11)     kb|g.1478.peg.3901      9f6606c2e93c6ac75fdc60dff2f54955<br>.<br>.<br>.<br><br></pre>
+
  We have over 200 distinct fids that all are believed to implement the functional role and can be linked to at least one pubmed reference. It is worth noting that the pubmed articles (<a name="Publication447">Publication</a>
  entities) are linked to <a name="ProteinSequence448">ProteinSequence</a>
  entities, and then through them to Features. This means that we may see many Fids that share identical protein sequence (note the <a name="md5449">md5</a>
- values in the initial output). <br />
-<br />
- Now we are ready to illustrate the concept of an exemplar. Rather than saying <br />
-<pre>
-      the function of protein X is &quot;6-phosphofructokinase (EC 2.7.1.11)&quot;, 
-<br /></pre>
- we can say <br />
-<pre>
-      the function of protein X is the same as that of feature kb|g.0.peg.2659,
-      which has a sequence with an md5 hash of 9f6606c2e93c6ac75fdc60dff2f54955.
-<br /></pre>
+ values in the initial output). <br>
+<br>
+ Now we are ready to illustrate the concept of an exemplar. Rather than saying <br>
+
+<pre>      the function of protein X is "6-phosphofructokinase (EC 2.7.1.11)", <br><br></pre>
+ we can say <br>
+<pre>      the function of protein X is the same as that of feature kb|g.0.peg.2659,<br>      which has a sequence with an md5 hash of 9f6606c2e93c6ac75fdc60dff2f54955.<br><br></pre>
  Thus, we have an <i>abstract function</i>
  which we represent with a specific feature ID (<i>kb|g.0.<a name="peg450">peg</a>.2659</i>
-). When we say <i>&quot;The function of feature X is the same as that of exemplar Y&quot;</i>
+
+). When we say <i>"The function of feature X is the same as that of exemplar Y"</i>
  anyone can look up the sequence of the exemplar in KBase, they can access any attached <a name="literature451">literature</a>
 , and they can investigate the potential role of <i>X</i>
- in modelling. Further, they can do all this without arguing about how to precisely label the abstract function. <br />
-<br />
+ in modelling. Further, they can do all this without arguing about how to precisely label the abstract function. <br>
+<br>
  Now let us consider how we might use the data in the file <i>role.fid.<a name="md5452">md5</a></i>
+
  to select an appropriate exemplar for each functional role. It really should not matter which ones we pick. However, we have chosen to use <i>Escherichia coli</i>
  and <i>Bacillus subtilis</i>
- features when possible. We consider these to be relatively stable. We begin by just getting a 3-column table <br />
-<pre>
-           [role,fid,genome-name]
-<br /></pre>
- using <br />
-<pre> 
-           cut -f1,2 role.fid.md5 | 
-	   <a href="http://kbase.us/developer-zone/api-documentation/cdm-entity-relationship-command-scripts/#get_relationship_IsOwnedBy" target='_blank'>get_relationship_IsOwnedBy</a> -to scientific_name | 
-	   <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#fids_to_functions" target='_blank'>fids_to_functions</a> -c 2 |
-	   sort &gt; role.fid.genome.function
-<br /></pre>
- We have tacked on the function of each fid because we wish to eliminate the use of multifunctional fids as exemplars. We do this by only looking at fids with functions that exactly match the role in the little program below. Now the simple program <br />
-<pre>
+ features when possible. We consider these to be relatively stable. We begin by just getting a 3-column table <br>
+<pre>           [role,fid,genome-name]<br><br></pre>
+ using <br>
 
-# choose_exemplars.pl
-#
-my %exemplar;
-while ($_ = &lt;STDIN&gt;)
-{
-    chomp;
-    my($role,$fid,$genome_name,$function) = split(/\t/,$_);
-    $function =~ s/\s*#.*$//;     # some annotators have appended comments
-                                  # beginning with the hash; we remove these
-                                  # before verifying that the function
-                                  # matches the role (multifunctional proteins
-                                  # should probably not be exemplars)
-    if ($role eq $function)
-    {
-        my $existing = $exemplar{$role};
-        if ((! $existing) || &amp;better($genome_name,$existing-&gt;[1]))
-        {	
-	    $exemplar{$role} = [$fid,$genome_name];
-        }
-    }
-}
+<pre> <br>           cut -f1,2 role.fid.md5 | <br>	   <a href="http://kbase.us/developer-zone/api-documentation/cdm-entity-relationship-command-scripts/#get_relationship_IsOwnedBy" target="_blank">get_relationship_IsOwnedBy</a> -to scientific_name | <br>	   <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#fids_to_functions" target="_blank">fids_to_functions</a> -c 2 |<br>	   sort &gt; role.fid.genome.function<br><br></pre>
+ We have tacked on the function of each fid because we wish to eliminate the use of multifunctional fids as exemplars. We do this by only looking at fids with functions that exactly match the role in the little program below. Now the simple program <br>
 
-foreach my $role (sort keys(%exemplar))
-{
-    my($fid,$genome_name) = @{$exemplar{$role}};
-    print join(&quot;\t&quot;,($role,$fid,$genome_name)),&quot;\n&quot;;
-}
+<pre># choose_exemplars.pl<br>#<br>my %exemplar;<br>while ($_ = &lt;STDIN&gt;)<br>{<br>    chomp;<br>    my($role,$fid,$genome_name,$function) = split(/\t/,$_);<br>    $function =~ s/\s*#.*$//;     # some annotators have appended comments<br>                                  # beginning with the hash; we remove these<br>                                  # before verifying that the function<br>                                  # matches the role (multifunctional proteins<br>                                  # should probably not be exemplars)<br>    if ($role eq $function)<br>    {<br>        my $existing = $exemplar{$role};<br>        if ((! $existing) || &amp;better($genome_name,$existing-&gt;[1]))<br>        {	<br>	    $exemplar{$role} = [$fid,$genome_name];<br>        }<br>    }<br>}<br><br>foreach my $role (sort keys(%exemplar))<br>{<br>    my($fid,$genome_name) = @{$exemplar{$role}};<br>    print join("\t",($role,$fid,$genome_name)),"\n";<br>}<br><br>sub better {<br>    my($x,$existing) = @_;<br><br>    return ((($x =~ /Escherichia coli/) &amp;&amp; ($existing !~ /Escherichia coli/)) ||<br>	    (($x =~ /Bacillus subtilis/) &amp;&amp; ($existing !~ /Bacillus subtilis/)));<br>}<br><br></pre>
+ can be used to select an initial set of exemplars. <br>
+<pre>          perl choose_exemplars.pl &lt; role.fid.genome.function  &gt; exemplars.with.literature<br><br></pre>
 
-sub better {
-    my($x,$existing) = @_;
-
-    return ((($x =~ /Escherichia coli/) &amp;&amp; ($existing !~ /Escherichia coli/)) ||
-	    (($x =~ /Bacillus subtilis/) &amp;&amp; ($existing !~ /Bacillus subtilis/)));
-}
-<br /></pre>
- can be used to select an initial set of exemplars. <br />
-<pre>
-          perl choose_exemplars.pl &lt; role.fid.genome.function  &gt; exemplars.with.literature
-<br /></pre>
  For each functional role that is used in construction of KBase models, and for which we can find a <a name="literature453">literature</a>
- reference identifying a feature that implements the role, we have selected a feature to act as an exemplar. The feature has been the topic of at least one paper, and we believe that the paper supports the position that the exemplar feature implements the corresponding role. <br />
-<br />
+ reference identifying a feature that implements the role, we have selected a feature to act as an exemplar. The feature has been the topic of at least one paper, and we believe that the paper supports the position that the exemplar feature implements the corresponding role. <br>
+<br>
  We now have a set of functional roles that are represented by exemplars that are supported by <a name="literature454">literature</a>
  references. We have captured the roles that cannot be connected to any fids in <i>roles.without.fids</i>
 . Finally, we are left with roles that are connected to fids, but not to any fid that we have connected to <a name="literature455">literature</a>
+
 . The connections between roles and possible exemplars was captured in <i>roles.fids.no.<a name="literature456">literature</a></i>
- We need to delete from this file all roles for which exemplars have been chosen, and then select exemplars from those that are left. We can make fairly arbitrary choices to get initial exemplars. Perhaps the easiest way to make an initial choice is to just use <br />
-<pre>
-                perl delete_roles_with_exemplars.pl exemplars.with.literature &lt; roles.fids.no.literature | 
-                <a href="http://kbase.us/developer-zone/api-documentation/cdm-entity-relationship-command-scripts/#get_relationship_IsOwnedBy" target='_blank'>get_relationship_IsOwnedBy</a> -to scientific_name |
-                <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#fids_to_functions" target='_blank'>fids_to_functions</a> -c 2 | 
-                sort | 
-                perl choose_exemplars.pl &gt; exemplars.for.no.lit.roles
-<br /></pre>
- Here the simple perl program to filter out roles that already have exemplars is just <br />
-<pre>
-# delete_roles_with_exemplars.pl
-#
-my %roles_with_exemplars = map { $_ =~ /^([^\t\n]*)/; ($1 =&gt; 1) } `cat $ARGV[0]`;
-while ($_ = )
-{
-    if (($_ =~ /^([^\t\n]+)/) &amp;&amp; (! $roles_with_exemplars{$1}))
-    {
-	print $_;
-    }
-}
-<br /></pre>
- To get a list of the roles for which no exemplars could be chosen, we can use <br />
-<pre>
-    cat exemplars.with.literature exemplars.for.no.lit.roles &gt; exemplars
-    <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#all_roles_used_in_models" target='_blank'>all_roles_used_in_models</a> | perl delete_roles_with_exemplars.pl exemplars &gt; roles.without.exemplars
-<br /></pre>
- Out of the 2000-2500 roles used in the curent collection of models, there are often a small number for which no attachment to a sequence exists. These require manual curation and need to be continuously reviewed. In any event, we will have to curate the set of exemplars as new experiemental evidence becomes available. <br />
-<br />
+ We need to delete from this file all roles for which exemplars have been chosen, and then select exemplars from those that are left. We can make fairly arbitrary choices to get initial exemplars. Perhaps the easiest way to make an initial choice is to just use <br>
+<pre>                perl delete_roles_with_exemplars.pl exemplars.with.literature &lt; roles.fids.no.literature | <br>                <a href="http://kbase.us/developer-zone/api-documentation/cdm-entity-relationship-command-scripts/#get_relationship_IsOwnedBy" target="_blank">get_relationship_IsOwnedBy</a> -to scientific_name |<br>                <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#fids_to_functions" target="_blank">fids_to_functions</a> -c 2 | <br>                sort | <br>                perl choose_exemplars.pl &gt; exemplars.for.no.lit.roles<br><br></pre>
+
+ Here the simple perl program to filter out roles that already have exemplars is just <br>
+<pre># delete_roles_with_exemplars.pl<br>#<br>my %roles_with_exemplars = map { $_ =~ /^([^\t\n]*)/; ($1 =&gt; 1) } `cat $ARGV[0]`;<br>while ($_ = )<br>{<br>    if (($_ =~ /^([^\t\n]+)/) &amp;&amp; (! $roles_with_exemplars{$1}))<br>    {<br>	print $_;<br>    }<br>}<br><br></pre>
+
+ To get a list of the roles for which no exemplars could be chosen, we can use <br>
+<pre>    cat exemplars.with.literature exemplars.for.no.lit.roles &gt; exemplars<br>    <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#all_roles_used_in_models" target="_blank">all_roles_used_in_models</a> | perl delete_roles_with_exemplars.pl exemplars &gt; roles.without.exemplars<br><br></pre>
+ Out of the 2000-2500 roles used in the curent collection of models, there are often a small number for which no attachment to a sequence exists. These require manual curation and need to be continuously reviewed. In any event, we will have to curate the set of exemplars as new experiemental evidence becomes available. <br>
+
+<br>
  The choice of exemplars constitutes step 1 of the process of reaching interchangable <a name="annotations457">annotations</a>
- via controlled vocabularies. 
+ via controlled vocabularies.
