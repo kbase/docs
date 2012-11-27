@@ -1,0 +1,52 @@
+<h1>Translating Microbes Online IDs to and from KBase ids</h1>
+<p>
+<strong>Purpose:</strong> Learn how to use the Microbes Online ID translation service
+<p>
+<strong>Required Prerequisites:</strong> <a href="http://kbase.us/developer-zone/tutorials/getting-started/getting-started-with-kbase/">Getting Started with KBase</a>
+<p>
+<strong>Suggested Prerequisites:</strong> None
+<p>
+<strong>Related Tutorials:</strong>  <a href="http://kbase.us/developer-zone/tutorials/apis/getting-started-with-kbase-apis/extracting-data-from-the-cs-using-the-cs-api-some-typical-examples/">Extracting Data from the CS Using the CS-API: Some Typical Examples</a>
+<p>
+<h2>Introduction</h2>
+This tutorial is intended to teach developers who are used to working
+with Microbes Online identifiers how to translate these identifiers
+to and from KBase idenfifiers.
+<p>
+Microbes Online uses "Locus IDs" to refer to loci on
+a genome.  Microbe Online locus ids are integers.
+<p>
+KBase has two objects that correspond to loci: "features" and
+"proteins."  A "feature" is an annotated region of a genome, and
+feature ids ("fids") are alphanumeric (e.g., "kb|g.20029.peg.3202").
+A "protein" is the protein encoded by a feature, and these identifiers
+look like MD5 sums (e.g., "cf87188c893421a9a13c9300b1c3cd68").
+<p>
+<h2>Sample Program to Translate Microbes Online Locus IDs to KBase Feature IDs</h2>
+<pre>
+#!/usr/bin/perl
+
+use strict;
+use Data::Dumper;
+use Bio::KBase::MOTranslationService::Client;
+
+my $client=Bio::KBase::MOTranslationService::Client->new("http://localhost:7061");
+
+my $locusId2fids=$client->moLocusIds_to_fids([208945,7704787]);
+warn Dumper($locusId2fids);
+</pre>
+<p>
+
+The above program assumes that you're running the service locally; if not,
+replace "localhost" with the IP address of the machine running the
+service.
+
+The above program should return "???" FIXME--could not be tested; produces:
+<pre>
+Error invoking method moLocusIds_to_fids
+HTTP status: 500 Status read failed: Connection reset by peer
+Function invoked: moLocusIds_to_fids
+
+Trace begun at /kb/dev_container/modules/translation/lib/Bio/KBase/MOTranslationService/Client.pm line 291
+Bio::KBase::MOTranslationService::Client::moLocusIds_to_fids('Bio::KBase::MOTranslationService::Client=HASH(0x28036e8)', 'ARRAY(0x27fb710)') called at mot-test.t line 9
+</pre>
