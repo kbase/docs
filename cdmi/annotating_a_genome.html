@@ -1,140 +1,113 @@
 <h1>Annotating a Genome Using KBase Tools</h1>
 <p><strong>Purpose: </strong>This tutorial demonstrates how to annotate a set of closely related genomes using KBase tools. For example, the genus <i>Geobacter</i> can be used to study the pan-genome and construct <a name="metabolic315">metabolic</a> models to clarify differences between strains. 
-<p><strong>Required Prerequisite Activities: </strong><a href="/developer-zone/tutorials/getting-started/getting-started-with-the-kbase/">Getting Started with KBase</a>
-<p><strong>Suggested Prerequesite Activities: </strong><a href="/developer-zone/tutorials/getting-started/some-basic-exercises-using-kbase/">Basic Exercises Using KBase</a>
-<p><strong>Related Tutorials: </strong>None
-<h2>Select a genome</h2>
+</p><p><strong>Required Prerequisite Activities: </strong><a href="/developer-zone/tutorials/getting-started/getting-started-with-the-kbase/">Getting Started with KBase</a>
+</p><p><strong>Suggested Prerequesite Activities: </strong><a href="/developer-zone/tutorials/getting-started/some-basic-exercises-using-kbase/">Basic Exercises Using KBase</a>
+</p><p><strong>Related Tutorials: </strong>None
+
+</p><h2>Select a genome</h2>
  To see which <i>Geobacter</i>
  genomes are in the <i><a name="Central Store316">Central Store</a> (CS)</i>
- of KBase, use<br />
-<pre>
-  <a href="http://kbase.us/developer-zone/api-documentation/cdm-entity-relationship-command-scripts/#all_entities_Genome" target='_blank'>all_entities_Genome</a> -f scientific_name | grep Geobacter
-<br /></pre>
+ of KBase, use<br>
+<pre>  <a href="http://kbase.us/developer-zone/api-documentation/cdm-entity-relationship-command-scripts/#all_entities_Genome" target="_blank">all_entities_Genome</a> -f scientific_name | grep Geobacter<br><br></pre>
+
  <i>Geobacter sulfurreducens KN400</i>
- is a good example genome to begin with. Its KBase id is <i>kb|g.2860</i>
-. Locate it in the list of genomes. Obtain a local copy of the contigs of that genome using the step below. <h2>Extract a FASTA file of contigs from the CS</h2>
- You can upload any desired set of contigs from a file in your local machine to your IRIS workarea. However, in this example, obtain the contigs from the CS. To do that, use <br />
-<pre>
-  echo &#39;kb|g.2860&#39; | <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#genomes_to_contigs" target='_blank'>genomes_to_contigs</a> | <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#contigs_to_sequences" target='_blank'>contigs_to_sequences</a> &gt; g.2860.contigs
-<br /></pre>
+ is a good example genome to start. Its KBase id is <i>kb|g.2860</i>.
+ Locate it in the list of genomes. Obtain a local copy of the contigs of that genome using the step below. <h2>Extract a FASTA file of contigs from the CS</h2>
+ You can upload any desired set of contigs from a file in your local machine to your IRIS workarea. However, in this example, obtain the contigs from the CS. To do that, use <br>
+<pre>  echo 'kb|g.2860' | <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#genomes_to_contigs" target="_blank">genomes_to_contigs</a> | <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#contigs_to_sequences" target="_blank">contigs_to_sequences</a> &gt; g.2860.contigs<br><br></pre>
+
 <h2>Create projects</h2>
  Create subdirectories to contain your separate projects. Make a subdirectory called <i>g.2860</i>
- where you will annotate kb|g.2860. (Do not use any special characters in your filenames, e.g., in this case the &#39;kb|&#39; prefix was left off). For example <br />
-<pre>
+ where you will annotate kb|g.2860. (Do not use any special characters in your filenames, e.g., in this case the 'kb|' prefix was left off). For example <br>
+<pre>  mkdir g.2860<br>  mv g.2860.contigs g.2860<br>  cd g.2860<br>  ls<br></pre>
+ The first command creates the subdirectory, the second moves our contigs into the subdirectory, the third moves our "position" to the subdirectory, and the last displays the contents of the subdirectory. We urge you to verify that it all works as described. <h2>Create a genome object to annotate</h2>
 
-  mkdir g.2860
-  mv g.2860.contigs g.2860
-  cd g.2860
-  ls
-</pre>
- The first command creates the subdirectory, the second moves our contigs into the subdirectory, the third moves our &quot;position&quot; to the subdirectory, and the last displays the contents of the subdirectory. We urge you to verify that it all works as described. <h2>Create a genome object to annotate</h2>
  Next, use the FASTA file of contigs to create a <i>genome object</i>
- using <br />
-<pre>
+ using <br>
+<pre>  fasta_to_genome 'Geobacter sulfurreducens KN400' Bacteria 11 &lt; g.2860.contigs &gt; genome<br><br></pre>
+ The above command creates a "genome object" in the file <i>genome</i>.
 
-  fasta_to_genome &#39;Geobacter sulfurreducens KN400&#39; Bacteria 11 &lt; g.2860.contigs &gt; genome
-
-</pre>
- The above command creates a &quot;genome object&quot; in the file <i>genome</i>
-. The object contains the contigs, the scientific name of the organism, the domain (we specified &#39;B&#39; for <i>Bacteria</i>
+ The object contains the contigs, the scientific name of the organism, the domain (we specified 'B' for <i>Bacteria</i>
 ), and the genetic code for the organism (i.e., 11, which is the code most commonly used with prokaryotic genomes). Use <em>ls</em>
  to see the file, and then click on it to see the encoded fields). Note that we have named our project subdirectory <i>g.2860, </i>
 which reflects the name of the genome whose contigs we copied. We are going to re-annotate the contigs, generating a whole new genome, which is what <b>fasta_to_genome</b>
  does; it registers a new genome ID that will not be used by anyone else. <h2>Annotate a genome object</h2>
- Now create an initial annotation for the genome using <br />
-<pre>
 
-  annotate_genome &lt; genome &gt; annotated.genome
-
-</pre>
+ Now create an initial annotation for the genome using <br>
+<pre>  annotate_genome &lt; genome &gt; annotated.genome<br><br></pre>
  This causes an initial annotation to be generated. It may take several minutes for large genomes. You can issue other commands while you wait, and the completion message will display below the command when the annotation is complete. When it completes, use <b>ls</b>
- to see the generated file, and click on it to see the encoded <a name="annotations317">annotations</a>
-. Alternatively, to the the features generated and placed in the annotated genome object (stored in <i>annotated.genome</i>
-), try <br />
-<pre>
-  genomeTO_to_feature_data &lt; annotated.genome &gt; features.txt
-</pre>
- which produces a tab-separated table containing <br />
-<pre>
-  [feature-id,location,type,assigned-function]
- <br /></pre>
+ to see the generated file, and click on it to see the encoded <a name="annotations317">annotations</a>.
+
+ Alternatively, to the the features generated and placed in the annotated genome object (stored in <i>annotated.genome</i>
+), try <br>
+<pre>  genomeTO_to_feature_data &lt; annotated.genome &gt; features.txt<br></pre>
+ which produces a tab-separated table containing <br>
+<pre>  [feature-id,location,type,assigned-function]<br> <br></pre>
+
  Use <em>ls</em>
  to see it and explore the contents. <h2>Build a metabolic reconstruction from an annotated genome</h2>
- The term &quot;<a name="metabolic318">metabolic</a>
- reconstruction&quot; as used here roughly means <i>a set of <a href="http://www.theseed.org/wiki/Glossary#Subsystem" name="subsystems319" target="blank_"> subsystems</a> that are believed to be present in the genome, along with the relevant variant codes</i>
-. Obtain a <a name="metabolic320">metabolic</a>
- reconstruction for the annotated genome using <br />
-<pre>
-  genomeTO_to_reconstructionTO &lt; annotated.genome &gt; reconstruction
-<br /></pre>
- To see the roles that were found, use <br />
-<pre>
-  reconstructionTO_to_roles &lt; reconstruction &gt; roles
-<br /></pre>
+ The term "<a name="metabolic318">metabolic</a>
+ reconstruction" as used here roughly means <i>a set of <a href="http://www.theseed.org/wiki/Glossary#Subsystem" name="subsystems319" target="blank_"> subsystems</a> that are believed to be present in the genome, along with the relevant variant codes</i>.
+
+ Obtain a <a name="metabolic320">metabolic</a>
+ reconstruction for the annotated genome using <br>
+<pre>  genomeTO_to_reconstructionTO &lt; annotated.genome &gt; reconstruction<br><br></pre>
+ To see the roles that were found, use <br>
+<pre>  reconstructionTO_to_roles &lt; reconstruction &gt; roles<br><br></pre>
+
  To see the <a name="subsystems321">subsystems</a>
- (along with the variant codes that seemed appropriate), use <br />
-<pre>
-  reconstructionTO_to_subsystems &lt; reconstruction &gt; subsystems
-<br /></pre>
+ (along with the variant codes that seemed appropriate), use <br>
+<pre>  reconstructionTO_to_subsystems &lt; reconstruction &gt; subsystems<br><br></pre>
 <h2>Get roles that might impact metabolic models</h2>
  How good are the <a name="annotations322">annotations</a>
+
  for your newly-annotated genome? One way to assess this is to focus on the <i>Roles </i>
  that might impact <a name="metabolic323">metabolic</a>
  models. We can look at the ones that were found and then compare them against those that exist in a similar, manually-curated genome. Begin by getting the subset of the Roles that might impact the <a name="metabolic324">metabolic</a>
- models:<br />
-<pre>
-  <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#all_roles_used_in_models" target='_blank'>all_roles_used_in_models</a> &gt; all.roles
-  a_and_b roles all.roles &gt; roles.for.models
-<br /></pre>
+ models:<br>
+<pre>  <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#all_roles_used_in_models" target="_blank">all_roles_used_in_models</a> &gt; all.roles<br>  a_and_b roles all.roles &gt; roles.for.models<br><br></pre>
+
 <h2>Get roles that might have been missed</h2>
  Now, compare this set of Roles against the set found in <i>Geobacter metallireducens GS-15</i>
  (<i>kb|g.9032</i>
- in the CS). Obtain the roles for that genome using <br />
-<pre>
-  echo &#39;kb|g.9032&#39; | <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#genomes_to_fids" target='_blank'>genomes_to_fids</a> CDS | <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#fids_to_roles" target='_blank'>fids_to_roles</a> 2&gt; /dev/null | <br />  cut -f 3 &gt; roles.in.g.9032
-<br /></pre>
- Note that the command <b><a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#fids_to_roles" target='_blank'>fids_to_roles</a></b>
- writes error messages when it cannot match a fid to any Roles. <p> Now use <br /><pre>
-  a_and_b roles.in.g.9032 all.roles &gt; roles.for.models.g.9032
-  a_not_b roles.for.models roles.for.models.g.9032 &gt; roles.to.search.for
-<br /></pre> to create a file of Roles in <i>kb|g.9032</i> that are not yet found in the <a name="annotations325">annotations</a> we got back for our new version of <i>g.2860</i>. 
+ in the CS). Obtain the roles for that genome using <br>
+<pre>  echo 'kb|g.9032' | <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#genomes_to_fids" target="_blank">genomes_to_fids</a> CDS | <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#fids_to_roles" target="_blank">fids_to_roles</a> 2&gt; /dev/null | <br>  cut -f 3 &gt; roles.in.g.9032<br><br></pre>
+
+ Note that the command <b><a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#fids_to_roles" target="_blank">fids_to_roles</a></b>
+ writes error messages when it cannot match a fid to any Roles. <p> Now use <br></p><pre>  a_and_b roles.in.g.9032 all.roles &gt; roles.for.models.g.9032<br>  a_not_b roles.for.models roles.for.models.g.9032 &gt; roles.to.search.for<br><br></pre> to create a file of Roles in <i>kb|g.9032</i> that are not yet found in the <a name="annotations325">annotations</a> we got back for our new version of <i>g.2860</i>. 
+
 <h2>Create an initial metabolic model</h2>
  Now that we have an annotated genome, create an initial <a name="metabolic326">metabolic</a>
- model using <br />
-<pre>
-  genome_to_fbamodel &lt; annotated.genome &gt; initial.model
-</pre>
+ model using <br>
+<pre>  genome_to_fbamodel &lt; annotated.genome &gt; initial.model<br></pre>
 <p>&nbsp;
-<p>After a minute or two, a <a name="metabolic327">metabolic</a> model object is stored in <i>initial.model</i>. 
-<h2>View the model</h2>
- We can convert this model into readable HTML to see what it contains: <pre>
-  fbamodel_to_html &lt; initial.model &gt; initial.model.html
-</pre>
+
+</p><p>After a minute or two, a <a name="metabolic327">metabolic</a> model object is stored in <i>initial.model</i>. 
+</p><h2>View the model</h2>
+ We can convert this model into readable HTML to see what it contains: <pre>  fbamodel_to_html &lt; initial.model &gt; initial.model.html<br></pre>
+
 <p>&nbsp;
-<p>After that command completes, use <em>ls</em> and click on the generated html. 
-<h2>Run flux balance analysis on the metabolic model</h2>
- Flux balance analysis (FBA) is a mathematical approach in which our model is used to simulate various cellular activities, typically the production of biomass or metabolites from transportable nutrients. Now that we have a model, apply flux balance analysis to determine whether our model can grow, and to discover which pathways are utilized during growth. <pre>
-  runfba &lt; initial.model &gt; solution.html
-</pre>
+</p><p>After that command completes, use <em>ls</em> and click on the generated html. 
+</p><h2>Run flux balance analysis on the metabolic model</h2>
+ Flux balance analysis (FBA) is a mathematical approach in which our model is used to simulate various cellular activities, typically the production of biomass or metabolites from transportable nutrients. Now that we have a model, apply flux balance analysis to determine whether our model can grow, and to discover which pathways are utilized during growth. <pre>  runfba &lt; initial.model &gt; solution.html<br></pre>
 <p>&nbsp;
-<p>The results from the FBA are printed in HTML in the output solution file. Simply run the <em>ls</em> command and click on the HTML file to view the solution. At the top of this file is a table of the parameters used to run the FBA. Directly below this table is another table showing the objective function and value. In all likelihood, your model did not grow at all. This is because the model is missing pathways needed for biomass production. When a model fails to grow, the FBA command attempst to diagnose the problem by identifying biomass components that cannot be produced. This is done by maximizing the production of each individual biomass component, one at a time. You can see these analysis results in your solution HTML file (see the metabolite production table). Note that some of your biomass components have no numbers in this table. These are the components that cannot be produced. Now try to fix the model by adding reactions to enable production of these components. 
-<h2>Gapfill the model</h2>
- We can run a gapfilling command on our model to automatically add reactions as needed to enable the production of all biomass components: <pre>
-  gapfill_fbamodel &lt; initial.model &gt; gapfilled.model
-</pre>
+
+</p><p>The results from the FBA are printed in HTML in the output solution file. Simply run the <em>ls</em> command and click on the HTML file to view the solution. At the top of this file is a table of the parameters used to run the FBA. Directly below this table is another table showing the objective function and value. In all likelihood, your model did not grow at all. This is because the model is missing pathways needed for biomass production. When a model fails to grow, the FBA command attempst to diagnose the problem by identifying biomass components that cannot be produced. This is done by maximizing the production of each individual biomass component, one at a time. You can see these analysis results in your solution HTML file (see the metabolite production table). Note that some of your biomass components have no numbers in this table. These are the components that cannot be produced. Now try to fix the model by adding reactions to enable production of these components. 
+</p><h2>Gapfill the model</h2>
+ We can run a gapfilling command on our model to automatically add reactions as needed to enable the production of all biomass components: <pre>  gapfill_fbamodel &lt; initial.model &gt; gapfilled.model<br></pre>
 <p>&nbsp;
-<p>Depending on the size and state of the genome, this could take minutes to hours, but when the analysis is complete, your model will have additional reactions in it, reflecting the ideal solution identified by the gapfilling algorithm to enable growth. Then rerun the flux balance analysis to determine the biomass production pathways of the organism. 
-<h2>Run flux balance analysis on the gapfilled model</h2>
+</p><p>Depending on the size and state of the genome, this could take minutes to hours, but when the analysis is complete, your model will have additional reactions in it, reflecting the ideal solution identified by the gapfilling algorithm to enable growth. Then rerun the flux balance analysis to determine the biomass production pathways of the organism. 
+
+</p><h2>Run flux balance analysis on the gapfilled model</h2>
  Now that the model has been gapfilled, it should be possible to simulate biomass production using flux balance analysis. Use the <i>runfba</i>
- command again: <pre>
-  runfba &lt; gapfilled.model &gt; solution.html
-</pre>
+ command again: <pre>  runfba &lt; gapfilled.model &gt; solution.html<br></pre>
 <p>&nbsp;
-<p>Once this command completes, use <em>ls</em> and click on the HTML produced by the FBA command. Your FBA solution should now include a nonzero objective value as well as numerous compound and reaction fluxes.
-<h2>Export the model to external tools</h2>
+</p><p>Once this command completes, use <em>ls</em> and click on the HTML produced by the FBA command. Your FBA solution should now include a nonzero objective value as well as numerous compound and reaction fluxes.
+
+</p><h2>Export the model to external tools</h2>
  Many other tools now exist that enable the analysis of genome-scale <a name="metabolic328">metabolic</a>
- models (e.g., the Cobra toolbox). Most of these tools read models printed in SBML format. Print the gapfilled model in SBML format so the model can be used with these tools: <pre>
-  fbamodel_to_sbml &lt; gapfilled.model &gt; gapfilled.model.sbml
-</pre>
+ models (e.g., the Cobra toolbox). Most of these tools read models printed in SBML format. Print the gapfilled model in SBML format so the model can be used with these tools: <pre>  fbamodel_to_sbml &lt; gapfilled.model &gt; gapfilled.model.sbml<br></pre>
 <p>&nbsp;
-<p>After the command completes, use <i>ls</i> and select the SBML file for download.
+</p><p>After the command completes, use <i>ls</i> and select the SBML file for download.
+
+</p>
