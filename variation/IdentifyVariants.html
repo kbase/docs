@@ -151,8 +151,12 @@ paired end reads that we uploaded above. The -organism flag selects the referenc
 for alignment as identified above. Here we are aligning the reads against the reference
 yeast genome. Note if you are using a KBase genome identifier, make sure to use single
 quotes around the genome name: <i>jkbase -organism 'kb|g.1870' ...</i>. You can also align
-the reads using bwa by substituting bwa for bowtie in the command above.
+the reads using bwa by substituting bwa for bowtie in the command above. If you run 
+<i>jkbase compute bowtie</i> or any of the jkbase commands without options, it will 
+remind you of the required parameters with a short help text.
 </p>
+
+
 
 
 <h3>4. Check status of running Job</h3>
