@@ -1,20 +1,68 @@
+
 <h1><a href="http://pubseed.theseed.org/ErdbDocWidget.cgi?xmlFileName=/home/parrello/FIGdisk/dist/releases/current/KBaseCDMI/KSaplingDBD.xml" target="_blank">The CDM Represented as an Entity-Relationship Model</a></h1>
+<p><strong>Purpose: </strong> Learn more about the Central Data Model
+(CDM) of KBase.
+</p>
+<p><strong>Required Prerequisite Activites: </strong> None </p>
+<p> <strong>Suggested Prerequisite Activities: </strong> None </p>
+<p> </p>
+<p><strong>Related Tutorials:</strong> <a href="http://www.kbase.us/developer-zone/tutorials/getting-started/getting-started-with-kbase/">Getting
+Started with KBase </a> and other
+"Getting Started" tutorials. </p>
 <h2>Introduction</h2>
-The <a name="Central Data Model329">Central Data Model</a>
- (<b><a name="CDM330">CDM</a></b>
-) describes the architecture of the Central Storage (<b>CS</b>
-). The CS is a database supporting an integration of the data needed to support the KBase. The <a name="CDM331">CDM</a>
- is specified as an <a name="Entity-Relationship Model332">Entity-Relationship Model</a>
-. The current contents of the CS are described in this <a href="http://pubseed.theseed.org/ErdbDocWidget.cgi?xmlFileName=/home/parrello/FIGdisk/dist/releases/current/KBaseCDMI/KSaplingDBD.xml" name="ER-Model333" target="_blank">ER-Model</a>
-. The model is made up of a set of diagrams, each displaying a subset of the overall <a name="ER-Model334">ER-Model</a>
-. In a small dropdown menu, you should be able to locate the current subsets that are available to you. Let us begin with the <i>Main Region</i>
-. Note that the diagram is made up of rectangles (which represent <i>Entities</i>
-) and diamonds (which represent <i>relationships between entities</i>
-). <h2>Navigating the Diagram<br /></h2>
-<p>Using the dropdown menu, you can move between different subsets of the overall model. You should verify that you can go back and forth <big>to </big>explore the types of entities stored included in the <a name="CDM335">CDM</a>. 
-<p> Once you have an overview of the types of entities included, you might investigate the data items (often called <i>attributes</i>) associated with instances of these entities. Click on <b><a name="Genome336">Genome</a></b>, and you should see a page that includes three types of information: 
-<ol><li><b>Relationships</b> is a list of relationships that connect a <a name="Genome337">Genome</a> entity to other entities. Each such relationship is really bi-directional -- that is, you can move from a <a name="Genome338">Genome</a> entity to an entity of another type, or alternatively from the other entity to th <a name="Genome339">Genome</a> entity. Each of these relationships has two names, each reflecting a direction. Thus, <b><a name="IsOwnerOf340">IsOwnerOf</a></b> is used to cross the relationship from a <a name="Genome341">Genome</a> to the Features defined for the <a name="Genome342">Genome</a>, while <b>IsOwnedBy</b> supports access of a <a name="Genome343">Genome</a> from a <a name="Feature344">Feature</a> associated with the <a name="Genome345">Genome</a>. <br /><br /><li><b>Fields:</b> lists the attributes stored for each instance of the entity. <br /><br /><li>Finally, <b>indexes</b> specifies the indexes maintained to support effective access to subsets of the entities. Unless you really care about database design, you can probably ignore this last table. </ol>
-<br />
- To get back to the diagram showing the entities and relationships, click on the <i>IMAGE</i>
- button (i.e., the back-arrow in your browser&nbsp; won&#39;t work for going back from an entity or relationship description to the overall diagram). <p> To explore, you might click on a relationship (one of the diamonds). This should display data relating to the specific type of relationship. It shows the two names for crossing in different directions, as well as the attributes stored for each relationship (many relationships just connect entities and have no extra attributes, but some relationships have several attributes. 
-<p> The overall set of entities in the <a name="ER-Model346">ER-Model</a> (which you can glean from the set of perspectives offered in the drop-down menu) reflect the types of data we currently have integrated to support the development of <a name="metabolic347">metabolic</a> and regulatory models. 
+The <a name="Central Data Model329">Central Data Model</a> (<b><a name="CDM330">CDM</a></b>) describes the architecture of the Central
+Storage (<b>CS</b>). The CS is a database supporting an integration of
+the data needed to
+support the KBase. The <a name="CDM331">CDM</a> is specified as an <a name="Entity-Relationship Model332">Entity-Relationship Model</a>. The
+current contents of the CS are described in this <a href="http://pubseed.theseed.org/ErdbDocWidget.cgi?xmlFileName=/home/parrello/FIGdisk/dist/releases/current/KBaseCDMI/KSaplingDBD.xml" name="ER-Model333" target="_blank">ER-Model</a>. The model is made up
+of a set of diagrams, each displaying a subset
+of the overall <a name="ER-Model334">ER-Model</a>. In a small dropdown
+menu, you should be able to locate the current
+subsets that are available to you. Let us begin with the <i>Main Region</i>
+. Note that the diagram is made up of rectangles (which represent <i>Entities</i>)
+ and diamonds (which represent <i>relationships between entities</i>).
+<h2>Navigating the Diagram<br>
+</h2>
+<p>Using the dropdown menu, you can move between different subsets of
+the overall model. You should verify that you can go back and forth <big>to
+</big>explore the types of entities stored included in the <a name="CDM335">CDM</a>. </p>
+<p> Once you have an overview of the types of entities included, you
+might investigate the data items (often called <i>attributes</i>)
+associated with instances of these entities. Click on <b><a name="Genome336">Genome</a></b>, and you should see a page that
+includes three types of information: </p>
+<ol>
+  <li><b>Relationships</b> is a list of relationships that connect a <a name="Genome337">Genome</a> entity to other entities. Each such
+relationship is really bi-directional -- that is, you can move from a <a name="Genome338">Genome</a> entity to an entity of another type, or
+alternatively from the other entity to th <a name="Genome339">Genome</a>
+entity. Each of these relationships has two names, each reflecting a
+direction. Thus, <b><a name="IsOwnerOf340">IsOwnerOf</a></b> is used
+to cross the relationship from a <a name="Genome341">Genome</a> to the
+Features defined for the <a name="Genome342">Genome</a>, while <b>IsOwnedBy</b>
+supports access of a <a name="Genome343">Genome</a> from a <a name="Feature344">Feature</a> associated with the <a name="Genome345">Genome</a>.
+    <br>
+    <br>
+  </li>
+  <li><b>Fields:</b> lists the attributes stored for each instance of
+the entity. <br>
+    <br>
+  </li>
+  <li>Finally, <b>indexes</b> specifies the indexes maintained to
+support effective access to subsets of the entities. Unless you really
+care about database design, you can probably ignore this last table. </li>
+</ol>
+<br>
+To get back to the diagram showing the entities and relationships,
+click on the <i>IMAGE</i> button (i.e., the back-arrow in your
+browser&nbsp; won't work for going back from an entity or relationship
+description to the overall diagram).
+<p> To explore, you might click on a relationship (one of the
+diamonds). This should display data relating to the specific type of
+relationship. It shows the two names for crossing in different
+directions, as well as the attributes stored for each relationship
+(many relationships just connect entities and have no extra attributes,
+but some relationships have several attributes. </p>
+<p> The overall set of entities in the <a name="ER-Model346">ER-Model</a>
+(which you can glean from the set of perspectives offered in the
+drop-down menu) reflect the types of data we currently have integrated
+to support the development of <a name="metabolic347">metabolic</a> and
+regulatory models. </p>
