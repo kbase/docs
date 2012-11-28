@@ -1,0 +1,70 @@
+<h1>Finding Orthologs for a Gene</h1>
+
+<p>
+<strong>Purpose:</strong> Learn how to use the Protein Info service to find orthologs for a gene
+
+<p>
+<strong>Required Prerequisites:</strong> <a href="http://kbase.us/developer-zone/tutorials/getting-started/getting-started-with-kbase/">Getting Started with KBase</a>
+
+<p>
+<strong>Suggested Prerequisites:</strong> None
+
+<p>
+<strong>Related Tutorials:</strong>  Finding Domains for a Protein, Finding Functional Annotations for a Protein
+
+<p>
+<h2>Introduction</h2>
+This tutorial is intended to teach developers how to use the Protein
+Info service to find orthologs of a gene
+
+<p>
+<h2>Sample Program to look up Orthologs for a Gene</h2>
+
+<pre>
+#!/usr/bin/perl
+
+use strict;
+use Data::Dumper;
+use Bio::KBase::ProteinInfoService::Client;
+
+my $client=Bio::KBase::ProteinInfoService::Client->new("http://localhost:7057");
+
+my $orthologs=$client->fids_to_orthologs(["kb|g.21765.CDS.3010"]);
+print Dumper($orthologs);
+</pre>
+
+<p>
+The above program assumes that you're running the service locally; if not,
+replace "localhost" with the IP address of the machine running the
+service.
+
+<p>
+This program is supposed to look up orthologs for the fid
+kb|g.21765.CDS.3010.  This is the tufA (elongation factor EF-Tu) gene
+from <i>E. coli</i>.  This program should print out a hash, in which
+the keys are the query fids, and the values are an array of
+identifiers of orthologous fids.  Here's sample output:
+
+<pre>
+$VAR1 = {
+          'kb|g.21765.CDS.3010' => [
+                                     'kb|g.0.peg.2872',
+                                     'kb|g.10012.peg.452',
+                                     'kb|g.1053.peg.4838',
+                                     'kb|g.1081.peg.2577',
+                                     'kb|g.1087.peg.3002',
+                                     'kb|g.124.peg.3664',
+                                     'kb|g.125.peg.3286',
+                                     'kb|g.1330.peg.3425',
+                                     'kb|g.1348.peg.3394',
+                                     'kb|g.1397.peg.2066',
+                                     'kb|g.9911.peg.5083'
+                                   ]
+        };
+</pre>
+
+<p>
+In the above example, there are over 200 orthologs in KBase;
+some orthologs were deleted from the return hash for clarity.
+Each fid starts with the KBase genome identifier (e.g., "kb|g.0",
+which is a closely related <i>E. coli</i>).
