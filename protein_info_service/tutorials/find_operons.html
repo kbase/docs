@@ -29,7 +29,7 @@ use Bio::KBase::ProteinInfoService::Client;
 
 my $client=Bio::KBase::ProteinInfoService::Client->new("http://localhost:7057");
 
-my $operons=$client->fids_to_domains(["kb|g.21765.CDS.3010"]);
+my $operons=$client->fids_to_operons(["kb|g.21765.CDS.880"], ["kb|g.21765.CDS.101"]);
 print Dumper($operons);
 </pre>
 
