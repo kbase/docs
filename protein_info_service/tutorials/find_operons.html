@@ -1,18 +1,25 @@
 <h1>Finding Operons for a Microbial Gene</h1>
+
 <p>
 <strong>Purpose:</strong> Learn how to use the Protein Info service to find operons for a microbial gene
+
 <p>
 <strong>Required Prerequisites:</strong> <a href="http://kbase.us/developer-zone/tutorials/getting-started/getting-started-with-kbase/">Getting Started with KBase</a>
+
 <p>
 <strong>Suggested Prerequisites:</strong> None
+
 <p>
 <strong>Related Tutorials:</strong>  <a href="http://kbase.us/developer-zone/tutorials/apis/getting-started-with-kbase-apis/extracting-data-from-the-cs-using-the-cs-api-some-typical-examples/">Extracting Data from the CS Using the CS-API: Some Typical Examples</a>, Translating Microbes Online IDs to and from KBase ids
+
 <p>
 <h2>Introduction</h2>
 This tutorial is intended to teach developers how to use the Protein
 Info service to get information on the operon a microbial gene belongs to.
+
 <p>
 <h2>Sample Program to look up Operons for a Microbial Gene</h2>
+
 <pre>
 #!/usr/bin/perl
 
@@ -22,14 +29,38 @@ use Bio::KBase::ProteinInfoService::Client;
 
 my $client=Bio::KBase::ProteinInfoService::Client->new("http://localhost:7057");
 
-my $fids=$client->fids_to_operons(["kb|g.20029.peg.3202"]);
-warn Dumper($fids);
+my $operons=$client->fids_to_domains(["kb|g.21765.CDS.3010"]);
+print Dumper($operons);
 </pre>
-<p>
 
+<p>
 The above program assumes that you're running the service locally; if not,
 replace "localhost" with the IP address of the machine running the
 service.
 
-The above program should return "???" FIXME--could not be tested; hangs for >1 hr.
+<p>
+This program is supposed to look up operons for 2 genes, with fids
+kb|g.21765.CDS.880 and kb|g.21765.CDS.101.  These are the proA and
+proB genes from <i>E. coli</i>, which form a single operon.  The
+program should print out a hash, in which the keys are the query fids,
+and the values are an array of fids corresponding to the genes in the
+operon (currently, these are returned in an arbitrary order, NOT the
+order in which the genes are transcribed in the operon).  Here's
+sample output:
+
 <pre>
+$VAR1 = {
+          'kb|g.21765.CDS.880' => [
+                                    'kb|g.21765.CDS.880',
+                                    'kb|g.21765.CDS.101'
+                                  ],
+          'kb|g.21765.CDS.101' => [
+                                    'kb|g.21765.CDS.880',
+                                    'kb|g.21765.CDS.101'
+                                  ]
+        };
+</pre>
+
+<p>
+In the above example, both query fids correspond to the same
+two-gene operon.
