@@ -12,21 +12,25 @@ as well.
 <p><strong>Suggested Prerequesite Activities: </strong>Basic Exercises Using KBase</p>
 <p><strong>Related Tutorials: </strong> </p>
 
+<br><br>
+
 <h2>Download and configure client</h2>
 
 <h3>1. Download and Install Variation Services Client</h3>
 
 <p> 
 The client program for accessing the KBase variation services is called
-<i>jkbase</i>.  Mac users can download the client as part of the  KBase DMG disk
-image from <a href="http://kbase.us/docs/downloads/KBase-Mac.dmg">http://kbase.us/docs/downloads/KBase-Mac.dmg</a>.
+<i>jkbase</i>. If you are connected to the KBase Magellan cluster, this program
+should be available in your path. 
 </p>
 
 <p>
+Alternatively, Mac users can download the client as part of the KBase DMG disk
+image from <a href="http://kbase.us/docs/downloads/KBase-Mac.dmg">http://kbase.us/docs/downloads/KBase-Mac.dmg</a>.
 Once you download the DMG package and run the KBase.app program, you should be
 able to run the command <i>jkbase</i>. Note you must have java installed on your
-system to run the client program, but your Mac will guide you through the install
-process if you do not have it already installed.
+system to run the client program, but your Mac will guide you through the
+install process if you do not have it already installed.
 </p>
 
 
@@ -48,6 +52,8 @@ username and password.
   [Password:] ***GLOBUS_ONLINE_PASSWORD***
   Created: $HOME/.jnomics/globus_auth.properties
 </pre>
+
+<br><br>
 
 <h2>Aligning reads to a reference genome</h2>
 
@@ -206,6 +212,7 @@ If you forgot your jobID, you can list the status of all your running jobs:
   $ jkbase compute list_jobs
 </pre>
 
+<br><br>
 
 <h2>Identify SNPs and download VCF file</h2>
 
