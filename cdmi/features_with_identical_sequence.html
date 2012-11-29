@@ -1,58 +1,36 @@
-<h1>Looking for Features with Identical Sequence that have Different Annotations</h1>
-<p>In this short example, I write code that reads in a file in which each line is supposed to contain the ID of a feature of type &#39;<a name="peg407">peg</a>&#39; (protein-encoding gene). For each of these input pegs we gather all features that have exactly the same translation (i.e., protein sequence), gather their <a name="annotations408">annotations</a>, and check to see if they are all identical. If not, the set of features and inconsistent <a name="annotations409">annotations</a> gets displayed. <br />
+
+<h1>Looking for Features with Identical Sequence that have Different
+Annotations</h1>
+<p><strong> Purpose:</strong> Use KBase to locate identical protein
+sequences with divergent annotations.</p>
+<p><strong> Required Prerequisite Activities:</strong> <a href="http://www.kbase.us/developer-zone/tutorials/getting-started/getting-started-with-kbase/">Getting
+Started with KBase</a> </p>
+<p><strong> Suggested Prerequisite Activites:</strong> <a href="http://www.kbase.us/developer-zone/tutorials/apis/getting-started-with-kbase-apis/extracting-data-from-the-cs-using-the-cs-api-some-typical-examples/">Extracting
+Data from the CS Using the CS-API: Some Typical Examples </a> </p>
+<p><strong> Related Tutorials:</strong> <a href="http://www.kbase.us/developer-zone/tutorials/apis/example-tasks/comparing-the-functional-roles-in-two-genomes/">Comparing
+the Functional Roles in Two Genomes </a>
+and other API tutorials. </p>
+<h2>Introduction</h2>
+<p>This short example includes code that reads in a file in which
+each line contains the ID of a feature of type '<a name="peg407">peg</a>'
+(protein-encoding gene). For each of these
+input pegs we gather all features that have exactly the same
+translation (i.e., protein sequence), gather their <a name="annotations408">annotations</a>, and check to see if they are
+all identical. If not, the set of features and inconsistent <a name="annotations409">annotations</a> gets displayed. <br>
+</p>
 <h2>A Program to Look Up Functions Associated with Feature IDs</h2>
-<p>Here is the program I will describe: <br />
-<pre>
-use CDMI_APIClient;
-my $kbO = CDMI_APIClient-&gt;new;
 
-my @fids = &lt;STDIN&gt;;
-chop @fids;
-my $fidH = $kbO-&gt;<a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#fids_to_proteins" target='_blank'>fids_to_proteins</a>(\@fids);
-foreach my $fid (@fids)
-{
-    my $md5 = $fidH-&gt;{$fid};
-    my $md5H = $kbO-&gt;<a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#proteins_to_fids" target='_blank'>proteins_to_fids</a>([$md5]);
-    my $fids_with_same_sequence = $md5H-&gt;{$md5};
-
-    if ($fids_with_same_sequence &amp;&amp; (@$fids_with_same_sequence &gt; 1))
-    {
-        my $fidH = $kbO-&gt;<a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#fids_to_functions" target='_blank'>fids_to_functions</a>($fids_with_same_sequence);
-        my %counts;
-        foreach $_ (keys(%$fidH))
-        {
-            $counts{$fidH-&gt;{$_}}++ ;
-        }
-        if (keys(%counts) &gt; 1)   # inconsistent functions
-        {
-            foreach my $fid1 (@$fids_with_same_sequence)
-            {
-                print join(&quot;\t&quot;,($fid1,                     # Feature ID
-		                 $counts{$fidH-&gt;{$fid1}},   # with same function
-                                 $fidH-&gt;{$fid1}             # function
-                                )),&quot;\n&quot;;
-            }
-            print &quot;//\n&quot;;
-        }
-    }
-}
-<br /></pre>
- For each input feature, the <a name="md5410">md5</a>
- hash value of the protein sequence associated with the feature is retrieved. This is achieved by <br />
-<pre>
-my @fids = &lt;STDIN&gt;;
-chop @fids;
-my $fidH = $kbO-&gt;<a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#fids_to_proteins" target='_blank'>fids_to_proteins</a>(\@fids);
-<br /></pre>
- Then for each of the input features we compute the set of feature IDs that all have the same sequence using <br />
-<pre>
-    my $md5 = $fidH-&gt;{$fid};
-    my $md5H = $kbO-&gt;<a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#proteins_to_fids" target='_blank'>proteins_to_fids</a>([$md5]);
-    my $fids_with_same_sequence = $md5H-&gt;{$md5};
-<br /></pre>
- The program then looks up the functions associated with each of these features using <br />
-<pre>
-        my $fidH = $kbO-&gt;<a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#fids_to_functions" target='_blank'>fids_to_functions</a>($fids_with_same_sequence);
-<br /></pre>
- It then creates a hash with the function as a key and the number of occurrences as the value. If there are inconsistent <a name="annotations411">annotations</a>
-, all of the features and functions are displayed. 
+<pre>use CDMI_APIClient;<br>my $kbO = CDMI_APIClient-&gt;new;<br><br>my @fids = &lt;STDIN&gt;;<br>chop @fids;<br>my $fidH = $kbO-&gt;<a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#fids_to_proteins" target="_blank">fids_to_proteins</a>(\@fids);<br>foreach my $fid (@fids)<br>{<br>    my $md5 = $fidH-&gt;{$fid};<br>    my $md5H = $kbO-&gt;<a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#proteins_to_fids" target="_blank">proteins_to_fids</a>([$md5]);<br>    my $fids_with_same_sequence = $md5H-&gt;{$md5};<br><br>    if ($fids_with_same_sequence &amp;&amp; (@$fids_with_same_sequence &gt; 1))<br>    {<br>        my $fidH = $kbO-&gt;<a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#fids_to_functions" target="_blank">fids_to_functions</a>($fids_with_same_sequence);<br>        my %counts;<br>        foreach $_ (keys(%$fidH))<br>        {<br>            $counts{$fidH-&gt;{$_}}++ ;<br>        }<br>        if (keys(%counts) &gt; 1)   # inconsistent functions<br>        {<br>            foreach my $fid1 (@$fids_with_same_sequence)<br>            {<br>                print join("\t",($fid1,                     # Feature ID<br>		                 $counts{$fidH-&gt;{$fid1}},   # with same function<br>                                 $fidH-&gt;{$fid1}             # function<br>                                )),"\n";<br>            }<br>            print "//\n";<br>        }<br>    }<br>}<br><br></pre>
+For each input feature, the <a name="md5410">md5</a> hash value of the
+protein sequence associated with the feature is retrieved. This is
+achieved by <br>
+<pre>my @fids = &lt;STDIN&gt;;<br>chop @fids;<br>my $fidH = $kbO-&gt;<a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#fids_to_proteins" target="_blank">fids_to_proteins</a>(\@fids);<br><br></pre>
+Then for each of the input features we compute the set of feature IDs
+that all have the same sequence using <br>
+<pre>    my $md5 = $fidH-&gt;{$fid};<br>    my $md5H = $kbO-&gt;<a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#proteins_to_fids" target="_blank">proteins_to_fids</a>([$md5]);<br>    my $fids_with_same_sequence = $md5H-&gt;{$md5};<br><br></pre>
+The program then looks up the functions associated with each of these
+features using <br>
+<pre>        my $fidH = $kbO-&gt;<a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#fids_to_functions" target="_blank">fids_to_functions</a>($fids_with_same_sequence);<br><br></pre>
+It then creates a hash with the function as a key and the number of
+occurrences as the value. If there are inconsistent <a name="annotations411">annotations</a>
+, all of the features and functions are displayed.
