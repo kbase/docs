@@ -2,7 +2,7 @@
 <h1>Mapping Functions Between Sources of Annotations: Take 2</h1>
 <p><strong>Purpose: </strong> More information on mapping between
 sources of annotations using Perl to invoke KBase command-line tools.</p>
-<p><strong>Required Prerequisite Activites: </strong> <a href="http://www.kbase.us/developer-zone/tutorials/getting-started/getting-started-with-kbase/">Getting
+<p><strong>Required Prerequisite Activities: </strong> <a href="http://www.kbase.us/developer-zone/tutorials/getting-started/getting-started-with-kbase/">Getting
 Started with KBase</a> </p>
 <p> <strong>Suggested Prerequisite Activities: </strong> <a href="http://www.kbase.us/developer-zone/tutorials/getting-started/some-basic-exercises-using-kbase/">Some
 Basic Exercises Using KBase</a> </p>
@@ -120,18 +120,17 @@ assertion: <br>
 MOL</h3>
 We provide another simple Perl script that can be used to compute the
 clean <a name="md5680">md5</a> assertions provided by MOL. The program
-we provide illustrates the use of a <a name="CS-API681">CS-API</a> <a name="pipeline682">pipeline</a> invoked in an <i>open</i>.
- This can be a useful way to gain access to the output of a <a name="pipeline683">pipeline</a> without having to generate an
+we provide illustrates the use of a <a name="CS-API681">CS-API</a> <a name="pipeline682">pipeline</a> invoked in an <i>open</i>. This can
+be a useful way to gain access to the output of a <a name="pipeline683">pipeline</a>
+without having to generate an
 intermediate file, access it, and then remove it. <br>
 <br>
 We suppose that the ouput of the previous program (which generated <a name="SEED684">SEED</a> clean <a name="md5685">md5</a> assertions)
-has been placed in the file <i><a name="SEED686">SEED</a>-<a name="md5687">md5</a>.func</i>.
- <br>
+has been placed in the file <i><a name="SEED686">SEED</a>-<a name="md5687">md5</a>.func</i>. <br>
 <pre>open(TMP,"cut -f 1 $seed_md5_func | \<br>          <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#proteins_to_fids" target="_blank">proteins_to_fids</a> 2&gt; /dev/null | \<br>          <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#fids_to_genomes" target="_blank">fids_to_genomes</a> | \<br>          <a href="http://kbase.us/developer-zone/api-documentation/cdm-entity-relationship-command-scripts/#get_relationship_WasSubmittedBy" target="_blank">get_relationship_WasSubmittedBy</a> -to id | \<br>          grep \"MOL\$\" | \<br>          <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#fids_to_functions" target="_blank">fids_to_functions</a> -c 2 2&gt; /dev/null | \<br>          sort -k 1 | \<br>          cut -f 1,5 |")<br>    || die "could not set up the temporary pipe";<br><br>my $x = ;<br>while ($x &amp;&amp; ($x =~ /^(\S+)/))<br>{   <br>    my $md5 = $1;<br>    my %funcs;<br>    while ($x &amp;&amp; ($x =~ /^(\S+)\t(.*)/) &amp;&amp; ($1 eq $md5))<br>    {<br>        if ($2)<br>        {   <br>            $funcs{$2}++;<br>        }<br>        $x = ;<br>    }<br>    my @poss = sort { $funcs{$b} &lt;=&gt; $funcs{$a} } keys(%funcs);<br>    if ((@poss == 1) || ($funcs{$poss[0]} &gt; $funcs{$poss[1]}))<br>    {<br>        print join("\t",($md5,$poss[0])),"\n";<br>    }<br>}<br>close(TMP);<br><br><br></pre>
 The program begins by "opening" a small <a name="pipeline688">pipeline</a>.
- The output of this <a name="pipeline689">pipeline</a> is accessed
-via the filehandle <b>TMP</b>.
- <br>
+The output of this <a name="pipeline689">pipeline</a> is accessed
+via the filehandle <b>TMP</b>. <br>
 <pre>open(TMP,"cut -f 1 $seed_md5_func |<br>          <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#proteins_to_fids" target="_blank">proteins_to_fids</a> 2&gt; /dev/null | \<br>          <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#fids_to_genomes" target="_blank">fids_to_genomes</a> | \<br>          <a href="http://kbase.us/developer-zone/api-documentation/cdm-entity-relationship-command-scripts/#get_relationship_WasSubmittedBy" target="_blank">get_relationship_WasSubmittedBy</a> -to id | \<br>          grep \"MOL\$\" | \<br>          <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#fids_to_functions" target="_blank">fids_to_functions</a> -c 2 2&gt; /dev/null | \<br>          sort -k 1 | \<br>          cut -f 1,5 |")<br>    || die "could not set up the temporary pipe";<br><br><br></pre>
 Note that the lines provided by <b>TMP</b> each contain an <a name="md5690">md5</a> value and an associated function, and the lines
 are sorted on the <a name="md5691">md5</a> values. This allows a
