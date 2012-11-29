@@ -3,10 +3,10 @@
 <p><strong> Purpose:</strong> How to use the KBase Central Store
 Application Programming Interface (CS-API) to Extract Data from the CS.</p>
 <p><strong> Required Prerequisite Activities:</strong> <a href="http://www.kbase.us/developer-zone/tutorials/getting-started/getting-started-with-kbase/">Getting
-Started with KBase.</a> and other "Getting Started" tutorials, <a href="http://www.kbase.us/developer-zone/tutorials/iris/some-basic-exercises-using-the-kbase-iris-interface/">Some
+Started with KBase</a>  </p>
+<p><strong> Suggested Prerequisite Activites:</strong> <a href="http://www.kbase.us/developer-zone/tutorials/iris/some-basic-exercises-using-the-kbase-iris-interface/">Some
 Basic Exercises using the KBase IRIS Interface </a> and other IRIS
 tutorials.</p>
-<p><strong> Suggested Prerequisite Activites:</strong> None</p>
 <p><strong> Related Tutorials:</strong> <a href="http://www.kbase.us/developer-zone/tutorials/apis/example-tasks/looking-for-features-with-identical-sequence-that-have-different-annotations/">Looking
 for features with Identical Sequence that have Different Annotations </a>
 and other
@@ -62,8 +62,7 @@ Corresponding to the <b><a name="Genome275">Genome</a></b> Entity</h3>
 You can access data relating to several genomes with a single
 invocation of <i><a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#genomes_to_genome_data" target="_blank">genomes_to_genome_data</a></i>, but most of the time
 you will be after data relating to a single
-genome (in the example, <i>kb|g.0</i>).
- <br>
+genome (in the example, <i>kb|g.0</i>). <br>
 <pre>use strict;<br>use Data::Dumper;<br>use Bio::KBase::CDMI::CDMIClient;<br>use Bio::KBase::Utilities::ScriptThing;<br>my $csO = Bio::KBase::CDMI::CDMIClient-&gt;new_for_script();<br><br>my $gH = $csO-&gt;<a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#genomes_to_genome_data" target="_blank">genomes_to_genome_data</a>(['kb|g.0']);<br>print &amp;Dumper($gH)<br><br></pre>
 produces the following output: <br>
 <pre>$VAR1 = {<br>          'kb|g.0' =&gt; {<br>                        'rnas' =&gt; '170',<br>                        'gc_content' =&gt; '50.7888716661698',<br>                        'dna_size' =&gt; '4639221',<br>                        'taxonomy' =&gt; 'Bacteria; Proteobacteria; Gammaproteobacteria; Enterobacteriales; Enterobacteriaceae; Escherichia; Escherichia coli K-12',<br>                        'scientific_name' =&gt; 'Escherichia coli K12',<br>                        'contigs' =&gt; '1',<br>                        'genome_md5' =&gt; 'b4ff0a0fea9686b26b4e2a3cf7b6adbf',<br>                        'pegs' =&gt; '4308',<br>                        'genetic_code' =&gt; '11',<br>                        'complete' =&gt; '1'<br>                      }<br>        };<br><br></pre>
