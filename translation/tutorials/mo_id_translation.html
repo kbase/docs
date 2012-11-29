@@ -1,7 +1,7 @@
-<h1>Translating Microbes Online IDs to and from KBase ids</h1>
+<h1>Translating MicrobesOnline IDs to and from KBase ids</h1>
 
 <p>
-<strong>Purpose:</strong> Learn how to use the Microbes Online ID translation service
+<strong>Purpose:</strong> Learn how to use the MicrobesOnline ID translation service
 
 <p>
 <strong>Required Prerequisites:</strong> <a href="http://kbase.us/developer-zone/tutorials/getting-started/getting-started-with-kbase/">Getting Started with KBase</a>
@@ -16,12 +16,12 @@
 
 <h2>Introduction</h2>
 This tutorial is intended to teach developers who are used to working
-with Microbes Online identifiers how to translate these identifiers
+with MicrobesOnline identifiers how to translate these identifiers
 to and from KBase idenfifiers.
 
 <p>
-Microbes Online uses "Locus IDs" to refer to loci on
-a genome.  Microbe Online locus ids are integers.
+MicrobesOnline uses "Locus IDs" to refer to loci on
+a genome.  MicrobeOnline locus ids are integers.
 
 <p>
 KBase has two objects that correspond to loci: "features" and
@@ -32,7 +32,7 @@ look like MD5 sums (e.g., "cf87188c893421a9a13c9300b1c3cd68").
 
 <p>
 
-<h2>Sample Program to Translate Microbes Online Locus IDs to KBase
+<h2>Sample Program to Translate MicrobesOnline Locus IDs to KBase
 Feature IDs</h2>
 
 <pre>
@@ -78,7 +78,7 @@ $VAR1 = {
 </pre>
 
 <p>
-<h2>Sample Program to Translate KBase Feature IDs to Microbes Online
+<h2>Sample Program to Translate KBase Feature IDs to MicrobesOnline
 Locus IDs</h2>
 
 <pre>
@@ -97,7 +97,7 @@ print Dumper($fids2loci);
 <p>
 The above program (with the same caveat regarding the IP address of
 the service) should print a hash in which the keys are the query KBase
-fids, and the values are arrays of corresponding Microbes Online locus
+fids, and the values are arrays of corresponding MicrobesOnline locus
 IDs.  Here's sample output (which will change in the future as both
 databases change):
 
@@ -127,10 +127,10 @@ $VAR1 = {
 
 <p>
 Finally, here's a program to convert between KBase protein IDs and
-Microbes Online locus IDs.
+MicrobesOnline locus IDs.
 
 <p>
-<h2>Sample Program to Translate KBase Protein IDs to and from Microbes Online
+<h2>Sample Program to Translate KBase Protein IDs to and from MicrobesOnline
 Locus IDs</h2>
 
 <pre>
@@ -151,7 +151,7 @@ print Dumper($prot2loci);
 
 <p>
 The above program (with the same caveat regarding the IP address of
-the service) first prints a hash in which the keys are Microbes Online
+the service) first prints a hash in which the keys are MicrobesOnline
 locus IDs, and the values are arrays of corresponding KBase proteins.
 It then prints another hash that maps in the reverse direction.  Note
 that the mappings are not 1-1, due to the fact that proteins from many
