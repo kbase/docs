@@ -1,0 +1,68 @@
+
+<h1>KBase Authentication</h1>
+<h2>Prerequisites</h2>
+This tutorial assumes that you have downloaded and installed the Perl
+Bio::KBase::Auth* libraries from the git repo at
+ssh://git@github.com/kbase/auth.git or ssh://kbase@git.kbase.us/auth.git<br>
+<br>
+After checking a copy of the auth repo, if you are in a normal KBase VM
+deployment environment you can use the "install-libs" target in the top
+level Makefile. If you are on a laptop or local environment change into
+the Bio-KBase-Auth subdirectory and run the following commands:<br>
+<br>
+perl ./Build.PL<br>
+perl ./Build installdeps<br>
+perl ./Build install<br>
+<br>
+This will create the appropriate installer script, then install the
+dependencies and then install the libraries themselves.<br>
+<br>
+You will also need the commandline utility "curl" installed in order to
+test the commandline token examples.<br>
+<br>
+<h2>Introduction</h2>
+&nbsp;&nbsp;&nbsp;
+This is a very quick tutorial that shows sample perl code for acquiring
+a Globus Online token and putting it into the<br>
+appropriate header for an authenticated KBase request. It is assumed
+that you have an account at Globus Online<br>
+( go to https://www.globusonline.org/SignUp to register ) and can use
+it to get a token - the code sample uses<br>
+test accounts that are login to KBase, but will not have any other
+privileges.&nbsp; We will also include an example<br>
+for shell users using curl.<br>
+<br>
+<h2>Perl Client Code<span style="font-family: monospace;"></span></h2>
+&nbsp;&nbsp;&nbsp; The KBase standard is that OAuth tokens are passed
+in the HTTP Authorization header, with the prefix "OAuth " to identify
+it as an OAuth token. The formal RFC specification suggests using
+"Bearer " as the prefix because tokens are often opaque strings with no
+apparent structure, making it very hard to identify the type of token
+used - all of the tokens used by KBase have structure and can be parsed
+to discover their type. In addition, we treat all tokens as if they are
+bearer tokens - they should never be sent in cleartext and should be
+handled as if they are username/password equivalent.<br>
+&nbsp;&nbsp; The function below is a web client using the
+LWP::UserAgent module and the Bio::KBase::AuthToken module. First we
+acquire the token and then we insert it as part of the HTTP
+Authorization header of the LWP::UserAgent object.<br>
+<br>
+<pre>sub testClient {<br>    my $server = shift;<br>    my $ua = LWP::UserAgent-&gt;new();<br>    $at = Bio::KBase::AuthToken-&gt;new('user_id' =&gt; 'kbasetest', 'password' =&gt; '@Suite525');<br><br>    $ua-&gt;default_header( "Authorization" =&gt; "OAuth " . $at-&gt;token);<br>    $res = $ua-&gt;get( $server. "someurl" );<br>    printf "Client: Recieved a response: %d %s\n", $res-&gt;code, $res-&gt;content;<br>    # As a sanity check, trash the oauth_secret and make sure that<br>    # we get a negative result<br>   <br>    $ua-&gt;default_header( "Authorization" =&gt; "OAuth Bogotoken");<br>    printf "Client: Sending bad request.\n";<br>    $res = $ua-&gt;get( $server. "someurl" );<br>    printf "Client: Recieved a response: %d %s\n", $res-&gt;code, $res-&gt;content;<br>}<br><br></pre>
+<br>
+<h2>Shell Client Code</h2>
+&nbsp;&nbsp; The following command line commands demonstrate how to
+call the GlobusOnline web services interface to login as a test user
+and use the resulting token as authentication to another REST service.<br>
+<br>
+&nbsp;&nbsp; First we fetch a token from Globus Online, with the
+username/password in the --user option. The token is returned in the
+"access_token" field - we pipe the output to a python json pretty
+printer:<br>
+<br>
+<pre>$ curl -k -# --user<br>kbasetest:@Suite525<br>'https://nexus.api.globusonline.org/goauth/token?client_id=papa&amp;grant_type=client_credentials'<br>| python -mjson.tool<br>########################################################################<br>100.0%<br>{<br>    "access_token": "un=kbasetest|tokenid=3be5a452-0d97-11e2-81d0-12313809f035|expiry=1380831397|client_id=kbasetest|token_type=Bearer|SigningSubject=https://nexus.api.globusonline.org/goauth/keys/efc9fd6e-0ba9-11e2-81d0-12313809f035|sig=7ae1687147d52a5717f5ebc15a64cda67f8648332944220d1e578f847fd1899ed5abd7b7bd4b4e9b568bd959f35517b5722e12f044e173bd23337103643279330b26c897a89e21f44e27ead4bb75ab510dca9f08734b7aa6bc7ab4554821fd70a90a8151f44968cc510e6a64b3b5ff2f7736c199e8a711e151c7422f7d8816db",<br>    "access_token_hash": "736372797074000d0000000800000001c8b8073aa1d98e78554bd8ac1fdec33f62eb53c977d6ae437418f1a49a3975ed625a2468d23d8b0b7b5e8359668856ee9058af31698d6eb2c444db6c2153a147bcce2a2f9d6f1786a1c4db83afbab84ca7e00f4826df6503f72880c2b280144392a4656f5c6d420b9d728e3cf9af323a955532d089b11735d54ea43c2ffec53669e3b244589d14d3754b1fc7683503e33595f885e7161291f7c4a6f4b774af7c66679bf5038c106445458d7b608ca2b1",<br>    "client_id": "kbasetest", <br>    "expires_in": 31536000, <br>    "expiry": 1380831397, <br>    "issued_on":1349295397, <br>    "lifetime": 31536000, <br>    "scopes": [<br>       "https://transfer.api.globusonline.org"<br>    ], <br>    "token_id": "3be5a452-0d97-11e2-81d0-12313809f035", <br>    "token_type": "Bearer", <br>    "user_name": "kbasetest"<br>}<br></pre>
+<br>
+&nbsp;&nbsp; The value of access token is then used to create an
+Authorization header (using the -H option of curl) in the request - the
+REST service responds with a description of itself.<br>
+<br>
+<pre>$ curl -# -H "Authorization: OAuth un=kbasetest|tokenid=3be5a452-0d97-11e2-81d0-12313809f035|expiry=1380831397|client_id=kbasetest|token_type=Bearer|SigningSubject=https://nexus.api.globusonline.org/goauth/keys/efc9fd6e-0ba9-11e2-81d0-12313809f035|sig=7ae1687147d52a5717f5ebc15a64cda67f8648332944220d1e578f847fd1899ed5abd7b7bd4b4e9b568bd959f35517b5722e12f044e173bd23337103643279330b26c897a89e21f44e27ead4bb75ab510dca9f08734b7aa6bc7ab4554821fd70a90a8151f44968cc510e6a64b3b5ff2f7736c199e8a711e151c7422f7d8816db"<br>http://localhost:7039/Roles | python -mjson.tool<br>########################################################################<br>100.0%<br>{<br>    "contact": {<br>        "email": "sychan@lbl.gov"<br>    }, <br>    "documentation": "https://docs.google.com/document/d/1CTkthDUPwNzMF22maLyNIktI1sHdWPwtd3lJk0aFb20/edit",<br><br>    "id": "KBase Authorization", <br>    "resources": {<br>        "create": "Boolean value - does this role provide the create privilege", <br>        "delete": "List of kbase object ids (strings) that this role allows delete privs", <br>        "description": "Description of the role (required)", <br>        "grant": "List of kbase authz role_ids (strings) that this role allows grant privs", <br>        "impersonate": "List of kbase user_ids (strings) that this role allows impersonate privs", <br>        "members": "A list of the user_ids who are members of this group", <br>        "modify": "List of kbase object ids (strings) that this role allows modify privs", <br>        "read": "List of kbase object ids (strings) that this role allows read privs", <br>        "role_id": "Unique human readable identifer for role (required)", <br>        "role_owner":"Owner(creator) of this role", <br>        "role_updater": "User_ids that can update this role"<br>    }, <br>    "usage": "This is a standard REST service. Note that read handler<br>takes\nMongoDB filtering and JSON field selection options<br>passed as\nURL parameters 'filter' and 'fields' respectively.\nPlease<br>look at MongoDB pymongo collection documentation for details.\nRead and<br>Create are currently open to all authenticated users in role<br>\"kbase_users\", but\ndelete requires ownership of the document (in<br>field role_owner),\nupdate requires ownership or membership in the<br>target document's role_updaters list\n"<br>}<br><br></pre>

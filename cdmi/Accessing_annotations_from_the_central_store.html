@@ -1,43 +1,889 @@
+
 <h1>Accessing Annotations from the Central Store (CS)</h1>
+<p><strong>Purpose: </strong> Use KBase to access annotations in the
+Central Store.
+</p>
+<p><strong>Required Prerequisite Activites: </strong> <a href="http://www.kbase.us/developer-zone/tutorials/getting-started/getting-started-with-kbase/">Getting
+Started with KBase</a> and other "Getting Started" tutorials, <a href="http://www.kbase.us/developer-zone/tutorials/iris/some-basic-exercises-using-the-kbase-iris-interface/">Some
+Basic Exercises using the KBase IRIS Interface </a> and other IRIS
+tutorials. </p>
+<p> <strong>Suggested Prerequisite Activities: </strong> None </p>
+<p> </p>
+<p><strong>Related Tutorials:</strong> <a href="http://www.kbase.us/developer-zone/tutorials/metabolic-model-reconstruction-and-analysis/reconstruction-and-analysis-of-metabolic-models-in-kbase/">Reconstruction
+and Analysis of Metabolic Models in KBase </a> and <a href="http://www.kbase.us/developer-zone/tutorials/command-line-scripts/accessing-central-store-data/getting-what-you-need-from-the-cs-using-command-line-scripts/">Getting
+What You Need from the CS Using Command-Line Scripts </a> and other
+Command Line tutorials. </p>
 <h2>Introduction</h2>
- The KBase is used to store genomes and <a name="annotations738">annotations</a>
- coming from numerous sources. One goal is to provide a unified computational framework where data from numerous sources can be reconciled. In this short tutorial, we show&nbsp; how to access the different functional asssignments that have been made to <i>Features</i>
- and <i>ProteinSequences</i>
-. Over the coming years, we seek to reconcile these differing assertions and vocabularies into a coherent picture. <p>
+The KBase is used to store genomes and <a name="annotations738">annotations</a>
+coming from numerous sources. One goal is to provide a unified
+computational framework where data from numerous sources can be
+reconciled. In this short tutorial, we show&nbsp; how to access the
+different functional asssignments that have been made to <i>Features</i>
+and <i>ProteinSequences</i>
+. Over the coming years, we seek to reconcile these differing
+assertions and vocabularies into a coherent picture.
 <h2>Getting the Primary Function Associated with a <i>Feature</i></h2>
- First, suppose that we have a <i><a name="Feature739">Feature</a></i>
-, say <i>kb|g.0.<a name="peg740">peg</a>.1002</i>
-. There is a function associated with each protein-encoding gene in KBase, and this function is the one normally used as a &quot;best estimate&quot; in building models. Let us call this the <i>primary</i>
- assertion. You can get the primary assertion using something like <br />
-<pre>  echo &#39;kb|g.0.peg.1002&#39; | <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#fids_to_functions" target='_blank'>fids_to_functions</a> <br /><br /></pre>
- which produces <br />
-<pre>  kb|g.0.peg.1002	Periplasmic nitrate reductase precursor (EC 1.7.99.4)<br /><br /></pre>
+First, suppose that we have a <i><a name="Feature739">Feature</a></i>
+, say <i>kb|g.0.<a name="peg740">peg</a>.1002</i>. There is a function
+associated with each protein-encoding gene in
+KBase, and this function is the one normally used as a "best estimate"
+in building models. Let us call this the <i>primary</i> assertion. You
+can get the primary assertion using something like <br>
+<pre>  echo 'kb|g.0.peg.1002' | <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#fids_to_functions" target="_blank">fids_to_functions</a> <br><br></pre>
+which produces <br>
+<pre>  kb|g.0.peg.1002	Periplasmic nitrate reductase precursor (EC 1.7.99.4)<br><br></pre>
 <h2>Associating Features with Protein Sequences</h2>
- Each protein-encoding <i><a name="Feature741">Feature</a></i>
- has an associated sequence, as well as an &quot;MD5 hash value&quot; of the sequence. To see this, run <br />
-<pre>  echo &#39;kb|g.0.peg.1002&#39; | <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#fids_to_proteins" target='_blank'>fids_to_proteins</a> | <a href="http://kbase.us/developer-zone/api-documentation/cdm-entity-relationship-command-scripts/#get_entity_ProteinSequence" target='_blank'>get_entity_ProteinSequence</a> -f sequence<br /><br /></pre>
- which produces <br />
-<pre>  kb|g.0.peg.1002     9443dd882ae7a95ae657f8450acca893		MKLSRRSFMKA...VKLEKV<br /><br /></pre>
- That is, it produces a 3-column table containing <br />
-<pre>  [fid,MD5-hash,translation]<br /><br /></pre>
- If you find this a bit confusing, remember to keep a version of the underlying <a href="http://pubseed.theseed.org/ErdbDocWidget.cgi?xmlFileName=/home/parrello/FIGdisk/dist/releases/current/KBaseCDMI/KSaplingDBD.xml"> Entity-Relationship (ER) model</a>
- in mind. Try accessing the model, and make sure that you select the <b>Main Region</b>
- (the overall architecture of the <a name="Central Store742">Central Store</a>
- is one large ER model that you can see in managable pieces). One key to understanding these command pipelines is to be able to move through the ER diagram, looking up the fields in entities and relationships, seeing the two distinct names for each relationship, and understanding what each command is intended to achieve. In the case of the last example, <ul><li><b><a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#fids_to_proteins" target='_blank'>fids_to_proteins</a></b> takes as input a tab-separated table in which the last column contains a <i>fid</i>. In the example, we piped in (using the <b>echo</b> command) a table with a single row and a single column. The <b><a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#fids_to_proteins" target='_blank'>fids_to_proteins</a></b> command adds a column to the input table, and that column is the MD5 hash value of the protein sequence (i.e., the translation). <li> the <b><a href="http://kbase.us/developer-zone/api-documentation/cdm-entity-relationship-command-scripts/#get_entity_ProteinSequence" target='_blank'>get_entity_ProteinSequence</a></b> command is used to extract fields from the <i><a name="ProteinSequence743">ProteinSequence</a></i> entity. It takes as input a tab-separated table with the last column containing an MD5 hash and adds columns corresponding to the desired fields. We specified <br /><pre>  <a href="http://kbase.us/developer-zone/api-documentation/cdm-entity-relationship-command-scripts/#get_entity_ProteinSequence" target='_blank'>get_entity_ProteinSequence</a> -f sequence<br /><br /></pre> which asks for the actual sequence associated with the MD5 hash. You could also use a &quot;well-trodden path&quot; routine to get FASTA sequences by using <br /><pre>  echo &#39;kb|g.0.peg.1002&#39; | <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#fids_to_proteins" target='_blank'>fids_to_proteins</a> | proteins_to_sequences -fc 1<br /><br /></pre> which produces <br /><pre>  &gt;9443dd882ae7a95ae657f8450acca893 kb|g.0.peg.1002<br />  MKLSRRSF...VKLEKV<br /></pre></ul>
+Each protein-encoding <i><a name="Feature741">Feature</a></i> has an
+associated sequence, as well as an "MD5 hash value" of the sequence. To
+see this, run <br>
+<pre>  echo 'kb|g.0.peg.1002' | <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#fids_to_proteins" target="_blank">fids_to_proteins</a> | <a href="http://kbase.us/developer-zone/api-documentation/cdm-entity-relationship-command-scripts/#get_entity_ProteinSequence" target="_blank">get_entity_ProteinSequence</a> -f sequence<br><br></pre>
+which produces <br>
+<pre>  kb|g.0.peg.1002     9443dd882ae7a95ae657f8450acca893		MKLSRRSFMKA...VKLEKV<br><br></pre>
+That is, it produces a 3-column table containing <br>
+<pre>  [fid,MD5-hash,translation]<br><br></pre>
+If you find this a bit confusing, remember to keep a version of the
+underlying <a href="http://pubseed.theseed.org/ErdbDocWidget.cgi?xmlFileName=/home/parrello/FIGdisk/dist/releases/current/KBaseCDMI/KSaplingDBD.xml">
+Entity-Relationship (ER) model</a> in mind. Try accessing the model,
+and make sure that you select the <b>Main Region</b> (the overall
+architecture of the <a name="Central Store742">Central Store</a> is
+one large ER model that you can see in managable pieces). One key to
+understanding these command pipelines is to be able to move through the
+ER diagram, looking up the fields in entities and relationships, seeing
+the two distinct names for each relationship, and understanding what
+each command is intended to achieve. In the case of the last example,
+<ul>
+  <li><b><a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#fids_to_proteins" target="_blank">fids_to_proteins</a></b> takes as input a
+tab-separated table in which the last column contains a <i>fid</i>. In
+the example, we piped in (using the <b>echo</b> command) a table with
+a single row and a single column. The <b><a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#fids_to_proteins" target="_blank">fids_to_proteins</a></b> command adds a column to the
+input table, and that column is the MD5 hash value of the protein
+sequence (i.e., the translation). </li>
+  <li> the <b><a href="http://kbase.us/developer-zone/api-documentation/cdm-entity-relationship-command-scripts/#get_entity_ProteinSequence" target="_blank">get_entity_ProteinSequence</a></b> command is used to
+extract fields from the <i><a name="ProteinSequence743">ProteinSequence</a></i>
+entity. It takes as input a tab-separated table with the last column
+containing an MD5 hash and adds columns corresponding to the desired
+fields. We specified <br>
+    <pre>  <a href="http://kbase.us/developer-zone/api-documentation/cdm-entity-relationship-command-scripts/#get_entity_ProteinSequence" target="_blank">get_entity_ProteinSequence</a> -f sequence<br><br></pre>
+which asks for the actual sequence associated with the MD5 hash. You
+could also use a "well-trodden path" routine to get FASTA sequences by
+using <br>
+    <pre>  echo 'kb|g.0.peg.1002' | <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#fids_to_proteins" target="_blank">fids_to_proteins</a> | proteins_to_sequences -fc 1<br><br></pre>
+which produces <br>
+    <pre>  &gt;9443dd882ae7a95ae657f8450acca893 kb|g.0.peg.1002<br>  MKLSRRSF...VKLEKV<br></pre>
+  </li>
+</ul>
 <h2>Associating Assignments with Features and Protein Sequences</h2>
- We save assignments of function from numerous sources. Because reconciliation of feature IDs is often problematic, we save the assertions along with the MD5 hash of the protein sequence that they are associated with. You can access the set of assignments associated with a given MD5 value using something like <br />
-<pre>  echo 9443dd882ae7a95ae657f8450acca893 | <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#equiv_sequence_assertions" target='_blank'>equiv_sequence_assertions</a><br /><br /></pre>
- which produces:<br />
-<br />
-<small><br /></small>
-<table border="1" cellpadding="2" cellspacing="2" style="width: 962px; height: 1905px;"><tr><td><small> </small><tbody></tbody></td></tr><tr><td><small>9443dd882ae7a95ae657f8450acca893</small></td><td><small>fig|83333.1.<a name="peg744">peg</a>.2180</small></td><td><small>Periplasmic nitrate reductase precursor (EC 1.7.99.4)</small></td><td><small><a name="SEED745">SEED</a></small></td></tr><tr><td><small> </small></td></tr><tr><td><small>9443dd882ae7a95ae657f8450acca893</small></td><td><small>fig|457401.3.<a name="peg746">peg</a>.1944</small></td><td><small>Periplasmic nitrate reductase precursor (EC 1.7.99.4)</small></td><td><small><a name="SEED747">SEED</a></small></td></tr><tr><td><small> </small></td></tr><tr><td><small>9443dd882ae7a95ae657f8450acca893</small></td><td><small>fig|511145.12.<a name="peg748">peg</a>.2295</small></td><td><small>Periplasmic nitrate reductase precursor (EC 1.7.99.4)</small></td><td><small><a name="SEED749">SEED</a></small></td></tr><tr><td><small> </small></td></tr><tr><td><small>9443dd882ae7a95ae657f8450acca893</small></td><td><small>fig|536056.3.<a name="peg750">peg</a>.1525</small></td><td><small>Periplasmic nitrate reductase precursor (EC 1.7.99.4)</small></td><td><small><a name="SEED751">SEED</a></small></td></tr><tr><td><small> </small></td></tr><tr><td><small>9443dd882ae7a95ae657f8450acca893</small></td><td><small>16314</small></td><td><small>nitrate reductase, periplasmic, large subunit</small></td><td><small>MOL</small></td></tr><tr><td><small> </small></td></tr><tr><td><small>9443dd882ae7a95ae657f8450acca893</small></td><td><small>7703313</small></td><td><small>nitrate reductase, periplasmic, large subunit</small></td><td><small>MOL</small></td></tr><tr><td><small> </small></td></tr><tr><td><small>9443dd882ae7a95ae657f8450acca893</small></td><td><small>fig|550687.3.<a name="peg752">peg</a>.2602</small></td><td><small>Periplasmic nitrate reductase precursor (EC 1.7.99.4)</small></td><td><small><a name="SEED753">SEED</a></small></td></tr><tr><td><small> </small></td></tr><tr><td><small>9443dd882ae7a95ae657f8450acca893</small></td><td><small>fig|595496.3.<a name="peg754">peg</a>.2177</small></td><td><small>Periplasmic nitrate reductase precursor (EC 1.7.99.4)</small></td><td><small><a name="SEED755">SEED</a></small></td></tr><tr><td><small> </small></td></tr><tr><td><small>9443dd882ae7a95ae657f8450acca893</small></td><td><small>fig|656374.3.<a name="peg756">peg</a>.2162</small></td><td><small>Periplasmic nitrate reductase precursor (EC 1.7.99.4)</small></td><td><small><a name="SEED757">SEED</a></small></td></tr><tr><td><small> </small></td></tr><tr><td><small>9443dd882ae7a95ae657f8450acca893</small></td><td><small>fig|656414.3.<a name="peg758">peg</a>.2581</small></td><td><small>Periplasmic nitrate reductase precursor (EC 1.7.99.4)</small></td><td><small><a name="SEED759">SEED</a></small></td></tr><tr><td><small> </small></td></tr><tr><td><small>9443dd882ae7a95ae657f8450acca893</small></td><td><small>fig|670892.3.<a name="peg760">peg</a>.4143</small></td><td><small>Periplasmic nitrate reductase precursor (EC 1.7.99.4)</small></td><td><small><a name="SEED761">SEED</a></small></td></tr><tr><td><small> </small></td></tr><tr><td><small>9443dd882ae7a95ae657f8450acca893</small></td><td><small>fig|696406.3.<a name="peg762">peg</a>.2710</small></td><td><small>Periplasmic nitrate reductase precursor (EC 1.7.99.4)</small></td><td><small><a name="SEED763">SEED</a></small></td></tr><tr><td><small> </small></td></tr><tr><td><small>9443dd882ae7a95ae657f8450acca893</small></td><td><small>fig|869670.3.<a name="peg764">peg</a>.2691</small></td><td><small>Periplasmic nitrate reductase precursor (EC 1.7.99.4)</small></td><td><small><a name="SEED765">SEED</a></small></td></tr><tr><td><small> </small></td></tr><tr><td><small>9443dd882ae7a95ae657f8450acca893</small></td><td><small>fig|869690.3.<a name="peg766">peg</a>.4013</small></td><td><small>Periplasmic nitrate reductase precursor (EC 1.7.99.4)</small></td><td><small><a name="SEED767">SEED</a></small></td></tr><tr><td><small> </small></td></tr><tr><td><small>9443dd882ae7a95ae657f8450acca893</small></td><td><small>fig|869691.3.<a name="peg768">peg</a>.1976</small></td><td><small>Periplasmic nitrate reductase precursor (EC 1.7.99.4)</small></td><td><small><a name="SEED769">SEED</a></small></td></tr><tr><td><small> </small></td></tr><tr><td><small>9443dd882ae7a95ae657f8450acca893</small></td><td><small>fig|869694.3.<a name="peg770">peg</a>.3176</small></td><td><small>Periplasmic nitrate reductase precursor (EC 1.7.99.4)</small></td><td><small><a name="SEED771">SEED</a></small></td></tr><tr><td><small> </small></td></tr><tr><td><small>9443dd882ae7a95ae657f8450acca893</small></td><td><small>fig|879462.4.<a name="peg772">peg</a>.2233</small></td><td><small>Periplasmic nitrate reductase precursor (EC 1.7.99.4)</small></td><td><small><a name="SEED773">SEED</a></small></td></tr><tr><td><small> </small></td></tr><tr><td><small>9443dd882ae7a95ae657f8450acca893</small></td><td><small>fig|913091.3.<a name="peg774">peg</a>.2871</small></td><td><small>Periplasmic nitrate reductase precursor (EC 1.7.99.4)</small></td><td><small><a name="SEED775">SEED</a></small></td></tr><tr><td><small> </small></td></tr><tr><td><small>9443dd882ae7a95ae657f8450acca893</small></td><td><small>fig|316385.7.<a name="peg776">peg</a>.2385</small></td><td><small>Periplasmic nitrate reductase precursor (EC 1.7.99.4)</small></td><td><small><a name="SEED777">SEED</a></small></td></tr><tr><td><small> </small></td></tr><tr><td><small>9443dd882ae7a95ae657f8450acca893</small></td><td><small>fig|316407.9.<a name="peg778">peg</a>.2236</small></td><td><small>Periplasmic nitrate reductase precursor (EC 1.7.99.4)</small></td><td><small><a name="SEED779">SEED</a></small></td></tr><tr><td><small> </small></td></tr><tr><td><small>9443dd882ae7a95ae657f8450acca893</small></td><td><small>5497364</small></td><td><small>nitrate reductase, periplasmic, large subunit</small></td><td><small>MOL</small></td></tr><tr><td><small> </small></td></tr><tr><td><small>9443dd882ae7a95ae657f8450acca893</small></td><td><small>1241231</small></td><td><small>nitrate reductase, periplasmic, large subunit</small></td><td><small>MOL</small></td></tr><tr><td><small> </small></td></tr><tr><td><small>9443dd882ae7a95ae657f8450acca893</small></td><td><small>NT01EC2670</small></td><td><small>periplasmic nitrate reductase precursor</small></td><td><small>CMR</small></td></tr><tr><td><small> </small></td></tr><tr><td><small>9443dd882ae7a95ae657f8450acca893</small></td><td><small>NTL01EC02164</small></td><td><small>probable nitrate reductase 3</small></td><td><small>CMR</small></td></tr><tr><td><small> </small></td></tr><tr><td><small>9443dd882ae7a95ae657f8450acca893</small></td><td><small>NT41EC2158</small></td><td><small>periplasmic nitrate reductase, large subunit</small></td><td><small>CMR</small></td></tr><tr><td><small> </small></td></tr><tr><td><small>9443dd882ae7a95ae657f8450acca893</small></td><td><small>NTL41EC1979</small></td><td><small>nitrate reductase, periplasmic, large subunit</small></td><td><small>CMR</small></td></tr><tr><td><small> </small></td></tr><tr><td><small>9443dd882ae7a95ae657f8450acca893</small></td><td><small>NT11EC2285</small></td><td><small>periplasmic nitrate reductase, large subunit</small></td><td><small>CMR</small></td></tr><tr><td><small> </small></td></tr><tr><td><small>9443dd882ae7a95ae657f8450acca893</small></td><td><small>NTL11EC2201</small></td><td><small>nitrate reductase, periplasmic, large subunit</small></td><td><small>CMR</small></td></tr><tr><td><small> </small></td></tr><tr><td><small>9443dd882ae7a95ae657f8450acca893</small></td><td><small>NT38EC2386</small></td><td><small>periplasmic nitrate reductase, large subunit</small></td><td><small>CMR</small></td></tr><tr><td><small> </small></td></tr><tr><td><small>9443dd882ae7a95ae657f8450acca893</small></td><td><small>NTL38EC2212</small></td><td><small>nitrate reductase, periplasmic, large subunit</small></td><td><small>CMR</small></td></tr><tr><td><small> </small></td></tr><tr><td><small>9443dd882ae7a95ae657f8450acca893</small></td><td><small>ABE-0007289</small></td><td><small>nitrate reductase periplasmic large subunit</small></td><td><small>ERIC</small></td></tr><tr><td><small> </small></td></tr><tr><td><small>9443dd882ae7a95ae657f8450acca893</small></td><td><small>ADY-0002272</small></td><td><small>nitrate reductase periplasmic large subunit</small></td><td><small>ERIC</small></td></tr><tr><td><small> </small></td></tr><tr><td><small>9443dd882ae7a95ae657f8450acca893</small></td><td><small>ref|NP_416710.1</small></td><td><small>nitrate reductase, periplasmic, large subunit</small></td><td><small>NCBI</small></td></tr><tr><td><small> </small></td></tr><tr><td><small>9443dd882ae7a95ae657f8450acca893</small></td><td><small>ref|YP_001731146.1</small></td><td><small>nitrate reductase catalytic subunit</small></td><td><small>NCBI</small></td></tr><tr><td><small> </small></td></tr><tr><td><small>9443dd882ae7a95ae657f8450acca893</small></td><td><small>ref|YP_002927176.1</small></td><td><small>nitrate reductase catalytic subunit</small></td><td><small>NCBI</small></td></tr><tr><td><small> </small></td></tr><tr><td><small>9443dd882ae7a95ae657f8450acca893</small></td><td><small>ref|ZP_05435977.1</small></td><td><small>nitrate reductase catalytic subunit</small></td><td><small>NCBI</small></td></tr><tr><td><small> </small></td></tr><tr><td><small>9443dd882ae7a95ae657f8450acca893</small></td><td><small>ref|ZP_08343970.1</small></td><td><small>periplasmic nitrate reductase, large subunit</small></td><td><small>NCBI</small></td></tr><tr><td><small> </small></td></tr><tr><td><small>9443dd882ae7a95ae657f8450acca893</small></td><td><small>sp|P33937|NAPA_ECOLI</small></td><td><small>RecName: Full=Periplasmic nitrate reductase; Flags: Precursor</small></td><td><small>NCBI</small></td></tr><tr><td><small> </small></td></tr><tr><td><small>9443dd882ae7a95ae657f8450acca893</small></td><td><small>sp|B1X8A2|NAPA_ECODH</small></td><td><small>RecName: Full=Periplasmic nitrate reductase; Flags: Precursor</small></td><td><small>NCBI</small></td></tr><tr><td><small> </small></td></tr><tr><td><small>9443dd882ae7a95ae657f8450acca893</small></td><td><small>sp|C4ZU48|NAPA_ECOBW</small></td><td><small>RecName: Full=Periplasmic nitrate reductase; Flags: Precursor</small></td><td><small>NCBI</small></td></tr><tr><td><small> </small></td></tr><tr><td><small>9443dd882ae7a95ae657f8450acca893</small></td><td><small>gb|AAC75266.1</small></td><td><small>nitrate reductase, periplasmic, large subunit</small></td><td><small>NCBI</small></td></tr><tr><td><small> </small></td></tr><tr><td><small>9443dd882ae7a95ae657f8450acca893</small></td><td><small>dbj|BAA15989.2</small></td><td><small>nitrate reductase, periplasmic, large subunit</small></td><td><small>NCBI</small></td></tr><tr><td><small> </small></td></tr><tr><td><small>9443dd882ae7a95ae657f8450acca893</small></td><td><small>gb|ACB03368.1</small></td><td><small>nitrate reductase, periplasmic, large subunit</small></td><td><small>NCBI</small></td></tr><tr><td><small> </small></td></tr><tr><td><small>9443dd882ae7a95ae657f8450acca893</small></td><td><small>gb|ACR63904.1</small></td><td><small>nitrate reductase, periplasmic, large subunit</small></td><td><small>NCBI</small></td></tr><tr><td><small> </small></td></tr><tr><td><small>9443dd882ae7a95ae657f8450acca893</small></td><td><small>gb|ACX39123.1</small></td><td><small>periplasmic nitrate reductase, large subunit</small></td><td><small>NCBI</small></td></tr><tr><td><small> </small></td></tr><tr><td><small>9443dd882ae7a95ae657f8450acca893</small></td><td><small>dbj|BAJ43997.1</small></td><td><small>nitrate reductase catalytic subunit</small></td><td><small>NCBI</small></td></tr><tr><td><small> </small></td></tr><tr><td><small>9443dd882ae7a95ae657f8450acca893</small></td><td><small>gb|EFU96098.1</small></td><td><small>periplasmic nitrate reductase, large subunit</small></td><td><small>NCBI</small></td></tr><tr><td><small> </small></td></tr><tr><td><small>9443dd882ae7a95ae657f8450acca893</small></td><td><small>gb|EGB33105.1</small></td><td><small>periplasmic nitrate reductase</small></td><td><small>NCBI</small></td></tr><tr><td><small> </small></td></tr><tr><td><small>9443dd882ae7a95ae657f8450acca893</small></td><td><small>gb|EGB36914.1</small></td><td><small>periplasmic nitrate reductase</small></td><td><small>NCBI</small></td></tr><tr><td><small> </small></td></tr><tr><td><small>9443dd882ae7a95ae657f8450acca893</small></td><td><small>gb|EGI11853.1</small></td><td><small>periplasmic nitrate reductase, large subunit</small></td><td><small>NCBI</small></td></tr><tr><td><small> </small></td></tr><tr><td><small>9443dd882ae7a95ae657f8450acca893</small></td><td><small>gb|AEE57320.1</small></td><td><small>periplasmic nitrate reductase, large subunit NapA</small></td><td><small>NCBI</small></td></tr><tr><td><small> </small></td></tr><tr><td><small>9443dd882ae7a95ae657f8450acca893</small></td><td><small>gb|EGU25057.1</small></td><td><small>nitrate reductase catalytic subunit</small></td><td><small>NCBI</small></td></tr><tr><td><small> </small></td></tr><tr><td><small>9443dd882ae7a95ae657f8450acca893</small></td><td><small>gb|EGV49118.1</small></td><td><small>nitrate reductase catalytic subunit</small></td><td><small>NCBI</small></td></tr><tr><td><small> </small></td></tr><tr><td><small>9443dd882ae7a95ae657f8450acca893</small></td><td><small>gb|EGW94027.1</small></td><td><small>periplasmic nitrate reductase, large subunit</small></td><td><small>NCBI</small></td></tr><tr><td><small> </small></td></tr><tr><td><small>9443dd882ae7a95ae657f8450acca893</small></td><td><small>gb|EGX07462.1</small></td><td><small>periplasmic nitrate reductase, large subunit</small></td><td><small>NCBI</small></td></tr><tr><td><small> </small></td></tr><tr><td><small>9443dd882ae7a95ae657f8450acca893</small></td><td><small>gb|EGX17242.1</small></td><td><small>periplasmic nitrate reductase, large subunit</small></td><td><small>NCBI</small></td></tr><tr><td><small> </small></td></tr><tr><td><small>9443dd882ae7a95ae657f8450acca893</small></td><td><small>dbj|BAL38997.1</small></td><td><small>nitrate reductase, periplasmic, large subunit</small></td><td><small>NCBI</small></td></tr><tr><td><small> </small></td></tr><tr><td><small>9443dd882ae7a95ae657f8450acca893</small></td><td><small>gb|EHV55433.1</small></td><td><small>periplasmic nitrate reductase, large subunit</small></td><td><small>NCBI</small></td></tr><tr><td><small> </small></td></tr><tr><td><small>9443dd882ae7a95ae657f8450acca893</small></td><td><small>gb|EHV56789.1</small></td><td><small>periplasmic nitrate reductase, large subunit</small></td><td><small>NCBI</small></td></tr><tr><td><small> </small></td></tr><tr><td><small>9443dd882ae7a95ae657f8450acca893</small></td><td><small>gb|EHV60297.1</small></td><td><small>periplasmic nitrate reductase, large subunit</small></td><td><small>NCBI</small></td></tr><tr><td><small> </small></td></tr><tr><td><small>9443dd882ae7a95ae657f8450acca893</small></td><td><small>gb|EHV70195.1</small></td><td><small>periplasmic nitrate reductase, large subunit</small></td><td><small>NCBI</small></td></tr><tr><td><small> </small></td></tr><tr><td><small>9443dd882ae7a95ae657f8450acca893</small></td><td><small>gb|EHV74036.1</small></td><td><small>periplasmic nitrate reductase, large subunit</small></td><td><small>NCBI</small></td></tr><tr><td><small> </small></td></tr><tr><td><small>9443dd882ae7a95ae657f8450acca893</small></td><td><small>sp|C4ZU48|NAPA_ECOBW</small></td><td><small>Periplasmic nitrate reductase precursor</small></td><td><small>Swiss-Prot</small></td></tr><tr><td><small> </small></td></tr><tr><td><small>9443dd882ae7a95ae657f8450acca893</small></td><td><small>sp|B1X8A2|NAPA_ECODH</small></td><td><small>Periplasmic nitrate reductase precursor</small></td><td><small>Swiss-Prot</small></td></tr><tr><td><small> </small></td></tr><tr><td><small>9443dd882ae7a95ae657f8450acca893</small></td><td><small>sp|P33937|NAPA_ECOLI</small></td><td><small>Periplasmic nitrate reductase precursor</small></td><td><small>Swiss-Prot</small></td></tr><tr><td><small> </small></td></tr><tr><td><small>9443dd882ae7a95ae657f8450acca893</small></td><td><small>tr|E6B9N0|E6B9N0_ECOLX</small></td><td><small>Nitrate reductase</small></td><td><small>TrEMBL</small></td></tr><tr><td><small> </small></td></tr><tr><td><small>9443dd882ae7a95ae657f8450acca893</small></td><td><small>tr|E9WGQ0|E9WGQ0_ECOLX</small></td><td><small>Nitrate reductase</small></td><td><small>TrEMBL</small></td></tr><tr><td><small> </small></td></tr><tr><td><small>9443dd882ae7a95ae657f8450acca893</small></td><td><small>tr|E9WW94|E9WW94_ECOLX</small></td><td><small>Nitrate reductase</small></td><td><small>TrEMBL</small></td></tr><tr><td><small> </small></td></tr><tr><td><small>9443dd882ae7a95ae657f8450acca893</small></td><td><small>tr|F4M336|F4M336_ECOLX</small></td><td><small>Nitrate reductase</small></td><td><small>TrEMBL</small></td></tr><tr><td><small> </small></td></tr><tr><td><small>9443dd882ae7a95ae657f8450acca893</small></td><td><small>tr|F4SG48|F4SG48_ECOLX</small></td><td><small>Nitrate reductase</small></td><td><small>TrEMBL</small></td></tr><tr><td><small> </small></td></tr><tr><td><small>9443dd882ae7a95ae657f8450acca893</small></td><td><small>tr|F9R5Y1|F9R5Y1_ECOLX</small></td><td><small>Nitrate reductase</small></td><td><small>TrEMBL</small></td></tr><tr><td><small> </small></td></tr><tr><td><small>9443dd882ae7a95ae657f8450acca893</small></td><td><small>tr|G2AWX2|G2AWX2_ECOLX</small></td><td><small>Nitrate reductase</small></td><td><small>TrEMBL</small></td></tr><tr><td><small> </small></td></tr><tr><td><small>9443dd882ae7a95ae657f8450acca893</small></td><td><small>tr|G2BBM9|G2BBM9_ECOLX</small></td><td><small>Nitrate reductase</small></td><td><small>TrEMBL</small></td></tr><tr><td><small> </small></td></tr><tr><td><small>9443dd882ae7a95ae657f8450acca893</small></td><td><small>tr|G2CMI8|G2CMI8_ECOLX</small></td><td><small>Nitrate reductase</small></td><td><small>TrEMBL</small></td></tr><tr><td><small> </small></td></tr><tr><td><small>9443dd882ae7a95ae657f8450acca893</small></td><td><small>tr|G2EZU1|G2EZU1_ECOLX</small></td><td><small>Nitrate reductase</small></td><td><small>TrEMBL</small></td></tr><tr><td><small> </small></td></tr><tr><td><small>9443dd882ae7a95ae657f8450acca893</small></td><td><small>tr|H0QDG3|H0QDG3_ECOLI</small></td><td><small>Nitrate reductase, periplasmic, large subunit</small></td><td><small>TrEMBL</small></td></tr><tr><td><small> </small></td></tr><tr><td><small>9443dd882ae7a95ae657f8450acca893</small></td><td><small>tr|C9QRA2|C9QRA2_ECOD1</small></td><td><small>Periplasmic nitrate reductase precursor</small></td><td><small>TrEMBL</small></td></tr><tr><td><small> </small></td></tr></table>
-<br />
-Note the tendency for most sources of these assertions to be at least somewhat inconsistent. That is, it is very common for assertions of function relating to precisely the same protein sequence to have assignments of function that say essentially the same thing, but do it in many ways. <p> Now, it should be clear how to take a given <em>fid</em> and ask for assertions from other sources that have been made to protein sequences that are identical. We would suggest using something like <br />
-<pre>  echo &#39;kb|g.0.peg.1002&#39; | <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#fids_to_proteins" target='_blank'>fids_to_proteins</a> | <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#equiv_sequence_assertions" target='_blank'>equiv_sequence_assertions</a><br /><br /></pre>
- Of course, this example shows how to do it for a single <em>fid</em>
-. You could just use <br />
-<pre>  <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#fids_to_proteins" target='_blank'>fids_to_proteins</a> &lt; file.of.fids | <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#equiv_sequence_assertions" target='_blank'>equiv_sequence_assertions</a><br /><br /></pre>
- to handle processing a file of <em>fids</em>
-. If the input is a tab-separated table in which the third column contains fids, we would use <br />
-<pre>  <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#fids_to_proteins" target='_blank'>fids_to_proteins</a> -c 3 &lt; file.of.fids | <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#equiv_sequence_assertions" target='_blank'>equiv_sequence_assertions</a><br /><br /></pre>
- These simple tools offer ways to extract assertions. As such, we hope they lay the foundation for actually achieving reconciliation of those assertions. 
+We save assignments of function from numerous sources. Because
+reconciliation of feature IDs is often problematic, we save the
+assertions along with the MD5 hash of the protein sequence that they
+are associated with. You can access the set of assignments associated
+with a given MD5 value using something like <br>
+<pre>  echo 9443dd882ae7a95ae657f8450acca893 | <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#equiv_sequence_assertions" target="_blank">equiv_sequence_assertions</a><br><br></pre>
+which produces:<br>
+<br>
+<small><br>
+</small>
+<table style="width: 962px; height: 1905px;" border="1" cellpadding="2" cellspacing="2">
+  <tbody>
+    <tr>
+      <td><small> </small><br>
+      </td>
+    </tr>
+  </tbody><tbody>
+  </tbody><tbody>
+    <tr>
+      <td><small>9443dd882ae7a95ae657f8450acca893</small></td>
+      <td><small>fig|83333.1.<a name="peg744">peg</a>.2180</small></td>
+      <td><small>Periplasmic nitrate reductase precursor (EC 1.7.99.4)</small></td>
+      <td><small><a name="SEED745">SEED</a></small></td>
+    </tr>
+    <tr>
+      <td><small> </small><br>
+      </td>
+    </tr>
+    <tr>
+      <td><small>9443dd882ae7a95ae657f8450acca893</small></td>
+      <td><small>fig|457401.3.<a name="peg746">peg</a>.1944</small></td>
+      <td><small>Periplasmic nitrate reductase precursor (EC 1.7.99.4)</small></td>
+      <td><small><a name="SEED747">SEED</a></small></td>
+    </tr>
+    <tr>
+      <td><small> </small><br>
+      </td>
+    </tr>
+    <tr>
+      <td><small>9443dd882ae7a95ae657f8450acca893</small></td>
+      <td><small>fig|511145.12.<a name="peg748">peg</a>.2295</small></td>
+      <td><small>Periplasmic nitrate reductase precursor (EC 1.7.99.4)</small></td>
+      <td><small><a name="SEED749">SEED</a></small></td>
+    </tr>
+    <tr>
+      <td><small> </small><br>
+      </td>
+    </tr>
+    <tr>
+      <td><small>9443dd882ae7a95ae657f8450acca893</small></td>
+      <td><small>fig|536056.3.<a name="peg750">peg</a>.1525</small></td>
+      <td><small>Periplasmic nitrate reductase precursor (EC 1.7.99.4)</small></td>
+      <td><small><a name="SEED751">SEED</a></small></td>
+    </tr>
+    <tr>
+      <td><small> </small><br>
+      </td>
+    </tr>
+    <tr>
+      <td><small>9443dd882ae7a95ae657f8450acca893</small></td>
+      <td><small>16314</small></td>
+      <td><small>nitrate reductase, periplasmic, large subunit</small></td>
+      <td><small>MOL</small></td>
+    </tr>
+    <tr>
+      <td><small> </small><br>
+      </td>
+    </tr>
+    <tr>
+      <td><small>9443dd882ae7a95ae657f8450acca893</small></td>
+      <td><small>7703313</small></td>
+      <td><small>nitrate reductase, periplasmic, large subunit</small></td>
+      <td><small>MOL</small></td>
+    </tr>
+    <tr>
+      <td><small> </small><br>
+      </td>
+    </tr>
+    <tr>
+      <td><small>9443dd882ae7a95ae657f8450acca893</small></td>
+      <td><small>fig|550687.3.<a name="peg752">peg</a>.2602</small></td>
+      <td><small>Periplasmic nitrate reductase precursor (EC 1.7.99.4)</small></td>
+      <td><small><a name="SEED753">SEED</a></small></td>
+    </tr>
+    <tr>
+      <td><small> </small><br>
+      </td>
+    </tr>
+    <tr>
+      <td><small>9443dd882ae7a95ae657f8450acca893</small></td>
+      <td><small>fig|595496.3.<a name="peg754">peg</a>.2177</small></td>
+      <td><small>Periplasmic nitrate reductase precursor (EC 1.7.99.4)</small></td>
+      <td><small><a name="SEED755">SEED</a></small></td>
+    </tr>
+    <tr>
+      <td><small> </small><br>
+      </td>
+    </tr>
+    <tr>
+      <td><small>9443dd882ae7a95ae657f8450acca893</small></td>
+      <td><small>fig|656374.3.<a name="peg756">peg</a>.2162</small></td>
+      <td><small>Periplasmic nitrate reductase precursor (EC 1.7.99.4)</small></td>
+      <td><small><a name="SEED757">SEED</a></small></td>
+    </tr>
+    <tr>
+      <td><small> </small><br>
+      </td>
+    </tr>
+    <tr>
+      <td><small>9443dd882ae7a95ae657f8450acca893</small></td>
+      <td><small>fig|656414.3.<a name="peg758">peg</a>.2581</small></td>
+      <td><small>Periplasmic nitrate reductase precursor (EC 1.7.99.4)</small></td>
+      <td><small><a name="SEED759">SEED</a></small></td>
+    </tr>
+    <tr>
+      <td><small> </small><br>
+      </td>
+    </tr>
+    <tr>
+      <td><small>9443dd882ae7a95ae657f8450acca893</small></td>
+      <td><small>fig|670892.3.<a name="peg760">peg</a>.4143</small></td>
+      <td><small>Periplasmic nitrate reductase precursor (EC 1.7.99.4)</small></td>
+      <td><small><a name="SEED761">SEED</a></small></td>
+    </tr>
+    <tr>
+      <td><small> </small><br>
+      </td>
+    </tr>
+    <tr>
+      <td><small>9443dd882ae7a95ae657f8450acca893</small></td>
+      <td><small>fig|696406.3.<a name="peg762">peg</a>.2710</small></td>
+      <td><small>Periplasmic nitrate reductase precursor (EC 1.7.99.4)</small></td>
+      <td><small><a name="SEED763">SEED</a></small></td>
+    </tr>
+    <tr>
+      <td><small> </small><br>
+      </td>
+    </tr>
+    <tr>
+      <td><small>9443dd882ae7a95ae657f8450acca893</small></td>
+      <td><small>fig|869670.3.<a name="peg764">peg</a>.2691</small></td>
+      <td><small>Periplasmic nitrate reductase precursor (EC 1.7.99.4)</small></td>
+      <td><small><a name="SEED765">SEED</a></small></td>
+    </tr>
+    <tr>
+      <td><small> </small><br>
+      </td>
+    </tr>
+    <tr>
+      <td><small>9443dd882ae7a95ae657f8450acca893</small></td>
+      <td><small>fig|869690.3.<a name="peg766">peg</a>.4013</small></td>
+      <td><small>Periplasmic nitrate reductase precursor (EC 1.7.99.4)</small></td>
+      <td><small><a name="SEED767">SEED</a></small></td>
+    </tr>
+    <tr>
+      <td><small> </small><br>
+      </td>
+    </tr>
+    <tr>
+      <td><small>9443dd882ae7a95ae657f8450acca893</small></td>
+      <td><small>fig|869691.3.<a name="peg768">peg</a>.1976</small></td>
+      <td><small>Periplasmic nitrate reductase precursor (EC 1.7.99.4)</small></td>
+      <td><small><a name="SEED769">SEED</a></small></td>
+    </tr>
+    <tr>
+      <td><small> </small><br>
+      </td>
+    </tr>
+    <tr>
+      <td><small>9443dd882ae7a95ae657f8450acca893</small></td>
+      <td><small>fig|869694.3.<a name="peg770">peg</a>.3176</small></td>
+      <td><small>Periplasmic nitrate reductase precursor (EC 1.7.99.4)</small></td>
+      <td><small><a name="SEED771">SEED</a></small></td>
+    </tr>
+    <tr>
+      <td><small> </small><br>
+      </td>
+    </tr>
+    <tr>
+      <td><small>9443dd882ae7a95ae657f8450acca893</small></td>
+      <td><small>fig|879462.4.<a name="peg772">peg</a>.2233</small></td>
+      <td><small>Periplasmic nitrate reductase precursor (EC 1.7.99.4)</small></td>
+      <td><small><a name="SEED773">SEED</a></small></td>
+    </tr>
+    <tr>
+      <td><small> </small><br>
+      </td>
+    </tr>
+    <tr>
+      <td><small>9443dd882ae7a95ae657f8450acca893</small></td>
+      <td><small>fig|913091.3.<a name="peg774">peg</a>.2871</small></td>
+      <td><small>Periplasmic nitrate reductase precursor (EC 1.7.99.4)</small></td>
+      <td><small><a name="SEED775">SEED</a></small></td>
+    </tr>
+    <tr>
+      <td><small> </small><br>
+      </td>
+    </tr>
+    <tr>
+      <td><small>9443dd882ae7a95ae657f8450acca893</small></td>
+      <td><small>fig|316385.7.<a name="peg776">peg</a>.2385</small></td>
+      <td><small>Periplasmic nitrate reductase precursor (EC 1.7.99.4)</small></td>
+      <td><small><a name="SEED777">SEED</a></small></td>
+    </tr>
+    <tr>
+      <td><small> </small><br>
+      </td>
+    </tr>
+    <tr>
+      <td><small>9443dd882ae7a95ae657f8450acca893</small></td>
+      <td><small>fig|316407.9.<a name="peg778">peg</a>.2236</small></td>
+      <td><small>Periplasmic nitrate reductase precursor (EC 1.7.99.4)</small></td>
+      <td><small><a name="SEED779">SEED</a></small></td>
+    </tr>
+    <tr>
+      <td><small> </small><br>
+      </td>
+    </tr>
+    <tr>
+      <td><small>9443dd882ae7a95ae657f8450acca893</small></td>
+      <td><small>5497364</small></td>
+      <td><small>nitrate reductase, periplasmic, large subunit</small></td>
+      <td><small>MOL</small></td>
+    </tr>
+    <tr>
+      <td><small> </small><br>
+      </td>
+    </tr>
+    <tr>
+      <td><small>9443dd882ae7a95ae657f8450acca893</small></td>
+      <td><small>1241231</small></td>
+      <td><small>nitrate reductase, periplasmic, large subunit</small></td>
+      <td><small>MOL</small></td>
+    </tr>
+    <tr>
+      <td><small> </small><br>
+      </td>
+    </tr>
+    <tr>
+      <td><small>9443dd882ae7a95ae657f8450acca893</small></td>
+      <td><small>NT01EC2670</small></td>
+      <td><small>periplasmic nitrate reductase precursor</small></td>
+      <td><small>CMR</small></td>
+    </tr>
+    <tr>
+      <td><small> </small><br>
+      </td>
+    </tr>
+    <tr>
+      <td><small>9443dd882ae7a95ae657f8450acca893</small></td>
+      <td><small>NTL01EC02164</small></td>
+      <td><small>probable nitrate reductase 3</small></td>
+      <td><small>CMR</small></td>
+    </tr>
+    <tr>
+      <td><small> </small><br>
+      </td>
+    </tr>
+    <tr>
+      <td><small>9443dd882ae7a95ae657f8450acca893</small></td>
+      <td><small>NT41EC2158</small></td>
+      <td><small>periplasmic nitrate reductase, large subunit</small></td>
+      <td><small>CMR</small></td>
+    </tr>
+    <tr>
+      <td><small> </small><br>
+      </td>
+    </tr>
+    <tr>
+      <td><small>9443dd882ae7a95ae657f8450acca893</small></td>
+      <td><small>NTL41EC1979</small></td>
+      <td><small>nitrate reductase, periplasmic, large subunit</small></td>
+      <td><small>CMR</small></td>
+    </tr>
+    <tr>
+      <td><small> </small><br>
+      </td>
+    </tr>
+    <tr>
+      <td><small>9443dd882ae7a95ae657f8450acca893</small></td>
+      <td><small>NT11EC2285</small></td>
+      <td><small>periplasmic nitrate reductase, large subunit</small></td>
+      <td><small>CMR</small></td>
+    </tr>
+    <tr>
+      <td><small> </small><br>
+      </td>
+    </tr>
+    <tr>
+      <td><small>9443dd882ae7a95ae657f8450acca893</small></td>
+      <td><small>NTL11EC2201</small></td>
+      <td><small>nitrate reductase, periplasmic, large subunit</small></td>
+      <td><small>CMR</small></td>
+    </tr>
+    <tr>
+      <td><small> </small><br>
+      </td>
+    </tr>
+    <tr>
+      <td><small>9443dd882ae7a95ae657f8450acca893</small></td>
+      <td><small>NT38EC2386</small></td>
+      <td><small>periplasmic nitrate reductase, large subunit</small></td>
+      <td><small>CMR</small></td>
+    </tr>
+    <tr>
+      <td><small> </small><br>
+      </td>
+    </tr>
+    <tr>
+      <td><small>9443dd882ae7a95ae657f8450acca893</small></td>
+      <td><small>NTL38EC2212</small></td>
+      <td><small>nitrate reductase, periplasmic, large subunit</small></td>
+      <td><small>CMR</small></td>
+    </tr>
+    <tr>
+      <td><small> </small><br>
+      </td>
+    </tr>
+    <tr>
+      <td><small>9443dd882ae7a95ae657f8450acca893</small></td>
+      <td><small>ABE-0007289</small></td>
+      <td><small>nitrate reductase periplasmic large subunit</small></td>
+      <td><small>ERIC</small></td>
+    </tr>
+    <tr>
+      <td><small> </small><br>
+      </td>
+    </tr>
+    <tr>
+      <td><small>9443dd882ae7a95ae657f8450acca893</small></td>
+      <td><small>ADY-0002272</small></td>
+      <td><small>nitrate reductase periplasmic large subunit</small></td>
+      <td><small>ERIC</small></td>
+    </tr>
+    <tr>
+      <td><small> </small><br>
+      </td>
+    </tr>
+    <tr>
+      <td><small>9443dd882ae7a95ae657f8450acca893</small></td>
+      <td><small>ref|NP_416710.1</small></td>
+      <td><small>nitrate reductase, periplasmic, large subunit</small></td>
+      <td><small>NCBI</small></td>
+    </tr>
+    <tr>
+      <td><small> </small><br>
+      </td>
+    </tr>
+    <tr>
+      <td><small>9443dd882ae7a95ae657f8450acca893</small></td>
+      <td><small>ref|YP_001731146.1</small></td>
+      <td><small>nitrate reductase catalytic subunit</small></td>
+      <td><small>NCBI</small></td>
+    </tr>
+    <tr>
+      <td><small> </small><br>
+      </td>
+    </tr>
+    <tr>
+      <td><small>9443dd882ae7a95ae657f8450acca893</small></td>
+      <td><small>ref|YP_002927176.1</small></td>
+      <td><small>nitrate reductase catalytic subunit</small></td>
+      <td><small>NCBI</small></td>
+    </tr>
+    <tr>
+      <td><small> </small><br>
+      </td>
+    </tr>
+    <tr>
+      <td><small>9443dd882ae7a95ae657f8450acca893</small></td>
+      <td><small>ref|ZP_05435977.1</small></td>
+      <td><small>nitrate reductase catalytic subunit</small></td>
+      <td><small>NCBI</small></td>
+    </tr>
+    <tr>
+      <td><small> </small><br>
+      </td>
+    </tr>
+    <tr>
+      <td><small>9443dd882ae7a95ae657f8450acca893</small></td>
+      <td><small>ref|ZP_08343970.1</small></td>
+      <td><small>periplasmic nitrate reductase, large subunit</small></td>
+      <td><small>NCBI</small></td>
+    </tr>
+    <tr>
+      <td><small> </small><br>
+      </td>
+    </tr>
+    <tr>
+      <td><small>9443dd882ae7a95ae657f8450acca893</small></td>
+      <td><small>sp|P33937|NAPA_ECOLI</small></td>
+      <td><small>RecName: Full=Periplasmic nitrate reductase; Flags:
+Precursor</small></td>
+      <td><small>NCBI</small></td>
+    </tr>
+    <tr>
+      <td><small> </small><br>
+      </td>
+    </tr>
+    <tr>
+      <td><small>9443dd882ae7a95ae657f8450acca893</small></td>
+      <td><small>sp|B1X8A2|NAPA_ECODH</small></td>
+      <td><small>RecName: Full=Periplasmic nitrate reductase; Flags:
+Precursor</small></td>
+      <td><small>NCBI</small></td>
+    </tr>
+    <tr>
+      <td><small> </small><br>
+      </td>
+    </tr>
+    <tr>
+      <td><small>9443dd882ae7a95ae657f8450acca893</small></td>
+      <td><small>sp|C4ZU48|NAPA_ECOBW</small></td>
+      <td><small>RecName: Full=Periplasmic nitrate reductase; Flags:
+Precursor</small></td>
+      <td><small>NCBI</small></td>
+    </tr>
+    <tr>
+      <td><small> </small><br>
+      </td>
+    </tr>
+    <tr>
+      <td><small>9443dd882ae7a95ae657f8450acca893</small></td>
+      <td><small>gb|AAC75266.1</small></td>
+      <td><small>nitrate reductase, periplasmic, large subunit</small></td>
+      <td><small>NCBI</small></td>
+    </tr>
+    <tr>
+      <td><small> </small><br>
+      </td>
+    </tr>
+    <tr>
+      <td><small>9443dd882ae7a95ae657f8450acca893</small></td>
+      <td><small>dbj|BAA15989.2</small></td>
+      <td><small>nitrate reductase, periplasmic, large subunit</small></td>
+      <td><small>NCBI</small></td>
+    </tr>
+    <tr>
+      <td><small> </small><br>
+      </td>
+    </tr>
+    <tr>
+      <td><small>9443dd882ae7a95ae657f8450acca893</small></td>
+      <td><small>gb|ACB03368.1</small></td>
+      <td><small>nitrate reductase, periplasmic, large subunit</small></td>
+      <td><small>NCBI</small></td>
+    </tr>
+    <tr>
+      <td><small> </small><br>
+      </td>
+    </tr>
+    <tr>
+      <td><small>9443dd882ae7a95ae657f8450acca893</small></td>
+      <td><small>gb|ACR63904.1</small></td>
+      <td><small>nitrate reductase, periplasmic, large subunit</small></td>
+      <td><small>NCBI</small></td>
+    </tr>
+    <tr>
+      <td><small> </small><br>
+      </td>
+    </tr>
+    <tr>
+      <td><small>9443dd882ae7a95ae657f8450acca893</small></td>
+      <td><small>gb|ACX39123.1</small></td>
+      <td><small>periplasmic nitrate reductase, large subunit</small></td>
+      <td><small>NCBI</small></td>
+    </tr>
+    <tr>
+      <td><small> </small><br>
+      </td>
+    </tr>
+    <tr>
+      <td><small>9443dd882ae7a95ae657f8450acca893</small></td>
+      <td><small>dbj|BAJ43997.1</small></td>
+      <td><small>nitrate reductase catalytic subunit</small></td>
+      <td><small>NCBI</small></td>
+    </tr>
+    <tr>
+      <td><small> </small><br>
+      </td>
+    </tr>
+    <tr>
+      <td><small>9443dd882ae7a95ae657f8450acca893</small></td>
+      <td><small>gb|EFU96098.1</small></td>
+      <td><small>periplasmic nitrate reductase, large subunit</small></td>
+      <td><small>NCBI</small></td>
+    </tr>
+    <tr>
+      <td><small> </small><br>
+      </td>
+    </tr>
+    <tr>
+      <td><small>9443dd882ae7a95ae657f8450acca893</small></td>
+      <td><small>gb|EGB33105.1</small></td>
+      <td><small>periplasmic nitrate reductase</small></td>
+      <td><small>NCBI</small></td>
+    </tr>
+    <tr>
+      <td><small> </small><br>
+      </td>
+    </tr>
+    <tr>
+      <td><small>9443dd882ae7a95ae657f8450acca893</small></td>
+      <td><small>gb|EGB36914.1</small></td>
+      <td><small>periplasmic nitrate reductase</small></td>
+      <td><small>NCBI</small></td>
+    </tr>
+    <tr>
+      <td><small> </small><br>
+      </td>
+    </tr>
+    <tr>
+      <td><small>9443dd882ae7a95ae657f8450acca893</small></td>
+      <td><small>gb|EGI11853.1</small></td>
+      <td><small>periplasmic nitrate reductase, large subunit</small></td>
+      <td><small>NCBI</small></td>
+    </tr>
+    <tr>
+      <td><small> </small><br>
+      </td>
+    </tr>
+    <tr>
+      <td><small>9443dd882ae7a95ae657f8450acca893</small></td>
+      <td><small>gb|AEE57320.1</small></td>
+      <td><small>periplasmic nitrate reductase, large subunit NapA</small></td>
+      <td><small>NCBI</small></td>
+    </tr>
+    <tr>
+      <td><small> </small><br>
+      </td>
+    </tr>
+    <tr>
+      <td><small>9443dd882ae7a95ae657f8450acca893</small></td>
+      <td><small>gb|EGU25057.1</small></td>
+      <td><small>nitrate reductase catalytic subunit</small></td>
+      <td><small>NCBI</small></td>
+    </tr>
+    <tr>
+      <td><small> </small><br>
+      </td>
+    </tr>
+    <tr>
+      <td><small>9443dd882ae7a95ae657f8450acca893</small></td>
+      <td><small>gb|EGV49118.1</small></td>
+      <td><small>nitrate reductase catalytic subunit</small></td>
+      <td><small>NCBI</small></td>
+    </tr>
+    <tr>
+      <td><small> </small><br>
+      </td>
+    </tr>
+    <tr>
+      <td><small>9443dd882ae7a95ae657f8450acca893</small></td>
+      <td><small>gb|EGW94027.1</small></td>
+      <td><small>periplasmic nitrate reductase, large subunit</small></td>
+      <td><small>NCBI</small></td>
+    </tr>
+    <tr>
+      <td><small> </small><br>
+      </td>
+    </tr>
+    <tr>
+      <td><small>9443dd882ae7a95ae657f8450acca893</small></td>
+      <td><small>gb|EGX07462.1</small></td>
+      <td><small>periplasmic nitrate reductase, large subunit</small></td>
+      <td><small>NCBI</small></td>
+    </tr>
+    <tr>
+      <td><small> </small><br>
+      </td>
+    </tr>
+    <tr>
+      <td><small>9443dd882ae7a95ae657f8450acca893</small></td>
+      <td><small>gb|EGX17242.1</small></td>
+      <td><small>periplasmic nitrate reductase, large subunit</small></td>
+      <td><small>NCBI</small></td>
+    </tr>
+    <tr>
+      <td><small> </small><br>
+      </td>
+    </tr>
+    <tr>
+      <td><small>9443dd882ae7a95ae657f8450acca893</small></td>
+      <td><small>dbj|BAL38997.1</small></td>
+      <td><small>nitrate reductase, periplasmic, large subunit</small></td>
+      <td><small>NCBI</small></td>
+    </tr>
+    <tr>
+      <td><small> </small><br>
+      </td>
+    </tr>
+    <tr>
+      <td><small>9443dd882ae7a95ae657f8450acca893</small></td>
+      <td><small>gb|EHV55433.1</small></td>
+      <td><small>periplasmic nitrate reductase, large subunit</small></td>
+      <td><small>NCBI</small></td>
+    </tr>
+    <tr>
+      <td><small> </small><br>
+      </td>
+    </tr>
+    <tr>
+      <td><small>9443dd882ae7a95ae657f8450acca893</small></td>
+      <td><small>gb|EHV56789.1</small></td>
+      <td><small>periplasmic nitrate reductase, large subunit</small></td>
+      <td><small>NCBI</small></td>
+    </tr>
+    <tr>
+      <td><small> </small><br>
+      </td>
+    </tr>
+    <tr>
+      <td><small>9443dd882ae7a95ae657f8450acca893</small></td>
+      <td><small>gb|EHV60297.1</small></td>
+      <td><small>periplasmic nitrate reductase, large subunit</small></td>
+      <td><small>NCBI</small></td>
+    </tr>
+    <tr>
+      <td><small> </small><br>
+      </td>
+    </tr>
+    <tr>
+      <td><small>9443dd882ae7a95ae657f8450acca893</small></td>
+      <td><small>gb|EHV70195.1</small></td>
+      <td><small>periplasmic nitrate reductase, large subunit</small></td>
+      <td><small>NCBI</small></td>
+    </tr>
+    <tr>
+      <td><small> </small><br>
+      </td>
+    </tr>
+    <tr>
+      <td><small>9443dd882ae7a95ae657f8450acca893</small></td>
+      <td><small>gb|EHV74036.1</small></td>
+      <td><small>periplasmic nitrate reductase, large subunit</small></td>
+      <td><small>NCBI</small></td>
+    </tr>
+    <tr>
+      <td><small> </small><br>
+      </td>
+    </tr>
+    <tr>
+      <td><small>9443dd882ae7a95ae657f8450acca893</small></td>
+      <td><small>sp|C4ZU48|NAPA_ECOBW</small></td>
+      <td><small>Periplasmic nitrate reductase precursor</small></td>
+      <td><small>Swiss-Prot</small></td>
+    </tr>
+    <tr>
+      <td><small> </small><br>
+      </td>
+    </tr>
+    <tr>
+      <td><small>9443dd882ae7a95ae657f8450acca893</small></td>
+      <td><small>sp|B1X8A2|NAPA_ECODH</small></td>
+      <td><small>Periplasmic nitrate reductase precursor</small></td>
+      <td><small>Swiss-Prot</small></td>
+    </tr>
+    <tr>
+      <td><small> </small><br>
+      </td>
+    </tr>
+    <tr>
+      <td><small>9443dd882ae7a95ae657f8450acca893</small></td>
+      <td><small>sp|P33937|NAPA_ECOLI</small></td>
+      <td><small>Periplasmic nitrate reductase precursor</small></td>
+      <td><small>Swiss-Prot</small></td>
+    </tr>
+    <tr>
+      <td><small> </small><br>
+      </td>
+    </tr>
+    <tr>
+      <td><small>9443dd882ae7a95ae657f8450acca893</small></td>
+      <td><small>tr|E6B9N0|E6B9N0_ECOLX</small></td>
+      <td><small>Nitrate reductase</small></td>
+      <td><small>TrEMBL</small></td>
+    </tr>
+    <tr>
+      <td><small> </small><br>
+      </td>
+    </tr>
+    <tr>
+      <td><small>9443dd882ae7a95ae657f8450acca893</small></td>
+      <td><small>tr|E9WGQ0|E9WGQ0_ECOLX</small></td>
+      <td><small>Nitrate reductase</small></td>
+      <td><small>TrEMBL</small></td>
+    </tr>
+    <tr>
+      <td><small> </small><br>
+      </td>
+    </tr>
+    <tr>
+      <td><small>9443dd882ae7a95ae657f8450acca893</small></td>
+      <td><small>tr|E9WW94|E9WW94_ECOLX</small></td>
+      <td><small>Nitrate reductase</small></td>
+      <td><small>TrEMBL</small></td>
+    </tr>
+    <tr>
+      <td><small> </small><br>
+      </td>
+    </tr>
+    <tr>
+      <td><small>9443dd882ae7a95ae657f8450acca893</small></td>
+      <td><small>tr|F4M336|F4M336_ECOLX</small></td>
+      <td><small>Nitrate reductase</small></td>
+      <td><small>TrEMBL</small></td>
+    </tr>
+    <tr>
+      <td><small> </small><br>
+      </td>
+    </tr>
+    <tr>
+      <td><small>9443dd882ae7a95ae657f8450acca893</small></td>
+      <td><small>tr|F4SG48|F4SG48_ECOLX</small></td>
+      <td><small>Nitrate reductase</small></td>
+      <td><small>TrEMBL</small></td>
+    </tr>
+    <tr>
+      <td><small> </small><br>
+      </td>
+    </tr>
+    <tr>
+      <td><small>9443dd882ae7a95ae657f8450acca893</small></td>
+      <td><small>tr|F9R5Y1|F9R5Y1_ECOLX</small></td>
+      <td><small>Nitrate reductase</small></td>
+      <td><small>TrEMBL</small></td>
+    </tr>
+    <tr>
+      <td><small> </small><br>
+      </td>
+    </tr>
+    <tr>
+      <td><small>9443dd882ae7a95ae657f8450acca893</small></td>
+      <td><small>tr|G2AWX2|G2AWX2_ECOLX</small></td>
+      <td><small>Nitrate reductase</small></td>
+      <td><small>TrEMBL</small></td>
+    </tr>
+    <tr>
+      <td><small> </small><br>
+      </td>
+    </tr>
+    <tr>
+      <td><small>9443dd882ae7a95ae657f8450acca893</small></td>
+      <td><small>tr|G2BBM9|G2BBM9_ECOLX</small></td>
+      <td><small>Nitrate reductase</small></td>
+      <td><small>TrEMBL</small></td>
+    </tr>
+    <tr>
+      <td><small> </small><br>
+      </td>
+    </tr>
+    <tr>
+      <td><small>9443dd882ae7a95ae657f8450acca893</small></td>
+      <td><small>tr|G2CMI8|G2CMI8_ECOLX</small></td>
+      <td><small>Nitrate reductase</small></td>
+      <td><small>TrEMBL</small></td>
+    </tr>
+    <tr>
+      <td><small> </small><br>
+      </td>
+    </tr>
+    <tr>
+      <td><small>9443dd882ae7a95ae657f8450acca893</small></td>
+      <td><small>tr|G2EZU1|G2EZU1_ECOLX</small></td>
+      <td><small>Nitrate reductase</small></td>
+      <td><small>TrEMBL</small></td>
+    </tr>
+    <tr>
+      <td><small> </small><br>
+      </td>
+    </tr>
+    <tr>
+      <td><small>9443dd882ae7a95ae657f8450acca893</small></td>
+      <td><small>tr|H0QDG3|H0QDG3_ECOLI</small></td>
+      <td><small>Nitrate reductase, periplasmic, large subunit</small></td>
+      <td><small>TrEMBL</small></td>
+    </tr>
+    <tr>
+      <td><small> </small><br>
+      </td>
+    </tr>
+    <tr>
+      <td><small>9443dd882ae7a95ae657f8450acca893</small></td>
+      <td><small>tr|C9QRA2|C9QRA2_ECOD1</small></td>
+      <td><small>Periplasmic nitrate reductase precursor</small></td>
+      <td><small>TrEMBL</small></td>
+    </tr>
+    <tr>
+      <td><small> </small><br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<br>
+Note the tendency for most sources of these assertions to be at least
+somewhat inconsistent. That is, it is very common for assertions of
+function relating to precisely the same protein sequence to have
+assignments of function that say essentially the same thing, but do it
+in many ways.
+<p> Now, it should be clear how to take a given <em>fid</em> and ask
+for assertions from other sources that have been made to protein
+sequences that are identical. We would suggest using something like <br>
+</p>
+<pre>  echo 'kb|g.0.peg.1002' | <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#fids_to_proteins" target="_blank">fids_to_proteins</a> | <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#equiv_sequence_assertions" target="_blank">equiv_sequence_assertions</a><br><br></pre>
+Of course, this example shows how to do it for a single <em>fid</em>
+. You could just use <br>
+<pre>  <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#fids_to_proteins" target="_blank">fids_to_proteins</a> &lt; file.of.fids | <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#equiv_sequence_assertions" target="_blank">equiv_sequence_assertions</a><br><br></pre>
+to handle processing a file of <em>fids</em>
+. If the input is a tab-separated table in which the third column
+contains fids, we would use <br>
+<pre>  <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#fids_to_proteins" target="_blank">fids_to_proteins</a> -c 3 &lt; file.of.fids | <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#equiv_sequence_assertions" target="_blank">equiv_sequence_assertions</a><br><br></pre>
+These simple tools offer ways to extract assertions. As such, we hope
+they lay the foundation for actually achieving reconciliation of those
+assertions.

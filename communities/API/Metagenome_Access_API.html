@@ -1,0 +1,721 @@
+<?xml version="1.0" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>API</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<link rev="made" href="mailto:Andi@merle.mcs.anl.gov" />
+</head>
+
+<body style="background-color: white">
+
+
+<!-- INDEX BEGIN -->
+<div name="index">
+<p><a name="__index__"></a></p>
+
+<ul>
+
+	<li><a href="#name">NAME</a></li>
+	<li><a href="#description">DESCRIPTION</a></li>
+	<li><a href="#methods">METHODS</a></li>
+	<ul>
+
+		<li><a href="#get_abundanceprofile_instance">get_abundanceprofile_instance</a></li>
+		<li><a href="#get_library_query">get_library_query</a></li>
+		<li><a href="#get_library_instance">get_library_instance</a></li>
+		<li><a href="#get_metagenome_query">get_metagenome_query</a></li>
+		<li><a href="#get_metagenome_instance">get_metagenome_instance</a></li>
+		<li><a href="#get_project_query">get_project_query</a></li>
+		<li><a href="#get_project_instance">get_project_instance</a></li>
+		<li><a href="#get_sample_query">get_sample_query</a></li>
+		<li><a href="#get_sample_instance">get_sample_instance</a></li>
+		<li><a href="#get_sequences_md5">get_sequences_md5</a></li>
+		<li><a href="#get_sequences_annotation">get_sequences_annotation</a></li>
+		<li><a href="#version">version</a></li>
+	</ul>
+
+	<li><a href="#types">TYPES</a></li>
+	<ul>
+
+		<li><a href="#get_abundanceprofile_instance_params">get_abundanceprofile_instance_params</a></li>
+		<li><a href="#abundanceprofileinstance">AbundanceprofileInstance</a></li>
+		<li><a href="#get_library_query_params">get_library_query_params</a></li>
+		<li><a href="#libraryquery">LibraryQuery</a></li>
+		<li><a href="#get_library_instance_params">get_library_instance_params</a></li>
+		<li><a href="#libraryinstance">LibraryInstance</a></li>
+		<li><a href="#get_metagenome_query_params">get_metagenome_query_params</a></li>
+		<li><a href="#metagenomequery">MetagenomeQuery</a></li>
+		<li><a href="#get_metagenome_instance_params">get_metagenome_instance_params</a></li>
+		<li><a href="#metagenomeinstance">MetagenomeInstance</a></li>
+		<li><a href="#get_project_query_params">get_project_query_params</a></li>
+		<li><a href="#projectquery">ProjectQuery</a></li>
+		<li><a href="#get_project_instance_params">get_project_instance_params</a></li>
+		<li><a href="#projectinstance">ProjectInstance</a></li>
+		<li><a href="#get_sample_query_params">get_sample_query_params</a></li>
+		<li><a href="#samplequery">SampleQuery</a></li>
+		<li><a href="#get_sample_instance_params">get_sample_instance_params</a></li>
+		<li><a href="#sampleinstance">SampleInstance</a></li>
+		<li><a href="#get_sequences_md5_params">get_sequences_md5_params</a></li>
+		<li><a href="#sequencesmd5">SequencesMd5</a></li>
+		<li><a href="#get_sequences_annotation_params">get_sequences_annotation_params</a></li>
+		<li><a href="#sequencesannotation">SequencesAnnotation</a></li>
+	</ul>
+
+</ul>
+
+<hr name="index" />
+</div>
+<!-- INDEX END -->
+
+<p>
+</p>
+<h1><a name="name">NAME</a></h1>
+<p>CommunitiesAPI</p>
+<p>
+</p>
+<hr />
+<h1><a name="description">DESCRIPTION</a></h1>
+<p>
+</p>
+<hr />
+<h1><a name="methods">METHODS</a></h1>
+<p>
+</p>
+<h2><a name="get_abundanceprofile_instance">get_abundanceprofile_instance</a></h2>
+<pre>
+  $return = $obj-&gt;get_abundanceprofile_instance($get_abundanceprofile_instance_params)</pre>
+<dl>
+<dt><strong><a name="parameter_and_return_types" class="item">Parameter and return types</a></strong></dt>
+
+<pre>
+$get_abundanceprofile_instance_params is a get_abundanceprofile_instance_params
+$return is an AbundanceprofileInstance
+get_abundanceprofile_instance_params is a reference to a hash where the following keys are defined:
+	verbosity has a value which is a string
+	source has a value which is a string
+	id has a value which is a string
+	type has a value which is a string
+AbundanceprofileInstance is a reference to a hash where the following keys are defined:
+	generated_by has a value which is a string
+	matrix_type has a value which is a string
+	date has a value which is a string
+	data has a value which is a reference to a list where each element is a reference to a list where each element is a float
+	rows has a value which is a reference to a list where each element is a reference to a hash where the key is a string and the value is a string
+	matrix_element_type has a value which is a string
+	format_url has a value which is a string
+	format has a value which is a string
+	columns has a value which is a reference to a list where each element is a reference to a hash where the key is a string and the value is a string
+	id has a value which is a string
+	type has a value which is a string
+	shape has a value which is a reference to a list where each element is an int</pre><dt><strong><a name="description" class="item">Description</a></strong></dt>
+
+</dl>
+<p>
+</p>
+<h2><a name="get_library_query">get_library_query</a></h2>
+<pre>
+  $return = $obj-&gt;get_library_query($get_library_query_params)</pre>
+<dl>
+<dt><strong><a name="parameter_and_return_types2" class="item">Parameter and return types</a></strong></dt>
+
+<pre>
+$get_library_query_params is a get_library_query_params
+$return is a LibraryQuery
+get_library_query_params is a reference to a hash where the following keys are defined:
+	verbosity has a value which is a string
+	order has a value which is a string
+	limit has a value which is an int
+	offset has a value which is an int
+LibraryQuery is a reference to a hash where the following keys are defined:
+	version has a value which is an int
+	project has a value which is a string
+	name has a value which is a string
+	sequencesets has a value which is a reference to a list where each element is a string
+	metagenome has a value which is a string
+	created has a value which is a string
+	url has a value which is a string
+	id has a value which is a string
+	sample has a value which is a string
+	metadata has a value which is a reference to a hash where the key is a string and the value is a string</pre><dt><strong><a name="description2" class="item">Description</a></strong></dt>
+
+</dl>
+<p>
+</p>
+<h2><a name="get_library_instance">get_library_instance</a></h2>
+<pre>
+  $return = $obj-&gt;get_library_instance($get_library_instance_params)</pre>
+<dl>
+<dt><strong><a name="parameter_and_return_types3" class="item">Parameter and return types</a></strong></dt>
+
+<pre>
+$get_library_instance_params is a get_library_instance_params
+$return is a LibraryInstance
+get_library_instance_params is a reference to a hash where the following keys are defined:
+	verbosity has a value which is a string
+	id has a value which is a string
+LibraryInstance is a reference to a hash where the following keys are defined:
+	version has a value which is an int
+	project has a value which is a string
+	name has a value which is a string
+	sequencesets has a value which is a reference to a list where each element is a string
+	metagenome has a value which is a string
+	created has a value which is a string
+	url has a value which is a string
+	id has a value which is a string
+	sample has a value which is a string
+	metadata has a value which is a reference to a hash where the key is a string and the value is a string</pre><dt><strong><a name="description3" class="item">Description</a></strong></dt>
+
+</dl>
+<p>
+</p>
+<h2><a name="get_metagenome_query">get_metagenome_query</a></h2>
+<pre>
+  $return = $obj-&gt;get_metagenome_query($get_metagenome_query_params)</pre>
+<dl>
+<dt><strong><a name="parameter_and_return_types4" class="item">Parameter and return types</a></strong></dt>
+
+<pre>
+$get_metagenome_query_params is a get_metagenome_query_params
+$return is a MetagenomeQuery
+get_metagenome_query_params is a reference to a hash where the following keys are defined:
+	verbosity has a value which is a string
+	order has a value which is a string
+	limit has a value which is an int
+	offset has a value which is an int
+MetagenomeQuery is a reference to a hash where the following keys are defined:
+	file_size has a value which is an int
+	version has a value which is an int
+	name has a value which is a string
+	library has a value which is a string
+	sequence_type has a value which is a string
+	created has a value which is a string
+	url has a value which is a string
+	primary_project has a value which is a string
+	id has a value which is a string
+	sample has a value which is a string
+	metadata has a value which is a reference to a hash where the key is a string and the value is a string</pre><dt><strong><a name="description4" class="item">Description</a></strong></dt>
+
+</dl>
+<p>
+</p>
+<h2><a name="get_metagenome_instance">get_metagenome_instance</a></h2>
+<pre>
+  $return = $obj-&gt;get_metagenome_instance($get_metagenome_instance_params)</pre>
+<dl>
+<dt><strong><a name="parameter_and_return_types5" class="item">Parameter and return types</a></strong></dt>
+
+<pre>
+$get_metagenome_instance_params is a get_metagenome_instance_params
+$return is a MetagenomeInstance
+get_metagenome_instance_params is a reference to a hash where the following keys are defined:
+	verbosity has a value which is a string
+	id has a value which is a string
+MetagenomeInstance is a reference to a hash where the following keys are defined:
+	file_size has a value which is an int
+	version has a value which is an int
+	name has a value which is a string
+	library has a value which is a string
+	sequence_type has a value which is a string
+	created has a value which is a string
+	url has a value which is a string
+	primary_project has a value which is a string
+	id has a value which is a string
+	sample has a value which is a string
+	metadata has a value which is a reference to a hash where the key is a string and the value is a string</pre><dt><strong><a name="description5" class="item">Description</a></strong></dt>
+
+</dl>
+<p>
+</p>
+<h2><a name="get_project_query">get_project_query</a></h2>
+<pre>
+  $return = $obj-&gt;get_project_query($get_project_query_params)</pre>
+<dl>
+<dt><strong><a name="parameter_and_return_types6" class="item">Parameter and return types</a></strong></dt>
+
+<pre>
+$get_project_query_params is a get_project_query_params
+$return is a ProjectQuery
+get_project_query_params is a reference to a hash where the following keys are defined:
+	order has a value which is a string
+	limit has a value which is an int
+	offset has a value which is an int
+ProjectQuery is a reference to a hash where the following keys are defined:
+	analyzed has a value which is a reference to a list where each element is a string
+	version has a value which is an int
+	name has a value which is a string
+	description has a value which is a string
+	libraries has a value which is a reference to a list where each element is a string
+	created has a value which is a string
+	samples has a value which is a reference to a list where each element is a string
+	funding_source has a value which is a string
+	url has a value which is a string
+	metadata has a value which is a reference to a hash where the key is a string and the value is a string
+	id has a value which is a string
+	pi has a value which is a string</pre><dt><strong><a name="description6" class="item">Description</a></strong></dt>
+
+</dl>
+<p>
+</p>
+<h2><a name="get_project_instance">get_project_instance</a></h2>
+<pre>
+  $return = $obj-&gt;get_project_instance($get_project_instance_params)</pre>
+<dl>
+<dt><strong><a name="parameter_and_return_types7" class="item">Parameter and return types</a></strong></dt>
+
+<pre>
+$get_project_instance_params is a get_project_instance_params
+$return is a ProjectInstance
+get_project_instance_params is a reference to a hash where the following keys are defined:
+	verbosity has a value which is a string
+	id has a value which is a string
+ProjectInstance is a reference to a hash where the following keys are defined:
+	analyzed has a value which is a reference to a list where each element is a string
+	version has a value which is an int
+	name has a value which is a string
+	description has a value which is a string
+	libraries has a value which is a reference to a list where each element is a string
+	created has a value which is a string
+	samples has a value which is a reference to a list where each element is a string
+	funding_source has a value which is a string
+	url has a value which is a string
+	metadata has a value which is a reference to a hash where the key is a string and the value is a string
+	id has a value which is a string
+	pi has a value which is a string</pre><dt><strong><a name="description7" class="item">Description</a></strong></dt>
+
+</dl>
+<p>
+</p>
+<h2><a name="get_sample_query">get_sample_query</a></h2>
+<pre>
+  $return = $obj-&gt;get_sample_query($get_sample_query_params)</pre>
+<dl>
+<dt><strong><a name="parameter_and_return_types8" class="item">Parameter and return types</a></strong></dt>
+
+<pre>
+$get_sample_query_params is a get_sample_query_params
+$return is a SampleQuery
+get_sample_query_params is a reference to a hash where the following keys are defined:
+	order has a value which is a string
+	limit has a value which is an int
+	offset has a value which is an int
+SampleQuery is a reference to a hash where the following keys are defined:
+	version has a value which is an int
+	project has a value which is a string
+	name has a value which is a string
+	metagenomes has a value which is a reference to a list where each element is a string
+	libraries has a value which is a reference to a list where each element is a string
+	created has a value which is a string
+	env_package has a value which is a reference to a hash where the key is a string and the value is a string
+	url has a value which is a string
+	id has a value which is a string
+	metadata has a value which is a reference to a hash where the key is a string and the value is a string</pre><dt><strong><a name="description8" class="item">Description</a></strong></dt>
+
+</dl>
+<p>
+</p>
+<h2><a name="get_sample_instance">get_sample_instance</a></h2>
+<pre>
+  $return = $obj-&gt;get_sample_instance($get_sample_instance_params)</pre>
+<dl>
+<dt><strong><a name="parameter_and_return_types9" class="item">Parameter and return types</a></strong></dt>
+
+<pre>
+$get_sample_instance_params is a get_sample_instance_params
+$return is a SampleInstance
+get_sample_instance_params is a reference to a hash where the following keys are defined:
+	verbosity has a value which is a string
+	id has a value which is a string
+SampleInstance is a reference to a hash where the following keys are defined:
+	version has a value which is an int
+	project has a value which is a string
+	name has a value which is a string
+	metagenomes has a value which is a reference to a list where each element is a string
+	libraries has a value which is a reference to a list where each element is a string
+	created has a value which is a string
+	env_package has a value which is a reference to a hash where the key is a string and the value is a string
+	url has a value which is a string
+	id has a value which is a string
+	metadata has a value which is a reference to a hash where the key is a string and the value is a string</pre><dt><strong><a name="description9" class="item">Description</a></strong></dt>
+
+</dl>
+<p>
+</p>
+<h2><a name="get_sequences_md5">get_sequences_md5</a></h2>
+<pre>
+  $return = $obj-&gt;get_sequences_md5($get_sequences_md5_params)</pre>
+<dl>
+<dt><strong><a name="parameter_and_return_types10" class="item">Parameter and return types</a></strong></dt>
+
+<pre>
+$get_sequences_md5_params is a get_sequences_md5_params
+$return is a SequencesMd5
+get_sequences_md5_params is a reference to a hash where the following keys are defined:
+	id has a value which is a string
+	sequence_type has a value which is a string
+SequencesMd5 is a reference to a hash where the following keys are defined:
+	version has a value which is an int
+	url has a value which is a string
+	id has a value which is a string</pre><dt><strong><a name="description10" class="item">Description</a></strong></dt>
+
+</dl>
+<p>
+</p>
+<h2><a name="get_sequences_annotation">get_sequences_annotation</a></h2>
+<pre>
+  $return = $obj-&gt;get_sequences_annotation($get_sequences_annotation_params)</pre>
+<dl>
+<dt><strong><a name="parameter_and_return_types11" class="item">Parameter and return types</a></strong></dt>
+
+<pre>
+$get_sequences_annotation_params is a get_sequences_annotation_params
+$return is a SequencesAnnotation
+get_sequences_annotation_params is a reference to a hash where the following keys are defined:
+	source has a value which is a string
+	data_type has a value which is a string
+	id has a value which is a string
+	sequence_type has a value which is a string
+	organism has a value which is a string
+SequencesAnnotation is a reference to a hash where the following keys are defined:
+	version has a value which is an int
+	url has a value which is a string
+	id has a value which is a string</pre><dt><strong><a name="description11" class="item">Description</a></strong></dt>
+
+</dl>
+<p>
+</p>
+<h2><a name="version">version</a></h2>
+<pre>
+  $return = $obj-&gt;version()</pre>
+<dl>
+<dt><strong><a name="parameter_and_return_types12" class="item">Parameter and return types</a></strong></dt>
+
+<pre>
+$return is a string
+</pre><dt><strong><a name="description12" class="item">Description</a></strong></dt>
+
+<dd>
+<p>Return the module version. This is a Semantic Versioning number.</p>
+</dd>
+</dl>
+<p>
+</p>
+<hr />
+<h1><a name="types">TYPES</a></h1>
+<p>
+</p>
+<h2><a name="get_abundanceprofile_instance_params">get_abundanceprofile_instance_params</a></h2>
+<dl>
+<dt><strong><a name="definition" class="item">Definition</a></strong></dt>
+
+<pre>
+a reference to a hash where the following keys are defined:
+verbosity has a value which is a string
+source has a value which is a string
+id has a value which is a string
+type has a value which is a string</pre></dl>
+<p>
+</p>
+<h2><a name="abundanceprofileinstance">AbundanceprofileInstance</a></h2>
+<dl>
+<dt><strong><a name="definition2" class="item">Definition</a></strong></dt>
+
+<pre>
+a reference to a hash where the following keys are defined:
+generated_by has a value which is a string
+matrix_type has a value which is a string
+date has a value which is a string
+data has a value which is a reference to a list where each element is a reference to a list where each element is a float
+rows has a value which is a reference to a list where each element is a reference to a hash where the key is a string and the value is a string
+matrix_element_type has a value which is a string
+format_url has a value which is a string
+format has a value which is a string
+columns has a value which is a reference to a list where each element is a reference to a hash where the key is a string and the value is a string
+id has a value which is a string
+type has a value which is a string
+shape has a value which is a reference to a list where each element is an int</pre></dl>
+<p>
+</p>
+<h2><a name="get_library_query_params">get_library_query_params</a></h2>
+<dl>
+<dt><strong><a name="definition3" class="item">Definition</a></strong></dt>
+
+<pre>
+a reference to a hash where the following keys are defined:
+verbosity has a value which is a string
+order has a value which is a string
+limit has a value which is an int
+offset has a value which is an int</pre></dl>
+<p>
+</p>
+<h2><a name="libraryquery">LibraryQuery</a></h2>
+<dl>
+<dt><strong><a name="definition4" class="item">Definition</a></strong></dt>
+
+<pre>
+a reference to a hash where the following keys are defined:
+version has a value which is an int
+project has a value which is a string
+name has a value which is a string
+sequencesets has a value which is a reference to a list where each element is a string
+metagenome has a value which is a string
+created has a value which is a string
+url has a value which is a string
+id has a value which is a string
+sample has a value which is a string
+metadata has a value which is a reference to a hash where the key is a string and the value is a string</pre></dl>
+<p>
+</p>
+<h2><a name="get_library_instance_params">get_library_instance_params</a></h2>
+<dl>
+<dt><strong><a name="definition5" class="item">Definition</a></strong></dt>
+
+<pre>
+a reference to a hash where the following keys are defined:
+verbosity has a value which is a string
+id has a value which is a string</pre></dl>
+<p>
+</p>
+<h2><a name="libraryinstance">LibraryInstance</a></h2>
+<dl>
+<dt><strong><a name="definition6" class="item">Definition</a></strong></dt>
+
+<pre>
+a reference to a hash where the following keys are defined:
+version has a value which is an int
+project has a value which is a string
+name has a value which is a string
+sequencesets has a value which is a reference to a list where each element is a string
+metagenome has a value which is a string
+created has a value which is a string
+url has a value which is a string
+id has a value which is a string
+sample has a value which is a string
+metadata has a value which is a reference to a hash where the key is a string and the value is a string</pre></dl>
+<p>
+</p>
+<h2><a name="get_metagenome_query_params">get_metagenome_query_params</a></h2>
+<dl>
+<dt><strong><a name="definition7" class="item">Definition</a></strong></dt>
+
+<pre>
+a reference to a hash where the following keys are defined:
+verbosity has a value which is a string
+order has a value which is a string
+limit has a value which is an int
+offset has a value which is an int</pre></dl>
+<p>
+</p>
+<h2><a name="metagenomequery">MetagenomeQuery</a></h2>
+<dl>
+<dt><strong><a name="definition8" class="item">Definition</a></strong></dt>
+
+<pre>
+a reference to a hash where the following keys are defined:
+file_size has a value which is an int
+version has a value which is an int
+name has a value which is a string
+library has a value which is a string
+sequence_type has a value which is a string
+created has a value which is a string
+url has a value which is a string
+primary_project has a value which is a string
+id has a value which is a string
+sample has a value which is a string
+metadata has a value which is a reference to a hash where the key is a string and the value is a string</pre></dl>
+<p>
+</p>
+<h2><a name="get_metagenome_instance_params">get_metagenome_instance_params</a></h2>
+<dl>
+<dt><strong><a name="definition9" class="item">Definition</a></strong></dt>
+
+<pre>
+a reference to a hash where the following keys are defined:
+verbosity has a value which is a string
+id has a value which is a string</pre></dl>
+<p>
+</p>
+<h2><a name="metagenomeinstance">MetagenomeInstance</a></h2>
+<dl>
+<dt><strong><a name="definition10" class="item">Definition</a></strong></dt>
+
+<pre>
+a reference to a hash where the following keys are defined:
+file_size has a value which is an int
+version has a value which is an int
+name has a value which is a string
+library has a value which is a string
+sequence_type has a value which is a string
+created has a value which is a string
+url has a value which is a string
+primary_project has a value which is a string
+id has a value which is a string
+sample has a value which is a string
+metadata has a value which is a reference to a hash where the key is a string and the value is a string</pre></dl>
+<p>
+</p>
+<h2><a name="get_project_query_params">get_project_query_params</a></h2>
+<dl>
+<dt><strong><a name="definition11" class="item">Definition</a></strong></dt>
+
+<pre>
+a reference to a hash where the following keys are defined:
+order has a value which is a string
+limit has a value which is an int
+offset has a value which is an int</pre></dl>
+<p>
+</p>
+<h2><a name="projectquery">ProjectQuery</a></h2>
+<dl>
+<dt><strong><a name="definition12" class="item">Definition</a></strong></dt>
+
+<pre>
+a reference to a hash where the following keys are defined:
+analyzed has a value which is a reference to a list where each element is a string
+version has a value which is an int
+name has a value which is a string
+description has a value which is a string
+libraries has a value which is a reference to a list where each element is a string
+created has a value which is a string
+samples has a value which is a reference to a list where each element is a string
+funding_source has a value which is a string
+url has a value which is a string
+metadata has a value which is a reference to a hash where the key is a string and the value is a string
+id has a value which is a string
+pi has a value which is a string</pre></dl>
+<p>
+</p>
+<h2><a name="get_project_instance_params">get_project_instance_params</a></h2>
+<dl>
+<dt><strong><a name="definition13" class="item">Definition</a></strong></dt>
+
+<pre>
+a reference to a hash where the following keys are defined:
+verbosity has a value which is a string
+id has a value which is a string</pre></dl>
+<p>
+</p>
+<h2><a name="projectinstance">ProjectInstance</a></h2>
+<dl>
+<dt><strong><a name="definition14" class="item">Definition</a></strong></dt>
+
+<pre>
+a reference to a hash where the following keys are defined:
+analyzed has a value which is a reference to a list where each element is a string
+version has a value which is an int
+name has a value which is a string
+description has a value which is a string
+libraries has a value which is a reference to a list where each element is a string
+created has a value which is a string
+samples has a value which is a reference to a list where each element is a string
+funding_source has a value which is a string
+url has a value which is a string
+metadata has a value which is a reference to a hash where the key is a string and the value is a string
+id has a value which is a string
+pi has a value which is a string</pre></dl>
+<p>
+</p>
+<h2><a name="get_sample_query_params">get_sample_query_params</a></h2>
+<dl>
+<dt><strong><a name="definition15" class="item">Definition</a></strong></dt>
+
+<pre>
+a reference to a hash where the following keys are defined:
+order has a value which is a string
+limit has a value which is an int
+offset has a value which is an int</pre></dl>
+<p>
+</p>
+<h2><a name="samplequery">SampleQuery</a></h2>
+<dl>
+<dt><strong><a name="definition16" class="item">Definition</a></strong></dt>
+
+<pre>
+a reference to a hash where the following keys are defined:
+version has a value which is an int
+project has a value which is a string
+name has a value which is a string
+metagenomes has a value which is a reference to a list where each element is a string
+libraries has a value which is a reference to a list where each element is a string
+created has a value which is a string
+env_package has a value which is a reference to a hash where the key is a string and the value is a string
+url has a value which is a string
+id has a value which is a string
+metadata has a value which is a reference to a hash where the key is a string and the value is a string</pre></dl>
+<p>
+</p>
+<h2><a name="get_sample_instance_params">get_sample_instance_params</a></h2>
+<dl>
+<dt><strong><a name="definition17" class="item">Definition</a></strong></dt>
+
+<pre>
+a reference to a hash where the following keys are defined:
+verbosity has a value which is a string
+id has a value which is a string</pre></dl>
+<p>
+</p>
+<h2><a name="sampleinstance">SampleInstance</a></h2>
+<dl>
+<dt><strong><a name="definition18" class="item">Definition</a></strong></dt>
+
+<pre>
+a reference to a hash where the following keys are defined:
+version has a value which is an int
+project has a value which is a string
+name has a value which is a string
+metagenomes has a value which is a reference to a list where each element is a string
+libraries has a value which is a reference to a list where each element is a string
+created has a value which is a string
+env_package has a value which is a reference to a hash where the key is a string and the value is a string
+url has a value which is a string
+id has a value which is a string
+metadata has a value which is a reference to a hash where the key is a string and the value is a string</pre></dl>
+<p>
+</p>
+<h2><a name="get_sequences_md5_params">get_sequences_md5_params</a></h2>
+<dl>
+<dt><strong><a name="definition19" class="item">Definition</a></strong></dt>
+
+<pre>
+a reference to a hash where the following keys are defined:
+id has a value which is a string
+sequence_type has a value which is a string</pre></dl>
+<p>
+</p>
+<h2><a name="sequencesmd5">SequencesMd5</a></h2>
+<dl>
+<dt><strong><a name="definition20" class="item">Definition</a></strong></dt>
+
+<pre>
+a reference to a hash where the following keys are defined:
+version has a value which is an int
+url has a value which is a string
+id has a value which is a string</pre></dl>
+<p>
+</p>
+<h2><a name="get_sequences_annotation_params">get_sequences_annotation_params</a></h2>
+<dl>
+<dt><strong><a name="definition21" class="item">Definition</a></strong></dt>
+
+<pre>
+a reference to a hash where the following keys are defined:
+source has a value which is a string
+data_type has a value which is a string
+id has a value which is a string
+sequence_type has a value which is a string
+organism has a value which is a string</pre></dl>
+<p>
+</p>
+<h2><a name="sequencesannotation">SequencesAnnotation</a></h2>
+<dl>
+<dt><strong><a name="definition22" class="item">Definition</a></strong></dt>
+
+<pre>
+a reference to a hash where the following keys are defined:
+version has a value which is an int
+url has a value which is a string
+id has a value which is a string</pre></dl>
+
+</body>
+
+</html>
