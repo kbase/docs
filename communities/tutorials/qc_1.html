@@ -1,6 +1,13 @@
 <h1>Communities Quality Control Service Tutorial</h1>
 
+<p><strong>Purpose:</strong> To learn how to perform quality control on metagenomic sequences.</p>
+<p><strong>Required Prerequisite Activities:</strong> Know how to import data into KBase (Note: another tutorial is needed to describe), because this service takes an uploaded file ID</p>
+<p>Suggested Prerequisite Activities: </p>
+<p>Related Tutorials: other tutorial on perl docs</p>
+<p>Introduction</p>
+<p>After you have uploaded your dataset, use this tutorial to answer the question: How can I determine the quality of my WGS metagenome? To accomplish this, KBase provides several metrics, which include DRISEE , a k-mer profile, and a nucleotide histogram.</p>
 <p>This tutorial will give you a quick introduction on how to use the Communities Quality Control Service. The service provides resources for performing quality control on metagenomic sequences.</p>
+<p>&nbsp;</p>
 
 <h2>Available Resources</h2>
 
@@ -13,6 +20,7 @@
 </ul>
 
 <p>You can view the available resources by navigating your web browser to the root path of the service. Assuming you are on the machine that runs the service that would normally be port 7052 on localhost: <a href='http://localhost:7052/'>http://localhost:7052/</a>. For the sake of this tutorial, we assume you are on the machine that hosts the service. Otherwise you would replace 'localhost' with the IP/URI of the service machine. This will bring up the resource overview:</p>
+<pre>
 
 ```json
 {
@@ -39,7 +47,7 @@
 
 }
 ```
-
+</pre>
 <p>The drisee resource calculates a drisee score and a drisee profile. The histogram resource provides a basepair histogram for the first one hundred basepairs. The k-mer resource offers statistics on the k-mer distribution within the sequence file.</p>
 
 <h2>Requesting a Computation</h2>
@@ -49,6 +57,7 @@
 <a href='http://localhost:7052/drisee'>http://localhost:7052/drisee</a>
 
 <p>and you should receive</p>
+<pre>
 
 ```json
 {
@@ -187,24 +196,24 @@
 
 }
 ```
-
+</pre>
 <p>Which is a list of all the requests you can make to the drisee resource. The according rpc method name can be constructed by joining method, resource name and request name, so for example the info request would be called 'get_drisee_info'. The parameters are then passed via a hash of parameter name pointing to parameter value.</p>
 
 <p>To request a compute, you need to issue a compute request (sic!). To do so, you need to pass the kbase identifier of the metagenomic sequence you want to analyze. Using curl that would look something like this<p>
-
+<pre>
 ```
 curl -s -X GET "http://localhost:7052/drisee/kb|mg.1/compute"
 ```
-
+</pre>
 <p>or in perl you would do</p>
-
+<pre>
 ```perl
 use LWP::UserAgent;
 LWP::UserAgent->new()->get("http://localhost:7052/drisee/kb|mg.1/compute")->content;
 ```
-
+</pre>
 <p>or you could use the JSON-RPC client for one of the provided languages (which will essentially execute the above line), all of which will return the same result. Since the resource is aynchronous, the return value is not the result, but a status of the request. It will look something like this<p>
-
+<pre>
 ```json
 {
 
@@ -215,9 +224,9 @@ LWP::UserAgent->new()->get("http://localhost:7052/drisee/kb|mg.1/compute")->cont
 
 }
 ```
-
+</pre>
 <p>It will tell you how many seconds the request has been running, what the current status is, an error message (hopefully empty) and an id that you can repeatedly query the status with. When the status turns to 'complete', the return message will look like this</p>
-
+<pre>
 ```json
 {
 
@@ -228,15 +237,15 @@ LWP::UserAgent->new()->get("http://localhost:7052/drisee/kb|mg.1/compute")->cont
 
 }
 ```
-
+</pre>
 <p>Now you can retrieve the result</p>
-
+<pre>
 ```
 curl -s -X GET "http://localhost:7052/drisee/kb|mg.1"
 ```
-
+</pre>
 <p>which should look similar to this</p>
-
+<pre>
 ```json
 {
 
@@ -274,7 +283,7 @@ curl -s -X GET "http://localhost:7052/drisee/kb|mg.1"
 
 }
 ```
-
+</pre>
 <p>Note that some of the result has been collapsed for sake of space in this document. Performing these identical steps with exchanging the word 'drisee' for 'kmer' or 'histogram' will return you the results for those resources.</p>
 
 <h2>Authentication</h2>
@@ -282,11 +291,11 @@ curl -s -X GET "http://localhost:7052/drisee/kb|mg.1"
 <p>The results produced by these calculations are stored in the KBase auxiliary store, as are the metagenomic sequences used for computation. If you want your results to be private to you or use private metagenomic sequences that only you have access to in the auxiliary store, you need to use authentication.</p>
 
 <p>The Communities Quality Control Service accepts the standard KBase authentication tokens. They must be sent in the header using the keyword 'auth'. The computation request stated above would then read</p>
-
+<pre>
 ```
 curl -s -X GET -H "auth: YOUR_KBASE_AUTH_TOKEN_HERE" "http://localhost:7052/drisee/kb|mg.1/compute"
 ```
-
+</pre>
 <p>This will work with any request and any resource.</p>
 
 <h2>Conclusion</h2>
