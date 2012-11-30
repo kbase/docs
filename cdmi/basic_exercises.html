@@ -4,17 +4,19 @@
 (CDM) Entity-Relationshop Model and
 how to run command line tools to expose the data in it. </p>
 <p><strong>Required Prerequisite Activities: </strong><a href="/developer-zone/tutorials/getting-started/getting-started-with-the-kbase/">Getting
-Started with KBase</a> and <a href="http://www.kbase.us/developer-zone/tutorials/the-kbase-central-data-model/the-cdm-represented-as-an-entity-relationship-model/">The CDM
+Started with KBase</a> and <a href="developer-zone/tutorials/the-kbase-central-data-model/the-cdm-represented-as-an-entity-relationship-model/">The
+CDM
 Represented as an Entity-Relationship Model </a></p>
-
 <p><strong>Related Tutorials: </strong><a href="/developer-zone/tutorials/command-line-scripts/accessing-central-store-data/getting-what-you-need-from-the-cs-using-command-line-scripts/">Getting
 What You Need from the CS Using Command Line Scripts</a>, <a href="/developer-zone/tutorials/command-line-scripts/accessing-central-store-data/extending-the-cs-commands-with-operators/">Extending
 the CS Commands with Operators</a>.
 </p>
+
 <h2>Introduction</h2>
-<p>KBase includes an integrated database of genomic data called the <a name="Central Store82">Central Store</a> (<b>CS</b>). Extract data
-from the CS using a defined <a name="API83">API</a> (see <a href="/developer-zone/api-documentation/" target="_blank">the
-reference documentation</a>), or access the CS via a fairly simple set
+
+<p>KBase includes an integrated database of genomic data called the
+Central Store (<i>CS</i>). Extract data
+from the CS using a defined Application Programmic Interface (<i>API</i>), or access the CS via a fairly simple set
 of command-line scripts. The most simple way to access the data in the
 CS is using command-line scripts that produce tab-separated tables that
 can be examined using common tools. We will demonstrate the basic tools
@@ -22,16 +24,18 @@ we provide below. We urge you to go slowly through a few examples in
 this tutorial, typing the actual commands and verifying that you
 understand the details as they are presented.
 </p>
+
 <h2>How to Work with the CDM Entity-Relationship Model</h2>
+
 It is important that you gain some familiarity with the ER-model that
 describes the contents of the KBase CS. An entity-relationship model is
 an abstract description of the architecture of a database. It describes
 the types of <i>entities</i> and the <i>relationships</i> between
 entities. The data fields associated with each entity type constitute
 most of the data in the CS. However, fields can be associated with
-relationships, as well. For example, if two entities of type <strong><a name="Feature84">Feature</a></strong> are related by a relationship of
-type <strong><a name="IsCoregulatedWith85">IsCoregulatedWith</a></strong>
-, then the Pearson correlation coefficient is an attribute of the
+relationships, as well. For example, if two entities of type <i>Feature</i> are related by a relationship of
+type <i>IsCoregulatedWith85</i>,
+ then the Pearson correlation coefficient is an attribute of the
 relationship, and not of either of the related entities by themselves.
 The entity types and relationship types are mapped into a standard
 relational database (in the case of the CS), but it might well be a
