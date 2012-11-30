@@ -11,12 +11,11 @@ Represented as an Entity-Relationship Model </a></p>
 What You Need from the CS Using Command Line Scripts</a>, <a href="/developer-zone/tutorials/command-line-scripts/accessing-central-store-data/extending-the-cs-commands-with-operators/">Extending
 the CS Commands with Operators</a>.
 </p>
-
 <h2>Introduction</h2>
-
 <p>KBase includes an integrated database of genomic data called the
 Central Store (<i>CS</i>). Extract data
-from the CS using a defined Application Programmic Interface (<i>API</i>), or access the CS via a fairly simple set
+from the CS using a defined Application Programmic Interface (<i>API</i>),
+or access the CS via a fairly simple set
 of command-line scripts. The most simple way to access the data in the
 CS is using command-line scripts that produce tab-separated tables that
 can be examined using common tools. We will demonstrate the basic tools
@@ -24,57 +23,62 @@ we provide below. We urge you to go slowly through a few examples in
 this tutorial, typing the actual commands and verifying that you
 understand the details as they are presented.
 </p>
-
 <h2>How to Work with the CDM Entity-Relationship Model</h2>
-
 It is important that you gain some familiarity with the ER-model that
 describes the contents of the KBase CS. An entity-relationship model is
 an abstract description of the architecture of a database. It describes
 the types of <i>entities</i> and the <i>relationships</i> between
 entities. The data fields associated with each entity type constitute
 most of the data in the CS. However, fields can be associated with
-relationships, as well. For example, if two entities of type <i>Feature</i> are related by a relationship of
-type <i>IsCoregulatedWith85</i>,
- then the Pearson correlation coefficient is an attribute of the
+relationships, as well. For example, if two entities of type <i>Feature</i>
+are related by a relationship of
+type <i>IsCoregulatedWith85</i>, then the Pearson correlation
+coefficient is an attribute of the
 relationship, and not of either of the related entities by themselves.
 The entity types and relationship types are mapped into a standard
 relational database (in the case of the CS), but it might well be a
 good idea to peruse the ER-model and attempt to gain at least a
-rudimentary understanding of the types of data we have included.
-<p> There are three standard tools for accessing fields in entities and
+rudimentary understanding of the types of data we have included.<p> There are three standard tools for accessing fields in entities and
 relationships, and there is also a set of customized tools. We will
-illustrate these tools with simple examples. First, we will answer the
-question <i>What features in the CS are connected to publications?</i>
+illustrate these tools with simple examples. First, we will determine
+which features in the CS
+are connected to publications.
 This activity is useful for gaining insight as to the reliability of
-function assignments. Begin by looking at the <a name="CDM86">CDM</a>
-ER-model (which describes the overall architecture of the <i><a name="Central Data Model87">Central Data Model</a></i>.) This model,
-in turn, describes the entities and relationships that make up the <i><a name="Central Store88">Central Store</a></i>. If you go to the <a href="http://pubseed.theseed.org/ErdbDocWidget.cgi?xmlFileName=/home/parrello/FIGdisk/dist/releases/current/KBaseCDMI/KSaplingDBD.xml" name="ER-Model89" target="_blank">ER-Model</a>, look for the path from
-the entity <b><a name="Publication90">Publication</a></b> to the
-entity <b><a name="Feature91">Feature</a></b>. </p>
-<p>Verify the following: </p>
-<ol>
-  <li><b><a name="Publication92">Publication</a></b> is an entity that
-connects to the entity <b><a name="ProteinSequence93">ProteinSequence</a></b>
-via the relationship <b><a name="Concerns94">Concerns</a></b>. It can
-be thought of as <i><a name="Publication95">Publication</a> <a name="Concerns96">Concerns</a> <a name="ProteinSequence97">ProteinSequence</a></i>.
-This describes crossing the relationship from <b><a name="Publication98">Publication</a></b> to <b><a name="ProteinSequence99">ProteinSequence</a></b>. There is a
+function assignments. Begin by looking at the <a href="developer-zone/tutorials/the-kbase-central-data-model/the-cdm-represented-as-an-entity-relationship-model/">
+CDM as represented as
+an ER Model</a>. This model describes the entities and relationships
+that make up the Central Store. If you go to the <a href="http://pubseed.theseed.org/ErdbDocWidget.cgi?xmlFileName=/home/parrello/CdmiData/Published/KSaplingDBD.xml">ER-Model</a>,
+look for the path from
+the entity <i>Publication</i> to the
+entity <i>Feature</i>. </p><p>Verify the following: </p>
+<ol><li>Publication is an entity that
+connects to the entity <i>ProteinSequence</i>
+via the relationship <i>Concerns</i>.
+It can be thought of as <i>Publication</i> <i>Concerns</i> <i>ProteinSequence</i>.
+This describes crossing the relationship from <i>Publication</i> to <i>ProteinSequence</i>.
+There is a
 relationship going in the other direction, as well -- even though the
-diagram only explicitly lists the name of the one going from <b><a name="Publication100">Publication</a></b> to <b><a name="ProteinSequence101">ProteinSequence</a></b>. If you click on the
-entity <b><a name="Publication102">Publication</a></b>, it describes
+diagram only explicitly lists the name of the one going from <i>Publication</i> to <i>ProteinSequence</i>. If you click on the
+entity <i>Publication</i>, it describes
 the relationships that entity type participates in. Similarly, if you
-click on <b><a name="ProteinSequence103">ProteinSequence</a></b>, you
-will see that the connection going from <b><a name="ProteinSequence104">ProteinSequence</a></b>
-to <b><a name="Publication105">Publication</a></b> is named <b>IsATopicOf</b>
-(<i><a name="ProteinSequence106">ProteinSequence</a> IsATopicOf <a name="Publication107">Publication</a></i>). You need to be comfortable
+click on <i>ProteinSequence</i>, you
+will see that the connection going from <i>ProteinSequence</i>
+
+
+
+to <i>Publication</i> is named <i>IsATopicOf</i>
+(<i>ProteinSequence IsATopicOf Publication</i>). You need to be comfortable
 seeing what fields are in specific entities and relationships, as well
 as understanding the names of the relationships connecting entities.
 Note that, if you are looking at the description of a single entity or
 relationship, and you wish to go back to see the overall diagram, you
 need to hit the "Image" button, and not the back arrow on your browser.
     <br>
+
     <br>
-  </li>
-  <li> To get from <b><a name="ProteinSequence108">ProteinSequence</a></b>
+
+
+  </li><li> To get from <b><a name="ProteinSequence108">ProteinSequence</a></b>
 to a related <a name="Feature109">Feature</a> linked to the protein,
 one crosses the <a name="IsProteinFor110">IsProteinFor</a>
 relationship (<i><a name="ProteinSequence111">ProteinSequence</a> <a name="IsProteinFor112">IsProteinFor</a> <a name="Feature113">Feature</a></i>).
