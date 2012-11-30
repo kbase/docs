@@ -78,54 +78,66 @@ need to hit the "Image" button, and not the back arrow on your browser.
     <br>
 
 
-  </li><li> To get from <b><a name="ProteinSequence108">ProteinSequence</a></b>
-to a related <a name="Feature109">Feature</a> linked to the protein,
-one crosses the <a name="IsProteinFor110">IsProteinFor</a>
-relationship (<i><a name="ProteinSequence111">ProteinSequence</a> <a name="IsProteinFor112">IsProteinFor</a> <a name="Feature113">Feature</a></i>).
+  </li><li> To get from <i>ProteinSequence</i>
+to a related <i>Feature</i> linked to the protein,
+one crosses the <i>IsProteinFor</i>
+relationship (<i>ProteinSequence IsProteinFor Feature</i>).
     <br>
+
     <br>
-  </li>
-  <li> Thus, one interpretation of the original goal of seeing which
+  </li><li> Thus, one interpretation of the original goal of seeing which
 features in the CS connect to publications, is
-    <blockquote> Start with the list of <b><a name="Publication114">Publication</a></b>s.
-For each one, locate the <b><a name="ProteinSequence115">ProteinSequence</a></b>
+    <blockquote> Start with the list of <i>Publication</i>s.
+For each one, locate the <i>ProteinSequence</i>
 described in the publication. Then, use the protein sequences to find
-the Features and produce a 2-column table [<a name="Publication116">Publication</a>,<a name="Feature117">Feature</a>] </blockquote>
+the Features and produce a 2-column table [<i>Publication, Feature</i>] </blockquote>
     <br>
-Note that you could start with Features and trace back to <b><a name="Publication118">Publication</a></b>s, but there are millions of
-Features and only thousands of <b><a name="Publication119">Publication</a></b>s
+Note that you could start with Features and trace back to <i>Publication</i>s, but there are millions of
+Features and only thousands of <i>Publication</i>s
 in the CS. It will probably be faster to look up the features connected
 to the publications, rather than the other way around. <br>
+
+
+
     <br>
-  </li>
-  <li> Now, to see a table of the <b><a name="Publication120">Publication</a></b>
+  </li><li> Now, to see a table of the <i>Publication</i>
 entities just type <br>
     <pre>  <a href="http://kbase.us/developer-zone/api-documentation/cdm-entity-relationship-command-scripts/#all_entities_Publication" target="_blank">all_entities_Publication</a> -a | head<br><br></pre>
-For every entity type in the CS a command like this exists to display
+For every entity type in the CS, a command like this exists to display
 the instances of that entity. We encourage you to try it out. (We pipe
 the output to "head" which just shows the head of a file.) <br>
     <br>
-To determine which Genomes are in the CS, use <br>
+To determine which genomes are in the CS, use <br>
+
+
+
+
     <pre>  <a href="http://kbase.us/developer-zone/api-documentation/cdm-entity-relationship-command-scripts/#all_entities_Genome" target="_blank">all_entities_Genome</a> -a<br><br></pre>
 Try it again leaving the "-a" option off. Then use <br>
     <pre>  <a href="http://kbase.us/developer-zone/api-documentation/cdm-entity-relationship-command-scripts/#all_entities_Genome" target="_blank">all_entities_Genome</a> -show-fields<br><br></pre>
-to see what fields the <b><a name="Genome121">Genome</a></b> entity
-contains (compare this against the <a name="ER-Model122">ER-Model</a>
+
+to see what fields the <i>Genome</i> entity contains (compare this against the <i>ER-Model</i>
+
+
+
 description of the fields). Finally, note what <br>
     <pre>  <a href="http://kbase.us/developer-zone/api-documentation/cdm-entity-relationship-command-scripts/#all_entities_Genome" target="_blank">all_entities_Genome</a> -f 'contigs,domain,scientific_name'<br><br></pre>
-produces. The Unix command "<a name="grep123">grep</a>" can be used to
+
+produces. The Unix command <code> grep</code> can be used to
 filter out lines containing a desired string. Thus, <br>
     <pre>  <a href="http://kbase.us/developer-zone/api-documentation/cdm-entity-relationship-command-scripts/#all_entities_Genome" target="_blank">all_entities_Genome</a> -f scientific_name | grep Streptococcus<br><br></pre>
+
+
+
 would give you the IDs of the <i>Streptococcus</i> genomes in KBase. <br>
+
     <br>
-  </li>
-  <li> Now, run <br>
+  </li><li> Now, run <br>
     <pre>  <a href="http://kbase.us/developer-zone/api-documentation/cdm-entity-relationship-command-scripts/#all_entities_Publication" target="_blank">all_entities_Publication</a> | <a href="http://kbase.us/developer-zone/api-documentation/cdm-entity-relationship-command-scripts/#get_relationship_Concerns" target="_blank">get_relationship_Concerns</a> -to id<br><br></pre>
-This illustrates how to "cross a relationship." The <i><a href="http://kbase.us/developer-zone/api-documentation/cdm-entity-relationship-command-scripts/#all_entities_Publication" target="_blank">all_entities_Publication</a></i> produces a 1-column
+This illustrates how to "cross a relationship." The <code>all_entities_Publication</code> produces a 1-column
 table containing pubmed IDs. These go into the command <br>
     <pre>  <a href="http://kbase.us/developer-zone/api-documentation/cdm-entity-relationship-command-scripts/#get_relationship_Concerns" target="_blank">get_relationship_Concerns</a> -to id<br><br></pre>
-This is an example of the second class of commands. One thinks of a <i>get_relationship
-command</i> as taking as input a set of IDs from the <i>from entity</i>,
+This is an example of the second class of commands. One thinks of a <code>get_relationship</code> command as taking as input a set of IDs from the <i>from entity</i>,
 crossing the relationship to the <i>to entity</i>, and extracting
 whatever fields you want from the <i>from entity</i>, the <i>relationship</i>,
 and the <i>to entity</i>. The general form is <br>
