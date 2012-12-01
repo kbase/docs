@@ -7,7 +7,7 @@
 <H1>Tutorial: Building a new genome scale metabolic model reconstruction</H1>
 <H2>Introduction</H2>
 This tutorial will teach you how to build a genome scale metabolic model reconstruction starting from an annotated genome object using the DOE Systems Biology Knowledgebase tools.
-<P><B>Prerequisites:</B> Genome Annotation, Workspaces</P>
+<P><B>Prerequisites:</B> Genome Annotation Tutorial, Workspaces Tutorial</P>
 <H2>Building a whole genome metabolic model</H2>
 <H3>Getting the genome typed object into the workspace</H3>
 The command <i>genome_to_workspace</i> can be used to 
@@ -16,7 +16,7 @@ run genome_to_fba using genomeTO in workspace, return model into workspace
 <H3>Verify model creation</H3>
 run workspace command to list objects in workspace, view model object metadata
 <H3>View model</H3>
-print to html, sbml, export for COBRA? other toos?; view in browser; info on what the model metadata fields; 
+print to html, sbml, export for COBRA? other tools?; view in browser; info on what the model metadata fields; 
 <H3>View model attributes</H3>
 details on model fields (compounds, compartments, biomass, reactions, gapfilling?)
 <H2>FBA</H2>
@@ -28,8 +28,15 @@ list command for models (already covered above, but whatever we can repeat it); 
 <H3>running runfba</H3>
 actual command for creating fba output; discussion on some options/defaults; minimum you need to know; media discussion? link to media tutorial?
 <H3>View model</H3>
-same as above mostly; explaination of new metadata fields; viewing new attributes of the model;
+same as above mostly; explaination of new metadata fields; viewing new attributes of the model; link to gapfilling tutorial if model didn't grow
 <H3>Exploring fluxes</H3>
 a little discussion; biomass; excreted compounds; input compounds consumed;
+<H3>runfba on different media</H3>
+link to media tutorial; running fba on different media, i.e. exploring carbon sources
+<H3>runfba on gene or reaction knockouts</H3>
+specifiying ko genes --geneko or reactions --rxnko and running runfba
+<H3>changing the objective funcion</H3>
+this is more complicated; assume the user mostly knows what they're doing and understands most of the terms; maybe an "Aside" box with more details
+
 </BODY>
 </HTML>
