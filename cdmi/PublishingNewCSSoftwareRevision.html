@@ -1,14 +1,63 @@
+
 <h1>Publishing a New Central Store Software Revision</h1>
+<p><strong>Purpose: </strong> Detail on the process by which software
+is published from the SEED CVS into the KBase git repository and by
+which the running deployment is updated. </p>
+<p><strong>Required Prerequisite Activities: </strong> <a href="http://www.kbase.us/developer-zone/tutorials/getting-started/getting-started-with-kbase/">Getting
+Started with KBase</a> </p>
+<p> <strong>Suggested Prerequisite Activities: </strong> <a href="http://www.kbase.us/developer-zone/tutorials/command-line-scripts/accessing-central-store-data/getting-what-you-need-from-the-cs-using-command-line-scripts/">Getting
+What You Need from the CS Using Command-Line Scripts </a> </p>
+<p><strong>Related Tutorials:</strong> <a href="http://www.kbase.us/developer-zone/tutorials/developer-tutorials/kbase-authentication/">Introduction
+to Authentication </a> and other
+Developer tutorials. </p>
 <h2>Introduction</h2>
-<p>The code for the <a name="Central Store716">Central Store</a> and CDMI are managed in the <a name="SEED717">SEED</a> project CVS repository. This short note describes the process by which the software is published from the <a name="SEED718">SEED</a> CVS into the KBase git repository and the running deployment updated.
+<p>The code for the <a name="Central Store716">Central Store</a> and
+CDMI are managed in the <a name="SEED717">SEED</a> project CVS
+repository. This short note describes the process by which the software
+is published from the <a name="SEED718">SEED</a> CVS into the KBase
+git repository and the running deployment is updated.
+</p>
 <p>The process involves the following steps:
-<ol><li>Publishing a release from the <a name="SEED719">SEED</a> CVS.<li>Installing the new release into the KBase git.<li>Updating the running deployment.</ol>
+</p>
+<ol>
+  <li>Publishing a release from the <a name="SEED719">SEED</a> CVS.</li>
+  <li>Installing the new release into the KBase git.</li>
+  <li>Updating the running deployment.</li>
+</ol>
 <h2>Publishing a release from the SEED CVS</h2>
-<p>A release is published using the&nbsp; <span style="font-family: monospace;">build_sas_distro_from_cvs</span> command. We define version numbers that are strictly sequential:
-<p style="margin-left: 40px;"><span style="font-family: monospace;">V=1.018<br /> build_sas_distro_from_cvs --kbase --version $V ~/kb-$V.tgz<br /></span><br />
+<p>A release is published using the&nbsp; <span style="font-family: monospace;">build_sas_distro_from_cvs</span>
+command. We define version numbers that are strictly sequential:
+</p>
+<p style="margin-left: 40px;"><span style="font-family: monospace;">V=1.018<br>
+build_sas_distro_from_cvs --kbase --version $V ~/kb-$V.tgz<br>
+</span><br>
+</p>
 <h2>Installing the new release into the KBase git</h2>
-<p>The KBase git repository <span style="font-family: monospace;">kb_seed</span> is used to store the code from the <a name="SEED720">SEED</a> repository. The structure of published tarball is designed to drop simply into the kbase repository, replacing the <span style="font-family: monospace;">scripts</span> and <span style="font-family: monospace;">lib</span> subdirectories:<br />
-<p style="margin-left: 40px;"><span style="font-family: monospace;">cd kb_seed<br /> rm -r lib scripts<br /> tar xf ~/kb-$V.tgz<br /> mv kb-$V/* <br /> rmdir kb-$V<br /> git add .<br /> git commit<br /> git push<br /></span>
+<p>The KBase git repository <span style="font-family: monospace;">kb_seed</span>
+is used to store the code from the <a name="SEED720">SEED</a>
+repository. The structure of published tarball is designed to drop
+simply into the kbase repository, replacing the <span style="font-family: monospace;">scripts</span> and <span style="font-family: monospace;">lib</span> subdirectories:<br>
+</p>
+<p style="margin-left: 40px;"><span style="font-family: monospace;">cd
+kb_seed<br>
+rm -r lib scripts<br>
+tar xf ~/kb-$V.tgz<br>
+mv kb-$V/* <br>
+rmdir kb-$V<br>
+git add .<br>
+git commit<br>
+git push<br>
+</span></p>
 <h2>Updating the running deployment.</h2>
-<p>The current KB deployment runs on ash.mcs.anl.gov. The following is done to update the deployment.
-<p style="margin-left: 40px;"><span style="font-family: monospace;">cd /kb/code/dev_container/modules/kb_seed</span><br style="font-family: monospace;" /><span style="font-family: monospace;">git pull</span><br style="font-family: monospace;" /><span style="font-family: monospace;">/kb/deployment/services/cdmi_api/stop_service</span><br style="font-family: monospace;" /><span style="font-family: monospace;">cd ../..</span><br style="font-family: monospace;" /><span style="font-family: monospace;">make deploy</span><br style="font-family: monospace;" /><span style="font-family: monospace;">/kb/deployment/services/cdmi_api/start_service &amp;</span><br />
+<p>The current KB deployment runs on ash.mcs.anl.gov. The following is
+done to update the deployment.
+</p>
+<p style="margin-left: 40px;"><span style="font-family: monospace;">cd
+/kb/code/dev_container/modules/kb_seed</span><br style="font-family: monospace;">
+<span style="font-family: monospace;">git pull</span><br style="font-family: monospace;">
+<span style="font-family: monospace;">/kb/deployment/services/cdmi_api/stop_service</span><br style="font-family: monospace;">
+<span style="font-family: monospace;">cd ../..</span><br style="font-family: monospace;">
+<span style="font-family: monospace;">make deploy</span><br style="font-family: monospace;">
+<span style="font-family: monospace;">/kb/deployment/services/cdmi_api/start_service
+&amp;</span><br>
+</p>

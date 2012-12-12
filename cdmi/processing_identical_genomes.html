@@ -1,248 +1,145 @@
+
 <h1>Processing Identical Genomes</h1>
+<p><strong>Purpose: </strong> More detail on comparing identical
+genomes in
+KBase. </p>
+<p><strong>Required Prerequisite Activities: </strong> <a href="http://www.kbase.us/developer-zone/tutorials/getting-started/getting-started-with-kbase/">Getting
+Started with KBase</a> </p>
+<p> <strong>Suggested Prerequisite Activities: </strong> <a href="http://www.kbase.us/developer-zone/tutorials/iris/some-basic-exercises-using-the-kbase-iris-interface/">Some
+Basic Exercises using the KBase IRIS Interface </a> and other IRIS
+tutorials. </p>
+<p><strong>Related Tutorials:</strong> <a href="http://www.kbase.us/developer-zone/tutorials/command-line-scripts/command-line-applications/towards-a-controlled-vocabulary-part-1-defining-exemplars/">Towards
+a Controlled Vocabulary Part 1: Defining Exemplars </a> and other
+Command Line tutorials. </p>
 <h2>Introduction</h2>
- The KBase is intended as an environment in which identical genomes, annotated by distinct groups, can reside and be compared. We anticipate that there will soon be thousands of &quot;essentially identical&quot; genomes, due to the rapid increase in sequencing capacity. We will cover &quot;very similar&quot; genomes in other tutorials. This short document will only make comments relating to the use of identical genomes. <br />
-<br />
+The KBase is intended as an environment in which identical genomes,
+annotated by distinct groups, can reside and be compared. We anticipate
+that there will soon be thousands of "essentially identical" genomes,
+due to the rapid increase in sequencing capacity. We will cover "very
+similar" genomes in other tutorials. This short document will only make
+comments relating to the use of identical genomes. <br>
+<br>
 <h2>Finding identical genomes</h2>
- So, how do you know what identical genomes exist within the KBase? You might start by simply running a command like <br />
-<pre>
-      <a href="http://kbase.us/developer-zone/api-documentation/cdm-entity-relationship-command-scripts/#all_entities_Genome" target='_blank'>all_entities_Genome</a> -f &#39;md5,scientific_name&#39; | sort -k 2
-<br /></pre>
- which produces output like <br />
-<pre>
-kb|g.2123	001abafe9595720c262f47843d7837f3	Proteus mirabilis HI4320
-kb|g.9440	001cd0a84ad3f5184a031fff80b6df62	Pasteurella phage F108
-kb|g.3099	00219e734e8d768ee6a8604b50fe82f2	Alistipes shahii WAL 8301
-kb|g.392 	00262fed25a37ff8b430d240aa914110	Pseudomonas fluorescens SBW25
-kb|g.8843	00262fed25a37ff8b430d240aa914110	Pseudomonas fluorescens SBW25
-kb|g.19962	0026a2cbccd1f5db5714082c4c6bae35	Sugarcane streak Egypt virus
-kb|g.9347	003169b175a34753e219ae11682ce08a	Myxococcus fulvus
-.
-.
-.
-<br /></pre>
- The command says <blockquote> Give me all genomes. For each genome, give me 3 fields: <ol><li> the ID (by default -- you do not have to list it), <li> the <a name="md5354">md5</a> hash value of the contigs that make up the genome, and <li> the scientific name of the genome. </ol></blockquote>
-<br />
- Looking at the initial lines of output, it is clear that <i>kb|g.392</i>
- and <i>kb|8843</i>
- are identical. <br />
-<br />
- The simple command above often suffices to give you information relating to your needs. Sometimes you can use a <a name="grep355">grep</a>
- to focus the output. Thus, <br />
-<pre>
-      <a href="http://kbase.us/developer-zone/api-documentation/cdm-entity-relationship-command-scripts/#all_entities_Genome" target='_blank'>all_entities_Genome</a> -f &#39;md5,scientific_name&#39; | sort -k 2 | grep E110019
-<br /></pre>
- would produce <br />
-<pre>
-kb|g.9430	0eb6bdaa44b9b24488debd7d7cf3003f	Escherichia coli E110019
-kb|g.958 	0eb6bdaa44b9b24488debd7d7cf3003f	Escherichia coli E110019
-kb|g.959 	a4a937e222aed004f9778feae4d01f5d	Escherichia coli E110019
-<br /></pre>
-<p>which would indicate that we have three copies of the genome, two of which are identical. <br /><br /> Suppose that you wished to construct a table where each row contained a set of tab-separated IDs for identical genomes. This be handy in many contexts. Here is one way to build the table using a small Perl program that invokes the <a name="CS-API356">CS-API</a> routines:
+So, how do you know what identical genomes exist within the KBase? You
+might start by simply running a command like <br>
+<pre>      <a href="http://kbase.us/developer-zone/api-documentation/cdm-entity-relationship-command-scripts/#all_entities_Genome" target="_blank">all_entities_Genome</a> -f 'md5,scientific_name' | sort -k 2<br><br></pre>
+which produces output like <br>
+<pre>kb|g.2123	001abafe9595720c262f47843d7837f3	Proteus mirabilis HI4320<br>kb|g.9440	001cd0a84ad3f5184a031fff80b6df62	Pasteurella phage F108<br>kb|g.3099	00219e734e8d768ee6a8604b50fe82f2	Alistipes shahii WAL 8301<br>kb|g.392 	00262fed25a37ff8b430d240aa914110	Pseudomonas fluorescens SBW25<br>kb|g.8843	00262fed25a37ff8b430d240aa914110	Pseudomonas fluorescens SBW25<br>kb|g.19962	0026a2cbccd1f5db5714082c4c6bae35	Sugarcane streak Egypt virus<br>kb|g.9347	003169b175a34753e219ae11682ce08a	Myxococcus fulvus<br>.<br>.<br>.<br><br></pre>
+The command says
+<blockquote> Give me all genomes. For each genome, give me 3 fields:
+  <ol>
+    <li> the ID (by default -- you do not have to list it), </li>
+    <li> the <a name="md5354">md5</a> hash value of the contigs that
+make up the genome, and </li>
+    <li> the scientific name of the genome. </li>
+  </ol>
+</blockquote>
+<br>
+Looking at the initial lines of output, it is clear that <i>kb|g.392</i>
+and <i>kb|8843</i> are identical. <br>
+<br>
+The simple command above often suffices to give you information
+relating to your needs. Sometimes you can use a <a name="grep355">grep</a>
+to focus the output. Thus, <br>
+<pre>      <a href="http://kbase.us/developer-zone/api-documentation/cdm-entity-relationship-command-scripts/#all_entities_Genome" target="_blank">all_entities_Genome</a> -f 'md5,scientific_name' | sort -k 2 | grep E110019<br><br></pre>
+would produce <br>
+<pre>kb|g.9430	0eb6bdaa44b9b24488debd7d7cf3003f	Escherichia coli E110019<br>kb|g.958 	0eb6bdaa44b9b24488debd7d7cf3003f	Escherichia coli E110019<br>kb|g.959 	a4a937e222aed004f9778feae4d01f5d	Escherichia coli E110019<br><br></pre>
+<p>which would indicate that we have three copies of the genome, two of
+which are identical. <br>
+<br>
+Suppose that you wished to construct a table where each row contained a
+set of tab-separated IDs for identical genomes. This be handy in many
+contexts. Here is one way to build the table using a small Perl program
+that invokes the <a name="CS-API356">CS-API</a> routines:
+</p>
 <h2>A Small Perl Program to Invoke the CS-API Routines</h2>
-<pre>
-
-use Bio::KBase;
-my $kb  = Bio::KBase-&gt;new;
-my $csO = $kb-&gt;central_store();
-
-my %by_md5;
-
-my $genH = $csO-&gt;<a href="http://kbase.us/developer-zone/api-documentation/cdm-entity-relationship-command-scripts/#all_entities_Genome" target='_blank'>all_entities_Genome</a>(0,100000,[&#39;md5&#39;]);
-foreach my $genome (keys(%$genH))
-{
-    my $md5 = $genH-&gt;{$genome}-&gt;{md5};
-    push(@{$by_md5{$md5}},$genome);
-}
-
-foreach my $md5 (keys(%by_md5))
-{
-    print join(&quot;\t&quot;,@{$by_md5{$md5}}),&quot;\n&quot;;
-}
-<br /></pre>
- The three lines <br />
-<pre>
-use Bio::KBase;
-my $kb  = Bio::KBase-&gt;new;
-my $csO = $kb-&gt;central_store();
-<br /></pre>
- are used to get an object (<i>$csO</i>
+<pre>use Bio::KBase;<br>my $kb  = Bio::KBase-&gt;new;<br>my $csO = $kb-&gt;central_store();<br><br>my %by_md5;<br><br>my $genH = $csO-&gt;<a href="http://kbase.us/developer-zone/api-documentation/cdm-entity-relationship-command-scripts/#all_entities_Genome" target="_blank">all_entities_Genome</a>(0,100000,['md5']);<br>foreach my $genome (keys(%$genH))<br>{<br>    my $md5 = $genH-&gt;{$genome}-&gt;{md5};<br>    push(@{$by_md5{$md5}},$genome);<br>}<br><br>foreach my $md5 (keys(%by_md5))<br>{<br>    print join("\t",@{$by_md5{$md5}}),"\n";<br>}<br><br></pre>
+The three lines <br>
+<pre>use Bio::KBase;<br>my $kb  = Bio::KBase-&gt;new;<br>my $csO = $kb-&gt;central_store();<br><br></pre>
+are used to get an object (<i>$csO</i>
 ) that offers access to the <a name="CS-API357">CS-API</a>
-. The line <br />
-<pre>
-    my $genH = $csO-&gt;<a href="http://kbase.us/developer-zone/api-documentation/cdm-entity-relationship-command-scripts/#all_entities_Genome" target='_blank'>all_entities_Genome</a>(0,100000,[&#39;md5&#39;]);
-<br /></pre>
- asks for access to the <i><a name="md5358">md5</a></i>
- field for the first up to 100,000 genomes. This issue of &quot;chunking&quot; the output from the servers is discussed below. For now, just think of this line as asking for acces to the <i><a name="md5359">md5</a></i>
- values for all of the genomes. The lines <br />
-<pre>
-    my $md5 = $genH-&gt;{$genome}-&gt;{md5};
-    push(@{$by_md5{$md5}},$genome);
-<br /></pre>
-<p>lead to the construction of <i>%by_md5</i> as a hash with the <a name="md5360">md5</a> values as keys and lists of genomes having the same <a name="md5361">md5</a> hashes as the values. <br /><br /> Once the hash is constructed, it is straightforward to dump the lists from the hash table. <br />
+. The line <br>
+<pre>    my $genH = $csO-&gt;<a href="http://kbase.us/developer-zone/api-documentation/cdm-entity-relationship-command-scripts/#all_entities_Genome" target="_blank">all_entities_Genome</a>(0,100000,['md5']);<br><br></pre>
+asks for access to the <i><a name="md5358">md5</a></i> field for the
+first up to 100,000 genomes. This issue of "chunking" the output from
+the servers is discussed below. For now, just think of this line as
+asking for acces to the <i><a name="md5359">md5</a></i> values for all
+of the genomes. The lines <br>
+<pre>    my $md5 = $genH-&gt;{$genome}-&gt;{md5};<br>    push(@{$by_md5{$md5}},$genome);<br><br></pre>
+<p>lead to the construction of <i>%by_md5</i> as a hash with the <a name="md5360">md5</a> values as keys and lists of genomes having the
+same <a name="md5361">md5</a> hashes as the values. <br>
+<br>
+Once the hash is constructed, it is straightforward to dump the lists
+from the hash table. <br>
+</p>
 <h2>Controlling the Output </h2>
-<p>Now let us revisit this issue of getting back &quot;chunks&quot; of the output, rather than everything all at once. This avoids overloading the client memory and causes output to be &quot;streamed&quot; in a much more controlled fashion. In the case of asking for all genomes, you could get them all back without doing too much damage. If you asked for all Features and their protein sequences, you might well get back a lot of data. Most modern machines can absorb hundreds of gigabytes, but as volumes grow it will just be a lot easier if we implement basic flow control. With that in mid, we recommend using a program like <br />
-<pre>
-use Bio::KBase;
-my $kb  = Bio::KBase-&gt;new;
-my $csO = $kb-&gt;central_store();
-
-my %by_md5;
-
-my $next_output = 0;
-my $size_chunk  = 100000;
-my $genH;
-while (($genH = $csO-&gt;<a href="http://kbase.us/developer-zone/api-documentation/cdm-entity-relationship-command-scripts/#all_entities_Genome" target='_blank'>all_entities_Genome</a>($next_output,$size_chunk,[&#39;md5&#39;])) &amp;&amp; (%$genH))
-{
-    foreach my $genome (keys(%$genH))
-    {
-	my $md5 = $genH-&gt;{$genome}-&gt;{md5};
-	push(@{$by_md5{$md5}},$genome);
-    }
-    $next_output += $size_chunk;
-}
-
-foreach my $md5 (keys(%by_md5))
-{
-    print join(&quot;\t&quot;,@{$by_md5{$md5}}),&quot;\n&quot;;
-}
-<br /></pre>
-<p>So far, we have discussed the simple issue of how to find out which genomes are completely identical (in the sense that they have an identical set of contigs, but probably have differing gene calls and <a name="annotations362">annotations</a>). <br />
+<p>Now let us revisit this issue of getting back "chunks" of the
+output, rather than everything all at once. This avoids overloading the
+client memory and causes output to be "streamed" in a much more
+controlled fashion. In the case of asking for all genomes, you could
+get them all back without doing too much damage. If you asked for all
+Features and their protein sequences, you might well get back a lot of
+data. Most modern machines can absorb hundreds of gigabytes, but as
+volumes grow it will just be a lot easier if we implement basic flow
+control. With that in mid, we recommend using a program like <br>
+</p>
+<pre>use Bio::KBase;<br>my $kb  = Bio::KBase-&gt;new;<br>my $csO = $kb-&gt;central_store();<br><br>my %by_md5;<br><br>my $next_output = 0;<br>my $size_chunk  = 100000;<br>my $genH;<br>while (($genH = $csO-&gt;<a href="http://kbase.us/developer-zone/api-documentation/cdm-entity-relationship-command-scripts/#all_entities_Genome" target="_blank">all_entities_Genome</a>($next_output,$size_chunk,['md5'])) &amp;&amp; (%$genH))<br>{<br>    foreach my $genome (keys(%$genH))<br>    {<br>	my $md5 = $genH-&gt;{$genome}-&gt;{md5};<br>	push(@{$by_md5{$md5}},$genome);<br>    }<br>    $next_output += $size_chunk;<br>}<br><br>foreach my $md5 (keys(%by_md5))<br>{<br>    print join("\t",@{$by_md5{$md5}}),"\n";<br>}<br><br></pre>
+<p>So far, we have discussed the simple issue of how to find out which
+genomes are completely identical (in the sense that they have an
+identical set of contigs, but probably have differing gene calls and <a name="annotations362">annotations</a>). <br>
+</p>
 <h2>Correspondence Between Genes from Two Identical Genomes</h2>
-<p>Let us now consider the issue of how to create a correspondence between genes from two identical genomes. This is somewhat different than asking for gene correspondences between very, very similar genomes; in the case of identical genomes one can detect correspondence based on location. That is, two genes that have location strings that differ only in the genome ids then clearly correspond. This solves the bulk of the problem, although there remains the topic of how to handle pairs of protein-encoding genes that differ only in start location. <br /><br /> So, given two genomes that you know are identical, (say, kb|g.3383 and kb|g.19998), and you want to see the correspondence between the protein-encoding genes from the two genomes. <br /><br /> You might begin with something like <br />
-<pre>
-    echo &#39;kb|g.3383&#39;  | <a href="http://kbase.us/developer-zone/api-documentation/cdm-entity-relationship-command-scripts/#get_entity_Genome" target='_blank'>get_entity_Genome</a> -f md5 
-    echo &#39;kb|g.19998&#39; | <a href="http://kbase.us/developer-zone/api-documentation/cdm-entity-relationship-command-scripts/#get_entity_Genome" target='_blank'>get_entity_Genome</a> -f md5 
-<br /></pre>
- to verify that the two gnomes are really the same (they should both produce an <a name="md5363">md5</a>
- of &quot;f26f59daae18a385bdfcf89aa6b0bc1c&quot;). <br />
-<br />
- Then you might try making a file that contained just the two genome IDs (that is, a file called <i>genomes</i>
- that contained <br />
-<pre>
-kb|g.3383
-kb|g.19998
-<br /></pre>
- Then try <br />
-<pre>
-	 <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#genomes_to_fids" target='_blank'>genomes_to_fids</a> peg &lt; genomes |
-	 <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#fids_to_locations" target='_blank'>fids_to_locations</a> | 
-	 <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#fids_to_protein_sequences" target='_blank'>fids_to_protein_sequences</a> -c 2 -fasta=0 |
-	 sort -k 4
-<br /></pre>
- to get a 4-column table containing <br />
-<pre>
-         [genome,fid,location,translation]
-<br /></pre>
-<p>sorted on translation. You can peruse this file to locate matches and mismatches and to get a sense of how well the gene calls match up. <br /><br /> While there is a great deal that can be learned quickly by accessing the data via command-line tools, what is needed is more control; that probably requires using the <a name="CS-API364">CS-API</a>. 
+<p>Let us now consider the issue of how to create a correspondence
+between genes from two identical genomes. This is somewhat different
+than asking for gene correspondences between very, very similar
+genomes; in the case of identical genomes one can detect correspondence
+based on location. That is, two genes that have location strings that
+differ only in the genome ids then clearly correspond. This solves the
+bulk of the problem, although there remains the topic of how to handle
+pairs of protein-encoding genes that differ only in start location. <br>
+<br>
+So, given two genomes that you know are identical, (say, kb|g.3383 and
+kb|g.19998), and you want to see the correspondence between the
+protein-encoding genes from the two genomes. <br>
+<br>
+You might begin with something like <br>
+</p>
+<pre>    echo 'kb|g.3383'  | <a href="http://kbase.us/developer-zone/api-documentation/cdm-entity-relationship-command-scripts/#get_entity_Genome" target="_blank">get_entity_Genome</a> -f md5 <br>    echo 'kb|g.19998' | <a href="http://kbase.us/developer-zone/api-documentation/cdm-entity-relationship-command-scripts/#get_entity_Genome" target="_blank">get_entity_Genome</a> -f md5 <br><br></pre>
+to verify that the two gnomes are really the same (they should both
+produce an <a name="md5363">md5</a> of
+"f26f59daae18a385bdfcf89aa6b0bc1c"). <br>
+<br>
+Then you might try making a file that contained just the two genome IDs
+(that is, a file called <i>genomes</i> that contained <br>
+<pre>kb|g.3383<br>kb|g.19998<br><br></pre>
+Then try <br>
+<pre>	 <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#genomes_to_fids" target="_blank">genomes_to_fids</a> peg &lt; genomes |<br>	 <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#fids_to_locations" target="_blank">fids_to_locations</a> | <br>	 <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#fids_to_protein_sequences" target="_blank">fids_to_protein_sequences</a> -c 2 -fasta=0 |<br>	 sort -k 4<br><br></pre>
+to get a 4-column table containing <br>
+<pre>         [genome,fid,location,translation]<br><br></pre>
+<p>sorted on translation. You can peruse this file to locate matches
+and mismatches and to get a sense of how well the gene calls match up. <br>
+<br>
+While there is a great deal that can be learned quickly by accessing
+the data via command-line tools, what is needed is more control; that
+probably requires using the <a name="CS-API364">CS-API</a>. </p>
 <h2>A Short Program: Two Genes Correspond IFF Locations Are Identical </h2>
-<p>Here is a short program that takes as inut two genome IDs (<i>g1</i> and <i>g2</i>) and prints out a two-column table. The first column represents a gene in <i>g1</i> that <a name="corresponds365"><a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#corresponds" target='_blank'>corresponds</a></a> to the gene in the second colum from <i>g2</i>. If one of the columns is empty, then we have a case where a gene fails to correspond to a gene in the other genome. <br /><br /> We will do a simple program here that just implements the notion that two genes correspond IFF they have identical locations. This is not a completely trivial notion, since unique KBase IDs have been assigned to the contigs in each genome. However, since the key of a <b><a name="Contig366">Contig</a></b> is a unique Kbase ID, but the key of the related <b><a name="ContigSequence367">ContigSequence</a></b> is an <a name="md5368">md5</a> hash, equivalence of locations is easily computed. Here is the program: <br />
-<pre>
-use Bio::KBase;
-my $kb  = Bio::KBase-&gt;new;
-my $csO = $kb-&gt;central_store();
-
-# First, get the two genomes to be compared.  We assume that they
-# have identical md5 hash values.
-my($g1,$g2);
-my $usage = &quot;Usage: get_corresponding_features Genome1 Genome2&quot;;
-(
- ($g1 = shift @ARGV) &amp;&amp;
- ($g2 = shift @ARGV)
-)
-    || die $usage;
-
-# The little routines get_contig_to_md5_mapping gets a hash table
-# that maps contig IDs from the first genome to md5 values.
-#
-# The second routine, get_md5_to_contig_mapping, creates
-# a mapping from md5 values to contigs in the second genome.
-#
-# To map the contig IDs from genome1 to contig values in genome2
-# is a 2-step process from contigs1-&gt;md5s-&gt;contigs2.
-#
-my $contig_to_md5_1 = &amp;get_contig_to_md5_mapping($csO,$g1);
-my $md5_to_contig_2 = &amp;get_md5_to_contig_mapping($csO,$g2);
-
-# Genomes to fids just maps the genome IDs to lists of the
-# protein-encoding genes that occur in each of the genomes.
-my $gH    = $csO-&gt;<a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#genomes_to_fids" target='_blank'>genomes_to_fids</a>([$g1,$g2],[&#39;peg&#39;]);
-my $fids1 = $gH-&gt;{$g1};
-my $fids2 = $gH-&gt;{$g2};
-
-# Now we pick up the locations associated with each of the features
-# in each of the genomes.
-my $fid_locH1       = $csO-&gt;<a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#fids_to_locations" target='_blank'>fids_to_locations</a>($fids1);
-my $fid_locH2       = $csO-&gt;<a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#fids_to_locations" target='_blank'>fids_to_locations</a>($fids2);
-
-# Now we map string forms of the locations in genome2 to
-# feature IDs.
-#
-my %in2;
-foreach my $fid2 (@$fids2)
-{
-    my $loc2 = $fid_locH2-&gt;{$fid2};
-    my $loc2_string = join(&quot;,&quot;,map { join(&quot;&quot;, $_-&gt;[0], &quot;_&quot;, $_-&gt;[1], $_-&gt;[2], $_-&gt;[3]) } @$loc2);
-    $in2{$loc2_string} = $fid2;
-}
-
-# Now try to map the fids from genome 1 to corresponding locations in genome 2 (by
-# mapping the contig names in the locations).  If the mapped location is a gene
-# in the second genome, we print the pair and record the fact that we matched it.
-# If not, we just print a mismatch.
-#
-my %matched;
-foreach my $fid1 (@$fids1)
-{
-    my $loc1         = $fid_locH1-&gt;{$fid1};  
-    my $projected_loc = join(&quot;,&quot;,map { my($contig1,$start,$strand,$ln) = @$_;
-	 			       my $contig2 = $md5_to_contig_2-&gt;{$contig_to_md5_1-&gt;{$contig1}};
-			 	       join(&quot;&quot;,($contig2,&quot;_&quot;,$start,$strand,$ln))
-                                     } @$loc1
-                            );
-
-    my $fid2 = $in2{$projected_loc};
-    if ($fid2)
-    {
-	$matched{$fid2} = 1;
-	print &quot;$fid1\t$fid2\n&quot;;
-    }
-    else
-    {
-	print &quot;$fid1\t\n&quot;;
-    }
-}
-
-# Finally, we display the unmatched fids from the second genome.
-
-foreach my $fid2 (@$fids2)
-{
-    if (! $matched{$fid2})
-    {
-	print &quot;\t$fid2\n&quot;;
-    }
-}
-
-sub get_contig_to_md5_mapping {
-    my($csO,$g) = @_;
-
-    my $gH = $csO-&gt;<a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#genomes_to_contigs" target='_blank'>genomes_to_contigs</a>([$g]);
-    my $contigs = $gH-&gt;{$g};
-    return $csO-&gt;<a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#contigs_to_md5s" target='_blank'>contigs_to_md5s</a>($contigs);
-}
-
-sub get_md5_to_contig_mapping {
-    my($csO,$g) = @_;
-
-    my $gH = $csO-&gt;<a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#genomes_to_contigs" target='_blank'>genomes_to_contigs</a>([$g]);
-    my $contigs = $gH-&gt;{$g};
-    my $md5_contig_tuples = $csO-&gt;<a href="http://kbase.us/developer-zone/api-documentation/cdm-entity-relationship-command-scripts/#get_relationship_HasAsSequence" target='_blank'>get_relationship_HasAsSequence</a>($contigs,[],[&#39;from_link&#39;,&#39;to_link&#39;],[]);
-    my $md5_contig = {};
-    foreach $_ (@$md5_contig_tuples)
-    {
-	$md5_contig-&gt;{$_-&gt;[1]-&gt;{to_link}} = $_-&gt;[1]-&gt;{from_link};
-    }
-    return $md5_contig;
-}
-
-<br /></pre>
- If you run this on a pair of identical genomes (say, the two we gave earlier), you will see far more mismatches than you might expect. Many of these are due to differing start calls. Can you modify the program to map genes IFF that are on the same strand and have identical end locations? 
+<p>Here is a short program that takes as inut two genome IDs (<i>g1</i>
+and <i>g2</i>) and prints out a two-column table. The first column
+represents a gene in <i>g1</i> that <a name="corresponds365"></a><a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#corresponds" target="_blank">corresponds</a> to the gene in the second colum from <i>g2</i>.
+If one of the columns is empty, then we have a case where a gene fails
+to correspond to a gene in the other genome. <br>
+<br>
+We will do a simple program here that just implements the notion that
+two genes correspond IFF they have identical locations. This is not a
+completely trivial notion, since unique KBase IDs have been assigned to
+the contigs in each genome. However, since the key of a <b><a name="Contig366">Contig</a></b> is a unique Kbase ID, but the key of
+the related <b><a name="ContigSequence367">ContigSequence</a></b> is
+an <a name="md5368">md5</a> hash, equivalence of locations is easily
+computed. Here is the program: <br>
+</p>
+<pre>use Bio::KBase;<br>my $kb  = Bio::KBase-&gt;new;<br>my $csO = $kb-&gt;central_store();<br><br># First, get the two genomes to be compared.  We assume that they<br># have identical md5 hash values.<br>my($g1,$g2);<br>my $usage = "Usage: get_corresponding_features Genome1 Genome2";<br>(<br> ($g1 = shift @ARGV) &amp;&amp;<br> ($g2 = shift @ARGV)<br>)<br>    || die $usage;<br><br># The little routines get_contig_to_md5_mapping gets a hash table<br># that maps contig IDs from the first genome to md5 values.<br>#<br># The second routine, get_md5_to_contig_mapping, creates<br># a mapping from md5 values to contigs in the second genome.<br>#<br># To map the contig IDs from genome1 to contig values in genome2<br># is a 2-step process from contigs1-&gt;md5s-&gt;contigs2.<br>#<br>my $contig_to_md5_1 = &amp;get_contig_to_md5_mapping($csO,$g1);<br>my $md5_to_contig_2 = &amp;get_md5_to_contig_mapping($csO,$g2);<br><br># Genomes to fids just maps the genome IDs to lists of the<br># protein-encoding genes that occur in each of the genomes.<br>my $gH    = $csO-&gt;<a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#genomes_to_fids" target="_blank">genomes_to_fids</a>([$g1,$g2],['peg']);<br>my $fids1 = $gH-&gt;{$g1};<br>my $fids2 = $gH-&gt;{$g2};<br><br># Now we pick up the locations associated with each of the features<br># in each of the genomes.<br>my $fid_locH1       = $csO-&gt;<a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#fids_to_locations" target="_blank">fids_to_locations</a>($fids1);<br>my $fid_locH2       = $csO-&gt;<a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#fids_to_locations" target="_blank">fids_to_locations</a>($fids2);<br><br># Now we map string forms of the locations in genome2 to<br># feature IDs.<br>#<br>my %in2;<br>foreach my $fid2 (@$fids2)<br>{<br>    my $loc2 = $fid_locH2-&gt;{$fid2};<br>    my $loc2_string = join(",",map { join("", $_-&gt;[0], "_", $_-&gt;[1], $_-&gt;[2], $_-&gt;[3]) } @$loc2);<br>    $in2{$loc2_string} = $fid2;<br>}<br><br># Now try to map the fids from genome 1 to corresponding locations in genome 2 (by<br># mapping the contig names in the locations).  If the mapped location is a gene<br># in the second genome, we print the pair and record the fact that we matched it.<br># If not, we just print a mismatch.<br>#<br>my %matched;<br>foreach my $fid1 (@$fids1)<br>{<br>    my $loc1         = $fid_locH1-&gt;{$fid1};  <br>    my $projected_loc = join(",",map { my($contig1,$start,$strand,$ln) = @$_;<br>	 			       my $contig2 = $md5_to_contig_2-&gt;{$contig_to_md5_1-&gt;{$contig1}};<br>			 	       join("",($contig2,"_",$start,$strand,$ln))<br>                                     } @$loc1<br>                            );<br><br>    my $fid2 = $in2{$projected_loc};<br>    if ($fid2)<br>    {<br>	$matched{$fid2} = 1;<br>	print "$fid1\t$fid2\n";<br>    }<br>    else<br>    {<br>	print "$fid1\t\n";<br>    }<br>}<br><br># Finally, we display the unmatched fids from the second genome.<br><br>foreach my $fid2 (@$fids2)<br>{<br>    if (! $matched{$fid2})<br>    {<br>	print "\t$fid2\n";<br>    }<br>}<br><br>sub get_contig_to_md5_mapping {<br>    my($csO,$g) = @_;<br><br>    my $gH = $csO-&gt;<a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#genomes_to_contigs" target="_blank">genomes_to_contigs</a>([$g]);<br>    my $contigs = $gH-&gt;{$g};<br>    return $csO-&gt;<a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#contigs_to_md5s" target="_blank">contigs_to_md5s</a>($contigs);<br>}<br><br>sub get_md5_to_contig_mapping {<br>    my($csO,$g) = @_;<br><br>    my $gH = $csO-&gt;<a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#genomes_to_contigs" target="_blank">genomes_to_contigs</a>([$g]);<br>    my $contigs = $gH-&gt;{$g};<br>    my $md5_contig_tuples = $csO-&gt;<a href="http://kbase.us/developer-zone/api-documentation/cdm-entity-relationship-command-scripts/#get_relationship_HasAsSequence" target="_blank">get_relationship_HasAsSequence</a>($contigs,[],['from_link','to_link'],[]);<br>    my $md5_contig = {};<br>    foreach $_ (@$md5_contig_tuples)<br>    {<br>	$md5_contig-&gt;{$_-&gt;[1]-&gt;{to_link}} = $_-&gt;[1]-&gt;{from_link};<br>    }<br>    return $md5_contig;<br>}<br><br><br></pre>
+If you run this on a pair of identical genomes (say, the two we gave
+earlier), you will see far more mismatches than you might expect. Many
+of these are due to differing start calls. Can you modify the program
+to map genes IFF that are on the same strand and have identical end
+locations?

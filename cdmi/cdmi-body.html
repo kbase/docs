@@ -2011,6 +2011,59 @@ optional is a string
 </dl>
 
 <h3><a class='u' href='#___top' title='click to go to top of document'
+name="aliases_to_fids"
+>aliases_to_fids</a></h3>
+
+<pre>  $return = $obj-&#62;aliases_to_fids($aliases)</pre>
+
+<dl>
+<dt><a name="Parameter_and_return_types"
+>Parameter and return types</a></dt>
+
+<dd>
+<pre>
+$aliases is an aliases
+$return is a reference to a hash where the key is an alias and the value is a fid
+aliases is a reference to a list where each element is an alias
+alias is a string
+fid is a string
+
+
+</pre>
+
+
+<dt><a name="Description"
+>Description</a></dt>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="external_ids_to_fids"
+>external_ids_to_fids</a></h3>
+
+<pre>  $return = $obj-&#62;external_ids_to_fids($external_ids, $prefix_match)</pre>
+
+<dl>
+<dt><a name="Parameter_and_return_types"
+>Parameter and return types</a></dt>
+
+<dd>
+<pre>
+$external_ids is an external_ids
+$prefix_match is an int
+$return is a reference to a hash where the key is an external_id and the value is a fid
+external_ids is a reference to a list where each element is an external_id
+external_id is a string
+fid is a string
+
+
+</pre>
+
+
+<dt><a name="Description"
+>Description</a></dt>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
 name="reaction_strings"
 >reaction_strings</a></h3>
 
@@ -2176,6 +2229,30 @@ $return is a reference to a hash where the key is a genome and the value is a re
 genomes is a reference to a list where each element is a genome
 genome is a string
 genome_name is a string
+
+
+</pre>
+
+
+<dt><a name="Description"
+>Description</a></dt>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="otus_to_representatives"
+>otus_to_representatives</a></h3>
+
+<pre>  $return = $obj-&#62;otus_to_representatives($otus)</pre>
+
+<dl>
+<dt><a name="Parameter_and_return_types"
+>Parameter and return types</a></dt>
+
+<dd>
+<pre>
+$otus is a reference to a list where each element is an int
+$return is a reference to a hash where the key is an int and the value is a genome
+genome is a string
 
 
 </pre>
@@ -2435,7 +2512,7 @@ name="align_sequences"
 <pre>
 $seq_set is a seq_set
 $align_seq_parms is an align_seq_parms
-$return is a seq_set
+$return is an alignment
 seq_set is a reference to a list where each element is a seq_triple
 seq_triple is a reference to a list containing 3 items:
 	0: an id
@@ -2534,6 +2611,108 @@ mafft_parms_t is a reference to a hash where the following keys are defined:
 	thread has a value which is a string
 	tm has a value which is a string
 	weighti has a value which is a string
+alignment is a seq_set
+
+
+</pre>
+
+
+<dt><a name="Description"
+>Description</a></dt>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="build_tree"
+>build_tree</a></h3>
+
+<pre>  $return = $obj-&#62;build_tree($alignment, $build_tree_parms)</pre>
+
+<dl>
+<dt><a name="Parameter_and_return_types"
+>Parameter and return types</a></dt>
+
+<dd>
+<pre>
+$alignment is an alignment
+$build_tree_parms is a build_tree_parms
+$return is a newick_tree
+alignment is a seq_set
+seq_set is a reference to a list where each element is a seq_triple
+seq_triple is a reference to a list containing 3 items:
+	0: an id
+	1: a comment
+	2: a sequence
+id is a string
+comment is a string
+sequence is a string
+build_tree_parms is a reference to a hash where the following keys are defined:
+	bootstrap has a value which is a string
+	model has a value which is a string
+	nclasses has a value which is a string
+	nproc has a value which is a string
+	rate has a value which is a string
+	search has a value which is a string
+	tool has a value which is a string
+	tool_params has a value which is a string
+newick_tree is a string
+
+
+</pre>
+
+
+<dt><a name="Description"
+>Description</a></dt>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="alignment_by_id"
+>alignment_by_id</a></h3>
+
+<pre>  $return = $obj-&#62;alignment_by_id($aln_id)</pre>
+
+<dl>
+<dt><a name="Parameter_and_return_types"
+>Parameter and return types</a></dt>
+
+<dd>
+<pre>
+$aln_id is an aln_id
+$return is an alignment
+aln_id is a string
+alignment is a seq_set
+seq_set is a reference to a list where each element is a seq_triple
+seq_triple is a reference to a list containing 3 items:
+	0: an id
+	1: a comment
+	2: a sequence
+id is a string
+comment is a string
+sequence is a string
+
+
+</pre>
+
+
+<dt><a name="Description"
+>Description</a></dt>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="tree_by_id"
+>tree_by_id</a></h3>
+
+<pre>  $return = $obj-&#62;tree_by_id($tree_id)</pre>
+
+<dl>
+<dt><a name="Parameter_and_return_types"
+>Parameter and return types</a></dt>
+
+<dd>
+<pre>
+$tree_id is a tree_id
+$return is a newick_tree
+tree_id is a string
+newick_tree is a string
 
 
 </pre>
@@ -4270,6 +4449,70 @@ a string
 </dl>
 
 <h3><a class='u' href='#___top' title='click to go to top of document'
+name="alias"
+>alias</a></h3>
+
+<dl>
+<dt><a name="Definition"
+>Definition</a></dt>
+
+<dd>
+<pre>
+a string
+</pre>
+
+</dd>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="aliases"
+>aliases</a></h3>
+
+<dl>
+<dt><a name="Definition"
+>Definition</a></dt>
+
+<dd>
+<pre>
+a reference to a list where each element is an alias
+</pre>
+
+</dd>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="external_id"
+>external_id</a></h3>
+
+<dl>
+<dt><a name="Definition"
+>Definition</a></dt>
+
+<dd>
+<pre>
+a string
+</pre>
+
+</dd>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="external_ids"
+>external_ids</a></h3>
+
+<dl>
+<dt><a name="Definition"
+>Definition</a></dt>
+
+<dd>
+<pre>
+a reference to a list where each element is an external_id
+</pre>
+
+</dd>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
 name="name_parameter"
 >name_parameter</a></h3>
 
@@ -4518,6 +4761,22 @@ a reference to a list where each element is an id
 </dl>
 
 <h3><a class='u' href='#___top' title='click to go to top of document'
+name="alignment"
+>alignment</a></h3>
+
+<dl>
+<dt><a name="Definition"
+>Definition</a></dt>
+
+<dd>
+<pre>
+a seq_set
+</pre>
+
+</dd>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
 name="rep_seq_parms"
 >rep_seq_parms</a></h3>
 
@@ -4688,6 +4947,80 @@ tool has a value which is a string
 align_ends_with_clustal has a value which is an int
 
 
+</pre>
+
+</dd>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="newick_tree"
+>newick_tree</a></h3>
+
+<dl>
+<dt><a name="Definition"
+>Definition</a></dt>
+
+<dd>
+<pre>
+a string
+</pre>
+
+</dd>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="build_tree_parms"
+>build_tree_parms</a></h3>
+
+<dl>
+<dt><a name="Definition"
+>Definition</a></dt>
+
+<dd>
+<pre>
+a reference to a hash where the following keys are defined:
+bootstrap has a value which is a string
+model has a value which is a string
+nclasses has a value which is a string
+nproc has a value which is a string
+rate has a value which is a string
+search has a value which is a string
+tool has a value which is a string
+tool_params has a value which is a string
+
+
+</pre>
+
+</dd>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="aln_id"
+>aln_id</a></h3>
+
+<dl>
+<dt><a name="Definition"
+>Definition</a></dt>
+
+<dd>
+<pre>
+a string
+</pre>
+
+</dd>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="tree_id"
+>tree_id</a></h3>
+
+<dl>
+<dt><a name="Definition"
+>Definition</a></dt>
+
+<dd>
+<pre>
+a string
 </pre>
 
 </dd>

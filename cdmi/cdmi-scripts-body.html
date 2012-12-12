@@ -1,26 +1,30 @@
 <a name='___top' class='dummyTopAnchor' ></a>
 
 <h2><a class='u' href='#___top' title='click to go to top of document'
-name="align_sequences"
->align_sequences</a></h2>
+name="aliases_to_fids"
+>aliases_to_fids</a></h2>
+
+<p>aliases_to_fids is used to search for the feature ids that a set of given aliases maps to.</p>
 
 <p>Example:</p>
 
-<pre>    align_sequences [arguments] &#60; input &#62; output</pre>
+<pre>    aliases_to_fids [arguments] &#60; input &#62; output</pre>
 
 <p>The standard input should be a tab-separated table (i.e., each line is a tab-separated set of fields). Normally, the last field in each line would contain the identifer. If another column contains the identifier use</p>
 
 <pre>    -c N</pre>
 
-<p>where N is the column (from 1) that contains the identifier.</p>
+<p>where N is the column (from 1) that contains the subsystem.</p>
 
-<p>This is a pipe command. The input is taken from the standard input, and the output is to the standard output.</p>
+<p>This is a pipe command. The input is taken from the standard input, and the output is to the standard output. For each input line, there can be many output lines, one per feature. The feature id is added to the end of the line.</p>
 
 <h3><a class='u' href='#___top' title='click to go to top of document'
 name="Documentation_for_underlying_call"
 >Documentation for underlying call</a></h3>
 
-<p>This script is a wrapper for the CDMI-API call align_sequences. It is documented as follows:</p>
+<p>This script is a wrapper for the CDMI-API call aliases_to_fids. It is documented as follows:</p>
+
+<pre>  $return = $obj-&#62;aliases_to_fids($aliases)</pre>
 
 <dl>
 <dt><a name="Parameter_and_return_types"
@@ -28,109 +32,11 @@ name="Documentation_for_underlying_call"
 
 <dd>
 <pre>
-$seq_set is a seq_set
-$align_seq_parms is an align_seq_parms
-$return is a seq_set
-seq_set is a reference to a list where each element is a seq_triple
-seq_triple is a reference to a list containing 3 items:
-	0: an id
-	1: a comment
-	2: a sequence
-id is a string
-comment is a string
-sequence is a string
-align_seq_parms is a reference to a hash where the following keys are defined:
-	muscle_parms has a value which is a muscle_parms_t
-	mafft_parms has a value which is a mafft_parms_t
-	tool has a value which is a string
-	align_ends_with_clustal has a value which is an int
-muscle_parms_t is a reference to a hash where the following keys are defined:
-	anchors has a value which is an int
-	brenner has a value which is an int
-	cluster has a value which is an int
-	dimer has a value which is an int
-	diags has a value which is an int
-	diags1 has a value which is an int
-	diags2 has a value which is an int
-	le has a value which is an int
-	noanchors has a value which is an int
-	sp has a value which is an int
-	spn has a value which is an int
-	stable has a value which is an int
-	sv has a value which is an int
-	anchorspacing has a value which is a string
-	center has a value which is a string
-	cluster1 has a value which is a string
-	cluster2 has a value which is a string
-	diagbreak has a value which is a string
-	diaglength has a value which is a string
-	diagmargin has a value which is a string
-	distance1 has a value which is a string
-	distance2 has a value which is a string
-	gapopen has a value which is a string
-	log has a value which is a string
-	loga has a value which is a string
-	matrix has a value which is a string
-	maxhours has a value which is a string
-	maxiters has a value which is a string
-	maxmb has a value which is a string
-	maxtrees has a value which is a string
-	minbestcolscore has a value which is a string
-	minsmoothscore has a value which is a string
-	objscore has a value which is a string
-	refinewindow has a value which is a string
-	root1 has a value which is a string
-	root2 has a value which is a string
-	scorefile has a value which is a string
-	seqtype has a value which is a string
-	smoothscorecell has a value which is a string
-	smoothwindow has a value which is a string
-	spscore has a value which is a string
-	SUEFF has a value which is a string
-	usetree has a value which is a string
-	weight1 has a value which is a string
-	weight2 has a value which is a string
-mafft_parms_t is a reference to a hash where the following keys are defined:
-	sixmerpair has a value which is an int
-	amino has a value which is an int
-	anysymbol has a value which is an int
-	auto has a value which is an int
-	clustalout has a value which is an int
-	dpparttree has a value which is an int
-	fastapair has a value which is an int
-	fastaparttree has a value which is an int
-	fft has a value which is an int
-	fmodel has a value which is an int
-	genafpair has a value which is an int
-	globalpair has a value which is an int
-	inputorder has a value which is an int
-	localpair has a value which is an int
-	memsave has a value which is an int
-	nofft has a value which is an int
-	noscore has a value which is an int
-	parttree has a value which is an int
-	reorder has a value which is an int
-	treeout has a value which is an int
-	alg has a value which is a string
-	aamatrix has a value which is a string
-	bl has a value which is a string
-	ep has a value which is a string
-	groupsize has a value which is a string
-	jtt has a value which is a string
-	lap has a value which is a string
-	lep has a value which is a string
-	lepx has a value which is a string
-	LOP has a value which is a string
-	LEXP has a value which is a string
-	maxiterate has a value which is a string
-	op has a value which is a string
-	partsize has a value which is a string
-	retree has a value which is a string
-	thread has a value which is a string
-	tm has a value which is a string
-	weighti has a value which is a string
-
-
+$aliases is an aliases
+$return is a reference to a hash where the key is an alias and the value is a fid
+aliases is a reference to a list where each element is an alias
+alias is a string
+fid is a string
 </pre>
 
 </dd>
@@ -145,7 +51,7 @@ name="Command-Line_Options"
 >-c Column</a></dt>
 
 <dd>
-<p>This is used only if the column containing the identifier is not the last column.</p>
+<p>This is used only if the column containing the subsystem is not the last column.</p>
 
 <dt><a name="-i_InputFile_[_use_InputFile,_rather_than_stdin_]"
 >-i InputFile [ use InputFile, rather than stdin ]</a></dt>
@@ -388,85 +294,6 @@ name="Output_Format"
 <p>The standard output is a tab-delimited file. It consists of the input file with extra columns added.</p>
 
 <p>Input lines that cannot be extended are written to stderr.</p>
-<hr>
-<a name='___top' class='dummyTopAnchor' ></a>
-
-<h2><a class='u' href='#___top' title='click to go to top of document'
-name="aln_to_html"
->aln_to_html</a></h2>
-
-<h3><a class='u' href='#___top' title='click to go to top of document'
-name="Introduction"
->Introduction</a></h3>
-
-<pre>    aln_to_html [options] &#60; alignment.in.fasta.format &#62; alignment.as.html</pre>
-
-<p>Convert a FASTA alignment to HTML</p>
-
-<p>This script takes a FASTA version of an alignment and produces the HTML needed to support visualization of the alignment.</p>
-
-<h3><a class='u' href='#___top' title='click to go to top of document'
-name="Command-Line_Options"
->Command-Line Options</a></h3>
-
-<dl>
-<dt><a name="-c=conservation|conservation2|residue|none"
->-c=conservation|conservation2|residue|none</a></dt>
-
-<dd>
-<p>If <i>conservation</i> is specified, coloring is used to reveal levels of conservation (within a column). If <i>conservation2</i> is specified, an alternative color scheme is used to reveal levels of conservation (within a column). If <i>residue</i> is specified, coloring is used to reveal classes of residues. If <i>none</i> simply turns off coloring</p>
-
-<p>The default value is <i>conservation</i>.</p>
-
-<dt><a name="-d"
->-d</a></dt>
-
-<dd>
-<p>If this option is specified, pop-up sequence definitions (comments) will be omitted</p>
-
-<dt><a name="-j"
->-j</a></dt>
-
-<dd>
-<p>If this option is specified, pop-up menus will be omitted (only valid with -t)</p>
-
-<dt><a name="-l"
->-l</a></dt>
-
-<dd>
-<p>If this option is specified, the legend will be omitted</p>
-
-<dt><a name="-n"
->-n</a></dt>
-
-<dd>
-<p>Treat residues as nucleotides (if neither -n nor -p is set, the program looks at the sequence and guesses)</p>
-
-<dt><a name="-p"
->-p</a></dt>
-
-<dd>
-<p>Treat residues as amino acids (if neither -n nor -p is set, the program looks at the sequence and guesses)</p>
-
-<dt><a name="-s=seqfile"
->-s=seqfile</a></dt>
-
-<dd>
-<p>Add unaligned residues to the ends of the alignment</p>
-
-<dt><a name="-t"
->-t</a></dt>
-
-<dd>
-<p>Write html table (default is to write a self-contained page)</p>
-</dd>
-</dl>
-
-<h4><a class='u' href='#___top' title='click to go to top of document'
-name="Output_Format"
->Output Format</a></h4>
-
-<p>The generated HTML document is written to STDOUT.</p>
 <hr>
 <a name='___top' class='dummyTopAnchor' ></a>
 
@@ -1142,7 +969,7 @@ name="Command-Line_Options"
 name="Output_Format"
 >Output Format</a></h3>
 
-<p>The standard output is a tab-delimited file. It consists of the input file with extra columns added. If the abbreviated format is requested, two columns get written (sc and the fid projected to). If the abbreviated format is not requested, ten columns will be written</p>
+<p>The standard output is a tab-delimited file. It consists of the input file with extra columns added. If the abbreviated format is requested, two columns get added (sc and the fid projected to). If the abbreviated format is not requested, ten columns will be added</p>
 
 <pre>    1  - percent-identity: the average percent identity over the
          range of the match
@@ -1370,6 +1197,73 @@ The remaining lines in the block define the field data associated with the entit
 >The name of a relation,
 if the field data is stored in a separate relation.</a></dt>
 </dl>
+<hr>
+<a name='___top' class='dummyTopAnchor' ></a>
+
+<h2><a class='u' href='#___top' title='click to go to top of document'
+name="external_ids_to_fids"
+>external_ids_to_fids</a></h2>
+
+<p>external_ids_to_fids is used to search for the feature ids that a set of given external_ids maps to.</p>
+
+<p>Example:</p>
+
+<pre>    external_ids_to_fids [arguments] &#60; input &#62; output</pre>
+
+<p>The standard input should be a tab-separated table (i.e., each line is a tab-separated set of fields). Normally, the last field in each line would contain the identifer. If another column contains the identifier use</p>
+
+<pre>    -c N</pre>
+
+<p>where N is the column (from 1) that contains the subsystem.</p>
+
+<p>This is a pipe command. The input is taken from the standard input, and the output is to the standard output. For each input line, there can be many output lines, one per feature. The feature id is added to the end of the line.</p>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Documentation_for_underlying_call"
+>Documentation for underlying call</a></h3>
+
+<p>This script is a wrapper for the CDMI-API call external_ids_to_fids. It is documented as follows:</p>
+
+<pre>  $return = $obj-&#62;external_ids_to_fids($external_ids)</pre>
+
+<dl>
+<dt><a name="Parameter_and_return_types"
+>Parameter and return types</a></dt>
+
+<dd>
+<pre>
+$external_ids is an external_ids
+$return is a reference to a hash where the key is an alias and the value is a fid
+external_ids is a reference to a list where each element is an external_id
+external_id is a string
+fid is a string
+</pre>
+
+</dd>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Command-Line_Options"
+>Command-Line Options</a></h3>
+
+<dl>
+<dt><a name="-c_Column"
+>-c Column</a></dt>
+
+<dd>
+<p>This is used only if the column containing the subsystem is not the last column.</p>
+
+<dt><a name="-i_InputFile_[_use_InputFile,_rather_than_stdin_]"
+>-i InputFile [ use InputFile, rather than stdin ]</a></dt>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Output_Format"
+>Output Format</a></h3>
+
+<p>The standard output is a tab-delimited file. It consists of the input file with extra columns added.</p>
+
+<p>Input lines that cannot be extended are written to stderr.</p>
 <hr>
 <a name='___top' class='dummyTopAnchor' ></a>
 
@@ -3576,6 +3470,76 @@ name="Output_Format"
 >Output Format</a></h3>
 
 <p>The standard output is a tab-delimited file. It consists of the input file with an extra column (a genome from the same OTU) added. If there are N genomes in the OTU for the genome in an input line, then N output lines will be generated, each containing a single genome ID from the same OTU.</p>
+
+<p>Input lines that cannot be extended are written to stderr.</p>
+<hr>
+<a name='___top' class='dummyTopAnchor' ></a>
+
+<h2><a class='u' href='#___top' title='click to go to top of document'
+name="otus_to_representatives"
+>otus_to_representatives</a></h2>
+
+<p>We deine the notion of OTU loosely.
+We try to keep genomes with 97% identical SSUrRNAs within the same OTU.
+We pick a representative genome for each OTU,
+and we try to keep all genomes that have 97% identical SSU rRNAs in the same OTU.</p>
+
+<p>This command is intended to add a column containing the representative genome from the given OTU.</p>
+
+<p>Example:</p>
+
+<pre>    otus_to_representatives [arguments] &#60; input &#62; output</pre>
+
+<p>The standard input should be a tab-separated table (i.e., each line is a tab-separated set of fields). Normally, the last field in each line would contain a genome identifer. If another column contains the identifier use</p>
+
+<pre>    -c N</pre>
+
+<p>where N is the column (from 1) that contains the subsystem.</p>
+
+<p>This is a pipe command. The input is taken from the standard input, and the output is to the standard output.</p>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Documentation_for_underlying_call"
+>Documentation for underlying call</a></h3>
+
+<p>This script is a wrapper for the CDMI-API call otu_members. It is documented as follows:</p>
+
+<pre>  $return = $obj-&#62;otus_to_representatives($otus)</pre>
+
+<dl>
+<dt><a name="Parameter_and_return_types"
+>Parameter and return types</a></dt>
+
+<dd>
+<pre>
+$otus is a reference to a list where each element is an int
+$return is a reference to a hash where the key is an int and the value is a genome
+genome is a string
+</pre>
+
+</dd>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Command-Line_Options"
+>Command-Line Options</a></h3>
+
+<dl>
+<dt><a name="-c_Column"
+>-c Column</a></dt>
+
+<dd>
+<p>This is used only if the column containing genome identifiers is not the last column.</p>
+
+<dt><a name="-i_InputFile_[_use_InputFile,_rather_than_stdin_]"
+>-i InputFile [ use InputFile, rather than stdin ]</a></dt>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Output_Format"
+>Output Format</a></h3>
+
+<p>The standard output is a tab-delimited file. It consists of the input file with an extra column (the representative genome from the OTU) added.</p>
 
 <p>Input lines that cannot be extended are written to stderr.</p>
 <hr>
