@@ -1,0 +1,454 @@
+<?xml version="1.0" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>lib/Bio/KBase/OntologyService/Client.pm</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<link rev="made" href="mailto:root@localhost" />
+</head>
+
+<body style="background-color: white">
+
+
+
+<p>
+</p>
+<h1><a name="name">NAME</a></h1>
+<p>Bio::KBase::OntologyService::Client</p>
+<p>
+</p>
+<hr />
+<h1><a name="description">DESCRIPTION</a></h1>
+<p>
+</p>
+<h2><a name="getgoidlist">getGOIDList</a></h2>
+<pre>
+  $results = $obj-&gt;getGOIDList($sname, $geneIDList, $domainList, $ecList)</pre>
+<dl>
+<dt><strong><a name="parameter_and_return_types" class="item">Parameter and return types</a></strong></dt>
+
+<pre>
+$sname is a Species
+$geneIDList is a GeneIDList
+$domainList is a DomainList
+$ecList is an EvidenceCodeList
+$results is a GeneIDMap2GoIDList
+Species is a string
+GeneIDList is a reference to a list where each element is a GeneID
+GeneID is a string
+DomainList is a reference to a list where each element is a Domain
+Domain is a string
+EvidenceCodeList is a reference to a list where each element is an EvidenceCode
+EvidenceCode is a string
+GeneIDMap2GoIDList is a reference to a hash where the key is a GeneID and the value is a GoIDList
+GoIDList is a reference to a list where each element is a GoID
+GoID is a string</pre><dt><strong><a name="description" class="item">Description</a></strong></dt>
+
+<dd>
+<p>For a given list of Features (aka Genes) from a particular genome (for example &quot;Athaliana&quot; Arabidopsis thaliana ) extract corresponding list of GO identifiers. This function call accepts four parameters: species name, a list of gene-identifiers, a list of ontology domains, and a list of evidence codes. The list of gene identifiers cannot be empty; however the list of ontology domains and the list of evidence codes can be empty. If any of the last two lists is not empty then the gene-id and go-id pairs retrieved from KBase are further filtered by using the desired ontology domains and/or evidence codes supplied as input. So, if you don't want to filter the initial results then it is recommended to provide empty domain and evidence code lists. Finally, this function returns a mapping of gene-id to go-ids; note that in the returned table of results, each gene-id is associated with a list of one of more go-ids. Also, a note on the input list: only one item per line is allowed.</p>
+</dd>
+</dl>
+<p>
+</p>
+<h2><a name="getgoidlimitedlist">getGOIDLimitedList</a></h2>
+<pre>
+  $results = $obj-&gt;getGOIDLimitedList($sname, $geneIDList, $domainList, $ecList, $minCount, $maxCount)</pre>
+<dl>
+<dt><strong><a name="parameter_and_return_types2" class="item">Parameter and return types</a></strong></dt>
+
+<pre>
+$sname is a Species
+$geneIDList is a GeneIDList
+$domainList is a DomainList
+$ecList is an EvidenceCodeList
+$minCount is an int
+$maxCount is an int
+$results is a GeneIDMap2GoIDList
+Species is a string
+GeneIDList is a reference to a list where each element is a GeneID
+GeneID is a string
+DomainList is a reference to a list where each element is a Domain
+Domain is a string
+EvidenceCodeList is a reference to a list where each element is an EvidenceCode
+EvidenceCode is a string
+GeneIDMap2GoIDList is a reference to a hash where the key is a GeneID and the value is a GoIDList
+GoIDList is a reference to a list where each element is a GoID
+GoID is a string</pre><dt><strong><a name="description2" class="item">Description</a></strong></dt>
+
+<dd>
+<p>For a given list of Features from a particular genome (for example &quot;Athaliana&quot;) extract corresponding list of GO identifiers. This function call accepts six parameters: species name, a list of gene-identifiers, a list of ontology domains, a list of evidence codes, and lower &amp; upper bound on the number of returned go-ids that a gene-id must have. The list of gene identifiers cannot be empty; however the list of ontology domains and the list of evidence codes can be empty. If any of the domain and the evidence-code lists is not empty then the gene-id and go-ids pairs retrieved from KBase are further filtered by using the desired ontology domains and/or evidence codes supplied as input. So, if you don't want to filter the initial results  then it is recommended to provide empty domain and evidence code lists. Finally, this function returns a mapping of only those gene-id to go-ids for which the count of go-ids per gene is between minimum and maximum count limit. Note that in the returned table of results, each gene-id is associated with a list of one of more go-ids. Also, a note on the input list: only one item per line is allowed.</p>
+</dd>
+</dl>
+<p>
+</p>
+<h2><a name="getgodesc">getGoDesc</a></h2>
+<pre>
+  $results = $obj-&gt;getGoDesc($goIDList)</pre>
+<dl>
+<dt><strong><a name="parameter_and_return_types3" class="item">Parameter and return types</a></strong></dt>
+
+<pre>
+$goIDList is a GoIDList
+$results is a reference to a hash where the key is a GoID and the value is a string
+GoIDList is a reference to a list where each element is a GoID
+GoID is a string</pre><dt><strong><a name="description3" class="item">Description</a></strong></dt>
+
+<dd>
+<p>Extract GO term description for a given list of go-identifiers. This function expects an input list of go-ids (one go-id per line) and returns a table of two columns, first column being the go-id and the second column being the go-term description.</p>
+</dd>
+</dl>
+<p>
+</p>
+<h2><a name="getgoenrichment">getGOEnrichment</a></h2>
+<pre>
+  $results = $obj-&gt;getGOEnrichment($sname, $geneIDList, $domainList, $ecList, $type)</pre>
+<dl>
+<dt><strong><a name="parameter_and_return_types4" class="item">Parameter and return types</a></strong></dt>
+
+<pre>
+$sname is a Species
+$geneIDList is a GeneIDList
+$domainList is a DomainList
+$ecList is an EvidenceCodeList
+$type is a TestType
+$results is an EnrichmentList
+Species is a string
+GeneIDList is a reference to a list where each element is a GeneID
+GeneID is a string
+DomainList is a reference to a list where each element is a Domain
+Domain is a string
+EvidenceCodeList is a reference to a list where each element is an EvidenceCode
+EvidenceCode is a string
+TestType is a string
+EnrichmentList is a reference to a list where each element is an Enrichment
+Enrichment is a reference to a hash where the following keys are defined:
+	goID has a value which is a GoID
+	goDesc has a value which is a GoDesc
+	pvalue has a value which is a float
+GoID is a string
+GoDesc is a string</pre><dt><strong><a name="description4" class="item">Description</a></strong></dt>
+
+<dd>
+<p>For a given list of Features from a particular genome (for example &quot;Athaliana&quot; ) find out the significantly enriched GO terms in your feature-set. This function accepts five parameters: Species name, a list of gene-identifiers, a list of ontology domains, a list of evidence codes, and test type (e.g. &quot;hypergeometric&quot; and &quot;chisq&quot;). The list of gene identifiers cannot be empty; however the list of ontology domains and the list of evidence codes can be empty. If any of these two lists is not empty then the gene-id and the go-id pairs retrieved from KBase are further filtered by using the desired ontology domains and/or evidence codes supplied as input. So, if you don't want to filter the initial results then it is recommended to provide empty domain and evidence code lists. Final filtered list of the gene-id to go-ids mapping is used to calculate GO Enrichment using hypergeometric or chi-square test.</p>
+</dd>
+</dl>
+<p>
+</p>
+<h2><a name="getgolimitedenrichment">getGOLimitedEnrichment</a></h2>
+<pre>
+  $results = $obj-&gt;getGOLimitedEnrichment($sname, $geneIDList, $domainList, $ecList, $minCount, $maxCount, $type)</pre>
+<dl>
+<dt><strong><a name="parameter_and_return_types5" class="item">Parameter and return types</a></strong></dt>
+
+<pre>
+$sname is a Species
+$geneIDList is a GeneIDList
+$domainList is a DomainList
+$ecList is an EvidenceCodeList
+$minCount is an int
+$maxCount is an int
+$type is a TestType
+$results is an EnrichmentList
+Species is a string
+GeneIDList is a reference to a list where each element is a GeneID
+GeneID is a string
+DomainList is a reference to a list where each element is a Domain
+Domain is a string
+EvidenceCodeList is a reference to a list where each element is an EvidenceCode
+EvidenceCode is a string
+TestType is a string
+EnrichmentList is a reference to a list where each element is an Enrichment
+Enrichment is a reference to a hash where the following keys are defined:
+	goID has a value which is a GoID
+	goDesc has a value which is a GoDesc
+	pvalue has a value which is a float
+GoID is a string
+GoDesc is a string</pre><dt><strong><a name="description5" class="item">Description</a></strong></dt>
+
+<dd>
+<p>For a given list of Features from a particular genome (for example Arabidopsis thaliana) find out the significantly enriched GO 
+terms in your feature-set. This function accepts seven parameters: Specie name, a list of gene-identifiers, a list of ontology domains,
+    a list of evidence codes, lower &amp; upper bound on the number of returned go-ids that a gene-id must have, and ontology 
+    type (e.g. GO, PO, EO, TO etc). The list of gene identifiers cannot be empty; however the list of ontology domains and the list of 
+    evidence codes can be empty. If any of these two lists is not empty then the gene-id and the go-id pairs retrieved from KBase are 
+    further filtered by using the desired ontology domains and/or evidence codes supplied as input. So, if you don't want to filter the 
+    initial results then it is recommended to provide empty domain and evidence code lists. In any case, a mapping of only those 
+    gene-id to go-ids for which the count of go-ids per gene is between minimum and maximum count limit is carried forward. Final filtered 
+    list of the gene-id to go-ids mapping is used to calculate GO Enrichment using hypergeometric test.</p>
+</dd>
+</dl>
+<p>
+</p>
+<hr />
+<h1><a name="types">TYPES</a></h1>
+<p>
+</p>
+<h2><a name="species">Species</a></h2>
+<dl>
+<dt><strong><a name="description6" class="item">Description</a></strong></dt>
+
+<dd>
+<p>Plant Species names.</p>
+<pre>
+
+     The current list of plant species includes: 
+     Alyrata: Arabidopsis lyrata
+     Athaliana: Arabidopsis thaliana
+     Bdistachyon: Brachypodium distachyon
+     Creinhardtii: Chlamydomonas reinhardtii
+     Gmax: Glycine max
+     Oglaberrima: Oryza glaberrima
+     Oindica: Oryza sativa indiaca
+     Osativa: Oryza sativa japonica
+     Ptrichocarpa: Populus trichocarpa 
+     Sbicolor: Sorghum bicolor 
+     Smoellendorffii:  Selaginella moellendorffii
+     Vvinifera: Vitis vinefera 
+     Zmays: Zea mays</pre>
+</dd>
+<dt><strong><a name="definition" class="item">Definition</a></strong></dt>
+
+<pre>
+a string
+</pre></dl>
+<p>
+</p>
+<h2><a name="goid">GoID</a></h2>
+<dl>
+<dt><strong><a name="description7" class="item">Description</a></strong></dt>
+
+<dd>
+<p>GoID : Unique GO term id (Source: external Gene Ontology database - <a href="http://www.geneontology.org/)">http://www.geneontology.org/)</a></p>
+</dd>
+<dt><strong><a name="definition2" class="item">Definition</a></strong></dt>
+
+<pre>
+a string
+</pre></dl>
+<p>
+</p>
+<h2><a name="godesc">GoDesc</a></h2>
+<dl>
+<dt><strong><a name="description8" class="item">Description</a></strong></dt>
+
+<dd>
+<p>GoDesc : Human readable text description of the corresponding GO term</p>
+</dd>
+<dt><strong><a name="definition3" class="item">Definition</a></strong></dt>
+
+<pre>
+a string
+</pre></dl>
+<p>
+</p>
+<h2><a name="geneid">GeneID</a></h2>
+<dl>
+<dt><strong><a name="description9" class="item">Description</a></strong></dt>
+
+<dd>
+<p>Unique identifier of a species specific Gene (aka Feature entity in KBase parlence). This ID is an external identifier that exists in the public databases such as Gramene, Ensembl, NCBI etc.</p>
+</dd>
+<dt><strong><a name="definition4" class="item">Definition</a></strong></dt>
+
+<pre>
+a string
+</pre></dl>
+<p>
+</p>
+<h2><a name="evidencecode">EvidenceCode</a></h2>
+<dl>
+<dt><strong><a name="description10" class="item">Description</a></strong></dt>
+
+<dd>
+<p>Evidence code indicates how the annotation to a particular term is supported. 
+The list of evidence codes includes Experimental, Computational Analysis, Author statement, Curator statement, Automatically assigned and Obsolete evidence codes. This list will be useful in selecting the correct evidence code for an annotation. The details are given below:</p>
+<p>+  Experimental Evidence Codes
+EXP: Inferred from Experiment
+IDA: Inferred from Direct Assay
+IPI: Inferred from Physical Interaction
+IMP: Inferred from Mutant Phenotype
+IGI: Inferred from Genetic Interaction
+IEP: Inferred from Expression Pattern</p>
+<pre>
+
++ Computational Analysis Evidence Codes
+ISS: Inferred from Sequence or Structural Similarity
+ISO: Inferred from Sequence Orthology
+ISA: Inferred from Sequence Alignment
+ISM: Inferred from Sequence Model
+IGC: Inferred from Genomic Context
+IBA: Inferred from Biological aspect of Ancestor
+IBD: Inferred from Biological aspect of Descendant
+IKR: Inferred from Key Residues
+IRD: Inferred from Rapid Divergence
+RCA: inferred from Reviewed Computational Analysis</pre>
+<pre>
+
++ Author Statement Evidence Codes
+TAS: Traceable Author Statement
+NAS: Non-traceable Author Statement</pre>
+<pre>
+
++ Curator Statement Evidence Codes
+IC: Inferred by Curator
+ND: No biological Data available</pre>
+<pre>
+
++ Automatically-assigned Evidence Codes
+IEA: Inferred from Electronic Annotation</pre>
+<pre>
+
++ Obsolete Evidence Codes
+NR: Not Recorded</pre>
+</dd>
+<dt><strong><a name="definition5" class="item">Definition</a></strong></dt>
+
+<pre>
+a string
+</pre></dl>
+<p>
+</p>
+<h2><a name="domain">Domain</a></h2>
+<dl>
+<dt><strong><a name="description11" class="item">Description</a></strong></dt>
+
+<dd>
+<p>Captures which branch of knowledge the GO terms refers to e.g. &quot;biological_process&quot;, &quot;molecular_function&quot;, &quot;cellular_component&quot; etc.</p>
+</dd>
+<dt><strong><a name="definition6" class="item">Definition</a></strong></dt>
+
+<pre>
+a string
+</pre></dl>
+<p>
+</p>
+<h2><a name="testtype">TestType</a></h2>
+<dl>
+<dt><strong><a name="description12" class="item">Description</a></strong></dt>
+
+<dd>
+<p>Test type, whether it's &quot;hypergeometric&quot; and &quot;chisq&quot;</p>
+</dd>
+<dt><strong><a name="definition7" class="item">Definition</a></strong></dt>
+
+<pre>
+a string
+</pre></dl>
+<p>
+</p>
+<h2><a name="goidlist">GoIDList</a></h2>
+<dl>
+<dt><strong><a name="description13" class="item">Description</a></strong></dt>
+
+<dd>
+<p>A list of ontology identifiers</p>
+</dd>
+<dt><strong><a name="definition8" class="item">Definition</a></strong></dt>
+
+<pre>
+a reference to a list where each element is a GoID
+</pre></dl>
+<p>
+</p>
+<h2><a name="godesclist">GoDescList</a></h2>
+<dl>
+<dt><strong><a name="description14" class="item">Description</a></strong></dt>
+
+<dd>
+<p>a list of GO terms description</p>
+</dd>
+<dt><strong><a name="definition9" class="item">Definition</a></strong></dt>
+
+<pre>
+a reference to a list where each element is a GoDesc
+</pre></dl>
+<p>
+</p>
+<h2><a name="geneidlist">GeneIDList</a></h2>
+<dl>
+<dt><strong><a name="description15" class="item">Description</a></strong></dt>
+
+<dd>
+<p>A list of gene identifiers from same species</p>
+</dd>
+<dt><strong><a name="definition10" class="item">Definition</a></strong></dt>
+
+<pre>
+a reference to a list where each element is a GeneID
+</pre></dl>
+<p>
+</p>
+<h2><a name="domainlist">DomainList</a></h2>
+<dl>
+<dt><strong><a name="description16" class="item">Description</a></strong></dt>
+
+<dd>
+<p>A list of ontology domains</p>
+</dd>
+<dt><strong><a name="definition11" class="item">Definition</a></strong></dt>
+
+<pre>
+a reference to a list where each element is a Domain
+</pre></dl>
+<p>
+</p>
+<h2><a name="evidencecodelist">EvidenceCodeList</a></h2>
+<dl>
+<dt><strong><a name="description17" class="item">Description</a></strong></dt>
+
+<dd>
+<p>A list of ontology term evidence codes. One ontology term can have one or more evidence codes.</p>
+</dd>
+<dt><strong><a name="definition12" class="item">Definition</a></strong></dt>
+
+<pre>
+a reference to a list where each element is an EvidenceCode
+</pre></dl>
+<p>
+</p>
+<h2><a name="geneidmap2goidlist">GeneIDMap2GoIDList</a></h2>
+<dl>
+<dt><strong><a name="description18" class="item">Description</a></strong></dt>
+
+<dd>
+<p>A list of gene-id to go-id mappings. One gene-id can have one or more go-ids associated with it.</p>
+</dd>
+<dt><strong><a name="definition13" class="item">Definition</a></strong></dt>
+
+<pre>
+a reference to a hash where the key is a GeneID and the value is a GoIDList
+</pre></dl>
+<p>
+</p>
+<h2><a name="enrichment">Enrichment</a></h2>
+<dl>
+<dt><strong><a name="description19" class="item">Description</a></strong></dt>
+
+<dd>
+<p>A composite data structure to capture ontology enrichment type object</p>
+</dd>
+<dt><strong><a name="definition14" class="item">Definition</a></strong></dt>
+
+<pre>
+a reference to a hash where the following keys are defined:
+goID has a value which is a GoID
+goDesc has a value which is a GoDesc
+pvalue has a value which is a float</pre></dl>
+<p>
+</p>
+<h2><a name="enrichmentlist">EnrichmentList</a></h2>
+<dl>
+<dt><strong><a name="description20" class="item">Description</a></strong></dt>
+
+<dd>
+<p>A list of ontology enrichment objects</p>
+</dd>
+<dt><strong><a name="definition15" class="item">Definition</a></strong></dt>
+
+<pre>
+a reference to a list where each element is an Enrichment
+</pre></dl>
+
+</body>
+
+</html>

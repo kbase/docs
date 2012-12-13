@@ -1,0 +1,212 @@
+<?xml version="1.0" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title></title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<link rev="made" href="mailto:root@b2.novalocal" />
+</head>
+
+<body style="background-color: white">
+
+
+
+<h1 id="NAME">NAME</h1>
+
+<p>Bio::KBase::SimService::Client</p>
+
+<h1 id="DESCRIPTION">DESCRIPTION</h1>
+
+<h2 id="sims">sims</h2>
+
+<pre><code>  $return = $obj-&gt;sims($ids, $options)</code></pre>
+
+<dl>
+
+<dt id="Parameter-and-return-types">Parameter and return types</dt>
+<dd>
+
+
+
+<pre>
+$ids is a reference to a list where each element is a string
+$options is an options
+$return is a reference to a list where each element is a sim_vec
+options is a reference to a hash where the following keys are defined:
+	kb_only has a value which is an int
+	kb_function2 has a value which is an int
+	evalue_cutoff has a value which is a float
+	max_sims has a value which is an int
+sim_vec is a reference to a list containing 18 items:
+	0: a string
+	1: a string
+	2: a float
+	3: an int
+	4: an int
+	5: an int
+	6: an int
+	7: an int
+	8: an int
+	9: an int
+	10: a float
+	11: a float
+	12: an int
+	13: an int
+	14: a string
+	15: a string
+	16: a string
+	17: a string</pre>
+
+</dd>
+<dt id="Description">Description</dt>
+<dd>
+
+<p>Retrieve precomputed protein similarities given a list of identifiers.</p>
+
+<p>The options parameter allows simple configuration of the call. The following values in the structure are interpreted:</p>
+
+<pre><code> kb_only        Only return KBase identifiers (not raw MD5 or other external IDs).
+ kb_function2   For KB identifiers, return the function mapped to id2.
+ evalue_cutoff  Return similarities with an e-value better than this value.
+ max_sims       Return at most this many similarities. The number of values
+                may exceed this due to multiple identifiers mapping to the same sequence.</code></pre>
+
+<p>Each similarity returned is encapsulated in a sim_vec tuple. This tuple contains the similar protein identifiers, as well as the columns as seen in the blastall -m8 output..</p>
+
+<p>The return is a list of tuples representing the similarity values. The indexes in the tuple are defined as follows:</p>
+
+<pre><code>  0   id1        query sequence id
+  1   id2        subject sequence id
+  2   iden       percentage sequence identity
+  3   ali_ln     alignment length
+  4   mismatches  number of mismatch
+  5   gaps       number of gaps
+  6   b1         query seq match start
+  7   e1         query seq match end
+  8   b2         subject seq match start
+  9   e2         subject seq match end
+ 10   psc        match e-value
+ 11   bsc        bit score
+ 12   ln1        query sequence length
+ 13   ln2        subject sequence length
+ 14   tool       tool used to produce similarities</code></pre>
+
+<p>All following fields may vary by tool:</p>
+
+<pre><code> 15   loc1       query seq locations string (b1-e1,b2-e2,b3-e3)
+ 16   loc2       subject seq locations string (b1-e1,b2-e2,b3-e3)
+ 17   dist       tree distance</code></pre>
+
+<p>We also return this column for any lookups when the kb_function2 flag is enabled.</p>
+
+<pre><code> 18  function2   The function associated with id2 in the KBase.</code></pre>
+
+</dd>
+</dl>
+
+<h1 id="TYPES">TYPES</h1>
+
+<h2 id="sim_vec">sim_vec</h2>
+
+<dl>
+
+<dt id="Description1">Description</dt>
+<dd>
+
+<p>Each similarity returned is encapsulated in a sim_vec tuple. This tuple contains the similar protein identifiers, as well as the columns as seen in the blastall -m8 output..</p>
+
+<p>The columns in the tuple are defined as follows:</p>
+
+<pre><code>  0   id1        query sequence id
+  1   id2        subject sequence id
+  2   iden       percentage sequence identity
+  3   ali_ln     alignment length
+  4   mismatches  number of mismatch
+  5   gaps       number of gaps
+  6   b1         query seq match start
+  7   e1         query seq match end
+  8   b2         subject seq match start
+  9   e2         subject seq match end
+ 10   psc        match e-value
+ 11   bsc        bit score
+ 12   ln1        query sequence length
+ 13   ln2        subject sequence length
+ 14   tool       tool used to produce similarities</code></pre>
+
+<p>All following fields may vary by tool:</p>
+
+<pre><code> 15   loc1       query seq locations string (b1-e1,b2-e2,b3-e3)
+ 16   loc2       subject seq locations string (b1-e1,b2-e2,b3-e3)
+ 17   dist       tree distance</code></pre>
+
+<p>We also return this column for any lookups when the kb_function2 flag is enabled:</p>
+
+<pre><code> 18  function2   The function associated with id2 in the KBase.</code></pre>
+
+</dd>
+<dt id="Definition">Definition</dt>
+<dd>
+
+
+
+<pre>
+a reference to a list containing 18 items:
+0: a string
+1: a string
+2: a float
+3: an int
+4: an int
+5: an int
+6: an int
+7: an int
+8: an int
+9: an int
+10: a float
+11: a float
+12: an int
+13: an int
+14: a string
+15: a string
+16: a string
+17: a string</pre>
+
+</dd>
+</dl>
+
+<h2 id="options">options</h2>
+
+<dl>
+
+<dt id="Description2">Description</dt>
+<dd>
+
+<p>Option specification. The following options are available for the sims call:</p>
+
+<pre><code>  kb_only        Only return KBase identifiers (not raw MD5 or other external IDs).
+  kb_function2   For KB identifiers, return the function mapped to id2.
+  evalue_cutoff  Return similarities with an e-value better than this value.
+  max_sims       Return at most this many similarities. The number of values
+                 may exceed this due to multiple identifiers mapping to the same sequence.</code></pre>
+
+</dd>
+<dt id="Definition1">Definition</dt>
+<dd>
+
+
+
+<pre>
+a reference to a hash where the following keys are defined:
+kb_only has a value which is an int
+kb_function2 has a value which is an int
+evalue_cutoff has a value which is a float
+max_sims has a value which is an int</pre>
+
+</dd>
+</dl>
+
+
+</body>
+
+</html>
+
+
