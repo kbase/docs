@@ -1,0 +1,132 @@
+<h1>Finding Domains for a Protein</h1>
+<!--tutorial author:John-Marc Chandonia on 30Nov2012, tutorial validator:Marcin-->
+<p>
+<strong>Purpose:</strong> Learn how to use the Protein Info service to find domains for a protein, and to find proteins that have a given domain.
+
+<p>
+<strong>Required Prerequisites:</strong> <a href="http://kbase.us/developer-zone/tutorials/getting-started/getting-started-with-kbase/">Getting Started with KBase</a>
+
+<p>
+<strong>Suggested Prerequisites:</strong> None
+
+<p>
+<strong>Related Tutorials:</strong> Finding Functional Annotations for a Protein, Finding Orthologs for a Protein
+
+<p>
+<h2>Introduction</h2>
+
+<p>
+This tutorial is intended to teach developers how to use the Protein
+Info service to get information on the domains in a protein, and also
+how to find all proteins that include a given domain.
+
+<p>
+<h2>Sample Program to look up Domains for a Protein</h2>
+
+<pre>
+#!/usr/bin/perl
+
+use strict;
+use Data::Dumper;
+use Bio::KBase::ProteinInfoService::Client;
+
+my $client=Bio::KBase::ProteinInfoService::Client->new("http://localhost:7057");
+
+my $domains=$client->fids_to_domains(["kb|g.21765.CDS.3010"]);
+print Dumper($domains);
+</pre>
+
+<p>
+The above program assumes that you're running the service locally; if not,
+replace "localhost" with the IP address of the machine running the
+service.
+
+<p>
+This program is supposed to look up domains for the protein encoded
+by the fid kb|g.21765.CDS.3010.  This is the tufA (elongation factor
+EF-Tu) gene from <i>E. coli</i>, which contains several Pfam domains.
+This program should print out a hash, in which the keys are the query fids,
+and the values are an array of identifiers of the domains in
+the protein encoded by each fid.  Here's sample output:
+
+<pre>
+$VAR1 = {
+          'kb|g.21765.CDS.3010' => [
+                                     'G3DSA:3.40.50.300',
+                                     'G3DSA:2.40.30.10',
+                                     'PTHR23115:SF31',
+                                     'PTHR23115',
+                                     'PF00009',
+                                     'PF03143',
+                                     'PF03144',
+                                     'SSF52540',
+                                     'SSF50465',
+                                     'SSF50447',
+                                     'TIGR00485',
+                                     'TIGR00231',
+                                     'COG50'
+                                   ]
+        };
+</pre>
+
+<p>
+In the above example, the protein encoded by "kb|g.21765.CDS.3010" has
+two Gene3D domains (those identifiers starting with G3DSA), two
+Panther domains (those identifiers starting with PTHR), three
+Pfam domains (starting with PF), three Superfamily domains (starting
+with SSF), two TIGRFam domains (starting with TIGR) and one COG domain
+(starting with COG).
+
+<p>
+The converse lookup can be done as well: domains_to_fids will find all
+the fids that encode proteins that contain a given domain.  Here's a
+sample program that searches for proteins encoding PF00009, the Pfam
+domain that represents the GTP-binding domain of EF-Tu proteins:
+
+<p>
+<h2>Sample Program to look up Proteins with a given Domain</h2>
+
+<pre>
+#!/usr/bin/perl
+
+use strict;
+use Data::Dumper;
+use Bio::KBase::ProteinInfoService::Client;
+
+my $client=Bio::KBase::ProteinInfoService::Client->new("http://localhost:7057");
+
+my $fids=$client->domains_to_fids(["PF00009"]);
+print Dumper($fids);
+</pre>
+
+<p>
+The output of the above program contains over 40,000 fids that encode
+proteins that include the PF00009 domain, including the 10 genes
+from the same strain of <i>E. coli</i> (genome ID "kb|g.21765") as
+above.  Here's partial output:
+
+<pre>
+$VAR1 = {
+          'PF00009' => [
+                         'kb|g.9248.peg.2779',
+                         'kb|g.680.peg.1305',
+                         'kb|g.3911.peg.6881.peg.2446',
+                         'kb|g.9934.peg.1694',
+                         'kb|g.2511.peg.627',
+                         'kb|g.21765.CDS.3211',
+                         'kb|g.21765.CDS.2432',
+                         'kb|g.21765.CDS.4047',
+                         'kb|g.21765.CDS.3879',
+                         'kb|g.21765.CDS.4262',
+                         'kb|g.21765.CDS.3782',
+                         'kb|g.21765.CDS.3098',
+                         'kb|g.21765.CDS.3010',
+                         'kb|g.21765.CDS.2227',
+                         'kb|g.21765.CDS.3095',
+                         'kb|g.9734.peg.650'
+                       ]
+        };
+</pre>
+
+<p>
+Almost all of the results have been omitted for clarity.

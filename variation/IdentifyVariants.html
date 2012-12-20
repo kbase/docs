@@ -1,115 +1,218 @@
-<h1>Identify Variants</h1>
+<h1>Identify variants in a next-gen resequencing project</h1>
 
-<p>
-<strong>Purpose: </strong>
-This tutorial demonstrates how to align reads to a reference genome and identify
-variants using a combination of Bowtie2 and SAMTools.
+<p><strong>Purpose: </strong>
+This tutorial demonstrates how to identify SNPs and small indels in a
+resequencing project relative to a reference genome using a combination of
+Bowtie2 and SAMTools. This tutorial will focus on paired-end Illumina
+sequencing, but similar analysis steps are available for single-end sequencing
+as well.
 </p>
 
-<p><strong>Required Prerequisite Activities:</strong> SSH access to kbase-b.knoxville.kbase.us</p>
 <p><strong>Required Prerequisite Activities:</strong> Getting Started with KBase</p>
 <p><strong>Suggested Prerequesite Activities: </strong>Basic Exercises Using KBase</p>
 <p><strong>Related Tutorials: </strong> </p>
 
-<h2>Connect to kbase-b</h2>
-Follow the system administrator instructions to ssh to kbase-b. Briefly, you first
-ssh to dtn01.knoxville.kbase.us and then from there ssh to kbase-b.knoxville.kbase.us
+<br><br>
 
-<h2>Configure jkbase client</h2>
+<h2>Download and configure client</h2>
 
-<p>
-Client software is already installed on kbase-b to configure it:
+<h3>1. Download and Install Variation Services Client</h3>
+
+<p> 
+The client program for accessing the KBase variation services is called
+<i>jkbase</i>. If you are connected to the KBase Magellan cluster, this program
+should be available in your path. 
 </p>
 
-1. Create the directory ~/.jnomics
-<pre>
-  $ mkdir ~/.jnomics
-</pre>
-
-2. Copy and edit the properties file
-<pre>
- $ cp /usr/local/etc/jnomics/jnomics-kbase-client.properties ~/.jnomics
- $ vim ~/.jnomics/jnomics-kbase-client.properties
-</pre>
-
 <p>
-Change the username to your kbase-b username. The properties file only
-needs to be edited once.
+Alternatively, Mac users can download the client as part of the KBase DMG disk
+image from <a href="http://kbase.us/docs/downloads/KBase-Mac.dmg">http://kbase.us/docs/downloads/KBase-Mac.dmg</a>.
+Once you download the DMG package and run the KBase.app program, you should be
+able to run the command <i>jkbase</i>. Note you must have java installed on your
+system to run the client program, but your Mac will guide you through the
+install process if you do not have it already installed.
 </p>
 
+
+<h3>2. Register user account and configure client</h3>
+
+<p>
+To use the variation services, you first need to register for a user account at
+<a href="https://www.globusonline.org/">Globus Online</a>.  Take note of your
+username and password since these will be needed to transfer data and identify
+variations.  The first time you use the client, it will prompt you to enter your
+username and password.
+</p>
+
+<pre>
+  $ jkbase compute
+
+  Please authenticate with Globus Online:
+  [Username:] ***GLOBUS_ONLINE_ACCOUNT***
+  [Password:] ***GLOBUS_ONLINE_PASSWORD***
+  Created: $HOME/.jnomics/globus_auth.properties
+</pre>
+
+<br><br>
 
 <h2>Aligning reads to a reference genome</h2>
 
 <p>
-The <i>jkbase</i> script is the command line interface to the service.
-The first step in most genomic analysis is the alignment of sequencing
-reads to a reference genome. 
-</p>
-
-<p>
-This tutorial will focus on paired-end illumina sequencing files. Single-end
-experiments will work as well by substituting `se` for `pe` in the commands below. 
+This tutorial will focus on aligning paired-end illumina sequencing files to a
+refernce but single-end experiments will work as well by substituting `se` for
+`pe` in the commands below.
 </p>
 
 
-<h3>1. Load reads into the cluster</h3>
+<h3>1. Load reads into the variation analysis service</h3>
 
 <p>
-Import the experiment reads into your home directory on the cluster. 
-Paired-end reads should be kept together during alignment so there is a special
-command for uploading paired-end reads. It is assumed that you have two files
-with paired reads in fastq format, the files can be either plain text, gzip'd
-or bzip2'd.
+This first step to run the analysis pipeline is to upload your reads 
+from your computer into the service.  For this tutorial, we will download 
+a small set of reads from the service, but you will not need to run these 
+two commands if you already have your own sequence data to analyze.
 </p>
 
 <pre>
-  $ jkbase fs -put_pe reads.1.fq.gz reads.2.fq.gz reads
+  $ jkbase fs -get /share/example/yeast_sim.1.fq.gz
+  $ jkbase fs -get /share/example/yeast_sim.2.fq.gz
 </pre>
 
 <p>
-This will pair the reads and upload them to the cluster. The last argument is the base
-name of the file that will be found in your home directory on the cluster. Because
-this is a paired-end experiment the extension `.pe` will be added automatically.
-After the upload process is complete, a file named reads.pe should be your home directory.
+Now that you have your read data, you can upload it to the analysis system.
+Paired-end reads should be kept together during alignment so there is a special
+command for uploading paired-end reads. It is assumed that you have two files
+with paired reads in fastq format, the files can be either plain text, gzip'd
+or bzip2'd. 
+</p>
+
+<pre>
+  $ jkbase fs -put_pe yeast_sim.1.fq.gz yeast_sim.2.fq.gz yeast
+</pre>
+
+<p>
+This will pair the reads and upload them to the cluster. The last argument is
+the base name of the file that will be found in your directory on the
+cluster where the variation analysis is performed. Because this is a paired-end
+experiment the extension `.pe` will be added automatically.  After the upload
+process is complete, a file named reads.pe should be your home directory.
 </p>
 
 <p>
-Standard filesystem commands can be listed with `jkbase fs`.
+Standard filesystem commands can be listed with <i>jkbase fs</i>.
 </p>
 
+<pre>
+  $ jkbase fs -ls 
+  $ jkbase fs -get yeast.pe
+  $ jkbase fs -mkdir my_directory
+  ...
+</pre>
 
-<h3>2. Align with Bowtie</h3>
+<h3>2. Select reference genome for alignment</h3>
+
+<p>
+Before you can align your reads, you must select the reference genome to align against. We
+have several thousand plant and microbial genomes to select from, but please contact us
+if your genome is not available in the system. The most commonly used genomes are listed using:
+<p>
+
+<pre>
+  $ jkbase compute list_genomes
+</pre>
+
+<p>
+The complete list of genomes is displayed using: 
+</p>
+
+<pre>
+  $ jkbase compute list_genomes -a
+</pre>
+
+<p>
+Genome ids listed with a "kb|" prefix are internal kbase genome identifiers. You can lookup the scientific name
+of the genome using the <i>all_entities_Genome</i> command. For example, this will identify all of the available strains of
+E. coli loaded into the infrastructure.
+</p>
+
+<pre>
+  $ all_entities_Genome -f scientific_name | grep -i 'Escherichia coli'
+</pre>
+
+
+<h3>3. Align reads with Bowtie2</h3>
 
 <p>
 To align the reads to a reference genome simply call jkbase compute with the bowtie argument.
 </p>
 
 <pre>
-  $ jkbase compute bowtie -in reads.pe -organism maize -out reads_bowtie_align
+  $ jkbase compute bowtie -in yeast.pe -organism yeast -out yeast_bowtie_align
+  Submitted Job: &lt;jobID&gt;
 </pre>
    
 <p>
-The organism flag selects the reference used in alignment. The organism must be supported by
-the kbase infrastructure as a part of the controlled genome vocabulary. To list the available
-genomes/organisms use:
+The -in flag specifies which reads to align and analyze. Here we are analyzing the yeast
+paired end reads that we uploaded above. The -organism flag selects the reference genome used 
+for alignment as identified above. Here we are aligning the reads against the reference
+yeast genome. Note if you are using a KBase genome identifier, make sure to use single
+quotes around the genome name: <i>jkbase -organism 'kb|g.1870' ...</i>. You can also align
+the reads using bwa by substituting bwa for bowtie in the command above. If you run 
+<i>jkbase compute bowtie</i> or any of the jkbase commands without options, it will 
+remind you of the required parameters with a short help text.
 </p>
 
-<pre>
- $ jkbase compute list_genomes
-</pre>
 
 
-<h3>3. Check status of running Job</h3>
+
+<h3>4. Check status of running Job</h3>
 
 <p>
-When the alignment task it started, the command will immediately return with a job reference id.
-This reference id can be used to poll the status of the job using the commandline client.
+When the alignment task it started, the command will immediately return with a
+job reference id but the analysis will continue in a batched queue on a large
+KBase cluster.  This reference id can be used to poll the status of the job
+using the commandline client.
 </p>
 
 <pre>
   $ jkbase compute status -job &lt;jobID&gt;
+
+                           ID:                        &lt;jobID&gt;
+                     Username:    ***GLOBUS_ONLINE_ACCOUNT***
+                     Complete:                          false
+                Running State:                              1
+                 Map Progress:             0.8053986430168152
+              Reduce Progress:                            0.0
+
 </pre>
 
+<p>
+You will know the job is complete when "Complete" is set to true.  Make sure you
+wait for the job to complete before continuing to the next step. Here the
+alignments are only 80.5% complete, but here is how it looks when the job
+completes.
+</p>
+
+<pre>
+  $ jkbase compute status -job &lt;jobID&gt;
+
+                           ID:                        &lt;jobID&gt;
+                     Username:    ***GLOBUS_ONLINE_ACCOUNT***
+                     Complete:                           true
+                Running State:                              2
+                 Map Progress:                            1.0
+              Reduce Progress:                            1.0
+</pre>
+
+<p>
+If you forgot your jobID, you can list the status of all your running jobs:
+</p>
+
+<pre>
+  $ jkbase compute list_jobs
+</pre>
+
+<br><br>
 
 <h2>Identify SNPs and download VCF file</h2>
 
@@ -120,31 +223,42 @@ using the selected reference.
 </p>
 
 <pre>
- $ jkbase compute snp -in reads_bowtie_align -organism maize -out reads_snps
+  $ jkbase compute snp -in yeast_bowtie_align -organism yeast -out yeast_snps
 </pre>
+
+<p>
+You can check on the status of your analysis job using the <i>jkbase compute
+status &lt;jobID&gt;</i> command as shown above. Make sure you wait until the
+status is complete before executing the next step. 
+</p>
+
+
 
 <h3>2. Merge VCF files</h3>
 <p>
 Because SNPs are called in parallel across the genome multiple files are created
-by the previous command.  To join the SNPs into a single VCF file use jkbase's
-vcfmerge function
+by the previous command.  To join the SNPs into a single VCF file use the
+<i>jkbase</i> vcfmerge function 
 </p>
 
 <pre>
- $ jkbase compute vcf_merge -in reads_snps -alignments reads_bowtie_align -out reads.vcf
+  $ jkbase compute vcf_merge -in yeast_snps -alignments yeast_bowtie_align -out yeast.vcf
 </pre>
 
 <h3>3. Download VCF file</h3>
 <p>
-Download the combined vcf file to the client machine for local viewing.
+Download the combined vcf file back to your desktop computer for local viewing.
 </p>
 
 <pre>
-  $ jkbase fs -get reads.vcf
+  $ jkbase fs -get yeast.vcf
+  $ less yeast.vcf
 </pre>
 
 <p>
-A local file named reads.vcf will be created containing all of the SNPs called
-by the pipeline.
+A local file named yeast.vcf will be created containing all of the SNPs called
+by the pipeline. These can be further analyzed using tools such as 
+<a href="http://snpeff.sourceforge.net/">SNPeff</a> or
+<a href="http://www.yandell-lab.org/software/vaast.html">VAAST</a>.
 </p>
 

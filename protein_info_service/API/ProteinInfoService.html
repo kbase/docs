@@ -1,0 +1,385 @@
+<?xml version="1.0" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title></title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<link rev="made" href="mailto:root@b2.novalocal" />
+</head>
+
+<body style="background-color: white">
+
+
+<h1 id="NAME">Protein Info Service</h1>
+
+<p>Bio::KBase::ProteinInfoService::Client</p>
+
+<p>This module provides various annotations about proteins, including domain annotations, orthologs in other genomes, and operons.</p>
+
+<h2 id="fids_to_operons">fids_to_operons</h2>
+
+<pre><code>  $return = $obj-&gt;fids_to_operons($fids)</code></pre>
+
+<dl>
+
+<dt id="Parameter-and-return-types">Parameter and return types</dt>
+<dd>
+
+
+
+<pre>
+$fids is a reference to a list where each element is a fid
+$return is a reference to a hash where the key is a fid and the value is an operon
+fid is a string
+operon is a reference to a list where each element is a fid</pre>
+
+</dd>
+<dt id="Description">Description</dt>
+<dd>
+
+<p>fids_to_operons takes as input a list of feature ids and returns a mapping of each fid to the operon in which it is found. The list of fids in the operon is not necessarily in the order that the fids are found on the genome. (fids_to_operons is currently not properly implemented.)</p>
+
+</dd>
+</dl>
+
+<h2 id="fids_to_domains">fids_to_domains</h2>
+
+<pre><code>  $return = $obj-&gt;fids_to_domains($fids)</code></pre>
+
+<dl>
+
+<dt id="Parameter-and-return-types1">Parameter and return types</dt>
+<dd>
+
+
+
+<pre>
+$fids is a reference to a list where each element is a fid
+$return is a reference to a hash where the key is a fid and the value is a domains
+fid is a string
+domains is a reference to a list where each element is a string</pre>
+
+</dd>
+<dt id="Description1">Description</dt>
+<dd>
+
+<p>fids_to_domains takes as input a list of feature ids, and returns a mapping of each fid to its domains. (This includes COG, even though COG is not part of InterProScan.)</p>
+
+</dd>
+</dl>
+
+<h2 id="domains_to_fids">domains_to_fids</h2>
+
+<pre><code>  $return = $obj-&gt;domains_to_fids($domain_ids)</code></pre>
+
+<dl>
+
+<dt id="Parameter-and-return-types2">Parameter and return types</dt>
+<dd>
+
+
+
+<pre>
+$domain_ids is a domains
+$return is a reference to a hash where the key is a domain_id and the value is a reference to a list where each element is a fid
+domains is a reference to a list where each element is a string
+domain_id is a string
+fid is a string</pre>
+
+</dd>
+<dt id="Description2">Description</dt>
+<dd>
+
+<p>domains_to_fids takes as input a list of domain_ids, and returns a mapping of each domain_id to the fids which have that domain. (This includes COG, even though COG is not part of InterProScan.)</p>
+
+</dd>
+</dl>
+
+<h2 id="fids_to_ipr">fids_to_ipr</h2>
+
+<pre><code>  $return = $obj-&gt;fids_to_ipr($fids)</code></pre>
+
+<dl>
+
+<dt id="Parameter-and-return-types3">Parameter and return types</dt>
+<dd>
+
+
+
+<pre>
+$fids is a reference to a list where each element is a fid
+$return is a reference to a hash where the key is a fid and the value is an ipr
+fid is a string
+ipr is a reference to a list where each element is a string</pre>
+
+</dd>
+<dt id="Description3">Description</dt>
+<dd>
+
+<p>fids_to_ipr takes as input a list of feature ids, and returns a mapping of each fid to its IPR assignments. These can come from HMMER or from non-HMM-based InterProScan results.</p>
+
+</dd>
+</dl>
+
+<h2 id="fids_to_orthologs">fids_to_orthologs</h2>
+
+<pre><code>  $return = $obj-&gt;fids_to_orthologs($fids)</code></pre>
+
+<dl>
+
+<dt id="Parameter-and-return-types4">Parameter and return types</dt>
+<dd>
+
+
+
+<pre>
+$fids is a reference to a list where each element is a fid
+$return is a reference to a hash where the key is a fid and the value is an orthologs
+fid is a string
+orthologs is a reference to a list where each element is a fid</pre>
+
+</dd>
+<dt id="Description4">Description</dt>
+<dd>
+
+<p>fids_to_orthologs takes as input a list of feature ids, and returns a mapping of each fid to its orthologous fids in all genomes.</p>
+
+</dd>
+</dl>
+
+<h2 id="fids_to_ec">fids_to_ec</h2>
+
+<pre><code>  $return = $obj-&gt;fids_to_ec($fids)</code></pre>
+
+<dl>
+
+<dt id="Parameter-and-return-types5">Parameter and return types</dt>
+<dd>
+
+
+
+<pre>
+$fids is a reference to a list where each element is a fid
+$return is a reference to a hash where the key is a fid and the value is an ec
+fid is a string
+ec is a reference to a list where each element is a string</pre>
+
+</dd>
+<dt id="Description5">Description</dt>
+<dd>
+
+<p>fids_to_ec takes as input a list of feature ids, and returns a mapping of each fid to its Enzyme Commission numbers (EC).</p>
+
+</dd>
+</dl>
+
+<h2 id="fids_to_go">fids_to_go</h2>
+
+<pre><code>  $return = $obj-&gt;fids_to_go($fids)</code></pre>
+
+<dl>
+
+<dt id="Parameter-and-return-types6">Parameter and return types</dt>
+<dd>
+
+
+
+<pre>
+$fids is a reference to a list where each element is a fid
+$return is a reference to a hash where the key is a fid and the value is a go
+fid is a string
+go is a reference to a list where each element is a string</pre>
+
+</dd>
+<dt id="Description6">Description</dt>
+<dd>
+
+<p>fids_to_go takes as input a list of feature ids, and returns a mapping of each fid to its Gene Ontology assignments (GO).</p>
+
+</dd>
+</dl>
+
+<h1 id="TYPES">TYPES</h1>
+
+<h2 id="fid">fid</h2>
+
+<dl>
+
+<dt id="Description7">Description</dt>
+<dd>
+
+<p>A fid is a unique identifier of a feature.</p>
+
+</dd>
+<dt id="Definition">Definition</dt>
+<dd>
+
+
+
+<pre>
+a string
+</pre>
+
+</dd>
+</dl>
+
+<h2 id="domain_id">domain_id</h2>
+
+<dl>
+
+<dt id="Description8">Description</dt>
+<dd>
+
+<p>A domain_id is an identifier of a protein domain or family (e.g., COG593, TIGR00362). Most of these are stable identifiers that come from external curated libraries, such as COG or InterProScan, but some may be unstable identifiers that come from automated analyses like FastBLAST. (The current implementation includes only COG and InterProScan HMM libraries, such as TIGRFam and Pfam.)</p>
+
+</dd>
+<dt id="Definition1">Definition</dt>
+<dd>
+
+
+
+<pre>
+a string
+</pre>
+
+</dd>
+</dl>
+
+<h2 id="domains">domains</h2>
+
+<dl>
+
+<dt id="Description9">Description</dt>
+<dd>
+
+<p>Domains are a list of domain_ids.</p>
+
+</dd>
+<dt id="Definition2">Definition</dt>
+<dd>
+
+
+
+<pre>
+a reference to a list where each element is a string
+</pre>
+
+</dd>
+</dl>
+
+<h2 id="ec">ec</h2>
+
+<dl>
+
+<dt id="Description10">Description</dt>
+<dd>
+
+<p>ECs are a list of Enzyme Commission identifiers.</p>
+
+</dd>
+<dt id="Definition3">Definition</dt>
+<dd>
+
+
+
+<pre>
+a reference to a list where each element is a string
+</pre>
+
+</dd>
+</dl>
+
+<h2 id="go">go</h2>
+
+<dl>
+
+<dt id="Description11">Description</dt>
+<dd>
+
+<p>GOs are a list of Gene Ontology identifiers.</p>
+
+</dd>
+<dt id="Definition4">Definition</dt>
+<dd>
+
+
+
+<pre>
+a reference to a list where each element is a string
+</pre>
+
+</dd>
+</dl>
+
+<h2 id="ipr">ipr</h2>
+
+<dl>
+
+<dt id="Description12">Description</dt>
+<dd>
+
+<p>IPRs are a list of InterPro identifiers.</p>
+
+</dd>
+<dt id="Definition5">Definition</dt>
+<dd>
+
+
+
+<pre>
+a reference to a list where each element is a string
+</pre>
+
+</dd>
+</dl>
+
+<h2 id="operon">operon</h2>
+
+<dl>
+
+<dt id="Description13">Description</dt>
+<dd>
+
+<p>An operon is represented by a list of fids which make up that operon. The order within the list is not defined; the fids_to_locations method can report on the order of the fids in the operon.</p>
+
+</dd>
+<dt id="Definition6">Definition</dt>
+<dd>
+
+
+
+<pre>
+a reference to a list where each element is a fid
+</pre>
+
+</dd>
+</dl>
+
+<h2 id="orthologs">orthologs</h2>
+
+<dl>
+
+<dt id="Description14">Description</dt>
+<dd>
+
+<p>Orthologs are a list of fids which are orthologous to a given fid.</p>
+
+</dd>
+<dt id="Definition7">Definition</dt>
+<dd>
+
+
+
+<pre>
+a reference to a list where each element is a fid
+</pre>
+
+</dd>
+</dl>
+
+
+</body>
+
+</html>
+
+

@@ -2243,6 +2243,10 @@ name="Related_entities"
 >HasLevelsFrom ProbeSet</a></dt>
 
 <dd>
+<dt><a name="ImplementsReaction_ReactionInstance"
+>ImplementsReaction ReactionInstance</a></dt>
+
+<dd>
 <dt><a name="IsAnnotatedBy_Annotation"
 >IsAnnotatedBy Annotation</a></dt>
 
@@ -2826,8 +2830,8 @@ name="Command-Line_Options"
 >source_id</a></dt>
 
 <dd>
-<dt><a name="hierarchy"
->hierarchy</a></dt>
+<dt><a name="abbr"
+>abbr</a></dt>
 </dl>
 </dd>
 </dl>
@@ -4286,6 +4290,10 @@ name="Related_entities"
 <p>The ReactionInstance entity has the following relationship links:</p>
 
 <dl>
+<dt><a name="ImplementedBasedOn_Feature"
+>ImplementedBasedOn Feature</a></dt>
+
+<dd>
 <dt><a name="IsARequirementOf_Model"
 >IsARequirementOf Model</a></dt>
 
@@ -8297,6 +8305,10 @@ name="Related_entities"
 >HasLevelsFrom ProbeSet</a></dt>
 
 <dd>
+<dt><a name="ImplementsReaction_ReactionInstance"
+>ImplementsReaction ReactionInstance</a></dt>
+
+<dd>
 <dt><a name="IsAnnotatedBy_Annotation"
 >IsAnnotatedBy Annotation</a></dt>
 
@@ -8910,8 +8922,8 @@ name="Command-Line_Options"
 >source_id</a></dt>
 
 <dd>
-<dt><a name="hierarchy"
->hierarchy</a></dt>
+<dt><a name="abbr"
+>abbr</a></dt>
 </dl>
 </dd>
 </dl>
@@ -10478,6 +10490,10 @@ name="Related_entities"
 <p>The ReactionInstance entity has the following relationship links:</p>
 
 <dl>
+<dt><a name="ImplementedBasedOn_Feature"
+>ImplementedBasedOn Feature</a></dt>
+
+<dd>
 <dt><a name="IsARequirementOf_Model"
 >IsARequirementOf Model</a></dt>
 
@@ -20542,6 +20558,112 @@ name="Output_Format"
 <a name='___top' class='dummyTopAnchor' ></a>
 
 <h2><a class='u' href='#___top' title='click to go to top of document'
+name="get_relationship_ImplementedBasedOn"
+>get_relationship_ImplementedBasedOn</a></h2>
+
+<p>This relationship connects features to reaction instances that exist because the feature is included in a model.</p>
+
+<p>Example:</p>
+
+<pre>    get_relationship_ImplementedBasedOn -a &#60; ids &#62; table.with.fields.added</pre>
+
+<p>would read in a file of ids and add a column for each field in the relationship.</p>
+
+<p>The standard input should be a tab-separated table (i.e., each line is a tab-separated set of fields). Normally, the last field in each line would contain the id. If some other column contains the id, use</p>
+
+<pre>    -c N</pre>
+
+<p>where N is the column (from 1) that contains the id.</p>
+
+<p>This is a pipe command. The input is taken from the standard input, and the output is to the standard output.</p>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Command-Line_Options"
+>Command-Line Options</a></h3>
+
+<dl>
+<dt><a name="-c_Column"
+>-c Column</a></dt>
+
+<dd>
+<p>This is used only if the column containing id is not the last.</p>
+
+<dt><a name="-from_field-list"
+>-from field-list</a></dt>
+
+<dd>
+<p>Choose a set of fields from the ReactionInstance entity to return. Field-list is a comma-separated list of strings. The following fields are available:</p>
+
+<dl>
+<dt><a name="id"
+>id</a></dt>
+
+<dd>
+<dt><a name="direction"
+>direction</a></dt>
+
+<dd>
+<dt><a name="protons"
+>protons</a></dt>
+</dl>
+
+<dt><a name="-rel_field-list"
+>-rel field-list</a></dt>
+
+<dd>
+<p>Choose a set of fields from the relationship to return. Field-list is a comma-separated list of strings. The following fields are available:</p>
+
+<dl>
+<dt><a name="from_link"
+>from_link</a></dt>
+
+<dd>
+<dt><a name="to_link"
+>to_link</a></dt>
+</dl>
+
+<dt><a name="-to_field-list"
+>-to field-list</a></dt>
+
+<dd>
+<p>Choose a set of fields from the Feature entity to return. Field-list is a comma-separated list of strings. The following fields are available:</p>
+
+<dl>
+<dt><a name="id"
+>id</a></dt>
+
+<dd>
+<dt><a name="feature_type"
+>feature_type</a></dt>
+
+<dd>
+<dt><a name="source_id"
+>source_id</a></dt>
+
+<dd>
+<dt><a name="sequence_length"
+>sequence_length</a></dt>
+
+<dd>
+<dt><a name="function"
+>function</a></dt>
+
+<dd>
+<dt><a name="alias"
+>alias</a></dt>
+</dl>
+</dd>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Output_Format"
+>Output Format</a></h3>
+
+<p>The standard output is a tab-delimited file. It consists of the input file with an extra column added for each requested field. Input lines that cannot be extended are written to stderr.</p>
+<hr>
+<a name='___top' class='dummyTopAnchor' ></a>
+
+<h2><a class='u' href='#___top' title='click to go to top of document'
 name="get_relationship_Implements"
 >get_relationship_Implements</a></h2>
 
@@ -20633,6 +20755,112 @@ name="Command-Line_Options"
 <dd>
 <dt><a name="comment"
 >comment</a></dt>
+</dl>
+</dd>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Output_Format"
+>Output Format</a></h3>
+
+<p>The standard output is a tab-delimited file. It consists of the input file with an extra column added for each requested field. Input lines that cannot be extended are written to stderr.</p>
+<hr>
+<a name='___top' class='dummyTopAnchor' ></a>
+
+<h2><a class='u' href='#___top' title='click to go to top of document'
+name="get_relationship_ImplementsReaction"
+>get_relationship_ImplementsReaction</a></h2>
+
+<p>This relationship connects features to reaction instances that exist because the feature is included in a model.</p>
+
+<p>Example:</p>
+
+<pre>    get_relationship_ImplementsReaction -a &#60; ids &#62; table.with.fields.added</pre>
+
+<p>would read in a file of ids and add a column for each field in the relationship.</p>
+
+<p>The standard input should be a tab-separated table (i.e., each line is a tab-separated set of fields). Normally, the last field in each line would contain the id. If some other column contains the id, use</p>
+
+<pre>    -c N</pre>
+
+<p>where N is the column (from 1) that contains the id.</p>
+
+<p>This is a pipe command. The input is taken from the standard input, and the output is to the standard output.</p>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Command-Line_Options"
+>Command-Line Options</a></h3>
+
+<dl>
+<dt><a name="-c_Column"
+>-c Column</a></dt>
+
+<dd>
+<p>This is used only if the column containing id is not the last.</p>
+
+<dt><a name="-from_field-list"
+>-from field-list</a></dt>
+
+<dd>
+<p>Choose a set of fields from the Feature entity to return. Field-list is a comma-separated list of strings. The following fields are available:</p>
+
+<dl>
+<dt><a name="id"
+>id</a></dt>
+
+<dd>
+<dt><a name="feature_type"
+>feature_type</a></dt>
+
+<dd>
+<dt><a name="source_id"
+>source_id</a></dt>
+
+<dd>
+<dt><a name="sequence_length"
+>sequence_length</a></dt>
+
+<dd>
+<dt><a name="function"
+>function</a></dt>
+
+<dd>
+<dt><a name="alias"
+>alias</a></dt>
+</dl>
+
+<dt><a name="-rel_field-list"
+>-rel field-list</a></dt>
+
+<dd>
+<p>Choose a set of fields from the relationship to return. Field-list is a comma-separated list of strings. The following fields are available:</p>
+
+<dl>
+<dt><a name="from_link"
+>from_link</a></dt>
+
+<dd>
+<dt><a name="to_link"
+>to_link</a></dt>
+</dl>
+
+<dt><a name="-to_field-list"
+>-to field-list</a></dt>
+
+<dd>
+<p>Choose a set of fields from the ReactionInstance entity to return. Field-list is a comma-separated list of strings. The following fields are available:</p>
+
+<dl>
+<dt><a name="id"
+>id</a></dt>
+
+<dd>
+<dt><a name="direction"
+>direction</a></dt>
+
+<dd>
+<dt><a name="protons"
+>protons</a></dt>
 </dl>
 </dd>
 </dl>
@@ -28111,8 +28339,8 @@ name="Command-Line_Options"
 >source_id</a></dt>
 
 <dd>
-<dt><a name="hierarchy"
->hierarchy</a></dt>
+<dt><a name="abbr"
+>abbr</a></dt>
 </dl>
 </dd>
 </dl>
@@ -28179,8 +28407,8 @@ name="Command-Line_Options"
 >source_id</a></dt>
 
 <dd>
-<dt><a name="hierarchy"
->hierarchy</a></dt>
+<dt><a name="abbr"
+>abbr</a></dt>
 </dl>
 
 <dt><a name="-rel_field-list"
@@ -30837,8 +31065,8 @@ name="Command-Line_Options"
 >source_id</a></dt>
 
 <dd>
-<dt><a name="hierarchy"
->hierarchy</a></dt>
+<dt><a name="abbr"
+>abbr</a></dt>
 </dl>
 
 <dt><a name="-rel_field-list"
@@ -36865,8 +37093,8 @@ name="Command-Line_Options"
 >source_id</a></dt>
 
 <dd>
-<dt><a name="hierarchy"
->hierarchy</a></dt>
+<dt><a name="abbr"
+>abbr</a></dt>
 </dl>
 </dd>
 </dl>
@@ -44986,6 +45214,10 @@ name="Related_entities"
 >HasLevelsFrom ProbeSet</a></dt>
 
 <dd>
+<dt><a name="ImplementsReaction_ReactionInstance"
+>ImplementsReaction ReactionInstance</a></dt>
+
+<dd>
 <dt><a name="IsAnnotatedBy_Annotation"
 >IsAnnotatedBy Annotation</a></dt>
 
@@ -45829,8 +46061,8 @@ name="Command-Line_Options"
 >source_id</a></dt>
 
 <dd>
-<dt><a name="hierarchy"
->hierarchy</a></dt>
+<dt><a name="abbr"
+>abbr</a></dt>
 </dl>
 </dd>
 </dl>
@@ -48018,6 +48250,10 @@ name="Related_entities"
 <p>The ReactionInstance entity has the following relationship links:</p>
 
 <dl>
+<dt><a name="ImplementedBasedOn_Feature"
+>ImplementedBasedOn Feature</a></dt>
+
+<dd>
 <dt><a name="IsARequirementOf_Model"
 >IsARequirementOf Model</a></dt>
 

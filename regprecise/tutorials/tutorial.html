@@ -1,0 +1,108 @@
+<h1>RegPrecise</h1>
+
+<p><strong>Purpose: Construct a regulatory model for a genome by projecting the
+regulatory models from a collection of analyzed genomes to a new genome
+</strong>
+
+</p>
+
+<p><strong>Required Prerequisite Activities:</strong> Getting Started with KBase</p>
+<p><strong>Suggested Prerequesite Activities: </strong>Basic Exercises Using KBase</p>
+<p><strong>Related Tutorials: </strong> </p>
+
+<h2>Constructing the model</h2>
+
+<h3>1. Lookup genome id</h3>
+<p> 
+The first step is to select the genome that you wish to analyze and construct the 
+regulatory model. The genome must be preloaded into the KBase infrastucture. Use 
+the KBase command <i>all_entities_nome</i> to list the genomes that are avalable,
+using grep (or other commands) to narrow down the search.
+</p>
+
+<pre>
+  all_entities_Genome -f scientific_name | grep -i 'Shewanella sp MR-4'
+  kb|g.19865	Shewanella sp MR-4
+</pre>
+
+<p>
+For this tutorial we will use the genome id 'kb|g.19865'
+</p>
+
+<br><br>
+
+<h3>2. Display the availale model collections</h3>
+<p>
+To construct a model for a new genome, you must select the regulatory model collection 
+you wish to use as a reference. This is a manual process based on taxonic distance
+and collection quality. To get started, so you can lookup all of the available model 
+collections, iterate through them, and print the collection names and their properties.
+</p>
+
+<pre>
+  ## Get all the regulome model collections
+  getRegulomeModelCollections
+
+  ## Iterate through the collection
+  ##   print the collection name and properties
+</pre>
+
+
+<br><br>
+
+<h3>3. Select the model collection for your genome</h3>
+<p>
+Examine the list of model collections and find the collection that is most closely 
+related to your genome. You should also consider the quality of the model by looking 
+at the number of regulons and regulated genes in each model. Model collections
+with more regulons will generally work better.
+</p>
+
+<br><br>
+
+<h3>4. Build the regulome model</h3>
+<p>
+Now that you have selected your genome id and your regulon collection id, you
+can build the regulatory model for the genome by projecting the regulon model
+from the selected collection to the new genome. This process will typically take
+5 to 10 minutes to complete, so the build command will just return a process id
+as the job is launched. You should then periodically check on the status of that
+process every 10 or 15s until it finishes.
+</p>
+
+<pre>
+  processState = buildRegulomeModel
+
+  while (processState->!done)
+  do
+    sleep(15s)
+  done
+</pre>
+
+<br><br>
+
+<h3>5. Examine the regulome model</h3>
+<p>
+After the regulome model has been constructed on the new genome, you can inspect it
+or compare it to other models. Biologically, the regulon that regulates the largest
+number of genes is the global regulon for the species. This can be easily discovered
+by computing some basic summary statistics on the new model
+</p>
+
+<pre>
+  list<RegulonModelStat> stats = getRegulonModelStats(regulomeModelId)
+
+  $global_regulon_id = undef;
+  $global_regulon_cnt = 0;
+
+  Iterate through the stats
+    Print the regulonModelId, regulatedOperonCount, regulatedGeneCount
+    if (regulatedGeneCount > global_regulon_cnt)
+       $global_regulon_id  = regulonModelId
+       $global_regulon_cnt = regulatedGeneCount
+       
+
+  print "The master regulon is $global_regulon_id and it regulates $global_regulon_cnt genes"
+
+</pre>
+
