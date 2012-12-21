@@ -344,11 +344,12 @@ Using username/password authentication:<br>
 
 <br>
 
-<span style="font-family: monospace;"></span><span style="font-family: monospace;">perl
--MBio::KBase::AuthToken -e 'print Bio::KBase::AuthToken-&gt;new(
-user_id =&gt; "papa", password =&gt; "papapa")-&gt;token,"\n";'</span><br style="font-family: monospace;">
+<pre>
+perl -MBio::KBase::AuthToken -e 'print Bio::KBase::AuthToken-&gt;new(
+user_id =&gt; "papa", password =&gt; "papapa")-&gt;token,"\n";'
 
-<span style="font-family: monospace;">un=papa|tokenid=c3fdf51e-0357-11e2-998e-1231391ccf32|expiry=1379704625|client_id=papa|token_type=Bearer|SigningSubject=https://nexus.api.globusonline.org/goauth/keys/860b6fa6-034e-11e2-9ebd-12313809f035|sig=49507eeaf3e007aa9726bffa20c1e61e706c895ea099c545ed6a7ed64dd264db90d2aa9a06c3db0a763dc5c662c85aa0a71633e6407d92560b4cc8b7d4c1943e50ca3ec1fc30973f249474ad05531c8465fb73a5e84571f8b0561b30b6961d76851b3521ced74b1af69497cb491204df577cb786ae095d5c28ce735005e897c4</span><br>
+un=papa|tokenid=c3fdf51e-0357-11e2-998e-1231391ccf32|expiry=1379704625|client_id=papa|token_type=Bearer|SigningSubject=https://nexus.api.globusonline.org/goauth/keys/860b6fa6-034e-11e2-9ebd-12313809f035|sig=49507eeaf3e007aa9726bffa20c1e61e706c895ea099c545ed6a7ed64dd264db90d2aa9a06c3db0a763dc5c662c85aa0a71633e6407d92560b4cc8b7d4c1943e50ca3ec1fc30973f249474ad05531c8465fb73a5e84571f8b0561b30b6961d76851b3521ced74b1af69497cb491204df577cb786ae095d5c28ce735005e897c4
+</pre>
 
 <br>
 
@@ -376,10 +377,10 @@ passphrase using the "ssh-keygen -p" option (see the ssh-keygen manual
 page):<br>
 
 <br>
-
-<span style="font-family: monospace;">perl -MBio::KBase::AuthToken
--e '$key=`cat ~/.ssh/id_rsa`; print Bio::KBase::AuthToken-&gt;new(
-user_id =&gt; "sychan", client_secret =&gt; $key)-&gt;token,"\n";'<br>un=sychan|tokenid=ff9ab49a-0357-11e2-b90a-12313d2d6e7f|expiry=1379704725|client_id=sychan|token_type=Bearer|SigningSubject=https://nexus.api.globusonline.org/goauth/keys/860b6fa6-034e-11e2-9ebd-12313809f035|sig=1024db4fba131425382ab72edf9699ee819f4d986dadd1070db968ec2bffe584b1d99bbc43c2b21c436a5c69107e175ad7289e73500c0329ab3d2723b965c08609bfa5b8fe4e826d9cba02f39ea052148448e1f06d01b9d26502f9864ac83107cd6e7ef204447480f2f1ffbee0127a4323f607aab831f300f7b020f0916b8b34</span><br>
+<pre>
+perl -MBio::KBase::AuthToken -e '$key=`cat ~/.ssh/id_rsa`; print Bio::KBase::AuthToken-&gt;new(
+user_id =&gt; "sychan", client_secret =&gt; $key)-&gt;token,"\n";'<br>un=sychan|tokenid=ff9ab49a-0357-11e2-b90a-12313d2d6e7f|expiry=1379704725|client_id=sychan|token_type=Bearer|SigningSubject=https://nexus.api.globusonline.org/goauth/keys/860b6fa6-034e-11e2-9ebd-12313809f035|sig=1024db4fba131425382ab72edf9699ee819f4d986dadd1070db968ec2bffe584b1d99bbc43c2b21c436a5c69107e175ad7289e73500c0329ab3d2723b965c08609bfa5b8fe4e826d9cba02f39ea052148448e1f06d01b9d26502f9864ac83107cd6e7ef204447480f2f1ffbee0127a4323f607aab831f300f7b020f0916b8b34
+</pre>
 
 <h3>Sample Perl script</h3>
 
@@ -589,7 +590,9 @@ should expire (expiry=), the URL to use for validating the signature
 
 Sample Token:<br>
 
+<pre>
 <span style="background-color: rgb(153, 255, 153);">un=kbasetest|clientid=kbasetest|expiry=1376547165|SigningSubject=https://graph.api.test.globuscs.info/goauth/keys/861eb8e0-e634-11e1-ac2c-1231381a5994</span>|<span style="background-color: rgb(51, 204, 255);">sig=9a8fcd2a41e877aec5b0ed5a0d0315c258b5466d4862d17b5ce33f2703d2a32e8179556579998a8379271360251593b9db86430fb9bd1b9bf081b39dc6ff978bde834a9a9cb19eacc46f0b4ada93048c10b8aa2bfa2325ba5fab6993042b51bc7e3ab1545831c261e96972f3789fd20b6c1c5742f937ffda8a6f08c3019ca0d1</span><br>
+</pre>
 
 Token Assertions = Green<br>
 
@@ -610,27 +613,29 @@ signature validation.<br>
 
 <br>
 
+
 SigningSubject points to JSON object:<br>
+<pre>
+{
 
-{<br>
+"expiry": 1345569705.0, 
 
-"expiry": 1345569705.0, <br>
-
-"id": "861eb8e0-e634-11e1-ac2c-1231381a5994", <br>
+"id": "861eb8e0-e634-11e1-ac2c-1231381a5994", 
 "pubkey": "-----BEGIN RSA PUBLIC
 KEY-----\nMIGJAoGBAOI4NghMHlbChfx07ZeLY4eiOiJUb9ofnv+cnFOFEmP+BrxZObT3RpuD\nC2jjIX78lj16LaQPxz5iaFth3FJCxERgcjnlQ5nvgHAwisRG+76Y8fIpgGAdWL5S\nzrlgDOXVieYs+N06fGPmlsMRtQVEzy0fUa5421epiNRKy5QYZskPAgMBAAE=\n-----END
-RSA PUBLIC KEY-----\n", <br>
+RSA PUBLIC KEY-----\n", 
 
-"valid": true<br>
+"valid": true
 
-}<br>
+}
 
+</pre>
 <br>
 
 Pseudocode for token validation, given the "pubkey" in the JSON object
 referenced above:<br>
 
-<br>
+</pre>
 
 <span style="background-color: rgb(153, 255, 153);">un=kbasetest|clientid=kbasetest|expiry=1376547165|SigningSubject=https://graph.api.test.globuscs.info/goauth/keys/861eb8e0-e634-11e1-ac2c-1231381a5994</span>|<span style="background-color: rgb(51, 204, 255);">sig=9a8fcd2a41e877aec5b0ed5a0d0315c258b5466d4862d17b5ce33f2703d2a32e8179556579998a8379271360251593b9db86430fb9bd1b9bf081b39dc6ff978bde834a9a9cb19eacc46f0b4ada93048c10b8aa2bfa2325ba5fab6993042b51bc7e3ab1545831c261e96972f3789fd20b6c1c5742f937ffda8a6f08c3019ca0d1</span><br>
 
@@ -642,7 +647,8 @@ If (RSA_SHA1_Base64(Green Stuff, pubkey) == Blue Stuff) {<br>
 
 # Sucks<br>
 
-}<br>
+}
+</pre>
 
 <br>
 
