@@ -1,12 +1,12 @@
-<h1>Workspace Command Line Script Tutorials</h1>
+<h1>Workspace Command Line Script User Manual</h1>
 
 <h2>Workspace Overview</h2>
 
 <p>Workspaces are used in KBase to provide an online location for all data, models, and
 analysis results. Workspaces are a powerful tool for managing private data, tracking 
 workflow provenance, storing and sharing large datasets, and tracking work history. They
-have a number of useful characteristics which you will learn about over the course of the
-workspace tutorials:</p>
+have a number of useful characteristics which you will learn about in
+this user manual:</p>
 <ul>
 <li>Multiple users can read and write from the same workspace at the same time, 
 facilitating collaboration</li>
@@ -16,10 +16,10 @@ easily accessible at any time, enabling the use of workspaces to track object pr
 control over the sharing and access of workspace contents</li>
 </ul>
 
-<p>In the following overview tutorials, we demonstrate all functions of the KBase 
+<p>In the following overviews, we demonstrate all functions of the KBase 
 workspace.</p>
 
-<h2>Tutorial Steps</h2>
+<h2>Using the Workspace Command Line Tools</h2>
 <ol>
 <li><a href="#STEP1">Installing and accessing workspace commands</a></li>
 <li><a href="#STEP2">Viewing available workspaces, switching current workspace, and listing workspace contents</a></li>
@@ -47,7 +47,7 @@ Or to install and run the KBase Client Installation.
 
 <a name="STEP2"><h3>2. Viewing available workspaces, switching current workspace, and 
 listing workspace contents</h3></a>
-<p>This sub-tutorial covers the commands used to list available workspace, switch the
+<p>This user manual covers the commands used to list available workspace, switch the
 currently selected workspace, and list all objects contained in the currently selected
 workspace. This includes the following specific workspace commands:</p>
 
@@ -58,7 +58,7 @@ workspace. This includes the following specific workspace commands:</p>
 <li>kbws-listobj: lists objects contained in the currently selected workspace</li>
 </ul>
 
-<a href="ViewSwitchListWorkspace.html" target="_blank">Detailed command tutorial</a>
+<a href="ViewSwitchListWorkspace.html" target="_blank">Detailed command documentation</a>
 
 <a name="STEP3"><h3>3. Creating, deleting, and cloning workspaces</h3></a>
 <p>Now that you can list the available workspaces and view workspace contents, it's time
@@ -71,7 +71,7 @@ the creation, deletion, and cloning of workspaces:</p>
 <li>kbws-deletews: deletes an existing workspace with all objects (use with caution!!!)</li>
 </ul>
 
-<a href="CreationCloneDeletion.html" target="_blank">Detailed command tutorial</a>
+<a href="CreationCloneDeletion.html" target="_blank">Detailed command documentation</a>
 
 <a name="STEP4"><h3>4. Managing workspace permissions</h3></a>
 <p>Now that you can create your own workspaces, you will want to manage the permissions
@@ -86,7 +86,7 @@ are three commands to support the management of workspace permissions:</p>
 <li>kbws-perm: returns a list of all currently set user-specific permissions for a workspace</li>
 </ul>
 
-<a href="PermissionsManagement.html" target="_blank">Detailed command tutorial</a>
+<a href="PermissionsManagement.html" target="_blank">Detailed command documentation</a>
 
 <a name="STEP5"><h3>5. Retrieving, altering, and loading workspace objects</h3></a>
 <p>Now that we can create workspaces and manage their permissions, we want to start 
@@ -103,7 +103,7 @@ and deletion:</p>
 <li>kbws-delete: enables the deletion of workspace objects</li>
 </ul>
 
-<a href="ObjectCreationModification.html" target="_blank">Detailed command tutorial</a>
+<a href="ObjectCreationModification.html" target="_blank">Detailed command documentation</a>
 
 <a name="STEP6"><h3>6. Viewing object history and reverting objects</h3></a>
 <p>Now that you can create and manage the objects in your workspace, you will want to 
@@ -120,7 +120,7 @@ provide support for object history:</p>
 <li>kbws-get: enables the user to retrieve the current and all previous versions of an object</li>
 </ul>
 
-<a href="ObjectHistory.html" target="_blank">Detailed command tutorial</a>
+<a href="ObjectHistory.html" target="_blank">Detailed command documentation</a>
 
 <a name="STEP7"><h3>7. Copying and moving workspace objects</h3></a>
 <p>Now that you understand how to create, retrieve, and revert workspace object, you will
@@ -133,7 +133,7 @@ are two commands to support object copying and moving:</p>
 <li>kbws-move: moves an object from one workspace and ID to another</li>
 </ul>
 
-<a href="ObjectMovement.html" target="_blank">Detailed command tutorial</a>
+<a href="ObjectMovement.html" target="_blank">Detailed command documentation</a>
 
 <a name="STEP8"><h3>8. Managing object types in the workspace</h3></a>
 <p>All objects stored in a KBase workspace are typed (e.g. Genome, FBAModel), and a recognizable type must be 
@@ -147,7 +147,7 @@ needed by users. There are three commands to support the management of workspace
 <li>kbws-removetype: removes a user-added type from the list of recognized types</li>
 </ul>
 
-<a href="TypeManagement.html" target="_blank">Detailed command tutorial</a>
+<a href="TypeManagement.html" target="_blank">Detailed command documentation</a>
 
 <a name="STEP9"><h3>9. Accessing outstanding jobs</h3></a>
 <p>Lastly, the workspace provides commands to manage jobs submitted by the user to run on
@@ -157,4 +157,4 @@ KBase cluster resources.</p>
 <li>kbws-jobs: retrieves a list of jobs submitted by the user to the workspace</li>
 </ul>
 
-<a href="JobHandling.html" target="_blank">Detailed command tutorial</a>
+<a href="JobHandling.html" target="_blank">Detailed command documentation</a>
