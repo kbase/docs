@@ -1,5 +1,10 @@
-
-
+/**
+ * The KBase API
+ * http://kbase.us
+ *
+ * API documentation: http://kbase.us/developer-zone/api-documentation/
+ * @license Copyright (c) 2013, The DOE Systems Biology Knowledgebase Project
+ */
 function CDMI_API(url) {
 
     var _url = url;
