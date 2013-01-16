@@ -5,6 +5,8 @@
  * API documentation: http://kbase.us/developer-zone/api-documentation/
  * @license Copyright (c) 2013, The DOE Systems Biology Knowledgebase Project
  */
+ 
+
 function CDMI_API(url) {
 
     var _url = url;
@@ -116,6 +118,78 @@ function CDMI_API(url) {
     this.locations_to_fids_async = function(region_of_dna_strings, _callback, _error_callback)
     {
 	json_call_ajax_async("CDMI_API.locations_to_fids", [region_of_dna_strings], 1, _callback, _error_callback)
+    }
+
+    this.alleles_to_bp_locs = function(alleles)
+    {
+	var resp = json_call_ajax_sync("CDMI_API.alleles_to_bp_locs", [alleles]);
+//	var resp = json_call_sync("CDMI_API.alleles_to_bp_locs", [alleles]);
+        return resp[0];
+    }
+
+    this.alleles_to_bp_locs_async = function(alleles, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_API.alleles_to_bp_locs", [alleles], 1, _callback, _error_callback)
+    }
+
+    this.region_to_fids = function(region_of_dna)
+    {
+	var resp = json_call_ajax_sync("CDMI_API.region_to_fids", [region_of_dna]);
+//	var resp = json_call_sync("CDMI_API.region_to_fids", [region_of_dna]);
+        return resp[0];
+    }
+
+    this.region_to_fids_async = function(region_of_dna, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_API.region_to_fids", [region_of_dna], 1, _callback, _error_callback)
+    }
+
+    this.region_to_alleles = function(region_of_dna)
+    {
+	var resp = json_call_ajax_sync("CDMI_API.region_to_alleles", [region_of_dna]);
+//	var resp = json_call_sync("CDMI_API.region_to_alleles", [region_of_dna]);
+        return resp[0];
+    }
+
+    this.region_to_alleles_async = function(region_of_dna, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_API.region_to_alleles", [region_of_dna], 1, _callback, _error_callback)
+    }
+
+    this.alleles_to_traits = function(alleles)
+    {
+	var resp = json_call_ajax_sync("CDMI_API.alleles_to_traits", [alleles]);
+//	var resp = json_call_sync("CDMI_API.alleles_to_traits", [alleles]);
+        return resp[0];
+    }
+
+    this.alleles_to_traits_async = function(alleles, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_API.alleles_to_traits", [alleles], 1, _callback, _error_callback)
+    }
+
+    this.traits_to_alleles = function(traits)
+    {
+	var resp = json_call_ajax_sync("CDMI_API.traits_to_alleles", [traits]);
+//	var resp = json_call_sync("CDMI_API.traits_to_alleles", [traits]);
+        return resp[0];
+    }
+
+    this.traits_to_alleles_async = function(traits, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_API.traits_to_alleles", [traits], 1, _callback, _error_callback)
+    }
+
+    this.ous_with_trait = function(genome, trait, measurement_type, min_value, max_value)
+    {
+	var resp = json_call_ajax_sync("CDMI_API.ous_with_trait", [genome, trait, measurement_type, min_value, max_value]);
+//	var resp = json_call_sync("CDMI_API.ous_with_trait", [genome, trait, measurement_type, min_value, max_value]);
+        return resp[0];
+    }
+
+    this.ous_with_trait_async = function(genome, trait, measurement_type, min_value, max_value, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_API.ous_with_trait", [genome, trait, measurement_type, min_value, max_value], 1, _callback, _error_callback)
     }
 
     this.locations_to_dna_sequences = function(locations)
@@ -502,6 +576,18 @@ function CDMI_API(url) {
 	json_call_ajax_async("CDMI_API.fids_to_regulon_data", [fids], 1, _callback, _error_callback)
     }
 
+    this.regulons_to_fids = function(regulons)
+    {
+	var resp = json_call_ajax_sync("CDMI_API.regulons_to_fids", [regulons]);
+//	var resp = json_call_sync("CDMI_API.regulons_to_fids", [regulons]);
+        return resp[0];
+    }
+
+    this.regulons_to_fids_async = function(regulons, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_API.regulons_to_fids", [regulons], 1, _callback, _error_callback)
+    }
+
     this.fids_to_feature_data = function(fids)
     {
 	var resp = json_call_ajax_sync("CDMI_API.fids_to_feature_data", [fids]);
@@ -538,16 +624,16 @@ function CDMI_API(url) {
 	json_call_ajax_async("CDMI_API.fids_to_atomic_regulons", [fids], 1, _callback, _error_callback)
     }
 
-    this.atomic_regulons_to_fids = function(regulons)
+    this.atomic_regulons_to_fids = function(atomic_regulons)
     {
-	var resp = json_call_ajax_sync("CDMI_API.atomic_regulons_to_fids", [regulons]);
-//	var resp = json_call_sync("CDMI_API.atomic_regulons_to_fids", [regulons]);
+	var resp = json_call_ajax_sync("CDMI_API.atomic_regulons_to_fids", [atomic_regulons]);
+//	var resp = json_call_sync("CDMI_API.atomic_regulons_to_fids", [atomic_regulons]);
         return resp[0];
     }
 
-    this.atomic_regulons_to_fids_async = function(regulons, _callback, _error_callback)
+    this.atomic_regulons_to_fids_async = function(atomic_regulons, _callback, _error_callback)
     {
-	json_call_ajax_async("CDMI_API.atomic_regulons_to_fids", [regulons], 1, _callback, _error_callback)
+	json_call_ajax_async("CDMI_API.atomic_regulons_to_fids", [atomic_regulons], 1, _callback, _error_callback)
     }
 
     this.fids_to_protein_sequences = function(fids)
@@ -610,6 +696,30 @@ function CDMI_API(url) {
 	json_call_ajax_async("CDMI_API.reactions_to_complexes", [reactions], 1, _callback, _error_callback)
     }
 
+    this.aliases_to_fids = function(aliases)
+    {
+	var resp = json_call_ajax_sync("CDMI_API.aliases_to_fids", [aliases]);
+//	var resp = json_call_sync("CDMI_API.aliases_to_fids", [aliases]);
+        return resp[0];
+    }
+
+    this.aliases_to_fids_async = function(aliases, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_API.aliases_to_fids", [aliases], 1, _callback, _error_callback)
+    }
+
+    this.external_ids_to_fids = function(external_ids, prefix_match)
+    {
+	var resp = json_call_ajax_sync("CDMI_API.external_ids_to_fids", [external_ids, prefix_match]);
+//	var resp = json_call_sync("CDMI_API.external_ids_to_fids", [external_ids, prefix_match]);
+        return resp[0];
+    }
+
+    this.external_ids_to_fids_async = function(external_ids, prefix_match, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_API.external_ids_to_fids", [external_ids, prefix_match], 1, _callback, _error_callback)
+    }
+
     this.reaction_strings = function(reactions, name_parameter)
     {
 	var resp = json_call_ajax_sync("CDMI_API.reaction_strings", [reactions, name_parameter]);
@@ -632,6 +742,18 @@ function CDMI_API(url) {
     this.roles_to_complexes_async = function(roles, _callback, _error_callback)
     {
 	json_call_ajax_async("CDMI_API.roles_to_complexes", [roles], 1, _callback, _error_callback)
+    }
+
+    this.complexes_to_roles = function(complexes)
+    {
+	var resp = json_call_ajax_sync("CDMI_API.complexes_to_roles", [complexes]);
+//	var resp = json_call_sync("CDMI_API.complexes_to_roles", [complexes]);
+        return resp[0];
+    }
+
+    this.complexes_to_roles_async = function(complexes, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_API.complexes_to_roles", [complexes], 1, _callback, _error_callback)
     }
 
     this.fids_to_subsystem_data = function(fids)
@@ -670,6 +792,18 @@ function CDMI_API(url) {
 	json_call_ajax_async("CDMI_API.otu_members", [genomes], 1, _callback, _error_callback)
     }
 
+    this.otus_to_representatives = function(otus)
+    {
+	var resp = json_call_ajax_sync("CDMI_API.otus_to_representatives", [otus]);
+//	var resp = json_call_sync("CDMI_API.otus_to_representatives", [otus]);
+        return resp[0];
+    }
+
+    this.otus_to_representatives_async = function(otus, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_API.otus_to_representatives", [otus], 1, _callback, _error_callback)
+    }
+
     this.fids_to_genomes = function(fids)
     {
 	var resp = json_call_ajax_sync("CDMI_API.fids_to_genomes", [fids]);
@@ -692,6 +826,102 @@ function CDMI_API(url) {
     this.text_search_async = function(input, start, count, entities, _callback, _error_callback)
     {
 	json_call_ajax_async("CDMI_API.text_search", [input, start, count, entities], 1, _callback, _error_callback)
+    }
+
+    this.corresponds = function(fids, genome)
+    {
+	var resp = json_call_ajax_sync("CDMI_API.corresponds", [fids, genome]);
+//	var resp = json_call_sync("CDMI_API.corresponds", [fids, genome]);
+        return resp[0];
+    }
+
+    this.corresponds_async = function(fids, genome, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_API.corresponds", [fids, genome], 1, _callback, _error_callback)
+    }
+
+    this.corresponds_from_sequences = function(g1_sequences, g1_locations, g2_sequences, g2_locations)
+    {
+	var resp = json_call_ajax_sync("CDMI_API.corresponds_from_sequences", [g1_sequences, g1_locations, g2_sequences, g2_locations]);
+//	var resp = json_call_sync("CDMI_API.corresponds_from_sequences", [g1_sequences, g1_locations, g2_sequences, g2_locations]);
+        return resp[0];
+    }
+
+    this.corresponds_from_sequences_async = function(g1_sequences, g1_locations, g2_sequences, g2_locations, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_API.corresponds_from_sequences", [g1_sequences, g1_locations, g2_sequences, g2_locations], 1, _callback, _error_callback)
+    }
+
+    this.close_genomes = function(seq_set, n)
+    {
+	var resp = json_call_ajax_sync("CDMI_API.close_genomes", [seq_set, n]);
+//	var resp = json_call_sync("CDMI_API.close_genomes", [seq_set, n]);
+        return resp[0];
+    }
+
+    this.close_genomes_async = function(seq_set, n, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_API.close_genomes", [seq_set, n], 1, _callback, _error_callback)
+    }
+
+    this.representative_sequences = function(seq_set, rep_seq_parms)
+    {
+	var resp = json_call_ajax_sync("CDMI_API.representative_sequences", [seq_set, rep_seq_parms]);
+//	var resp = json_call_sync("CDMI_API.representative_sequences", [seq_set, rep_seq_parms]);
+        return resp;
+    }
+
+    this.representative_sequences_async = function(seq_set, rep_seq_parms, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_API.representative_sequences", [seq_set, rep_seq_parms], 2, _callback, _error_callback)
+    }
+
+    this.align_sequences = function(seq_set, align_seq_parms)
+    {
+	var resp = json_call_ajax_sync("CDMI_API.align_sequences", [seq_set, align_seq_parms]);
+//	var resp = json_call_sync("CDMI_API.align_sequences", [seq_set, align_seq_parms]);
+        return resp[0];
+    }
+
+    this.align_sequences_async = function(seq_set, align_seq_parms, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_API.align_sequences", [seq_set, align_seq_parms], 1, _callback, _error_callback)
+    }
+
+    this.build_tree = function(alignment, build_tree_parms)
+    {
+	var resp = json_call_ajax_sync("CDMI_API.build_tree", [alignment, build_tree_parms]);
+//	var resp = json_call_sync("CDMI_API.build_tree", [alignment, build_tree_parms]);
+        return resp[0];
+    }
+
+    this.build_tree_async = function(alignment, build_tree_parms, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_API.build_tree", [alignment, build_tree_parms], 1, _callback, _error_callback)
+    }
+
+    this.alignment_by_id = function(aln_id)
+    {
+	var resp = json_call_ajax_sync("CDMI_API.alignment_by_id", [aln_id]);
+//	var resp = json_call_sync("CDMI_API.alignment_by_id", [aln_id]);
+        return resp[0];
+    }
+
+    this.alignment_by_id_async = function(aln_id, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_API.alignment_by_id", [aln_id], 1, _callback, _error_callback)
+    }
+
+    this.tree_by_id = function(tree_id)
+    {
+	var resp = json_call_ajax_sync("CDMI_API.tree_by_id", [tree_id]);
+//	var resp = json_call_sync("CDMI_API.tree_by_id", [tree_id]);
+        return resp[0];
+    }
+
+    this.tree_by_id_async = function(tree_id, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_API.tree_by_id", [tree_id], 1, _callback, _error_callback)
     }
 
     function _json_call_prepare(url, method, params, async_flag)
@@ -860,28 +1090,148 @@ function CDMI_EntityAPI(url) {
     var _url = url;
 
 
-    this.get_entity_AlignmentTree = function(ids, fields)
+    this.get_entity_Alignment = function(ids, fields)
     {
-	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_entity_AlignmentTree", [ids, fields]);
-//	var resp = json_call_sync("CDMI_EntityAPI.get_entity_AlignmentTree", [ids, fields]);
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_entity_Alignment", [ids, fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.get_entity_Alignment", [ids, fields]);
         return resp[0];
     }
 
-    this.get_entity_AlignmentTree_async = function(ids, fields, _callback, _error_callback)
+    this.get_entity_Alignment_async = function(ids, fields, _callback, _error_callback)
     {
-	json_call_ajax_async("CDMI_EntityAPI.get_entity_AlignmentTree", [ids, fields], 1, _callback, _error_callback)
+	json_call_ajax_async("CDMI_EntityAPI.get_entity_Alignment", [ids, fields], 1, _callback, _error_callback)
     }
 
-    this.all_entities_AlignmentTree = function(start, count, fields)
+    this.query_entity_Alignment = function(qry, fields)
     {
-	var resp = json_call_ajax_sync("CDMI_EntityAPI.all_entities_AlignmentTree", [start, count, fields]);
-//	var resp = json_call_sync("CDMI_EntityAPI.all_entities_AlignmentTree", [start, count, fields]);
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.query_entity_Alignment", [qry, fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.query_entity_Alignment", [qry, fields]);
         return resp[0];
     }
 
-    this.all_entities_AlignmentTree_async = function(start, count, fields, _callback, _error_callback)
+    this.query_entity_Alignment_async = function(qry, fields, _callback, _error_callback)
     {
-	json_call_ajax_async("CDMI_EntityAPI.all_entities_AlignmentTree", [start, count, fields], 1, _callback, _error_callback)
+	json_call_ajax_async("CDMI_EntityAPI.query_entity_Alignment", [qry, fields], 1, _callback, _error_callback)
+    }
+
+    this.all_entities_Alignment = function(start, count, fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.all_entities_Alignment", [start, count, fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.all_entities_Alignment", [start, count, fields]);
+        return resp[0];
+    }
+
+    this.all_entities_Alignment_async = function(start, count, fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.all_entities_Alignment", [start, count, fields], 1, _callback, _error_callback)
+    }
+
+    this.get_entity_AlignmentAttribute = function(ids, fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_entity_AlignmentAttribute", [ids, fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.get_entity_AlignmentAttribute", [ids, fields]);
+        return resp[0];
+    }
+
+    this.get_entity_AlignmentAttribute_async = function(ids, fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.get_entity_AlignmentAttribute", [ids, fields], 1, _callback, _error_callback)
+    }
+
+    this.query_entity_AlignmentAttribute = function(qry, fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.query_entity_AlignmentAttribute", [qry, fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.query_entity_AlignmentAttribute", [qry, fields]);
+        return resp[0];
+    }
+
+    this.query_entity_AlignmentAttribute_async = function(qry, fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.query_entity_AlignmentAttribute", [qry, fields], 1, _callback, _error_callback)
+    }
+
+    this.all_entities_AlignmentAttribute = function(start, count, fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.all_entities_AlignmentAttribute", [start, count, fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.all_entities_AlignmentAttribute", [start, count, fields]);
+        return resp[0];
+    }
+
+    this.all_entities_AlignmentAttribute_async = function(start, count, fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.all_entities_AlignmentAttribute", [start, count, fields], 1, _callback, _error_callback)
+    }
+
+    this.get_entity_AlignmentRow = function(ids, fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_entity_AlignmentRow", [ids, fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.get_entity_AlignmentRow", [ids, fields]);
+        return resp[0];
+    }
+
+    this.get_entity_AlignmentRow_async = function(ids, fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.get_entity_AlignmentRow", [ids, fields], 1, _callback, _error_callback)
+    }
+
+    this.query_entity_AlignmentRow = function(qry, fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.query_entity_AlignmentRow", [qry, fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.query_entity_AlignmentRow", [qry, fields]);
+        return resp[0];
+    }
+
+    this.query_entity_AlignmentRow_async = function(qry, fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.query_entity_AlignmentRow", [qry, fields], 1, _callback, _error_callback)
+    }
+
+    this.all_entities_AlignmentRow = function(start, count, fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.all_entities_AlignmentRow", [start, count, fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.all_entities_AlignmentRow", [start, count, fields]);
+        return resp[0];
+    }
+
+    this.all_entities_AlignmentRow_async = function(start, count, fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.all_entities_AlignmentRow", [start, count, fields], 1, _callback, _error_callback)
+    }
+
+    this.get_entity_AlleleFrequency = function(ids, fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_entity_AlleleFrequency", [ids, fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.get_entity_AlleleFrequency", [ids, fields]);
+        return resp[0];
+    }
+
+    this.get_entity_AlleleFrequency_async = function(ids, fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.get_entity_AlleleFrequency", [ids, fields], 1, _callback, _error_callback)
+    }
+
+    this.query_entity_AlleleFrequency = function(qry, fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.query_entity_AlleleFrequency", [qry, fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.query_entity_AlleleFrequency", [qry, fields]);
+        return resp[0];
+    }
+
+    this.query_entity_AlleleFrequency_async = function(qry, fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.query_entity_AlleleFrequency", [qry, fields], 1, _callback, _error_callback)
+    }
+
+    this.all_entities_AlleleFrequency = function(start, count, fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.all_entities_AlleleFrequency", [start, count, fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.all_entities_AlleleFrequency", [start, count, fields]);
+        return resp[0];
+    }
+
+    this.all_entities_AlleleFrequency_async = function(start, count, fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.all_entities_AlleleFrequency", [start, count, fields], 1, _callback, _error_callback)
     }
 
     this.get_entity_Annotation = function(ids, fields)
@@ -896,6 +1246,18 @@ function CDMI_EntityAPI(url) {
 	json_call_ajax_async("CDMI_EntityAPI.get_entity_Annotation", [ids, fields], 1, _callback, _error_callback)
     }
 
+    this.query_entity_Annotation = function(qry, fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.query_entity_Annotation", [qry, fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.query_entity_Annotation", [qry, fields]);
+        return resp[0];
+    }
+
+    this.query_entity_Annotation_async = function(qry, fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.query_entity_Annotation", [qry, fields], 1, _callback, _error_callback)
+    }
+
     this.all_entities_Annotation = function(start, count, fields)
     {
 	var resp = json_call_ajax_sync("CDMI_EntityAPI.all_entities_Annotation", [start, count, fields]);
@@ -908,6 +1270,42 @@ function CDMI_EntityAPI(url) {
 	json_call_ajax_async("CDMI_EntityAPI.all_entities_Annotation", [start, count, fields], 1, _callback, _error_callback)
     }
 
+    this.get_entity_Assay = function(ids, fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_entity_Assay", [ids, fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.get_entity_Assay", [ids, fields]);
+        return resp[0];
+    }
+
+    this.get_entity_Assay_async = function(ids, fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.get_entity_Assay", [ids, fields], 1, _callback, _error_callback)
+    }
+
+    this.query_entity_Assay = function(qry, fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.query_entity_Assay", [qry, fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.query_entity_Assay", [qry, fields]);
+        return resp[0];
+    }
+
+    this.query_entity_Assay_async = function(qry, fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.query_entity_Assay", [qry, fields], 1, _callback, _error_callback)
+    }
+
+    this.all_entities_Assay = function(start, count, fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.all_entities_Assay", [start, count, fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.all_entities_Assay", [start, count, fields]);
+        return resp[0];
+    }
+
+    this.all_entities_Assay_async = function(start, count, fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.all_entities_Assay", [start, count, fields], 1, _callback, _error_callback)
+    }
+
     this.get_entity_AtomicRegulon = function(ids, fields)
     {
 	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_entity_AtomicRegulon", [ids, fields]);
@@ -918,6 +1316,18 @@ function CDMI_EntityAPI(url) {
     this.get_entity_AtomicRegulon_async = function(ids, fields, _callback, _error_callback)
     {
 	json_call_ajax_async("CDMI_EntityAPI.get_entity_AtomicRegulon", [ids, fields], 1, _callback, _error_callback)
+    }
+
+    this.query_entity_AtomicRegulon = function(qry, fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.query_entity_AtomicRegulon", [qry, fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.query_entity_AtomicRegulon", [qry, fields]);
+        return resp[0];
+    }
+
+    this.query_entity_AtomicRegulon_async = function(qry, fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.query_entity_AtomicRegulon", [qry, fields], 1, _callback, _error_callback)
     }
 
     this.all_entities_AtomicRegulon = function(start, count, fields)
@@ -944,6 +1354,18 @@ function CDMI_EntityAPI(url) {
 	json_call_ajax_async("CDMI_EntityAPI.get_entity_Attribute", [ids, fields], 1, _callback, _error_callback)
     }
 
+    this.query_entity_Attribute = function(qry, fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.query_entity_Attribute", [qry, fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.query_entity_Attribute", [qry, fields]);
+        return resp[0];
+    }
+
+    this.query_entity_Attribute_async = function(qry, fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.query_entity_Attribute", [qry, fields], 1, _callback, _error_callback)
+    }
+
     this.all_entities_Attribute = function(start, count, fields)
     {
 	var resp = json_call_ajax_sync("CDMI_EntityAPI.all_entities_Attribute", [start, count, fields]);
@@ -968,6 +1390,18 @@ function CDMI_EntityAPI(url) {
 	json_call_ajax_async("CDMI_EntityAPI.get_entity_Biomass", [ids, fields], 1, _callback, _error_callback)
     }
 
+    this.query_entity_Biomass = function(qry, fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.query_entity_Biomass", [qry, fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.query_entity_Biomass", [qry, fields]);
+        return resp[0];
+    }
+
+    this.query_entity_Biomass_async = function(qry, fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.query_entity_Biomass", [qry, fields], 1, _callback, _error_callback)
+    }
+
     this.all_entities_Biomass = function(start, count, fields)
     {
 	var resp = json_call_ajax_sync("CDMI_EntityAPI.all_entities_Biomass", [start, count, fields]);
@@ -980,52 +1414,40 @@ function CDMI_EntityAPI(url) {
 	json_call_ajax_async("CDMI_EntityAPI.all_entities_Biomass", [start, count, fields], 1, _callback, _error_callback)
     }
 
-    this.get_entity_BiomassCompound = function(ids, fields)
+    this.get_entity_CodonUsage = function(ids, fields)
     {
-	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_entity_BiomassCompound", [ids, fields]);
-//	var resp = json_call_sync("CDMI_EntityAPI.get_entity_BiomassCompound", [ids, fields]);
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_entity_CodonUsage", [ids, fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.get_entity_CodonUsage", [ids, fields]);
         return resp[0];
     }
 
-    this.get_entity_BiomassCompound_async = function(ids, fields, _callback, _error_callback)
+    this.get_entity_CodonUsage_async = function(ids, fields, _callback, _error_callback)
     {
-	json_call_ajax_async("CDMI_EntityAPI.get_entity_BiomassCompound", [ids, fields], 1, _callback, _error_callback)
+	json_call_ajax_async("CDMI_EntityAPI.get_entity_CodonUsage", [ids, fields], 1, _callback, _error_callback)
     }
 
-    this.all_entities_BiomassCompound = function(start, count, fields)
+    this.query_entity_CodonUsage = function(qry, fields)
     {
-	var resp = json_call_ajax_sync("CDMI_EntityAPI.all_entities_BiomassCompound", [start, count, fields]);
-//	var resp = json_call_sync("CDMI_EntityAPI.all_entities_BiomassCompound", [start, count, fields]);
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.query_entity_CodonUsage", [qry, fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.query_entity_CodonUsage", [qry, fields]);
         return resp[0];
     }
 
-    this.all_entities_BiomassCompound_async = function(start, count, fields, _callback, _error_callback)
+    this.query_entity_CodonUsage_async = function(qry, fields, _callback, _error_callback)
     {
-	json_call_ajax_async("CDMI_EntityAPI.all_entities_BiomassCompound", [start, count, fields], 1, _callback, _error_callback)
+	json_call_ajax_async("CDMI_EntityAPI.query_entity_CodonUsage", [qry, fields], 1, _callback, _error_callback)
     }
 
-    this.get_entity_Compartment = function(ids, fields)
+    this.all_entities_CodonUsage = function(start, count, fields)
     {
-	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_entity_Compartment", [ids, fields]);
-//	var resp = json_call_sync("CDMI_EntityAPI.get_entity_Compartment", [ids, fields]);
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.all_entities_CodonUsage", [start, count, fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.all_entities_CodonUsage", [start, count, fields]);
         return resp[0];
     }
 
-    this.get_entity_Compartment_async = function(ids, fields, _callback, _error_callback)
+    this.all_entities_CodonUsage_async = function(start, count, fields, _callback, _error_callback)
     {
-	json_call_ajax_async("CDMI_EntityAPI.get_entity_Compartment", [ids, fields], 1, _callback, _error_callback)
-    }
-
-    this.all_entities_Compartment = function(start, count, fields)
-    {
-	var resp = json_call_ajax_sync("CDMI_EntityAPI.all_entities_Compartment", [start, count, fields]);
-//	var resp = json_call_sync("CDMI_EntityAPI.all_entities_Compartment", [start, count, fields]);
-        return resp[0];
-    }
-
-    this.all_entities_Compartment_async = function(start, count, fields, _callback, _error_callback)
-    {
-	json_call_ajax_async("CDMI_EntityAPI.all_entities_Compartment", [start, count, fields], 1, _callback, _error_callback)
+	json_call_ajax_async("CDMI_EntityAPI.all_entities_CodonUsage", [start, count, fields], 1, _callback, _error_callback)
     }
 
     this.get_entity_Complex = function(ids, fields)
@@ -1038,6 +1460,18 @@ function CDMI_EntityAPI(url) {
     this.get_entity_Complex_async = function(ids, fields, _callback, _error_callback)
     {
 	json_call_ajax_async("CDMI_EntityAPI.get_entity_Complex", [ids, fields], 1, _callback, _error_callback)
+    }
+
+    this.query_entity_Complex = function(qry, fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.query_entity_Complex", [qry, fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.query_entity_Complex", [qry, fields]);
+        return resp[0];
+    }
+
+    this.query_entity_Complex_async = function(qry, fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.query_entity_Complex", [qry, fields], 1, _callback, _error_callback)
     }
 
     this.all_entities_Complex = function(start, count, fields)
@@ -1064,6 +1498,18 @@ function CDMI_EntityAPI(url) {
 	json_call_ajax_async("CDMI_EntityAPI.get_entity_Compound", [ids, fields], 1, _callback, _error_callback)
     }
 
+    this.query_entity_Compound = function(qry, fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.query_entity_Compound", [qry, fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.query_entity_Compound", [qry, fields]);
+        return resp[0];
+    }
+
+    this.query_entity_Compound_async = function(qry, fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.query_entity_Compound", [qry, fields], 1, _callback, _error_callback)
+    }
+
     this.all_entities_Compound = function(start, count, fields)
     {
 	var resp = json_call_ajax_sync("CDMI_EntityAPI.all_entities_Compound", [start, count, fields]);
@@ -1076,6 +1522,42 @@ function CDMI_EntityAPI(url) {
 	json_call_ajax_async("CDMI_EntityAPI.all_entities_Compound", [start, count, fields], 1, _callback, _error_callback)
     }
 
+    this.get_entity_CompoundInstance = function(ids, fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_entity_CompoundInstance", [ids, fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.get_entity_CompoundInstance", [ids, fields]);
+        return resp[0];
+    }
+
+    this.get_entity_CompoundInstance_async = function(ids, fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.get_entity_CompoundInstance", [ids, fields], 1, _callback, _error_callback)
+    }
+
+    this.query_entity_CompoundInstance = function(qry, fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.query_entity_CompoundInstance", [qry, fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.query_entity_CompoundInstance", [qry, fields]);
+        return resp[0];
+    }
+
+    this.query_entity_CompoundInstance_async = function(qry, fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.query_entity_CompoundInstance", [qry, fields], 1, _callback, _error_callback)
+    }
+
+    this.all_entities_CompoundInstance = function(start, count, fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.all_entities_CompoundInstance", [start, count, fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.all_entities_CompoundInstance", [start, count, fields]);
+        return resp[0];
+    }
+
+    this.all_entities_CompoundInstance_async = function(start, count, fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.all_entities_CompoundInstance", [start, count, fields], 1, _callback, _error_callback)
+    }
+
     this.get_entity_Contig = function(ids, fields)
     {
 	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_entity_Contig", [ids, fields]);
@@ -1086,6 +1568,18 @@ function CDMI_EntityAPI(url) {
     this.get_entity_Contig_async = function(ids, fields, _callback, _error_callback)
     {
 	json_call_ajax_async("CDMI_EntityAPI.get_entity_Contig", [ids, fields], 1, _callback, _error_callback)
+    }
+
+    this.query_entity_Contig = function(qry, fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.query_entity_Contig", [qry, fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.query_entity_Contig", [qry, fields]);
+        return resp[0];
+    }
+
+    this.query_entity_Contig_async = function(qry, fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.query_entity_Contig", [qry, fields], 1, _callback, _error_callback)
     }
 
     this.all_entities_Contig = function(start, count, fields)
@@ -1112,6 +1606,18 @@ function CDMI_EntityAPI(url) {
 	json_call_ajax_async("CDMI_EntityAPI.get_entity_ContigChunk", [ids, fields], 1, _callback, _error_callback)
     }
 
+    this.query_entity_ContigChunk = function(qry, fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.query_entity_ContigChunk", [qry, fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.query_entity_ContigChunk", [qry, fields]);
+        return resp[0];
+    }
+
+    this.query_entity_ContigChunk_async = function(qry, fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.query_entity_ContigChunk", [qry, fields], 1, _callback, _error_callback)
+    }
+
     this.all_entities_ContigChunk = function(start, count, fields)
     {
 	var resp = json_call_ajax_sync("CDMI_EntityAPI.all_entities_ContigChunk", [start, count, fields]);
@@ -1134,6 +1640,18 @@ function CDMI_EntityAPI(url) {
     this.get_entity_ContigSequence_async = function(ids, fields, _callback, _error_callback)
     {
 	json_call_ajax_async("CDMI_EntityAPI.get_entity_ContigSequence", [ids, fields], 1, _callback, _error_callback)
+    }
+
+    this.query_entity_ContigSequence = function(qry, fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.query_entity_ContigSequence", [qry, fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.query_entity_ContigSequence", [qry, fields]);
+        return resp[0];
+    }
+
+    this.query_entity_ContigSequence_async = function(qry, fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.query_entity_ContigSequence", [qry, fields], 1, _callback, _error_callback)
     }
 
     this.all_entities_ContigSequence = function(start, count, fields)
@@ -1160,6 +1678,18 @@ function CDMI_EntityAPI(url) {
 	json_call_ajax_async("CDMI_EntityAPI.get_entity_CoregulatedSet", [ids, fields], 1, _callback, _error_callback)
     }
 
+    this.query_entity_CoregulatedSet = function(qry, fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.query_entity_CoregulatedSet", [qry, fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.query_entity_CoregulatedSet", [qry, fields]);
+        return resp[0];
+    }
+
+    this.query_entity_CoregulatedSet_async = function(qry, fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.query_entity_CoregulatedSet", [qry, fields], 1, _callback, _error_callback)
+    }
+
     this.all_entities_CoregulatedSet = function(start, count, fields)
     {
 	var resp = json_call_ajax_sync("CDMI_EntityAPI.all_entities_CoregulatedSet", [start, count, fields]);
@@ -1182,6 +1712,18 @@ function CDMI_EntityAPI(url) {
     this.get_entity_Diagram_async = function(ids, fields, _callback, _error_callback)
     {
 	json_call_ajax_async("CDMI_EntityAPI.get_entity_Diagram", [ids, fields], 1, _callback, _error_callback)
+    }
+
+    this.query_entity_Diagram = function(qry, fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.query_entity_Diagram", [qry, fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.query_entity_Diagram", [qry, fields]);
+        return resp[0];
+    }
+
+    this.query_entity_Diagram_async = function(qry, fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.query_entity_Diagram", [qry, fields], 1, _callback, _error_callback)
     }
 
     this.all_entities_Diagram = function(start, count, fields)
@@ -1208,6 +1750,18 @@ function CDMI_EntityAPI(url) {
 	json_call_ajax_async("CDMI_EntityAPI.get_entity_EcNumber", [ids, fields], 1, _callback, _error_callback)
     }
 
+    this.query_entity_EcNumber = function(qry, fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.query_entity_EcNumber", [qry, fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.query_entity_EcNumber", [qry, fields]);
+        return resp[0];
+    }
+
+    this.query_entity_EcNumber_async = function(qry, fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.query_entity_EcNumber", [qry, fields], 1, _callback, _error_callback)
+    }
+
     this.all_entities_EcNumber = function(start, count, fields)
     {
 	var resp = json_call_ajax_sync("CDMI_EntityAPI.all_entities_EcNumber", [start, count, fields]);
@@ -1218,6 +1772,42 @@ function CDMI_EntityAPI(url) {
     this.all_entities_EcNumber_async = function(start, count, fields, _callback, _error_callback)
     {
 	json_call_ajax_async("CDMI_EntityAPI.all_entities_EcNumber", [start, count, fields], 1, _callback, _error_callback)
+    }
+
+    this.get_entity_Environment = function(ids, fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_entity_Environment", [ids, fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.get_entity_Environment", [ids, fields]);
+        return resp[0];
+    }
+
+    this.get_entity_Environment_async = function(ids, fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.get_entity_Environment", [ids, fields], 1, _callback, _error_callback)
+    }
+
+    this.query_entity_Environment = function(qry, fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.query_entity_Environment", [qry, fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.query_entity_Environment", [qry, fields]);
+        return resp[0];
+    }
+
+    this.query_entity_Environment_async = function(qry, fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.query_entity_Environment", [qry, fields], 1, _callback, _error_callback)
+    }
+
+    this.all_entities_Environment = function(start, count, fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.all_entities_Environment", [start, count, fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.all_entities_Environment", [start, count, fields]);
+        return resp[0];
+    }
+
+    this.all_entities_Environment_async = function(start, count, fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.all_entities_Environment", [start, count, fields], 1, _callback, _error_callback)
     }
 
     this.get_entity_Experiment = function(ids, fields)
@@ -1232,6 +1822,18 @@ function CDMI_EntityAPI(url) {
 	json_call_ajax_async("CDMI_EntityAPI.get_entity_Experiment", [ids, fields], 1, _callback, _error_callback)
     }
 
+    this.query_entity_Experiment = function(qry, fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.query_entity_Experiment", [qry, fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.query_entity_Experiment", [qry, fields]);
+        return resp[0];
+    }
+
+    this.query_entity_Experiment_async = function(qry, fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.query_entity_Experiment", [qry, fields], 1, _callback, _error_callback)
+    }
+
     this.all_entities_Experiment = function(start, count, fields)
     {
 	var resp = json_call_ajax_sync("CDMI_EntityAPI.all_entities_Experiment", [start, count, fields]);
@@ -1244,6 +1846,42 @@ function CDMI_EntityAPI(url) {
 	json_call_ajax_async("CDMI_EntityAPI.all_entities_Experiment", [start, count, fields], 1, _callback, _error_callback)
     }
 
+    this.get_entity_ExperimentalUnit = function(ids, fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_entity_ExperimentalUnit", [ids, fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.get_entity_ExperimentalUnit", [ids, fields]);
+        return resp[0];
+    }
+
+    this.get_entity_ExperimentalUnit_async = function(ids, fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.get_entity_ExperimentalUnit", [ids, fields], 1, _callback, _error_callback)
+    }
+
+    this.query_entity_ExperimentalUnit = function(qry, fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.query_entity_ExperimentalUnit", [qry, fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.query_entity_ExperimentalUnit", [qry, fields]);
+        return resp[0];
+    }
+
+    this.query_entity_ExperimentalUnit_async = function(qry, fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.query_entity_ExperimentalUnit", [qry, fields], 1, _callback, _error_callback)
+    }
+
+    this.all_entities_ExperimentalUnit = function(start, count, fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.all_entities_ExperimentalUnit", [start, count, fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.all_entities_ExperimentalUnit", [start, count, fields]);
+        return resp[0];
+    }
+
+    this.all_entities_ExperimentalUnit_async = function(start, count, fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.all_entities_ExperimentalUnit", [start, count, fields], 1, _callback, _error_callback)
+    }
+
     this.get_entity_Family = function(ids, fields)
     {
 	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_entity_Family", [ids, fields]);
@@ -1254,6 +1892,18 @@ function CDMI_EntityAPI(url) {
     this.get_entity_Family_async = function(ids, fields, _callback, _error_callback)
     {
 	json_call_ajax_async("CDMI_EntityAPI.get_entity_Family", [ids, fields], 1, _callback, _error_callback)
+    }
+
+    this.query_entity_Family = function(qry, fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.query_entity_Family", [qry, fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.query_entity_Family", [qry, fields]);
+        return resp[0];
+    }
+
+    this.query_entity_Family_async = function(qry, fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.query_entity_Family", [qry, fields], 1, _callback, _error_callback)
     }
 
     this.all_entities_Family = function(start, count, fields)
@@ -1280,6 +1930,18 @@ function CDMI_EntityAPI(url) {
 	json_call_ajax_async("CDMI_EntityAPI.get_entity_Feature", [ids, fields], 1, _callback, _error_callback)
     }
 
+    this.query_entity_Feature = function(qry, fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.query_entity_Feature", [qry, fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.query_entity_Feature", [qry, fields]);
+        return resp[0];
+    }
+
+    this.query_entity_Feature_async = function(qry, fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.query_entity_Feature", [qry, fields], 1, _callback, _error_callback)
+    }
+
     this.all_entities_Feature = function(start, count, fields)
     {
 	var resp = json_call_ajax_sync("CDMI_EntityAPI.all_entities_Feature", [start, count, fields]);
@@ -1304,6 +1966,18 @@ function CDMI_EntityAPI(url) {
 	json_call_ajax_async("CDMI_EntityAPI.get_entity_Genome", [ids, fields], 1, _callback, _error_callback)
     }
 
+    this.query_entity_Genome = function(qry, fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.query_entity_Genome", [qry, fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.query_entity_Genome", [qry, fields]);
+        return resp[0];
+    }
+
+    this.query_entity_Genome_async = function(qry, fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.query_entity_Genome", [qry, fields], 1, _callback, _error_callback)
+    }
+
     this.all_entities_Genome = function(start, count, fields)
     {
 	var resp = json_call_ajax_sync("CDMI_EntityAPI.all_entities_Genome", [start, count, fields]);
@@ -1316,28 +1990,184 @@ function CDMI_EntityAPI(url) {
 	json_call_ajax_async("CDMI_EntityAPI.all_entities_Genome", [start, count, fields], 1, _callback, _error_callback)
     }
 
-    this.get_entity_Identifier = function(ids, fields)
+    this.get_entity_Locality = function(ids, fields)
     {
-	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_entity_Identifier", [ids, fields]);
-//	var resp = json_call_sync("CDMI_EntityAPI.get_entity_Identifier", [ids, fields]);
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_entity_Locality", [ids, fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.get_entity_Locality", [ids, fields]);
         return resp[0];
     }
 
-    this.get_entity_Identifier_async = function(ids, fields, _callback, _error_callback)
+    this.get_entity_Locality_async = function(ids, fields, _callback, _error_callback)
     {
-	json_call_ajax_async("CDMI_EntityAPI.get_entity_Identifier", [ids, fields], 1, _callback, _error_callback)
+	json_call_ajax_async("CDMI_EntityAPI.get_entity_Locality", [ids, fields], 1, _callback, _error_callback)
     }
 
-    this.all_entities_Identifier = function(start, count, fields)
+    this.query_entity_Locality = function(qry, fields)
     {
-	var resp = json_call_ajax_sync("CDMI_EntityAPI.all_entities_Identifier", [start, count, fields]);
-//	var resp = json_call_sync("CDMI_EntityAPI.all_entities_Identifier", [start, count, fields]);
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.query_entity_Locality", [qry, fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.query_entity_Locality", [qry, fields]);
         return resp[0];
     }
 
-    this.all_entities_Identifier_async = function(start, count, fields, _callback, _error_callback)
+    this.query_entity_Locality_async = function(qry, fields, _callback, _error_callback)
     {
-	json_call_ajax_async("CDMI_EntityAPI.all_entities_Identifier", [start, count, fields], 1, _callback, _error_callback)
+	json_call_ajax_async("CDMI_EntityAPI.query_entity_Locality", [qry, fields], 1, _callback, _error_callback)
+    }
+
+    this.all_entities_Locality = function(start, count, fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.all_entities_Locality", [start, count, fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.all_entities_Locality", [start, count, fields]);
+        return resp[0];
+    }
+
+    this.all_entities_Locality_async = function(start, count, fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.all_entities_Locality", [start, count, fields], 1, _callback, _error_callback)
+    }
+
+    this.get_entity_LocalizedCompound = function(ids, fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_entity_LocalizedCompound", [ids, fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.get_entity_LocalizedCompound", [ids, fields]);
+        return resp[0];
+    }
+
+    this.get_entity_LocalizedCompound_async = function(ids, fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.get_entity_LocalizedCompound", [ids, fields], 1, _callback, _error_callback)
+    }
+
+    this.query_entity_LocalizedCompound = function(qry, fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.query_entity_LocalizedCompound", [qry, fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.query_entity_LocalizedCompound", [qry, fields]);
+        return resp[0];
+    }
+
+    this.query_entity_LocalizedCompound_async = function(qry, fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.query_entity_LocalizedCompound", [qry, fields], 1, _callback, _error_callback)
+    }
+
+    this.all_entities_LocalizedCompound = function(start, count, fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.all_entities_LocalizedCompound", [start, count, fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.all_entities_LocalizedCompound", [start, count, fields]);
+        return resp[0];
+    }
+
+    this.all_entities_LocalizedCompound_async = function(start, count, fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.all_entities_LocalizedCompound", [start, count, fields], 1, _callback, _error_callback)
+    }
+
+    this.get_entity_Location = function(ids, fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_entity_Location", [ids, fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.get_entity_Location", [ids, fields]);
+        return resp[0];
+    }
+
+    this.get_entity_Location_async = function(ids, fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.get_entity_Location", [ids, fields], 1, _callback, _error_callback)
+    }
+
+    this.query_entity_Location = function(qry, fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.query_entity_Location", [qry, fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.query_entity_Location", [qry, fields]);
+        return resp[0];
+    }
+
+    this.query_entity_Location_async = function(qry, fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.query_entity_Location", [qry, fields], 1, _callback, _error_callback)
+    }
+
+    this.all_entities_Location = function(start, count, fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.all_entities_Location", [start, count, fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.all_entities_Location", [start, count, fields]);
+        return resp[0];
+    }
+
+    this.all_entities_Location_async = function(start, count, fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.all_entities_Location", [start, count, fields], 1, _callback, _error_callback)
+    }
+
+    this.get_entity_LocationInstance = function(ids, fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_entity_LocationInstance", [ids, fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.get_entity_LocationInstance", [ids, fields]);
+        return resp[0];
+    }
+
+    this.get_entity_LocationInstance_async = function(ids, fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.get_entity_LocationInstance", [ids, fields], 1, _callback, _error_callback)
+    }
+
+    this.query_entity_LocationInstance = function(qry, fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.query_entity_LocationInstance", [qry, fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.query_entity_LocationInstance", [qry, fields]);
+        return resp[0];
+    }
+
+    this.query_entity_LocationInstance_async = function(qry, fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.query_entity_LocationInstance", [qry, fields], 1, _callback, _error_callback)
+    }
+
+    this.all_entities_LocationInstance = function(start, count, fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.all_entities_LocationInstance", [start, count, fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.all_entities_LocationInstance", [start, count, fields]);
+        return resp[0];
+    }
+
+    this.all_entities_LocationInstance_async = function(start, count, fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.all_entities_LocationInstance", [start, count, fields], 1, _callback, _error_callback)
+    }
+
+    this.get_entity_Measurement = function(ids, fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_entity_Measurement", [ids, fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.get_entity_Measurement", [ids, fields]);
+        return resp[0];
+    }
+
+    this.get_entity_Measurement_async = function(ids, fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.get_entity_Measurement", [ids, fields], 1, _callback, _error_callback)
+    }
+
+    this.query_entity_Measurement = function(qry, fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.query_entity_Measurement", [qry, fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.query_entity_Measurement", [qry, fields]);
+        return resp[0];
+    }
+
+    this.query_entity_Measurement_async = function(qry, fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.query_entity_Measurement", [qry, fields], 1, _callback, _error_callback)
+    }
+
+    this.all_entities_Measurement = function(start, count, fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.all_entities_Measurement", [start, count, fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.all_entities_Measurement", [start, count, fields]);
+        return resp[0];
+    }
+
+    this.all_entities_Measurement_async = function(start, count, fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.all_entities_Measurement", [start, count, fields], 1, _callback, _error_callback)
     }
 
     this.get_entity_Media = function(ids, fields)
@@ -1350,6 +2180,18 @@ function CDMI_EntityAPI(url) {
     this.get_entity_Media_async = function(ids, fields, _callback, _error_callback)
     {
 	json_call_ajax_async("CDMI_EntityAPI.get_entity_Media", [ids, fields], 1, _callback, _error_callback)
+    }
+
+    this.query_entity_Media = function(qry, fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.query_entity_Media", [qry, fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.query_entity_Media", [qry, fields]);
+        return resp[0];
+    }
+
+    this.query_entity_Media_async = function(qry, fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.query_entity_Media", [qry, fields], 1, _callback, _error_callback)
     }
 
     this.all_entities_Media = function(start, count, fields)
@@ -1376,6 +2218,18 @@ function CDMI_EntityAPI(url) {
 	json_call_ajax_async("CDMI_EntityAPI.get_entity_Model", [ids, fields], 1, _callback, _error_callback)
     }
 
+    this.query_entity_Model = function(qry, fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.query_entity_Model", [qry, fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.query_entity_Model", [qry, fields]);
+        return resp[0];
+    }
+
+    this.query_entity_Model_async = function(qry, fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.query_entity_Model", [qry, fields], 1, _callback, _error_callback)
+    }
+
     this.all_entities_Model = function(start, count, fields)
     {
 	var resp = json_call_ajax_sync("CDMI_EntityAPI.all_entities_Model", [start, count, fields]);
@@ -1386,30 +2240,6 @@ function CDMI_EntityAPI(url) {
     this.all_entities_Model_async = function(start, count, fields, _callback, _error_callback)
     {
 	json_call_ajax_async("CDMI_EntityAPI.all_entities_Model", [start, count, fields], 1, _callback, _error_callback)
-    }
-
-    this.get_entity_ModelCompartment = function(ids, fields)
-    {
-	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_entity_ModelCompartment", [ids, fields]);
-//	var resp = json_call_sync("CDMI_EntityAPI.get_entity_ModelCompartment", [ids, fields]);
-        return resp[0];
-    }
-
-    this.get_entity_ModelCompartment_async = function(ids, fields, _callback, _error_callback)
-    {
-	json_call_ajax_async("CDMI_EntityAPI.get_entity_ModelCompartment", [ids, fields], 1, _callback, _error_callback)
-    }
-
-    this.all_entities_ModelCompartment = function(start, count, fields)
-    {
-	var resp = json_call_ajax_sync("CDMI_EntityAPI.all_entities_ModelCompartment", [start, count, fields]);
-//	var resp = json_call_sync("CDMI_EntityAPI.all_entities_ModelCompartment", [start, count, fields]);
-        return resp[0];
-    }
-
-    this.all_entities_ModelCompartment_async = function(start, count, fields, _callback, _error_callback)
-    {
-	json_call_ajax_async("CDMI_EntityAPI.all_entities_ModelCompartment", [start, count, fields], 1, _callback, _error_callback)
     }
 
     this.get_entity_OTU = function(ids, fields)
@@ -1424,6 +2254,18 @@ function CDMI_EntityAPI(url) {
 	json_call_ajax_async("CDMI_EntityAPI.get_entity_OTU", [ids, fields], 1, _callback, _error_callback)
     }
 
+    this.query_entity_OTU = function(qry, fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.query_entity_OTU", [qry, fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.query_entity_OTU", [qry, fields]);
+        return resp[0];
+    }
+
+    this.query_entity_OTU_async = function(qry, fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.query_entity_OTU", [qry, fields], 1, _callback, _error_callback)
+    }
+
     this.all_entities_OTU = function(start, count, fields)
     {
 	var resp = json_call_ajax_sync("CDMI_EntityAPI.all_entities_OTU", [start, count, fields]);
@@ -1436,6 +2278,42 @@ function CDMI_EntityAPI(url) {
 	json_call_ajax_async("CDMI_EntityAPI.all_entities_OTU", [start, count, fields], 1, _callback, _error_callback)
     }
 
+    this.get_entity_ObservationalUnit = function(ids, fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_entity_ObservationalUnit", [ids, fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.get_entity_ObservationalUnit", [ids, fields]);
+        return resp[0];
+    }
+
+    this.get_entity_ObservationalUnit_async = function(ids, fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.get_entity_ObservationalUnit", [ids, fields], 1, _callback, _error_callback)
+    }
+
+    this.query_entity_ObservationalUnit = function(qry, fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.query_entity_ObservationalUnit", [qry, fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.query_entity_ObservationalUnit", [qry, fields]);
+        return resp[0];
+    }
+
+    this.query_entity_ObservationalUnit_async = function(qry, fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.query_entity_ObservationalUnit", [qry, fields], 1, _callback, _error_callback)
+    }
+
+    this.all_entities_ObservationalUnit = function(start, count, fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.all_entities_ObservationalUnit", [start, count, fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.all_entities_ObservationalUnit", [start, count, fields]);
+        return resp[0];
+    }
+
+    this.all_entities_ObservationalUnit_async = function(start, count, fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.all_entities_ObservationalUnit", [start, count, fields], 1, _callback, _error_callback)
+    }
+
     this.get_entity_PairSet = function(ids, fields)
     {
 	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_entity_PairSet", [ids, fields]);
@@ -1446,6 +2324,18 @@ function CDMI_EntityAPI(url) {
     this.get_entity_PairSet_async = function(ids, fields, _callback, _error_callback)
     {
 	json_call_ajax_async("CDMI_EntityAPI.get_entity_PairSet", [ids, fields], 1, _callback, _error_callback)
+    }
+
+    this.query_entity_PairSet = function(qry, fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.query_entity_PairSet", [qry, fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.query_entity_PairSet", [qry, fields]);
+        return resp[0];
+    }
+
+    this.query_entity_PairSet_async = function(qry, fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.query_entity_PairSet", [qry, fields], 1, _callback, _error_callback)
     }
 
     this.all_entities_PairSet = function(start, count, fields)
@@ -1472,6 +2362,18 @@ function CDMI_EntityAPI(url) {
 	json_call_ajax_async("CDMI_EntityAPI.get_entity_Pairing", [ids, fields], 1, _callback, _error_callback)
     }
 
+    this.query_entity_Pairing = function(qry, fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.query_entity_Pairing", [qry, fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.query_entity_Pairing", [qry, fields]);
+        return resp[0];
+    }
+
+    this.query_entity_Pairing_async = function(qry, fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.query_entity_Pairing", [qry, fields], 1, _callback, _error_callback)
+    }
+
     this.all_entities_Pairing = function(start, count, fields)
     {
 	var resp = json_call_ajax_sync("CDMI_EntityAPI.all_entities_Pairing", [start, count, fields]);
@@ -1484,6 +2386,114 @@ function CDMI_EntityAPI(url) {
 	json_call_ajax_async("CDMI_EntityAPI.all_entities_Pairing", [start, count, fields], 1, _callback, _error_callback)
     }
 
+    this.get_entity_Person = function(ids, fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_entity_Person", [ids, fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.get_entity_Person", [ids, fields]);
+        return resp[0];
+    }
+
+    this.get_entity_Person_async = function(ids, fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.get_entity_Person", [ids, fields], 1, _callback, _error_callback)
+    }
+
+    this.query_entity_Person = function(qry, fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.query_entity_Person", [qry, fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.query_entity_Person", [qry, fields]);
+        return resp[0];
+    }
+
+    this.query_entity_Person_async = function(qry, fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.query_entity_Person", [qry, fields], 1, _callback, _error_callback)
+    }
+
+    this.all_entities_Person = function(start, count, fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.all_entities_Person", [start, count, fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.all_entities_Person", [start, count, fields]);
+        return resp[0];
+    }
+
+    this.all_entities_Person_async = function(start, count, fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.all_entities_Person", [start, count, fields], 1, _callback, _error_callback)
+    }
+
+    this.get_entity_PhenotypeDescription = function(ids, fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_entity_PhenotypeDescription", [ids, fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.get_entity_PhenotypeDescription", [ids, fields]);
+        return resp[0];
+    }
+
+    this.get_entity_PhenotypeDescription_async = function(ids, fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.get_entity_PhenotypeDescription", [ids, fields], 1, _callback, _error_callback)
+    }
+
+    this.query_entity_PhenotypeDescription = function(qry, fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.query_entity_PhenotypeDescription", [qry, fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.query_entity_PhenotypeDescription", [qry, fields]);
+        return resp[0];
+    }
+
+    this.query_entity_PhenotypeDescription_async = function(qry, fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.query_entity_PhenotypeDescription", [qry, fields], 1, _callback, _error_callback)
+    }
+
+    this.all_entities_PhenotypeDescription = function(start, count, fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.all_entities_PhenotypeDescription", [start, count, fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.all_entities_PhenotypeDescription", [start, count, fields]);
+        return resp[0];
+    }
+
+    this.all_entities_PhenotypeDescription_async = function(start, count, fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.all_entities_PhenotypeDescription", [start, count, fields], 1, _callback, _error_callback)
+    }
+
+    this.get_entity_PhenotypeExperiment = function(ids, fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_entity_PhenotypeExperiment", [ids, fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.get_entity_PhenotypeExperiment", [ids, fields]);
+        return resp[0];
+    }
+
+    this.get_entity_PhenotypeExperiment_async = function(ids, fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.get_entity_PhenotypeExperiment", [ids, fields], 1, _callback, _error_callback)
+    }
+
+    this.query_entity_PhenotypeExperiment = function(qry, fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.query_entity_PhenotypeExperiment", [qry, fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.query_entity_PhenotypeExperiment", [qry, fields]);
+        return resp[0];
+    }
+
+    this.query_entity_PhenotypeExperiment_async = function(qry, fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.query_entity_PhenotypeExperiment", [qry, fields], 1, _callback, _error_callback)
+    }
+
+    this.all_entities_PhenotypeExperiment = function(start, count, fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.all_entities_PhenotypeExperiment", [start, count, fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.all_entities_PhenotypeExperiment", [start, count, fields]);
+        return resp[0];
+    }
+
+    this.all_entities_PhenotypeExperiment_async = function(start, count, fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.all_entities_PhenotypeExperiment", [start, count, fields], 1, _callback, _error_callback)
+    }
+
     this.get_entity_ProbeSet = function(ids, fields)
     {
 	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_entity_ProbeSet", [ids, fields]);
@@ -1494,6 +2504,18 @@ function CDMI_EntityAPI(url) {
     this.get_entity_ProbeSet_async = function(ids, fields, _callback, _error_callback)
     {
 	json_call_ajax_async("CDMI_EntityAPI.get_entity_ProbeSet", [ids, fields], 1, _callback, _error_callback)
+    }
+
+    this.query_entity_ProbeSet = function(qry, fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.query_entity_ProbeSet", [qry, fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.query_entity_ProbeSet", [qry, fields]);
+        return resp[0];
+    }
+
+    this.query_entity_ProbeSet_async = function(qry, fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.query_entity_ProbeSet", [qry, fields], 1, _callback, _error_callback)
     }
 
     this.all_entities_ProbeSet = function(start, count, fields)
@@ -1520,6 +2542,18 @@ function CDMI_EntityAPI(url) {
 	json_call_ajax_async("CDMI_EntityAPI.get_entity_ProteinSequence", [ids, fields], 1, _callback, _error_callback)
     }
 
+    this.query_entity_ProteinSequence = function(qry, fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.query_entity_ProteinSequence", [qry, fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.query_entity_ProteinSequence", [qry, fields]);
+        return resp[0];
+    }
+
+    this.query_entity_ProteinSequence_async = function(qry, fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.query_entity_ProteinSequence", [qry, fields], 1, _callback, _error_callback)
+    }
+
     this.all_entities_ProteinSequence = function(start, count, fields)
     {
 	var resp = json_call_ajax_sync("CDMI_EntityAPI.all_entities_ProteinSequence", [start, count, fields]);
@@ -1532,6 +2566,42 @@ function CDMI_EntityAPI(url) {
 	json_call_ajax_async("CDMI_EntityAPI.all_entities_ProteinSequence", [start, count, fields], 1, _callback, _error_callback)
     }
 
+    this.get_entity_Protocol = function(ids, fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_entity_Protocol", [ids, fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.get_entity_Protocol", [ids, fields]);
+        return resp[0];
+    }
+
+    this.get_entity_Protocol_async = function(ids, fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.get_entity_Protocol", [ids, fields], 1, _callback, _error_callback)
+    }
+
+    this.query_entity_Protocol = function(qry, fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.query_entity_Protocol", [qry, fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.query_entity_Protocol", [qry, fields]);
+        return resp[0];
+    }
+
+    this.query_entity_Protocol_async = function(qry, fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.query_entity_Protocol", [qry, fields], 1, _callback, _error_callback)
+    }
+
+    this.all_entities_Protocol = function(start, count, fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.all_entities_Protocol", [start, count, fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.all_entities_Protocol", [start, count, fields]);
+        return resp[0];
+    }
+
+    this.all_entities_Protocol_async = function(start, count, fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.all_entities_Protocol", [start, count, fields], 1, _callback, _error_callback)
+    }
+
     this.get_entity_Publication = function(ids, fields)
     {
 	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_entity_Publication", [ids, fields]);
@@ -1542,6 +2612,18 @@ function CDMI_EntityAPI(url) {
     this.get_entity_Publication_async = function(ids, fields, _callback, _error_callback)
     {
 	json_call_ajax_async("CDMI_EntityAPI.get_entity_Publication", [ids, fields], 1, _callback, _error_callback)
+    }
+
+    this.query_entity_Publication = function(qry, fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.query_entity_Publication", [qry, fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.query_entity_Publication", [qry, fields]);
+        return resp[0];
+    }
+
+    this.query_entity_Publication_async = function(qry, fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.query_entity_Publication", [qry, fields], 1, _callback, _error_callback)
     }
 
     this.all_entities_Publication = function(start, count, fields)
@@ -1568,6 +2650,18 @@ function CDMI_EntityAPI(url) {
 	json_call_ajax_async("CDMI_EntityAPI.get_entity_Reaction", [ids, fields], 1, _callback, _error_callback)
     }
 
+    this.query_entity_Reaction = function(qry, fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.query_entity_Reaction", [qry, fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.query_entity_Reaction", [qry, fields]);
+        return resp[0];
+    }
+
+    this.query_entity_Reaction_async = function(qry, fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.query_entity_Reaction", [qry, fields], 1, _callback, _error_callback)
+    }
+
     this.all_entities_Reaction = function(start, count, fields)
     {
 	var resp = json_call_ajax_sync("CDMI_EntityAPI.all_entities_Reaction", [start, count, fields]);
@@ -1580,76 +2674,40 @@ function CDMI_EntityAPI(url) {
 	json_call_ajax_async("CDMI_EntityAPI.all_entities_Reaction", [start, count, fields], 1, _callback, _error_callback)
     }
 
-    this.get_entity_ReactionRule = function(ids, fields)
+    this.get_entity_ReactionInstance = function(ids, fields)
     {
-	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_entity_ReactionRule", [ids, fields]);
-//	var resp = json_call_sync("CDMI_EntityAPI.get_entity_ReactionRule", [ids, fields]);
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_entity_ReactionInstance", [ids, fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.get_entity_ReactionInstance", [ids, fields]);
         return resp[0];
     }
 
-    this.get_entity_ReactionRule_async = function(ids, fields, _callback, _error_callback)
+    this.get_entity_ReactionInstance_async = function(ids, fields, _callback, _error_callback)
     {
-	json_call_ajax_async("CDMI_EntityAPI.get_entity_ReactionRule", [ids, fields], 1, _callback, _error_callback)
+	json_call_ajax_async("CDMI_EntityAPI.get_entity_ReactionInstance", [ids, fields], 1, _callback, _error_callback)
     }
 
-    this.all_entities_ReactionRule = function(start, count, fields)
+    this.query_entity_ReactionInstance = function(qry, fields)
     {
-	var resp = json_call_ajax_sync("CDMI_EntityAPI.all_entities_ReactionRule", [start, count, fields]);
-//	var resp = json_call_sync("CDMI_EntityAPI.all_entities_ReactionRule", [start, count, fields]);
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.query_entity_ReactionInstance", [qry, fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.query_entity_ReactionInstance", [qry, fields]);
         return resp[0];
     }
 
-    this.all_entities_ReactionRule_async = function(start, count, fields, _callback, _error_callback)
+    this.query_entity_ReactionInstance_async = function(qry, fields, _callback, _error_callback)
     {
-	json_call_ajax_async("CDMI_EntityAPI.all_entities_ReactionRule", [start, count, fields], 1, _callback, _error_callback)
+	json_call_ajax_async("CDMI_EntityAPI.query_entity_ReactionInstance", [qry, fields], 1, _callback, _error_callback)
     }
 
-    this.get_entity_Reagent = function(ids, fields)
+    this.all_entities_ReactionInstance = function(start, count, fields)
     {
-	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_entity_Reagent", [ids, fields]);
-//	var resp = json_call_sync("CDMI_EntityAPI.get_entity_Reagent", [ids, fields]);
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.all_entities_ReactionInstance", [start, count, fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.all_entities_ReactionInstance", [start, count, fields]);
         return resp[0];
     }
 
-    this.get_entity_Reagent_async = function(ids, fields, _callback, _error_callback)
+    this.all_entities_ReactionInstance_async = function(start, count, fields, _callback, _error_callback)
     {
-	json_call_ajax_async("CDMI_EntityAPI.get_entity_Reagent", [ids, fields], 1, _callback, _error_callback)
-    }
-
-    this.all_entities_Reagent = function(start, count, fields)
-    {
-	var resp = json_call_ajax_sync("CDMI_EntityAPI.all_entities_Reagent", [start, count, fields]);
-//	var resp = json_call_sync("CDMI_EntityAPI.all_entities_Reagent", [start, count, fields]);
-        return resp[0];
-    }
-
-    this.all_entities_Reagent_async = function(start, count, fields, _callback, _error_callback)
-    {
-	json_call_ajax_async("CDMI_EntityAPI.all_entities_Reagent", [start, count, fields], 1, _callback, _error_callback)
-    }
-
-    this.get_entity_Requirement = function(ids, fields)
-    {
-	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_entity_Requirement", [ids, fields]);
-//	var resp = json_call_sync("CDMI_EntityAPI.get_entity_Requirement", [ids, fields]);
-        return resp[0];
-    }
-
-    this.get_entity_Requirement_async = function(ids, fields, _callback, _error_callback)
-    {
-	json_call_ajax_async("CDMI_EntityAPI.get_entity_Requirement", [ids, fields], 1, _callback, _error_callback)
-    }
-
-    this.all_entities_Requirement = function(start, count, fields)
-    {
-	var resp = json_call_ajax_sync("CDMI_EntityAPI.all_entities_Requirement", [start, count, fields]);
-//	var resp = json_call_sync("CDMI_EntityAPI.all_entities_Requirement", [start, count, fields]);
-        return resp[0];
-    }
-
-    this.all_entities_Requirement_async = function(start, count, fields, _callback, _error_callback)
-    {
-	json_call_ajax_async("CDMI_EntityAPI.all_entities_Requirement", [start, count, fields], 1, _callback, _error_callback)
+	json_call_ajax_async("CDMI_EntityAPI.all_entities_ReactionInstance", [start, count, fields], 1, _callback, _error_callback)
     }
 
     this.get_entity_Role = function(ids, fields)
@@ -1662,6 +2720,18 @@ function CDMI_EntityAPI(url) {
     this.get_entity_Role_async = function(ids, fields, _callback, _error_callback)
     {
 	json_call_ajax_async("CDMI_EntityAPI.get_entity_Role", [ids, fields], 1, _callback, _error_callback)
+    }
+
+    this.query_entity_Role = function(qry, fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.query_entity_Role", [qry, fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.query_entity_Role", [qry, fields]);
+        return resp[0];
+    }
+
+    this.query_entity_Role_async = function(qry, fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.query_entity_Role", [qry, fields], 1, _callback, _error_callback)
     }
 
     this.all_entities_Role = function(start, count, fields)
@@ -1688,6 +2758,18 @@ function CDMI_EntityAPI(url) {
 	json_call_ajax_async("CDMI_EntityAPI.get_entity_SSCell", [ids, fields], 1, _callback, _error_callback)
     }
 
+    this.query_entity_SSCell = function(qry, fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.query_entity_SSCell", [qry, fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.query_entity_SSCell", [qry, fields]);
+        return resp[0];
+    }
+
+    this.query_entity_SSCell_async = function(qry, fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.query_entity_SSCell", [qry, fields], 1, _callback, _error_callback)
+    }
+
     this.all_entities_SSCell = function(start, count, fields)
     {
 	var resp = json_call_ajax_sync("CDMI_EntityAPI.all_entities_SSCell", [start, count, fields]);
@@ -1710,6 +2792,18 @@ function CDMI_EntityAPI(url) {
     this.get_entity_SSRow_async = function(ids, fields, _callback, _error_callback)
     {
 	json_call_ajax_async("CDMI_EntityAPI.get_entity_SSRow", [ids, fields], 1, _callback, _error_callback)
+    }
+
+    this.query_entity_SSRow = function(qry, fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.query_entity_SSRow", [qry, fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.query_entity_SSRow", [qry, fields]);
+        return resp[0];
+    }
+
+    this.query_entity_SSRow_async = function(qry, fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.query_entity_SSRow", [qry, fields], 1, _callback, _error_callback)
     }
 
     this.all_entities_SSRow = function(start, count, fields)
@@ -1736,6 +2830,18 @@ function CDMI_EntityAPI(url) {
 	json_call_ajax_async("CDMI_EntityAPI.get_entity_Scenario", [ids, fields], 1, _callback, _error_callback)
     }
 
+    this.query_entity_Scenario = function(qry, fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.query_entity_Scenario", [qry, fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.query_entity_Scenario", [qry, fields]);
+        return resp[0];
+    }
+
+    this.query_entity_Scenario_async = function(qry, fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.query_entity_Scenario", [qry, fields], 1, _callback, _error_callback)
+    }
+
     this.all_entities_Scenario = function(start, count, fields)
     {
 	var resp = json_call_ajax_sync("CDMI_EntityAPI.all_entities_Scenario", [start, count, fields]);
@@ -1760,6 +2866,18 @@ function CDMI_EntityAPI(url) {
 	json_call_ajax_async("CDMI_EntityAPI.get_entity_Source", [ids, fields], 1, _callback, _error_callback)
     }
 
+    this.query_entity_Source = function(qry, fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.query_entity_Source", [qry, fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.query_entity_Source", [qry, fields]);
+        return resp[0];
+    }
+
+    this.query_entity_Source_async = function(qry, fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.query_entity_Source", [qry, fields], 1, _callback, _error_callback)
+    }
+
     this.all_entities_Source = function(start, count, fields)
     {
 	var resp = json_call_ajax_sync("CDMI_EntityAPI.all_entities_Source", [start, count, fields]);
@@ -1772,6 +2890,78 @@ function CDMI_EntityAPI(url) {
 	json_call_ajax_async("CDMI_EntityAPI.all_entities_Source", [start, count, fields], 1, _callback, _error_callback)
     }
 
+    this.get_entity_Strain = function(ids, fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_entity_Strain", [ids, fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.get_entity_Strain", [ids, fields]);
+        return resp[0];
+    }
+
+    this.get_entity_Strain_async = function(ids, fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.get_entity_Strain", [ids, fields], 1, _callback, _error_callback)
+    }
+
+    this.query_entity_Strain = function(qry, fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.query_entity_Strain", [qry, fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.query_entity_Strain", [qry, fields]);
+        return resp[0];
+    }
+
+    this.query_entity_Strain_async = function(qry, fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.query_entity_Strain", [qry, fields], 1, _callback, _error_callback)
+    }
+
+    this.all_entities_Strain = function(start, count, fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.all_entities_Strain", [start, count, fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.all_entities_Strain", [start, count, fields]);
+        return resp[0];
+    }
+
+    this.all_entities_Strain_async = function(start, count, fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.all_entities_Strain", [start, count, fields], 1, _callback, _error_callback)
+    }
+
+    this.get_entity_StudyExperiment = function(ids, fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_entity_StudyExperiment", [ids, fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.get_entity_StudyExperiment", [ids, fields]);
+        return resp[0];
+    }
+
+    this.get_entity_StudyExperiment_async = function(ids, fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.get_entity_StudyExperiment", [ids, fields], 1, _callback, _error_callback)
+    }
+
+    this.query_entity_StudyExperiment = function(qry, fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.query_entity_StudyExperiment", [qry, fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.query_entity_StudyExperiment", [qry, fields]);
+        return resp[0];
+    }
+
+    this.query_entity_StudyExperiment_async = function(qry, fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.query_entity_StudyExperiment", [qry, fields], 1, _callback, _error_callback)
+    }
+
+    this.all_entities_StudyExperiment = function(start, count, fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.all_entities_StudyExperiment", [start, count, fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.all_entities_StudyExperiment", [start, count, fields]);
+        return resp[0];
+    }
+
+    this.all_entities_StudyExperiment_async = function(start, count, fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.all_entities_StudyExperiment", [start, count, fields], 1, _callback, _error_callback)
+    }
+
     this.get_entity_Subsystem = function(ids, fields)
     {
 	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_entity_Subsystem", [ids, fields]);
@@ -1782,6 +2972,18 @@ function CDMI_EntityAPI(url) {
     this.get_entity_Subsystem_async = function(ids, fields, _callback, _error_callback)
     {
 	json_call_ajax_async("CDMI_EntityAPI.get_entity_Subsystem", [ids, fields], 1, _callback, _error_callback)
+    }
+
+    this.query_entity_Subsystem = function(qry, fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.query_entity_Subsystem", [qry, fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.query_entity_Subsystem", [qry, fields]);
+        return resp[0];
+    }
+
+    this.query_entity_Subsystem_async = function(qry, fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.query_entity_Subsystem", [qry, fields], 1, _callback, _error_callback)
     }
 
     this.all_entities_Subsystem = function(start, count, fields)
@@ -1808,6 +3010,18 @@ function CDMI_EntityAPI(url) {
 	json_call_ajax_async("CDMI_EntityAPI.get_entity_SubsystemClass", [ids, fields], 1, _callback, _error_callback)
     }
 
+    this.query_entity_SubsystemClass = function(qry, fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.query_entity_SubsystemClass", [qry, fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.query_entity_SubsystemClass", [qry, fields]);
+        return resp[0];
+    }
+
+    this.query_entity_SubsystemClass_async = function(qry, fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.query_entity_SubsystemClass", [qry, fields], 1, _callback, _error_callback)
+    }
+
     this.all_entities_SubsystemClass = function(start, count, fields)
     {
 	var resp = json_call_ajax_sync("CDMI_EntityAPI.all_entities_SubsystemClass", [start, count, fields]);
@@ -1832,6 +3046,18 @@ function CDMI_EntityAPI(url) {
 	json_call_ajax_async("CDMI_EntityAPI.get_entity_TaxonomicGrouping", [ids, fields], 1, _callback, _error_callback)
     }
 
+    this.query_entity_TaxonomicGrouping = function(qry, fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.query_entity_TaxonomicGrouping", [qry, fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.query_entity_TaxonomicGrouping", [qry, fields]);
+        return resp[0];
+    }
+
+    this.query_entity_TaxonomicGrouping_async = function(qry, fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.query_entity_TaxonomicGrouping", [qry, fields], 1, _callback, _error_callback)
+    }
+
     this.all_entities_TaxonomicGrouping = function(start, count, fields)
     {
 	var resp = json_call_ajax_sync("CDMI_EntityAPI.all_entities_TaxonomicGrouping", [start, count, fields]);
@@ -1842,6 +3068,150 @@ function CDMI_EntityAPI(url) {
     this.all_entities_TaxonomicGrouping_async = function(start, count, fields, _callback, _error_callback)
     {
 	json_call_ajax_async("CDMI_EntityAPI.all_entities_TaxonomicGrouping", [start, count, fields], 1, _callback, _error_callback)
+    }
+
+    this.get_entity_Trait = function(ids, fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_entity_Trait", [ids, fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.get_entity_Trait", [ids, fields]);
+        return resp[0];
+    }
+
+    this.get_entity_Trait_async = function(ids, fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.get_entity_Trait", [ids, fields], 1, _callback, _error_callback)
+    }
+
+    this.query_entity_Trait = function(qry, fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.query_entity_Trait", [qry, fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.query_entity_Trait", [qry, fields]);
+        return resp[0];
+    }
+
+    this.query_entity_Trait_async = function(qry, fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.query_entity_Trait", [qry, fields], 1, _callback, _error_callback)
+    }
+
+    this.all_entities_Trait = function(start, count, fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.all_entities_Trait", [start, count, fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.all_entities_Trait", [start, count, fields]);
+        return resp[0];
+    }
+
+    this.all_entities_Trait_async = function(start, count, fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.all_entities_Trait", [start, count, fields], 1, _callback, _error_callback)
+    }
+
+    this.get_entity_Tree = function(ids, fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_entity_Tree", [ids, fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.get_entity_Tree", [ids, fields]);
+        return resp[0];
+    }
+
+    this.get_entity_Tree_async = function(ids, fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.get_entity_Tree", [ids, fields], 1, _callback, _error_callback)
+    }
+
+    this.query_entity_Tree = function(qry, fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.query_entity_Tree", [qry, fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.query_entity_Tree", [qry, fields]);
+        return resp[0];
+    }
+
+    this.query_entity_Tree_async = function(qry, fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.query_entity_Tree", [qry, fields], 1, _callback, _error_callback)
+    }
+
+    this.all_entities_Tree = function(start, count, fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.all_entities_Tree", [start, count, fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.all_entities_Tree", [start, count, fields]);
+        return resp[0];
+    }
+
+    this.all_entities_Tree_async = function(start, count, fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.all_entities_Tree", [start, count, fields], 1, _callback, _error_callback)
+    }
+
+    this.get_entity_TreeAttribute = function(ids, fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_entity_TreeAttribute", [ids, fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.get_entity_TreeAttribute", [ids, fields]);
+        return resp[0];
+    }
+
+    this.get_entity_TreeAttribute_async = function(ids, fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.get_entity_TreeAttribute", [ids, fields], 1, _callback, _error_callback)
+    }
+
+    this.query_entity_TreeAttribute = function(qry, fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.query_entity_TreeAttribute", [qry, fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.query_entity_TreeAttribute", [qry, fields]);
+        return resp[0];
+    }
+
+    this.query_entity_TreeAttribute_async = function(qry, fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.query_entity_TreeAttribute", [qry, fields], 1, _callback, _error_callback)
+    }
+
+    this.all_entities_TreeAttribute = function(start, count, fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.all_entities_TreeAttribute", [start, count, fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.all_entities_TreeAttribute", [start, count, fields]);
+        return resp[0];
+    }
+
+    this.all_entities_TreeAttribute_async = function(start, count, fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.all_entities_TreeAttribute", [start, count, fields], 1, _callback, _error_callback)
+    }
+
+    this.get_entity_TreeNodeAttribute = function(ids, fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_entity_TreeNodeAttribute", [ids, fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.get_entity_TreeNodeAttribute", [ids, fields]);
+        return resp[0];
+    }
+
+    this.get_entity_TreeNodeAttribute_async = function(ids, fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.get_entity_TreeNodeAttribute", [ids, fields], 1, _callback, _error_callback)
+    }
+
+    this.query_entity_TreeNodeAttribute = function(qry, fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.query_entity_TreeNodeAttribute", [qry, fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.query_entity_TreeNodeAttribute", [qry, fields]);
+        return resp[0];
+    }
+
+    this.query_entity_TreeNodeAttribute_async = function(qry, fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.query_entity_TreeNodeAttribute", [qry, fields], 1, _callback, _error_callback)
+    }
+
+    this.all_entities_TreeNodeAttribute = function(start, count, fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.all_entities_TreeNodeAttribute", [start, count, fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.all_entities_TreeNodeAttribute", [start, count, fields]);
+        return resp[0];
+    }
+
+    this.all_entities_TreeNodeAttribute_async = function(start, count, fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.all_entities_TreeNodeAttribute", [start, count, fields], 1, _callback, _error_callback)
     }
 
     this.get_entity_Variant = function(ids, fields)
@@ -1856,6 +3226,18 @@ function CDMI_EntityAPI(url) {
 	json_call_ajax_async("CDMI_EntityAPI.get_entity_Variant", [ids, fields], 1, _callback, _error_callback)
     }
 
+    this.query_entity_Variant = function(qry, fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.query_entity_Variant", [qry, fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.query_entity_Variant", [qry, fields]);
+        return resp[0];
+    }
+
+    this.query_entity_Variant_async = function(qry, fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.query_entity_Variant", [qry, fields], 1, _callback, _error_callback)
+    }
+
     this.all_entities_Variant = function(start, count, fields)
     {
 	var resp = json_call_ajax_sync("CDMI_EntityAPI.all_entities_Variant", [start, count, fields]);
@@ -1866,30 +3248,6 @@ function CDMI_EntityAPI(url) {
     this.all_entities_Variant_async = function(start, count, fields, _callback, _error_callback)
     {
 	json_call_ajax_async("CDMI_EntityAPI.all_entities_Variant", [start, count, fields], 1, _callback, _error_callback)
-    }
-
-    this.get_entity_Variation = function(ids, fields)
-    {
-	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_entity_Variation", [ids, fields]);
-//	var resp = json_call_sync("CDMI_EntityAPI.get_entity_Variation", [ids, fields]);
-        return resp[0];
-    }
-
-    this.get_entity_Variation_async = function(ids, fields, _callback, _error_callback)
-    {
-	json_call_ajax_async("CDMI_EntityAPI.get_entity_Variation", [ids, fields], 1, _callback, _error_callback)
-    }
-
-    this.all_entities_Variation = function(start, count, fields)
-    {
-	var resp = json_call_ajax_sync("CDMI_EntityAPI.all_entities_Variation", [start, count, fields]);
-//	var resp = json_call_sync("CDMI_EntityAPI.all_entities_Variation", [start, count, fields]);
-        return resp[0];
-    }
-
-    this.all_entities_Variation_async = function(start, count, fields, _callback, _error_callback)
-    {
-	json_call_ajax_async("CDMI_EntityAPI.all_entities_Variation", [start, count, fields], 1, _callback, _error_callback)
     }
 
     this.get_relationship_AffectsLevelOf = function(ids, from_fields, rel_fields, to_fields)
@@ -1916,28 +3274,76 @@ function CDMI_EntityAPI(url) {
 	json_call_ajax_async("CDMI_EntityAPI.get_relationship_IsAffectedIn", [ids, from_fields, rel_fields, to_fields], 1, _callback, _error_callback)
     }
 
-    this.get_relationship_Aligns = function(ids, from_fields, rel_fields, to_fields)
+    this.get_relationship_Aligned = function(ids, from_fields, rel_fields, to_fields)
     {
-	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_relationship_Aligns", [ids, from_fields, rel_fields, to_fields]);
-//	var resp = json_call_sync("CDMI_EntityAPI.get_relationship_Aligns", [ids, from_fields, rel_fields, to_fields]);
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_relationship_Aligned", [ids, from_fields, rel_fields, to_fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.get_relationship_Aligned", [ids, from_fields, rel_fields, to_fields]);
         return resp[0];
     }
 
-    this.get_relationship_Aligns_async = function(ids, from_fields, rel_fields, to_fields, _callback, _error_callback)
+    this.get_relationship_Aligned_async = function(ids, from_fields, rel_fields, to_fields, _callback, _error_callback)
     {
-	json_call_ajax_async("CDMI_EntityAPI.get_relationship_Aligns", [ids, from_fields, rel_fields, to_fields], 1, _callback, _error_callback)
+	json_call_ajax_async("CDMI_EntityAPI.get_relationship_Aligned", [ids, from_fields, rel_fields, to_fields], 1, _callback, _error_callback)
     }
 
-    this.get_relationship_IsAlignedBy = function(ids, from_fields, rel_fields, to_fields)
+    this.get_relationship_WasAlignedBy = function(ids, from_fields, rel_fields, to_fields)
     {
-	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_relationship_IsAlignedBy", [ids, from_fields, rel_fields, to_fields]);
-//	var resp = json_call_sync("CDMI_EntityAPI.get_relationship_IsAlignedBy", [ids, from_fields, rel_fields, to_fields]);
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_relationship_WasAlignedBy", [ids, from_fields, rel_fields, to_fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.get_relationship_WasAlignedBy", [ids, from_fields, rel_fields, to_fields]);
         return resp[0];
     }
 
-    this.get_relationship_IsAlignedBy_async = function(ids, from_fields, rel_fields, to_fields, _callback, _error_callback)
+    this.get_relationship_WasAlignedBy_async = function(ids, from_fields, rel_fields, to_fields, _callback, _error_callback)
     {
-	json_call_ajax_async("CDMI_EntityAPI.get_relationship_IsAlignedBy", [ids, from_fields, rel_fields, to_fields], 1, _callback, _error_callback)
+	json_call_ajax_async("CDMI_EntityAPI.get_relationship_WasAlignedBy", [ids, from_fields, rel_fields, to_fields], 1, _callback, _error_callback)
+    }
+
+    this.get_relationship_AssertsFunctionFor = function(ids, from_fields, rel_fields, to_fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_relationship_AssertsFunctionFor", [ids, from_fields, rel_fields, to_fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.get_relationship_AssertsFunctionFor", [ids, from_fields, rel_fields, to_fields]);
+        return resp[0];
+    }
+
+    this.get_relationship_AssertsFunctionFor_async = function(ids, from_fields, rel_fields, to_fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.get_relationship_AssertsFunctionFor", [ids, from_fields, rel_fields, to_fields], 1, _callback, _error_callback)
+    }
+
+    this.get_relationship_HasAssertedFunctionFrom = function(ids, from_fields, rel_fields, to_fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_relationship_HasAssertedFunctionFrom", [ids, from_fields, rel_fields, to_fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.get_relationship_HasAssertedFunctionFrom", [ids, from_fields, rel_fields, to_fields]);
+        return resp[0];
+    }
+
+    this.get_relationship_HasAssertedFunctionFrom_async = function(ids, from_fields, rel_fields, to_fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.get_relationship_HasAssertedFunctionFrom", [ids, from_fields, rel_fields, to_fields], 1, _callback, _error_callback)
+    }
+
+    this.get_relationship_BelongsTo = function(ids, from_fields, rel_fields, to_fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_relationship_BelongsTo", [ids, from_fields, rel_fields, to_fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.get_relationship_BelongsTo", [ids, from_fields, rel_fields, to_fields]);
+        return resp[0];
+    }
+
+    this.get_relationship_BelongsTo_async = function(ids, from_fields, rel_fields, to_fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.get_relationship_BelongsTo", [ids, from_fields, rel_fields, to_fields], 1, _callback, _error_callback)
+    }
+
+    this.get_relationship_IncludesStrain = function(ids, from_fields, rel_fields, to_fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_relationship_IncludesStrain", [ids, from_fields, rel_fields, to_fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.get_relationship_IncludesStrain", [ids, from_fields, rel_fields, to_fields]);
+        return resp[0];
+    }
+
+    this.get_relationship_IncludesStrain_async = function(ids, from_fields, rel_fields, to_fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.get_relationship_IncludesStrain", [ids, from_fields, rel_fields, to_fields], 1, _callback, _error_callback)
     }
 
     this.get_relationship_Concerns = function(ids, from_fields, rel_fields, to_fields)
@@ -1964,6 +3370,30 @@ function CDMI_EntityAPI(url) {
 	json_call_ajax_async("CDMI_EntityAPI.get_relationship_IsATopicOf", [ids, from_fields, rel_fields, to_fields], 1, _callback, _error_callback)
     }
 
+    this.get_relationship_ConsistsOfCompounds = function(ids, from_fields, rel_fields, to_fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_relationship_ConsistsOfCompounds", [ids, from_fields, rel_fields, to_fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.get_relationship_ConsistsOfCompounds", [ids, from_fields, rel_fields, to_fields]);
+        return resp[0];
+    }
+
+    this.get_relationship_ConsistsOfCompounds_async = function(ids, from_fields, rel_fields, to_fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.get_relationship_ConsistsOfCompounds", [ids, from_fields, rel_fields, to_fields], 1, _callback, _error_callback)
+    }
+
+    this.get_relationship_ComponentOf = function(ids, from_fields, rel_fields, to_fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_relationship_ComponentOf", [ids, from_fields, rel_fields, to_fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.get_relationship_ComponentOf", [ids, from_fields, rel_fields, to_fields]);
+        return resp[0];
+    }
+
+    this.get_relationship_ComponentOf_async = function(ids, from_fields, rel_fields, to_fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.get_relationship_ComponentOf", [ids, from_fields, rel_fields, to_fields], 1, _callback, _error_callback)
+    }
+
     this.get_relationship_Contains = function(ids, from_fields, rel_fields, to_fields)
     {
 	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_relationship_Contains", [ids, from_fields, rel_fields, to_fields]);
@@ -1988,6 +3418,102 @@ function CDMI_EntityAPI(url) {
 	json_call_ajax_async("CDMI_EntityAPI.get_relationship_IsContainedIn", [ids, from_fields, rel_fields, to_fields], 1, _callback, _error_callback)
     }
 
+    this.get_relationship_ContainsAlignedDNA = function(ids, from_fields, rel_fields, to_fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_relationship_ContainsAlignedDNA", [ids, from_fields, rel_fields, to_fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.get_relationship_ContainsAlignedDNA", [ids, from_fields, rel_fields, to_fields]);
+        return resp[0];
+    }
+
+    this.get_relationship_ContainsAlignedDNA_async = function(ids, from_fields, rel_fields, to_fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.get_relationship_ContainsAlignedDNA", [ids, from_fields, rel_fields, to_fields], 1, _callback, _error_callback)
+    }
+
+    this.get_relationship_IsAlignedDNAComponentOf = function(ids, from_fields, rel_fields, to_fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_relationship_IsAlignedDNAComponentOf", [ids, from_fields, rel_fields, to_fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.get_relationship_IsAlignedDNAComponentOf", [ids, from_fields, rel_fields, to_fields]);
+        return resp[0];
+    }
+
+    this.get_relationship_IsAlignedDNAComponentOf_async = function(ids, from_fields, rel_fields, to_fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.get_relationship_IsAlignedDNAComponentOf", [ids, from_fields, rel_fields, to_fields], 1, _callback, _error_callback)
+    }
+
+    this.get_relationship_ContainsAlignedProtein = function(ids, from_fields, rel_fields, to_fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_relationship_ContainsAlignedProtein", [ids, from_fields, rel_fields, to_fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.get_relationship_ContainsAlignedProtein", [ids, from_fields, rel_fields, to_fields]);
+        return resp[0];
+    }
+
+    this.get_relationship_ContainsAlignedProtein_async = function(ids, from_fields, rel_fields, to_fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.get_relationship_ContainsAlignedProtein", [ids, from_fields, rel_fields, to_fields], 1, _callback, _error_callback)
+    }
+
+    this.get_relationship_IsAlignedProteinComponentOf = function(ids, from_fields, rel_fields, to_fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_relationship_IsAlignedProteinComponentOf", [ids, from_fields, rel_fields, to_fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.get_relationship_IsAlignedProteinComponentOf", [ids, from_fields, rel_fields, to_fields]);
+        return resp[0];
+    }
+
+    this.get_relationship_IsAlignedProteinComponentOf_async = function(ids, from_fields, rel_fields, to_fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.get_relationship_IsAlignedProteinComponentOf", [ids, from_fields, rel_fields, to_fields], 1, _callback, _error_callback)
+    }
+
+    this.get_relationship_Controls = function(ids, from_fields, rel_fields, to_fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_relationship_Controls", [ids, from_fields, rel_fields, to_fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.get_relationship_Controls", [ids, from_fields, rel_fields, to_fields]);
+        return resp[0];
+    }
+
+    this.get_relationship_Controls_async = function(ids, from_fields, rel_fields, to_fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.get_relationship_Controls", [ids, from_fields, rel_fields, to_fields], 1, _callback, _error_callback)
+    }
+
+    this.get_relationship_IsControlledUsing = function(ids, from_fields, rel_fields, to_fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_relationship_IsControlledUsing", [ids, from_fields, rel_fields, to_fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.get_relationship_IsControlledUsing", [ids, from_fields, rel_fields, to_fields]);
+        return resp[0];
+    }
+
+    this.get_relationship_IsControlledUsing_async = function(ids, from_fields, rel_fields, to_fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.get_relationship_IsControlledUsing", [ids, from_fields, rel_fields, to_fields], 1, _callback, _error_callback)
+    }
+
+    this.get_relationship_DerivedFromStrain = function(ids, from_fields, rel_fields, to_fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_relationship_DerivedFromStrain", [ids, from_fields, rel_fields, to_fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.get_relationship_DerivedFromStrain", [ids, from_fields, rel_fields, to_fields]);
+        return resp[0];
+    }
+
+    this.get_relationship_DerivedFromStrain_async = function(ids, from_fields, rel_fields, to_fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.get_relationship_DerivedFromStrain", [ids, from_fields, rel_fields, to_fields], 1, _callback, _error_callback)
+    }
+
+    this.get_relationship_StrainParentOf = function(ids, from_fields, rel_fields, to_fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_relationship_StrainParentOf", [ids, from_fields, rel_fields, to_fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.get_relationship_StrainParentOf", [ids, from_fields, rel_fields, to_fields]);
+        return resp[0];
+    }
+
+    this.get_relationship_StrainParentOf_async = function(ids, from_fields, rel_fields, to_fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.get_relationship_StrainParentOf", [ids, from_fields, rel_fields, to_fields], 1, _callback, _error_callback)
+    }
+
     this.get_relationship_Describes = function(ids, from_fields, rel_fields, to_fields)
     {
 	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_relationship_Describes", [ids, from_fields, rel_fields, to_fields]);
@@ -2010,6 +3536,78 @@ function CDMI_EntityAPI(url) {
     this.get_relationship_IsDescribedBy_async = function(ids, from_fields, rel_fields, to_fields, _callback, _error_callback)
     {
 	json_call_ajax_async("CDMI_EntityAPI.get_relationship_IsDescribedBy", [ids, from_fields, rel_fields, to_fields], 1, _callback, _error_callback)
+    }
+
+    this.get_relationship_DescribesAlignment = function(ids, from_fields, rel_fields, to_fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_relationship_DescribesAlignment", [ids, from_fields, rel_fields, to_fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.get_relationship_DescribesAlignment", [ids, from_fields, rel_fields, to_fields]);
+        return resp[0];
+    }
+
+    this.get_relationship_DescribesAlignment_async = function(ids, from_fields, rel_fields, to_fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.get_relationship_DescribesAlignment", [ids, from_fields, rel_fields, to_fields], 1, _callback, _error_callback)
+    }
+
+    this.get_relationship_HasAlignmentAttribute = function(ids, from_fields, rel_fields, to_fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_relationship_HasAlignmentAttribute", [ids, from_fields, rel_fields, to_fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.get_relationship_HasAlignmentAttribute", [ids, from_fields, rel_fields, to_fields]);
+        return resp[0];
+    }
+
+    this.get_relationship_HasAlignmentAttribute_async = function(ids, from_fields, rel_fields, to_fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.get_relationship_HasAlignmentAttribute", [ids, from_fields, rel_fields, to_fields], 1, _callback, _error_callback)
+    }
+
+    this.get_relationship_DescribesTree = function(ids, from_fields, rel_fields, to_fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_relationship_DescribesTree", [ids, from_fields, rel_fields, to_fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.get_relationship_DescribesTree", [ids, from_fields, rel_fields, to_fields]);
+        return resp[0];
+    }
+
+    this.get_relationship_DescribesTree_async = function(ids, from_fields, rel_fields, to_fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.get_relationship_DescribesTree", [ids, from_fields, rel_fields, to_fields], 1, _callback, _error_callback)
+    }
+
+    this.get_relationship_HasTreeAttribute = function(ids, from_fields, rel_fields, to_fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_relationship_HasTreeAttribute", [ids, from_fields, rel_fields, to_fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.get_relationship_HasTreeAttribute", [ids, from_fields, rel_fields, to_fields]);
+        return resp[0];
+    }
+
+    this.get_relationship_HasTreeAttribute_async = function(ids, from_fields, rel_fields, to_fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.get_relationship_HasTreeAttribute", [ids, from_fields, rel_fields, to_fields], 1, _callback, _error_callback)
+    }
+
+    this.get_relationship_DescribesTreeNode = function(ids, from_fields, rel_fields, to_fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_relationship_DescribesTreeNode", [ids, from_fields, rel_fields, to_fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.get_relationship_DescribesTreeNode", [ids, from_fields, rel_fields, to_fields]);
+        return resp[0];
+    }
+
+    this.get_relationship_DescribesTreeNode_async = function(ids, from_fields, rel_fields, to_fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.get_relationship_DescribesTreeNode", [ids, from_fields, rel_fields, to_fields], 1, _callback, _error_callback)
+    }
+
+    this.get_relationship_HasNodeAttribute = function(ids, from_fields, rel_fields, to_fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_relationship_HasNodeAttribute", [ids, from_fields, rel_fields, to_fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.get_relationship_HasNodeAttribute", [ids, from_fields, rel_fields, to_fields]);
+        return resp[0];
+    }
+
+    this.get_relationship_HasNodeAttribute_async = function(ids, from_fields, rel_fields, to_fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.get_relationship_HasNodeAttribute", [ids, from_fields, rel_fields, to_fields], 1, _callback, _error_callback)
     }
 
     this.get_relationship_Displays = function(ids, from_fields, rel_fields, to_fields)
@@ -2060,6 +3658,30 @@ function CDMI_EntityAPI(url) {
 	json_call_ajax_async("CDMI_EntityAPI.get_relationship_IsEncompassedIn", [ids, from_fields, rel_fields, to_fields], 1, _callback, _error_callback)
     }
 
+    this.get_relationship_Formulated = function(ids, from_fields, rel_fields, to_fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_relationship_Formulated", [ids, from_fields, rel_fields, to_fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.get_relationship_Formulated", [ids, from_fields, rel_fields, to_fields]);
+        return resp[0];
+    }
+
+    this.get_relationship_Formulated_async = function(ids, from_fields, rel_fields, to_fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.get_relationship_Formulated", [ids, from_fields, rel_fields, to_fields], 1, _callback, _error_callback)
+    }
+
+    this.get_relationship_WasFormulatedBy = function(ids, from_fields, rel_fields, to_fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_relationship_WasFormulatedBy", [ids, from_fields, rel_fields, to_fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.get_relationship_WasFormulatedBy", [ids, from_fields, rel_fields, to_fields]);
+        return resp[0];
+    }
+
+    this.get_relationship_WasFormulatedBy_async = function(ids, from_fields, rel_fields, to_fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.get_relationship_WasFormulatedBy", [ids, from_fields, rel_fields, to_fields], 1, _callback, _error_callback)
+    }
+
     this.get_relationship_GeneratedLevelsFor = function(ids, from_fields, rel_fields, to_fields)
     {
 	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_relationship_GeneratedLevelsFor", [ids, from_fields, rel_fields, to_fields]);
@@ -2084,28 +3706,52 @@ function CDMI_EntityAPI(url) {
 	json_call_ajax_async("CDMI_EntityAPI.get_relationship_WasGeneratedFrom", [ids, from_fields, rel_fields, to_fields], 1, _callback, _error_callback)
     }
 
-    this.get_relationship_HasAssertionFrom = function(ids, from_fields, rel_fields, to_fields)
+    this.get_relationship_GenomeParentOf = function(ids, from_fields, rel_fields, to_fields)
     {
-	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_relationship_HasAssertionFrom", [ids, from_fields, rel_fields, to_fields]);
-//	var resp = json_call_sync("CDMI_EntityAPI.get_relationship_HasAssertionFrom", [ids, from_fields, rel_fields, to_fields]);
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_relationship_GenomeParentOf", [ids, from_fields, rel_fields, to_fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.get_relationship_GenomeParentOf", [ids, from_fields, rel_fields, to_fields]);
         return resp[0];
     }
 
-    this.get_relationship_HasAssertionFrom_async = function(ids, from_fields, rel_fields, to_fields, _callback, _error_callback)
+    this.get_relationship_GenomeParentOf_async = function(ids, from_fields, rel_fields, to_fields, _callback, _error_callback)
     {
-	json_call_ajax_async("CDMI_EntityAPI.get_relationship_HasAssertionFrom", [ids, from_fields, rel_fields, to_fields], 1, _callback, _error_callback)
+	json_call_ajax_async("CDMI_EntityAPI.get_relationship_GenomeParentOf", [ids, from_fields, rel_fields, to_fields], 1, _callback, _error_callback)
     }
 
-    this.get_relationship_Asserts = function(ids, from_fields, rel_fields, to_fields)
+    this.get_relationship_DerivedFromGenome = function(ids, from_fields, rel_fields, to_fields)
     {
-	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_relationship_Asserts", [ids, from_fields, rel_fields, to_fields]);
-//	var resp = json_call_sync("CDMI_EntityAPI.get_relationship_Asserts", [ids, from_fields, rel_fields, to_fields]);
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_relationship_DerivedFromGenome", [ids, from_fields, rel_fields, to_fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.get_relationship_DerivedFromGenome", [ids, from_fields, rel_fields, to_fields]);
         return resp[0];
     }
 
-    this.get_relationship_Asserts_async = function(ids, from_fields, rel_fields, to_fields, _callback, _error_callback)
+    this.get_relationship_DerivedFromGenome_async = function(ids, from_fields, rel_fields, to_fields, _callback, _error_callback)
     {
-	json_call_ajax_async("CDMI_EntityAPI.get_relationship_Asserts", [ids, from_fields, rel_fields, to_fields], 1, _callback, _error_callback)
+	json_call_ajax_async("CDMI_EntityAPI.get_relationship_DerivedFromGenome", [ids, from_fields, rel_fields, to_fields], 1, _callback, _error_callback)
+    }
+
+    this.get_relationship_HasAssociatedMeasurement = function(ids, from_fields, rel_fields, to_fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_relationship_HasAssociatedMeasurement", [ids, from_fields, rel_fields, to_fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.get_relationship_HasAssociatedMeasurement", [ids, from_fields, rel_fields, to_fields]);
+        return resp[0];
+    }
+
+    this.get_relationship_HasAssociatedMeasurement_async = function(ids, from_fields, rel_fields, to_fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.get_relationship_HasAssociatedMeasurement", [ids, from_fields, rel_fields, to_fields], 1, _callback, _error_callback)
+    }
+
+    this.get_relationship_MeasuresPhenotype = function(ids, from_fields, rel_fields, to_fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_relationship_MeasuresPhenotype", [ids, from_fields, rel_fields, to_fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.get_relationship_MeasuresPhenotype", [ids, from_fields, rel_fields, to_fields]);
+        return resp[0];
+    }
+
+    this.get_relationship_MeasuresPhenotype_async = function(ids, from_fields, rel_fields, to_fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.get_relationship_MeasuresPhenotype", [ids, from_fields, rel_fields, to_fields], 1, _callback, _error_callback)
     }
 
     this.get_relationship_HasCompoundAliasFrom = function(ids, from_fields, rel_fields, to_fields)
@@ -2132,6 +3778,30 @@ function CDMI_EntityAPI(url) {
 	json_call_ajax_async("CDMI_EntityAPI.get_relationship_UsesAliasForCompound", [ids, from_fields, rel_fields, to_fields], 1, _callback, _error_callback)
     }
 
+    this.get_relationship_HasExperimentalUnit = function(ids, from_fields, rel_fields, to_fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_relationship_HasExperimentalUnit", [ids, from_fields, rel_fields, to_fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.get_relationship_HasExperimentalUnit", [ids, from_fields, rel_fields, to_fields]);
+        return resp[0];
+    }
+
+    this.get_relationship_HasExperimentalUnit_async = function(ids, from_fields, rel_fields, to_fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.get_relationship_HasExperimentalUnit", [ids, from_fields, rel_fields, to_fields], 1, _callback, _error_callback)
+    }
+
+    this.get_relationship_IsExperimentalUnitOf = function(ids, from_fields, rel_fields, to_fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_relationship_IsExperimentalUnitOf", [ids, from_fields, rel_fields, to_fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.get_relationship_IsExperimentalUnitOf", [ids, from_fields, rel_fields, to_fields]);
+        return resp[0];
+    }
+
+    this.get_relationship_IsExperimentalUnitOf_async = function(ids, from_fields, rel_fields, to_fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.get_relationship_IsExperimentalUnitOf", [ids, from_fields, rel_fields, to_fields], 1, _callback, _error_callback)
+    }
+
     this.get_relationship_HasIndicatedSignalFrom = function(ids, from_fields, rel_fields, to_fields)
     {
 	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_relationship_HasIndicatedSignalFrom", [ids, from_fields, rel_fields, to_fields]);
@@ -2154,6 +3824,54 @@ function CDMI_EntityAPI(url) {
     this.get_relationship_IndicatesSignalFor_async = function(ids, from_fields, rel_fields, to_fields, _callback, _error_callback)
     {
 	json_call_ajax_async("CDMI_EntityAPI.get_relationship_IndicatesSignalFor", [ids, from_fields, rel_fields, to_fields], 1, _callback, _error_callback)
+    }
+
+    this.get_relationship_HasKnockoutIn = function(ids, from_fields, rel_fields, to_fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_relationship_HasKnockoutIn", [ids, from_fields, rel_fields, to_fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.get_relationship_HasKnockoutIn", [ids, from_fields, rel_fields, to_fields]);
+        return resp[0];
+    }
+
+    this.get_relationship_HasKnockoutIn_async = function(ids, from_fields, rel_fields, to_fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.get_relationship_HasKnockoutIn", [ids, from_fields, rel_fields, to_fields], 1, _callback, _error_callback)
+    }
+
+    this.get_relationship_KnockedOutIn = function(ids, from_fields, rel_fields, to_fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_relationship_KnockedOutIn", [ids, from_fields, rel_fields, to_fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.get_relationship_KnockedOutIn", [ids, from_fields, rel_fields, to_fields]);
+        return resp[0];
+    }
+
+    this.get_relationship_KnockedOutIn_async = function(ids, from_fields, rel_fields, to_fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.get_relationship_KnockedOutIn", [ids, from_fields, rel_fields, to_fields], 1, _callback, _error_callback)
+    }
+
+    this.get_relationship_HasMeasurement = function(ids, from_fields, rel_fields, to_fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_relationship_HasMeasurement", [ids, from_fields, rel_fields, to_fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.get_relationship_HasMeasurement", [ids, from_fields, rel_fields, to_fields]);
+        return resp[0];
+    }
+
+    this.get_relationship_HasMeasurement_async = function(ids, from_fields, rel_fields, to_fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.get_relationship_HasMeasurement", [ids, from_fields, rel_fields, to_fields], 1, _callback, _error_callback)
+    }
+
+    this.get_relationship_IsMeasureOf = function(ids, from_fields, rel_fields, to_fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_relationship_IsMeasureOf", [ids, from_fields, rel_fields, to_fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.get_relationship_IsMeasureOf", [ids, from_fields, rel_fields, to_fields]);
+        return resp[0];
+    }
+
+    this.get_relationship_IsMeasureOf_async = function(ids, from_fields, rel_fields, to_fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.get_relationship_IsMeasureOf", [ids, from_fields, rel_fields, to_fields], 1, _callback, _error_callback)
     }
 
     this.get_relationship_HasMember = function(ids, from_fields, rel_fields, to_fields)
@@ -2228,6 +3946,30 @@ function CDMI_EntityAPI(url) {
 	json_call_ajax_async("CDMI_EntityAPI.get_relationship_IsPresentIn", [ids, from_fields, rel_fields, to_fields], 1, _callback, _error_callback)
     }
 
+    this.get_relationship_HasProteinMember = function(ids, from_fields, rel_fields, to_fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_relationship_HasProteinMember", [ids, from_fields, rel_fields, to_fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.get_relationship_HasProteinMember", [ids, from_fields, rel_fields, to_fields]);
+        return resp[0];
+    }
+
+    this.get_relationship_HasProteinMember_async = function(ids, from_fields, rel_fields, to_fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.get_relationship_HasProteinMember", [ids, from_fields, rel_fields, to_fields], 1, _callback, _error_callback)
+    }
+
+    this.get_relationship_IsProteinMemberOf = function(ids, from_fields, rel_fields, to_fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_relationship_IsProteinMemberOf", [ids, from_fields, rel_fields, to_fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.get_relationship_IsProteinMemberOf", [ids, from_fields, rel_fields, to_fields]);
+        return resp[0];
+    }
+
+    this.get_relationship_IsProteinMemberOf_async = function(ids, from_fields, rel_fields, to_fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.get_relationship_IsProteinMemberOf", [ids, from_fields, rel_fields, to_fields], 1, _callback, _error_callback)
+    }
+
     this.get_relationship_HasReactionAliasFrom = function(ids, from_fields, rel_fields, to_fields)
     {
 	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_relationship_HasReactionAliasFrom", [ids, from_fields, rel_fields, to_fields]);
@@ -2274,6 +4016,30 @@ function CDMI_EntityAPI(url) {
     this.get_relationship_IsRepresentedIn_async = function(ids, from_fields, rel_fields, to_fields, _callback, _error_callback)
     {
 	json_call_ajax_async("CDMI_EntityAPI.get_relationship_IsRepresentedIn", [ids, from_fields, rel_fields, to_fields], 1, _callback, _error_callback)
+    }
+
+    this.get_relationship_HasRequirementOf = function(ids, from_fields, rel_fields, to_fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_relationship_HasRequirementOf", [ids, from_fields, rel_fields, to_fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.get_relationship_HasRequirementOf", [ids, from_fields, rel_fields, to_fields]);
+        return resp[0];
+    }
+
+    this.get_relationship_HasRequirementOf_async = function(ids, from_fields, rel_fields, to_fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.get_relationship_HasRequirementOf", [ids, from_fields, rel_fields, to_fields], 1, _callback, _error_callback)
+    }
+
+    this.get_relationship_IsARequirementOf = function(ids, from_fields, rel_fields, to_fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_relationship_IsARequirementOf", [ids, from_fields, rel_fields, to_fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.get_relationship_IsARequirementOf", [ids, from_fields, rel_fields, to_fields]);
+        return resp[0];
+    }
+
+    this.get_relationship_IsARequirementOf_async = function(ids, from_fields, rel_fields, to_fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.get_relationship_IsARequirementOf", [ids, from_fields, rel_fields, to_fields], 1, _callback, _error_callback)
     }
 
     this.get_relationship_HasResultsIn = function(ids, from_fields, rel_fields, to_fields)
@@ -2348,6 +4114,54 @@ function CDMI_EntityAPI(url) {
 	json_call_ajax_async("CDMI_EntityAPI.get_relationship_IsStepOf", [ids, from_fields, rel_fields, to_fields], 1, _callback, _error_callback)
     }
 
+    this.get_relationship_HasTrait = function(ids, from_fields, rel_fields, to_fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_relationship_HasTrait", [ids, from_fields, rel_fields, to_fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.get_relationship_HasTrait", [ids, from_fields, rel_fields, to_fields]);
+        return resp[0];
+    }
+
+    this.get_relationship_HasTrait_async = function(ids, from_fields, rel_fields, to_fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.get_relationship_HasTrait", [ids, from_fields, rel_fields, to_fields], 1, _callback, _error_callback)
+    }
+
+    this.get_relationship_Measures = function(ids, from_fields, rel_fields, to_fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_relationship_Measures", [ids, from_fields, rel_fields, to_fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.get_relationship_Measures", [ids, from_fields, rel_fields, to_fields]);
+        return resp[0];
+    }
+
+    this.get_relationship_Measures_async = function(ids, from_fields, rel_fields, to_fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.get_relationship_Measures", [ids, from_fields, rel_fields, to_fields], 1, _callback, _error_callback)
+    }
+
+    this.get_relationship_HasUnits = function(ids, from_fields, rel_fields, to_fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_relationship_HasUnits", [ids, from_fields, rel_fields, to_fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.get_relationship_HasUnits", [ids, from_fields, rel_fields, to_fields]);
+        return resp[0];
+    }
+
+    this.get_relationship_HasUnits_async = function(ids, from_fields, rel_fields, to_fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.get_relationship_HasUnits", [ids, from_fields, rel_fields, to_fields], 1, _callback, _error_callback)
+    }
+
+    this.get_relationship_IsLocated = function(ids, from_fields, rel_fields, to_fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_relationship_IsLocated", [ids, from_fields, rel_fields, to_fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.get_relationship_IsLocated", [ids, from_fields, rel_fields, to_fields]);
+        return resp[0];
+    }
+
+    this.get_relationship_IsLocated_async = function(ids, from_fields, rel_fields, to_fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.get_relationship_IsLocated", [ids, from_fields, rel_fields, to_fields], 1, _callback, _error_callback)
+    }
+
     this.get_relationship_HasUsage = function(ids, from_fields, rel_fields, to_fields)
     {
 	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_relationship_HasUsage", [ids, from_fields, rel_fields, to_fields]);
@@ -2396,6 +4210,78 @@ function CDMI_EntityAPI(url) {
 	json_call_ajax_async("CDMI_EntityAPI.get_relationship_HasValueIn", [ids, from_fields, rel_fields, to_fields], 1, _callback, _error_callback)
     }
 
+    this.get_relationship_HasVariationIn = function(ids, from_fields, rel_fields, to_fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_relationship_HasVariationIn", [ids, from_fields, rel_fields, to_fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.get_relationship_HasVariationIn", [ids, from_fields, rel_fields, to_fields]);
+        return resp[0];
+    }
+
+    this.get_relationship_HasVariationIn_async = function(ids, from_fields, rel_fields, to_fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.get_relationship_HasVariationIn", [ids, from_fields, rel_fields, to_fields], 1, _callback, _error_callback)
+    }
+
+    this.get_relationship_IsVariedIn = function(ids, from_fields, rel_fields, to_fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_relationship_IsVariedIn", [ids, from_fields, rel_fields, to_fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.get_relationship_IsVariedIn", [ids, from_fields, rel_fields, to_fields]);
+        return resp[0];
+    }
+
+    this.get_relationship_IsVariedIn_async = function(ids, from_fields, rel_fields, to_fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.get_relationship_IsVariedIn", [ids, from_fields, rel_fields, to_fields], 1, _callback, _error_callback)
+    }
+
+    this.get_relationship_Impacts = function(ids, from_fields, rel_fields, to_fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_relationship_Impacts", [ids, from_fields, rel_fields, to_fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.get_relationship_Impacts", [ids, from_fields, rel_fields, to_fields]);
+        return resp[0];
+    }
+
+    this.get_relationship_Impacts_async = function(ids, from_fields, rel_fields, to_fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.get_relationship_Impacts", [ids, from_fields, rel_fields, to_fields], 1, _callback, _error_callback)
+    }
+
+    this.get_relationship_IsImpactedBy = function(ids, from_fields, rel_fields, to_fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_relationship_IsImpactedBy", [ids, from_fields, rel_fields, to_fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.get_relationship_IsImpactedBy", [ids, from_fields, rel_fields, to_fields]);
+        return resp[0];
+    }
+
+    this.get_relationship_IsImpactedBy_async = function(ids, from_fields, rel_fields, to_fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.get_relationship_IsImpactedBy", [ids, from_fields, rel_fields, to_fields], 1, _callback, _error_callback)
+    }
+
+    this.get_relationship_ImplementsReaction = function(ids, from_fields, rel_fields, to_fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_relationship_ImplementsReaction", [ids, from_fields, rel_fields, to_fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.get_relationship_ImplementsReaction", [ids, from_fields, rel_fields, to_fields]);
+        return resp[0];
+    }
+
+    this.get_relationship_ImplementsReaction_async = function(ids, from_fields, rel_fields, to_fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.get_relationship_ImplementsReaction", [ids, from_fields, rel_fields, to_fields], 1, _callback, _error_callback)
+    }
+
+    this.get_relationship_ImplementedBasedOn = function(ids, from_fields, rel_fields, to_fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_relationship_ImplementedBasedOn", [ids, from_fields, rel_fields, to_fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.get_relationship_ImplementedBasedOn", [ids, from_fields, rel_fields, to_fields]);
+        return resp[0];
+    }
+
+    this.get_relationship_ImplementedBasedOn_async = function(ids, from_fields, rel_fields, to_fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.get_relationship_ImplementedBasedOn", [ids, from_fields, rel_fields, to_fields], 1, _callback, _error_callback)
+    }
+
     this.get_relationship_Includes = function(ids, from_fields, rel_fields, to_fields)
     {
 	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_relationship_Includes", [ids, from_fields, rel_fields, to_fields]);
@@ -2418,6 +4304,78 @@ function CDMI_EntityAPI(url) {
     this.get_relationship_IsIncludedIn_async = function(ids, from_fields, rel_fields, to_fields, _callback, _error_callback)
     {
 	json_call_ajax_async("CDMI_EntityAPI.get_relationship_IsIncludedIn", [ids, from_fields, rel_fields, to_fields], 1, _callback, _error_callback)
+    }
+
+    this.get_relationship_IncludesAdditionalCompounds = function(ids, from_fields, rel_fields, to_fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_relationship_IncludesAdditionalCompounds", [ids, from_fields, rel_fields, to_fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.get_relationship_IncludesAdditionalCompounds", [ids, from_fields, rel_fields, to_fields]);
+        return resp[0];
+    }
+
+    this.get_relationship_IncludesAdditionalCompounds_async = function(ids, from_fields, rel_fields, to_fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.get_relationship_IncludesAdditionalCompounds", [ids, from_fields, rel_fields, to_fields], 1, _callback, _error_callback)
+    }
+
+    this.get_relationship_IncludedIn = function(ids, from_fields, rel_fields, to_fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_relationship_IncludedIn", [ids, from_fields, rel_fields, to_fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.get_relationship_IncludedIn", [ids, from_fields, rel_fields, to_fields]);
+        return resp[0];
+    }
+
+    this.get_relationship_IncludedIn_async = function(ids, from_fields, rel_fields, to_fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.get_relationship_IncludedIn", [ids, from_fields, rel_fields, to_fields], 1, _callback, _error_callback)
+    }
+
+    this.get_relationship_IncludesAlignmentRow = function(ids, from_fields, rel_fields, to_fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_relationship_IncludesAlignmentRow", [ids, from_fields, rel_fields, to_fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.get_relationship_IncludesAlignmentRow", [ids, from_fields, rel_fields, to_fields]);
+        return resp[0];
+    }
+
+    this.get_relationship_IncludesAlignmentRow_async = function(ids, from_fields, rel_fields, to_fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.get_relationship_IncludesAlignmentRow", [ids, from_fields, rel_fields, to_fields], 1, _callback, _error_callback)
+    }
+
+    this.get_relationship_IsAlignmentRowIn = function(ids, from_fields, rel_fields, to_fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_relationship_IsAlignmentRowIn", [ids, from_fields, rel_fields, to_fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.get_relationship_IsAlignmentRowIn", [ids, from_fields, rel_fields, to_fields]);
+        return resp[0];
+    }
+
+    this.get_relationship_IsAlignmentRowIn_async = function(ids, from_fields, rel_fields, to_fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.get_relationship_IsAlignmentRowIn", [ids, from_fields, rel_fields, to_fields], 1, _callback, _error_callback)
+    }
+
+    this.get_relationship_IncludesPart = function(ids, from_fields, rel_fields, to_fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_relationship_IncludesPart", [ids, from_fields, rel_fields, to_fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.get_relationship_IncludesPart", [ids, from_fields, rel_fields, to_fields]);
+        return resp[0];
+    }
+
+    this.get_relationship_IncludesPart_async = function(ids, from_fields, rel_fields, to_fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.get_relationship_IncludesPart", [ids, from_fields, rel_fields, to_fields], 1, _callback, _error_callback)
+    }
+
+    this.get_relationship_IsPartOf = function(ids, from_fields, rel_fields, to_fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_relationship_IsPartOf", [ids, from_fields, rel_fields, to_fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.get_relationship_IsPartOf", [ids, from_fields, rel_fields, to_fields]);
+        return resp[0];
+    }
+
+    this.get_relationship_IsPartOf_async = function(ids, from_fields, rel_fields, to_fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.get_relationship_IsPartOf", [ids, from_fields, rel_fields, to_fields], 1, _callback, _error_callback)
     }
 
     this.get_relationship_IndicatedLevelsFor = function(ids, from_fields, rel_fields, to_fields)
@@ -2468,54 +4426,6 @@ function CDMI_EntityAPI(url) {
 	json_call_ajax_async("CDMI_EntityAPI.get_relationship_IsInvolvedIn", [ids, from_fields, rel_fields, to_fields], 1, _callback, _error_callback)
     }
 
-    this.get_relationship_IsARequirementIn = function(ids, from_fields, rel_fields, to_fields)
-    {
-	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_relationship_IsARequirementIn", [ids, from_fields, rel_fields, to_fields]);
-//	var resp = json_call_sync("CDMI_EntityAPI.get_relationship_IsARequirementIn", [ids, from_fields, rel_fields, to_fields]);
-        return resp[0];
-    }
-
-    this.get_relationship_IsARequirementIn_async = function(ids, from_fields, rel_fields, to_fields, _callback, _error_callback)
-    {
-	json_call_ajax_async("CDMI_EntityAPI.get_relationship_IsARequirementIn", [ids, from_fields, rel_fields, to_fields], 1, _callback, _error_callback)
-    }
-
-    this.get_relationship_IsARequirementOf = function(ids, from_fields, rel_fields, to_fields)
-    {
-	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_relationship_IsARequirementOf", [ids, from_fields, rel_fields, to_fields]);
-//	var resp = json_call_sync("CDMI_EntityAPI.get_relationship_IsARequirementOf", [ids, from_fields, rel_fields, to_fields]);
-        return resp[0];
-    }
-
-    this.get_relationship_IsARequirementOf_async = function(ids, from_fields, rel_fields, to_fields, _callback, _error_callback)
-    {
-	json_call_ajax_async("CDMI_EntityAPI.get_relationship_IsARequirementOf", [ids, from_fields, rel_fields, to_fields], 1, _callback, _error_callback)
-    }
-
-    this.get_relationship_IsAlignedIn = function(ids, from_fields, rel_fields, to_fields)
-    {
-	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_relationship_IsAlignedIn", [ids, from_fields, rel_fields, to_fields]);
-//	var resp = json_call_sync("CDMI_EntityAPI.get_relationship_IsAlignedIn", [ids, from_fields, rel_fields, to_fields]);
-        return resp[0];
-    }
-
-    this.get_relationship_IsAlignedIn_async = function(ids, from_fields, rel_fields, to_fields, _callback, _error_callback)
-    {
-	json_call_ajax_async("CDMI_EntityAPI.get_relationship_IsAlignedIn", [ids, from_fields, rel_fields, to_fields], 1, _callback, _error_callback)
-    }
-
-    this.get_relationship_IsAlignmentFor = function(ids, from_fields, rel_fields, to_fields)
-    {
-	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_relationship_IsAlignmentFor", [ids, from_fields, rel_fields, to_fields]);
-//	var resp = json_call_sync("CDMI_EntityAPI.get_relationship_IsAlignmentFor", [ids, from_fields, rel_fields, to_fields]);
-        return resp[0];
-    }
-
-    this.get_relationship_IsAlignmentFor_async = function(ids, from_fields, rel_fields, to_fields, _callback, _error_callback)
-    {
-	json_call_ajax_async("CDMI_EntityAPI.get_relationship_IsAlignmentFor", [ids, from_fields, rel_fields, to_fields], 1, _callback, _error_callback)
-    }
-
     this.get_relationship_IsAnnotatedBy = function(ids, from_fields, rel_fields, to_fields)
     {
 	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_relationship_IsAnnotatedBy", [ids, from_fields, rel_fields, to_fields]);
@@ -2540,28 +4450,28 @@ function CDMI_EntityAPI(url) {
 	json_call_ajax_async("CDMI_EntityAPI.get_relationship_Annotates", [ids, from_fields, rel_fields, to_fields], 1, _callback, _error_callback)
     }
 
-    this.get_relationship_IsBindingSiteFor = function(ids, from_fields, rel_fields, to_fields)
+    this.get_relationship_IsAssayOf = function(ids, from_fields, rel_fields, to_fields)
     {
-	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_relationship_IsBindingSiteFor", [ids, from_fields, rel_fields, to_fields]);
-//	var resp = json_call_sync("CDMI_EntityAPI.get_relationship_IsBindingSiteFor", [ids, from_fields, rel_fields, to_fields]);
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_relationship_IsAssayOf", [ids, from_fields, rel_fields, to_fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.get_relationship_IsAssayOf", [ids, from_fields, rel_fields, to_fields]);
         return resp[0];
     }
 
-    this.get_relationship_IsBindingSiteFor_async = function(ids, from_fields, rel_fields, to_fields, _callback, _error_callback)
+    this.get_relationship_IsAssayOf_async = function(ids, from_fields, rel_fields, to_fields, _callback, _error_callback)
     {
-	json_call_ajax_async("CDMI_EntityAPI.get_relationship_IsBindingSiteFor", [ids, from_fields, rel_fields, to_fields], 1, _callback, _error_callback)
+	json_call_ajax_async("CDMI_EntityAPI.get_relationship_IsAssayOf", [ids, from_fields, rel_fields, to_fields], 1, _callback, _error_callback)
     }
 
-    this.get_relationship_IsBoundBy = function(ids, from_fields, rel_fields, to_fields)
+    this.get_relationship_IsAssayedBy = function(ids, from_fields, rel_fields, to_fields)
     {
-	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_relationship_IsBoundBy", [ids, from_fields, rel_fields, to_fields]);
-//	var resp = json_call_sync("CDMI_EntityAPI.get_relationship_IsBoundBy", [ids, from_fields, rel_fields, to_fields]);
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_relationship_IsAssayedBy", [ids, from_fields, rel_fields, to_fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.get_relationship_IsAssayedBy", [ids, from_fields, rel_fields, to_fields]);
         return resp[0];
     }
 
-    this.get_relationship_IsBoundBy_async = function(ids, from_fields, rel_fields, to_fields, _callback, _error_callback)
+    this.get_relationship_IsAssayedBy_async = function(ids, from_fields, rel_fields, to_fields, _callback, _error_callback)
     {
-	json_call_ajax_async("CDMI_EntityAPI.get_relationship_IsBoundBy", [ids, from_fields, rel_fields, to_fields], 1, _callback, _error_callback)
+	json_call_ajax_async("CDMI_EntityAPI.get_relationship_IsAssayedBy", [ids, from_fields, rel_fields, to_fields], 1, _callback, _error_callback)
     }
 
     this.get_relationship_IsClassFor = function(ids, from_fields, rel_fields, to_fields)
@@ -2708,30 +4618,6 @@ function CDMI_EntityAPI(url) {
 	json_call_ajax_async("CDMI_EntityAPI.get_relationship_IsConsistentTo", [ids, from_fields, rel_fields, to_fields], 1, _callback, _error_callback)
     }
 
-    this.get_relationship_IsControlledUsing = function(ids, from_fields, rel_fields, to_fields)
-    {
-	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_relationship_IsControlledUsing", [ids, from_fields, rel_fields, to_fields]);
-//	var resp = json_call_sync("CDMI_EntityAPI.get_relationship_IsControlledUsing", [ids, from_fields, rel_fields, to_fields]);
-        return resp[0];
-    }
-
-    this.get_relationship_IsControlledUsing_async = function(ids, from_fields, rel_fields, to_fields, _callback, _error_callback)
-    {
-	json_call_ajax_async("CDMI_EntityAPI.get_relationship_IsControlledUsing", [ids, from_fields, rel_fields, to_fields], 1, _callback, _error_callback)
-    }
-
-    this.get_relationship_Controls = function(ids, from_fields, rel_fields, to_fields)
-    {
-	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_relationship_Controls", [ids, from_fields, rel_fields, to_fields]);
-//	var resp = json_call_sync("CDMI_EntityAPI.get_relationship_Controls", [ids, from_fields, rel_fields, to_fields]);
-        return resp[0];
-    }
-
-    this.get_relationship_Controls_async = function(ids, from_fields, rel_fields, to_fields, _callback, _error_callback)
-    {
-	json_call_ajax_async("CDMI_EntityAPI.get_relationship_Controls", [ids, from_fields, rel_fields, to_fields], 1, _callback, _error_callback)
-    }
-
     this.get_relationship_IsCoregulatedWith = function(ids, from_fields, rel_fields, to_fields)
     {
 	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_relationship_IsCoregulatedWith", [ids, from_fields, rel_fields, to_fields]);
@@ -2780,54 +4666,6 @@ function CDMI_EntityAPI(url) {
 	json_call_ajax_async("CDMI_EntityAPI.get_relationship_IsCoupledWith", [ids, from_fields, rel_fields, to_fields], 1, _callback, _error_callback)
     }
 
-    this.get_relationship_IsDefaultFor = function(ids, from_fields, rel_fields, to_fields)
-    {
-	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_relationship_IsDefaultFor", [ids, from_fields, rel_fields, to_fields]);
-//	var resp = json_call_sync("CDMI_EntityAPI.get_relationship_IsDefaultFor", [ids, from_fields, rel_fields, to_fields]);
-        return resp[0];
-    }
-
-    this.get_relationship_IsDefaultFor_async = function(ids, from_fields, rel_fields, to_fields, _callback, _error_callback)
-    {
-	json_call_ajax_async("CDMI_EntityAPI.get_relationship_IsDefaultFor", [ids, from_fields, rel_fields, to_fields], 1, _callback, _error_callback)
-    }
-
-    this.get_relationship_RunsByDefaultIn = function(ids, from_fields, rel_fields, to_fields)
-    {
-	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_relationship_RunsByDefaultIn", [ids, from_fields, rel_fields, to_fields]);
-//	var resp = json_call_sync("CDMI_EntityAPI.get_relationship_RunsByDefaultIn", [ids, from_fields, rel_fields, to_fields]);
-        return resp[0];
-    }
-
-    this.get_relationship_RunsByDefaultIn_async = function(ids, from_fields, rel_fields, to_fields, _callback, _error_callback)
-    {
-	json_call_ajax_async("CDMI_EntityAPI.get_relationship_RunsByDefaultIn", [ids, from_fields, rel_fields, to_fields], 1, _callback, _error_callback)
-    }
-
-    this.get_relationship_IsDefaultLocationOf = function(ids, from_fields, rel_fields, to_fields)
-    {
-	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_relationship_IsDefaultLocationOf", [ids, from_fields, rel_fields, to_fields]);
-//	var resp = json_call_sync("CDMI_EntityAPI.get_relationship_IsDefaultLocationOf", [ids, from_fields, rel_fields, to_fields]);
-        return resp[0];
-    }
-
-    this.get_relationship_IsDefaultLocationOf_async = function(ids, from_fields, rel_fields, to_fields, _callback, _error_callback)
-    {
-	json_call_ajax_async("CDMI_EntityAPI.get_relationship_IsDefaultLocationOf", [ids, from_fields, rel_fields, to_fields], 1, _callback, _error_callback)
-    }
-
-    this.get_relationship_HasDefaultLocation = function(ids, from_fields, rel_fields, to_fields)
-    {
-	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_relationship_HasDefaultLocation", [ids, from_fields, rel_fields, to_fields]);
-//	var resp = json_call_sync("CDMI_EntityAPI.get_relationship_HasDefaultLocation", [ids, from_fields, rel_fields, to_fields]);
-        return resp[0];
-    }
-
-    this.get_relationship_HasDefaultLocation_async = function(ids, from_fields, rel_fields, to_fields, _callback, _error_callback)
-    {
-	json_call_ajax_async("CDMI_EntityAPI.get_relationship_HasDefaultLocation", [ids, from_fields, rel_fields, to_fields], 1, _callback, _error_callback)
-    }
-
     this.get_relationship_IsDeterminedBy = function(ids, from_fields, rel_fields, to_fields)
     {
 	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_relationship_IsDeterminedBy", [ids, from_fields, rel_fields, to_fields]);
@@ -2874,6 +4712,30 @@ function CDMI_EntityAPI(url) {
     this.get_relationship_IsDivisionOf_async = function(ids, from_fields, rel_fields, to_fields, _callback, _error_callback)
     {
 	json_call_ajax_async("CDMI_EntityAPI.get_relationship_IsDivisionOf", [ids, from_fields, rel_fields, to_fields], 1, _callback, _error_callback)
+    }
+
+    this.get_relationship_IsExecutedAs = function(ids, from_fields, rel_fields, to_fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_relationship_IsExecutedAs", [ids, from_fields, rel_fields, to_fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.get_relationship_IsExecutedAs", [ids, from_fields, rel_fields, to_fields]);
+        return resp[0];
+    }
+
+    this.get_relationship_IsExecutedAs_async = function(ids, from_fields, rel_fields, to_fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.get_relationship_IsExecutedAs", [ids, from_fields, rel_fields, to_fields], 1, _callback, _error_callback)
+    }
+
+    this.get_relationship_IsExecutionOf = function(ids, from_fields, rel_fields, to_fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_relationship_IsExecutionOf", [ids, from_fields, rel_fields, to_fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.get_relationship_IsExecutionOf", [ids, from_fields, rel_fields, to_fields]);
+        return resp[0];
+    }
+
+    this.get_relationship_IsExecutionOf_async = function(ids, from_fields, rel_fields, to_fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.get_relationship_IsExecutionOf", [ids, from_fields, rel_fields, to_fields], 1, _callback, _error_callback)
     }
 
     this.get_relationship_IsExemplarOf = function(ids, from_fields, rel_fields, to_fields)
@@ -3092,6 +4954,30 @@ function CDMI_EntityAPI(url) {
 	json_call_ajax_async("CDMI_EntityAPI.get_relationship_IsLocusFor", [ids, from_fields, rel_fields, to_fields], 1, _callback, _error_callback)
     }
 
+    this.get_relationship_IsMeasurementMethodOf = function(ids, from_fields, rel_fields, to_fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_relationship_IsMeasurementMethodOf", [ids, from_fields, rel_fields, to_fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.get_relationship_IsMeasurementMethodOf", [ids, from_fields, rel_fields, to_fields]);
+        return resp[0];
+    }
+
+    this.get_relationship_IsMeasurementMethodOf_async = function(ids, from_fields, rel_fields, to_fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.get_relationship_IsMeasurementMethodOf", [ids, from_fields, rel_fields, to_fields], 1, _callback, _error_callback)
+    }
+
+    this.get_relationship_WasMeasuredBy = function(ids, from_fields, rel_fields, to_fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_relationship_WasMeasuredBy", [ids, from_fields, rel_fields, to_fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.get_relationship_WasMeasuredBy", [ids, from_fields, rel_fields, to_fields]);
+        return resp[0];
+    }
+
+    this.get_relationship_WasMeasuredBy_async = function(ids, from_fields, rel_fields, to_fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.get_relationship_WasMeasuredBy", [ids, from_fields, rel_fields, to_fields], 1, _callback, _error_callback)
+    }
+
     this.get_relationship_IsModeledBy = function(ids, from_fields, rel_fields, to_fields)
     {
 	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_relationship_IsModeledBy", [ids, from_fields, rel_fields, to_fields]);
@@ -3116,28 +5002,52 @@ function CDMI_EntityAPI(url) {
 	json_call_ajax_async("CDMI_EntityAPI.get_relationship_Models", [ids, from_fields, rel_fields, to_fields], 1, _callback, _error_callback)
     }
 
-    this.get_relationship_IsNamedBy = function(ids, from_fields, rel_fields, to_fields)
+    this.get_relationship_IsModifiedToBuildAlignment = function(ids, from_fields, rel_fields, to_fields)
     {
-	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_relationship_IsNamedBy", [ids, from_fields, rel_fields, to_fields]);
-//	var resp = json_call_sync("CDMI_EntityAPI.get_relationship_IsNamedBy", [ids, from_fields, rel_fields, to_fields]);
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_relationship_IsModifiedToBuildAlignment", [ids, from_fields, rel_fields, to_fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.get_relationship_IsModifiedToBuildAlignment", [ids, from_fields, rel_fields, to_fields]);
         return resp[0];
     }
 
-    this.get_relationship_IsNamedBy_async = function(ids, from_fields, rel_fields, to_fields, _callback, _error_callback)
+    this.get_relationship_IsModifiedToBuildAlignment_async = function(ids, from_fields, rel_fields, to_fields, _callback, _error_callback)
     {
-	json_call_ajax_async("CDMI_EntityAPI.get_relationship_IsNamedBy", [ids, from_fields, rel_fields, to_fields], 1, _callback, _error_callback)
+	json_call_ajax_async("CDMI_EntityAPI.get_relationship_IsModifiedToBuildAlignment", [ids, from_fields, rel_fields, to_fields], 1, _callback, _error_callback)
     }
 
-    this.get_relationship_Names = function(ids, from_fields, rel_fields, to_fields)
+    this.get_relationship_IsModificationOfAlignment = function(ids, from_fields, rel_fields, to_fields)
     {
-	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_relationship_Names", [ids, from_fields, rel_fields, to_fields]);
-//	var resp = json_call_sync("CDMI_EntityAPI.get_relationship_Names", [ids, from_fields, rel_fields, to_fields]);
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_relationship_IsModificationOfAlignment", [ids, from_fields, rel_fields, to_fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.get_relationship_IsModificationOfAlignment", [ids, from_fields, rel_fields, to_fields]);
         return resp[0];
     }
 
-    this.get_relationship_Names_async = function(ids, from_fields, rel_fields, to_fields, _callback, _error_callback)
+    this.get_relationship_IsModificationOfAlignment_async = function(ids, from_fields, rel_fields, to_fields, _callback, _error_callback)
     {
-	json_call_ajax_async("CDMI_EntityAPI.get_relationship_Names", [ids, from_fields, rel_fields, to_fields], 1, _callback, _error_callback)
+	json_call_ajax_async("CDMI_EntityAPI.get_relationship_IsModificationOfAlignment", [ids, from_fields, rel_fields, to_fields], 1, _callback, _error_callback)
+    }
+
+    this.get_relationship_IsModifiedToBuildTree = function(ids, from_fields, rel_fields, to_fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_relationship_IsModifiedToBuildTree", [ids, from_fields, rel_fields, to_fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.get_relationship_IsModifiedToBuildTree", [ids, from_fields, rel_fields, to_fields]);
+        return resp[0];
+    }
+
+    this.get_relationship_IsModifiedToBuildTree_async = function(ids, from_fields, rel_fields, to_fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.get_relationship_IsModifiedToBuildTree", [ids, from_fields, rel_fields, to_fields], 1, _callback, _error_callback)
+    }
+
+    this.get_relationship_IsModificationOfTree = function(ids, from_fields, rel_fields, to_fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_relationship_IsModificationOfTree", [ids, from_fields, rel_fields, to_fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.get_relationship_IsModificationOfTree", [ids, from_fields, rel_fields, to_fields]);
+        return resp[0];
+    }
+
+    this.get_relationship_IsModificationOfTree_async = function(ids, from_fields, rel_fields, to_fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.get_relationship_IsModificationOfTree", [ids, from_fields, rel_fields, to_fields], 1, _callback, _error_callback)
     }
 
     this.get_relationship_IsOwnerOf = function(ids, from_fields, rel_fields, to_fields)
@@ -3164,28 +5074,28 @@ function CDMI_EntityAPI(url) {
 	json_call_ajax_async("CDMI_EntityAPI.get_relationship_IsOwnedBy", [ids, from_fields, rel_fields, to_fields], 1, _callback, _error_callback)
     }
 
-    this.get_relationship_IsProposedLocationOf = function(ids, from_fields, rel_fields, to_fields)
+    this.get_relationship_IsParticipatingAt = function(ids, from_fields, rel_fields, to_fields)
     {
-	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_relationship_IsProposedLocationOf", [ids, from_fields, rel_fields, to_fields]);
-//	var resp = json_call_sync("CDMI_EntityAPI.get_relationship_IsProposedLocationOf", [ids, from_fields, rel_fields, to_fields]);
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_relationship_IsParticipatingAt", [ids, from_fields, rel_fields, to_fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.get_relationship_IsParticipatingAt", [ids, from_fields, rel_fields, to_fields]);
         return resp[0];
     }
 
-    this.get_relationship_IsProposedLocationOf_async = function(ids, from_fields, rel_fields, to_fields, _callback, _error_callback)
+    this.get_relationship_IsParticipatingAt_async = function(ids, from_fields, rel_fields, to_fields, _callback, _error_callback)
     {
-	json_call_ajax_async("CDMI_EntityAPI.get_relationship_IsProposedLocationOf", [ids, from_fields, rel_fields, to_fields], 1, _callback, _error_callback)
+	json_call_ajax_async("CDMI_EntityAPI.get_relationship_IsParticipatingAt", [ids, from_fields, rel_fields, to_fields], 1, _callback, _error_callback)
     }
 
-    this.get_relationship_HasProposedLocationIn = function(ids, from_fields, rel_fields, to_fields)
+    this.get_relationship_ParticipatesAt = function(ids, from_fields, rel_fields, to_fields)
     {
-	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_relationship_HasProposedLocationIn", [ids, from_fields, rel_fields, to_fields]);
-//	var resp = json_call_sync("CDMI_EntityAPI.get_relationship_HasProposedLocationIn", [ids, from_fields, rel_fields, to_fields]);
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_relationship_ParticipatesAt", [ids, from_fields, rel_fields, to_fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.get_relationship_ParticipatesAt", [ids, from_fields, rel_fields, to_fields]);
         return resp[0];
     }
 
-    this.get_relationship_HasProposedLocationIn_async = function(ids, from_fields, rel_fields, to_fields, _callback, _error_callback)
+    this.get_relationship_ParticipatesAt_async = function(ids, from_fields, rel_fields, to_fields, _callback, _error_callback)
     {
-	json_call_ajax_async("CDMI_EntityAPI.get_relationship_HasProposedLocationIn", [ids, from_fields, rel_fields, to_fields], 1, _callback, _error_callback)
+	json_call_ajax_async("CDMI_EntityAPI.get_relationship_ParticipatesAt", [ids, from_fields, rel_fields, to_fields], 1, _callback, _error_callback)
     }
 
     this.get_relationship_IsProteinFor = function(ids, from_fields, rel_fields, to_fields)
@@ -3212,6 +5122,30 @@ function CDMI_EntityAPI(url) {
 	json_call_ajax_async("CDMI_EntityAPI.get_relationship_Produces", [ids, from_fields, rel_fields, to_fields], 1, _callback, _error_callback)
     }
 
+    this.get_relationship_IsReagentIn = function(ids, from_fields, rel_fields, to_fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_relationship_IsReagentIn", [ids, from_fields, rel_fields, to_fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.get_relationship_IsReagentIn", [ids, from_fields, rel_fields, to_fields]);
+        return resp[0];
+    }
+
+    this.get_relationship_IsReagentIn_async = function(ids, from_fields, rel_fields, to_fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.get_relationship_IsReagentIn", [ids, from_fields, rel_fields, to_fields], 1, _callback, _error_callback)
+    }
+
+    this.get_relationship_Targets = function(ids, from_fields, rel_fields, to_fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_relationship_Targets", [ids, from_fields, rel_fields, to_fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.get_relationship_Targets", [ids, from_fields, rel_fields, to_fields]);
+        return resp[0];
+    }
+
+    this.get_relationship_Targets_async = function(ids, from_fields, rel_fields, to_fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.get_relationship_Targets", [ids, from_fields, rel_fields, to_fields], 1, _callback, _error_callback)
+    }
+
     this.get_relationship_IsRealLocationOf = function(ids, from_fields, rel_fields, to_fields)
     {
 	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_relationship_IsRealLocationOf", [ids, from_fields, rel_fields, to_fields]);
@@ -3234,6 +5168,30 @@ function CDMI_EntityAPI(url) {
     this.get_relationship_HasRealLocationIn_async = function(ids, from_fields, rel_fields, to_fields, _callback, _error_callback)
     {
 	json_call_ajax_async("CDMI_EntityAPI.get_relationship_HasRealLocationIn", [ids, from_fields, rel_fields, to_fields], 1, _callback, _error_callback)
+    }
+
+    this.get_relationship_IsReferencedBy = function(ids, from_fields, rel_fields, to_fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_relationship_IsReferencedBy", [ids, from_fields, rel_fields, to_fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.get_relationship_IsReferencedBy", [ids, from_fields, rel_fields, to_fields]);
+        return resp[0];
+    }
+
+    this.get_relationship_IsReferencedBy_async = function(ids, from_fields, rel_fields, to_fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.get_relationship_IsReferencedBy", [ids, from_fields, rel_fields, to_fields], 1, _callback, _error_callback)
+    }
+
+    this.get_relationship_UsesReference = function(ids, from_fields, rel_fields, to_fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_relationship_UsesReference", [ids, from_fields, rel_fields, to_fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.get_relationship_UsesReference", [ids, from_fields, rel_fields, to_fields]);
+        return resp[0];
+    }
+
+    this.get_relationship_UsesReference_async = function(ids, from_fields, rel_fields, to_fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.get_relationship_UsesReference", [ids, from_fields, rel_fields, to_fields], 1, _callback, _error_callback)
     }
 
     this.get_relationship_IsRegulatedIn = function(ids, from_fields, rel_fields, to_fields)
@@ -3284,28 +5242,28 @@ function CDMI_EntityAPI(url) {
 	json_call_ajax_async("CDMI_EntityAPI.get_relationship_IsRelevantTo", [ids, from_fields, rel_fields, to_fields], 1, _callback, _error_callback)
     }
 
-    this.get_relationship_IsRequiredBy = function(ids, from_fields, rel_fields, to_fields)
+    this.get_relationship_IsRepresentedBy = function(ids, from_fields, rel_fields, to_fields)
     {
-	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_relationship_IsRequiredBy", [ids, from_fields, rel_fields, to_fields]);
-//	var resp = json_call_sync("CDMI_EntityAPI.get_relationship_IsRequiredBy", [ids, from_fields, rel_fields, to_fields]);
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_relationship_IsRepresentedBy", [ids, from_fields, rel_fields, to_fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.get_relationship_IsRepresentedBy", [ids, from_fields, rel_fields, to_fields]);
         return resp[0];
     }
 
-    this.get_relationship_IsRequiredBy_async = function(ids, from_fields, rel_fields, to_fields, _callback, _error_callback)
+    this.get_relationship_IsRepresentedBy_async = function(ids, from_fields, rel_fields, to_fields, _callback, _error_callback)
     {
-	json_call_ajax_async("CDMI_EntityAPI.get_relationship_IsRequiredBy", [ids, from_fields, rel_fields, to_fields], 1, _callback, _error_callback)
+	json_call_ajax_async("CDMI_EntityAPI.get_relationship_IsRepresentedBy", [ids, from_fields, rel_fields, to_fields], 1, _callback, _error_callback)
     }
 
-    this.get_relationship_Requires = function(ids, from_fields, rel_fields, to_fields)
+    this.get_relationship_DefinedBy = function(ids, from_fields, rel_fields, to_fields)
     {
-	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_relationship_Requires", [ids, from_fields, rel_fields, to_fields]);
-//	var resp = json_call_sync("CDMI_EntityAPI.get_relationship_Requires", [ids, from_fields, rel_fields, to_fields]);
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_relationship_DefinedBy", [ids, from_fields, rel_fields, to_fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.get_relationship_DefinedBy", [ids, from_fields, rel_fields, to_fields]);
         return resp[0];
     }
 
-    this.get_relationship_Requires_async = function(ids, from_fields, rel_fields, to_fields, _callback, _error_callback)
+    this.get_relationship_DefinedBy_async = function(ids, from_fields, rel_fields, to_fields, _callback, _error_callback)
     {
-	json_call_ajax_async("CDMI_EntityAPI.get_relationship_Requires", [ids, from_fields, rel_fields, to_fields], 1, _callback, _error_callback)
+	json_call_ajax_async("CDMI_EntityAPI.get_relationship_DefinedBy", [ids, from_fields, rel_fields, to_fields], 1, _callback, _error_callback)
     }
 
     this.get_relationship_IsRoleOf = function(ids, from_fields, rel_fields, to_fields)
@@ -3404,6 +5362,30 @@ function CDMI_EntityAPI(url) {
 	json_call_ajax_async("CDMI_EntityAPI.get_relationship_Validates", [ids, from_fields, rel_fields, to_fields], 1, _callback, _error_callback)
     }
 
+    this.get_relationship_IsSummarizedBy = function(ids, from_fields, rel_fields, to_fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_relationship_IsSummarizedBy", [ids, from_fields, rel_fields, to_fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.get_relationship_IsSummarizedBy", [ids, from_fields, rel_fields, to_fields]);
+        return resp[0];
+    }
+
+    this.get_relationship_IsSummarizedBy_async = function(ids, from_fields, rel_fields, to_fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.get_relationship_IsSummarizedBy", [ids, from_fields, rel_fields, to_fields], 1, _callback, _error_callback)
+    }
+
+    this.get_relationship_Summarizes = function(ids, from_fields, rel_fields, to_fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_relationship_Summarizes", [ids, from_fields, rel_fields, to_fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.get_relationship_Summarizes", [ids, from_fields, rel_fields, to_fields]);
+        return resp[0];
+    }
+
+    this.get_relationship_Summarizes_async = function(ids, from_fields, rel_fields, to_fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.get_relationship_Summarizes", [ids, from_fields, rel_fields, to_fields], 1, _callback, _error_callback)
+    }
+
     this.get_relationship_IsSuperclassOf = function(ids, from_fields, rel_fields, to_fields)
     {
 	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_relationship_IsSuperclassOf", [ids, from_fields, rel_fields, to_fields]);
@@ -3426,30 +5408,6 @@ function CDMI_EntityAPI(url) {
     this.get_relationship_IsSubclassOf_async = function(ids, from_fields, rel_fields, to_fields, _callback, _error_callback)
     {
 	json_call_ajax_async("CDMI_EntityAPI.get_relationship_IsSubclassOf", [ids, from_fields, rel_fields, to_fields], 1, _callback, _error_callback)
-    }
-
-    this.get_relationship_IsTargetOf = function(ids, from_fields, rel_fields, to_fields)
-    {
-	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_relationship_IsTargetOf", [ids, from_fields, rel_fields, to_fields]);
-//	var resp = json_call_sync("CDMI_EntityAPI.get_relationship_IsTargetOf", [ids, from_fields, rel_fields, to_fields]);
-        return resp[0];
-    }
-
-    this.get_relationship_IsTargetOf_async = function(ids, from_fields, rel_fields, to_fields, _callback, _error_callback)
-    {
-	json_call_ajax_async("CDMI_EntityAPI.get_relationship_IsTargetOf", [ids, from_fields, rel_fields, to_fields], 1, _callback, _error_callback)
-    }
-
-    this.get_relationship_Targets = function(ids, from_fields, rel_fields, to_fields)
-    {
-	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_relationship_Targets", [ids, from_fields, rel_fields, to_fields]);
-//	var resp = json_call_sync("CDMI_EntityAPI.get_relationship_Targets", [ids, from_fields, rel_fields, to_fields]);
-        return resp[0];
-    }
-
-    this.get_relationship_Targets_async = function(ids, from_fields, rel_fields, to_fields, _callback, _error_callback)
-    {
-	json_call_ajax_async("CDMI_EntityAPI.get_relationship_Targets", [ids, from_fields, rel_fields, to_fields], 1, _callback, _error_callback)
     }
 
     this.get_relationship_IsTaxonomyOf = function(ids, from_fields, rel_fields, to_fields)
@@ -3524,28 +5482,28 @@ function CDMI_EntityAPI(url) {
 	json_call_ajax_async("CDMI_EntityAPI.get_relationship_Triggers", [ids, from_fields, rel_fields, to_fields], 1, _callback, _error_callback)
     }
 
-    this.get_relationship_IsUsedAs = function(ids, from_fields, rel_fields, to_fields)
+    this.get_relationship_IsUsedToBuildTree = function(ids, from_fields, rel_fields, to_fields)
     {
-	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_relationship_IsUsedAs", [ids, from_fields, rel_fields, to_fields]);
-//	var resp = json_call_sync("CDMI_EntityAPI.get_relationship_IsUsedAs", [ids, from_fields, rel_fields, to_fields]);
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_relationship_IsUsedToBuildTree", [ids, from_fields, rel_fields, to_fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.get_relationship_IsUsedToBuildTree", [ids, from_fields, rel_fields, to_fields]);
         return resp[0];
     }
 
-    this.get_relationship_IsUsedAs_async = function(ids, from_fields, rel_fields, to_fields, _callback, _error_callback)
+    this.get_relationship_IsUsedToBuildTree_async = function(ids, from_fields, rel_fields, to_fields, _callback, _error_callback)
     {
-	json_call_ajax_async("CDMI_EntityAPI.get_relationship_IsUsedAs", [ids, from_fields, rel_fields, to_fields], 1, _callback, _error_callback)
+	json_call_ajax_async("CDMI_EntityAPI.get_relationship_IsUsedToBuildTree", [ids, from_fields, rel_fields, to_fields], 1, _callback, _error_callback)
     }
 
-    this.get_relationship_IsUseOf = function(ids, from_fields, rel_fields, to_fields)
+    this.get_relationship_IsBuiltFromAlignment = function(ids, from_fields, rel_fields, to_fields)
     {
-	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_relationship_IsUseOf", [ids, from_fields, rel_fields, to_fields]);
-//	var resp = json_call_sync("CDMI_EntityAPI.get_relationship_IsUseOf", [ids, from_fields, rel_fields, to_fields]);
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_relationship_IsBuiltFromAlignment", [ids, from_fields, rel_fields, to_fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.get_relationship_IsBuiltFromAlignment", [ids, from_fields, rel_fields, to_fields]);
         return resp[0];
     }
 
-    this.get_relationship_IsUseOf_async = function(ids, from_fields, rel_fields, to_fields, _callback, _error_callback)
+    this.get_relationship_IsBuiltFromAlignment_async = function(ids, from_fields, rel_fields, to_fields, _callback, _error_callback)
     {
-	json_call_ajax_async("CDMI_EntityAPI.get_relationship_IsUseOf", [ids, from_fields, rel_fields, to_fields], 1, _callback, _error_callback)
+	json_call_ajax_async("CDMI_EntityAPI.get_relationship_IsBuiltFromAlignment", [ids, from_fields, rel_fields, to_fields], 1, _callback, _error_callback)
     }
 
     this.get_relationship_Manages = function(ids, from_fields, rel_fields, to_fields)
@@ -3644,6 +5602,30 @@ function CDMI_EntityAPI(url) {
 	json_call_ajax_async("CDMI_EntityAPI.get_relationship_IsParticipationOf", [ids, from_fields, rel_fields, to_fields], 1, _callback, _error_callback)
     }
 
+    this.get_relationship_PerformedExperiment = function(ids, from_fields, rel_fields, to_fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_relationship_PerformedExperiment", [ids, from_fields, rel_fields, to_fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.get_relationship_PerformedExperiment", [ids, from_fields, rel_fields, to_fields]);
+        return resp[0];
+    }
+
+    this.get_relationship_PerformedExperiment_async = function(ids, from_fields, rel_fields, to_fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.get_relationship_PerformedExperiment", [ids, from_fields, rel_fields, to_fields], 1, _callback, _error_callback)
+    }
+
+    this.get_relationship_PerformedBy = function(ids, from_fields, rel_fields, to_fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_relationship_PerformedBy", [ids, from_fields, rel_fields, to_fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.get_relationship_PerformedBy", [ids, from_fields, rel_fields, to_fields]);
+        return resp[0];
+    }
+
+    this.get_relationship_PerformedBy_async = function(ids, from_fields, rel_fields, to_fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.get_relationship_PerformedBy", [ids, from_fields, rel_fields, to_fields], 1, _callback, _error_callback)
+    }
+
     this.get_relationship_ProducedResultsFor = function(ids, from_fields, rel_fields, to_fields)
     {
 	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_relationship_ProducedResultsFor", [ids, from_fields, rel_fields, to_fields]);
@@ -3668,30 +5650,6 @@ function CDMI_EntityAPI(url) {
 	json_call_ajax_async("CDMI_EntityAPI.get_relationship_HadResultsProducedBy", [ids, from_fields, rel_fields, to_fields], 1, _callback, _error_callback)
     }
 
-    this.get_relationship_ProjectsOnto = function(ids, from_fields, rel_fields, to_fields)
-    {
-	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_relationship_ProjectsOnto", [ids, from_fields, rel_fields, to_fields]);
-//	var resp = json_call_sync("CDMI_EntityAPI.get_relationship_ProjectsOnto", [ids, from_fields, rel_fields, to_fields]);
-        return resp[0];
-    }
-
-    this.get_relationship_ProjectsOnto_async = function(ids, from_fields, rel_fields, to_fields, _callback, _error_callback)
-    {
-	json_call_ajax_async("CDMI_EntityAPI.get_relationship_ProjectsOnto", [ids, from_fields, rel_fields, to_fields], 1, _callback, _error_callback)
-    }
-
-    this.get_relationship_IsProjectedOnto = function(ids, from_fields, rel_fields, to_fields)
-    {
-	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_relationship_IsProjectedOnto", [ids, from_fields, rel_fields, to_fields]);
-//	var resp = json_call_sync("CDMI_EntityAPI.get_relationship_IsProjectedOnto", [ids, from_fields, rel_fields, to_fields]);
-        return resp[0];
-    }
-
-    this.get_relationship_IsProjectedOnto_async = function(ids, from_fields, rel_fields, to_fields, _callback, _error_callback)
-    {
-	json_call_ajax_async("CDMI_EntityAPI.get_relationship_IsProjectedOnto", [ids, from_fields, rel_fields, to_fields], 1, _callback, _error_callback)
-    }
-
     this.get_relationship_Provided = function(ids, from_fields, rel_fields, to_fields)
     {
 	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_relationship_Provided", [ids, from_fields, rel_fields, to_fields]);
@@ -3714,6 +5672,54 @@ function CDMI_EntityAPI(url) {
     this.get_relationship_WasProvidedBy_async = function(ids, from_fields, rel_fields, to_fields, _callback, _error_callback)
     {
 	json_call_ajax_async("CDMI_EntityAPI.get_relationship_WasProvidedBy", [ids, from_fields, rel_fields, to_fields], 1, _callback, _error_callback)
+    }
+
+    this.get_relationship_PublishedExperiment = function(ids, from_fields, rel_fields, to_fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_relationship_PublishedExperiment", [ids, from_fields, rel_fields, to_fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.get_relationship_PublishedExperiment", [ids, from_fields, rel_fields, to_fields]);
+        return resp[0];
+    }
+
+    this.get_relationship_PublishedExperiment_async = function(ids, from_fields, rel_fields, to_fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.get_relationship_PublishedExperiment", [ids, from_fields, rel_fields, to_fields], 1, _callback, _error_callback)
+    }
+
+    this.get_relationship_ExperimentPublishedIn = function(ids, from_fields, rel_fields, to_fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_relationship_ExperimentPublishedIn", [ids, from_fields, rel_fields, to_fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.get_relationship_ExperimentPublishedIn", [ids, from_fields, rel_fields, to_fields]);
+        return resp[0];
+    }
+
+    this.get_relationship_ExperimentPublishedIn_async = function(ids, from_fields, rel_fields, to_fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.get_relationship_ExperimentPublishedIn", [ids, from_fields, rel_fields, to_fields], 1, _callback, _error_callback)
+    }
+
+    this.get_relationship_PublishedProtocol = function(ids, from_fields, rel_fields, to_fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_relationship_PublishedProtocol", [ids, from_fields, rel_fields, to_fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.get_relationship_PublishedProtocol", [ids, from_fields, rel_fields, to_fields]);
+        return resp[0];
+    }
+
+    this.get_relationship_PublishedProtocol_async = function(ids, from_fields, rel_fields, to_fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.get_relationship_PublishedProtocol", [ids, from_fields, rel_fields, to_fields], 1, _callback, _error_callback)
+    }
+
+    this.get_relationship_ProtocolPublishedIn = function(ids, from_fields, rel_fields, to_fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_relationship_ProtocolPublishedIn", [ids, from_fields, rel_fields, to_fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.get_relationship_ProtocolPublishedIn", [ids, from_fields, rel_fields, to_fields]);
+        return resp[0];
+    }
+
+    this.get_relationship_ProtocolPublishedIn_async = function(ids, from_fields, rel_fields, to_fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.get_relationship_ProtocolPublishedIn", [ids, from_fields, rel_fields, to_fields], 1, _callback, _error_callback)
     }
 
     this.get_relationship_Shows = function(ids, from_fields, rel_fields, to_fields)
@@ -3764,6 +5770,126 @@ function CDMI_EntityAPI(url) {
 	json_call_ajax_async("CDMI_EntityAPI.get_relationship_WasSubmittedBy", [ids, from_fields, rel_fields, to_fields], 1, _callback, _error_callback)
     }
 
+    this.get_relationship_SupersedesAlignment = function(ids, from_fields, rel_fields, to_fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_relationship_SupersedesAlignment", [ids, from_fields, rel_fields, to_fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.get_relationship_SupersedesAlignment", [ids, from_fields, rel_fields, to_fields]);
+        return resp[0];
+    }
+
+    this.get_relationship_SupersedesAlignment_async = function(ids, from_fields, rel_fields, to_fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.get_relationship_SupersedesAlignment", [ids, from_fields, rel_fields, to_fields], 1, _callback, _error_callback)
+    }
+
+    this.get_relationship_IsSupersededByAlignment = function(ids, from_fields, rel_fields, to_fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_relationship_IsSupersededByAlignment", [ids, from_fields, rel_fields, to_fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.get_relationship_IsSupersededByAlignment", [ids, from_fields, rel_fields, to_fields]);
+        return resp[0];
+    }
+
+    this.get_relationship_IsSupersededByAlignment_async = function(ids, from_fields, rel_fields, to_fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.get_relationship_IsSupersededByAlignment", [ids, from_fields, rel_fields, to_fields], 1, _callback, _error_callback)
+    }
+
+    this.get_relationship_SupersedesTree = function(ids, from_fields, rel_fields, to_fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_relationship_SupersedesTree", [ids, from_fields, rel_fields, to_fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.get_relationship_SupersedesTree", [ids, from_fields, rel_fields, to_fields]);
+        return resp[0];
+    }
+
+    this.get_relationship_SupersedesTree_async = function(ids, from_fields, rel_fields, to_fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.get_relationship_SupersedesTree", [ids, from_fields, rel_fields, to_fields], 1, _callback, _error_callback)
+    }
+
+    this.get_relationship_IsSupersededByTree = function(ids, from_fields, rel_fields, to_fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_relationship_IsSupersededByTree", [ids, from_fields, rel_fields, to_fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.get_relationship_IsSupersededByTree", [ids, from_fields, rel_fields, to_fields]);
+        return resp[0];
+    }
+
+    this.get_relationship_IsSupersededByTree_async = function(ids, from_fields, rel_fields, to_fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.get_relationship_IsSupersededByTree", [ids, from_fields, rel_fields, to_fields], 1, _callback, _error_callback)
+    }
+
+    this.get_relationship_Treed = function(ids, from_fields, rel_fields, to_fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_relationship_Treed", [ids, from_fields, rel_fields, to_fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.get_relationship_Treed", [ids, from_fields, rel_fields, to_fields]);
+        return resp[0];
+    }
+
+    this.get_relationship_Treed_async = function(ids, from_fields, rel_fields, to_fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.get_relationship_Treed", [ids, from_fields, rel_fields, to_fields], 1, _callback, _error_callback)
+    }
+
+    this.get_relationship_IsTreeFrom = function(ids, from_fields, rel_fields, to_fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_relationship_IsTreeFrom", [ids, from_fields, rel_fields, to_fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.get_relationship_IsTreeFrom", [ids, from_fields, rel_fields, to_fields]);
+        return resp[0];
+    }
+
+    this.get_relationship_IsTreeFrom_async = function(ids, from_fields, rel_fields, to_fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.get_relationship_IsTreeFrom", [ids, from_fields, rel_fields, to_fields], 1, _callback, _error_callback)
+    }
+
+    this.get_relationship_UsedBy = function(ids, from_fields, rel_fields, to_fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_relationship_UsedBy", [ids, from_fields, rel_fields, to_fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.get_relationship_UsedBy", [ids, from_fields, rel_fields, to_fields]);
+        return resp[0];
+    }
+
+    this.get_relationship_UsedBy_async = function(ids, from_fields, rel_fields, to_fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.get_relationship_UsedBy", [ids, from_fields, rel_fields, to_fields], 1, _callback, _error_callback)
+    }
+
+    this.get_relationship_UsesMedia = function(ids, from_fields, rel_fields, to_fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_relationship_UsesMedia", [ids, from_fields, rel_fields, to_fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.get_relationship_UsesMedia", [ids, from_fields, rel_fields, to_fields]);
+        return resp[0];
+    }
+
+    this.get_relationship_UsesMedia_async = function(ids, from_fields, rel_fields, to_fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.get_relationship_UsesMedia", [ids, from_fields, rel_fields, to_fields], 1, _callback, _error_callback)
+    }
+
+    this.get_relationship_UsedInExperimentalUnit = function(ids, from_fields, rel_fields, to_fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_relationship_UsedInExperimentalUnit", [ids, from_fields, rel_fields, to_fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.get_relationship_UsedInExperimentalUnit", [ids, from_fields, rel_fields, to_fields]);
+        return resp[0];
+    }
+
+    this.get_relationship_UsedInExperimentalUnit_async = function(ids, from_fields, rel_fields, to_fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.get_relationship_UsedInExperimentalUnit", [ids, from_fields, rel_fields, to_fields], 1, _callback, _error_callback)
+    }
+
+    this.get_relationship_HasEnvironment = function(ids, from_fields, rel_fields, to_fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_relationship_HasEnvironment", [ids, from_fields, rel_fields, to_fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.get_relationship_HasEnvironment", [ids, from_fields, rel_fields, to_fields]);
+        return resp[0];
+    }
+
+    this.get_relationship_HasEnvironment_async = function(ids, from_fields, rel_fields, to_fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.get_relationship_HasEnvironment", [ids, from_fields, rel_fields, to_fields], 1, _callback, _error_callback)
+    }
+
     this.get_relationship_Uses = function(ids, from_fields, rel_fields, to_fields)
     {
 	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_relationship_Uses", [ids, from_fields, rel_fields, to_fields]);
@@ -3786,6 +5912,30 @@ function CDMI_EntityAPI(url) {
     this.get_relationship_IsUsedBy_async = function(ids, from_fields, rel_fields, to_fields, _callback, _error_callback)
     {
 	json_call_ajax_async("CDMI_EntityAPI.get_relationship_IsUsedBy", [ids, from_fields, rel_fields, to_fields], 1, _callback, _error_callback)
+    }
+
+    this.get_relationship_UsesCodons = function(ids, from_fields, rel_fields, to_fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_relationship_UsesCodons", [ids, from_fields, rel_fields, to_fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.get_relationship_UsesCodons", [ids, from_fields, rel_fields, to_fields]);
+        return resp[0];
+    }
+
+    this.get_relationship_UsesCodons_async = function(ids, from_fields, rel_fields, to_fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.get_relationship_UsesCodons", [ids, from_fields, rel_fields, to_fields], 1, _callback, _error_callback)
+    }
+
+    this.get_relationship_AreCodonsFor = function(ids, from_fields, rel_fields, to_fields)
+    {
+	var resp = json_call_ajax_sync("CDMI_EntityAPI.get_relationship_AreCodonsFor", [ids, from_fields, rel_fields, to_fields]);
+//	var resp = json_call_sync("CDMI_EntityAPI.get_relationship_AreCodonsFor", [ids, from_fields, rel_fields, to_fields]);
+        return resp[0];
+    }
+
+    this.get_relationship_AreCodonsFor_async = function(ids, from_fields, rel_fields, to_fields, _callback, _error_callback)
+    {
+	json_call_ajax_async("CDMI_EntityAPI.get_relationship_AreCodonsFor", [ids, from_fields, rel_fields, to_fields], 1, _callback, _error_callback)
     }
 
     function _json_call_prepare(url, method, params, async_flag)
@@ -3947,6 +6097,7 @@ function CDMI_EntityAPI(url) {
     }
 }
 
+ 
 
 
 function KBaseRegPrecise(url) {
