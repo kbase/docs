@@ -1,0 +1,232 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title>Plant expression service tutorial</title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1138.47">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Courier}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Courier; min-height: 14.0px}
+  </style>
+</head>
+<body>
+<h1>Plant Expression Service</h1>
+<strong>Purpose: </strong>This service provides gene expression retrieval service in support of the coexpression networks and the ontology driven data needs of the plant sciences community. It will serve queries for tissue and condition specific coexpression network for biologically interesting genes/samples.
+<br><br>
+This tutorial introduces users to the plant expression metadata service APIs and construction of coexpression  clusters/network.
+<br><br>
+<strong>Required Prerequisite Activities:</strong> Getting Started with KBase<br>
+<strong>Suggested Prerequesite Activities: </strong>Basic Exercises Using KBase<br>
+<strong>Related Tutorials: </strong><br>
+<h2> Information retrieval supported by plant expression service APIs</h2>
+<ol>
+<li>Given EO (Environment Ontology) or PO (Plant Ontology) terms, retrieve NCBI GEO sample ID list.</li>
+<li>For given GEO Sample ID list, retrieve expression values.</li>
+<li>For given expression tables, compute co-expression network or co-expression clusters.</li>
+<br>
+<h3>1. Describe all available plant ontology (PO) terms</h3>
+<pre>
+  get_all_po
+  The output looks like:
+    PO:0020100      hypocotyl
+    PO:0009010      seed
+    PO:0009009      Embryo
+    PO:0009025      leaf
+</pre>
+<h3>2. Search for Shoot PO term(s)</h3>
+<pre>
+  get_all_po | grep "shoot"
+  Output:
+    PO:0009006      shoot
+    PO:0000037      shoot apex
+</pre>
+<h3>3. Find out PO descriptions for given PO Ids</h3>
+<pre>
+  echo 'PO:0020100,PO:0009010,PO:0009009,PO:0009025' | get_po_descriptions
+  Output:
+    PO:0020100      hypocotyl
+    PO:0009010      seed
+    PO:0009009      Embryo
+    PO:0009025      leaf
+</pre>
+<h3>4. Find out all available EO terms</h3>
+<pre>
+  get_all_eo
+  Output:
+    EO:0007149      chemical mutagen
+    EO:0007199      long day length regimen
+    EO:0007265      liquid growth media
+    EO:0007383      watering regimen
+    EO:0007162      continuous light regimen
+    EO:0007271      low light intensity regimen
+    EO:0007404      drought environment
+    EO:0007116      Hemiptera
+    EO:0007183      herbicide regimen
+    ...
+</pre>
+<h3>5. Retrieve available GEO sample IDs for given PO terms in Poplar</h3>
+<p>Are there any Poplar expression studies involving shoot samples? if so, show me the list of all such samples.</p>
+<pre>
+  echo 'PO:0009006' | get_po_sampleid_list --species=Pop
+  Output:
+    PO:0009006      Populus trichocarpa     GSM526681
+    PO:0009006      Populus trichocarpa     GSM526682
+    PO:0009006      Populus trichocarpa     GSM526683
+    PO:0009006      Populus trichocarpa     GSM526684
+    PO:0009006      Populus trichocarpa     GSM526685
+    PO:0009006      Populus trichocarpa     GSM526686
+</pre>
+<h3>6. Retrieve available GEO sample ID for given EO terms in Poplar</h3>
+<p>(Samples related to chemical mutagens (EO:0007149)</p>
+<pre>
+  echo 'EO:0007149' | get_eo_sampleidlist --species=Pop
+  Output:
+    EO:0007149      Populus trichocarpa     GSM529887
+    EO:0007149      Populus trichocarpa     GSM529888
+    EO:0007149      Populus trichocarpa     GSM529889
+    EO:0007149      Populus trichocarpa     GSM529890
+    EO:0007149      Populus trichocarpa     GSM529891
+    EO:0007149      Populus trichocarpa     GSM529892
+    EO:0007149      Populus trichocarpa     GSM529893
+    EO:0007149      Populus trichocarpa     GSM529894
+    ...
+</pre>
+<h3>7. Extract expression values from studies involving "shoot" samples in Poplar</h3>
+<pre>
+  echo 'PO:0009006' | get_po_sampleid_list --species=Pop | cut -f 3 | get_experiments_by_sampleid > shoot_expt_values.txt
+  Output:
+    "","GSM526681","GSM526682","GSM526683","GSM526684","GSM526685","GSM526686"
+    "kb|g.3907.locus.96",3.44193331937561,3.81305044991438,3.34541704885565,3.50065542803298,3.85806849751565,3.33764369559592
+    "kb|g.3907.locus.7",4.97601187971321,4.85016304685455,4.94542203191627,5.62226675865996,5.59823000830612,5.51363479255062
+    ...
+</pre>
+<h3>8. Extract expression values of selected genes</h3>
+<p> Extract expression values of selected <em>Arabidopsis thaliana</em> genes: AT1G03010,AT1G02830,AT1G09770,AT2G01650 from expression samples related to PO:0009001</p>
+<pre>
+  Step 1: Map external gene ids to KBase ids ...
+  Athaliana.TAIR10:AT1G03010          kb|g.3899.locus.336
+  Athaliana.TAIR10:AT1G02830          kb|g.3899.locus.356
+  Athaliana.TAIR10:AT1G09770          kb|g.3899.locus.1122
+  Athaliana.TAIR10:AT2G01650          kb|g.3899.locus.8685
+
+  Step 2: Use KBase ids to retrieve your dataset of interest as follows ...
+  echo 'PO:0009001' | get_po_sampleid_list | get_experiments_by_sampleid_geneid  'kb|g.3899.locus.336,kb|g.3899.locus.356,kb|g.3899.locus.1122,kb|g.3899.locus.8685'
+
+  Output:
+    "","GSM128731","GSM128734","GSM131685","GSM131686","GSM131687","GSM131688","GSM131689","GSM131690","GSM131691","GSM131692","GSM131693","GSM133816","GSM133817","GSM133818","GSM133819","GSM133820","GSM133821"
+    "kb|g.3899.locus.356",3.95307123655004,4.17309290481871,4.30014284711634,4.09689729238125,4.13941483967514,4.13650926641982,4.17574221369683,4.06829143682918,4.19202927877506,4.03370918319504,4.00583412618196,4.0073097262699,4.08834818979217,4.15239823045503,4.16475403815505,4.13939227555269,3.91858863109137
+    "kb|g.3899.locus.336",5.38901506598752,4.71033482260999,4.81843760600055,4.62063259457967,4.88043451960521,3.76265128064485,4.04423349312126,3.86972772230426,3.91581544970443,3.89914355300091,4.01969401313104,4.00510260694961,3.80692745710712,3.91157743006775,4.11310472148001,4.02729070208123,4.05843153560794
+    "kb|g.3899.locus.1122",8.58440575121871,8.7877179675566,8.26880295292625,8.05784868927534,8.07011027563469,8.7238165280629,8.68261832922867,8.5039521843154,8.55217713427851,8.55678214796825,8.56738661801641,8.1599102229022,7.57119951949854,8.24120315073286,7.76829129356316,8.27548425142281,8.02666883368699
+    "kb|g.3899.locus.8685",7.69326802524865,7.69392271694637,7.24424344706589,7.13138842567556,7.11108707895829,7.66502597382701,7.48814891639197,7.43381514775624,7.66333573624337,7.60674647347613,7.55438132673545,7.07216323135699,7.71866886038709,7.39488284362958,9.13847867188177,7.72217015516749,8.77858843169651
+
+  Alternatively, if one knows the sample ids then one can find the expression values of selected samples for a given set of genes as follows ...
+  echo GSM106833,GSM106827,GSM106908 | get_experiments_by_sampleid_geneid 'kb|g.3899.locus.2366,kb|g.3899.locus.1892,kb|g.3899.locus.2354,kb|g.3899.locus.2549'
+  Output:
+    "","GSM106827","GSM106833","GSM106908"
+    "kb|g.3899.locus.1892",3.62640050980275,3.74646160823484,3.82712679295874
+    "kb|g.3899.locus.2549",4.22598811329138,4.05899087276422,4.59052243374423
+    "kb|g.3899.locus.2354",6.12261660963062,6.38784981188643,5.9303694536575
+    "kb|g.3899.locus.2366",10.2073518913325,10.3122180963613,10.228269733505
+</pre>
+<h3>9. Extract expression data from studies involving "chemical mutagen" samples of Poplar. </h3>
+<p>Identify EO term for "chemical mutagen" and then execute the following command.</p>
+<pre>
+  echo 'EO:0007149' | get_eo_sampleidlist --species=Pop | cut -f 3 | get_experiments_by_sampleid > poplar_chemicalmutagen_exprvalues.txt
+</pre>
+<h3>10. Identify highly differentially expressed genes of given tissue (PO) or conditions (EO) related samples of a given genome.</h3>
+<p>Users need to extract the gene expression table of interested PO or EO terms and sample-replicate mapping via the plant expression metadata service APIs. For example, users can extract the gene expression table for the tissue of Fruit (PO:0009001) in Arabidopsis into data.csv:</p>
+<p>Step 1:Identify highly differentially expressed genes of fruit tissue in Arabidopsis with p-value cutoff = 0.01 using log-odd ratios(lor) method</p>
+<pre>
+  echo 'PO:0009001' | get_po_sampleid_list  --species=Ara | cut -f 3 | get_experiments_by_sampleid > data.csv
+  data.csv output looks like:
+  "","GSM128731","GSM128734","GSM131685","GSM131686","GSM131687","GSM131688","GSM131689","GSM131690","GSM131691","GSM131692","GSM131693","GSM133816","GSM133817","GSM133818","GSM133819","GSM133820","GSM133821"
+  "kb|g.3899.locus.11535",7.39509086407471,7.21543946796189,6.85206883632934,6.98865805789702,6.96032612395135,6.10411596734554,6.18904297377478,6.15178442082805,5.84660536351898,5.97222108818925,6.35409454743814,5.87951089839231,5.47153473634094,5.93289864550632,5.8042282776207,5.99647222842837,5.84596104079956
+  ...
+</pre>
+<p>Step 2: Obtain the information for the sample-replicate mapping</p>
+<pre>
+  echo 'PO:0009001' | get_po_sampleid_list --species=Ara | cut -f 3 | get_repid_by_sampleid > sample_id.csv
+
+  sample_id.csv file contents looks like:
+  1039,1039,1040,1040,1040,1041,1041,1041,1042,1042,1042,1043,1044,1043,1044,1043,1044
+</pre>
+<p>Step 3: Next call following R script...</p>
+<pre>
+  coex_filter.r -i data.csv -p 0.01 -s sample_id.csv  -m lor -o datafilter.csv
+
+  The output, datafilter.csv includes the highly differentially expressed genes (p-value < 0.01) along with their expression values across samples, which are average of replicates per sample like:
+
+  GENE        		      Sample 1      Sample 2      Sample 3       Sample 4       Sample 5       Sample 6
+  kb|g.3899.locus.8432    3.87749886    8.99530366    8.278210283    8.514692098    8.404818037    8.576996205
+  kb|g.3899.locus.11309   4.9622303     12.03348678   12.32979931    12.17871683    13.29973745    13.88981537
+  kb|g.3899.locus.23530   5.376951196   9.795617144   9.954027073    9.969303176    9.698684688    9.45894427
+  ...
+
+  It is strongly recommended that users provide sample_id.csv generated by expression service APIs.
+</pre>
+<h3>11. Construct gene co-expression network</h3>
+<pre>
+  Build co-expression network for highly differentially expressed genes of Arabidopsis fruit tissue and obtain its edge list with correlation > 0.9
+  Use following R script ...
+  coex_net.r  -i datafilter.csv -c 0.9 -t edge -o coexpression_network_edge_list.csv
+
+  The output, coexpression_network_edge_list.csv includes all gene pairs with their correlation > 0.9 like
+   Gene 1			Gene 2
+   kb|g.3899.locus.8432		kb|g.3899.locus.11309
+   kb|g.3899.locus.8432		kb|g.3899.locus.23530
+   kb|g.3899.locus.8432		kb|g.3899.locus.15817
+   kb|g.3899.locus.8432		kb|g.3899.locus.21275
+   ...
+</pre>
+<h3>12. Construct gene co-expression network for all genes using WGCNA and obtain its adjacent matrix</h3>
+<pre>
+  coex_net.r  -i data.csv -m WGCNA -t adjmat -o coexpression_network_adjmat_wgcna.csv
+
+  The output, coexpression_network_adjmat_wgcna.csv includes the adjacent matrix like (dummy number for example)
+                		kb|g.3899.locus.8432	kb|g.3899.locus.11309 	 kb|g.3899.locus.23530…
+  kb|g.3899.locus.8432	   	1.0              	0.2              	  0.8
+  kb|g.3899.locus.11309    	0.2            		1.0                   	  0.5
+  kb|g.3899.locus.23530     	0.8             	0.5                	  1.0
+  ...
+</pre>
+<h3>13. Clustering highly differentially expressed genes into 56 co-expression modules via hierarchical clustering</h3>
+<pre>
+  coex_cluster2.r -i datafilter.csv -s 56 -c hclust -n s -o coex_module_h.csv
+
+  The output, coex_module_h.csv includes genes and their associated modules looks like ...
+  Gene        			module
+  kb|g.3899.locus.8432		1
+  kb|g.3899.locus.11309		2
+  kb|g.3899.locus.23530		1
+  kb|g.3899.locus.15817		3
+  kb|g.3899.locus.21275		4
+  ...
+</pre>
+<h3>14. Clustering highly differentially expressed genes into co-expression modules via WGCNA with minimum module size = 30 genes, max power = 100, and minimum R2 = 0.75</h3>
+<pre>
+  coex_cluster2.r  -i datafilter.csv -o coex_module_w.csv -s 30 -p 100 -c w -n w -r 0.75
+
+  The output, coex_module_w.csv includes genes and their associated modules looks like ...
+
+  Gene			module
+  kb|g.3899.locus.8432	blue
+  kb|g.3899.locus.11309	blue
+  kb|g.3899.locus.23530	blue
+  kb|g.3899.locus.15817	blue
+  kb|g.3899.locus.21275	darkgreen
+  kb|g.3899.locus.20061	lightsteelblue1
+  kb|g.3899.locus.32188	skyblue
+  ...
+</pre>
+<h3>15. The users want to see more options for each API</h3>
+<pre>
+  Please refer to help
+  coex_filter.r -h
+  coex_net.r -h
+  coex_cluster.r -h
+  coex_cluster2.r -h
+</pre>
+</body>
+</html>
