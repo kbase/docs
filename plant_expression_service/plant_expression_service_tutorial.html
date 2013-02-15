@@ -154,7 +154,7 @@ This tutorial introduces users to the plant expression metadata service APIs and
 </pre>
 <p>Step 3: Next call following R script...</p>
 <pre>
-  coex_filter.r -i data.csv -p 0.01 -s sample_id.csv  -m lor -o datafilter.csv
+  coex_filter -i data.csv -p 0.01 -s sample_id.csv  -m lor -o datafilter.csv
 
   The output, datafilter.csv includes the highly differentially expressed genes (p-value < 0.01) along with their expression values across samples, which are average of replicates per sample like:
 
@@ -170,7 +170,7 @@ This tutorial introduces users to the plant expression metadata service APIs and
 <pre>
   Build co-expression network for highly differentially expressed genes of Arabidopsis fruit tissue and obtain its edge list with correlation > 0.9
   Use following R script ...
-  coex_net.r  -i datafilter.csv -c 0.9 -t edge -o coexpression_network_edge_list.csv
+  coex_net  -i datafilter.csv -c 0.9 -t edge -o coexpression_network_edge_list.csv
 
   The output, coexpression_network_edge_list.csv includes all gene pairs with their correlation > 0.9 like
    Gene 1			Gene 2
@@ -182,7 +182,7 @@ This tutorial introduces users to the plant expression metadata service APIs and
 </pre>
 <h3>12. Construct gene co-expression network for all genes using WGCNA and obtain its adjacent matrix</h3>
 <pre>
-  coex_net.r  -i data.csv -m WGCNA -t adjmat -o coexpression_network_adjmat_wgcna.csv
+  coex_net  -i data.csv -m WGCNA -t adjmat -o coexpression_network_adjmat_wgcna.csv
 
   The output, coexpression_network_adjmat_wgcna.csv includes the adjacent matrix like (dummy number for example)
                 		kb|g.3899.locus.8432	kb|g.3899.locus.11309 	 kb|g.3899.locus.23530…
@@ -193,7 +193,7 @@ This tutorial introduces users to the plant expression metadata service APIs and
 </pre>
 <h3>13. Clustering highly differentially expressed genes into 56 co-expression modules via hierarchical clustering</h3>
 <pre>
-  coex_cluster2.r -i datafilter.csv -s 56 -c hclust -n s -o coex_module_h.csv
+  coex_cluster2 -i datafilter.csv -s 56 -c hclust -n s -o coex_module_h.csv
 
   The output, coex_module_h.csv includes genes and their associated modules looks like ...
   Gene        			module
@@ -206,7 +206,7 @@ This tutorial introduces users to the plant expression metadata service APIs and
 </pre>
 <h3>14. Clustering highly differentially expressed genes into co-expression modules via WGCNA with minimum module size = 30 genes, max power = 100, and minimum R2 = 0.75</h3>
 <pre>
-  coex_cluster2.r  -i datafilter.csv -o coex_module_w.csv -s 30 -p 100 -c w -n w -r 0.75
+  coex_cluster2  -i datafilter.csv -o coex_module_w.csv -s 30 -p 100 -c w -n w -r 0.75
 
   The output, coex_module_w.csv includes genes and their associated modules looks like ...
 
@@ -223,10 +223,10 @@ This tutorial introduces users to the plant expression metadata service APIs and
 <h3>15. The users want to see more options for each API</h3>
 <pre>
   Please refer to help
-  coex_filter.r -h
-  coex_net.r -h
-  coex_cluster.r -h
-  coex_cluster2.r -h
+  coex_filter -h
+  coex_net -h
+  coex_cluster -h
+  coex_cluster2 -h
 </pre>
 </body>
 </html>
