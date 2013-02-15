@@ -1,4 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<!DOCTYPE html PUBLIC '-//W3C//DTD HTML 4.01//EN' 'http://www.w3.org/TR/html4/strict.dtd'>
 <html><head><title>KBase Networks API</title></head><body><b>  
   </b>
 <h1>KBase Networks API</h1>
@@ -7,18 +7,18 @@
 Required Prerequisite Activities: </b> None
 <b><br>
 Suggested Prerequisite Activities: </b> Getting What You Need from the
-CS Using Command-Line Scripts
+KBase Using Command-Line Scripts
 <b><br>
 Related Tutorials: </b> None
 <h2> Introduction </h2>
 
-<p>The KBase Central Store (CS) contains networks data pulled from a variety
+<p>The KBase contains networks data pulled from a variety
   of public databases. This tutorial will teach you:</p>
 <ul>
   <li>How to obtain the general information on what networks types,
-    datasets, and dataset sources are currently available in the KBase CS. </li>
-  <li> How to access the KBase CS to extract specific subsets of
-    network data using the KBase Networks API</li>
+    datasets, and dataset sources are currently available in the KBase. </li>
+  <li> How to access the KBase to extract specific subsets of
+    network data using the KBase Networks API.</li>
 </ul>
 <h2>Learning what network data
 are out there </h2>
@@ -72,8 +72,8 @@ representing a gene&#8217;s membership in a regulon (cluster). </li>
 </ul>
 
 To find the current list of network types in KBase you can use
-the command<code> allNetworkTypes</code>
-<h3> Dataset sources for networks in KBase CS</h3>
+the command<code> net_get_all_network_types</code>
+<h3> Dataset sources for networks in KBase </h3>
 
 Network data in KBase comes from a variety of public sources. The
 current list includes:
@@ -85,7 +85,7 @@ currently contains 11,355 direct interactions between TFs and target
 genes. </li>
   <li><em>ARANET </em>- Probabilistic functional association gene network in
 several plant species (currently <em>Arabidopsis</em> and Poplar) constructed by
-a modified Bayesian integration of 24 types of "omics" data from
+a modified Bayesian integration of 24 types of 'omics' data from
 multiple organisms, with each data type weighted according to how well
 it links genes that are known to function together. It is based on
 AraNet (http://www.functionalnet.org/aranet) and RiceNet
@@ -108,41 +108,42 @@ pathways. </li>
   <li><em>PPI</em> - Other published Protein-Protein Interaction datasets.</li>
   <li><em>REGPRECISE</em> - Curated database of transcriptional regulons
 reconstructed by the comparative genomic approach in a wide variety of
-prokaryotic genomes (http://regprecise.lbl.gov)</li>
+prokaryotic genomes (http://regprecise.lbl.gov).</li>
+  <li><em>Metagenome-based networks of SEED subsystems</em> - Co-variation networks of subsystems among different metagenome samples.</li>
+
+
 </ul>
 
 To find the current list of dataset sources in KBase use the
-command <code>allDatasetSources</code>
+command <code>net_get_all_dataset_sources</code>
 
-<h3> Networks datasets in KBase CS</h3>
+<h3> Networks datasets in KBase</h3>
 
-Each dataset source listed by <code>allDatasetSources</code> may contribute more
+Each dataset source listed by <code>net_get_all_dataset_sources</code> may contribute more
 than one network dataset to KBase. Examples include
 organism-specific networks extracted from IntAct, different plant
 species in PlantCyc, and different versions of biclusters.
 <p>
 
 To find the current list of datasets in KBase use the command
-<code>allDatasets</code>
+<code>net_get_all_datasets</code>
 
 <h2> Learning how to extract specific subsets of network data </h2>
 
-<h3> Finding first neighbors of a node </h3>
 
-The API command <code>buildFirstNeighborNetwork</code generates the network
+
+The API command <code>net_build_first_neighbor_network</code> generates the network
 connecting a user-specified node to its first neighbors in a user-specified
 list of network datasets and network data types.
 To use it efficiently, you need to be familiar with how to find the
-genes and genomes you are interested in described in <a href="http://www.kbase.us/developer-zone/tutorials/command-line-scripts/accessing-central-store-data/getting-what-you-need-from-the-cs-using-command-line-scripts/">Getting
+genes and genomes you are interested in described in <a href='http://www.kbase.us/developer-zone/tutorials/command-line-scripts/accessing-central-store-data/getting-what-you-need-from-the-cs-using-command-line-scripts/'>Getting
 What You
-Need from the CS Using Command-Line Scripts</a> tutorial. <br>
+Need from the Using Command-Line Scripts</a> tutorial. <br>
 
 <br>
 
 For example, to find the KBase ID for the
-<i>Escherichia coli</i> K-12 MG1655 genome we use
-the
-command:
+<i>Escherichia coli</i> K-12 MG1655 genome we use the command:
 <br>
 
 <br>
@@ -155,9 +156,7 @@ the KBase ID for <i>Escherichia coli</i> K-12 MG1655 is 'kb|g.1870'. <br>
 
 
 <br>
-
-To find the list of protein encoding genes ("peg") in this genome we use: <br>
-
+To find the list of protein encoding genes ('peg') in this genome we use: <br>
 <br>
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; echo 'kb|g.1870' |
@@ -171,213 +170,81 @@ previous comand: <br>
 
 &nbsp;&nbsp;&nbsp;&nbsp; <br>
 
-&nbsp;&nbsp;&nbsp;&nbsp; echo 'kb|g.0' | genomes_to_fids | grep 'peg' |
+&nbsp;&nbsp;&nbsp;&nbsp; echo 'kb|g.1870' | genomes_to_fids | grep 'peg' |
 fids_to_functions | grep RecA
 <br>
 
-<br>
 
-The KBase ID of the gene encoding the RecA protein is 'kb|g.1870.peg.1221'<br>
 
-<br>
+<h3>Acquiring the first neighbor of a node</h3>
 
-Another example is the bacterium <i>Shewanella oneidensis</i> MR-1, with KBase
-ID:
-"kb|g.20848".
-<br>
- To discover what network datasets include genes from this
-genome
-we run:
+To discover what network datasets of Arabidopsis, <i>Arabidopsis thaliana</i> (KBase ID: 'kb|g.3899') are stored in KBase, we run:
 <p>
-&nbsp;&nbsp;&nbsp;&nbsp; echo 'kb|g.20848' | taxon2Datasets
-
+&nbsp;&nbsp;&nbsp;&nbsp; echo 'kb|g.3899' |  net_taxon_to_datasets
 <p>
+<p>
+The output of this command looks like:
 
-One of the datasets listed in the output of this command has the KBase ID
-"kb|netdataset.regprecise.1" <br>
+<pre>
+kb|netdataset.plant.cn.8        FUNCTIONAL_ASSOCIATION  GEO     Coexpression Network - Arabidopsis thaliana - seed      Coexpression Network for Arabidopsis thaliana on seed
+kb|netdataset.plant.cn.7        FUNCTIONAL_ASSOCIATION  GEO     Coexpression Network - Arabidopsis thaliana - root      Coexpression Network for Arabidopsis thaliana on root
+kb|netdataset.plant.fn.25       FUNCTIONAL_ASSOCIATION  ARANET  AraNet  Aranet : Functional Association Network for Arabidopsis thaliana
+kb|netdataset.plant.gp.1        METABOLIC_SUBSYSTEM     PLANTCYC        Gene to Pathway ID - Arabidopsis thaliana       Gene to Pathway ID for Arabidopsis thaliana
+kb|netdataset.plant.rn.1        REGULATORY_NETWORK      AGRIS   AGRIS   AGRIS: Regulartory Network fo Arabidopsis thaliana
+......
+</pre>
 
-This is a regulatory network from
-the REGPRECISE database.
-We are interested in a gene encoding isocitrate lyase. <br>
-To find its KBase ID we run:
-<br>
-<br>
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; echo 'kb|g.20848' |
-genomes_to_fids | fids_to_functions | grep
-"isocitrate lyase"
-<br>
 
-<br>
 
-The output shows that in <i>Shewanella oneidensis</i> MR-1, this gene's KBase ID
-is "kb|g.20848.CDS.1671".
-<br>
-<br>
-The first neighbor network is found by running: <br>
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; echo
-'kb|g.20848.CDS.1671' | buildFirstNeighborNetwork
-'kb|netdataset.regprecise.1' GENE_CLUSTER <br>
+We are interested in a gene 'kb|g.3899.locus.2366 ', which encodes Cytochrome c. To check which network dataset contains this gene, we can run:<br>
+
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; echo 'kb|g.3899.locus.10' | net_entity_to_datasets  <br>
 
 <p>
 The output of this command looks like:
 
 <pre>
-$VAR1 = {
-          'datasets' => [
-                          {
-                            'networkType' => 'REGULATORY_NETWORK',
-                            'taxons' => [
-                                          'kb|g.20848'
-                                        ],
-                            'sourceReference' => 'REGPRECISE',
-                            'name' => 'Shewanella oneidensis MR-1',
-                            'id' => 'kb|netdataset.regprecise.1',
-                            'description' => 'Regulome of the Shewanella oneidensis MR-1 genome',
-                            'properties' => {}
-                          }
-                        ],
-          'edges' => [
-                       {
-                         'name' => 'regulated by',
-                         'properties' => {},
-                         'strength' => '0',
-                         'datasetId' => 'kb|netdataset.regprecise.1',
-                         'directed' => 'true',
-                         'userAnnotations' => {},
-                         'id' => 'kb|netedge.370785',
-                         'nodeId1' => 'kb|netnode.323883',
-                         'confidence' => '0',
-                         'nodeId2' => 'kb|netnode.323884'
-                       },
-                       {
-                         'name' => 'regulated by',
-                         'properties' => {},
-                         'strength' => '0',
-                         'datasetId' => 'kb|netdataset.regprecise.1',
-                         'directed' => 'true',
-                         'userAnnotations' => {},
-                         'id' => 'kb|netedge.370787',
-                         'nodeId1' => 'kb|netnode.323883',
-                         'confidence' => '0',
-                         'nodeId2' => 'kb|netnode.323886'
-                       },
-                       {
-                         'name' => 'regulated by',
-                         'properties' => {},
-                         'strength' => '0',
-                         'datasetId' => 'kb|netdataset.regprecise.1',
-                         'directed' => 'true',
-                         'userAnnotations' => {},
-                         'id' => 'kb|netedge.370789',
-                         'nodeId1' => 'kb|netnode.323883',
-                         'confidence' => '0',
-                         'nodeId2' => 'kb|netnode.323888'
-                       },
-                       {
-                         'name' => 'regulated by',
-                         'properties' => {},
-                         'strength' => '0',
-                         'datasetId' => 'kb|netdataset.regprecise.1',
-                         'directed' => 'true',
-                         'userAnnotations' => {},
-                         'id' => 'kb|netedge.370788',
-                         'nodeId1' => 'kb|netnode.323883',
-                         'confidence' => '0',
-                         'nodeId2' => 'kb|netnode.323887'
-                       },
-                       {
-                         'name' => 'regulated by',
-                         'properties' => {},
-                         'strength' => '0',
-                         'datasetId' => 'kb|netdataset.regprecise.1',
-                         'directed' => 'true',
-                         'userAnnotations' => {},
-                         'id' => 'kb|netedge.370786',
-                         'nodeId1' => 'kb|netnode.323883',
-                         'confidence' => '0',
-                         'nodeId2' => 'kb|netnode.323885'
-                       }
-                     ],
-          'userAnnotations' => {},
-          'name' => 'First neighbour network',
-          'nodes' => [
-                       {
-                         'entityId' => 'kb|g.20848.regulon.6391',
-                         'userAnnotations' => {},
-                         'name' => 'TyrR',
-                         'type' => 'CLUSTER',
-                         'id' => 'kb|netnode.323885',
-                         'properties' => {}
-                       },
-                       {
-                         'entityId' => 'kb|g.20848.CDS.1671',
-                         'userAnnotations' => {},
-                         'name' => 'aceA',
-                         'type' => 'GENE',
-                         'id' => 'kb|netnode.323883',
-                         'properties' => {}
-                       },
-                       {
-                         'entityId' => 'kb|g.20848.regulon.5959',
-                         'userAnnotations' => {},
-                         'name' => 'PsrA',
-                         'type' => 'CLUSTER',
-                         'id' => 'kb|netnode.323887',
-                         'properties' => {}
-                       },
-                       {
-                         'entityId' => 'kb|g.20848.regulon.5895',
-                         'userAnnotations' => {},
-                         'name' => 'PdhR',
-                         'type' => 'CLUSTER',
-                         'id' => 'kb|netnode.323884',
-                         'properties' => {}
-                       },
-                       {
-                         'entityId' => 'kb|g.20848.regulon.5527',
-                         'userAnnotations' => {},
-                         'name' => 'HexR',
-                         'type' => 'CLUSTER',
-                         'id' => 'kb|netnode.323886',
-                         'properties' => {}
-                       },
-                       {
-                         'entityId' => 'kb|g.20848.regulon.5623',
-                         'userAnnotations' => {},
-                         'name' => 'LiuR',
-                         'type' => 'CLUSTER',
-                         'id' => 'kb|netnode.323888',
-                         'properties' => {}
-                       }
-                     ],
-          'id' => 'kb|net.2419',
-          'properties' => {
-                            'graphType' => 'edu.uci.ics.jung.graph.SparseMultigraph'
-                          }
-        };
-
+kb|netdataset.plant.cc.6        FUNCTIONAL_ASSOCIATION  GEO     Coexpression Cluster - Arabidopsis thaliana - leaf      Coexpression Cluster for Arabidopsis thaliana on leaf
+kb|netdataset.plant.cn.6        FUNCTIONAL_ASSOCIATION  GEO     Coexpression Network - Arabidopsis thaliana - leaf      Coexpression Network for Arabidopsis thaliana on leaf
+kb|netdataset.plant.fn.25       FUNCTIONAL_ASSOCIATION  ARANET  AraNet  Aranet : Functional Association Network for Arabidopsis thaliana
 </pre>
 
-<br>
+
+<p>
+We can check the first neighbor in the network of 'kb|netdataset.plant.fn.25' by running:<br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; echo 'kb|g.3899.locus.2366'|net_build_first_neighbor_network 'kb|netdataset.plant.fn.25' 'GENE_GENE' <br>
+
+<p>
+The output of this command looks like:
+
+<pre>
+kb|g.3899.locus.2366    kb|g.3899.locus.30542   0.944832742214203       kb|netdataset.plant.fn.25       AT1G22450       AT5G43970       Interacting gene pair
+kb|g.3899.locus.2366    kb|g.3899.locus.19562   0.906808316707611       kb|netdataset.plant.fn.25       AT1G22450       AT3G51160       Interacting gene pair
+kb|g.3899.locus.1684    kb|g.3899.locus.2366    1.94978094100952        kb|netdataset.plant.fn.25       AT1G14320       AT1G22450       Interacting gene pair
+kb|g.3899.locus.2366    kb|g.3899.locus.14793   1.33847522735596        kb|netdataset.plant.fn.25       AT1G22450       AT3G08520       Interacting gene pair
+kb|g.3899.locus.2366    kb|g.3899.locus.4121    1.93127810955048        kb|netdataset.plant.fn.25       AT1G22450       AT1G41880       Interacting gene pair
+kb|g.3899.locus.2366    kb|g.3899.locus.15225   1.72984302043915        kb|netdataset.plant.fn.25       AT1G22450       AT3G13560       Interacting gene pair
+......
+</pre>
 
 A variant of this
-command, <code>buildFirstNeighborNetworkLimtedByStrength</code>,
+command, <code>net_build_first_neighbor_network_limited_by_strength</code>,
  uses an additional
-"cutOff" parameter setting a lower threshold on the strength of edges to
+'cutOff' parameter setting a lower threshold on the strength of edges to
 be considered. This cutoff is a part of some but not all network
 datasets such as e.g. functional association networks in AraNet, or
 co-expression networks.  The syntax for this command is:<br>
 <br>
 
 &nbsp;&nbsp;&nbsp;&nbsp; echo KBase_gene_ID|
-buildFirstNeighborNetworkLimtedByStrength KBase_network_dataset_ID
+net_build_first_neighbor_network_limited_by_strength KBase_network_dataset_ID
 GENE_GENE cutOff
 
-<h2> Finding a subnetwork connecting a user-specified set of nodes </h2>
+<h3> Finding a subnetwork connecting a user-specified set of nodes </h3>
 
-The command <code>buildInternalNetwork</code> returns the subnetwork connecting
+The command <code>net_build_internal_network</code> returns the subnetwork connecting
 a user-specified list of nodes, and is constructed
 from edges in the user-specified list of network datasets. The format
 to use this command for 3 nodes and one
@@ -387,13 +254,13 @@ network dataset is:
 <br>
 
 &nbsp;&nbsp;&nbsp;&nbsp; echo KBase_gene_ID1 KBase_gene_ID2
-KBase_gene_ID3 | buildInternalNetwork
+KBase_gene_ID3 | net_build_internal_network
 KBase_network_dataset_ID GENE_CLUSTER
 <br>
 
 <br>
 
-The command <code>buildInternalNetworkLimitedByStrength</code> adds a numerical
+The command <code>net_build_internal_network_limited_by_strength</code> adds a numerical
 cutOff parameter setting the lower bound on the strength of edges to be
 considered.
 <br>
@@ -403,6 +270,6 @@ It can be invoked by using:<br>
 <br>
 
 &nbsp;&nbsp;&nbsp; echo KBase_gene_ID1 KBase_gene_ID2 KBase_gene_ID3
-| buildInternalNetworkLimitedByStrength KBase_network_dataset_ID
+| net_build_internal_network_limited_by_strength KBase_network_dataset_ID
 GENE_CLUSTER cutOff
 </body></html>
