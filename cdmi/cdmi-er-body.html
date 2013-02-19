@@ -11485,6 +11485,96 @@ fields_Trait is a reference to a hash where the following keys are defined:
 </dl>
 
 <h3><a class='u' href='#___top' title='click to go to top of document'
+name="get_relationship_ImplementsReaction"
+>get_relationship_ImplementsReaction</a></h3>
+
+<pre>  $return = $obj-&#62;get_relationship_ImplementsReaction($ids, $from_fields, $rel_fields, $to_fields)</pre>
+
+<dl>
+<dt><a name="Parameter_and_return_types"
+>Parameter and return types</a></dt>
+
+<dd>
+<pre>
+$ids is a reference to a list where each element is a string
+$from_fields is a reference to a list where each element is a string
+$rel_fields is a reference to a list where each element is a string
+$to_fields is a reference to a list where each element is a string
+$return is a reference to a list where each element is a reference to a list containing 3 items:
+	0: a fields_Feature
+	1: a fields_ImplementsReaction
+	2: a fields_ReactionInstance
+fields_Feature is a reference to a hash where the following keys are defined:
+	id has a value which is a string
+	feature_type has a value which is a string
+	source_id has a value which is a string
+	sequence_length has a value which is an int
+	function has a value which is a string
+	alias has a value which is a reference to a list where each element is a string
+fields_ImplementsReaction is a reference to a hash where the following keys are defined:
+	from_link has a value which is a string
+	to_link has a value which is a string
+fields_ReactionInstance is a reference to a hash where the following keys are defined:
+	id has a value which is a string
+	direction has a value which is a string
+	protons has a value which is a float
+
+
+</pre>
+
+
+<dt><a name="Description"
+>Description</a></dt>
+
+<dd>
+<p>This relationship connects features to reaction instances that exist because the feature is included in a model. It has the following fields:</p>
+</dd>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="get_relationship_ImplementedBasedOn"
+>get_relationship_ImplementedBasedOn</a></h3>
+
+<pre>  $return = $obj-&#62;get_relationship_ImplementedBasedOn($ids, $from_fields, $rel_fields, $to_fields)</pre>
+
+<dl>
+<dt><a name="Parameter_and_return_types"
+>Parameter and return types</a></dt>
+
+<dd>
+<pre>
+$ids is a reference to a list where each element is a string
+$from_fields is a reference to a list where each element is a string
+$rel_fields is a reference to a list where each element is a string
+$to_fields is a reference to a list where each element is a string
+$return is a reference to a list where each element is a reference to a list containing 3 items:
+	0: a fields_ReactionInstance
+	1: a fields_ImplementsReaction
+	2: a fields_Feature
+fields_ReactionInstance is a reference to a hash where the following keys are defined:
+	id has a value which is a string
+	direction has a value which is a string
+	protons has a value which is a float
+fields_ImplementsReaction is a reference to a hash where the following keys are defined:
+	from_link has a value which is a string
+	to_link has a value which is a string
+fields_Feature is a reference to a hash where the following keys are defined:
+	id has a value which is a string
+	feature_type has a value which is a string
+	source_id has a value which is a string
+	sequence_length has a value which is an int
+	function has a value which is a string
+	alias has a value which is a reference to a list where each element is a string
+
+
+</pre>
+
+
+<dt><a name="Description"
+>Description</a></dt>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
 name="get_relationship_Includes"
 >get_relationship_Includes</a></h3>
 
@@ -22803,6 +22893,26 @@ source_name has a value which is a string
 rank has a value which is an int
 pvalue has a value which is a float
 position has a value which is an int
+
+
+</pre>
+
+</dd>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="fields_ImplementsReaction"
+>fields_ImplementsReaction</a></h3>
+
+<dl>
+<dt><a name="Definition"
+>Definition</a></dt>
+
+<dd>
+<pre>
+a reference to a hash where the following keys are defined:
+from_link has a value which is a string
+to_link has a value which is a string
 
 
 </pre>

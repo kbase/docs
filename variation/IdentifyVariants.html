@@ -19,13 +19,14 @@ as well.
 <h3>1. Download and Install Variation Services Client</h3>
 
 <p> 
-The client program for accessing the KBase variation services is called
-<i>jkbase</i>. If you are connected to the KBase Magellan cluster, this program
-should be available in your path. 
+The client suite for accessing the KBase variation services consists of a primary
+program <i>jkbase</i> along with a number of wrapper scripts that provide a unified
+KBase interface.
 </p>
 
 <p>
-Alternatively, Mac users can download the client as part of the KBase DMG disk
+Users of a Magellan KBase image should have the command <i>jkbase</i> in their
+path. Other users can download the Mac client as part of the KBase DMG disk
 image from <a href="http://kbase.us/docs/downloads/KBase-Mac.dmg">http://kbase.us/docs/downloads/KBase-Mac.dmg</a>.
 Once you download the DMG package and run the KBase.app program, you should be
 able to run the command <i>jkbase</i>. Note you must have java installed on your
@@ -45,7 +46,7 @@ username and password.
 </p>
 
 <pre>
-  $ jkbase compute
+  $ jk_fs_ls
 
   Please authenticate with Globus Online:
   [Username:] ***GLOBUS_ONLINE_ACCOUNT***
@@ -74,8 +75,8 @@ two commands if you already have your own sequence data to analyze.
 </p>
 
 <pre>
-  $ jkbase fs -get /share/example/yeast_sim.1.fq.gz
-  $ jkbase fs -get /share/example/yeast_sim.2.fq.gz
+  $ jk_fs_get /share/example/yeast_sim.1.fq.gz
+  $ jk_fs_get /share/example/yeast_sim.2.fq.gz
 </pre>
 
 <p>
@@ -87,7 +88,7 @@ or bzip2'd.
 </p>
 
 <pre>
-  $ jkbase fs -put_pe yeast_sim.1.fq.gz yeast_sim.2.fq.gz yeast
+  $ jk_fs_put_pe yeast_sim.1.fq.gz yeast_sim.2.fq.gz yeast
 </pre>
 
 <p>
@@ -99,13 +100,13 @@ process is complete, a file named reads.pe should be your home directory.
 </p>
 
 <p>
-Standard filesystem commands can be listed with <i>jkbase fs</i>.
+Standard filesystem commands begin with the prefix <i>jk_fs_*</i>.
 </p>
 
 <pre>
-  $ jkbase fs -ls 
-  $ jkbase fs -get yeast.pe
-  $ jkbase fs -mkdir my_directory
+  $ jk_fs_ls 
+  $ jk_fs_get yeast.pe
+  $ jk_fs_mkdir my_directory
   ...
 </pre>
 
@@ -118,7 +119,7 @@ if your genome is not available in the system. The most commonly used genomes ar
 <p>
 
 <pre>
-  $ jkbase compute list_genomes
+  $ jk_compute_list_genomes
 </pre>
 
 <p>
@@ -126,7 +127,7 @@ The complete list of genomes is displayed using:
 </p>
 
 <pre>
-  $ jkbase compute list_genomes -a
+  $ jk_compute_list_genomes -a
 </pre>
 
 <p>
@@ -143,22 +144,22 @@ E. coli loaded into the infrastructure.
 <h3>3. Align reads with Bowtie2</h3>
 
 <p>
-To align the reads to a reference genome simply call jkbase compute with the bowtie argument.
+To align the reads to a reference genome simply call jk_compute_bowtie.
 </p>
 
 <pre>
-  $ jkbase compute bowtie -in yeast.pe -organism yeast -out yeast_bowtie_align
+  $ jk_compute_bowtie -in=yeast.pe -org=yeast -out=yeast_bowtie_align
   Submitted Job: &lt;jobID&gt;
 </pre>
    
 <p>
 The -in flag specifies which reads to align and analyze. Here we are analyzing the yeast
-paired end reads that we uploaded above. The -organism flag selects the reference genome used 
+paired end reads that we uploaded above. The -org flag selects the reference genome used 
 for alignment as identified above. Here we are aligning the reads against the reference
 yeast genome. Note if you are using a KBase genome identifier, make sure to use single
-quotes around the genome name: <i>jkbase -organism 'kb|g.1870' ...</i>. You can also align
+quotes around the genome name: <i>jk_* -org='kb|g.1870' ...</i>. You can also align
 the reads using bwa by substituting bwa for bowtie in the command above. If you run 
-<i>jkbase compute bowtie</i> or any of the jkbase commands without options, it will 
+<i>jk_compute_bowtie</i> or any of the jk_* commands without options, it will 
 remind you of the required parameters with a short help text.
 </p>
 
@@ -175,7 +176,7 @@ using the commandline client.
 </p>
 
 <pre>
-  $ jkbase compute status -job &lt;jobID&gt;
+  $ jk_compute_job_status -job=&lt;jobID&gt;
 
                            ID:                        &lt;jobID&gt;
                      Username:    ***GLOBUS_ONLINE_ACCOUNT***
@@ -189,12 +190,12 @@ using the commandline client.
 <p>
 You will know the job is complete when "Complete" is set to true.  Make sure you
 wait for the job to complete before continuing to the next step. Here the
-alignments are only 80.5% complete, but here is how it looks when the job
+alignments are only 80.5% complete, but below is how it looks when the job
 completes.
 </p>
 
 <pre>
-  $ jkbase compute status -job &lt;jobID&gt;
+  $ jk_compute_job_status -job=&lt;jobID&gt;
 
                            ID:                        &lt;jobID&gt;
                      Username:    ***GLOBUS_ONLINE_ACCOUNT***
@@ -209,7 +210,7 @@ If you forgot your jobID, you can list the status of all your running jobs:
 </p>
 
 <pre>
-  $ jkbase compute list_jobs
+  $ jk_compute_list_jobs
 </pre>
 
 <br><br>
@@ -223,12 +224,12 @@ using the selected reference.
 </p>
 
 <pre>
-  $ jkbase compute snp -in yeast_bowtie_align -organism yeast -out yeast_snps
+  $ jk_compute_samtools_snp -in=yeast_bowtie_align -org=yeast -out=yeast_snps
 </pre>
 
 <p>
-You can check on the status of your analysis job using the <i>jkbase compute
-status &lt;jobID&gt;</i> command as shown above. Make sure you wait until the
+You can check on the status of your analysis job using the <i>jk_compute_job_status -job=&lt;jobID&gt;</i>
+command as shown above. Make sure you wait until the
 status is complete before executing the next step. 
 </p>
 
@@ -238,11 +239,11 @@ status is complete before executing the next step.
 <p>
 Because SNPs are called in parallel across the genome multiple files are created
 by the previous command.  To join the SNPs into a single VCF file use the
-<i>jkbase</i> vcfmerge function 
+vcfmerge function 
 </p>
 
 <pre>
-  $ jkbase compute vcf_merge -in yeast_snps -alignments yeast_bowtie_align -out yeast.vcf
+  $ jk_compute_vcf_merge -in=yeast_snps --alignments=yeast_bowtie_align -out=yeast.vcf
 </pre>
 
 <h3>3. Download VCF file</h3>
@@ -251,7 +252,7 @@ Download the combined vcf file back to your desktop computer for local viewing.
 </p>
 
 <pre>
-  $ jkbase fs -get yeast.vcf
+  $ jk_fs_get yeast.vcf
   $ less yeast.vcf
 </pre>
 

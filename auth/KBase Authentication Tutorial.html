@@ -263,95 +263,75 @@ Acquiring an authentication token</h3>
 
 <br>
 
+<pre>
 curl -# --user papa:papapa
-'https://nexus.api.globusonline.org/goauth/token?client_id=papa&amp;grant_type=client_credentials'
-| python -mjson.tool<br>
+'https://nexus.api.globusonline.org/goauth/token?client_id=papa&grant_type=client_credentials'
+| python -mjson.tool
 
 ########################################################################
-100.0%<br>
+100.0%
 
-{<br>
-&nbsp;&nbsp;&nbsp; "access_token":
+{
+    "access_token":
 "un=papa|tokenid=7601f8aa-0353-11e2-998e-1231391ccf32|expiry=1379702777|client_id=papa|token_type=Bearer|SigningSubject=https://nexus.api.globusonline.org/goauth/keys/860b6fa6-034e-11e2-9ebd-12313809f035|sig=08e05cbab5342c27bdc109ddbf688b43f17a22819899ed0f1f1356748719c757f0b5315f1676588393b8e9b3795092f7ce0e677b7bd23dbc73c5f3bbbf2b929813344645f7f85f2cfffca5c5ab390f6b84778dc3607c72f870bc9871cc71b2027c0b6115f4414f334f902398cea90afc59584c645054c2bee50580cb34258a48",
-<br>
-&nbsp;&nbsp;&nbsp; "access_token_hash":
+    "access_token_hash":
 "736372797074000d00000008000000017e84e070dc097544b24eeaa4eec64caac4dd4abcb0db7e38e0655c5973397fbd3d21fbad1b91963e49f5a41347bc97eec646e6405f708a0ef1d166c5b6495f3002c80ca8434227be3782d6cd1756a43d85cc56144270259b3192b54f30f2589366dc6e8fbba528502e2fe0ca41856a90e5882306ccd38871af5e3052c9ac225d1ca180ab31535368b9154958c0d8b693abe8e71a560873565f73555b201d7659a78a6783c88dfafc49bafda6332dddf0",
-<br>
+    "client_id": "papa",
+    "expires_in": 31536000,
+    "expiry": 1379702777,
+    "issued_on": 1348166777,
+    "lifetime": 31536000,
+    "scopes": [
+        "https://transfer.api.globusonline.org"
+     ],
+     "token_id": "7601f8aa-0353-11e2-998e-1231391ccf32",
+     "token_type": "Bearer",
+     "user_name": "papa"
+}
 
-&nbsp;&nbsp;&nbsp; "client_id": "papa", <br>
+Token Structure
 
-&nbsp;&nbsp;&nbsp; "expires_in": 31536000, <br>
+un=papa
 
-&nbsp;&nbsp;&nbsp; "expiry": 1379702777, <br>
+tokenid=7601f8aa-0353-11e2-998e-1231391ccf32
 
-&nbsp;&nbsp;&nbsp; "issued_on": 1348166777, <br>
+expiry=1379702777
 
-&nbsp;&nbsp;&nbsp; "lifetime": 31536000, <br>
+client_id=papa
 
-&nbsp;&nbsp;&nbsp; "scopes": [<br>
+token_type=Bearer
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-"https://transfer.api.globusonline.org"<br>
+SigningSubject=https://nexus.api.globusonline.org/goauth/keys/860b6fa6-034e-11e2-9ebd-12313809f035
+sig=08e05cbab5342c27bdc109ddbf688b43f17a22819899ed0f1f1356748719c757f0b5315f1676588393b8e9b3795092f7ce0e677b7bd23dbc73c5f3bbbf2b929813344645f7f85f2cfffca5c5ab390f6b84778dc3607c72f870bc9871cc71b2027c0b6115f4414f334f902398cea90afc59584c645054c2bee50580cb34258a48
 
-&nbsp;&nbsp;&nbsp; ], <br>
-
-&nbsp;&nbsp;&nbsp; "token_id": "7601f8aa-0353-11e2-998e-1231391ccf32", <br>
-
-&nbsp;&nbsp;&nbsp; "token_type": "Bearer", <br>
-
-&nbsp;&nbsp;&nbsp; "user_name": "papa"<br>
-
-}<br>
-
-<br>
-
-Token Structure<br>
-
-un=papa<br>
-
-tokenid=7601f8aa-0353-11e2-998e-1231391ccf32<br>
-
-expiry=1379702777<br>
-
-client_id=papa<br>
-
-token_type=Bearer<br>
-
-SigningSubject=https://nexus.api.globusonline.org/goauth/keys/860b6fa6-034e-11e2-9ebd-12313809f035<br>
-sig=08e05cbab5342c27bdc109ddbf688b43f17a22819899ed0f1f1356748719c757f0b5315f1676588393b8e9b3795092f7ce0e677b7bd23dbc73c5f3bbbf2b929813344645f7f85f2cfffca5c5ab390f6b84778dc3607c72f870bc9871cc71b2027c0b6115f4414f334f902398cea90afc59584c645054c2bee50580cb34258a48<br>
+</pre>
 
 <br>
 
-<br>
 
 <h3>
 Using authentication token to fetch user profile</h3>
 
 <br>
+<pre>
 curl -k -# -H "Authorization: Globus-Goauthtoken
 un=papa|tokenid=7601f8aa-0353-11e2-998e-1231391ccf32|expiry=1379702777|client_id=papa|token_type=Bearer|SigningSubject=https://nexus.api.globusonline.org/goauth/keys/860b6fa6-034e-11e2-9ebd-12313809f035|sig=08e05cbab5342c27bdc109ddbf688b43f17a22819899ed0f1f1356748719c757f0b5315f1676588393b8e9b3795092f7ce0e677b7bd23dbc73c5f3bbbf2b929813344645f7f85f2cfffca5c5ab390f6b84778dc3607c72f870bc9871cc71b2027c0b6115f4414f334f902398cea90afc59584c645054c2bee50580cb34258a48"
-https://nexus.api.globusonline.org/users/papa | python -m json.tool<br>
+https://nexus.api.globusonline.org/users/papa | python -m json.tool
 
 ########################################################################
-100.0%<br>
+100.0%
 
-{<br>
+{
+     "custom_fields": {}, 
+     "email": "sychan@lbl.gov", 
+     "email_validated": true, 
+     "fullname": "Papa test account", 
+     "opt_in": false, 
+     "system_admin": false, 
+     "username": "papa"
 
-&nbsp;&nbsp;&nbsp; "custom_fields": {}, <br>
-
-&nbsp;&nbsp;&nbsp; "email": "sychan@lbl.gov", <br>
-
-&nbsp;&nbsp;&nbsp; "email_validated": true, <br>
-
-&nbsp;&nbsp;&nbsp; "fullname": "Papa test account", <br>
-
-&nbsp;&nbsp;&nbsp; "opt_in": false, <br>
-
-&nbsp;&nbsp;&nbsp; "system_admin": false, <br>
-
-&nbsp;&nbsp;&nbsp; "username": "papa"<br>
-
-}<br>
+}
+</pre>
 
 <br>
 
@@ -364,11 +344,12 @@ Using username/password authentication:<br>
 
 <br>
 
-<span style="font-family: monospace;"></span><span style="font-family: monospace;">perl
--MBio::KBase::AuthToken -e 'print Bio::KBase::AuthToken-&gt;new(
-user_id =&gt; "papa", password =&gt; "papapa")-&gt;token,"\n";'</span><br style="font-family: monospace;">
+<pre>
+perl -MBio::KBase::AuthToken -e 'print Bio::KBase::AuthToken-&gt;new(
+user_id =&gt; "papa", password =&gt; "papapa")-&gt;token,"\n";'
 
-<span style="font-family: monospace;">un=papa|tokenid=c3fdf51e-0357-11e2-998e-1231391ccf32|expiry=1379704625|client_id=papa|token_type=Bearer|SigningSubject=https://nexus.api.globusonline.org/goauth/keys/860b6fa6-034e-11e2-9ebd-12313809f035|sig=49507eeaf3e007aa9726bffa20c1e61e706c895ea099c545ed6a7ed64dd264db90d2aa9a06c3db0a763dc5c662c85aa0a71633e6407d92560b4cc8b7d4c1943e50ca3ec1fc30973f249474ad05531c8465fb73a5e84571f8b0561b30b6961d76851b3521ced74b1af69497cb491204df577cb786ae095d5c28ce735005e897c4</span><br>
+un=papa|tokenid=c3fdf51e-0357-11e2-998e-1231391ccf32|expiry=1379704625|client_id=papa|token_type=Bearer|SigningSubject=https://nexus.api.globusonline.org/goauth/keys/860b6fa6-034e-11e2-9ebd-12313809f035|sig=49507eeaf3e007aa9726bffa20c1e61e706c895ea099c545ed6a7ed64dd264db90d2aa9a06c3db0a763dc5c662c85aa0a71633e6407d92560b4cc8b7d4c1943e50ca3ec1fc30973f249474ad05531c8465fb73a5e84571f8b0561b30b6961d76851b3521ced74b1af69497cb491204df577cb786ae095d5c28ce735005e897c4
+</pre>
 
 <br>
 
@@ -396,10 +377,10 @@ passphrase using the "ssh-keygen -p" option (see the ssh-keygen manual
 page):<br>
 
 <br>
-
-<span style="font-family: monospace;">perl -MBio::KBase::AuthToken
--e '$key=`cat ~/.ssh/id_rsa`; print Bio::KBase::AuthToken-&gt;new(
-user_id =&gt; "sychan", client_secret =&gt; $key)-&gt;token,"\n";'<br>un=sychan|tokenid=ff9ab49a-0357-11e2-b90a-12313d2d6e7f|expiry=1379704725|client_id=sychan|token_type=Bearer|SigningSubject=https://nexus.api.globusonline.org/goauth/keys/860b6fa6-034e-11e2-9ebd-12313809f035|sig=1024db4fba131425382ab72edf9699ee819f4d986dadd1070db968ec2bffe584b1d99bbc43c2b21c436a5c69107e175ad7289e73500c0329ab3d2723b965c08609bfa5b8fe4e826d9cba02f39ea052148448e1f06d01b9d26502f9864ac83107cd6e7ef204447480f2f1ffbee0127a4323f607aab831f300f7b020f0916b8b34</span><br>
+<pre>
+perl -MBio::KBase::AuthToken -e '$key=`cat ~/.ssh/id_rsa`; print Bio::KBase::AuthToken-&gt;new(
+user_id =&gt; "sychan", client_secret =&gt; $key)-&gt;token,"\n";'<br>un=sychan|tokenid=ff9ab49a-0357-11e2-b90a-12313d2d6e7f|expiry=1379704725|client_id=sychan|token_type=Bearer|SigningSubject=https://nexus.api.globusonline.org/goauth/keys/860b6fa6-034e-11e2-9ebd-12313809f035|sig=1024db4fba131425382ab72edf9699ee819f4d986dadd1070db968ec2bffe584b1d99bbc43c2b21c436a5c69107e175ad7289e73500c0329ab3d2723b965c08609bfa5b8fe4e826d9cba02f39ea052148448e1f06d01b9d26502f9864ac83107cd6e7ef204447480f2f1ffbee0127a4323f607aab831f300f7b020f0916b8b34
+</pre>
 
 <h3>Sample Perl script</h3>
 
@@ -409,164 +390,72 @@ This is a short example of a conventional perl script that acquires an
 authentication token:<br>
 
 <br>
+<pre>
+use Bio::KBase::AuthToken;
 
-<span style="font-family: monospace;">use Bio::KBase::AuthToken;</span><br style="font-family: monospace;">
+use Bio::KBase::AuthUser;
 
-<span style="font-family: monospace;">use Bio::KBase::AuthUser;</span><br style="font-family: monospace;">
+use Data::Dumper;
 
-<span style="font-family: monospace;">use Data::Dumper;</span><br style="font-family: monospace;">
+$t = Bio::KBase::AuthToken->new( user_id => "papa",
+                                 password=> "papapa");
 
-<br style="font-family: monospace;">
 
-<span style="font-family: monospace;">
-$t = Bio::KBase::AuthToken-&gt;new( user_id =&gt; "papa",</span><br style="font-family: monospace;">
+if ($t->validate()) {
+    print "Yeehaw!!! It works!\n";
+    print Dumper($t);
+    $u = Bio::KBase::AuthUser->new( token => $t->token);
 
-<span style="font-family: monospace;">&nbsp; &nbsp; &nbsp; &nbsp;
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; password
-=&gt; "papapa");</span><br style="font-family: monospace;">
-
-<br style="font-family: monospace;">
-
-<span style="font-family: monospace;">
-if ($t-&gt;validate()) {</span><br style="font-family: monospace;">
-
-<span style="font-family: monospace;">&nbsp;&nbsp;&nbsp; print
-"Yeehaw!!! It works!\n";</span><br style="font-family: monospace;">
-
-<span style="font-family: monospace;">&nbsp;&nbsp;&nbsp; print Dumper(
-$t);</span><br style="font-family: monospace;">
-
-<span style="font-family: monospace;">&nbsp;&nbsp;&nbsp; $u =
-Bio::KBase::AuthUser-&gt;new( token =&gt; $t-&gt;token);</span><br style="font-family: monospace;">
-
-<span style="font-family: monospace;">&nbsp;&nbsp;&nbsp; if
-($t-&gt;user_id()) {</span><br style="font-family: monospace;">
-
-<span style="font-family: monospace;">&nbsp; &nbsp;&nbsp;&nbsp; print
-"And here's my profile object:\n";</span><br style="font-family: monospace;">
-
-<span style="font-family: monospace;">&nbsp; &nbsp;&nbsp;&nbsp; print
-Dumper( $u);</span><br style="font-family: monospace;">
-
-<span style="font-family: monospace;">&nbsp;&nbsp;&nbsp; }</span><br style="font-family: monospace;">
-
-<span style="font-family: monospace;">} else {</span><br style="font-family: monospace;">
-
-<span style="font-family: monospace;">&nbsp;&nbsp;&nbsp; die "Doh!\n";</span><br style="font-family: monospace;">
-
-<span style="font-family: monospace;">}</span><br>
-
+    if ($t->user_id()) {
+        print "And here's my profile object:\n";
+	print Dumper( $u);
+    }
+} else {
+    die "Doh!\n";
+}
+</pre>
 <br>
 
-&nbsp;&nbsp; Here is the output:<br>
+Here is the output:<br>
 
 <br>
+<pre>
+Yeehaw!!! It works!
 
-<span style="font-family: monospace;">Yeehaw!!! It works!</span><br style="font-family: monospace;">
+$VAR1 = bless( {
+                   'password'=> 'papapa',
+		   'error_message' => undef,
+		   'user_id' => 'papa',
+		   'token' => 'un=papa|clientid=papa|expiry=1376544425|SigningSubject=https://graph.api.test.globuscs.info/goauth/keys/861eb8e0-e634-11e1-ac2c-1231381a5994|sig=805ab020da27e5b77416ce8e76431cd5941a1a2c527ef3c89ff04a4b2a2de1fa94e7e40517364224b89aeec19269aabb960435a6d144b7911ee62801b2143c5061808504f9815930dd7f55150cbdfec7203331466c744b9dd62d674d459b4efbd39f2ff2d3249ae8f2d4eb41d17d5263ae6ddd8a43bed0a555005c2edc299076'
+		},
+		'Bio::KBase::AuthToken' );
 
-<br style="font-family: monospace;">
+And here's my profile object:
 
-<span style="font-family: monospace;">$VAR1 = bless( {</span><br style="font-family: monospace;">
+$VAR1 = bless( {
 
-<span style="font-family: monospace;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; 'password'
-=&gt; 'papapa',</span><br style="font-family: monospace;">
+ 'system_admin' => 1,
+ 'name' => 'Papa Smurf',
+ 'phone' => '8888888888',
+ 'email' => 'papa@smurfs.nz',
+ 'oauth_creds' => {
+ 'auth_token' => 'un=papa|clientid=papa|expiry=1376544425|SigningSubject=https://graph.api.test.globuscs.info/goauth/keys/861eb8e0-e634-11e1-ac2c-1231381a5994|sig=805ab020da27e5b77416ce8e76431cd5941a1a2c527ef3c89ff04a4b2a2de1fa94e7e40517364224b89aeec19269aabb960435a6d144b7911ee62801b2143c5061808504f9815930dd7f55150cbdfec7203331466c744b9dd62d674d459b4efbd39f2ff2d3249ae8f2d4eb41d17d5263ae6ddd8a43bed0a555005c2edc299076'
 
-<span style="font-family: monospace;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
-'error_message' =&gt; undef,</span><br style="font-family: monospace;">
+ },
+ 'error_message' => undef,
+ 'current_project_name' =>'Papa',
+ 'verified' => 1,
+ 'user_id' => 'papa',
+ 'token' => undef,
+ 'organization' => 'papa',
+ 'institution' => 'papa',
+ 'opt_in' => undef
+ },
+'Bio::KBase::AuthUser' );
 
-<span style="font-family: monospace;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; 'user_id'
-=&gt; 'papa',</span><br style="font-family: monospace;">
+</pre>
 
-<span style="font-family: monospace;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; 'token' =&gt;
-'un=papa|clientid=papa|expiry=1376544425|SigningSubject=https://graph.api.test.globuscs.info/goauth/keys/861eb8e0-e634-11e1-ac2c-1231381a5994|sig=805ab020da27e5b77416ce8e76431cd5941a1a2c527ef3c89ff04a4b2a2de1fa94e7e40517364224b89aeec19269aabb960435a6d144b7911ee62801b2143c5061808504f9815930dd7f55150cbdfec7203331466c744b9dd62d674d459b4efbd39f2ff2d3249ae8f2d4eb41d17d5263ae6ddd8a43bed0a555005c2edc299076'</span><br style="font-family: monospace;">
 
-<span style="font-family: monospace;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; },
-'Bio::KBase::AuthToken' );</span><br style="font-family: monospace;">
-
-<br style="font-family: monospace;">
-
-<span style="font-family: monospace;">And here's my profile object:</span><br style="font-family: monospace;">
-
-<br style="font-family: monospace;">
-
-<span style="font-family: monospace;">$VAR1 = bless( {</span><br style="font-family: monospace;">
-
-<span style="font-family: monospace;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; 'system_admin'
-=&gt; 1,</span><br style="font-family: monospace;">
-
-<span style="font-family: monospace;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; 'name' =&gt;
-'Papa Smurf',</span><br style="font-family: monospace;">
-
-<span style="font-family: monospace;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; 'phone' =&gt;
-'8888888888',</span><br style="font-family: monospace;">
-
-<span style="font-family: monospace;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; 'email' =&gt;
-'papa@smurfs.nz',</span><br style="font-family: monospace;">
-
-<span style="font-family: monospace;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; 'oauth_creds'
-=&gt; {</span><br style="font-family: monospace;">
-
-<span style="font-family: monospace;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; 'auth_token'
-=&gt;
-'un=papa|clientid=papa|expiry=1376544425|SigningSubject=https://graph.api.test.globuscs.info/goauth/keys/861eb8e0-e634-11e1-ac2c-1231381a5994|sig=805ab020da27e5b77416ce8e76431cd5941a1a2c527ef3c89ff04a4b2a2de1fa94e7e40517364224b89aeec19269aabb960435a6d144b7911ee62801b2143c5061808504f9815930dd7f55150cbdfec7203331466c744b9dd62d674d459b4efbd39f2ff2d3249ae8f2d4eb41d17d5263ae6ddd8a43bed0a555005c2edc299076'</span><br style="font-family: monospace;">
-
-<span style="font-family: monospace;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-},</span><br style="font-family: monospace;">
-
-<span style="font-family: monospace;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
-'error_message' =&gt; undef,</span><br style="font-family: monospace;">
-
-<span style="font-family: monospace;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
-'current_project_name' =&gt; 'Papa',</span><br style="font-family: monospace;">
-
-<span style="font-family: monospace;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; 'verified'
-=&gt; 1,</span><br style="font-family: monospace;">
-
-<span style="font-family: monospace;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; 'user_id'
-=&gt; 'papa',</span><br style="font-family: monospace;">
-
-<span style="font-family: monospace;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; 'token' =&gt;
-undef,</span><br style="font-family: monospace;">
-
-<span style="font-family: monospace;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; 'organization'
-=&gt; 'papa',</span><br style="font-family: monospace;">
-
-<span style="font-family: monospace;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; 'institution'
-=&gt; 'papa',</span><br style="font-family: monospace;">
-
-<span style="font-family: monospace;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; 'opt_in' =&gt;
-undef</span><br style="font-family: monospace;">
-
-<span style="font-family: monospace;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; },
-'Bio::KBase::AuthUser' );</span><br style="font-family: monospace;">
-
-<br style="font-family: monospace;">
-
-&nbsp;
-<br>
 
 <h4>
 Example Client and Server code using AuthToken and AuthUser:</h4>
@@ -584,153 +473,105 @@ validate it, and returns an appropriate HTTP status code depending on
 whether or not the token validates.<br>
 
 <br>
+<pre>
+use lib "../lib/";
+use lib "lib";
+use Data::Dumper;
+use HTTP::Daemon;
+use HTTP::Request;
+use LWP::UserAgent;
+use JSON;
+use Bio::KBase::AuthToken;
+use Bio::KBase::AuthUser;
 
-<span style="font-family: monospace;">use lib "../lib/";</span><br style="font-family: monospace;">
+sub testServer {
 
-<span style="font-family: monospace;">use lib "lib";</span><br style="font-family: monospace;">
+    my $d = shift;
+    my $res = new HTTP::Response;
+    my $msg = new HTTP::Message;
+    my $at = new Bio::KBase::AuthToken;
+    while (my $c = $d->accept()) {
+        while (my $r = $c->get_request) {
+	    my ($token) = $r->header('Authorization') =~ /OAuth (.+)/;
+	    $at->token( $token);
+	    if ($at->validate()) {
+	        $res->code(200);
+		$body = sprintf( "Successfully logged in as user %s\n",
+		$at->user_id);
+		$au = Bio::KBase::AuthUser->new( 'token' => $at->token);
+		printf "Server: User %s (%s) found for token %s.\n",
+		$au->name,$au->user_id, $at->token;
+	    } else {
+	        $res->code(401);
+		printf "Server: token failed validation.\n";
+		$body = sprintf("You failed to login: %s\n", $at->error_message);
+	    }
+	    $res->content( $body);
+	    $c->send_response($res);
+	}
+	$c->close;
+    }
+}
 
-<span style="font-family: monospace;">use Data::Dumper;</span><br style="font-family: monospace;">
+sub testClient {
+    my $server = shift; my $ua =LWP::UserAgent->new();
 
-<span style="font-family: monospace;">use HTTP::Daemon;</span><br style="font-family: monospace;">
+    $at = Bio::KBase::AuthToken->new('user_id' =>'kbasetest', 'password' => '@Suite525');
+    $ua->default_header( "Authorization" => "OAuth " . $at->token);
 
-<span style="font-family: monospace;">use HTTP::Request;</span><br style="font-family: monospace;">
 
-<span style="font-family: monospace;">use LWP::UserAgent;</span><br style="font-family: monospace;">
+    $res = $ua->get( $server. "someurl" );
+    printf "Client: Recieved a response: %d %s\n",$res->code, $res->content;
 
-<span style="font-family: monospace;">use JSON;</span><br style="font-family: monospace;">
+    # As a sanity check, trash the oauth_secret and make sure that
+    # we get a negative result
+    $ua->default_header( "Authorization" => "OAuth Bogotoken");
 
-<span style="font-family: monospace;">use Bio::KBase::AuthToken;</span><br style="font-family: monospace;">
+    printf "Client: Sending bad request.\n";
+    $res = $ua->get( $server. "someurl" );
+    printf "Client: Recieved a response: %d %s\n", $res->code, $res->content;
 
-<span style="font-family: monospace;">use Bio::KBase::AuthUser;</span><br style="font-family: monospace;">
+}
 
-<br style="font-family: monospace;">
+$d = HTTP::Daemon->new(LocalAddr => '127.0.0.1');
 
-<span style="font-family: monospace;">sub testServer {<br>
-&nbsp;&nbsp;&nbsp; my $d = shift;<br>
-&nbsp;&nbsp;&nbsp; my $res = new HTTP::Response;<br>
-&nbsp;&nbsp;&nbsp; my $msg = new HTTP::Message;<br>
-&nbsp;&nbsp;&nbsp; my $at = new Bio::KBase::AuthToken;<br>
-&nbsp;&nbsp;&nbsp; while (my $c = $d-&gt;accept()) {<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; while (my $r =
-$c-&gt;get_request) {<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; my
-($token) = $r-&gt;header('Authorization') =~ /OAuth (.+)/;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-$at-&gt;token( $token);<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if
-($at-&gt;validate()) {<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-$res-&gt;code(200);<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-$body = sprintf( "Successfully logged in as user %s\n",
-$at-&gt;user_id);<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-$au = Bio::KBase::AuthUser-&gt;new( 'token' =&gt; $at-&gt;token);<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-printf "Server: User %s (%s) found for token %s.\n",
-$au-&gt;name,$au-&gt;user_id, $at-&gt;token;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }
-else {<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-$res-&gt;code(401);<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-printf "Server: token failed validation.\n";<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-$body = sprintf("You failed to login: %s\n", $at-&gt;error_message);<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-$res-&gt;content( $body);<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-$c-&gt;send_response($res);<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; $c-&gt;close;<br>
-&nbsp;&nbsp;&nbsp; }<br>
-}<br>
-<br>
-sub testClient {<br>
-&nbsp;&nbsp;&nbsp; my $server = shift; my $ua =
-LWP::UserAgent-&gt;new();<br>
-<br>
-&nbsp;&nbsp;&nbsp; $at = Bio::KBase::AuthToken-&gt;new('user_id' =&gt;
-'kbasetest', 'password' =&gt; '@Suite525');<br>
-&nbsp;&nbsp;&nbsp; $ua-&gt;default_header( "Authorization" =&gt; "OAuth
-" . $at-&gt;token);<br>
-<br>
-<br>
-&nbsp;&nbsp;&nbsp; $res = $ua-&gt;get( $server. "someurl" );<br>
-&nbsp;&nbsp;&nbsp; printf "Client: Recieved a response: %d %s\n",
-$res-&gt;code, $res-&gt;content;<br>
-<br>
-&nbsp;&nbsp;&nbsp; # As a sanity check, trash the oauth_secret and make
-sure that<br>
-&nbsp;&nbsp;&nbsp; # we get a negative result<br>
-&nbsp;&nbsp;&nbsp; $ua-&gt;default_header( "Authorization" =&gt; "OAuth
-Bogotoken");<br>
-<br>
-&nbsp;&nbsp;&nbsp; printf "Client: Sending bad request.\n";<br>
-&nbsp;&nbsp;&nbsp; $res = $ua-&gt;get( $server. "someurl" );<br>
-&nbsp;&nbsp;&nbsp; printf "Client: Recieved a response: %d %s\n",
-$res-&gt;code, $res-&gt;content;<br>
-<br>
-}</span><br style="font-family: monospace;">
+printf "Server listening at %s\n",$d->url;
 
-<br style="font-family: monospace;">
+my $child = fork();
 
-<span style="font-family: monospace;">$d = HTTP::Daemon-&gt;new(
-LocalAddr =&gt; '127.0.0.1');</span><br style="font-family: monospace;">
+if ($child) {
+ testClient( $d->url);
+} else {
+ testServer($d);
+}
 
-<br style="font-family: monospace;">
+kill 9, $child;
 
-<span style="font-family: monospace;">printf "Server listening at
-%s\n",$d-&gt;url;</span><br style="font-family: monospace;">
+Output from the sample script:
 
-<br style="font-family: monospace;">
 
-<span style="font-family: monospace;">my $child = fork();</span><br style="font-family: monospace;">
+Server listening at
+http://127.0.0.1:54079/
 
-<span style="font-family: monospace;">if ($child) {</span><br style="font-family: monospace;">
-
-<span style="font-family: monospace;">&nbsp;&nbsp;&nbsp; testClient(
-$d-&gt;url);</span><br style="font-family: monospace;">
-
-<span style="font-family: monospace;">} else {</span><br style="font-family: monospace;">
-
-<span style="font-family: monospace;">&nbsp;&nbsp;&nbsp; testServer(
-$d);</span><br style="font-family: monospace;">
-
-<span style="font-family: monospace;">}</span><br style="font-family: monospace;">
-
-<span style="font-family: monospace;">kill 9, $child;</span><br style="font-family: monospace;">
-
-<br style="font-family: monospace;">
-
-<br>
-
-Output from the sample script:<br>
-
-<br>
-
-<span style="font-family: monospace;">Server listening at
-http://127.0.0.1:54079/</span><br style="font-family: monospace;">
-
-<span style="font-family: monospace;">Server:
+Server:
 User KBase Test Account (kbasetest) found for token
-un=kbasetest|clientid=kbasetest|expiry=1376547165|SigningSubject=https://graph.api.test.globuscs.info/goauth/keys/861eb8e0-e634-11e1-ac2c-1231381a5994|sig=9a8fcd2a41e877aec5b0ed5a0d0315c258b5466d4862d17b5ce33f2703d2a32e8179556579998a8379271360251593b9db86430fb9bd1b9bf081b39dc6ff978bde834a9a9cb19eacc46f0b4ada93048c10b8aa2bfa2325ba5fab6993042b51bc7e3ab1545831c261e96972f3789fd20b6c1c5742f937ffda8a6f08c3019ca0d1.</span><br style="font-family: monospace;">
+un=kbasetest|clientid=kbasetest|expiry=1376547165|SigningSubject=https://graph.api.test.globuscs.info/goauth/keys/861eb8e0-e634-11e1-ac2c-1231381a5994|sig=9a8fcd2a41e877aec5b0ed5a0d0315c258b5466d4862d17b5ce33f2703d2a32e8179556579998a8379271360251593b9db86430fb9bd1b9bf081b39dc6ff978bde834a9a9cb19eacc46f0b4ada93048c10b8aa2bfa2325ba5fab6993042b51bc7e3ab1545831c261e96972f3789fd20b6c1c5742f937ffda8a6f08c3019ca0d1.
 
-<span style="font-family: monospace;">Client: Recieved a response: 200
-Successfully logged in as user kbasetest</span><br style="font-family: monospace;">
+Client: Recieved a response: 200
+Successfully logged in as user kbasetest
 
-<br style="font-family: monospace;">
 
-<span style="font-family: monospace;">Client: Sending bad request: GET
-http://127.0.0.1:54079/someurl (expecting failure)</span><br style="font-family: monospace;">
+Client: Sending bad request: GET
+http://127.0.0.1:54079/someurl (expecting failure)
 
-<span style="font-family: monospace;">Server: token failed validation.</span><br style="font-family: monospace;">
+Server: token failed validation.
 
-<span style="font-family: monospace;">Client: Recieved a response: 401
+Client: Recieved a response: 401
 You failed to login: Failed to verify
 token: Token lacks signature fields at lib/Bio/KBase/AuthToken.pm line
-237.</span><br style="font-family: monospace;">
+237.
+
+</pre>
 
 <br>
 
@@ -749,7 +590,9 @@ should expire (expiry=), the URL to use for validating the signature
 
 Sample Token:<br>
 
+<pre>
 <span style="background-color: rgb(153, 255, 153);">un=kbasetest|clientid=kbasetest|expiry=1376547165|SigningSubject=https://graph.api.test.globuscs.info/goauth/keys/861eb8e0-e634-11e1-ac2c-1231381a5994</span>|<span style="background-color: rgb(51, 204, 255);">sig=9a8fcd2a41e877aec5b0ed5a0d0315c258b5466d4862d17b5ce33f2703d2a32e8179556579998a8379271360251593b9db86430fb9bd1b9bf081b39dc6ff978bde834a9a9cb19eacc46f0b4ada93048c10b8aa2bfa2325ba5fab6993042b51bc7e3ab1545831c261e96972f3789fd20b6c1c5742f937ffda8a6f08c3019ca0d1</span><br>
+</pre>
 
 Token Assertions = Green<br>
 
@@ -763,47 +606,49 @@ SigningSubject=https://graph.api.test.globuscs.info/goauth/keys/861eb8e0-e634-11
 
 <br>
 
-&nbsp;&nbsp; Using this URL, we can issue a REST call to retrieve the
+Using this URL, we can issue a REST call to retrieve the
 public key to be used to validate the signature. First we retrieve the
 public key, and then use our favorite RSA library that supports SHA1
 signature validation.<br>
 
 <br>
 
+
 SigningSubject points to JSON object:<br>
+<pre>
+{
 
-{<br>
+"expiry": 1345569705.0, 
 
-&nbsp;&nbsp;&nbsp; "expiry": 1345569705.0, <br>
-
-&nbsp;&nbsp;&nbsp; "id": "861eb8e0-e634-11e1-ac2c-1231381a5994", <br>
-&nbsp;&nbsp;&nbsp;
+"id": "861eb8e0-e634-11e1-ac2c-1231381a5994", 
 "pubkey": "-----BEGIN RSA PUBLIC
 KEY-----\nMIGJAoGBAOI4NghMHlbChfx07ZeLY4eiOiJUb9ofnv+cnFOFEmP+BrxZObT3RpuD\nC2jjIX78lj16LaQPxz5iaFth3FJCxERgcjnlQ5nvgHAwisRG+76Y8fIpgGAdWL5S\nzrlgDOXVieYs+N06fGPmlsMRtQVEzy0fUa5421epiNRKy5QYZskPAgMBAAE=\n-----END
-RSA PUBLIC KEY-----\n", <br>
+RSA PUBLIC KEY-----\n", 
 
-&nbsp;&nbsp;&nbsp; "valid": true<br>
+"valid": true
 
-}<br>
+}
 
+</pre>
 <br>
 
 Pseudocode for token validation, given the "pubkey" in the JSON object
 referenced above:<br>
 
-<br>
+<pre>
 
 <span style="background-color: rgb(153, 255, 153);">un=kbasetest|clientid=kbasetest|expiry=1376547165|SigningSubject=https://graph.api.test.globuscs.info/goauth/keys/861eb8e0-e634-11e1-ac2c-1231381a5994</span>|<span style="background-color: rgb(51, 204, 255);">sig=9a8fcd2a41e877aec5b0ed5a0d0315c258b5466d4862d17b5ce33f2703d2a32e8179556579998a8379271360251593b9db86430fb9bd1b9bf081b39dc6ff978bde834a9a9cb19eacc46f0b4ada93048c10b8aa2bfa2325ba5fab6993042b51bc7e3ab1545831c261e96972f3789fd20b6c1c5742f937ffda8a6f08c3019ca0d1</span><br>
 
 If (RSA_SHA1_Base64(Green Stuff, pubkey) == Blue Stuff) {<br>
 
-&nbsp;&nbsp;&nbsp; # Happiness!!<br>
+# Happiness!!<br>
 
 } else {<br>
 
-&nbsp;&nbsp;&nbsp; # Sucks<br>
+# Sucks<br>
 
-}<br>
+}
+</pre>
 
 <br>
 

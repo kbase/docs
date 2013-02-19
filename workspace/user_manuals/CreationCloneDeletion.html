@@ -1,0 +1,55 @@
+<h1>Workspace Command Line Script User Manual</h1>
+<a href="Overview.html" target="_blank">Return to Workspace overview</a>
+<h2>Creating, cloning, and deletion of workspaces</h2>
+<p>Now that you can list the available workspaces and view workspace contents, it's time
+to learn how to create and delete you own workspaces. There are three commands to support
+the creation, deletion, and cloning of workspaces:</p>
+<ol>
+<li><a href="#STEP1">kbws-createws: creates a new workspace to be owned and managed by you</a></li>
+<li><a href="#STEP2">kbws-clone: creates an exact clone of an existing workspace to enable tinkering</a></li>
+<li><a href="#STEP3">kbws-deletews: deletes an existing workspace with all objects (use with caution!!!)</a></li>
+</ol>
+<a name="STEP1"><h3>1. kbws-createws</h3></a>
+<p></p>
+<pre><code><i>
+	kb_createws <Workspace ID> <Default permissions> [-?ehv] [long options...]
+		-e --showerror   Show any errors in execution
+		-v --verbose     Print verbose messages
+		-? -h --help     Print this usage information
+</i></pre></code>
+<p></p>
+<pre><code><i>
+	$ kbws-createws myNewWorkspace r
+		Workspace created with name:
+		myNewWorkspace
+</i></pre></code>
+<p></p>
+<a name="STEP2"><h3>2. kbws-clone</h3></a>
+<p></p>
+<pre><code><i>
+	kbws-clone <Destination workspace ID> <Destination workspace permission> [-?ehw] [long options...]
+		-w --workspace     ID for current workspace
+		-e --showerror     Show any errors in execution
+		-? -h --help       Print this usage information
+</i></pre></code>
+<p></p>
+<pre><code><i>
+	$ kbws-clone testClone r
+		Workspace cloned to new workspace named:
+		testClone
+</i></pre></code>
+<p></p>
+<a name="STEP3"><h3>3. kbws-deletews</h3></a>
+<p></p>
+<pre><code><i>
+	kbws-deletews <Workspace ID> [-?eh] [long options...]
+		-e --showerror   Set as 1 to show any errors in execution
+		-? -h --help     Print this usage information
+</i></pre></code>
+<p>Let's see an example of this command in action. ....</p>
+<pre><code><i>
+	$ kbws-deletews myNewWorkspace
+		Workspace deleted with ID:
+		myNewWorkspace
+</i></pre></code>
+<p>The output of this command indicates...</p>

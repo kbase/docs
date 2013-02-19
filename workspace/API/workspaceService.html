@@ -1,0 +1,692 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+ <head>
+  <title>
+   workspaceService
+  </title>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <link rev="made" href="mailto:root@ubuntu.chicago.kbase.us" />
+ </head>
+ <body style="background-color: white">
+  <h1 id="Workspace-Service">
+   Workspace Service
+  </h1>
+  <p>
+   Services operating on workspaces and objects
+  </p>
+  <p>
+   <i>
+    Note: This document is a early draft and should not be taken seriously.
+   </i>
+  </p>
+  <h2 id="SYNOPSIS">
+   SYNOPSIS
+  </h2>
+  <pre>
+   <code>
+    my $serv = Bio::KBase::workspaceService-&gt;new;
+    # Create a private workspace called &quot;foo&quot;
+    my $ws   = $serv-&gt;create_workspace({
+       workspace =&gt; &quot;foo&quot;,
+       default_permission =&gt; &quot;n&quot;
+    );
+    my $objs = $serv-&gt;list_workspace_objects(&quot;foo&quot;);
+    # Print out the names of each object in the workspace
+    print map { $_-&gt;[0] } @$objs;
+   </code>
+  </pre>
+  <h2 id="Authentication">
+   Authentication
+  </h2>
+  <p>
+   Each and every function in this service takes a hash reference as its single argument. This hash reference may contain a key
+   <code>
+    authentication
+   </code>
+   whose value is a bearer token for the user making the request. If this is not provided a default user is assumed.
+  </p>
+  <h2 id="Workspaces">
+   Workspaces
+  </h2>
+  <p>
+   A workspace is a named collection of objects owned by a specific user, that may be viewable or editable by other users.
+  </p>
+  <p>
+   Functions that operate on workspaces take a
+   <code>
+    workspace_id
+   </code>
+   which is an alphanumeric string that uniquely identifies a workspace among all workspaces.
+  </p>
+  <p>
+   Most of these functions return
+   <code>
+    workspace_metadata
+   </code>
+   which, in JSON form is an array with the following elements:
+  </p>
+  <pre>
+   <code>
+    [
+        workspace_id,
+        owner
+        modification_timestamp,
+        number_of_objects,
+        user_permission,
+        global_permission,
+    ]
+   </code>
+  </pre>
+  <p>
+   <code>
+    workspace_id
+   </code>
+   has been covered.
+   <code>
+    timestamp
+   </code>
+   is an ISO8601 datetime string, e.g. &quot;2012-10-31T15:13Z&quot;.
+   <code>
+    number_of_objects
+   </code>
+   is an integer representing the number of objects in the workspace.
+   <code>
+    user_permission
+   </code>
+   and
+   <code>
+    global_permission
+   </code>
+   are permission strings.
+  </p>
+  <p>
+   A permission string must be one of the following single character strings, which define specific permission roles:
+  </p>
+  <dl>
+   <dt id="r">
+    <code>
+     &quot;r&quot;
+    </code>
+   </dt>
+   <dd>
+    <p>
+     Read only permissions on a workspace and workspace objects.
+    </p>
+   </dd>
+   <dt id="w">
+    <code>
+     &quot;w&quot;
+    </code>
+   </dt>
+   <dd>
+    <p>
+     Read and write permissions on a workspace. The user may add, alter or remove objects from a workspace. This implies read permissions on the workspace and workspace objects.
+    </p>
+   </dd>
+   <dt id="a">
+    <code>
+     &quot;a&quot;
+    </code>
+   </dt>
+   <dd>
+    <p>
+     Administrative permissions on a workspace. The user may alter other users permissions on the workspace. This implies write and read permissions on the workspace.
+    </p>
+   </dd>
+   <dt id="n">
+    <code>
+     &quot;n&quot;
+    </code>
+   </dt>
+   <dd>
+    <p>
+     No permissions on the workspace. This permission is used to clear all permissions for a user on the workspace. If the workspaces
+     <code>
+      global_permission
+     </code>
+     is set to this, the workspace is cannot be seen by outsiders.
+    </p>
+   </dd>
+  </dl>
+  <p>
+   <code>
+    user_permission
+   </code>
+   defines what permissions the current user has on the workspace.
+   <code>
+    global_permission
+   </code>
+   defines what permissions any user, including unauthenticated users, have on the workspace.
+  </p>
+  <h3 id="METHODS">
+   METHODS
+  </h3>
+  <h4 id="create_workspace">
+   create_workspace
+  </h4>
+  <pre>
+   <code>
+    my ($meta) = $serv-&gt;create_workspace(\%config);
+   </code>
+  </pre>
+  <p>
+   Creates a workspace. This takes a hash reference containing:
+   <code>
+    workspace
+   </code>
+   the string ID of the workspace,
+   <code>
+    default_permission
+   </code>
+   the default permissions for new users added to the workspace. Returns the workspace metadata object. If the workspace already exists, this dies with an error.
+  </p>
+  <h4 id="delete_workspace">
+   delete_workspace
+  </h4>
+  <p>
+   Deletes the associated workspace, returning the last
+   <code>
+    workspace_metadata
+   </code>
+   object on success. This function dies if it fails for any reason, including lack of permissions.
+  </p>
+  <h4 id="clone_workspace">
+   clone_workspace
+  </h4>
+  <pre>
+   <code>
+    my ($meta) = $serv-&gt;clone_workspace({
+        new_workspace =&gt; &quot;new_id&quot;,
+        current_workspace =&gt; &quot;old_id&quot;,
+        default_permission =&gt; &quot;n&quot;
+    });
+   </code>
+  </pre>
+  <p>
+   Copy an existing workspace with a new
+   <code>
+    workspace_id
+   </code>
+   .
+   <code>
+    default_permission
+   </code>
+   will be the default permissions of the new workspace. This function dies if the old workspace does not exist or if the new workspace already exists.
+  </p>
+  <h4 id="list_workspaces">
+   list_workspaces
+  </h4>
+  <pre>
+   <code>
+    my (\@metas) = $serv-&gt;list_workspaces(\%conf);
+   </code>
+  </pre>
+  <p>
+   Returns a list of workspace metadata objects for each workspace that the current user can see. The only allowed argument is an
+   <code>
+    authorization
+   </code>
+   parameter.
+  </p>
+  <h4 id="list_workspace_objects">
+   list_workspace_objects
+  </h4>
+  <pre>
+   <code>
+    my ($obj_metas) = $serv-&gt;list_workspace_objects(\%conf);
+
+    $conf = {
+        workspace =&gt; &quot;workspace_id&quot;,
+        type =&gt; &quot;Genome&quot;,
+        showDeletedObject =&gt; 0,
+    };
+   </code>
+  </pre>
+  <p>
+   List the objects in the workspace.
+   <code>
+    workspace
+   </code>
+   is required; type will limit results to objects of that type, see the
+   <a href="#Types">
+    &quot;Types&quot;
+   </a>
+   section for details.
+   <code>
+    showDeletedObject
+   </code>
+   will return deleted objects.
+  </p>
+  <h4 id="set_global_workspace_permissions">
+   set_global_workspace_permissions
+  </h4>
+  <pre>
+   <code>
+    my ($meta) = $s-&gt;set_global_workspace_permissions(\%conf)
+
+    $conf = {
+        workspace =&gt; &quot;workspace_id&quot;,
+        new_permission =&gt; &quot;n&quot;,
+    };
+   </code>
+  </pre>
+  <p>
+   Set the
+   <code>
+    global_permission
+   </code>
+   of the workspace. Returns the updated metadata on success. If the current user does not have sufficient privileges, dies with an error.
+  </p>
+  <h4 id="set_workspace_permissions">
+   set_workspace_permissions
+  </h4>
+  <pre>
+   <code>
+    $conf = {
+        workspace =&gt; &quot;workspace_id&quot;,
+        new_permission =&gt; &quot;n&quot;,
+    };
+    my ($success) = $s-&gt;set_workspace_permissions($conf);
+   </code>
+  </pre>
+  <p>
+   <code>
+    users
+   </code>
+   is a list of usernames.
+   <code>
+    new_permission
+   </code>
+   is a permission object. This returns true, e.g. &quot;1&quot; on success or &quot;0&quot; on failure. If you do not have permissions on an object, this dies.
+  </p>
+  <h2 id="Objects">
+   Objects
+  </h2>
+  <p>
+   An object is simply a JSON &quot;object&quot; with one required attribute:
+   <code>
+    version
+   </code>
+   which is an integer representing the version of the object.
+  </p>
+  <p>
+   Objects also have metadata associated with them in the context of a
+   <a href="#Workspaces">
+    workspace
+   </a>
+   . The
+   <code>
+    object_metadata
+   </code>
+   is a JSON &quot;array&quot; with the following elements:
+  </p>
+  <pre>
+   <code>
+    [
+        object_id,
+        object_type,
+        modification_timestamp,
+        instance,
+        command,
+        last_modifer_username,
+        owner_username,
+    ]
+   </code>
+  </pre>
+  <p>
+   <code>
+    object_id
+   </code>
+   is a string that uniquely identifies an object within the context of the workspace.
+   <code>
+    object_type
+   </code>
+   is a string that identifies the
+   <a href="#Types">
+    type of the object
+   </a>
+   .
+   <code>
+    instance
+   </code>
+   is an integer that is the number ancestors for an object including itself. So the minimum value for this is 1 and increases monotonically.
+   <code>
+    modification_timestamp
+   </code>
+   is an ISO8601 datetime string, e.g. &quot;2012-10-31T15:13Z&quot;.
+   <code>
+    command
+   </code>
+   is a string indicating the las command executed on the object that modified it.
+   <code>
+    last_modifier_username
+   </code>
+   is a username string that indicates the last person to create or modify the object.
+   <code>
+    owner_username
+   </code>
+   identifies the owner of the object.
+  </p>
+  <h3 id="METHODS1">
+   METHODS
+  </h3>
+  <h4 id="save_object">
+   save_object
+  </h4>
+  <pre>
+   <code>
+    my $conf = {
+        id =&gt; &quot;object_id&quot;,
+        type =&gt; &quot;Genome&quot;,
+        data =&gt; $data,
+        workspace =&gt; &quot;workspace_id&quot;,
+        command =&gt; &quot;string&quot;,
+        metadata =&gt; \%metadata,
+    };
+    my ($meta) = $s-&gt;save_object($conf);
+   </code>
+  </pre>
+  <p>
+   Save an object
+   <code>
+    $data
+   </code>
+   into the workspace
+   <code>
+    workspace_id
+   </code>
+   under the
+   <code>
+    object_id
+   </code>
+   identifier with the supplied type
+   <code>
+    object_type
+   </code>
+   . Other optional values:
+  </p>
+  <dl>
+   <dt id="command">
+    command
+   </dt>
+   <dd>
+    <p>
+     A command string to save with the object.
+    </p>
+   </dd>
+   <dt id="metadata">
+    metadata
+   </dt>
+   <dd>
+    <p>
+     A JSON &quot;object&quot;. This is any arbitrary metadata to be associated with the object.
+    </p>
+   </dd>
+  </dl>
+  <h4 id="delete_object">
+   delete_object
+  </h4>
+  <pre>
+   <code>
+    my $conf = {
+        workspace =&gt; &quot;workspace_id&quot;,
+        id =&gt; &quot;object_id&quot;,
+        type =&gt; &quot;Genome&quot;,
+    };
+    my ($meta) = $s-&gt;delete_object($conf);
+   </code>
+  </pre>
+  <p>
+   Removes the object from the workspace
+   <code>
+    workspace_id
+   </code>
+   that matches
+   <code>
+    object_id
+   </code>
+   and
+   <code>
+    object_type
+   </code>
+   . Returns the final state of the object&#39;s metadata, if that exists. Otherwise this function dies of errors.
+  </p>
+  <h4 id="delete_object_permanently">
+   delete_object_permanently
+  </h4>
+  <p>
+   This actually removes the object history from the system. This can only be successfully called if
+   <code>
+    delete_object
+   </code>
+   has been called already. Otherwise this function dies of errors.
+  </p>
+  <h4 id="get_object">
+   get_object
+  </h4>
+  <pre>
+   <code>
+    my $conf = {
+        workspace =&gt; &quot;workspace_id&quot;,
+        id =&gt; &quot;object_id&quot;,
+        type =&gt; &quot;Genome&quot;,
+    };
+    my ($data, $metadata) = $s-&gt;get_object($conf);
+   </code>
+  </pre>
+  <p>
+   Returns the
+   <code>
+    object_data
+   </code>
+   and
+   <code>
+    object_metadata
+   </code>
+   for the object
+   <code>
+    object_id
+   </code>
+   with type
+   <code>
+    object_type
+   </code>
+   contained in the workspace
+   <code>
+    workspace_id
+   </code>
+   .
+  </p>
+  <h4 id="get_objectmeta">
+   get_objectmeta
+  </h4>
+  <pre>
+   <code>
+    my $conf = {
+        workspace =&gt; &quot;workspace_id&quot;,
+        id =&gt; &quot;object_id&quot;,
+        type =&gt; &quot;Genome&quot;,
+    };
+    my ($metadata) = $s-&gt;get_objectmeta($conf);
+   </code>
+  </pre>
+  <p>
+   Returns the
+   <code>
+    object_metadata
+   </code>
+   for the object
+   <code>
+    object_id
+   </code>
+   with type
+   <code>
+    object_type
+   </code>
+   contained in the workspace
+   <code>
+    workspace_id
+   </code>
+   .
+  </p>
+  <h4 id="revert_object">
+   revert_object
+  </h4>
+  <pre>
+   <code>
+    my $conf = {
+        workspace =&gt; &quot;workspace_id&quot;,
+        id =&gt; &quot;object_id&quot;,
+        type =&gt; &quot;Genome&quot;,
+        instance =&gt; 42,
+    };
+    my ($metadata) = $s-&gt;revert_object($conf);
+   </code>
+  </pre>
+  <p>
+   Returns an object to the previous version of the object. If there is no previous version, this function dies with an error.
+  </p>
+  <h4 id="unrevert_object">
+   unrevert_object
+  </h4>
+  <pre>
+   <code>
+    my $conf = {
+        workspace =&gt; &quot;workspace_id&quot;,
+        id =&gt; &quot;object_id&quot;,
+        type =&gt; &quot;Genome&quot;,
+    };
+    my ($metadata) = $s-&gt;unrevert_object($conf);
+   </code>
+  </pre>
+  <p>
+   If
+   <code>
+    revert_object
+   </code>
+   returns the previous instance of an object,
+   <code>
+    unrevert_object
+   </code>
+   returns the next instance. Unrevert reverses the operation of revert. If there is no &quot;future&quot; version of an object, this function dies with an error.
+  </p>
+  <h4 id="copy_object">
+   copy_object
+  </h4>
+  <pre>
+   <code>
+    my $conf = {
+        new_id =&gt; &quot;object_id_2&quot;,
+        new_workspace =&gt; &quot;workspace_2&quot;,
+        source_id =&gt; &quot;object_id&quot;,
+        instance =&gt; 42,
+        type =&gt; &quot;Genome&quot;,
+        source_workspace =&gt; &quot;workspace&quot;,
+    };
+    my ($metadata) = $s-&gt;copy_object($conf);
+   </code>
+  </pre>
+  <p>
+   Copies the object
+   <code>
+    old_object_id
+   </code>
+   with type
+   <code>
+    object_type
+   </code>
+   from the
+   <code>
+    old_workspace_id
+   </code>
+   workspace into the
+   <code>
+    new_workspace_id
+   </code>
+   workspace.
+  </p>
+  <h4 id="move_object">
+   move_object
+  </h4>
+  <pre>
+   <code>
+    my $conf = {
+        new_id =&gt; &quot;object_id_2&quot;,
+        new_workspace =&gt; &quot;workspace_2&quot;,
+        source_id =&gt; &quot;object_id&quot;,
+        type =&gt; &quot;Genome&quot;,
+        source_workspace =&gt; &quot;workspace&quot;,
+    };
+   </code>
+  </pre>
+  <p>
+   Same arguments as
+   <code>
+    copy_object
+   </code>
+   but this results in the object no longer being associated with
+   <code>
+    old_object_id
+   </code>
+   in the workspace
+   <code>
+    old_workspace_id
+   </code>
+   .
+  </p>
+  <h4 id="has_object">
+   has_object
+  </h4>
+  <pre>
+   <code>
+    my $conf = {
+        id =&gt; &quot;object_id&quot;,
+        instance =&gt; 42,
+        type =&gt; &quot;Genome&quot;,
+        workspace =&gt; &quot;workspace_id&quot;,
+    };
+    my ($present) = $s-&gt;has_object($conf);
+   </code>
+  </pre>
+  <p>
+   Returns true, &quot;1&quot; if the object identified by
+   <code>
+    object_id
+   </code>
+   and type
+   <code>
+    object_type
+   </code>
+   is present in the workspace
+   <code>
+    workspace_id
+   </code>
+   . Returns false, &quot;0&quot; otherwise.
+  </p>
+  <h2 id="Types">
+   Types
+  </h2>
+  <p>
+   Currently types are simple strings that represent allowed objects within the workspace. While there are plans to institute a rigorous type-hierarchy, currently there are a few hard-coded types in the system:
+  </p>
+  <pre>
+   <code>
+    Genome
+    Unspecified
+    TestData
+    ModelSEED::Biochemistry
+    ModelSEED::Model
+    ModelSEED::Mapping
+    ModelSEED::Annotation
+   </code>
+  </pre>
+  <p>
+   Type strings are case-sensitive.
+   <code>
+    Unspecified
+   </code>
+   is a universal type.
+  </p>
+ </body>
+</html>
