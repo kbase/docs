@@ -24,16 +24,12 @@
 
 <br>
 
-<strong>Purpose:</strong> The ontology service provides the basic
+<strong>Purpose:</strong> Learn how to use the ontology service to
+provide the basic
 functionality of annotation with GO ids, its description, domain
 ontologies (e.g., biological process, molecular function, cellular
 process) of interest and evidence codes for a given set of species
-specific genes. Additionally, it also allows gene ontology enrichment
-analysis ("hypergeometric") to be performed on a set of genes that
-identifies statistically overrepresented GO terms within given gene
-sets, say for example, GO enrichment of over-expressed genes in drought
-stress in plant roots.
-<br>
+specific genes. <br>
 
 <br>
 
@@ -43,44 +39,54 @@ KBase<br>
 <strong>Suggested Prerequesite Activities: </strong>Basic Exercises
 Using KBase<br>
 
-<strong>Related Tutorials: </strong>
+<h2>
+Introduction</h2>
+
+<p>
+The ontology service provides the basic
+functionality of annotation with GO ids, its description, domain
+ontologies (e.g., biological process, molecular function, cellular
+process) of interest and evidence codes for a given set of species
+specific genes. Additionally, this service also allows gene ontology
+enrichment
+analysis ("hypergeometric") to be performed on a set of genes that
+identifies statistically overrepresented GO terms within given gene
+sets, say for example, GO enrichment of over-expressed genes in drought
+stress in plant roots.
 <br>
+</p>
 
 <h3>Extract Ontology Terms and Find Statistically Enriched Genes of
 Interest</h3>
 
-<h3>1. Lookup differentially expressed genes in <em>Arabidopsis
-thaliana</em> roots under abiotic stress</h3>
-
+<strong>1. Lookup differentially expressed genes in <em>Arabidopsis
+thaliana</em> roots under abiotic stress.</strong>
 For a given list of differentially expressed genes (AT1G03010,
 AT1G02830,AT1G09770,AT2G01650) in Arabidopsis thaliana roots under
 abiotic stress conditions, provide gene ontology terms known for each
 gene.
-<br>
-
 <pre> First step: Convert external gene identifiers into KBase gene identifiers<br> external_ids_to_kbase_ids EnsemblPlant &lt; ath_geneids.txt<br> Here ath_geneids.txt is the input ASCII text file containing external Arabidopsis thaliana gene identifiers (one per line).<br><br> The output looks like:<br> Athaliana.TAIR10:AT1G03010    kb|g.3899.locus.336<br> Athaliana.TAIR10:AT1G02830    kb|g.3899.locus.356<br> Athaliana.TAIR10:AT1G09770    kb|g.3899.locus.1122<br> Athaliana.TAIR10:AT2G01650    kb|g.3899.locus.8685<br><br> Second step: execute the following command ...<br> echo 'kb|g.3899.locus.336','kb|g.3899.locus.356','kb|g.3899.locus.1122','kb|g.3899.locus.8685' | get_goidlist<br> The output looks like:<br> kb|g.3899.locus.336     GO:0009416    biological_process    ISS     response to light stimulus<br> kb|g.3899.locus.336     GO:0004871    molecular_function    IEA     signal transducer activity<br> kb|g.3899.locus.336     GO:0009860    biological_process    IEP     pollen tube growth<br> kb|g.3899.locus.356     GO:0005840    cellular_component    ISS     ribosome<br> kb|g.3899.locus.356     GO:0006412    biological_process    IEA     translation<br> kb|g.3899.locus.356     GO:0022625    cellular_component    IDA     cytosolic large ribosomal subunit<br> kb|g.3899.locus.356     GO:0005622    cellular_component    IEA     intracellular<br> kb|g.3899.locus.356     GO:0003735    molecular_function    IEA     structural constituent of ribosome<br> kb|g.3899.locus.1122    GO:0050832    biological_process    IMP     defense response to fungus<br> kb|g.3899.locus.1122    GO:0010204    biological_process    IMP     defense response signaling pathway, resistance gene-independent<br> kb|g.3899.locus.1122    GO:0003677    molecular_function    ISS     DNA binding<br> kb|g.3899.locus.1122    GO:0005515    molecular_function    IEA     protein binding<br> kb|g.3899.locus.1122    GO:0009870    biological_process    IMP     defense response signaling pathway, resistance gene-dependent<br> kb|g.3899.locus.1122    GO:0042742    biological_process    IMP     defense response to bacterium<br> kb|g.3899.locus.1122    GO:0003700    molecular_function    ISS     sequence-specific DNA binding transcription factor activity<br> kb|g.3899.locus.1122    GO:0009507    cellular_component    IDA     chloroplast<br> kb|g.3899.locus.8685    GO:0003677    molecular_function    IEA     DNA binding<br> kb|g.3899.locus.8685    GO:0006281    biological_process    IEA     DNA repair<br> kb|g.3899.locus.8685    GO:0005515    molecular_function    IEA     protein binding<br> kb|g.3899.locus.8685    GO:0019898    cellular_component    NAS     extrinsic to membrane<br> kb|g.3899.locus.8685    GO:0008270    molecular_function    ISS     zinc ion binding<br> kb|g.3899.locus.8685    GO:0003676    molecular_function    ISS     nucleic acid binding<br><br> Alternatively, you can put list of genes of your interest in a text file <gid.in> and pass it as an input to the API call as follows ...<br> get_goidlist &lt; gid.in<br><br> Third step: Filter the ontology terms for above mentioned genes based on evidence code of type ISS.<br> echo 'kb|g.3899.locus.336','kb|g.3899.locus.356','kb|g.3899.locus.1122','kb|g.3899.locus.8685' | get_goidlist --evidence_code=ISS<br> The output looks like:<br> kb|g.3899.locus.336     GO:0009416    biological_process    ISS     response to light stimulus<br> kb|g.3899.locus.356     GO:0005840    cellular_component    ISS     ribosome<br> kb|g.3899.locus.1122    GO:0003677    molecular_function    ISS     DNA binding<br> kb|g.3899.locus.1122    GO:0003700    molecular_function    ISS     sequence-specific DNA binding transcription factor activity<br> kb|g.3899.locus.8685    GO:0008270    molecular_function    ISS     zinc ion binding<br> kb|g.3899.locus.8685    GO:0003676    molecular_function    ISS     nucleic acid binding<br><br> Fourth Step: For biological process domain related GO terms the have evidence code of type IEA.<br> echo 'kb|g.3899.locus.336','kb|g.3899.locus.356','kb|g.3899.locus.1122','kb|g.3899.locus.8685' | get_goidlist --domain_list=biological_process --evidence_code=IEA<br> The output looks like:<br> kb|g.3899.locus.356     GO:0006412    biological_process    IEA     translation<br> kb|g.3899.locus.8685    GO:0006281    biological_process    IEA     DNA repair<br><br></gid.in></pre>
 
-<h3>2. Find the enrichment (statistical significance) of differentially
+<strong>2. Find the enrichment (statistical significance) of
+differentially
 expressed genes in <em>Arabidopsis thaliana</em> roots under abiotic
-stress</h3>
-
+stress.</strong>
 For a given list of differentially expressed genes (AT1G03010,
 AT1G02830,AT1G09770,AT2G01650) in Arabidopsis thaliana roots under
 abiotic stress conditions, provide the ontology enrichment based on
 hypergeometric distribution for each gene.
-<br>
-
 <pre> First step: Convert external gene identifiers into KBase gene identifiers<br> external_ids_to_kbase_ids EnsemblPlant &lt; ath_geneids.txt<br> Here ath_geneids.txt is the input ASCII text file containing external Arabidopsis thaliana gene identifiers (one per line).<br><br> The output looks like:<br> Athaliana.TAIR10:AT1G03010    kb|g.3899.locus.336<br> Athaliana.TAIR10:AT1G02830    kb|g.3899.locus.356<br> Athaliana.TAIR10:AT1G09770    kb|g.3899.locus.1122<br> Athaliana.TAIR10:AT2G01650    kb|g.3899.locus.8685<br><br> Second step: execute the following command ...<br> echo 'kb|g.3899.locus.336','kb|g.3899.locus.356','kb|g.3899.locus.1122','kb|g.3899.locus.8685' | get_go_enrichment<br> The output looks like:<br> GO:0019898    0.0107579459664984    extrinsic to membrane  cellular_component    kb|g.3899.locus.8685<br> GO:0009860    0.0366896969658291    pollen tube growth    biological_process    kb|g.3899.locus.336<br> GO:0050832    0.0448327595434993    defense response to fungus    biological_process    kb|g.3899.locus.1122<br> GO:0010204    0.00519064592824905   defense response signaling pathway, resistance gene-independent biological_process  kb|g.3899.locus.1122<br> GO:0009870    0.00718165774634453   defense response signaling pathway, resistance gene-dependent  biological_process  kb|g.3899.locus.1122<br><br> Alternatively, you can put list of genes of your interest in a text file <gid.in> and pass it as an input to the API call as follows ...<br> get_go_enrichment &lt; gid.in<br><br></gid.in></pre>
 
-<h3>3. Find the GO description and domain information for a list of
-given GO ids. </h3>
-
+<strong>3. Find the GO description and domain information for a list of
+given GO ids. </strong>
 For a given list of GO ids
 (GO:0010204','GO:0009860','GO:0042742','GO:0005515') provide the gene
 ontology description and domain information.
 <br>
 
 <pre> First step: execute the following command ...<br> echo 'GO:0010204','GO:0009860','GO:0042742','GO:0005515' | get_go_description<br> The output looks like:<br> GO:0010204    defense response signaling pathway, resistance gene-independent biological_process<br> GO:0005515    protein binding molecular_function<br> GO:0042742    defense response to bacterium  biological_process<br> GO:0009860    pollen tube growth    biological_process<br> Alternatively, you can put list of GO ids of your interest in a text file <goid.in> and pass it as an input to the API call as follows ...<br> get_go_description &lt; gid.in<br><br></goid.in></pre>
+
+<br>
 
 <br>
 
