@@ -1,13 +1,25 @@
 OVERVIEW
 -----------------------------------------
 This KBase service provides helper methods for performing data access, manipulation, analysis,
-and visualization of multiple sequence alignments (MSAs) and phylogenetic trees.  Technical
-documentation can be generated in the docs directory by running 'make build-docs'. Deployment
-documentation is available in the README.md file.
+and visualization of multiple sequence alignments (MSAs) and phylogenetic trees.
 
 
+VERSION: 0.03 (Released 2/4/2013)
+------------------------------------------
+NEW FEATURES:
+-added command line scripts that wrap client methods for fetching trees/alignments and
+relabeling nodes in trees; command line scripts are wrapped for IRIS deployment/testing
 
-VERSION: 0.0.2 (Released 11/20/2012)
+UPDATED FEATURES / MAJOR BUG FIXES:
+-none.
+
+ANTICIPATED FUTURE DEVELOPMENTS:
+-ability to associate nodes with data (e.g. descriptions, abundance values) by mapping node
+ids to data in tab-delimited tables
+-additional options for tree visualization
+
+
+VERSION: 0.02 (Released 11/20/2012)
 ------------------------------------------
 NEW FEATURES:
 -This is the first public release of the Phylogenetic Tree Service.
@@ -29,7 +41,7 @@ ids to data in tab-delimited tables
 
 
 
-VERSION: 0.0.1 (Released 8/16/2012)
+VERSION: 0.01 (Released 8/16/2012)
 ------------------------------------------
 NEW FEATURES:
 -This is the first internal release of the Phylogenetic Tree Service, all methods are new.
