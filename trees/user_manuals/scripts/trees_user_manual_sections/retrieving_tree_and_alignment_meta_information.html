@@ -1,0 +1,85 @@
+<h2>Retrieving Tree & Alignment Meta Information</h2>
+<p>After you have identified a list of potential trees to work with, you can query KBase for additional information about
+each tree using the 'tree-get-tree' command.  The simplist usage of the method is to pass a single tree as an argument with the '-m' flag
+to indicate that meta data should be returned instead of the actual tree.</p>
+<pre>
+    > tree-get-tree 'kb|tree.991753' -m
+    [tree_id]: kb|tree.991753
+    [source_id]: COG840
+    [tree_contruction_method]: FastTree2
+    [source_db]: MOL:Tree
+    [status]: active
+    [tree_protocol]: MO Pipeline
+    [date_created]: 1359610815
+    [leaf_count]: 28931
+    [node_count]: 52017
+    [tree_construction_parameters]: -fastest
+    [alignment_id]: kb|aln.991753
+    [type]: sequence_alignment
+</pre>
+<p>Like many scripts in KBase, the 'tree-get-tree' command can also accept input through standard-in.  This behaviour
+allows you to chain together commands to construct more complex queries.  For instance, to get
+all meta-data about the trees that include our favorite KBase feature, string together the following commands using
+the pipe symbol ('|'), which redirects the output of one command to the input of another command:</p>
+<pre>
+    > tree-find-tree-ids -f 'kb|g.1870.peg.3915' | tree-get-tree -m
+    [tree_id]:	kb|tree.11259
+    [source_id]:	tree00011265
+    [tree_contruction_method]:	FastTree 2.1.2 SSE3
+    [source_db]:	SEED
+    [status]:	active
+    [tree_protocol]:	Sequences were identified with PSI-BLAST, trimmed to PSI-BLAST profile, aligned and treed
+    [date_created]:	1344486561
+    [leaf_count]:	9605
+    [node_count]:	18203
+    [tree_construction_parameters]:	--spr 4 -cat 20
+    [alignment_id]:	kb|aln.11259
+    [type]:	sequence_alignment
+    [tree_id]:	kb|tree.11314
+    [source_id]:	tree00011320
+    [tree_contruction_method]:	FastTree 2.1.2 SSE3
+    [source_db]:	SEED
+    [status]:	active
+    [tree_protocol]:	Sequences were identified with PSI-BLAST, trimmed to PSI-BLAST profile, aligned and treed
+    [date_created]:	1344486766
+    [leaf_count]:	12180
+    [node_count]:	23764
+    [tree_construction_parameters]:	--spr 4 -cat 20
+    [alignment_id]:	kb|aln.11314
+    [type]:	sequence_alignment
+    ....
+</pre>
+<p>Powerfully, this command can then be chained to standard command line tools like 'grep' to retrieve exactly the information
+you are interested in.  For instance, if you only care about how many leaf nodes are in the tree and the source database of
+the tree, you can execute a query with this command: </p>
+<pre>
+    > tree-find-tree-ids -f 'kb|g.1870.peg.3915' | tree-get-tree -m | grep 'tree_id\|leaf_count\|source_db'
+    [tree_id]:	kb|tree.11259
+    [source_db]:	SEED
+    [leaf_count]:	9605
+    ....
+    [source_db]:	MOL:Tree
+    [leaf_count]:	26227
+    [tree_id]:	kb|tree.993312
+    [source_db]:	MOL:Tree
+    [leaf_count]:	51082
+    ....
+</pre>
+<p>The same approach can be used to retrieve details about a set of alignments: </p>
+<pre>
+    > tree-find-alignment-ids -f 'kb|g.1870.peg.3915' | tree-get-alignment -m | \
+            grep 'alignment_id\|alignment_construction_method'
+    [alignment_id]:	kb|aln.11259
+    [alignment_construction_method]:	MAFFT v6.818b
+    [alignment_id]:	kb|aln.11314
+    [alignment_construction_method]:	MAFFT v6.818b
+    ....
+    [alignment_id]:	kb|aln.28891
+    [alignment_construction_method]:	RPS-BLAST
+    [alignment_id]:	kb|aln.30419
+    [alignment_construction_method]:	HMMER3
+    [alignment_id]:	kb|aln.30458
+    [alignment_construction_method]:	HMMER3
+    [alignment_id]:	kb|aln.32629
+    ....
+</pre>
