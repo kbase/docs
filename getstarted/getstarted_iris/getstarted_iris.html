@@ -1,0 +1,79 @@
+
+<h1>Getting Started with IRIS</h1>
+<p><strong>Purpose: </strong>Become acquainted with the KBase IRIS web interface.</p>
+<p><strong>Required Prerequisite Activities: </strong><a href="https://gologin.kbase.us/SignUp">Sign up for a user account</a>.  Note that after completing the signup request, you will need to check  your email for further instructions to complete the account signup  process. Account access will be granted immediately upon completion of  the process.</p>
+<p><strong>Suggested Prerequisite Activities: </strong>None</p>
+<p><strong>Related Tutorials: </strong>Some Basic Exercises Using KBase</p>
+<h2>Introduction</h2>
+<p>The KBase IRIS interface allows one to run all of the KBase command line scripts and some useful UNIX tools from a web-based interface without downloading any software. The interface keeps track of who you are and stores your results and history on our KBase IRIS server. The prototype version of the IRIS interface is located at http://prototypesite.net/iris/iris.html.</p>
+<h2>Using the IRIS Interface</h2> 
+<p>The initial page looks like this: <br />
+      <br />
+<img src="iris_welcomescreen.png" width="828" height="727" alt="IRIS welcome" /></p>
+<p>Your first action should be to log in. Click &quot;Sign In,&quot; which is located in the upper right corner of the interface. In the popup box that appears, log in using the KBase username and password selected when you signed up for your user account. After successfully logging in, you should see the text:</p>
+<pre>Set session to username</pre>
+<p>When you are ready to log out at the end of your session, simply type <strong>logout </strong>in the command entry box.<br />
+  <br>
+Along the left side, you will notice a list of available script and command categories that you can use. Click on a command category to expand it and view the scripts and commands. Double-click on a command to easily place it into the command entry box.</p>
+<p>To learn more about each, enter the script or command followed by a<strong> -h</strong>. For example, if you enter the Workspace script <strong>kbws-addtype -h</strong>, you should see the output:</p>
+<pre>kbws-addtype &lt;Object type&gt; [-?eh] [long options...]
+ -e --showerror   Set as 1 to show any errors in execution
+ -? -h --help     Print this usage information</pre>
+<p>The commands and scripts availalble on the left side of the interface contain the commands that are used most frequently, but this is not an exhaustive set of all commands available. To view all available commands, type <strong>commands</strong> in the command entry box.<br>
+  <br />
+When entering commands, a few shortcuts are available. Use the up and down arrows to scroll through your command history. Use the right arrow key to autocomplete a partially typed command.</p>
+<h2>UNIX Commands Available in IRIS</h2>
+In IRIS, you can also use the following commands which are simply run in a UNIX shell on the server and use the full semantics of the UNIX commands:<br />
+                    <br />
+        <a name="sort62" id="sort62"><strong>sort</strong></a><strong> , <a name="grep63" id="grep63">grep</a> , <a name="cut64" id="cut64">cut</a> , cat, head, tail, date, echo, <a name="wc65" id="wc65">wc</a> <br />
+</strong><br />
+File system commands are also available, but are re-implemented on the server as very limited version of the originals.<br />
+<br />
+These are: <br />
+<br />
+    <strong>mkdir </strong>DIR<br />
+   <strong> rmdir </strong>DIR (Removes non-empty directories without asking)<br />
+    <strong>rm</strong> FILE<br />
+    <strong>mv</strong> FROM TO<br />
+    <strong>cp</strong> FROM TO<br />
+    <strong>cd </strong>DIR<br />
+    <strong>ls</strong> [DIR]
+<h2>Additional Features of IRIS</h2>
+<h3>File Browser</h3>
+<p>IRIS maintains a file system for your use. You can upload your own data files (using the up-arrow button in th lower right corner of the File Browser box), or create your own via output redirection using the &gt; redirection symbol. Let's say you wanted to create a file of Streptococcus genomes; you would type <br />
+  <br />
+      <a href="http://kbase.us/developer-zone/api-documentation/cdm-entity-relationship-command-scripts/#all_entities_Genome" target="_blank"><strong>all_entities_Genome</strong></a><strong> -f scientific_name | <a name="grep61" id="grep61">grep</a> &quot;Streptococcus pneumonia&quot;  &gt; all_strep</strong><br />
+  <br />
+  This creates a file with the name <strong>all_strep</strong> in your IRIS user space. You should see this filename appear in your File Browser section of the interface. You can also see your stored files by using the ls command. Stored files persist from session to session.</p>
+<p><img src="filebrowser.png" width="185" height="122" alt="File Browser" /><br />
+  You can view individual files by selecting them and then clicking on the &quot;view selected file icon,&quot; represented by the magnifying glass. The file will open in a new window.<br />
+  <br />
+  The File Browser also provides shortcut icons for creating directories and deleting files. To move files, use the common UNIX commands from the previous section.<br />
+</p>
+<h3>Running Processes</h3>
+<p>IRIS runs commands asynchronously, which means that several commands can be run simultaneously. You need not wait for one command to complete prior to invoking another.</p>
+<p>Running commands are listed in the Running Processes section of the interface. Locate the section:</p>
+<p><img src="runningprocesses.png" width="251" height="62" alt="Running Processes" /></p>
+<p>While observing the contents of this section, type the command <strong>all_entities_Genome</strong>. All commands that are invoked and that are still running should be listed in this box, and then disappear upon completion.</p>
+<h2>Understanding KBase Commands and Output</h2>
+<p>Most of the KBase command-line tools take in a file containing a tab-separated table and output a modified table. The most common modification is the addition of one of more columns. We create &quot;pipelines&quot; of these tools to implement fairly complex transformations leading to the final table containing the desired output. For example, consider the following little <a name="pipeline53" id="pipeline53">pipeline</a>: <br />
+  <br />
+           <a href="http://kbase.us/developer-zone/api-documentation/cdm-entity-relationship-command-scripts/#all_entities_Genome" target="_blank"><strong>all_entities_Genome</strong></a><strong> -f scientific_name | <a name="grep54" id="grep54">grep</a> &quot;Streptococcus pneumoniae&quot;<br />
+</strong><br />
+The <a href="http://kbase.us/developer-zone/api-documentation/cdm-entity-relationship-command-scripts/#all_entities_Genome" target="_blank"><strong>all_entities_Genome</strong></a> command is thought of as producing a table in which the first column (by default) is the genome ID, and any extra columns come from the arguments of the command. In this case, we get a 2-column table:<br />
+<br />
+           [<strong>genome-ID,genome-name</strong>]<br />
+<br />
+This 2-column table is fed into a UNIX command called <a name="grep55" id="grep55">grep</a>, which keeps lines that match its argument. In this case, the <a name="grep56" id="grep56">grep</a> extracts rows in the table that match the string &quot;Streptococcus pneumoniae.&quot; Thus, we get as a result a 2-column table in which each row contains &quot;Streptococcus pneumoniae.&quot; </p>
+<pre>
+       
+   kb|g.3478 Streptococcus pneumoniae SPN034183  
+   kb|g.3264 Streptococcus pneumoniae GA47901
+   kb|g.162 Streptococcus pneumoniae R6
+   kb|g.3483 Streptococcus pneumoniae SPN032672
+   ...
+   kb|g.3482 Streptococcus pneumoniae SPN1041
+   kb|g.1577 Streptococcus pneumoniae CDC3059-06
+   kb|g.3259 Streptococcus pneumoniae GA04375   </pre>
+<br>
+<br />The next suggested exercises are found in the tutorial in <a href="http://kbase.us/developer-zone/tutorials/getting-started/some-basic-exercises-using-kbase/" target="_blank">Basic Exercises Using KBase</a>
