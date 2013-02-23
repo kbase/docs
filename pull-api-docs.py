@@ -16,7 +16,7 @@ DEPLOY_DICT = [{'name': 'Workspace Service',
                {'name': 'Plant Expression Service',
                 'service': 'PlantExpressionService', 
                 'target_dir':'plant_expression_service',
-                'html_name': 'plant_expression_service'},
+                'html_name': 'PlantExpressionService'},
 
 
                {'name': 'Tree Service', #check
@@ -31,9 +31,13 @@ DEPLOY_DICT = [{'name': 'Workspace Service',
 
                {'name': 'Communtiies API', #check
                 'service': 'communities_api', 
-                'target_dir':'communties',
-                'html_name': 'CommuntiiesAPI'},
+                'target_dir':'communities',
+                'html_name': 'CommunitiesAPI'},
 
+               {'name': 'QC Service', 
+                'service': 'communities_qc', 
+                'target_dir':'communities_qc',
+                'html_name': 'communitiesQC'},
 
                {'name': 'Authorization Client',
                 'service': 'authorization_server', 
@@ -100,8 +104,10 @@ def pull_api_doc(service, target, name, html_name=None):
 
     content = BeautifulSoup(doc_text)
     #content.find(id='NAME').replace_with(name)
-    nav = content.find('ul', id="index").extract()
-
+    try:
+        nav = content.find('ul', id="index").extract()
+    except:
+        nav = None
 
     target_dir = target+'/'+'API/'
 
@@ -110,11 +116,12 @@ def pull_api_doc(service, target, name, html_name=None):
     f.write(str(content.prettify()))
     print 'Wrote content to:', content_target    
 
-    nav_target = target_dir+service+'_nav.html'   
-    f = open(nav_target, 'w')
-    f.write(str(nav.prettify()))
-    print 'Wrote nav to:', nav_target
-    print
+    if nav:
+        nav_target = target_dir+service+'_nav.html'   
+        f = open(nav_target, 'w')
+        f.write(str(nav.prettify()))
+        print 'Wrote nav to:', nav_target
+        print
 
 
 
@@ -126,8 +133,13 @@ def pull_api_docs():
 
         try:
             html_name = obj['html_name']
-            pull_api_doc(service, target, name, html_name)            
         except:
+            html_name = None
+
+        if html_name:
+            print 'calling this with '+html_name
+            pull_api_doc(service, target, name, html_name)
+        else:
             pull_api_doc(service, target, name)
 
 
