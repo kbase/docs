@@ -15,6 +15,16 @@ DEPLOY_DICT = [
                 'target_dir':'cdmi_api',
                 'html_name': 'application_api'},
 
+               {'name': 'CDM Entity-Relationship API',
+                'service': 'cdmi_api', 
+                'target_dir':'cdmi_api',
+                'html_name': 'er_api'},
+
+               {'name': 'ID Server API',
+                'service': 'idserver', 
+                'target_dir':'idserver',
+                'html_name': 'idserver_client_api'},
+
                 {'name': 'Workspace Service',
                 'service': 'workspaceService', 
                 'target_dir':'workspace'},
@@ -24,8 +34,7 @@ DEPLOY_DICT = [
                 'target_dir':'plant_expression_service',
                 'html_name': 'PlantExpressionService'},
 
-
-               {'name': 'Tree Service', # check
+               {'name': 'Tree Service',
                 'service': 'trees',
                 'target_dir':'trees', 
                 'html_name': 'Tree'},   
@@ -35,7 +44,7 @@ DEPLOY_DICT = [
                 #'target_dir':'sim_service',
                 #'html_name': 'sim_service'},
 
-               {'name': 'Communtiies API', #check
+               {'name': 'Communties API',
                 'service': 'communities_api', 
                 'target_dir':'communities',
                 'html_name': 'CommunitiesAPI'},
@@ -50,7 +59,7 @@ DEPLOY_DICT = [
                 'target_dir':'auth', 
                 'html_name': 'AuthUser'},
 
-               {'name': 'Genome Annotation Service', #check
+               {'name': 'Genome Annotation Service',
                 'service': 'genome_annotation', 
                 'target_dir':'genome_annotation',
                 'html_name': 'genomeanno_impl'},
