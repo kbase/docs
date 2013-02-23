@@ -13,6 +13,28 @@ DEPLOY_DICT = [{'name': 'Workspace Service',
                 'service': 'workspaceService', 
                 'target_dir':'workspace'},
 
+               {'name': 'Plant Expression Service',
+                'service': 'PlantExpressionService', 
+                'target_dir':'plant_expression_service',
+                'html_name': 'plant_expression_service'},
+
+
+               {'name': 'Tree Service', #check
+                'service': 'trees',
+                'target_dir':'trees', 
+                'html_name': 'Tree'},   
+
+                #{'name': 'Similarity Service',
+                #'service': 'sim_service', 
+                #'target_dir':'sim_service',
+                #'html_name': 'sim_service'},
+
+               {'name': 'Communtiies API', #check
+                'service': 'communities_api', 
+                'target_dir':'communties',
+                'html_name': 'CommuntiiesAPI'},
+
+
                {'name': 'Authorization Client',
                 'service': 'authorization_server', 
                 'target_dir':'auth', 
@@ -57,7 +79,6 @@ DEPLOY_DICT = [{'name': 'Workspace Service',
                 'service': 'Regulation', 
                 'target_dir':'regulation', 
                 'html_name': 'Regulation'},
-
                ]
 
 
