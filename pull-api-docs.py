@@ -9,7 +9,13 @@ from HTMLParser import HTMLParser
 
 DOCS_ROOT = 'http://www.kbase.us/services/docs/'
 
-DEPLOY_DICT = [{'name': 'Workspace Service',
+DEPLOY_DICT = [
+               {'name': 'CDM API',
+                'service': 'cdmi_api', 
+                'target_dir':'cdmi_api',
+                'html_name': 'application_api'},
+
+                {'name': 'Workspace Service',
                 'service': 'workspaceService', 
                 'target_dir':'workspace'},
 
@@ -19,7 +25,7 @@ DEPLOY_DICT = [{'name': 'Workspace Service',
                 'html_name': 'PlantExpressionService'},
 
 
-               {'name': 'Tree Service', #check
+               {'name': 'Tree Service', # check
                 'service': 'trees',
                 'target_dir':'trees', 
                 'html_name': 'Tree'},   
@@ -43,6 +49,21 @@ DEPLOY_DICT = [{'name': 'Workspace Service',
                 'service': 'authorization_server', 
                 'target_dir':'auth', 
                 'html_name': 'AuthUser'},
+
+               {'name': 'Genome Annotation Service', #check
+                'service': 'genome_annotation', 
+                'target_dir':'genome_annotation',
+                'html_name': 'genomeanno_impl'},
+
+               {'name': 'Translation Service', 
+                'service': 'translation', 
+                'target_dir':'translation',
+                'html_name': 'MOTranslationService'},
+
+               {'name': 'Networks Service', 
+                'service': 'KBaseNetworksService', 
+                'target_dir':'networks',
+                'html_name': 'KBaseNetworksService'},
 
                {'name': 'Ontology Service',
                 'service': 'ontology_service',
@@ -137,7 +158,6 @@ def pull_api_docs():
             html_name = None
 
         if html_name:
-            print 'calling this with '+html_name
             pull_api_doc(service, target, name, html_name)
         else:
             pull_api_doc(service, target, name)
