@@ -1,0 +1,1018 @@
+<ul id="index">
+<li>
+ <a href="#NAME">
+  NAME
+ </a>
+</li>
+<li>
+ <a href="#DESCRIPTION">
+  DESCRIPTION
+ </a>
+ <ul>
+  <li>
+   <a href="#Basic-Themes">
+    Basic Themes
+   </a>
+  </li>
+  <li>
+   <a href="#Batching-queries">
+    Batching queries
+   </a>
+  </li>
+ </ul>
+</li>
+<li>
+ <a href="#METHODS">
+  METHODS
+ </a>
+ <ul>
+  <li>
+   <a href="#fids_to_annotations">
+    fids_to_annotations
+   </a>
+  </li>
+  <li>
+   <a href="#fids_to_functions">
+    fids_to_functions
+   </a>
+  </li>
+  <li>
+   <a href="#fids_to_literature">
+    fids_to_literature
+   </a>
+  </li>
+  <li>
+   <a href="#fids_to_protein_families">
+    fids_to_protein_families
+   </a>
+  </li>
+  <li>
+   <a href="#fids_to_roles">
+    fids_to_roles
+   </a>
+  </li>
+  <li>
+   <a href="#fids_to_subsystems">
+    fids_to_subsystems
+   </a>
+  </li>
+  <li>
+   <a href="#fids_to_co_occurring_fids">
+    fids_to_co_occurring_fids
+   </a>
+  </li>
+  <li>
+   <a href="#fids_to_locations">
+    fids_to_locations
+   </a>
+  </li>
+  <li>
+   <a href="#locations_to_fids">
+    locations_to_fids
+   </a>
+  </li>
+  <li>
+   <a href="#alleles_to_bp_locs">
+    alleles_to_bp_locs
+   </a>
+  </li>
+  <li>
+   <a href="#region_to_fids">
+    region_to_fids
+   </a>
+  </li>
+  <li>
+   <a href="#region_to_alleles">
+    region_to_alleles
+   </a>
+  </li>
+  <li>
+   <a href="#alleles_to_traits">
+    alleles_to_traits
+   </a>
+  </li>
+  <li>
+   <a href="#traits_to_alleles">
+    traits_to_alleles
+   </a>
+  </li>
+  <li>
+   <a href="#ous_with_trait">
+    ous_with_trait
+   </a>
+  </li>
+  <li>
+   <a href="#locations_to_dna_sequences">
+    locations_to_dna_sequences
+   </a>
+  </li>
+  <li>
+   <a href="#proteins_to_fids">
+    proteins_to_fids
+   </a>
+  </li>
+  <li>
+   <a href="#proteins_to_protein_families">
+    proteins_to_protein_families
+   </a>
+  </li>
+  <li>
+   <a href="#proteins_to_literature">
+    proteins_to_literature
+   </a>
+  </li>
+  <li>
+   <a href="#proteins_to_functions">
+    proteins_to_functions
+   </a>
+  </li>
+  <li>
+   <a href="#proteins_to_roles">
+    proteins_to_roles
+   </a>
+  </li>
+  <li>
+   <a href="#roles_to_proteins">
+    roles_to_proteins
+   </a>
+  </li>
+  <li>
+   <a href="#roles_to_subsystems">
+    roles_to_subsystems
+   </a>
+  </li>
+  <li>
+   <a href="#roles_to_protein_families">
+    roles_to_protein_families
+   </a>
+  </li>
+  <li>
+   <a href="#fids_to_coexpressed_fids">
+    fids_to_coexpressed_fids
+   </a>
+  </li>
+  <li>
+   <a href="#protein_families_to_fids">
+    protein_families_to_fids
+   </a>
+  </li>
+  <li>
+   <a href="#protein_families_to_proteins">
+    protein_families_to_proteins
+   </a>
+  </li>
+  <li>
+   <a href="#protein_families_to_functions">
+    protein_families_to_functions
+   </a>
+  </li>
+  <li>
+   <a href="#protein_families_to_co_occurring_families">
+    protein_families_to_co_occurring_families
+   </a>
+  </li>
+  <li>
+   <a href="#co_occurrence_evidence">
+    co_occurrence_evidence
+   </a>
+  </li>
+  <li>
+   <a href="#contigs_to_sequences">
+    contigs_to_sequences
+   </a>
+  </li>
+  <li>
+   <a href="#contigs_to_lengths">
+    contigs_to_lengths
+   </a>
+  </li>
+  <li>
+   <a href="#contigs_to_md5s">
+    contigs_to_md5s
+   </a>
+  </li>
+  <li>
+   <a href="#md5s_to_genomes">
+    md5s_to_genomes
+   </a>
+  </li>
+  <li>
+   <a href="#genomes_to_md5s">
+    genomes_to_md5s
+   </a>
+  </li>
+  <li>
+   <a href="#genomes_to_contigs">
+    genomes_to_contigs
+   </a>
+  </li>
+  <li>
+   <a href="#genomes_to_fids">
+    genomes_to_fids
+   </a>
+  </li>
+  <li>
+   <a href="#genomes_to_taxonomies">
+    genomes_to_taxonomies
+   </a>
+  </li>
+  <li>
+   <a href="#genomes_to_subsystems">
+    genomes_to_subsystems
+   </a>
+  </li>
+  <li>
+   <a href="#subsystems_to_genomes">
+    subsystems_to_genomes
+   </a>
+  </li>
+  <li>
+   <a href="#subsystems_to_fids">
+    subsystems_to_fids
+   </a>
+  </li>
+  <li>
+   <a href="#subsystems_to_roles">
+    subsystems_to_roles
+   </a>
+  </li>
+  <li>
+   <a href="#subsystems_to_spreadsheets">
+    subsystems_to_spreadsheets
+   </a>
+  </li>
+  <li>
+   <a href="#all_roles_used_in_models">
+    all_roles_used_in_models
+   </a>
+  </li>
+  <li>
+   <a href="#complexes_to_complex_data">
+    complexes_to_complex_data
+   </a>
+  </li>
+  <li>
+   <a href="#genomes_to_genome_data">
+    genomes_to_genome_data
+   </a>
+  </li>
+  <li>
+   <a href="#fids_to_regulon_data">
+    fids_to_regulon_data
+   </a>
+  </li>
+  <li>
+   <a href="#regulons_to_fids">
+    regulons_to_fids
+   </a>
+  </li>
+  <li>
+   <a href="#fids_to_feature_data">
+    fids_to_feature_data
+   </a>
+  </li>
+  <li>
+   <a href="#equiv_sequence_assertions">
+    equiv_sequence_assertions
+   </a>
+  </li>
+  <li>
+   <a href="#fids_to_atomic_regulons">
+    fids_to_atomic_regulons
+   </a>
+  </li>
+  <li>
+   <a href="#atomic_regulons_to_fids">
+    atomic_regulons_to_fids
+   </a>
+  </li>
+  <li>
+   <a href="#fids_to_protein_sequences">
+    fids_to_protein_sequences
+   </a>
+  </li>
+  <li>
+   <a href="#fids_to_proteins">
+    fids_to_proteins
+   </a>
+  </li>
+  <li>
+   <a href="#fids_to_dna_sequences">
+    fids_to_dna_sequences
+   </a>
+  </li>
+  <li>
+   <a href="#roles_to_fids">
+    roles_to_fids
+   </a>
+  </li>
+  <li>
+   <a href="#reactions_to_complexes">
+    reactions_to_complexes
+   </a>
+  </li>
+  <li>
+   <a href="#aliases_to_fids">
+    aliases_to_fids
+   </a>
+  </li>
+  <li>
+   <a href="#external_ids_to_fids">
+    external_ids_to_fids
+   </a>
+  </li>
+  <li>
+   <a href="#reaction_strings">
+    reaction_strings
+   </a>
+  </li>
+  <li>
+   <a href="#roles_to_complexes">
+    roles_to_complexes
+   </a>
+  </li>
+  <li>
+   <a href="#complexes_to_roles">
+    complexes_to_roles
+   </a>
+  </li>
+  <li>
+   <a href="#fids_to_subsystem_data">
+    fids_to_subsystem_data
+   </a>
+  </li>
+  <li>
+   <a href="#representative">
+    representative
+   </a>
+  </li>
+  <li>
+   <a href="#otu_members">
+    otu_members
+   </a>
+  </li>
+  <li>
+   <a href="#otus_to_representatives">
+    otus_to_representatives
+   </a>
+  </li>
+  <li>
+   <a href="#fids_to_genomes">
+    fids_to_genomes
+   </a>
+  </li>
+  <li>
+   <a href="#text_search">
+    text_search
+   </a>
+  </li>
+  <li>
+   <a href="#corresponds">
+    corresponds
+   </a>
+  </li>
+  <li>
+   <a href="#corresponds_from_sequences">
+    corresponds_from_sequences
+   </a>
+  </li>
+  <li>
+   <a href="#close_genomes">
+    close_genomes
+   </a>
+  </li>
+  <li>
+   <a href="#representative_sequences">
+    representative_sequences
+   </a>
+  </li>
+  <li>
+   <a href="#align_sequences">
+    align_sequences
+   </a>
+  </li>
+  <li>
+   <a href="#build_tree">
+    build_tree
+   </a>
+  </li>
+  <li>
+   <a href="#alignment_by_id">
+    alignment_by_id
+   </a>
+  </li>
+  <li>
+   <a href="#tree_by_id">
+    tree_by_id
+   </a>
+  </li>
+  <li>
+   <a href="#version">
+    version
+   </a>
+  </li>
+ </ul>
+</li>
+<li>
+ <a href="#TYPES">
+  TYPES
+ </a>
+ <ul>
+  <li>
+   <a href="#annotator">
+    annotator
+   </a>
+  </li>
+  <li>
+   <a href="#annotation_time">
+    annotation_time
+   </a>
+  </li>
+  <li>
+   <a href="#comment">
+    comment
+   </a>
+  </li>
+  <li>
+   <a href="#fid">
+    fid
+   </a>
+  </li>
+  <li>
+   <a href="#protein_family">
+    protein_family
+   </a>
+  </li>
+  <li>
+   <a href="#role">
+    role
+   </a>
+  </li>
+  <li>
+   <a href="#subsystem">
+    subsystem
+   </a>
+  </li>
+  <li>
+   <a href="#variant">
+    variant
+   </a>
+  </li>
+  <li>
+   <a href="#variant_of_subsystem">
+    variant_of_subsystem
+   </a>
+  </li>
+  <li>
+   <a href="#variant_subsystem_pairs">
+    variant_subsystem_pairs
+   </a>
+  </li>
+  <li>
+   <a href="#type_of_fid">
+    type_of_fid
+   </a>
+  </li>
+  <li>
+   <a href="#types_of_fids">
+    types_of_fids
+   </a>
+  </li>
+  <li>
+   <a href="#length">
+    length
+   </a>
+  </li>
+  <li>
+   <a href="#begin">
+    begin
+   </a>
+  </li>
+  <li>
+   <a href="#strand">
+    strand
+   </a>
+  </li>
+  <li>
+   <a href="#contig">
+    contig
+   </a>
+  </li>
+  <li>
+   <a href="#region_of_dna">
+    region_of_dna
+   </a>
+  </li>
+  <li>
+   <a href="#location">
+    location
+   </a>
+  </li>
+  <li>
+   <a href="#locations">
+    locations
+   </a>
+  </li>
+  <li>
+   <a href="#region_of_dna_string">
+    region_of_dna_string
+   </a>
+  </li>
+  <li>
+   <a href="#region_of_dna_strings">
+    region_of_dna_strings
+   </a>
+  </li>
+  <li>
+   <a href="#location_string">
+    location_string
+   </a>
+  </li>
+  <li>
+   <a href="#dna">
+    dna
+   </a>
+  </li>
+  <li>
+   <a href="#function">
+    function
+   </a>
+  </li>
+  <li>
+   <a href="#protein">
+    protein
+   </a>
+  </li>
+  <li>
+   <a href="#md5">
+    md5
+   </a>
+  </li>
+  <li>
+   <a href="#genome">
+    genome
+   </a>
+  </li>
+  <li>
+   <a href="#taxonomic_group">
+    taxonomic_group
+   </a>
+  </li>
+  <li>
+   <a href="#annotation">
+    annotation
+   </a>
+  </li>
+  <li>
+   <a href="#pubref">
+    pubref
+   </a>
+  </li>
+  <li>
+   <a href="#scored_fid">
+    scored_fid
+   </a>
+  </li>
+  <li>
+   <a href="#annotations">
+    annotations
+   </a>
+  </li>
+  <li>
+   <a href="#pubrefs">
+    pubrefs
+   </a>
+  </li>
+  <li>
+   <a href="#roles">
+    roles
+   </a>
+  </li>
+  <li>
+   <a href="#optional">
+    optional
+   </a>
+  </li>
+  <li>
+   <a href="#role_with_flag">
+    role_with_flag
+   </a>
+  </li>
+  <li>
+   <a href="#roles_with_flags">
+    roles_with_flags
+   </a>
+  </li>
+  <li>
+   <a href="#scored_fids">
+    scored_fids
+   </a>
+  </li>
+  <li>
+   <a href="#proteins">
+    proteins
+   </a>
+  </li>
+  <li>
+   <a href="#functions">
+    functions
+   </a>
+  </li>
+  <li>
+   <a href="#taxonomic_groups">
+    taxonomic_groups
+   </a>
+  </li>
+  <li>
+   <a href="#subsystems">
+    subsystems
+   </a>
+  </li>
+  <li>
+   <a href="#contigs">
+    contigs
+   </a>
+  </li>
+  <li>
+   <a href="#md5s">
+    md5s
+   </a>
+  </li>
+  <li>
+   <a href="#genomes">
+    genomes
+   </a>
+  </li>
+  <li>
+   <a href="#pair_of_fids">
+    pair_of_fids
+   </a>
+  </li>
+  <li>
+   <a href="#pairs_of_fids">
+    pairs_of_fids
+   </a>
+  </li>
+  <li>
+   <a href="#protein_families">
+    protein_families
+   </a>
+  </li>
+  <li>
+   <a href="#score">
+    score
+   </a>
+  </li>
+  <li>
+   <a href="#evidence">
+    evidence
+   </a>
+  </li>
+  <li>
+   <a href="#fids">
+    fids
+   </a>
+  </li>
+  <li>
+   <a href="#row">
+    row
+   </a>
+  </li>
+  <li>
+   <a href="#fid_function_pair">
+    fid_function_pair
+   </a>
+  </li>
+  <li>
+   <a href="#fid_function_pairs">
+    fid_function_pairs
+   </a>
+  </li>
+  <li>
+   <a href="#fc_protein_family">
+    fc_protein_family
+   </a>
+  </li>
+  <li>
+   <a href="#fc_protein_families">
+    fc_protein_families
+   </a>
+  </li>
+  <li>
+   <a href="#allele">
+    allele
+   </a>
+  </li>
+  <li>
+   <a href="#alleles">
+    alleles
+   </a>
+  </li>
+  <li>
+   <a href="#trait">
+    trait
+   </a>
+  </li>
+  <li>
+   <a href="#traits">
+    traits
+   </a>
+  </li>
+  <li>
+   <a href="#ou">
+    ou
+   </a>
+  </li>
+  <li>
+   <a href="#ous">
+    ous
+   </a>
+  </li>
+  <li>
+   <a href="#bp_loc">
+    bp_loc
+   </a>
+  </li>
+  <li>
+   <a href="#measurement_type">
+    measurement_type
+   </a>
+  </li>
+  <li>
+   <a href="#measurement_value">
+    measurement_value
+   </a>
+  </li>
+  <li>
+   <a href="#aux">
+    aux
+   </a>
+  </li>
+  <li>
+   <a href="#fields">
+    fields
+   </a>
+  </li>
+  <li>
+   <a href="#complex">
+    complex
+   </a>
+  </li>
+  <li>
+   <a href="#complex_with_flag">
+    complex_with_flag
+   </a>
+  </li>
+  <li>
+   <a href="#complexes_with_flags">
+    complexes_with_flags
+   </a>
+  </li>
+  <li>
+   <a href="#complexes">
+    complexes
+   </a>
+  </li>
+  <li>
+   <a href="#name">
+    name
+   </a>
+  </li>
+  <li>
+   <a href="#reaction">
+    reaction
+   </a>
+  </li>
+  <li>
+   <a href="#reactions">
+    reactions
+   </a>
+  </li>
+  <li>
+   <a href="#complex_data">
+    complex_data
+   </a>
+  </li>
+  <li>
+   <a href="#genome_data">
+    genome_data
+   </a>
+  </li>
+  <li>
+   <a href="#regulon">
+    regulon
+   </a>
+  </li>
+  <li>
+   <a href="#regulons">
+    regulons
+   </a>
+  </li>
+  <li>
+   <a href="#regulon_data">
+    regulon_data
+   </a>
+  </li>
+  <li>
+   <a href="#regulons_data">
+    regulons_data
+   </a>
+  </li>
+  <li>
+   <a href="#feature_data">
+    feature_data
+   </a>
+  </li>
+  <li>
+   <a href="#expert">
+    expert
+   </a>
+  </li>
+  <li>
+   <a href="#source">
+    source
+   </a>
+  </li>
+  <li>
+   <a href="#id">
+    id
+   </a>
+  </li>
+  <li>
+   <a href="#function_assertion">
+    function_assertion
+   </a>
+  </li>
+  <li>
+   <a href="#function_assertions">
+    function_assertions
+   </a>
+  </li>
+  <li>
+   <a href="#atomic_regulon">
+    atomic_regulon
+   </a>
+  </li>
+  <li>
+   <a href="#atomic_regulon_size">
+    atomic_regulon_size
+   </a>
+  </li>
+  <li>
+   <a href="#atomic_regulon_size_pair">
+    atomic_regulon_size_pair
+   </a>
+  </li>
+  <li>
+   <a href="#atomic_regulon_size_pairs">
+    atomic_regulon_size_pairs
+   </a>
+  </li>
+  <li>
+   <a href="#atomic_regulons">
+    atomic_regulons
+   </a>
+  </li>
+  <li>
+   <a href="#protein_sequence">
+    protein_sequence
+   </a>
+  </li>
+  <li>
+   <a href="#dna_sequence">
+    dna_sequence
+   </a>
+  </li>
+  <li>
+   <a href="#alias">
+    alias
+   </a>
+  </li>
+  <li>
+   <a href="#aliases">
+    aliases
+   </a>
+  </li>
+  <li>
+   <a href="#external_id">
+    external_id
+   </a>
+  </li>
+  <li>
+   <a href="#external_ids">
+    external_ids
+   </a>
+  </li>
+  <li>
+   <a href="#name_parameter">
+    name_parameter
+   </a>
+  </li>
+  <li>
+   <a href="#ss_var_role_tuple">
+    ss_var_role_tuple
+   </a>
+  </li>
+  <li>
+   <a href="#ss_var_role_tuples">
+    ss_var_role_tuples
+   </a>
+  </li>
+  <li>
+   <a href="#genome_name">
+    genome_name
+   </a>
+  </li>
+  <li>
+   <a href="#entity_name">
+    entity_name
+   </a>
+  </li>
+  <li>
+   <a href="#weight">
+    weight
+   </a>
+  </li>
+  <li>
+   <a href="#field_name">
+    field_name
+   </a>
+  </li>
+  <li>
+   <a href="#search_hit">
+    search_hit
+   </a>
+  </li>
+  <li>
+   <a href="#correspondence">
+    correspondence
+   </a>
+  </li>
+  <li>
+   <a href="#sequence">
+    sequence
+   </a>
+  </li>
+  <li>
+   <a href="#seq_triple">
+    seq_triple
+   </a>
+  </li>
+  <li>
+   <a href="#seq_set">
+    seq_set
+   </a>
+  </li>
+  <li>
+   <a href="#id_set">
+    id_set
+   </a>
+  </li>
+  <li>
+   <a href="#alignment">
+    alignment
+   </a>
+  </li>
+  <li>
+   <a href="#rep_seq_parms">
+    rep_seq_parms
+   </a>
+  </li>
+  <li>
+   <a href="#muscle_parms_t">
+    muscle_parms_t
+   </a>
+  </li>
+  <li>
+   <a href="#mafft_parms_t">
+    mafft_parms_t
+   </a>
+  </li>
+  <li>
+   <a href="#align_seq_parms">
+    align_seq_parms
+   </a>
+  </li>
+  <li>
+   <a href="#newick_tree">
+    newick_tree
+   </a>
+  </li>
+  <li>
+   <a href="#build_tree_parms">
+    build_tree_parms
+   </a>
+  </li>
+  <li>
+   <a href="#aln_id">
+    aln_id
+   </a>
+  </li>
+  <li>
+   <a href="#tree_id">
+    tree_id
+   </a>
+  </li>
+ </ul>
+</li>
+</ul>
