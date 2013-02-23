@@ -1,0 +1,1496 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+ <head>
+  <title>
+  </title>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <link rev="made" href="mailto:root@ubuntu.chicago.kbase.us" />
+ </head>
+ <body style="background-color: white">
+  <h1 id="NAME">
+   NAME
+  </h1>
+  <p>
+   Bio::KBase::experiment::Client
+  </p>
+  <h1 id="DESCRIPTION">
+   DESCRIPTION
+  </h1>
+  <p>
+   Experiment Service API specification
+  </p>
+  <p>
+   This service provides various methods for extracting data from the Experiment portion of the CDS.
+  </p>
+  <h2 id="getChildCompounds">
+   getChildCompounds
+  </h2>
+  <pre>
+   <code>
+    $return = $obj-&gt;getChildCompounds($parents)
+   </code>
+  </pre>
+  <dl>
+   <dt id="Parameter-and-return-types">
+    Parameter and return types
+   </dt>
+   <dd>
+    <pre>
+     $parents is a compounds
+$return is a compound_relationships
+compounds is a reference to a list where each element is a compound_id
+compound_id is a string
+compound_relationships is a reference to a hash where the key is a compound_id and the value is a cpd_to_molar
+cpd_to_molar is a reference to a hash where the key is a compound_id and the value is a molar_ratio
+molar_ratio is a float
+    </pre>
+   </dd>
+   <dt id="Description">
+    Description
+   </dt>
+   <dd>
+    <p>
+     Returns the child compounds of the input compounds and their molar ratio equivalents to the parent/input. The MR is -1 if the molar ratio is unknown. If the input compounds have no children the returned mapping contains the input compound and 1 as the molar ratio. Intermediate compounds in the tree between child (e.g. a compound that has no more children) and input/parent compound are not returned.
+    </p>
+   </dd>
+  </dl>
+  <h2 id="getParentCompounds">
+   getParentCompounds
+  </h2>
+  <pre>
+   <code>
+    $return = $obj-&gt;getParentCompounds($children)
+   </code>
+  </pre>
+  <dl>
+   <dt id="Parameter-and-return-types1">
+    Parameter and return types
+   </dt>
+   <dd>
+    <pre>
+     $children is a compounds
+$return is a compound_relationships
+compounds is a reference to a list where each element is a compound_id
+compound_id is a string
+compound_relationships is a reference to a hash where the key is a compound_id and the value is a cpd_to_molar
+cpd_to_molar is a reference to a hash where the key is a compound_id and the value is a molar_ratio
+molar_ratio is a float
+    </pre>
+   </dd>
+   <dt id="Description1">
+    Description
+   </dt>
+   <dd>
+    <p>
+     Returns the parent compounds of the input compounds and the molar ratio of the child compound to the parent compound. Note this is the same value as returned by the getChildCompounds function, not the inverse of that value. The MR is -1 if the molar ratio is unknown. If the input compounds have no parents the returned mapping contains the input compound and 1 as the molar ratio. Intermediate compounds in the tree between parent (e.g. a compound that has no more parents) and input/child compound are not returned.
+    </p>
+   </dd>
+  </dl>
+  <h2 id="getChildAndIntermediateCompounds">
+   getChildAndIntermediateCompounds
+  </h2>
+  <pre>
+   <code>
+    $return = $obj-&gt;getChildAndIntermediateCompounds($parents)
+   </code>
+  </pre>
+  <dl>
+   <dt id="Parameter-and-return-types2">
+    Parameter and return types
+   </dt>
+   <dd>
+    <pre>
+     $parents is a compounds
+$return is a compound_relationships
+compounds is a reference to a list where each element is a compound_id
+compound_id is a string
+compound_relationships is a reference to a hash where the key is a compound_id and the value is a cpd_to_molar
+cpd_to_molar is a reference to a hash where the key is a compound_id and the value is a molar_ratio
+molar_ratio is a float
+    </pre>
+   </dd>
+   <dt id="Description2">
+    Description
+   </dt>
+   <dd>
+    <p>
+     Returns a representation of the compound tree from the parent compounds to their ultimate children. All intermediate compounds in the tree are included. This takes the form of a mapping between a parent and its immediate children and a subsequent mapping between those children and the molar ratio from parent:child. To traverse the tree, choose the parent of interest, retrieve the child:molar ratio mapping, and continue down the tree with each child, retrieving its children from the mapping returned by the function. If a compound has no children it is not included in the mapping.
+    </p>
+   </dd>
+  </dl>
+  <h2 id="getParentAndIntermediateCompounds">
+   getParentAndIntermediateCompounds
+  </h2>
+  <pre>
+   <code>
+    $return = $obj-&gt;getParentAndIntermediateCompounds($children)
+   </code>
+  </pre>
+  <dl>
+   <dt id="Parameter-and-return-types3">
+    Parameter and return types
+   </dt>
+   <dd>
+    <pre>
+     $children is a compounds
+$return is a compound_relationships
+compounds is a reference to a list where each element is a compound_id
+compound_id is a string
+compound_relationships is a reference to a hash where the key is a compound_id and the value is a cpd_to_molar
+cpd_to_molar is a reference to a hash where the key is a compound_id and the value is a molar_ratio
+molar_ratio is a float
+    </pre>
+   </dd>
+   <dt id="Description3">
+    Description
+   </dt>
+   <dd>
+    <p>
+     Returns a representation of the compound tree from the child compounds to their ultimate parents. All intermediate compounds in the tree are included. This takes the form of a mapping between the child and its immediate parents and a subsequent mapping between those parents and the molar ratio from parent:child. To traverse the tree, choose the child of interest, retrieve the parent:molar ratio mapping, and continue up the tree with each parent, retrieving its parents from the mapping returned by the function. If a compound has no parents it is not included in the mapping.
+    </p>
+   </dd>
+  </dl>
+  <h2 id="findMedias">
+   findMedias
+  </h2>
+  <pre>
+   <code>
+    $return = $obj-&gt;findMedias($exclude_medias, $exclude_compounds, $exclude_solid, $exclude_undefined)
+   </code>
+  </pre>
+  <dl>
+   <dt id="Parameter-and-return-types4">
+    Parameter and return types
+   </dt>
+   <dd>
+    <pre>
+     $exclude_medias is an exclude_medias
+$exclude_compounds is an exclude_compounds
+$exclude_solid is an exclude_solid
+$exclude_undefined is an exclude_undefined
+$return is a medias
+exclude_medias is a reference to a list where each element is a media_id
+media_id is a string
+exclude_compounds is a reference to a list where each element is a compound_id
+compound_id is a string
+exclude_solid is a boolean
+boolean is an int
+exclude_undefined is a boolean
+medias is a reference to a list where each element is a media_id
+    </pre>
+   </dd>
+   <dt id="Description4">
+    Description
+   </dt>
+   <dd>
+    <p>
+     Find medias matching the input requirements. Media IDs in exclude_medias will not be returned under any circumstances. Medias containing the compounds in exclude_compounds, their parent compounds, and any intermediate compounds will be excluded. The arguments exclude_solid and exclude_undefined will prevent solid and undefined medias, respectively, from inclusion in the results.
+    </p>
+   </dd>
+  </dl>
+  <h2 id="getEnvironmentsInExchangeFormat">
+   getEnvironmentsInExchangeFormat
+  </h2>
+  <pre>
+   <code>
+    $return = $obj-&gt;getEnvironmentsInExchangeFormat($environments)
+   </code>
+  </pre>
+  <dl>
+   <dt id="Parameter-and-return-types5">
+    Parameter and return types
+   </dt>
+   <dd>
+    <pre>
+     $environments is an environments
+$return is an envEFs
+environments is a reference to a list where each element is an environment_id
+environment_id is a string
+envEFs is a reference to a hash where the key is an environment_id and the value is an envEF
+envEF is a reference to a list containing 8 items:
+	0: (sourceID) a string
+	1: (description) a string
+	2: (temperature) a float
+	3: (oxygenConcentration) a float
+	4: (pH) a float
+	5: (mediaID) a string
+	6: (conditions) a string
+	7: (parameters) a string
+    </pre>
+   </dd>
+   <dt id="Description5">
+    Description
+   </dt>
+   <dd>
+    <p>
+     Return Environment objects in exchange format. Compounds are returned as loaded and are not resolved to the subcompounds. Entries with no values are returned as null (e.g. if the environment has no additional compounds the conditions field in envEF will be undef/None/null).
+    </p>
+   </dd>
+  </dl>
+  <h2 id="getEnvironmentByGroup">
+   getEnvironmentByGroup
+  </h2>
+  <pre>
+   <code>
+    $return = $obj-&gt;getEnvironmentByGroup($groups)
+   </code>
+  </pre>
+  <dl>
+   <dt id="Parameter-and-return-types6">
+    Parameter and return types
+   </dt>
+   <dd>
+    <pre>
+     $groups is a groups
+$return is an env_by_group
+groups is a reference to a list where each element is a group_id
+group_id is a string
+env_by_group is a reference to a hash where the key is a group_id and the value is a meta_to_loc
+meta_to_loc is a reference to a hash where the key is a groupMeta and the value is a loc_to_time_info
+groupMeta is a meta
+meta is a string
+loc_to_time_info is a reference to a hash where the key is a location and the value is an env_by_time
+location is a string
+env_by_time is a reference to a hash where the following keys are defined:
+	timeSeriesId has a value which is a time_series_id
+	timepoints has a value which is a meta_to_time
+time_series_id is a string
+meta_to_time is a reference to a hash where the key is a timeMeta and the value is a time_to_env
+timeMeta is a meta
+time_to_env is a reference to a hash where the key is a time_point and the value is an environment_id
+time_point is a float
+environment_id is a string
+    </pre>
+   </dd>
+   <dt id="Description6">
+    Description
+   </dt>
+   <dd>
+    <p>
+     Return environment ids for a particular experimental unit group hierarchially grouped by the group meta boolean, the location in the group, the time meta boolean, and the time point. The id of the time series, if any, is included at the level of the group location. Group locations or time information that does not exist for a group-&gt;environment relationship is represented by nulls.
+    </p>
+   </dd>
+  </dl>
+  <h2 id="findStrainsAndKOs">
+   findStrainsAndKOs
+  </h2>
+  <pre>
+   <code>
+    $return = $obj-&gt;findStrainsAndKOs($genome_id, $maxKnockouts, $onlyWildtype, $onlyAggregate)
+   </code>
+  </pre>
+  <dl>
+   <dt id="Parameter-and-return-types7">
+    Parameter and return types
+   </dt>
+   <dd>
+    <pre>
+     $genome_id is a genome_id
+$maxKnockouts is a maxKnockouts
+$onlyWildtype is an onlyWildtype
+$onlyAggregate is an onlyAggregate
+$return is a strainToKOs
+genome_id is a string
+maxKnockouts is an int
+onlyWildtype is a boolean
+boolean is an int
+onlyAggregate is a boolean
+strainToKOs is a reference to a hash where the key is a strain_id and the value is a knockouts
+strain_id is a string
+knockouts is a reference to a list where each element is a feature_id
+feature_id is a string
+    </pre>
+   </dd>
+   <dt id="Description7">
+    Description
+   </dt>
+   <dd>
+    <p>
+     Returns the strains and their knockouts that match the given genome, maximum knockout count, and wildtype and aggregate data boolean flags.
+    </p>
+   </dd>
+  </dl>
+  <h2 id="generateGrowmatchInput">
+   generateGrowmatchInput
+  </h2>
+  <pre>
+   <code>
+    $return = $obj-&gt;generateGrowmatchInput($gmInputParams)
+   </code>
+  </pre>
+  <dl>
+   <dt id="Parameter-and-return-types8">
+    Parameter and return types
+   </dt>
+   <dd>
+    <pre>
+     $gmInputParams is a gmInputParams
+$return is a growmatchData
+gmInputParams is a reference to a hash where the following keys are defined:
+	genome has a value which is a genome_id
+	maxKnockouts has a value which is an int
+	onlyWildtype has a value which is a boolean
+	onlyAggregate has a value which is a boolean
+	experimentMetaIDs has a value which is a reference to a list where each element is an experimentMeta_id
+	excludeGroups has a value which is a groups
+	onlyGroups has a value which is a groups
+	growthBoolean has a value which is a boolean
+	excludeMedias has a value which is a reference to a list where each element is a media_id
+	onlyMedias has a value which is a reference to a list where each element is a media_id
+	excludeCompounds has a value which is a reference to a list where each element is a compound_id
+	dropCompounds has a value which is a reference to a list where each element is a compound_id
+	excludeSolid has a value which is a boolean
+	excludeUndefined has a value which is a boolean
+	temperatureRange has a value which is a reference to a list containing 2 items:
+	0: a min_temp
+	1: a max_temp	oxygenRange has a value which is a reference to a list containing 2 items:
+	0: a min_oxygen
+	1: a max_oxygen
+
+	pHRange has a value which is a reference to a list containing 2 items:
+	0: a min_pH
+	1: a max_pH
+
+	aggMethod has a value which is a string
+	oxygenCutoff has a value which is a float
+	allValues has a value which is a boolean
+	mergeCompounds has a value which is a boolean
+	parentCompounds has a value which is a boolean
+genome_id is a string
+boolean is an int
+experimentMeta_id is a string
+groups is a reference to a list where each element is a group_id
+group_id is a string
+media_id is a string
+compound_id is a string
+min_temp is a float
+max_temp is a float
+min_oxygen is a float
+max_oxygen is a float
+min_pH is a float
+max_pH is a float
+growmatchData is a reference to a hash where the key is a group_id and the value is a groupdata
+groupdata is a reference to a hash where the following keys are defined:
+	data has a value which is a growmatchGroup
+	groupComponds has a value which is a compounds
+	allValues has a value which is a fitnessValues
+	stats has a value which is a statistics
+	env has a value which is an environment_id
+growmatchGroup is a reference to a list where each element is a growmatchRow
+growmatchRow is a reference to a list containing 4 items:
+	0: a knockouts
+	1: a compounds
+	2: a fitnessValue
+	3: an environment_id
+knockouts is a reference to a list where each element is a feature_id
+feature_id is a string
+compounds is a reference to a list where each element is a compound_id
+fitnessValue is a float
+environment_id is a string
+fitnessValues is a reference to a list where each element is a fitnessValue
+statistics is a reference to a hash where the following keys are defined:
+	median has a value which is a float
+	mean has a value which is a float
+	stddev has a value which is a float
+    </pre>
+   </dd>
+   <dt id="Description8">
+    Description
+   </dt>
+   <dd>
+    <p>
+     Given a number of input parameters, returns data for input into a growmatch FBA algorithm. Fundamentally the data consists of a mapping of an environment, consisting of a list of compounds, and a set of gene knockouts to a fitness value or a growth boolean. By default, the data is processed such that data rows (where a row is an environment, set of knockouts, and a fitness value) with identical compounds and knockouts are merged into a single row by taking the maximum of the identical rows.
+    </p>
+    <p>
+     The return value consists of a mapping of ExperimentalUnitGroup IDs to a structure containing several pieces of data about the group: 1) the list of compounds in the environment of the group, 2) some summary statistics about the entire group (e.g. including all rows, not just the returned merged rows), 3) the ID of the environment of the group, 4) if requested, a list of all fitness values in the group for the purposes of thresholding and finally, 5) the list of data rows containing, by default, the knockout list, an empty compound list, and the fitness value (see options below regarding the compound list).
+    </p>
+    <p>
+     The fitness value entry can consist of either a continuous fitness value (see measurement description IDs kb|measdesc.0 and 1) or a growth boolean (see kb|measdesc.5). Groups, in this case, will typically be microarrays or RNAseq experiments. Data that is not associated with any group is mapped from an empty string (&#39;&#39;) instead of a KBase experimental unit group ID. For this &#39;group&#39; statistics are not provided and the compounds and environment ID are provided on a per row basis rather than once for the entire group. No time series data is ever returned.
+    </p>
+    <p>
+     Input values are: genome - the KBase ID of the genome to pull data from
+    </p>
+    <p>
+     maxKnockouts - the maximum number of knockouts allowed for any strain in the return data (defaults to no limit)
+    </p>
+    <p>
+     onlyWildType - only strains marked as wildtype will be returned (default false (0))
+    </p>
+    <p>
+     onlyAggregate - only strains that represent aggregate data from multiple strains will be returned (default true (1))
+    </p>
+    <p>
+     experimentMetaIDs - the KBase IDs of the experimentMeta entities from which to return data (default all)
+    </p>
+    <p>
+     excludeGroups - the data related to the ExperimentalUnitGroup KBase IDs in this list will be excluded from the results.
+    </p>
+    <p>
+     onlyGroups - only the data related to the ExperimentalUnitGroup KBase IDs in this list will be included in the results. excludeGroups will be ignored. An empty list results in no restrictions (default) except those in excludeGroups.
+    </p>
+    <p>
+     growthBoolean - if true, returns data consisting of a growth boolean (1 for grows, 0 for doesn&#39;t grow) rather than fitness values. Defaults to returning fitness values. There is no guarantee that a particular strain/environment combination with growth boolean data has fitness value data as well and vice versa.
+    </p>
+    <p>
+     excludeMedias - data using the media specified by the KBase media IDs in this list will not be returned.
+    </p>
+    <p>
+     onlyMedias - only data using the medias in this list will be returned. If this list is not empty excludeMedias and excludeCompounds are ignored. If all three lists are empty no restrictions are placed on the medias allowed.
+    </p>
+    <p>
+     excludeCompounds - any data using medias or environments containing these compounds or any of their parent compounds will not be returned.
+    </p>
+    <p>
+     dropCompounds - these compounds will be silently removed from the data before it is returned. Typically used to remove compounds such as VitB12 which can interfere with FBA results. Does not prevent using medias or environments containing the compound. Only an exact match will be removed from the returned data - children and parent compounds will remain in the data.
+    </p>
+    <p>
+     excludeSolid - any data using solid medias will be excluded if true (1). Defaults to false (0).
+    </p>
+    <p>
+     excludeUndefined - any data using undefined medias will be excluded if true (1). Defaults to false (0).
+    </p>
+    <p>
+     temperatureRange - any data outside the given temperature range will be excluded from the results. Defaults to no limits.
+    </p>
+    <p>
+     oxygenRange - any data outside the given oxygen range will be excluded from the results. Defaults to no limits. Recall that -1 signifies the presence of an unknown but substantial quantity of oxygen (as in an unmonitored shake flask, for example).
+    </p>
+    <p>
+     pHRange - any data outside the given pH range will be excluded from the results. Defaults to no limits. If a range is given, data without pH data will not be returned.
+    </p>
+    <p>
+     aggMethod - the method by which to aggregate data rows with identical compound lists and knockouts. The choices are &#39;max&#39;, &#39;min&#39;, or &#39;none&#39; which return the maximum or minimum growth / fitness value or performs no aggregation, respectively. The default is max, which is appropriate for nutrient compounds, but less so for inhibitors. Vice versa for min.
+    </p>
+    <p>
+     oxygenCutoff - environments with a greater oxygen concentration than this value will have oxygen added to the compound list if it doesn&#39;t already exist. Defaults to 0.000002. If the oxygen value is &lt; 0 oxygen is always added to the compound list.
+    </p>
+    <p>
+     allValues - returns a list of all fitness values in each group for the purposes of statistical thresholding. By default an empty list is returned.
+    </p>
+    <p>
+     mergeCompounds - if true, rather than returning one list of compounds per group, each row of the data contains the compounds list. In this case the group level list of compounds will be empty. Note that the transfer and storage costs for the data will probably go up significantly if this option is enabled.
+    </p>
+    <p>
+     parentCompounds - by default, the compounds returned are the ultimate subcompounds of the media and environment compound lists. If this parameter is set to True, the compounds returned are not resolved to subcompounds.
+    </p>
+   </dd>
+  </dl>
+  <h2 id="storeGrowmatchInput">
+   storeGrowmatchInput
+  </h2>
+  <pre>
+   <code>
+    $return = $obj-&gt;storeGrowmatchInput($gmInputParams, $workspace_id, $object_id)
+   </code>
+  </pre>
+  <dl>
+   <dt id="Parameter-and-return-types9">
+    Parameter and return types
+   </dt>
+   <dd>
+    <pre>
+     $gmInputParams is a gmInputParams
+$workspace_id is a workspace_id
+$object_id is an object_id
+$return is an object_metadata
+gmInputParams is a reference to a hash where the following keys are defined:
+	genome has a value which is a genome_id
+	maxKnockouts has a value which is an int
+	onlyWildtype has a value which is a boolean
+	onlyAggregate has a value which is a boolean
+	experimentMetaIDs has a value which is a reference to a list where each element is an experimentMeta_id
+	excludeGroups has a value which is a groups
+	onlyGroups has a value which is a groups
+	growthBoolean has a value which is a boolean
+	excludeMedias has a value which is a reference to a list where each element is a media_id
+	onlyMedias has a value which is a reference to a list where each element is a media_id
+	excludeCompounds has a value which is a reference to a list where each element is a compound_id
+	dropCompounds has a value which is a reference to a list where each element is a compound_id
+	excludeSolid has a value which is a boolean
+	excludeUndefined has a value which is a boolean
+	temperatureRange has a value which is a reference to a list containing 2 items:
+	0: a min_temp
+	1: a max_temp	oxygenRange has a value which is a reference to a list containing 2 items:
+	0: a min_oxygen
+	1: a max_oxygen
+
+	pHRange has a value which is a reference to a list containing 2 items:
+	0: a min_pH
+	1: a max_pH
+
+	aggMethod has a value which is a string
+	oxygenCutoff has a value which is a float
+	allValues has a value which is a boolean
+	mergeCompounds has a value which is a boolean
+	parentCompounds has a value which is a boolean
+genome_id is a string
+boolean is an int
+experimentMeta_id is a string
+groups is a reference to a list where each element is a group_id
+group_id is a string
+media_id is a string
+compound_id is a string
+min_temp is a float
+max_temp is a float
+min_oxygen is a float
+max_oxygen is a float
+min_pH is a float
+max_pH is a float
+workspace_id is a string
+object_id is a string
+object_metadata is a reference to a list containing 11 items:
+	0: (id) an object_id
+	1: (type) an object_type
+	2: (moddate) a timestamp
+	3: (instance) an int
+	4: (command) a string
+	5: (lastmodifier) a username
+	6: (owner) a username
+	7: (workspace) a workspace_id
+	8: (ref) a workspace_ref
+	9: (chsum) a string
+	10: (metadata) a reference to a hash where the key is a string and the value is a string
+object_type is a string
+timestamp is a string
+username is a string
+workspace_ref is a string
+    </pre>
+   </dd>
+   <dt id="Description9">
+    Description
+   </dt>
+   <dd>
+    <p>
+     As generateGrowmatchInput but rather than returning the data, it is stored in the authenticated user&#39;s workspace. The ID of the workspace into which to save the object as well as the ID to save the object to are required. The data is stored in a structure with two fields: &#39;params&#39; and &#39;gmdata&#39;. The input parameters (e.g. the gmInputParams structure) is stored in the first field while the grow match data is stored in the second. The object type is &#39;Growmatch data&#39;. The standard object metadata from the workspace service is returned.
+    </p>
+   </dd>
+  </dl>
+  <h1 id="TYPES">
+   TYPES
+  </h1>
+  <h2 id="workspace_id">
+   workspace_id
+  </h2>
+  <dl>
+   <dt id="Description10">
+    Description
+   </dt>
+   <dd>
+    <p>
+     A string used as an ID for a workspace. Any string consisting of alphanumeric characters and &quot;-&quot; is acceptable
+    </p>
+   </dd>
+   <dt id="Definition">
+    Definition
+   </dt>
+   <dd>
+    <pre>
+     a string
+    </pre>
+   </dd>
+  </dl>
+  <h2 id="object_type">
+   object_type
+  </h2>
+  <dl>
+   <dt id="Description11">
+    Description
+   </dt>
+   <dd>
+    <p>
+     A string indicating the &quot;type&quot; of an object stored in a workspace. Acceptable types are returned by the &quot;get_types()&quot; command
+    </p>
+   </dd>
+   <dt id="Definition1">
+    Definition
+   </dt>
+   <dd>
+    <pre>
+     a string
+    </pre>
+   </dd>
+  </dl>
+  <h2 id="object_id">
+   object_id
+  </h2>
+  <dl>
+   <dt id="Description12">
+    Description
+   </dt>
+   <dd>
+    <p>
+     ID of an object stored in the workspace. Any string consisting of alphanumeric characters and &quot;-&quot; is acceptable
+    </p>
+   </dd>
+   <dt id="Definition2">
+    Definition
+   </dt>
+   <dd>
+    <pre>
+     a string
+    </pre>
+   </dd>
+  </dl>
+  <h2 id="permission">
+   permission
+  </h2>
+  <dl>
+   <dt id="Description13">
+    Description
+   </dt>
+   <dd>
+    <p>
+     Single letter indicating permissions on access to workspace. Options are: &#39;a&#39; for administative access, &#39;w&#39; for read/write access, &#39;r&#39; for read access, and &#39;n&#39; for no access.
+    </p>
+   </dd>
+   <dt id="Definition3">
+    Definition
+   </dt>
+   <dd>
+    <pre>
+     a string
+    </pre>
+   </dd>
+  </dl>
+  <h2 id="username">
+   username
+  </h2>
+  <dl>
+   <dt id="Description14">
+    Description
+   </dt>
+   <dd>
+    <p>
+     Login name of KBase useraccount to which permissions for workspaces are mapped
+    </p>
+   </dd>
+   <dt id="Definition4">
+    Definition
+   </dt>
+   <dd>
+    <pre>
+     a string
+    </pre>
+   </dd>
+  </dl>
+  <h2 id="timestamp">
+   timestamp
+  </h2>
+  <dl>
+   <dt id="Description15">
+    Description
+   </dt>
+   <dd>
+    <p>
+     Exact time for workspace operations. e.g. 2012-12-17T23:24:06
+    </p>
+   </dd>
+   <dt id="Definition5">
+    Definition
+   </dt>
+   <dd>
+    <pre>
+     a string
+    </pre>
+   </dd>
+  </dl>
+  <h2 id="workspace_ref">
+   workspace_ref
+  </h2>
+  <dl>
+   <dt id="Description16">
+    Description
+   </dt>
+   <dd>
+    <p>
+     A 36 character string referring to a particular instance of an object in a workspace that lasts forever. Objects should always be retreivable using this ID
+    </p>
+   </dd>
+   <dt id="Definition6">
+    Definition
+   </dt>
+   <dd>
+    <pre>
+     a string
+    </pre>
+   </dd>
+  </dl>
+  <h2 id="object_metadata">
+   object_metadata
+  </h2>
+  <dl>
+   <dt id="Definition7">
+    Definition
+   </dt>
+   <dd>
+    <pre>
+     a reference to a list containing 11 items:
+0: (id) an object_id
+1: (type) an object_type
+2: (moddate) a timestamp
+3: (instance) an int
+4: (command) a string
+5: (lastmodifier) a username
+6: (owner) a username
+7: (workspace) a workspace_id
+8: (ref) a workspace_ref
+9: (chsum) a string
+10: (metadata) a reference to a hash where the key is a string and the value is a string
+    </pre>
+   </dd>
+  </dl>
+  <h2 id="boolean">
+   boolean
+  </h2>
+  <dl>
+   <dt id="Description17">
+    Description
+   </dt>
+   <dd>
+    <p>
+     END IMPORTED OBJECTS ----------
+    </p>
+   </dd>
+   <dt id="Definition8">
+    Definition
+   </dt>
+   <dd>
+    <pre>
+     an int
+    </pre>
+   </dd>
+  </dl>
+  <h2 id="compound_id">
+   compound_id
+  </h2>
+  <dl>
+   <dt id="Definition9">
+    Definition
+   </dt>
+   <dd>
+    <pre>
+     a string
+    </pre>
+   </dd>
+  </dl>
+  <h2 id="compounds">
+   compounds
+  </h2>
+  <dl>
+   <dt id="Definition10">
+    Definition
+   </dt>
+   <dd>
+    <pre>
+     a reference to a list where each element is a compound_id
+    </pre>
+   </dd>
+  </dl>
+  <h2 id="molar_ratio">
+   molar_ratio
+  </h2>
+  <dl>
+   <dt id="Definition11">
+    Definition
+   </dt>
+   <dd>
+    <pre>
+     a float
+    </pre>
+   </dd>
+  </dl>
+  <h2 id="cpd_to_molar">
+   cpd_to_molar
+  </h2>
+  <dl>
+   <dt id="Definition12">
+    Definition
+   </dt>
+   <dd>
+    <pre>
+     a reference to a hash where the key is a compound_id and the value is a molar_ratio
+    </pre>
+   </dd>
+  </dl>
+  <h2 id="compound_relationships">
+   compound_relationships
+  </h2>
+  <dl>
+   <dt id="Definition13">
+    Definition
+   </dt>
+   <dd>
+    <pre>
+     a reference to a hash where the key is a compound_id and the value is a cpd_to_molar
+    </pre>
+   </dd>
+  </dl>
+  <h2 id="media_id">
+   media_id
+  </h2>
+  <dl>
+   <dt id="Definition14">
+    Definition
+   </dt>
+   <dd>
+    <pre>
+     a string
+    </pre>
+   </dd>
+  </dl>
+  <h2 id="exclude_medias">
+   exclude_medias
+  </h2>
+  <dl>
+   <dt id="Definition15">
+    Definition
+   </dt>
+   <dd>
+    <pre>
+     a reference to a list where each element is a media_id
+    </pre>
+   </dd>
+  </dl>
+  <h2 id="exclude_compounds">
+   exclude_compounds
+  </h2>
+  <dl>
+   <dt id="Definition16">
+    Definition
+   </dt>
+   <dd>
+    <pre>
+     a reference to a list where each element is a compound_id
+    </pre>
+   </dd>
+  </dl>
+  <h2 id="exclude_solid">
+   exclude_solid
+  </h2>
+  <dl>
+   <dt id="Definition17">
+    Definition
+   </dt>
+   <dd>
+    <pre>
+     a boolean
+    </pre>
+   </dd>
+  </dl>
+  <h2 id="exclude_undefined">
+   exclude_undefined
+  </h2>
+  <dl>
+   <dt id="Definition18">
+    Definition
+   </dt>
+   <dd>
+    <pre>
+     a boolean
+    </pre>
+   </dd>
+  </dl>
+  <h2 id="medias">
+   medias
+  </h2>
+  <dl>
+   <dt id="Definition19">
+    Definition
+   </dt>
+   <dd>
+    <pre>
+     a reference to a list where each element is a media_id
+    </pre>
+   </dd>
+  </dl>
+  <h2 id="environment_id">
+   environment_id
+  </h2>
+  <dl>
+   <dt id="Definition20">
+    Definition
+   </dt>
+   <dd>
+    <pre>
+     a string
+    </pre>
+   </dd>
+  </dl>
+  <h2 id="environments">
+   environments
+  </h2>
+  <dl>
+   <dt id="Definition21">
+    Definition
+   </dt>
+   <dd>
+    <pre>
+     a reference to a list where each element is an environment_id
+    </pre>
+   </dd>
+  </dl>
+  <h2 id="envEF">
+   envEF
+  </h2>
+  <dl>
+   <dt id="Definition22">
+    Definition
+   </dt>
+   <dd>
+    <pre>
+     a reference to a list containing 8 items:
+0: (sourceID) a string
+1: (description) a string
+2: (temperature) a float
+3: (oxygenConcentration) a float
+4: (pH) a float
+5: (mediaID) a string
+6: (conditions) a string
+7: (parameters) a string
+    </pre>
+   </dd>
+  </dl>
+  <h2 id="envEFs">
+   envEFs
+  </h2>
+  <dl>
+   <dt id="Definition23">
+    Definition
+   </dt>
+   <dd>
+    <pre>
+     a reference to a hash where the key is an environment_id and the value is an envEF
+    </pre>
+   </dd>
+  </dl>
+  <h2 id="group_id">
+   group_id
+  </h2>
+  <dl>
+   <dt id="Definition24">
+    Definition
+   </dt>
+   <dd>
+    <pre>
+     a string
+    </pre>
+   </dd>
+  </dl>
+  <h2 id="groups">
+   groups
+  </h2>
+  <dl>
+   <dt id="Definition25">
+    Definition
+   </dt>
+   <dd>
+    <pre>
+     a reference to a list where each element is a group_id
+    </pre>
+   </dd>
+  </dl>
+  <h2 id="time_point">
+   time_point
+  </h2>
+  <dl>
+   <dt id="Definition26">
+    Definition
+   </dt>
+   <dd>
+    <pre>
+     a float
+    </pre>
+   </dd>
+  </dl>
+  <h2 id="time_to_env">
+   time_to_env
+  </h2>
+  <dl>
+   <dt id="Definition27">
+    Definition
+   </dt>
+   <dd>
+    <pre>
+     a reference to a hash where the key is a time_point and the value is an environment_id
+    </pre>
+   </dd>
+  </dl>
+  <h2 id="meta">
+   meta
+  </h2>
+  <dl>
+   <dt id="Description18">
+    Description
+   </dt>
+   <dd>
+    <p>
+     Defines whether an experimental unit refers to metadata about a grouping or time series, value is either &#39;Y&#39; or &#39;N&#39;
+    </p>
+   </dd>
+   <dt id="Definition28">
+    Definition
+   </dt>
+   <dd>
+    <pre>
+     a string
+    </pre>
+   </dd>
+  </dl>
+  <h2 id="groupMeta">
+   groupMeta
+  </h2>
+  <dl>
+   <dt id="Definition29">
+    Definition
+   </dt>
+   <dd>
+    <pre>
+     a meta
+    </pre>
+   </dd>
+  </dl>
+  <h2 id="timeMeta">
+   timeMeta
+  </h2>
+  <dl>
+   <dt id="Definition30">
+    Definition
+   </dt>
+   <dd>
+    <pre>
+     a meta
+    </pre>
+   </dd>
+  </dl>
+  <h2 id="meta_to_time">
+   meta_to_time
+  </h2>
+  <dl>
+   <dt id="Definition31">
+    Definition
+   </dt>
+   <dd>
+    <pre>
+     a reference to a hash where the key is a timeMeta and the value is a time_to_env
+    </pre>
+   </dd>
+  </dl>
+  <h2 id="time_series_id">
+   time_series_id
+  </h2>
+  <dl>
+   <dt id="Definition32">
+    Definition
+   </dt>
+   <dd>
+    <pre>
+     a string
+    </pre>
+   </dd>
+  </dl>
+  <h2 id="env_by_time">
+   env_by_time
+  </h2>
+  <dl>
+   <dt id="Definition33">
+    Definition
+   </dt>
+   <dd>
+    <pre>
+     a reference to a hash where the following keys are defined:
+timeSeriesId has a value which is a time_series_id
+timepoints has a value which is a meta_to_time
+    </pre>
+   </dd>
+  </dl>
+  <h2 id="location">
+   location
+  </h2>
+  <dl>
+   <dt id="Definition34">
+    Definition
+   </dt>
+   <dd>
+    <pre>
+     a string
+    </pre>
+   </dd>
+  </dl>
+  <h2 id="loc_to_time_info">
+   loc_to_time_info
+  </h2>
+  <dl>
+   <dt id="Definition35">
+    Definition
+   </dt>
+   <dd>
+    <pre>
+     a reference to a hash where the key is a location and the value is an env_by_time
+    </pre>
+   </dd>
+  </dl>
+  <h2 id="meta_to_loc">
+   meta_to_loc
+  </h2>
+  <dl>
+   <dt id="Definition36">
+    Definition
+   </dt>
+   <dd>
+    <pre>
+     a reference to a hash where the key is a groupMeta and the value is a loc_to_time_info
+    </pre>
+   </dd>
+  </dl>
+  <h2 id="env_by_group">
+   env_by_group
+  </h2>
+  <dl>
+   <dt id="Definition37">
+    Definition
+   </dt>
+   <dd>
+    <pre>
+     a reference to a hash where the key is a group_id and the value is a meta_to_loc
+    </pre>
+   </dd>
+  </dl>
+  <h2 id="genome_id">
+   genome_id
+  </h2>
+  <dl>
+   <dt id="Definition38">
+    Definition
+   </dt>
+   <dd>
+    <pre>
+     a string
+    </pre>
+   </dd>
+  </dl>
+  <h2 id="maxKnockouts">
+   maxKnockouts
+  </h2>
+  <dl>
+   <dt id="Definition39">
+    Definition
+   </dt>
+   <dd>
+    <pre>
+     an int
+    </pre>
+   </dd>
+  </dl>
+  <h2 id="onlyWildtype">
+   onlyWildtype
+  </h2>
+  <dl>
+   <dt id="Definition40">
+    Definition
+   </dt>
+   <dd>
+    <pre>
+     a boolean
+    </pre>
+   </dd>
+  </dl>
+  <h2 id="onlyAggregate">
+   onlyAggregate
+  </h2>
+  <dl>
+   <dt id="Definition41">
+    Definition
+   </dt>
+   <dd>
+    <pre>
+     a boolean
+    </pre>
+   </dd>
+  </dl>
+  <h2 id="feature_id">
+   feature_id
+  </h2>
+  <dl>
+   <dt id="Definition42">
+    Definition
+   </dt>
+   <dd>
+    <pre>
+     a string
+    </pre>
+   </dd>
+  </dl>
+  <h2 id="knockouts">
+   knockouts
+  </h2>
+  <dl>
+   <dt id="Definition43">
+    Definition
+   </dt>
+   <dd>
+    <pre>
+     a reference to a list where each element is a feature_id
+    </pre>
+   </dd>
+  </dl>
+  <h2 id="strain_id">
+   strain_id
+  </h2>
+  <dl>
+   <dt id="Definition44">
+    Definition
+   </dt>
+   <dd>
+    <pre>
+     a string
+    </pre>
+   </dd>
+  </dl>
+  <h2 id="strainToKOs">
+   strainToKOs
+  </h2>
+  <dl>
+   <dt id="Definition45">
+    Definition
+   </dt>
+   <dd>
+    <pre>
+     a reference to a hash where the key is a strain_id and the value is a knockouts
+    </pre>
+   </dd>
+  </dl>
+  <h2 id="experimentMeta_id">
+   experimentMeta_id
+  </h2>
+  <dl>
+   <dt id="Definition46">
+    Definition
+   </dt>
+   <dd>
+    <pre>
+     a string
+    </pre>
+   </dd>
+  </dl>
+  <h2 id="min_temp">
+   min_temp
+  </h2>
+  <dl>
+   <dt id="Definition47">
+    Definition
+   </dt>
+   <dd>
+    <pre>
+     a float
+    </pre>
+   </dd>
+  </dl>
+  <h2 id="max_temp">
+   max_temp
+  </h2>
+  <dl>
+   <dt id="Definition48">
+    Definition
+   </dt>
+   <dd>
+    <pre>
+     a float
+    </pre>
+   </dd>
+  </dl>
+  <h2 id="min_oxygen">
+   min_oxygen
+  </h2>
+  <dl>
+   <dt id="Definition49">
+    Definition
+   </dt>
+   <dd>
+    <pre>
+     a float
+    </pre>
+   </dd>
+  </dl>
+  <h2 id="max_oxygen">
+   max_oxygen
+  </h2>
+  <dl>
+   <dt id="Definition50">
+    Definition
+   </dt>
+   <dd>
+    <pre>
+     a float
+    </pre>
+   </dd>
+  </dl>
+  <h2 id="max_pH">
+   max_pH
+  </h2>
+  <dl>
+   <dt id="Definition51">
+    Definition
+   </dt>
+   <dd>
+    <pre>
+     a float
+    </pre>
+   </dd>
+  </dl>
+  <h2 id="min_pH">
+   min_pH
+  </h2>
+  <dl>
+   <dt id="Definition52">
+    Definition
+   </dt>
+   <dd>
+    <pre>
+     a float
+    </pre>
+   </dd>
+  </dl>
+  <h2 id="gmInputParams">
+   gmInputParams
+  </h2>
+  <dl>
+   <dt id="Definition53">
+    Definition
+   </dt>
+   <dd>
+    <pre>
+     a reference to a hash where the following keys are defined:
+genome has a value which is a genome_id
+maxKnockouts has a value which is an int
+onlyWildtype has a value which is a boolean
+onlyAggregate has a value which is a boolean
+experimentMetaIDs has a value which is a reference to a list where each element is an experimentMeta_id
+excludeGroups has a value which is a groups
+onlyGroups has a value which is a groups
+growthBoolean has a value which is a boolean
+excludeMedias has a value which is a reference to a list where each element is a media_id
+onlyMedias has a value which is a reference to a list where each element is a media_id
+excludeCompounds has a value which is a reference to a list where each element is a compound_id
+dropCompounds has a value which is a reference to a list where each element is a compound_id
+excludeSolid has a value which is a boolean
+excludeUndefined has a value which is a boolean
+temperatureRange has a value which is a reference to a list containing 2 items:
+0: a min_temp
+1: a max_tempoxygenRange has a value which is a reference to a list containing 2 items:
+0: a min_oxygen
+1: a max_oxygenpHRange has a value which is a reference to a list containing 2 items:
+0: a min_pH
+1: a max_pHaggMethod has a value which is a string
+oxygenCutoff has a value which is a float
+allValues has a value which is a boolean
+mergeCompounds has a value which is a boolean
+parentCompounds has a value which is a boolean
+    </pre>
+   </dd>
+  </dl>
+  <h2 id="fitnessValue">
+   fitnessValue
+  </h2>
+  <dl>
+   <dt id="Definition54">
+    Definition
+   </dt>
+   <dd>
+    <pre>
+     a float
+    </pre>
+   </dd>
+  </dl>
+  <h2 id="fitnessValues">
+   fitnessValues
+  </h2>
+  <dl>
+   <dt id="Definition55">
+    Definition
+   </dt>
+   <dd>
+    <pre>
+     a reference to a list where each element is a fitnessValue
+    </pre>
+   </dd>
+  </dl>
+  <h2 id="statistics">
+   statistics
+  </h2>
+  <dl>
+   <dt id="Definition56">
+    Definition
+   </dt>
+   <dd>
+    <pre>
+     a reference to a hash where the following keys are defined:
+median has a value which is a float
+mean has a value which is a float
+stddev has a value which is a float
+    </pre>
+   </dd>
+  </dl>
+  <h2 id="growmatchRow">
+   growmatchRow
+  </h2>
+  <dl>
+   <dt id="Definition57">
+    Definition
+   </dt>
+   <dd>
+    <pre>
+     a reference to a list containing 4 items:
+0: a knockouts
+1: a compounds
+2: a fitnessValue
+3: an environment_id
+    </pre>
+   </dd>
+  </dl>
+  <h2 id="growmatchGroup">
+   growmatchGroup
+  </h2>
+  <dl>
+   <dt id="Definition58">
+    Definition
+   </dt>
+   <dd>
+    <pre>
+     a reference to a list where each element is a growmatchRow
+    </pre>
+   </dd>
+  </dl>
+  <h2 id="groupdata">
+   groupdata
+  </h2>
+  <dl>
+   <dt id="Definition59">
+    Definition
+   </dt>
+   <dd>
+    <pre>
+     a reference to a hash where the following keys are defined:
+data has a value which is a growmatchGroup
+groupComponds has a value which is a compounds
+allValues has a value which is a fitnessValues
+stats has a value which is a statistics
+env has a value which is an environment_id
+    </pre>
+   </dd>
+  </dl>
+  <h2 id="growmatchData">
+   growmatchData
+  </h2>
+  <dl>
+   <dt id="Definition60">
+    Definition
+   </dt>
+   <dd>
+    <pre>
+     a reference to a hash where the key is a group_id and the value is a groupdata
+    </pre>
+   </dd>
+  </dl>
+ </body>
+</html>
