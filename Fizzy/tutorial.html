@@ -1,0 +1,37 @@
+<h1> Fizzy (feature selection) service</h1>
+
+<p>
+
+This tutorial gives an example how to invoke the Fizzy service to determine the most significant features within a metagenomic abundance matrix. 
+
+</p>
+<code>
+#!/usr/bin/perl 
+# Illustrate the basic functionality of the Fizzy API
+
+# import some standard packages
+use warnings;
+use strict;
+use Data::Dumper;
+</code>
+<p>
+# Here we are going to define what the IDs are that we would 
+# like to obtain from KBase and specify the source used to 
+# generate the abundance data. Keep tabs on the matrix service
+# on KBase to see what sources can be specified. 
+</p>
+
+<code>
+my $ids = ["4447970.3","4447971.3","4447101.3","4447102.3","4447103.3","4447192.3","4447903.3","4447943.3","4445990.3","4445994.3","4445993.3","4445996.3","4476877.3"];
+my $source = "KEGG"; 
+</code>
+
+
+<code>
+use FizzyClient;
+my $FizzyService = FizzyClient->new("http://localhost:7047");
+my $feature_data_1 = $FizzyService->feature_selection($ids, $source);
+print Dumper($feature_data_1)
+</code>
+
+</p>
