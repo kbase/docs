@@ -1,0 +1,122 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+ <head>
+  <title>
+   Fizzy API Client
+  </title>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <link rev="made" href="mailto:root@ubuntu.chicago.kbase.us" />
+ </head>
+ <body style="background-color: white">
+  <h1 id="NAME">
+   NAME
+  </h1>
+  <p>
+   FizzyClient
+  </p>
+  <h1 id="DESCRIPTION">
+   DESCRIPTION
+  </h1>
+  <p>
+   MODULE: Fizzy This service receives a list of strings containing the options containing the metagenome IDs that will build the data matrix for feature selection. The SOURCE should be specified according to the available options specified by the KBase matrix service. The Fizzy service returns a list of strings contains the feature names that were selected.
+  </p>
+  <h2 id="feature_selection">
+   feature_selection
+  </h2>
+  <pre>
+   <code>
+    $features = $obj-&gt;feature_selection($ids, $source)
+   </code>
+  </pre>
+  <dl>
+   <dt id="Parameter-and-return-types">
+    Parameter and return types
+   </dt>
+   <dd>
+    <pre>
+     $ids is an IDs
+$source is a SOURCE
+$features is a FEATURES
+IDs is a reference to a list where each element is a string
+SOURCE is a string
+FEATURES is a reference to a list where each element is a string
+    </pre>
+   </dd>
+   <dt id="Description">
+    Description
+   </dt>
+   <dd>
+    <p>
+     FEATURE_SELECTION: TYPE function -- Run a Chi2 feature selection method on the abundance data contained in the metagenome IDs. Take in a list of IDs and the source used to form the feature vectors. Return the list of feature that were selected by the algorithm.
+    </p>
+   </dd>
+  </dl>
+  <h1 id="TYPES">
+   TYPES
+  </h1>
+  <h2 id="IDs">
+   IDs
+  </h2>
+  <dl>
+   <dt id="Description1">
+    Description
+   </dt>
+   <dd>
+    <p>
+     * IDs: TYPE list&lt;string&gt; * -- list of strings contain the metagenome IDs that are * either on KBase or MGRAST.
+    </p>
+   </dd>
+   <dt id="Definition">
+    Definition
+   </dt>
+   <dd>
+    <pre>
+     a reference to a list where each element is a string
+    </pre>
+   </dd>
+  </dl>
+  <h2 id="SOURCE">
+   SOURCE
+  </h2>
+  <dl>
+   <dt id="Description2">
+    Description
+   </dt>
+   <dd>
+    <p>
+     * SOURCE: TYPE string * -- This parameter value can be chosen from the following * M5NR - comprehensive protein database * RefSeq - protein database * SwissProt - protein database * GenBank - protein database * IMG - protein database * SEED - protein database * TrEMBL - protein database * PATRIC - protein database * KEGG - protein database * M5RNA - comprehensive RNA database * RDP - RNA database * Greengenes - RNA database * LSU - RNA database * SSU - RNA database
+    </p>
+   </dd>
+   <dt id="Definition1">
+    Definition
+   </dt>
+   <dd>
+    <pre>
+     a string
+    </pre>
+   </dd>
+  </dl>
+  <h2 id="FEATURES">
+   FEATURES
+  </h2>
+  <dl>
+   <dt id="Description3">
+    Description
+   </dt>
+   <dd>
+    <p>
+     * SOURCE: TYPE list&lt;string&gt; * -- List of string containing the features that were * selected using the variable selection method. The first * entry in the list is a header.
+    </p>
+   </dd>
+   <dt id="Definition2">
+    Definition
+   </dt>
+   <dd>
+    <pre>
+     a reference to a list where each element is a string
+    </pre>
+   </dd>
+  </dl>
+ </body>
+</html>
