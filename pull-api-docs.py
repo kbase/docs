@@ -107,12 +107,17 @@ DEPLOY_DICT = [
                {'name': 'Phispy Service',
                 'service': 'Phispy', 
                 'target_dir':'phispy', 
-                'html_name': 'Phispy'},                
+                'html_name': 'Phispy'},
 
                {'name': 'Regulation Service',
                 'service': 'Regulation', 
                 'target_dir':'regulation', 
                 'html_name': 'Regulation'},
+
+               {'name': 'Fizzy Feature Selection Service',
+                'service': 'feature_selection', 
+                'target_dir':'feature_selection',
+                'html_name': 'Fizzy'},
                ]
 
 
