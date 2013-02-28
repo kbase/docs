@@ -5,33 +5,60 @@
     <p>This is an example tutorial to test how to post a new tutorial to the kbase.us website via the C5 Content Management System.</p>
     <p>Please do not make this tutorial &quot;live&quot; or viewable to the public.</p>
     <p>&nbsp;</p>
-    <p>Here are some rough notes on how to accomplish this:</p>
-<p>&nbsp;</p>
-    <p>Check a tutorial into the git docs repo.<br />
-      Log in to C5.<br />
-      Go to site map --&gt; add multiple pages (this is a better way than adding a single page)<br />
-Select page, then select the parent page<br />
-For users<br />
-Tutorials &lt;-- click on this<br />
-&quot;Left sidebar nag page&quot; &lt;-- this is the template used for tutorials<br />
-Enter title in Page Names box<br />
-Enter Description in box<br />
-Header Extra can be left blank<br />
-Meta can be filled in with keywords for searching<br />
-Below these, check all boxes to hide the page from navigation for now.<br />
-Click Add<br />
-The page should now show up in the site map at the bottom of the list of tutorial pages<br />
-Open up an example tutorial page that has already been completed.<br />
-Use the clipboard. Click on regions of the completed tutorial page, such as the side navigation, title and body sections. For each, select to 	copy to clipboard. It will copy the functionality, not the exact text that you see.<br />
-(An alternate way to do this is via &quot;stacks,&quot; but use the clipboard for now.)<br />
-Now go to your new tutorial page.<br />
-Click &quot;edit.&quot;<br />
-Paste the formatting into the blocks from the corresponding sections in the completed tutorial.<br />
-Then choose &quot;add block&quot;<br />
-Type html, then select the &quot;html file&quot; option that appears.<br />
-Type in the correct path to the doc in git docs repo, for example docs/example_service/tutorials/example_tutorial.html (not that there is no 	beginning / forward slash before docs in the path).<br />
-The page should populate with content from the tutorial in git doc repo<br />
-When you are happy with the new tutorial page, go back into the page properties for your new tutorial page and deselect all of the check boxes to include it in navigation, lists, and search.</p>
-    <p>
-      </di>
-    </p>
+<p>1. Check a tutorial into the git docs repo.</p>
+<p>2. Log in to C5. If you have permissions set up, you can gain access via your browser by visiting kbase.us/login. If you are attempting access away from Argonne, you will need to connect via your VPN or have some other method in place.</p>
+<p>3. Once logged in, 
+  go to the Site Map and choose the option to Add Multiple Pages. (Note that there is more than one way to add a page, but this is the method we are recommending.)</p>
+<p><img src="AddMultiplePages.png" width="604" height="183" alt="Add Multiple Pages" /></p>
+<p>4. In the &quot;Add Multiple Pages&quot; dialog that appears, click &quot;Select Page&quot; then locate the parent page for your new tutorial. Select that parent page by clicking on it. For most User Tutorials, the parent page can be found by expanding &quot;For Users&quot; and selecting &quot;Tutorials&quot; beneath that level.</p>
+<p><img src="SelectParentPage.png" width="830" height="373" alt="Select Parent Page" /><br />
+  <br />
+5. For &quot;Page Type,&quot; select &quot;left sidebar nav page.&quot; This is the template used for tutorials.</p>
+<p><img src="LSideBarNav.png" width="487" height="480" alt="select left side bar nav template" /></p>
+<p>6. For &quot;Enter page names separated by carriage return (Enter),&quot; type the title you wish to give this new file. It does not have to match the filename in the repo.</p>
+<p>7. For &quot;Description (will be added to all pages above),&quot; enter a reasonable description for the tutorial that will be readily understood by your audience. This will be displayed on the website to the public.</p>
+<p>8. The section for &quot;Header Extra Content (will be added to all pages above)&quot; can be left empty.</p>
+<p>9. For &quot;Meta Description (will be added to all pages above),&quot; supply a brief description.</p>
+<p>10. For &quot;Meta Keywords (will be added to all pages above),&quot; type in keywords that can be used to search for this tutorial.</p>
+<p>11. Below these, there are several statements followed by checkboxes:<br />
+  </p>
+<blockquote>
+  <p>Exclude pages from navigation?<br />
+    Exclude pages from page list?<br />
+    Exclude pages from search index?<br />
+    Exclude pages from sitemap.xml?<br />
+  </p>
+  <p>Check the box next to all of these items to exclude your incomplete tutorial pages until it is ready for public viewing.<br />
+  </p>
+</blockquote>
+<p>12. Click Add<br />
+  <br />
+  13. The page should now show up in the site map at the bottom of the list of tutorial pages. For this example, the file is named &quot;Example Tutorial by Jen.&quot;</p>
+<p><img src="SiteMapExampleTutorialJen.png" width="338" height="535" alt="New page added to list of tutorials" /></p>
+<p><br />
+  14. The next step is to select an existing, complete tutorial and copy some of the formatting from that page to your new tutorial page. Open up an example tutorial page that has already been completed. Under Tutorials, locate the first tutorial in the list, titled &quot;Installing the KBase.app DMG. Open it by clicking on it and selecting &quot;Visit.&quot;</p>
+<p><img src="OpenExistingTutorial.png" width="337" height="356" alt="Open existing tutorial" /><br />
+  </p>
+<p>15. Once on that page, go into Edit mode by selecting &quot;Edit&quot; in the upper left corner, then click the &quot;Edit this Page&quot; button.</p>
+<p><img src="EditExistingTutorial.png" width="714" height="391" alt="Edit existing tutorial" /></p>
+<p>16. Now that you are in edit mode, you can copy formatting from the page regions to your clipboard, and later paste this formatting into your new tutorials page. Click on regions of the completed tutorial page, such as the side navigation, title and body sections. For each, select to 	copy to clipboard. By doing this you are copying only the functionality, not the exact text that you see in these sections. You do not need to copy information from the top header or footer regions, just the page content sections.</p>
+<p>Copy from the top page content region</p>
+<p><img src="CopyToClipboard1.png" width="638" height="555" alt="Copy top page contents" /></p>
+<p>Also copy the side navigation.</p>
+<p><img src="CopyToClipboard2.png" width="645" height="661" alt="Copy side navigation" /><br />
+</p>
+<p>17. After copying formatting to your clipboard, click again in the upper left corner of the screen where it says &quot;Editing&quot; and select the option to &quot;Exit Editing Mode.&quot; If it asks you what to do with changes, select the option to discard any changes. You should not make any changes to this existing tutorial page.</p>
+<p>18. Using the same procedures as described above, locate your new tutorial page in the sitemap, visit it, and enter into the editing mode.</p>
+<p>19. Paste the copied formatting from your clipboard into the correct blocks from the corresponding sections in the completed tutorial.</p>
+<p>20. Next, in the main body of your new tutiorial , choose &quot;add block.&quot;</p>
+<p>21. Type<strong> html</strong>, then select the &quot;html file&quot; option that appears.</p>
+<p>22. Type in the correct path to the new tutorial document in the git docs repo. For example, the path to this example tutorial is:</p>
+<p> <strong>docs/example_service/tutorials/example_tutorial.html </strong></p>
+<p>Note that there is no 	beginning forward slash before docs in the path).<br />
+</p>
+<p>The page should populate with content from the tutorial in the git doc repo.<br />
+  </p>
+<p>23. When you are happy with the new tutorial page, go back into the page properties for your new tutorial page and deselect all of the check boxes. This will include your new tutorial in navigation, lists, and search, and it will be viewable by the public.</p>
+<p>
+  </di>
+  </p>
