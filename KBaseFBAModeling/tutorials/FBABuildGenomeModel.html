@@ -25,22 +25,22 @@
 			Getting Started
 		</H3>
 		First, you must register for a <A HREF="https://gologin.kbase.us/SignUp">KBase account</A>. The KBase account is necessary to accesss the KBase tools and data stores. You will also need have access to the KBase command-line scripts. This can be done in three ways: installing the KBase scripts on a LINUX machine you have access, downloading the <A HREF="http://www.kbase.us/developer-zone/downloads/">mac DMG</A> or using the <A HREF="http://140.221.84.183/iris/Iris/">IRIS</A> web page. IRIS provides browser based access to a command-line environment with all the required KBase scripts and utilities configured. It is the easiest way to get started, please refer to the IRIS tutorial. 
-		<img src="/docs/KBaseFBAModeling/tutorials/img/IRIS.png"> 
+		<img src="/docs/KBaseFBAModeling/tutorials/img/IRIS.png" style="width: 100%;"> 
 		To save your work and your share results, all input and output data objects will be saved to your workspace. Please refer to the Workspace Tutorial for more detailed instructions on how to effectively use the workspaces. In addition to the command-line scripts for accessing the workspaces, there is also a web based graphical <A HREF="http://140.221.92.49/">Workspace Browser</A> that will be used in this tutorial.
 		<H3>
 			Setting up a workspace
 		</H3>
 		<P>
 			Set up a workspace to store the input and output data objects. We will do this using the <a href="http:140.221.92.49">Workspace Browser</a>. Open the Workspace Browser and sign in by clicking on the "Sign In" link in the upper right courner. You will see a list of workspaces available workspace on the left hand side. Since we want to create a new workspace, scroll to the bottom of this list and click on the "+create" link to create a new workspace for this FBA project. You must pick a workspace name and decide what permissions the public will have for this workspace. The public options are none, read or write. Below, I am creating a workspace name "pseudomonas" that will be publicly readable.
-			<img src="/docs/KBaseFBAModeling/tutorials/img/CreateWorkspace.png"> 
+			<img src="/docs/KBaseFBAModeling/tutorials/img/CreateWorkspace.png" style="width: 100%;"> 
 			I can also share this workspace with individual users from the Workspace Browser.
 		</P>
 		<P>
 			Now, I can return to the IRIS command-line tool and select the workspace I just created, "pseudomonas" as my active workspace. First, I must login to the KBase system from IRIS. 
 			From the IRIS command prompt, use the <i>authenticate</i> command to login. This will bring up a login window where you can enter your KBase username and password.
-			<img src="/docs/KBaseFBAModeling/tutorials/img/IRISLogin.png">
+			<img src="/docs/KBaseFBAModeling/tutorials/img/IRISLogin.png" style="width: 100%;">
 			Once logged in, I will set the "pseudomonas" workspace I created as my active workspace. This is done using the <i>kbws-workspace</i> command. By running the command with no argument, I will see my current workspace. By running it with "pseudomonas" as the argument, I will select "pseudomonas" as my workspace.
-			<img src="/docs/KBaseFBAModeling/tutorials/img/IRISSetWorkspace.png"> 
+			<img src="/docs/KBaseFBAModeling/tutorials/img/IRISSetWorkspace.png" style="width: 100%;"> 
 			IRIS also contains several commands for the creation and manipulation of workspaces and data objects inside workspaces. a more detailed explaination of those tools can be found in the Workspace tutorial. The workspace commands we will use here are <i>kbws-listobj</i> to view the contents of our workspace and <i>kbws-jobs</i> to see our currently running jobs.
 
 		<H3>
@@ -51,11 +51,11 @@
 		</P>
 		<P>
 			To import a genome fromt the CDS into our workspace, we use the command <i>kbfba-loadgenome</i>. To use this command, we must give it a valid KBase genome id. The easiest way to find the KBase genome id is to use the <A HREF="http://140.221.92.12/">Genome Browser</A>. Since I know what genome I am looking for, I will type the name into the search box. As I type, the displayed set of genomes will change. I can click on the scientific name of the organism and bring up more information about the genome and make sure the annotation is up to date.
-			<img src="/docs/KBaseFBAModeling/tutorials/img/GenomeBrowserPseudomonas.png">
+			<img src="/docs/KBaseFBAModeling/tutorials/img/GenomeBrowserPseudomonas.png" style="width: 100%;">
 		</P>
 		<P>
 			We will use the "kb|g.1147" KBase genome id. Now we can return to IRIS and load the genome into our workspace by using the <i>kbfba-loadfbagenome</i> command with "kb|g.1147" as it's argument. Since our workspace is still set to "pseudomonas," our genome object will be created here. 
-			<img src="/docs/KBaseFBAModeling/tutorials/img/IRISLoadFBAGenome.png">
+			<img src="/docs/KBaseFBAModeling/tutorials/img/IRISLoadFBAGenome.png" style="width: 100%;">
 			You can use the <i>kbws-listobj</i> command to verify that the "kb|g.1147" genome object has been created in your workspace.
 		</P> 
 		<H3>
@@ -63,7 +63,7 @@
 		</H3>
 		<P>
 			Now that we have the genome object in our workspace, we can build a draft model using our genome object. The draft model is based only on the existing gene annotations in our genome model. It is relatively simple using the <i>kbfba-buildmodel</i> command with our genome as the argument:
-			<img src="/docs/KBaseFBAModeling/tutorials/img/IRISbuildfbamodelrunning.png">
+			<img src="/docs/KBaseFBAModeling/tutorials/img/IRISbuildfbamodelrunning.png" style="width: 100%;">
 		</P>
 		<P>
 			Here, you may notice that the <i>kbfba-buildmodel</i> command has not completed. Although the IRIS command prompt has returned, and we can execute more commands. Our <i>kbfba-buildmodel</i> command is still running and can be seen on the left side of the IRIS screen, under the "Running processes" header. When the command completes, it will be removed from under the "Running processes" header and a "Command complete" message will be printed to the IRIS screen.
@@ -73,9 +73,9 @@
 		</H3>
 		<P>
 			Once the command is completed, we can view our draft model. The easiest way to do this is to return to our Workspace Browser. Note: you may have to reload the page to refresh the workspace contents. We should now see that our genome object and model object are in our workspace. 
-			<img src="/docs/KBaseFBAModeling/tutorials/img/WBdraftmodel.png">
+			<img src="/docs/KBaseFBAModeling/tutorials/img/WBdraftmodel.png" style="width: 100%;">
 			To view more information about the model, we can click on the model name to bring up a popup with additional metadata for our model object. To view the actual model data, click on the "View HTML" link in the popup. This will open a new page showing the model contents. 
-			<img src="/docs/KBaseFBAModeling/tutorials/img/WBviewdraftmodel.png">
+			<img src="/docs/KBaseFBAModeling/tutorials/img/WBviewdraftmodel.png" style="width: 100%;">
 			In this view, we see several tabs with detailed information about the model. Since this is a draft model, the "Gapfilling" and "Gapgen" tabs are empty. 
 		</P>
 		<P>
@@ -109,18 +109,18 @@
 		</p>
 		<p>
 			In this case, I am going to gapfill on complete media. In the interest of time, I will only ask for one solution and have the program only run for 10min. It is better to ask for more solutions and the let the program run for at least 1hr per solution.
-			<img src="/docs/KBaseFBAModeling/tutorials/img/IRISgapfill.png">
+			<img src="/docs/KBaseFBAModeling/tutorials/img/IRISgapfill.png" style="width: 100%;">
 		</p>
 		<p>
 			Because this is a long running job. The system will return a "job id" so that you can monitor its status. The "job id" is the long string listed as the "Perm ref:"
-			<img src="/docs/KBaseFBAModeling/tutorials/img/IRISgapfilljobsubmitted.png">
+			<img src="/docs/KBaseFBAModeling/tutorials/img/IRISgapfilljobsubmitted.png" style="width: 100%;">
 		</p>
 		<h3>
 			Jobs
 		</h3>
 		<p>
 			You can monitor your job's status by using the workspace command <i>kbws-jobs</i>. You will see the "status" of your job change from "queued" to "running" and finally to "done." Because these are long running jobs, they are excuted on a KBase compute cluster. Depending on the load on the system it can take sometime for the job go from the queue to running. Once the job is running, it should run uninterrupted until completion. You may run several jobs simultaneously, they will be run as cluster nodes become available.
-			<img src="/docs/KBaseFBAModeling/tutorials/img/IRISjobsdone.png">
+			<img src="/docs/KBaseFBAModeling/tutorials/img/IRISjobsdone.png" style="width: 100%;">
 		</p>
 		<h3>
 			View Gapfill results
@@ -130,7 +130,7 @@
 		</p>
 		<p>
 			From the Workspace Browser we can click on our model, in this case "kb|g.1147.fbamdl.1", and we will see a popup with the updated metadata for the model. Clicking on the "View HTML" will bring us to the model viewer page. Now the "Gapfilling" tab in our model viewer has been populated with the gap filling solution(s) we requested. In some rare cases, it is possible that the program wasn't able to find a solution in the given amount of time. 
-			<img src="/docs/KBaseFBAModeling/tutorials/img/WBviewgapfilledmodel.png">
+			<img src="/docs/KBaseFBAModeling/tutorials/img/WBviewgapfilledmodel.png" style="width: 100%;">
 		</p>
 		<p>
 			Here we see that a single solution has been returned. This solution adds 12 reactions to our initial model. This gap filling solution has not actually been integrated into the model. We can now examine the list of suggested changes and decide if we believe this solution is plausible. If we choose, we can update our model by integrating this solution, or we can return to the <i>kbfba-gapfill</i> command, change the parameters and find more solutions. In this case, I will accept this solution and integrate it into the model. To do this, I must note the solution id. The solution id is the composed of the "Gapfill simulation" field + "." + "solution" + "." and the "Solution" field: "5271DC9A-7D77-11E2-86C3-05287082D269.solution.0"
@@ -140,14 +140,14 @@
 		</h3>
 		<p>
 			With our solution id, we can now return to IRIS and integrate that solution into the model. We will use the <i>kbfba-integratesolution</i> command giving it our model id and our solution id:
-			<img src="IRISintegrate.png">
+			<img src="IRISintegrate.png" style="width: 100%;">
 		</p>
 		<h3>
 			View Integrated Model
 		</h3>
 		<p>
 			To view our integrated model, we can return to the Workspace Browser, open our model and then use the "View HTML" link to get to the Model Viewer. Now when, we look under the "Gapfill" tab, we see that the solution we integrated has had it's status updated to "Integrated" and more reactions have been added to our model. It is important to note that no new genes have been added to our model, only reactions with no associated genes.
-			<img src="/docs/KBaseFBAModeling/tutorials/img/WBviewmodelintegrated.png">
+			<img src="/docs/KBaseFBAModeling/tutorials/img/WBviewmodelintegrated.png" style="width: 100%;">
 		</p>
 		<h2>
 			Run FBA
@@ -157,14 +157,14 @@
 		</p>
 		<p>
 			To run the fba, we will return to IRIS and use the <i>kbfba-runfba</i> command giving it our model as the only argument. There are a number of options that you can explore to alter the fba performance or change the growth media. Again, the default media is Complete media.
-			<img src="/docs/KBaseFBAModeling/tutorials/img/IRISrunfba.png">
+			<img src="/docs/KBaseFBAModeling/tutorials/img/IRISrunfba.png" style="width: 100%;">
 		</p>
 		<h3>
 			View FBA results
 		</h3>
 		<p>
 			Again, we will return to the Workspace Browser to view the FBA results. In our workspace, there is now a new file "kb|g.1147.fbamdl.1.fba.0". (It maybe necessary to refresh your Workspace Browser window.)
-			<img src="/docs/KBaseFBAModeling/tutorials/img/WBfbasolution.png">
+			<img src="/docs/KBaseFBAModeling/tutorials/img/WBfbasolution.png" style="width: 100%;">
 			If we click on this FBA, we will first get a popup of the FBA metadata and then again, click on the "View HTML" link. 
 			<img src="/docs/KBaseFBAModeling/tutorials/img/WBviewfba.png">
 			In this case, you can see that the model grows since it has a significant positive value for the "Objective value". Since we used the default settings, the objective function was for biomass production.
@@ -174,8 +174,8 @@
 		</H3>
 		<p>
 			In the FBA viewer, there are tabs for "Overview", "Reaction Fluxes" and "Compound Fluxes". You can explore the contents of your FBA result by click on the tabs and searching for particular compounds or reactions of interest. It is also possible to view and compare multiple FBA results in the GLAMM viewer. Please refer to the GLAMM tutorial.
-			<img src="/docs/KBaseFBAModeling/tutorials/img/IRISviewfbafluxes.png">
-			<img src="/docs/KBaseFBAModeling/tutorials/img/IRISviewfbacompounds.png">
+			<img src="/docs/KBaseFBAModeling/tutorials/img/IRISviewfbafluxes.png" style="width: 100%;">
+			<img src="/docs/KBaseFBAModeling/tutorials/img/IRISviewfbacompounds.png" style="width: 100%;">
 		</p>
 	</BODY>
 </HTML>
