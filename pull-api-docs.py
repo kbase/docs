@@ -29,6 +29,11 @@ DEPLOY_DICT = [
                 'service': 'workspaceService', 
                 'target_dir':'workspace'},
 
+#               {'name': 'Assembly Service',
+#                'service': 'assembly', 
+#                'target_dir':'assembly',
+#                'html_name': ''},
+
                {'name': 'Plant Expression Service',
                 'service': 'PlantExpressionService', 
                 'target_dir':'plant_expression_service',
