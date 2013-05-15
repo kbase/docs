@@ -16,9 +16,10 @@ DEPLOY_DICT = [
                 'html_name': 'application_api'},
 
                {'name': 'CDM Entity-Relationship API',
-                'service': 'cdmi_api', 
+                'service': 'cdmi_api',
                 'target_dir':'cdmi_api',
-                'html_name': 'er_api'},
+                'html_name': 'er_api',
+                'html_target': 'cdmi_entity_api'},
 
                {'name': 'ID Server API',
                 'service': 'idserver', 
@@ -128,7 +129,7 @@ DEPLOY_DICT = [
 
 
 
-def pull_api_doc(service, target, name, html_name=None):
+def pull_api_doc(service, target, name, html_name=None, html_target=None):
     if html_name:
         url = DOCS_ROOT+service+'/'+html_name+'.html'
     else:
@@ -151,12 +152,23 @@ def pull_api_doc(service, target, name, html_name=None):
 
     target_dir = target+'/'+'API/'
 
-    content_target = target_dir+service+'.html'
+    if html_target:
+        content_target = target_dir+html_target+'.html'        
+    else:
+        content_target = target_dir+service+'.html'
+
     f = open(content_target, 'w')
     f.write(str(content.prettify()))
     print 'Wrote content to:', content_target    
 
     if nav:
+
+
+        if html_target:
+            content_target = target_dir+html_target+'_nav.html'        
+        else:
+            content_target = target_dir+service+'_nav.html'
+
         nav_target = target_dir+service+'_nav.html'   
         f = open(nav_target, 'w')
         f.write(str(nav.prettify()))
@@ -176,8 +188,15 @@ def pull_api_docs():
         except:
             html_name = None
 
-        if html_name:
-            pull_api_doc(service, target, name, html_name)
+        try:
+            html_target = obj['html_target']
+        except:
+            html_target = None
+
+        if html_name and html_target:
+            pull_api_doc(service, target, name, html_name, html_target)
+        elif html_name:
+            pull_api_doc(service, target, name, html_name)            
         else:
             pull_api_doc(service, target, name)
 

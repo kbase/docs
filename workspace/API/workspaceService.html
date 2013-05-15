@@ -1232,6 +1232,7 @@ queue_job_params is a reference to a hash where the following keys are defined:
 	jobid has a value which is a string
 	auth has a value which is a string
 	state has a value which is a string
+	jobdata has a value which is a reference to a hash where the key is a string and the value is a string
 bool is an int
     </pre>
    </dd>
@@ -1265,6 +1266,7 @@ set_job_status_params is a reference to a hash where the following keys are defi
 	status has a value which is a string
 	auth has a value which is a string
 	currentStatus has a value which is a string
+	jobdata has a value which is a reference to a hash where the key is a string and the value is a string
 bool is an int
     </pre>
    </dd>
@@ -1294,6 +1296,7 @@ bool is an int
      $params is a get_jobs_params
 $jobs is a reference to a list where each element is an ObjectData
 get_jobs_params is a reference to a hash where the following keys are defined:
+	jobids has a value which is a reference to a list where each element is a string
 	status has a value which is a string
 	auth has a value which is a string
 ObjectData is a reference to a hash where the following keys are defined:
@@ -2592,6 +2595,7 @@ auth has a value which is a string
       string jobid - ID of the job to be queued (an essential argument)
         string auth - the authentication token of the KBase account queuing the job; must have access to the job being queued (an optional argument; user is &quot;public&quot; if auth is not provided)
         string state - the initial state to assign to the job being queued (an optional argument; default is &quot;queued&quot;)
+        mapping&lt;string,string&gt; jobdata - hash of data associated with job
      </code>
     </pre>
    </dd>
@@ -2604,6 +2608,7 @@ auth has a value which is a string
 jobid has a value which is a string
 auth has a value which is a string
 state has a value which is a string
+jobdata has a value which is a reference to a hash where the key is a string and the value is a string
     </pre>
    </dd>
   </dl>
@@ -2624,6 +2629,7 @@ state has a value which is a string
         string status - Status to which job should be changed; accepted values are &#39;queued&#39;, &#39;running&#39;, and &#39;done&#39; (an essential argument)
         string auth - the authentication token of the KBase account requesting job status; only status for owned jobs can be retrieved (an optional argument; user is &quot;public&quot; if auth is not provided)
         string currentStatus - Indicates the current statues of the selected job (an optional argument; default is &quot;undef&quot;)
+        mapping&lt;string,string&gt; jobdata - hash of data associated with job
      </code>
     </pre>
    </dd>
@@ -2637,6 +2643,7 @@ jobid has a value which is a string
 status has a value which is a string
 auth has a value which is a string
 currentStatus has a value which is a string
+jobdata has a value which is a reference to a hash where the key is a string and the value is a string
     </pre>
    </dd>
   </dl>
@@ -2651,12 +2658,9 @@ currentStatus has a value which is a string
     <p>
      Input parameters for the &quot;get_jobs&quot; function.
     </p>
-    <pre>
-     <code>
-      string status - Status of all jobs to be retrieved; accepted values are &#39;queued&#39;, &#39;running&#39;, and &#39;done&#39; (an essential argument)
-        string auth - the authentication token of the KBase account accessing job list; only owned jobs will be returned (an optional argument; user is &quot;public&quot; if auth is not provided)
-     </code>
-    </pre>
+    <p>
+     list&lt;string&gt; jobids - list of specific jobs to be retrieved (an optional argument; default is an empty list) string status - Status of all jobs to be retrieved; accepted values are &#39;queued&#39;, &#39;running&#39;, and &#39;done&#39; (an essential argument) string auth - the authentication token of the KBase account accessing job list; only owned jobs will be returned (an optional argument; user is &quot;public&quot; if auth is not provided)
+    </p>
    </dd>
    <dt id="Definition39">
     Definition
@@ -2664,6 +2668,7 @@ currentStatus has a value which is a string
    <dd>
     <pre>
      a reference to a hash where the following keys are defined:
+jobids has a value which is a reference to a list where each element is a string
 status has a value which is a string
 auth has a value which is a string
     </pre>
