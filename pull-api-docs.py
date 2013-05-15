@@ -162,14 +162,11 @@ def pull_api_doc(service, target, name, html_name=None, html_target=None):
     print 'Wrote content to:', content_target    
 
     if nav:
-
-
         if html_target:
-            content_target = target_dir+html_target+'_nav.html'        
+            nav_target = target_dir+html_target+'_nav.html'        
         else:
-            content_target = target_dir+service+'_nav.html'
+            nav_target = target_dir+service+'_nav.html'
 
-        nav_target = target_dir+service+'_nav.html'   
         f = open(nav_target, 'w')
         f.write(str(nav.prettify()))
         print 'Wrote nav to:', nav_target
