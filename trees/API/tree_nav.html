@@ -1,38 +1,201 @@
 <ul id="index">
-  <li><a href="#NAME">Tree Service</a></li>
-    <ul>
-      <li><a href="#replace_node_names">replace_node_names</a></li>
-      <li><a href="#remove_node_names_and_simplify">remove_node_names_and_simplify</a></li>
-      <li><a href="#extract_leaf_node_names">extract_leaf_node_names</a></li>
-      <li><a href="#extract_node_names">extract_node_names</a></li>
-      <li><a href="#get_node_count">get_node_count</a></li>
-      <li><a href="#get_leaf_count">get_leaf_count</a></li>
-      <li><a href="#get_tree">get_tree</a></li>
-      <li><a href="#get_tree_data">get_tree_data</a></li>
-      <li><a href="#get_alignment_data">get_alignment_data</a></li>
-      <li><a href="#get_tree_ids_by_feature">get_tree_ids_by_feature</a></li>
-      <li><a href="#get_tree_ids_by_protein_sequence">get_tree_ids_by_...</a></li>
-      <li><a href="#get_alignment_ids_by_feature">get_alignment_ids_by_feature</a></li>
-      <li><a href="#get_alignment_ids_by_protein_sequence">get_alignment_ids_by_...</a></li>
-      <li><a href="#draw_html_tree">draw_html_tree</a></li>
-    </ul>
+<li>
+ <a href="#NAME">
+  NAME
+ </a>
+</li>
+<li>
+ <a href="#DESCRIPTION">
+  DESCRIPTION
+ </a>
+ <ul>
+  <li>
+   <a href="#replace_node_names">
+    replace_node_names
+   </a>
   </li>
-  <li><a href="#TYPES">TYPES</a>
-    <ul>
-      <li><a href="#bool">bool</a></li>
-      <li><a href="#timestamp">timestamp</a></li>
-      <li><a href="#position">position</a></li>
-      <li><a href="#kbase_id">kbase_id</a></li>
-      <li><a href="#tree">tree</a></li>
-      <li><a href="#newick_tree">newick_tree</a></li>
-      <li><a href="#phyloXML_tree">phyloXML_tree</a></li>
-      <li><a href="#json_tree">json_tree</a></li>
-      <li><a href="#fasta">fasta</a></li>
-      <li><a href="#fasta_alignment">fasta_alignment</a></li>
-      <li><a href="#node_name">node_name</a></li>
-      <li><a href="#html_file">html_file</a></li>
-      <li><a href="#tree_meta_data">tree_meta_data</a></li>
-      <li><a href="#alignment_meta_data">alignment_meta_data</a></li>
-    </ul>
+  <li>
+   <a href="#remove_node_names_and_simplify">
+    remove_node_names_and_simplify
+   </a>
   </li>
+  <li>
+   <a href="#extract_leaf_node_names">
+    extract_leaf_node_names
+   </a>
+  </li>
+  <li>
+   <a href="#extract_node_names">
+    extract_node_names
+   </a>
+  </li>
+  <li>
+   <a href="#get_node_count">
+    get_node_count
+   </a>
+  </li>
+  <li>
+   <a href="#get_leaf_count">
+    get_leaf_count
+   </a>
+  </li>
+  <li>
+   <a href="#get_tree">
+    get_tree
+   </a>
+  </li>
+  <li>
+   <a href="#get_alignment">
+    get_alignment
+   </a>
+  </li>
+  <li>
+   <a href="#get_tree_data">
+    get_tree_data
+   </a>
+  </li>
+  <li>
+   <a href="#get_alignment_data">
+    get_alignment_data
+   </a>
+  </li>
+  <li>
+   <a href="#get_tree_ids_by_feature">
+    get_tree_ids_by_feature
+   </a>
+  </li>
+  <li>
+   <a href="#get_tree_ids_by_protein_sequence">
+    get_tree_ids_by_protein_sequence
+   </a>
+  </li>
+  <li>
+   <a href="#get_alignment_ids_by_feature">
+    get_alignment_ids_by_feature
+   </a>
+  </li>
+  <li>
+   <a href="#get_alignment_ids_by_protein_sequence">
+    get_alignment_ids_by_protein_sequence
+   </a>
+  </li>
+  <li>
+   <a href="#get_tree_ids_by_source_id_pattern">
+    get_tree_ids_by_source_id_pattern
+   </a>
+  </li>
+  <li>
+   <a href="#get_leaf_to_protein_map">
+    get_leaf_to_protein_map
+   </a>
+  </li>
+  <li>
+   <a href="#get_leaf_to_feature_map">
+    get_leaf_to_feature_map
+   </a>
+  </li>
+  <li>
+   <a href="#compute_abundance_profile">
+    compute_abundance_profile
+   </a>
+  </li>
+  <li>
+   <a href="#draw_html_tree">
+    draw_html_tree
+   </a>
+  </li>
+ </ul>
+</li>
+<li>
+ <a href="#TYPES">
+  TYPES
+ </a>
+ <ul>
+  <li>
+   <a href="#bool">
+    bool
+   </a>
+  </li>
+  <li>
+   <a href="#timestamp">
+    timestamp
+   </a>
+  </li>
+  <li>
+   <a href="#position">
+    position
+   </a>
+  </li>
+  <li>
+   <a href="#kbase_id">
+    kbase_id
+   </a>
+  </li>
+  <li>
+   <a href="#tree">
+    tree
+   </a>
+  </li>
+  <li>
+   <a href="#newick_tree">
+    newick_tree
+   </a>
+  </li>
+  <li>
+   <a href="#phyloXML_tree">
+    phyloXML_tree
+   </a>
+  </li>
+  <li>
+   <a href="#json_tree">
+    json_tree
+   </a>
+  </li>
+  <li>
+   <a href="#alignment">
+    alignment
+   </a>
+  </li>
+  <li>
+   <a href="#fasta">
+    fasta
+   </a>
+  </li>
+  <li>
+   <a href="#fasta_alignment">
+    fasta_alignment
+   </a>
+  </li>
+  <li>
+   <a href="#node_name">
+    node_name
+   </a>
+  </li>
+  <li>
+   <a href="#html_file">
+    html_file
+   </a>
+  </li>
+  <li>
+   <a href="#tree_meta_data">
+    tree_meta_data
+   </a>
+  </li>
+  <li>
+   <a href="#alignment_meta_data">
+    alignment_meta_data
+   </a>
+  </li>
+  <li>
+   <a href="#abundance_params">
+    abundance_params
+   </a>
+  </li>
+  <li>
+   <a href="#abundance_result">
+    abundance_result
+   </a>
+  </li>
+ </ul>
+</li>
 </ul>

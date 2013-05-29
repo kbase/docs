@@ -44,7 +44,8 @@ DEPLOY_DICT = [
                {'name': 'Tree Service',
                 'service': 'trees',
                 'target_dir':'trees', 
-                'html_name': 'Tree'},   
+                'html_name': 'Tree',
+                'html_target':'tree'},   
 
                 #{'name': 'Similarity Service',
                 #'service': 'sim_service', 
@@ -64,7 +65,8 @@ DEPLOY_DICT = [
                 #{'name': 'Authorization Client',
                 #'service': 'authorization_server', 
                 #'target_dir':'auth', 
-                #'html_name': 'AuthUser'},
+                #'html_name': 'AuthUser',
+                #'html_target':},
 
                {'name': 'Genome Annotation Service',
                 'service': 'genome_annotation', 
@@ -74,7 +76,8 @@ DEPLOY_DICT = [
                {'name': 'Translation Service', 
                 'service': 'translation', 
                 'target_dir':'translation',
-                'html_name': 'MOTranslationService'},
+                'html_name': 'MOTranslationService',
+                'html_target':'MOTranslationService'},
 
                {'name': 'Networks Service', 
                 'service': 'KBaseNetworksService', 
@@ -84,7 +87,8 @@ DEPLOY_DICT = [
                {'name': 'Ontology Service',
                 'service': 'ontology_service',
                 'html_name': 'OntologyService',
-                'target_dir':'ontology_service'},
+                'target_dir':'ontology_service',
+                'html_target': 'OntologyService' },
 
                {'name': 'Protein Info Service',
                 'service': 'protein_info_service', 
