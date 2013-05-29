@@ -71,6 +71,171 @@
    </code>
    , which is an alphanumeric string that uniquely identifies a workspace among all workspaces.
   </p>
+  <h2 id="load_media_from_bio">
+   load_media_from_bio
+  </h2>
+  <pre>
+   <code>
+    $mediaMetas = $obj-&gt;load_media_from_bio($params)
+   </code>
+  </pre>
+  <dl>
+   <dt id="Parameter-and-return-types">
+    Parameter and return types
+   </dt>
+   <dd>
+    <pre>
+     $params is a load_media_from_bio_params
+$mediaMetas is a reference to a list where each element is an object_metadata
+load_media_from_bio_params is a reference to a hash where the following keys are defined:
+	mediaWS has a value which is a workspace_id
+	bioid has a value which is an object_id
+	bioWS has a value which is a workspace_id
+	clearExisting has a value which is a bool
+	overwrite has a value which is a bool
+	auth has a value which is a string
+	asHash has a value which is a bool
+workspace_id is a string
+object_id is a string
+bool is an int
+object_metadata is a reference to a list containing 11 items:
+	0: (id) an object_id
+	1: (type) an object_type
+	2: (moddate) a timestamp
+	3: (instance) an int
+	4: (command) a string
+	5: (lastmodifier) a username
+	6: (owner) a username
+	7: (workspace) a workspace_id
+	8: (ref) a workspace_ref
+	9: (chsum) a string
+	10: (metadata) a reference to a hash where the key is a string and the value is a string
+object_type is a string
+timestamp is a string
+username is a string
+workspace_ref is a string
+    </pre>
+   </dd>
+   <dt id="Description">
+    Description
+   </dt>
+   <dd>
+    <p>
+     Creates &quot;Media&quot; objects in the workspace for all media contained in the specified biochemistry
+    </p>
+   </dd>
+  </dl>
+  <h2 id="import_bio">
+   import_bio
+  </h2>
+  <pre>
+   <code>
+    $metadata = $obj-&gt;import_bio($params)
+   </code>
+  </pre>
+  <dl>
+   <dt id="Parameter-and-return-types1">
+    Parameter and return types
+   </dt>
+   <dd>
+    <pre>
+     $params is an import_bio_params
+$metadata is an object_metadata
+import_bio_params is a reference to a hash where the following keys are defined:
+	bioid has a value which is an object_id
+	bioWS has a value which is a workspace_id
+	url has a value which is a string
+	compressed has a value which is a bool
+	clearExisting has a value which is a bool
+	overwrite has a value which is a bool
+	auth has a value which is a string
+	asHash has a value which is a bool
+object_id is a string
+workspace_id is a string
+bool is an int
+object_metadata is a reference to a list containing 11 items:
+	0: (id) an object_id
+	1: (type) an object_type
+	2: (moddate) a timestamp
+	3: (instance) an int
+	4: (command) a string
+	5: (lastmodifier) a username
+	6: (owner) a username
+	7: (workspace) a workspace_id
+	8: (ref) a workspace_ref
+	9: (chsum) a string
+	10: (metadata) a reference to a hash where the key is a string and the value is a string
+object_type is a string
+timestamp is a string
+username is a string
+workspace_ref is a string
+    </pre>
+   </dd>
+   <dt id="Description1">
+    Description
+   </dt>
+   <dd>
+    <p>
+     Imports a biochemistry from a URL
+    </p>
+   </dd>
+  </dl>
+  <h2 id="import_map">
+   import_map
+  </h2>
+  <pre>
+   <code>
+    $metadata = $obj-&gt;import_map($params)
+   </code>
+  </pre>
+  <dl>
+   <dt id="Parameter-and-return-types2">
+    Parameter and return types
+   </dt>
+   <dd>
+    <pre>
+     $params is an import_map_params
+$metadata is an object_metadata
+import_map_params is a reference to a hash where the following keys are defined:
+	bioid has a value which is an object_id
+	bioWS has a value which is a workspace_id
+	mapid has a value which is an object_id
+	mapWS has a value which is a workspace_id
+	url has a value which is a string
+	compressed has a value which is a bool
+	overwrite has a value which is a bool
+	auth has a value which is a string
+	asHash has a value which is a bool
+object_id is a string
+workspace_id is a string
+bool is an int
+object_metadata is a reference to a list containing 11 items:
+	0: (id) an object_id
+	1: (type) an object_type
+	2: (moddate) a timestamp
+	3: (instance) an int
+	4: (command) a string
+	5: (lastmodifier) a username
+	6: (owner) a username
+	7: (workspace) a workspace_id
+	8: (ref) a workspace_ref
+	9: (chsum) a string
+	10: (metadata) a reference to a hash where the key is a string and the value is a string
+object_type is a string
+timestamp is a string
+username is a string
+workspace_ref is a string
+    </pre>
+   </dd>
+   <dt id="Description2">
+    Description
+   </dt>
+   <dd>
+    <p>
+     Imports a mapping from a URL
+    </p>
+   </dd>
+  </dl>
   <h2 id="save_object">
    save_object
   </h2>
@@ -80,7 +245,7 @@
    </code>
   </pre>
   <dl>
-   <dt id="Parameter-and-return-types">
+   <dt id="Parameter-and-return-types3">
     Parameter and return types
    </dt>
    <dd>
@@ -122,7 +287,7 @@ username is a string
 workspace_ref is a string
     </pre>
    </dd>
-   <dt id="Description">
+   <dt id="Description3">
     Description
    </dt>
    <dd>
@@ -140,7 +305,7 @@ workspace_ref is a string
    </code>
   </pre>
   <dl>
-   <dt id="Parameter-and-return-types1">
+   <dt id="Parameter-and-return-types4">
     Parameter and return types
    </dt>
    <dd>
@@ -174,7 +339,7 @@ username is a string
 workspace_ref is a string
     </pre>
    </dd>
-   <dt id="Description1">
+   <dt id="Description4">
     Description
    </dt>
    <dd>
@@ -192,7 +357,7 @@ workspace_ref is a string
    </code>
   </pre>
   <dl>
-   <dt id="Parameter-and-return-types2">
+   <dt id="Parameter-and-return-types5">
     Parameter and return types
    </dt>
    <dd>
@@ -226,7 +391,7 @@ username is a string
 workspace_ref is a string
     </pre>
    </dd>
-   <dt id="Description2">
+   <dt id="Description5">
     Description
    </dt>
    <dd>
@@ -244,7 +409,7 @@ workspace_ref is a string
    </code>
   </pre>
   <dl>
-   <dt id="Parameter-and-return-types3">
+   <dt id="Parameter-and-return-types6">
     Parameter and return types
    </dt>
    <dd>
@@ -283,7 +448,7 @@ username is a string
 workspace_ref is a string
     </pre>
    </dd>
-   <dt id="Description3">
+   <dt id="Description6">
     Description
    </dt>
    <dd>
@@ -301,7 +466,7 @@ workspace_ref is a string
    </code>
   </pre>
   <dl>
-   <dt id="Parameter-and-return-types4">
+   <dt id="Parameter-and-return-types7">
     Parameter and return types
    </dt>
    <dd>
@@ -337,7 +502,7 @@ username is a string
 workspace_id is a string
     </pre>
    </dd>
-   <dt id="Description4">
+   <dt id="Description7">
     Description
    </dt>
    <dd>
@@ -355,7 +520,7 @@ workspace_id is a string
    </code>
   </pre>
   <dl>
-   <dt id="Parameter-and-return-types5">
+   <dt id="Parameter-and-return-types8">
     Parameter and return types
    </dt>
    <dd>
@@ -398,7 +563,7 @@ username is a string
 workspace_id is a string
     </pre>
    </dd>
-   <dt id="Description5">
+   <dt id="Description8">
     Description
    </dt>
    <dd>
@@ -416,7 +581,7 @@ workspace_id is a string
    </code>
   </pre>
   <dl>
-   <dt id="Parameter-and-return-types6">
+   <dt id="Parameter-and-return-types9">
     Parameter and return types
    </dt>
    <dd>
@@ -451,7 +616,7 @@ username is a string
 workspace_ref is a string
     </pre>
    </dd>
-   <dt id="Description6">
+   <dt id="Description9">
     Description
    </dt>
    <dd>
@@ -469,7 +634,7 @@ workspace_ref is a string
    </code>
   </pre>
   <dl>
-   <dt id="Parameter-and-return-types7">
+   <dt id="Parameter-and-return-types10">
     Parameter and return types
    </dt>
    <dd>
@@ -501,7 +666,7 @@ username is a string
 workspace_id is a string
     </pre>
    </dd>
-   <dt id="Description7">
+   <dt id="Description10">
     Description
    </dt>
    <dd>
@@ -519,7 +684,7 @@ workspace_id is a string
    </code>
   </pre>
   <dl>
-   <dt id="Parameter-and-return-types8">
+   <dt id="Parameter-and-return-types11">
     Parameter and return types
    </dt>
    <dd>
@@ -554,7 +719,7 @@ username is a string
 workspace_ref is a string
     </pre>
    </dd>
-   <dt id="Description8">
+   <dt id="Description11">
     Description
    </dt>
    <dd>
@@ -572,7 +737,7 @@ workspace_ref is a string
    </code>
   </pre>
   <dl>
-   <dt id="Parameter-and-return-types9">
+   <dt id="Parameter-and-return-types12">
     Parameter and return types
    </dt>
    <dd>
@@ -610,7 +775,7 @@ username is a string
 workspace_ref is a string
     </pre>
    </dd>
-   <dt id="Description9">
+   <dt id="Description12">
     Description
    </dt>
    <dd>
@@ -628,7 +793,7 @@ workspace_ref is a string
    </code>
   </pre>
   <dl>
-   <dt id="Parameter-and-return-types10">
+   <dt id="Parameter-and-return-types13">
     Parameter and return types
    </dt>
    <dd>
@@ -665,7 +830,7 @@ username is a string
 workspace_ref is a string
     </pre>
    </dd>
-   <dt id="Description10">
+   <dt id="Description13">
     Description
    </dt>
    <dd>
@@ -683,7 +848,7 @@ workspace_ref is a string
    </code>
   </pre>
   <dl>
-   <dt id="Parameter-and-return-types11">
+   <dt id="Parameter-and-return-types14">
     Parameter and return types
    </dt>
    <dd>
@@ -702,7 +867,7 @@ workspace_id is a string
 bool is an int
     </pre>
    </dd>
-   <dt id="Description11">
+   <dt id="Description14">
     Description
    </dt>
    <dd>
@@ -720,7 +885,7 @@ bool is an int
    </code>
   </pre>
   <dl>
-   <dt id="Parameter-and-return-types12">
+   <dt id="Parameter-and-return-types15">
     Parameter and return types
    </dt>
    <dd>
@@ -754,7 +919,7 @@ username is a string
 workspace_ref is a string
     </pre>
    </dd>
-   <dt id="Description12">
+   <dt id="Description15">
     Description
    </dt>
    <dd>
@@ -772,7 +937,7 @@ workspace_ref is a string
    </code>
   </pre>
   <dl>
-   <dt id="Parameter-and-return-types13">
+   <dt id="Parameter-and-return-types16">
     Parameter and return types
    </dt>
    <dd>
@@ -798,7 +963,7 @@ username is a string
 timestamp is a string
     </pre>
    </dd>
-   <dt id="Description13">
+   <dt id="Description16">
     Description
    </dt>
    <dd>
@@ -816,7 +981,7 @@ timestamp is a string
    </code>
   </pre>
   <dl>
-   <dt id="Parameter-and-return-types14">
+   <dt id="Parameter-and-return-types17">
     Parameter and return types
    </dt>
    <dd>
@@ -841,7 +1006,7 @@ timestamp is a string
 permission is a string
     </pre>
    </dd>
-   <dt id="Description14">
+   <dt id="Description17">
     Description
    </dt>
    <dd>
@@ -859,7 +1024,7 @@ permission is a string
    </code>
   </pre>
   <dl>
-   <dt id="Parameter-and-return-types15">
+   <dt id="Parameter-and-return-types18">
     Parameter and return types
    </dt>
    <dd>
@@ -874,7 +1039,7 @@ username is a string
 permission is a string
     </pre>
    </dd>
-   <dt id="Description15">
+   <dt id="Description18">
     Description
    </dt>
    <dd>
@@ -892,7 +1057,7 @@ permission is a string
    </code>
   </pre>
   <dl>
-   <dt id="Parameter-and-return-types16">
+   <dt id="Parameter-and-return-types19">
     Parameter and return types
    </dt>
    <dd>
@@ -917,7 +1082,7 @@ timestamp is a string
 permission is a string
     </pre>
    </dd>
-   <dt id="Description16">
+   <dt id="Description19">
     Description
    </dt>
    <dd>
@@ -935,7 +1100,7 @@ permission is a string
    </code>
   </pre>
   <dl>
-   <dt id="Parameter-and-return-types17">
+   <dt id="Parameter-and-return-types20">
     Parameter and return types
    </dt>
    <dd>
@@ -963,7 +1128,7 @@ username is a string
 timestamp is a string
     </pre>
    </dd>
-   <dt id="Description17">
+   <dt id="Description20">
     Description
    </dt>
    <dd>
@@ -981,7 +1146,7 @@ timestamp is a string
    </code>
   </pre>
   <dl>
-   <dt id="Parameter-and-return-types18">
+   <dt id="Parameter-and-return-types21">
     Parameter and return types
    </dt>
    <dd>
@@ -1005,7 +1170,7 @@ timestamp is a string
 permission is a string
     </pre>
    </dd>
-   <dt id="Description18">
+   <dt id="Description21">
     Description
    </dt>
    <dd>
@@ -1023,7 +1188,7 @@ permission is a string
    </code>
   </pre>
   <dl>
-   <dt id="Parameter-and-return-types19">
+   <dt id="Parameter-and-return-types22">
     Parameter and return types
    </dt>
    <dd>
@@ -1057,7 +1222,7 @@ username is a string
 workspace_ref is a string
     </pre>
    </dd>
-   <dt id="Description19">
+   <dt id="Description22">
     Description
    </dt>
    <dd>
@@ -1075,7 +1240,7 @@ workspace_ref is a string
    </code>
   </pre>
   <dl>
-   <dt id="Parameter-and-return-types20">
+   <dt id="Parameter-and-return-types23">
     Parameter and return types
    </dt>
    <dd>
@@ -1101,7 +1266,7 @@ username is a string
 timestamp is a string
     </pre>
    </dd>
-   <dt id="Description20">
+   <dt id="Description23">
     Description
    </dt>
    <dd>
@@ -1119,7 +1284,7 @@ timestamp is a string
    </code>
   </pre>
   <dl>
-   <dt id="Parameter-and-return-types21">
+   <dt id="Parameter-and-return-types24">
     Parameter and return types
    </dt>
    <dd>
@@ -1137,7 +1302,7 @@ workspace_id is a string
 bool is an int
     </pre>
    </dd>
-   <dt id="Description21">
+   <dt id="Description24">
     Description
    </dt>
    <dd>
@@ -1155,7 +1320,7 @@ bool is an int
    </code>
   </pre>
   <dl>
-   <dt id="Parameter-and-return-types22">
+   <dt id="Parameter-and-return-types25">
     Parameter and return types
    </dt>
    <dd>
@@ -1169,7 +1334,7 @@ user_settings is a reference to a hash where the following keys are defined:
 workspace_id is a string
     </pre>
    </dd>
-   <dt id="Description22">
+   <dt id="Description25">
     Description
    </dt>
    <dd>
@@ -1187,7 +1352,7 @@ workspace_id is a string
    </code>
   </pre>
   <dl>
-   <dt id="Parameter-and-return-types23">
+   <dt id="Parameter-and-return-types26">
     Parameter and return types
    </dt>
    <dd>
@@ -1203,7 +1368,7 @@ user_settings is a reference to a hash where the following keys are defined:
 workspace_id is a string
     </pre>
    </dd>
-   <dt id="Description23">
+   <dt id="Description26">
     Description
    </dt>
    <dd>
@@ -1217,31 +1382,43 @@ workspace_id is a string
   </h2>
   <pre>
    <code>
-    $success = $obj-&gt;queue_job($params)
+    $job = $obj-&gt;queue_job($params)
    </code>
   </pre>
   <dl>
-   <dt id="Parameter-and-return-types24">
+   <dt id="Parameter-and-return-types27">
     Parameter and return types
    </dt>
    <dd>
     <pre>
      $params is a queue_job_params
-$success is a bool
+$job is a JobObject
 queue_job_params is a reference to a hash where the following keys are defined:
-	jobid has a value which is a string
 	auth has a value which is a string
 	state has a value which is a string
+	type has a value which is a string
+	queuecommand has a value which is a string
 	jobdata has a value which is a reference to a hash where the key is a string and the value is a string
-bool is an int
+JobObject is a reference to a hash where the following keys are defined:
+	id has a value which is a job_id
+	type has a value which is a string
+	auth has a value which is a string
+	status has a value which is a string
+	jobdata has a value which is a reference to a hash where the key is a string and the value is a string
+	queuetime has a value which is a string
+	starttime has a value which is a string
+	completetime has a value which is a string
+	owner has a value which is a string
+	queuecommand has a value which is a string
+job_id is a string
     </pre>
    </dd>
-   <dt id="Description24">
+   <dt id="Description27">
     Description
    </dt>
    <dd>
     <p>
-     Queues a new job in the workspace. Workspace job queues handles jobs that don&#39;t get submitted to large clusters.
+     Queues a new job in the workspace.
     </p>
    </dd>
   </dl>
@@ -1250,27 +1427,38 @@ bool is an int
   </h2>
   <pre>
    <code>
-    $success = $obj-&gt;set_job_status($params)
+    $job = $obj-&gt;set_job_status($params)
    </code>
   </pre>
   <dl>
-   <dt id="Parameter-and-return-types25">
+   <dt id="Parameter-and-return-types28">
     Parameter and return types
    </dt>
    <dd>
     <pre>
      $params is a set_job_status_params
-$success is a bool
+$job is a JobObject
 set_job_status_params is a reference to a hash where the following keys are defined:
 	jobid has a value which is a string
 	status has a value which is a string
 	auth has a value which is a string
 	currentStatus has a value which is a string
 	jobdata has a value which is a reference to a hash where the key is a string and the value is a string
-bool is an int
+JobObject is a reference to a hash where the following keys are defined:
+	id has a value which is a job_id
+	type has a value which is a string
+	auth has a value which is a string
+	status has a value which is a string
+	jobdata has a value which is a reference to a hash where the key is a string and the value is a string
+	queuetime has a value which is a string
+	starttime has a value which is a string
+	completetime has a value which is a string
+	owner has a value which is a string
+	queuecommand has a value which is a string
+job_id is a string
     </pre>
    </dd>
-   <dt id="Description25">
+   <dt id="Description28">
     Description
    </dt>
    <dd>
@@ -1288,22 +1476,33 @@ bool is an int
    </code>
   </pre>
   <dl>
-   <dt id="Parameter-and-return-types26">
+   <dt id="Parameter-and-return-types29">
     Parameter and return types
    </dt>
    <dd>
     <pre>
      $params is a get_jobs_params
-$jobs is a reference to a list where each element is an ObjectData
+$jobs is a reference to a list where each element is a JobObject
 get_jobs_params is a reference to a hash where the following keys are defined:
 	jobids has a value which is a reference to a list where each element is a string
+	type has a value which is a string
 	status has a value which is a string
 	auth has a value which is a string
-ObjectData is a reference to a hash where the following keys are defined:
-	version has a value which is an int
+JobObject is a reference to a hash where the following keys are defined:
+	id has a value which is a job_id
+	type has a value which is a string
+	auth has a value which is a string
+	status has a value which is a string
+	jobdata has a value which is a reference to a hash where the key is a string and the value is a string
+	queuetime has a value which is a string
+	starttime has a value which is a string
+	completetime has a value which is a string
+	owner has a value which is a string
+	queuecommand has a value which is a string
+job_id is a string
     </pre>
    </dd>
-   <dt id="Description26">
+   <dt id="Description29">
     Description
    </dt>
    <dd>
@@ -1318,7 +1517,7 @@ ObjectData is a reference to a hash where the following keys are defined:
    </code>
   </pre>
   <dl>
-   <dt id="Parameter-and-return-types27">
+   <dt id="Parameter-and-return-types30">
     Parameter and return types
    </dt>
    <dd>
@@ -1326,7 +1525,7 @@ ObjectData is a reference to a hash where the following keys are defined:
      $types is a reference to a list where each element is a string
     </pre>
    </dd>
-   <dt id="Description27">
+   <dt id="Description30">
     Description
    </dt>
    <dd>
@@ -1344,7 +1543,7 @@ ObjectData is a reference to a hash where the following keys are defined:
    </code>
   </pre>
   <dl>
-   <dt id="Parameter-and-return-types28">
+   <dt id="Parameter-and-return-types31">
     Parameter and return types
    </dt>
    <dd>
@@ -1357,7 +1556,7 @@ add_type_params is a reference to a hash where the following keys are defined:
 bool is an int
     </pre>
    </dd>
-   <dt id="Description28">
+   <dt id="Description31">
     Description
    </dt>
    <dd>
@@ -1375,7 +1574,7 @@ bool is an int
    </code>
   </pre>
   <dl>
-   <dt id="Parameter-and-return-types29">
+   <dt id="Parameter-and-return-types32">
     Parameter and return types
    </dt>
    <dd>
@@ -1388,12 +1587,43 @@ remove_type_params is a reference to a hash where the following keys are defined
 bool is an int
     </pre>
    </dd>
-   <dt id="Description29">
+   <dt id="Description32">
     Description
    </dt>
    <dd>
     <p>
      Removes a custom type from the workspace service. Permanent types cannot be removed.
+    </p>
+   </dd>
+  </dl>
+  <h2 id="patch">
+   patch
+  </h2>
+  <pre>
+   <code>
+    $success = $obj-&gt;patch($params)
+   </code>
+  </pre>
+  <dl>
+   <dt id="Parameter-and-return-types33">
+    Parameter and return types
+   </dt>
+   <dd>
+    <pre>
+     $params is a patch_params
+$success is a bool
+patch_params is a reference to a hash where the following keys are defined:
+	patch_id has a value which is a string
+	auth has a value which is a string
+bool is an int
+    </pre>
+   </dd>
+   <dt id="Description33">
+    Description
+   </dt>
+   <dd>
+    <p>
+     This function patches the database after an update. Called remotely, but only callable by the admin user.
     </p>
    </dd>
   </dl>
@@ -1404,7 +1634,7 @@ bool is an int
    bool
   </h2>
   <dl>
-   <dt id="Description30">
+   <dt id="Description34">
     Description
    </dt>
    <dd>
@@ -1421,11 +1651,32 @@ bool is an int
     </pre>
    </dd>
   </dl>
+  <h2 id="job_id">
+   job_id
+  </h2>
+  <dl>
+   <dt id="Description35">
+    Description
+   </dt>
+   <dd>
+    <p>
+     ID of a job object
+    </p>
+   </dd>
+   <dt id="Definition1">
+    Definition
+   </dt>
+   <dd>
+    <pre>
+     a string
+    </pre>
+   </dd>
+  </dl>
   <h2 id="workspace_id">
    workspace_id
   </h2>
   <dl>
-   <dt id="Description31">
+   <dt id="Description36">
     Description
    </dt>
    <dd>
@@ -1433,7 +1684,7 @@ bool is an int
      A string used as an ID for a workspace. Any string consisting of alphanumeric characters and &quot;-&quot; is acceptable
     </p>
    </dd>
-   <dt id="Definition1">
+   <dt id="Definition2">
     Definition
    </dt>
    <dd>
@@ -1446,7 +1697,7 @@ bool is an int
    object_type
   </h2>
   <dl>
-   <dt id="Description32">
+   <dt id="Description37">
     Description
    </dt>
    <dd>
@@ -1454,7 +1705,7 @@ bool is an int
      A string indicating the &quot;type&quot; of an object stored in a workspace. Acceptable types are returned by the &quot;get_types()&quot; command
     </p>
    </dd>
-   <dt id="Definition2">
+   <dt id="Definition3">
     Definition
    </dt>
    <dd>
@@ -1467,7 +1718,7 @@ bool is an int
    object_id
   </h2>
   <dl>
-   <dt id="Description33">
+   <dt id="Description38">
     Description
    </dt>
    <dd>
@@ -1475,7 +1726,7 @@ bool is an int
      ID of an object stored in the workspace. Any string consisting of alphanumeric characters and &quot;-&quot; is acceptable
     </p>
    </dd>
-   <dt id="Definition3">
+   <dt id="Definition4">
     Definition
    </dt>
    <dd>
@@ -1488,7 +1739,7 @@ bool is an int
    permission
   </h2>
   <dl>
-   <dt id="Description34">
+   <dt id="Description39">
     Description
    </dt>
    <dd>
@@ -1496,7 +1747,7 @@ bool is an int
      Single letter indicating permissions on access to workspace. Options are: &#39;a&#39; for administative access, &#39;w&#39; for read/write access, &#39;r&#39; for read access, and &#39;n&#39; for no access.
     </p>
    </dd>
-   <dt id="Definition4">
+   <dt id="Definition5">
     Definition
    </dt>
    <dd>
@@ -1509,7 +1760,7 @@ bool is an int
    username
   </h2>
   <dl>
-   <dt id="Description35">
+   <dt id="Description40">
     Description
    </dt>
    <dd>
@@ -1517,7 +1768,7 @@ bool is an int
      Login name of KBase useraccount to which permissions for workspaces are mapped
     </p>
    </dd>
-   <dt id="Definition5">
+   <dt id="Definition6">
     Definition
    </dt>
    <dd>
@@ -1530,7 +1781,7 @@ bool is an int
    timestamp
   </h2>
   <dl>
-   <dt id="Description36">
+   <dt id="Description41">
     Description
    </dt>
    <dd>
@@ -1538,7 +1789,7 @@ bool is an int
      Exact time for workspace operations. e.g. 2012-12-17T23:24:06
     </p>
    </dd>
-   <dt id="Definition6">
+   <dt id="Definition7">
     Definition
    </dt>
    <dd>
@@ -1551,7 +1802,7 @@ bool is an int
    workspace_ref
   </h2>
   <dl>
-   <dt id="Description37">
+   <dt id="Description42">
     Description
    </dt>
    <dd>
@@ -1559,7 +1810,7 @@ bool is an int
      A 36 character string referring to a particular instance of an object in a workspace that lasts forever. Objects should always be retreivable using this ID
     </p>
    </dd>
-   <dt id="Definition7">
+   <dt id="Definition8">
     Definition
    </dt>
    <dd>
@@ -1572,7 +1823,7 @@ bool is an int
    ObjectData
   </h2>
   <dl>
-   <dt id="Description38">
+   <dt id="Description43">
     Description
    </dt>
    <dd>
@@ -1583,7 +1834,7 @@ bool is an int
      version - for complex data structures, the datastructure should include a version number to enable tracking of changes that may occur to the structure of the data over time
     </p>
    </dd>
-   <dt id="Definition8">
+   <dt id="Definition9">
     Definition
    </dt>
    <dd>
@@ -1597,7 +1848,7 @@ version has a value which is an int
    object_metadata
   </h2>
   <dl>
-   <dt id="Description39">
+   <dt id="Description44">
     Description
    </dt>
    <dd>
@@ -1620,7 +1871,7 @@ version has a value which is an int
      </code>
     </pre>
    </dd>
-   <dt id="Definition9">
+   <dt id="Definition10">
     Definition
    </dt>
    <dd>
@@ -1644,7 +1895,7 @@ version has a value which is an int
    workspace_metadata
   </h2>
   <dl>
-   <dt id="Description40">
+   <dt id="Description45">
     Description
    </dt>
    <dd>
@@ -1662,7 +1913,7 @@ version has a value which is an int
      </code>
     </pre>
    </dd>
-   <dt id="Definition10">
+   <dt id="Definition11">
     Definition
    </dt>
    <dd>
@@ -1677,11 +1928,45 @@ version has a value which is an int
     </pre>
    </dd>
   </dl>
+  <h2 id="JobObject">
+   JobObject
+  </h2>
+  <dl>
+   <dt id="Description46">
+    Description
+   </dt>
+   <dd>
+    <p>
+     Data structures for a job object
+    </p>
+    <p>
+     job_id id - ID of the job object string type - type of the job string auth - authentication token of job owner string status - current status of job mapping&lt;string,string&gt; jobdata; string queuetime - time when job was queued string starttime - time when job started running string completetime - time when the job was completed string owner - owner of the job string queuecommand - command used to queue job
+    </p>
+   </dd>
+   <dt id="Definition12">
+    Definition
+   </dt>
+   <dd>
+    <pre>
+     a reference to a hash where the following keys are defined:
+id has a value which is a job_id
+type has a value which is a string
+auth has a value which is a string
+status has a value which is a string
+jobdata has a value which is a reference to a hash where the key is a string and the value is a string
+queuetime has a value which is a string
+starttime has a value which is a string
+completetime has a value which is a string
+owner has a value which is a string
+queuecommand has a value which is a string
+    </pre>
+   </dd>
+  </dl>
   <h2 id="user_settings">
    user_settings
   </h2>
   <dl>
-   <dt id="Description41">
+   <dt id="Description47">
     Description
    </dt>
    <dd>
@@ -1694,7 +1979,7 @@ version has a value which is an int
      </code>
     </pre>
    </dd>
-   <dt id="Definition11">
+   <dt id="Definition13">
     Definition
    </dt>
    <dd>
@@ -1704,11 +1989,125 @@ workspace has a value which is a workspace_id
     </pre>
    </dd>
   </dl>
+  <h2 id="load_media_from_bio_params">
+   load_media_from_bio_params
+  </h2>
+  <dl>
+   <dt id="Description48">
+    Description
+   </dt>
+   <dd>
+    <p>
+     Input parameters for the &quot;load_media_from_bio&quot; function.
+    </p>
+    <pre>
+     <code>
+      workspace_id mediaWS - ID of workspace where media will be loaded (an optional argument with default &quot;KBaseMedia&quot;)
+        object_id bioid - ID of biochemistry from which media will be loaded (an optional argument with default &quot;default&quot;)
+        workspace_id bioWS - ID of workspace with biochemistry from which media will be loaded (an optional argument with default &quot;kbase&quot;)
+        bool clearExisting - A boolean indicating if existing media in the specified workspace should be cleared (an optional argument with default &quot;0&quot;)
+        bool overwrite - A boolean indicating if a matching existing media should be overwritten (an optional argument with default &quot;0&quot;)
+     </code>
+    </pre>
+   </dd>
+   <dt id="Definition14">
+    Definition
+   </dt>
+   <dd>
+    <pre>
+     a reference to a hash where the following keys are defined:
+mediaWS has a value which is a workspace_id
+bioid has a value which is an object_id
+bioWS has a value which is a workspace_id
+clearExisting has a value which is a bool
+overwrite has a value which is a bool
+auth has a value which is a string
+asHash has a value which is a bool
+    </pre>
+   </dd>
+  </dl>
+  <h2 id="import_bio_params">
+   import_bio_params
+  </h2>
+  <dl>
+   <dt id="Description49">
+    Description
+   </dt>
+   <dd>
+    <p>
+     Input parameters for the &quot;import_bio&quot; function.
+    </p>
+    <pre>
+     <code>
+      object_id bioid - ID of biochemistry to be imported (an optional argument with default &quot;default&quot;)
+        workspace_id bioWS - ID of workspace to which biochemistry will be imported (an optional argument with default &quot;kbase&quot;)
+        string url - URL from which biochemistry should be retrieved
+        bool compressed - boolean indicating if biochemistry is compressed
+        bool overwrite - A boolean indicating if a matching existing biochemistry should be overwritten (an optional argument with default &quot;0&quot;)
+     </code>
+    </pre>
+   </dd>
+   <dt id="Definition15">
+    Definition
+   </dt>
+   <dd>
+    <pre>
+     a reference to a hash where the following keys are defined:
+bioid has a value which is an object_id
+bioWS has a value which is a workspace_id
+url has a value which is a string
+compressed has a value which is a bool
+clearExisting has a value which is a bool
+overwrite has a value which is a bool
+auth has a value which is a string
+asHash has a value which is a bool
+    </pre>
+   </dd>
+  </dl>
+  <h2 id="import_map_params">
+   import_map_params
+  </h2>
+  <dl>
+   <dt id="Description50">
+    Description
+   </dt>
+   <dd>
+    <p>
+     Input parameters for the &quot;import_map&quot; function.
+    </p>
+    <pre>
+     <code>
+      object_id mapid - ID of mapping to be imported (an optional argument with default &quot;default&quot;)
+        workspace_id mapWS - ID of workspace to which mapping will be imported (an optional argument with default &quot;kbase&quot;)
+        string url - URL from which mapping should be retrieved
+        bool compressed - boolean indicating if mapping is compressed
+        bool overwrite - A boolean indicating if a matching existing mapping should be overwritten (an optional argument with default &quot;0&quot;)
+     </code>
+    </pre>
+   </dd>
+   <dt id="Definition16">
+    Definition
+   </dt>
+   <dd>
+    <pre>
+     a reference to a hash where the following keys are defined:
+bioid has a value which is an object_id
+bioWS has a value which is a workspace_id
+mapid has a value which is an object_id
+mapWS has a value which is a workspace_id
+url has a value which is a string
+compressed has a value which is a bool
+overwrite has a value which is a bool
+auth has a value which is a string
+asHash has a value which is a bool
+    </pre>
+   </dd>
+  </dl>
   <h2 id="save_object_params">
    save_object_params
   </h2>
   <dl>
-   <dt id="Description42">
+   <dt id="Description51">
     Description
    </dt>
    <dd>
@@ -1731,7 +2130,7 @@ workspace has a value which is a workspace_id
      </code>
     </pre>
    </dd>
-   <dt id="Definition12">
+   <dt id="Definition17">
     Definition
    </dt>
    <dd>
@@ -1755,7 +2154,7 @@ asHash has a value which is a bool
    delete_object_params
   </h2>
   <dl>
-   <dt id="Description43">
+   <dt id="Description52">
     Description
    </dt>
    <dd>
@@ -1772,7 +2171,7 @@ asHash has a value which is a bool
      </code>
     </pre>
    </dd>
-   <dt id="Definition13">
+   <dt id="Definition18">
     Definition
    </dt>
    <dd>
@@ -1790,7 +2189,7 @@ asHash has a value which is a bool
    delete_object_permanently_params
   </h2>
   <dl>
-   <dt id="Description44">
+   <dt id="Description53">
     Description
    </dt>
    <dd>
@@ -1807,7 +2206,7 @@ asHash has a value which is a bool
      </code>
     </pre>
    </dd>
-   <dt id="Definition14">
+   <dt id="Definition19">
     Definition
    </dt>
    <dd>
@@ -1825,7 +2224,7 @@ asHash has a value which is a bool
    get_object_params
   </h2>
   <dl>
-   <dt id="Description45">
+   <dt id="Description54">
     Description
    </dt>
    <dd>
@@ -1844,7 +2243,7 @@ asHash has a value which is a bool
      </code>
     </pre>
    </dd>
-   <dt id="Definition15">
+   <dt id="Definition20">
     Definition
    </dt>
    <dd>
@@ -1864,7 +2263,7 @@ asJSON has a value which is a bool
    get_object_output
   </h2>
   <dl>
-   <dt id="Description46">
+   <dt id="Description55">
     Description
    </dt>
    <dd>
@@ -1878,7 +2277,7 @@ asJSON has a value which is a bool
      </code>
     </pre>
    </dd>
-   <dt id="Definition16">
+   <dt id="Definition21">
     Definition
    </dt>
    <dd>
@@ -1893,7 +2292,7 @@ metadata has a value which is an object_metadata
    get_object_by_ref_params
   </h2>
   <dl>
-   <dt id="Description47">
+   <dt id="Description56">
     Description
    </dt>
    <dd>
@@ -1909,7 +2308,7 @@ metadata has a value which is an object_metadata
      </code>
     </pre>
    </dd>
-   <dt id="Definition17">
+   <dt id="Definition22">
     Definition
    </dt>
    <dd>
@@ -1926,7 +2325,7 @@ asJSON has a value which is a bool
    save_object_by_ref_params
   </h2>
   <dl>
-   <dt id="Description48">
+   <dt id="Description57">
     Description
    </dt>
    <dd>
@@ -1950,7 +2349,7 @@ asJSON has a value which is a bool
      </code>
     </pre>
    </dd>
-   <dt id="Definition18">
+   <dt id="Definition23">
     Definition
    </dt>
    <dd>
@@ -1975,7 +2374,7 @@ asHash has a value which is a bool
    get_objectmeta_params
   </h2>
   <dl>
-   <dt id="Description49">
+   <dt id="Description58">
     Description
    </dt>
    <dd>
@@ -1993,7 +2392,7 @@ asHash has a value which is a bool
      </code>
     </pre>
    </dd>
-   <dt id="Definition19">
+   <dt id="Definition24">
     Definition
    </dt>
    <dd>
@@ -2012,7 +2411,7 @@ asHash has a value which is a bool
    get_objectmeta_by_ref_params
   </h2>
   <dl>
-   <dt id="Description50">
+   <dt id="Description59">
     Description
    </dt>
    <dd>
@@ -2027,7 +2426,7 @@ asHash has a value which is a bool
      </code>
     </pre>
    </dd>
-   <dt id="Definition20">
+   <dt id="Definition25">
     Definition
    </dt>
    <dd>
@@ -2043,7 +2442,7 @@ asHash has a value which is a bool
    revert_object_params
   </h2>
   <dl>
-   <dt id="Description51">
+   <dt id="Description60">
     Description
    </dt>
    <dd>
@@ -2061,7 +2460,7 @@ asHash has a value which is a bool
      </code>
     </pre>
    </dd>
-   <dt id="Definition21">
+   <dt id="Definition26">
     Definition
    </dt>
    <dd>
@@ -2080,7 +2479,7 @@ asHash has a value which is a bool
    copy_object_params
   </h2>
   <dl>
-   <dt id="Description52">
+   <dt id="Description61">
     Description
    </dt>
    <dd>
@@ -2101,7 +2500,7 @@ asHash has a value which is a bool
      </code>
     </pre>
    </dd>
-   <dt id="Definition22">
+   <dt id="Definition27">
     Definition
    </dt>
    <dd>
@@ -2123,7 +2522,7 @@ asHash has a value which is a bool
    move_object_params
   </h2>
   <dl>
-   <dt id="Description53">
+   <dt id="Description62">
     Description
    </dt>
    <dd>
@@ -2143,7 +2542,7 @@ asHash has a value which is a bool
      </code>
     </pre>
    </dd>
-   <dt id="Definition23">
+   <dt id="Definition28">
     Definition
    </dt>
    <dd>
@@ -2164,7 +2563,7 @@ asHash has a value which is a bool
    has_object_params
   </h2>
   <dl>
-   <dt id="Description54">
+   <dt id="Description63">
     Description
    </dt>
    <dd>
@@ -2181,7 +2580,7 @@ asHash has a value which is a bool
      </code>
     </pre>
    </dd>
-   <dt id="Definition24">
+   <dt id="Definition29">
     Definition
    </dt>
    <dd>
@@ -2199,7 +2598,7 @@ auth has a value which is a string
    object_history_params
   </h2>
   <dl>
-   <dt id="Description55">
+   <dt id="Description64">
     Description
    </dt>
    <dd>
@@ -2216,7 +2615,7 @@ auth has a value which is a string
      </code>
     </pre>
    </dd>
-   <dt id="Definition25">
+   <dt id="Definition30">
     Definition
    </dt>
    <dd>
@@ -2234,7 +2633,7 @@ asHash has a value which is a bool
    create_workspace_params
   </h2>
   <dl>
-   <dt id="Description56">
+   <dt id="Description65">
     Description
    </dt>
    <dd>
@@ -2250,7 +2649,7 @@ asHash has a value which is a bool
      </code>
     </pre>
    </dd>
-   <dt id="Definition26">
+   <dt id="Definition31">
     Definition
    </dt>
    <dd>
@@ -2267,7 +2666,7 @@ asHash has a value which is a bool
    get_workspacemeta_params
   </h2>
   <dl>
-   <dt id="Description57">
+   <dt id="Description66">
     Description
    </dt>
    <dd>
@@ -2282,7 +2681,7 @@ asHash has a value which is a bool
      </code>
     </pre>
    </dd>
-   <dt id="Definition27">
+   <dt id="Definition32">
     Definition
    </dt>
    <dd>
@@ -2298,7 +2697,7 @@ asHash has a value which is a bool
    get_workspacepermissions_params
   </h2>
   <dl>
-   <dt id="Description58">
+   <dt id="Description67">
     Description
    </dt>
    <dd>
@@ -2312,7 +2711,7 @@ asHash has a value which is a bool
      </code>
     </pre>
    </dd>
-   <dt id="Definition28">
+   <dt id="Definition33">
     Definition
    </dt>
    <dd>
@@ -2327,7 +2726,7 @@ auth has a value which is a string
    delete_workspace_params
   </h2>
   <dl>
-   <dt id="Description59">
+   <dt id="Description68">
     Description
    </dt>
    <dd>
@@ -2342,7 +2741,7 @@ auth has a value which is a string
      </code>
     </pre>
    </dd>
-   <dt id="Definition29">
+   <dt id="Definition34">
     Definition
    </dt>
    <dd>
@@ -2358,7 +2757,7 @@ asHash has a value which is a bool
    clone_workspace_params
   </h2>
   <dl>
-   <dt id="Description60">
+   <dt id="Description69">
     Description
    </dt>
    <dd>
@@ -2376,7 +2775,7 @@ asHash has a value which is a bool
      </code>
     </pre>
    </dd>
-   <dt id="Definition30">
+   <dt id="Definition35">
     Definition
    </dt>
    <dd>
@@ -2395,7 +2794,7 @@ asHash has a value which is a bool
    list_workspaces_params
   </h2>
   <dl>
-   <dt id="Description61">
+   <dt id="Description70">
     Description
    </dt>
    <dd>
@@ -2409,7 +2808,7 @@ asHash has a value which is a bool
      </code>
     </pre>
    </dd>
-   <dt id="Definition31">
+   <dt id="Definition36">
     Definition
    </dt>
    <dd>
@@ -2424,7 +2823,7 @@ asHash has a value which is a bool
    list_workspace_objects_params
   </h2>
   <dl>
-   <dt id="Description62">
+   <dt id="Description71">
     Description
    </dt>
    <dd>
@@ -2441,7 +2840,7 @@ asHash has a value which is a bool
      </code>
     </pre>
    </dd>
-   <dt id="Definition32">
+   <dt id="Definition37">
     Definition
    </dt>
    <dd>
@@ -2459,7 +2858,7 @@ asHash has a value which is a bool
    set_global_workspace_permissions_params
   </h2>
   <dl>
-   <dt id="Description63">
+   <dt id="Description72">
     Description
    </dt>
    <dd>
@@ -2475,7 +2874,7 @@ asHash has a value which is a bool
      </code>
     </pre>
    </dd>
-   <dt id="Definition33">
+   <dt id="Definition38">
     Definition
    </dt>
    <dd>
@@ -2492,7 +2891,7 @@ asHash has a value which is a bool
    set_workspace_permissions_params
   </h2>
   <dl>
-   <dt id="Description64">
+   <dt id="Description73">
     Description
    </dt>
    <dd>
@@ -2508,7 +2907,7 @@ asHash has a value which is a bool
      </code>
     </pre>
    </dd>
-   <dt id="Definition34">
+   <dt id="Definition39">
     Definition
    </dt>
    <dd>
@@ -2525,7 +2924,7 @@ auth has a value which is a string
    get_user_settings_params
   </h2>
   <dl>
-   <dt id="Description65">
+   <dt id="Description74">
     Description
    </dt>
    <dd>
@@ -2538,7 +2937,7 @@ auth has a value which is a string
      </code>
     </pre>
    </dd>
-   <dt id="Definition35">
+   <dt id="Definition40">
     Definition
    </dt>
    <dd>
@@ -2552,7 +2951,7 @@ auth has a value which is a string
    set_user_settings_params
   </h2>
   <dl>
-   <dt id="Description66">
+   <dt id="Description75">
     Description
    </dt>
    <dd>
@@ -2567,7 +2966,7 @@ auth has a value which is a string
      </code>
     </pre>
    </dd>
-   <dt id="Definition36">
+   <dt id="Definition41">
     Definition
    </dt>
    <dd>
@@ -2583,7 +2982,7 @@ auth has a value which is a string
    queue_job_params
   </h2>
   <dl>
-   <dt id="Description67">
+   <dt id="Description76">
     Description
    </dt>
    <dd>
@@ -2592,22 +2991,23 @@ auth has a value which is a string
     </p>
     <pre>
      <code>
-      string jobid - ID of the job to be queued (an essential argument)
-        string auth - the authentication token of the KBase account queuing the job; must have access to the job being queued (an optional argument; user is &quot;public&quot; if auth is not provided)
+      string auth - the authentication token of the KBase account queuing the job; must have access to the job being queued (an optional argument; user is &quot;public&quot; if auth is not provided)
         string state - the initial state to assign to the job being queued (an optional argument; default is &quot;queued&quot;)
+        string type - the type of the job being queued
         mapping&lt;string,string&gt; jobdata - hash of data associated with job
      </code>
     </pre>
    </dd>
-   <dt id="Definition37">
+   <dt id="Definition42">
     Definition
    </dt>
    <dd>
     <pre>
      a reference to a hash where the following keys are defined:
-jobid has a value which is a string
 auth has a value which is a string
 state has a value which is a string
+type has a value which is a string
+queuecommand has a value which is a string
 jobdata has a value which is a reference to a hash where the key is a string and the value is a string
     </pre>
    </dd>
@@ -2616,7 +3016,7 @@ jobdata has a value which is a reference to a hash where the key is a string and
    set_job_status_params
   </h2>
   <dl>
-   <dt id="Description68">
+   <dt id="Description77">
     Description
    </dt>
    <dd>
@@ -2633,7 +3033,7 @@ jobdata has a value which is a reference to a hash where the key is a string and
      </code>
     </pre>
    </dd>
-   <dt id="Definition38">
+   <dt id="Definition43">
     Definition
    </dt>
    <dd>
@@ -2651,7 +3051,7 @@ jobdata has a value which is a reference to a hash where the key is a string and
    get_jobs_params
   </h2>
   <dl>
-   <dt id="Description69">
+   <dt id="Description78">
     Description
    </dt>
    <dd>
@@ -2662,13 +3062,14 @@ jobdata has a value which is a reference to a hash where the key is a string and
      list&lt;string&gt; jobids - list of specific jobs to be retrieved (an optional argument; default is an empty list) string status - Status of all jobs to be retrieved; accepted values are &#39;queued&#39;, &#39;running&#39;, and &#39;done&#39; (an essential argument) string auth - the authentication token of the KBase account accessing job list; only owned jobs will be returned (an optional argument; user is &quot;public&quot; if auth is not provided)
     </p>
    </dd>
-   <dt id="Definition39">
+   <dt id="Definition44">
     Definition
    </dt>
    <dd>
     <pre>
      a reference to a hash where the following keys are defined:
 jobids has a value which is a reference to a list where each element is a string
+type has a value which is a string
 status has a value which is a string
 auth has a value which is a string
     </pre>
@@ -2678,7 +3079,7 @@ auth has a value which is a string
    add_type_params
   </h2>
   <dl>
-   <dt id="Description70">
+   <dt id="Description79">
     Description
    </dt>
    <dd>
@@ -2692,7 +3093,7 @@ auth has a value which is a string
      </code>
     </pre>
    </dd>
-   <dt id="Definition40">
+   <dt id="Definition45">
     Definition
    </dt>
    <dd>
@@ -2707,7 +3108,7 @@ auth has a value which is a string
    remove_type_params
   </h2>
   <dl>
-   <dt id="Description71">
+   <dt id="Description80">
     Description
    </dt>
    <dd>
@@ -2721,13 +3122,39 @@ auth has a value which is a string
      </code>
     </pre>
    </dd>
-   <dt id="Definition41">
+   <dt id="Definition46">
     Definition
    </dt>
    <dd>
     <pre>
      a reference to a hash where the following keys are defined:
 type has a value which is a string
+auth has a value which is a string
+    </pre>
+   </dd>
+  </dl>
+  <h2 id="patch_params">
+   patch_params
+  </h2>
+  <dl>
+   <dt id="Description81">
+    Description
+   </dt>
+   <dd>
+    <p>
+     Input parameters for the &quot;patch&quot; function.
+    </p>
+    <p>
+     string patch_id - ID of the patch that should be run on the workspace string auth - the authentication token of the KBase account removing a custom type (an optional argument; user is &quot;public&quot; if auth is not provided)
+    </p>
+   </dd>
+   <dt id="Definition47">
+    Definition
+   </dt>
+   <dd>
+    <pre>
+     a reference to a hash where the following keys are defined:
+patch_id has a value which is a string
 auth has a value which is a string
     </pre>
    </dd>

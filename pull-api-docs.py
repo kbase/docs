@@ -24,16 +24,17 @@ DEPLOY_DICT = [
                {'name': 'ID Server API',
                 'service': 'idserver', 
                 'target_dir':'idserver',
-                'html_name': 'idserver_client_api'},
+                'html_name': 'idserver_client_api',
+                'html_target':'idserver_api'},
 
                 {'name': 'Workspace Service',
                 'service': 'workspaceService', 
                 'target_dir':'workspace'},
 
-#               {'name': 'Assembly Service',
-#                'service': 'assembly', 
-#                'target_dir':'assembly',
-#                'html_name': ''},
+                #{'name': 'Assembly Service',
+                #'service': 'assembly', 
+                #'target_dir':'assembly',
+                #'html_name': ''},
 
                {'name': 'Plant Expression Service',
                 'service': 'PlantExpressionService', 
@@ -60,10 +61,10 @@ DEPLOY_DICT = [
                 'target_dir':'communities_qc',
                 'html_name': 'communitiesQC'},
 
-               {'name': 'Authorization Client',
-                'service': 'authorization_server', 
-                'target_dir':'auth', 
-                'html_name': 'AuthUser'},
+                #{'name': 'Authorization Client',
+                #'service': 'authorization_server', 
+                #'target_dir':'auth', 
+                #'html_name': 'AuthUser'},
 
                {'name': 'Genome Annotation Service',
                 'service': 'genome_annotation', 
@@ -95,10 +96,10 @@ DEPLOY_DICT = [
                 'target_dir':'experiment', 
                 'html_name': 'experiment'},
 
-               {'name': 'FBA Modeling Service',
-                'service': 'fbaModelServices', 
-                'target_dir':'KBaseFBAModeling', 
-                'html_name': 'fbaModelServices'},
+                #{'name': 'FBA Modeling Service',
+                #'service': 'fbaModelServices', 
+                #'target_dir':'KBaseFBAModeling', 
+                #'html_name': 'fbaModelServices'},
 
                {'name': 'Genotype Phenotype Service',
                 'service': 'Genotype_PhenotypeAPI', 
