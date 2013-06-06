@@ -3,12 +3,12 @@
 <p><strong>Purpose: </strong>Learn more about the Central Data Model
 (CDM) Entity-Relationshop Model and
 how to run command line tools to expose the data in it. </p>
-<p><strong>Required Prerequisite Activities: </strong><a href="/for-users/tutorials/installing-the-kbase-app-dmg/">Download KBase: Installing the KBase Application DMG</a>, OR <a href="for-users/tutorials/navigating-iris/">Get Started with IRIS: Navigating IRIS</a> <p> <a href="/developer-zone/tutorials/the-kbase-central-data-model/the-cdm-represented-as-an-entity-relationship-model/">The
+<p><strong>Required Prerequisite Activities: </strong><a href="/for-users/tutorials/installing-the-kbase-app-dmg/">Download
+KBase: Installing the KBase Application DMG</a>, OR <a href="for-users/tutorials/navigating-iris/">Get Started with IRIS:
+Navigating IRIS</a> </p>
+<p> <a href="/developer-zone/tutorials/the-kbase-central-data-model/the-cdm-represented-as-an-entity-relationship-model/">The
 CDM
 Represented as an Entity-Relationship Model </a></p>
-
-
-
 <h2>Introduction</h2>
 <p>KBase includes an integrated database of genomic data called the
 Central Store (<i>CS</i>). Extract data
@@ -36,69 +36,68 @@ relationship, and not of either of the related entities by themselves.
 The entity types and relationship types are mapped into a standard
 relational database (in the case of the CS), but it might well be a
 good idea to peruse the ER-model and attempt to gain at least a
-rudimentary understanding of the types of data we have included.<p> There are three standard tools for accessing fields in entities and
+rudimentary understanding of the types of data we have included.
+<p> There are three standard tools for accessing fields in entities and
 relationships, and there is also a set of customized tools. We will
 illustrate these tools with simple examples. First, we will determine
 which features in the CS
 are connected to publications.
 This activity is useful for gaining insight as to the reliability of
-function assignments. Begin by looking at the <a href="developer-zone/tutorials/the-kbase-central-data-model/the-cdm-represented-as-an-entity-relationship-model/">
+function assignments. Begin by looking at the <a href="http://kbase.us/developer-zone/tutorials/the-kbase-central-data-model/the-cdm-represented-as-an-entity-relationship-model/">
 CDM as represented as
 an ER Model</a>. This model describes the entities and relationships
 that make up the Central Store. If you go to the <a href="http://pubseed.theseed.org/ErdbDocWidget.cgi?xmlFileName=/home/parrello/CdmiData/Published/KSaplingDBD.xml">ER-Model</a>,
 look for the path from
 the entity <i>Publication</i> to the
-entity <i>Feature</i>. </p><p>Verify the following: </p>
-<ol><li>Publication is an entity that
+entity <i>Feature</i>. </p>
+<p>Verify the following: </p>
+<ol>
+  <li>Publication is an entity that
 connects to the entity <i>ProteinSequence</i>
 via the relationship <i>Concerns</i>.
 It can be thought of as <i>Publication</i> <i>Concerns</i> <i>ProteinSequence</i>.
 This describes crossing the relationship from <i>Publication</i> to <i>ProteinSequence</i>.
 There is a
 relationship going in the other direction, as well -- even though the
-diagram only explicitly lists the name of the one going from <i>Publication</i> to <i>ProteinSequence</i>. If you click on the
+diagram only explicitly lists the name of the one going from <i>Publication</i>
+to <i>ProteinSequence</i>. If you click on the
 entity <i>Publication</i>, it describes
 the relationships that entity type participates in. Similarly, if you
 click on <i>ProteinSequence</i>, you
 will see that the connection going from <i>ProteinSequence</i>
-
-
-
 to <i>Publication</i> is named <i>IsATopicOf</i>
-(<i>ProteinSequence IsATopicOf Publication</i>). You need to be comfortable
+(<i>ProteinSequence IsATopicOf Publication</i>). You need to be
+comfortable
 seeing what fields are in specific entities and relationships, as well
 as understanding the names of the relationships connecting entities.
 Note that, if you are looking at the description of a single entity or
 relationship, and you wish to go back to see the overall diagram, you
 need to hit the "Image" button, and not the back arrow on your browser.
     <br>
-
     <br>
-
-
-  </li><li> To get from <i>ProteinSequence</i>
+  </li>
+  <li> To get from <i>ProteinSequence</i>
 to a related <i>Feature</i> linked to the protein,
 one crosses the <i>IsProteinFor</i>
-relationship (<i>ProteinSequence IsProteinFor Feature</i>).
+relationship (<i>ProteinSequence IsProteinFor Feature</i>). <br>
     <br>
-
-    <br>
-  </li><li> Thus, one interpretation of the original goal of seeing which
+  </li>
+  <li> Thus, one interpretation of the original goal of seeing which
 features in the CS connect to publications, is
     <blockquote> Start with the list of <i>Publication</i>s.
 For each one, locate the <i>ProteinSequence</i>
 described in the publication. Then, use the protein sequences to find
-the Features and produce a 2-column table [<i>Publication, Feature</i>] </blockquote>
+the Features and produce a 2-column table [<i>Publication, Feature</i>]
+    </blockquote>
     <br>
-Note that you could start with Features and trace back to <i>Publication</i>s, but there are millions of
+Note that you could start with Features and trace back to <i>Publication</i>s,
+but there are millions of
 Features and only thousands of <i>Publication</i>s
 in the CS. It will probably be faster to look up the features connected
 to the publications, rather than the other way around. <br>
-
-
-
     <br>
-  </li><li> Now, to see a table of the <i>Publication</i>
+  </li>
+  <li> Now, to see a table of the <i>Publication</i>
 entities just type <br>
     <pre>  <a href="http://kbase.us/developer-zone/api-documentation/cdm-entity-relationship-command-scripts/#all_entities_Publication" target="_blank">all_entities_Publication</a> -a | head<br><br></pre>
 For every entity type in the CS, a command like this exists to display
@@ -106,36 +105,27 @@ the instances of that entity. We encourage you to try it out. (We pipe
 the output to "head" which just shows the head of a file.) <br>
     <br>
 To determine which genomes are in the CS, use <br>
-
-
-
-
     <pre>  <a href="http://kbase.us/developer-zone/api-documentation/cdm-entity-relationship-command-scripts/#all_entities_Genome" target="_blank">all_entities_Genome</a> -a<br><br></pre>
 Try it again leaving the "-a" option off. Then use <br>
     <pre>  <a href="http://kbase.us/developer-zone/api-documentation/cdm-entity-relationship-command-scripts/#all_entities_Genome" target="_blank">all_entities_Genome</a> -show-fields<br><br></pre>
-
-to see what fields the <i>Genome</i> entity contains (compare this against the <i>ER-Model</i>
-
-
-
+to see what fields the <i>Genome</i> entity contains (compare this
+against the <i>ER-Model</i>
 description of the fields). Finally, note what <br>
     <pre>  <a href="http://kbase.us/developer-zone/api-documentation/cdm-entity-relationship-command-scripts/#all_entities_Genome" target="_blank">all_entities_Genome</a> -f 'contigs,domain,scientific_name'<br><br></pre>
-
 produces. The Unix command <code> grep</code> can be used to
 filter out lines containing a desired string. Thus, <br>
     <pre>  <a href="http://kbase.us/developer-zone/api-documentation/cdm-entity-relationship-command-scripts/#all_entities_Genome" target="_blank">all_entities_Genome</a> -f scientific_name | grep Streptococcus<br><br></pre>
-
-
-
 would give you the IDs of the <i>Streptococcus</i> genomes in KBase. <br>
-
     <br>
-  </li><li> Now, run <br>
+  </li>
+  <li> Now, run <br>
     <pre>  <a href="http://kbase.us/developer-zone/api-documentation/cdm-entity-relationship-command-scripts/#all_entities_Publication" target="_blank">all_entities_Publication</a> | <a href="http://kbase.us/developer-zone/api-documentation/cdm-entity-relationship-command-scripts/#get_relationship_Concerns" target="_blank">get_relationship_Concerns</a> -to id<br><br></pre>
-This illustrates how to "cross a relationship." The <code>all_entities_Publication</code> produces a 1-column
+This illustrates how to "cross a relationship." The <code>all_entities_Publication</code>
+produces a 1-column
 table containing pubmed IDs. These go into the command <br>
     <pre>  <a href="http://kbase.us/developer-zone/api-documentation/cdm-entity-relationship-command-scripts/#get_relationship_Concerns" target="_blank">get_relationship_Concerns</a> -to id<br><br></pre>
-This is an example of the second class of commands. One thinks of a <code>get_relationship</code> command as taking as input a set of IDs from the <i>from entity</i>,
+This is an example of the second class of commands. One thinks of a <code>get_relationship</code>
+command as taking as input a set of IDs from the <i>from entity</i>,
 crossing the relationship to the <i>to entity</i>, and extracting
 whatever fields you want from the <i>from entity</i>, the <i>relationship</i>,
 and the <i>to entity</i>. The general form is <br>
