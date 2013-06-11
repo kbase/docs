@@ -1,4 +1,4 @@
-
+<div>
 <h1>Identify variants in a next-gen resequencing project</h1>
 <p><strong>Purpose: </strong>
 This tutorial demonstrates how to identify SNPs and small indels in a
@@ -15,24 +15,26 @@ with KBase</p>
 Using KBase</p>
 <p><strong>Related Tutorials: </strong> </p>
 <br>
+</div>
 <br>
+<div>
 <h2>Download and configure client</h2>
 <h3>1. Download and Install Variation Services Client</h3>
 <p> The client suite for accessing the KBase variation services
 consists of a primary
-program <i>jkbase</i> along with a number of wrapper scripts that
+program <i><code title = "iris-tutorial">jkbase</code></i> along with a number of wrapper scripts that
 provide a unified
 KBase interface with the prefix <i>jk_</i>.
 </p>
 <p>
-Users of a Magellan KBase image should have the command <i>jkbase</i>
+Users of a Magellan KBase image should have the command <i><code title = "iris-tutorial">jkbase</code></i>
 in their
 path. Other users can download the Mac client as part of the KBase DMG
 disk
 image from <a href="http://kbase.us/developer-zone/downloads/">http://kbase.us/developer-zone/downloads/</a>.
 Once you download the DMG package and run the KBase.app program, you
 should be
-able to run the command <i>jkbase</i>. Note you must have java
+able to run the command <i><code title = "iris-tutorial">jkbase</code></i>. Note you must have java
 installed on your
 system to run the client program, but your Mac will guide you through
 the
@@ -41,6 +43,8 @@ install process if you do not have it already installed.
 <p>You can also access the suite from the IRIS web client available at:
 <a href="http://www.kbase.us/services/docs/invocation/Iris/iris.html">http://www.kbase.us/services/docs/invocation/Iris/iris.html</a>
 </p>
+</div>
+<div>
 <h3>2. Register user account and configure client</h3>
 <p>
 To use the variation services, you first need to register for a user
@@ -53,9 +57,11 @@ variations. The first time you use the client, it will prompt you to
 enter your
 username and password.
 </p>
-<pre>  $ jk_fs_ls<br><br>  Please authenticate with Globus Online:<br>  [Username:] ***GLOBUS_ONLINE_ACCOUNT***<br>  [Password:] ***GLOBUS_ONLINE_PASSWORD***<br>  Created: $HOME/.jnomics/globus_auth.properties<br></pre>
+<pre>  $ <code title = "iris-tutorial">jk_fs_ls</code><br><br>  Please authenticate with Globus Online:<br>  [Username:] ***GLOBUS_ONLINE_ACCOUNT***<br>  [Password:] ***GLOBUS_ONLINE_PASSWORD***<br>  Created: $HOME/.jnomics/globus_auth.properties<br></pre>
 <br>
 <br>
+</div>
+<div>
 <h2>Aligning reads to a reference genome</h2>
 <p>
 This tutorial will focus on aligning paired-end illumina sequencing
@@ -64,6 +70,8 @@ reference but single-end experiments will work as well by substituting
 `se` for
 `pe` in the commands below.
 </p>
+</div>
+<div>
 <h3>1. Load reads into the variation analysis service</h3>
 <p>
 This first step to run the analysis pipeline is to upload your reads
@@ -72,8 +80,10 @@ download a small set of reads from the service, but you will not need
 to run these two commands if you already have your own sequence data to
 analyze.
 </p>
-<pre>  $ jk_fs_get /share/example/yeast_sim.1.fq.gz<br>  $ jk_fs_get /share/example/yeast_sim.2.fq.gz<br></pre>
+<pre>  $ <code title = "iris-tutorial">jk_fs_get</code> /share/example/yeast_sim.1.fq.gz<br>  $ <code title = "iris-tutorial">jk_fs_get</code> /share/example/yeast_sim.2.fq.gz<br></pre>
 <p>
+</div>
+<div>
 Now that you have your read data, you can upload it to the analysis
 system.
 Paired-end reads should be kept together during alignment so there is a
@@ -83,22 +93,21 @@ files
 with paired reads in fastq format, the files can be either plain text,
 gzip'd
 or bzip2'd. </p>
-<pre>  $ jk_fs_put_pe yeast_sim.1.fq.gz yeast_sim.2.fq.gz yeast<br></pre>
+<pre>  $ <code title = "iris-tutorial">jk_fs_put_pe</code> yeast_sim.1.fq.gz yeast_sim.2.fq.gz yeast<br></pre>
 <p>
 This will pair the reads and upload them to the cluster. The last
-argument is
-the base name of the file that will be found in your directory on the
+argument is the base name of the file that will be found in your directory on the
 cluster where the variation analysis is performed. Because this is a
-paired-end
-experiment the extension `.pe` will be added automatically. After the
-upload
-process is complete, a file named reads.pe should be your home
+paired-end experiment the extension `.pe` will be added automatically. After the
+upload process is complete, a file named reads.pe should be your home
 directory.
 </p>
 <p>
 Standard filesystem commands begin with the prefix <i>jk_fs_*</i>.
 </p>
-<pre>  $ jk_fs_ls <br>  $ jk_fs_get yeast.pe<br>  $ jk_fs_mkdir my_directory<br>  ...<br></pre>
+<pre>  $ <code title = "iris-tutorial">jk_fs_ls</code> <br>  $ <code title = "iris-tutorial">jk_fs_get</code> yeast.pe<br>  $ <code title = "iris-tutorial">jk_fs_mkdir</code> my_directory<br>  ...<br></pre>
+</div>
+<div>
 <h3>2. Select reference genome for alignment</h3>
 <p>
 Before you can align your reads, you must select the reference genome
@@ -108,23 +117,25 @@ please contact us
 if your genome is not available in the system. The most commonly used
 genomes are listed using:
 </p>
-<pre>  $ jk_compute_list_genomes<br></pre>
+<pre>  $ <code title = "iris-tutorial">jk_compute_list_genomes</code><br></pre>
 <p>
 The complete list of genomes is displayed using: </p>
-<pre>  $ jk_compute_list_genomes -a<br></pre>
+<pre>  $ <code title = "iris-tutorial">jk_compute_list_genomes </code>-a<br></pre>
 <p>
 Genome IDs listed with a "kb|" prefix are internal kbase genome
 identifiers. You can lookup the scientific name
-of the genome using the <i>all_entities_Genome</i> command. For
+of the genome using the <i><code title = "iris-tutorial">all_entities_Genome</code></i> command. For
 example, this will identify all of the available strains of
 E. coli loaded into the infrastructure.
 </p>
-<pre>  $ all_entities_Genome -f scientific_name | grep -i 'Escherichia coli'<br></pre>
+<pre>  $ <code title = "iris-tutorial">all_entities_Genome</code> -f scientific_name | grep -i 'Escherichia coli'<br></pre>
+</div>
+<div>
 <h3>3. Align reads with Bowtie2</h3>
 <p>
 To align the reads to a reference genome simply call jk_compute_bowtie.
 </p>
-<pre>  $ jk_compute_bowtie -in=yeast.pe -org=yeast -out=yeast_bowtie_align<br>  Submitted Job: &lt;jobID&gt;<br></pre>
+<pre>  $ <code title = "iris-tutorial">jk_compute_bowtie</code> -in=yeast.pe -org=yeast -out=yeast_bowtie_align<br>  Submitted Job: &lt;jobID&gt;<br></pre>
 <p>The -in flag specifies which reads to align and analyze. Here we are
 analyzing the yeast
 paired end reads that we uploaded above. The -org flag selects the
@@ -135,39 +146,37 @@ sure to use single
 quotes around the genome name: <i>jk_* -org='kb|g.1870' ...</i>. You
 can also align
 the reads using bwa by substituting bwa for bowtie in the command
-above. If you run <i>jk_compute_bowtie</i> or any of the jk_* commands
+above. If you run <i><code title = "iris-tutorial">jk_compute_bowtie</code></i> or any of the jk_* commands
 without options, it will remind you of the required parameters with a
 short help text.
 </p>
+</div>
+<div>
 <h3>4. Check status of running Job</h3>
 <p>
 When the alignment task is started, the command will immediately return
-with a
-job reference ID but the analysis will continue in a batched queue on a
-large
-KBase cluster. This reference ID can be used to poll the status of the
-job
-using the command line client.
+with a job reference ID but the analysis will continue in a batched queue on a
+large KBase cluster. This reference ID can be used to poll the status of the
+job using the command line client.
 </p>
-<pre>  $ jk_compute_job_status -job=&lt;jobID&gt;<br><br>                           ID:                        &lt;jobID&gt;<br>                     Username:    ***GLOBUS_ONLINE_ACCOUNT***<br>                     Complete:                          false<br>                Running State:                              1<br>                 Map Progress:             0.8053986430168152<br>              Reduce Progress:                            0.0<br><br></pre>
+<pre>  $ <code title = "iris-tutorial">jk_compute_job_status</code> -job=&lt;jobID&gt;<br><br>                           ID:                        &lt;jobID&gt;<br>                     Username:    ***GLOBUS_ONLINE_ACCOUNT***<br>                     Complete:                          false<br>                Running State:                              1<br>                 Map Progress:             0.8053986430168152<br>              Reduce Progress:                            0.0<br><br></pre>
 <p>
 You will know the job is complete when "Complete" is set to true. Make
-sure you
-wait for the job to complete before continuing to the next step. Here
-the
-alignments are only 80.5% complete, but below is how it looks when the
-job
-completes. (It should take approximately 5 minutes to align the reads
+sure you wait for the job to complete before continuing to the next step. Here
+the alignments are only 80.5% complete, but below is how it looks when the
+job completes. (It should take approximately 5 minutes to align the reads
 for this example.)
 </p>
-<pre>  $ jk_compute_job_status -job=&lt;jobID&gt;<br><br>                           ID:                        &lt;jobID&gt;<br>                     Username:    ***GLOBUS_ONLINE_ACCOUNT***<br>                     Complete:                           true<br>                Running State:                              2<br>                 Map Progress:                            1.0<br>              Reduce Progress:                            1.0<br></pre>
+<pre>  $ <code title = "iris-tutorial">jk_compute_job_status</code> -job=&lt;jobID&gt;<br><br>                           ID:                        &lt;jobID&gt;<br>                     Username:    ***GLOBUS_ONLINE_ACCOUNT***<br>                     Complete:                           true<br>                Running State:                              2<br>                 Map Progress:                            1.0<br>              Reduce Progress:                            1.0<br></pre>
 <p>
 If you forgot your jobID, you can list the status of all your running
 jobs:
 </p>
-<pre>  $ jk_compute_list_jobs<br></pre>
+<pre>  $ <code title = "iris-tutorial">jk_compute_list_jobs</code><br></pre>
 <br>
 <br>
+</div>
+<div>
 <h2>Identify SNPs and download VCF file</h2>
 <h3>1. Call SNPs with SAMTools</h3>
 <p>
@@ -175,7 +184,7 @@ Calling SNPs takes the output from the alignment steps above and calls
 SNPs
 using the selected reference.
 </p>
-<pre>  $ jk_compute_samtools_snp -in=yeast_bowtie_align -org=yeast -out=yeast_snps<br></pre>
+<pre>  $ <code title = "iris-tutorial">jk_compute_samtools_snp</code> -in=yeast_bowtie_align -org=yeast -out=yeast_snps<br></pre>
 <p>
 You can check on the status of your analysis job using the <i>jk_compute_job_status
 -job=&lt;jobID&gt;</i>
@@ -183,6 +192,8 @@ command as shown above. Make sure you wait until the
 status is complete before executing the next step. (This example will
 take approximately 5 minutes)
 </p>
+</div>
+<div>
 <h3>2. Merge VCF files</h3>
 <p>
 Because SNPs are called in parallel across the genome multiple files
@@ -190,16 +201,18 @@ are created
 by the previous command. To join the SNPs into a single VCF file use
 the
 vcfmerge function </p>
-<pre>  $ jk_compute_vcf_merge -in=yeast_snps --alignments=yeast_bowtie_align -out=yeast.vcf<br></pre>
+<pre>  $ <code title = "iris-tutorial">jk_compute_vcf_merge</div> -in=yeast_snps --alignments=yeast_bowtie_align -out=yeast.vcf<br></pre>
+</div>
+<div>
 <h3>3. Download VCF file</h3>
 <p>
 Download the combined vcf file back to your desktop computer for local
 viewing.
 </p>
-<pre>  $ jk_fs_get yeast.vcf<br>  $ wc -l yeast.vcf<br>  $ head yeast.vcf<br></pre>
+<pre>  $ <code title = "iris-tutorial">jk_fs_get</code> yeast.vcf<br>  $ wc -l yeast.vcf<br>  $ head yeast.vcf<br></pre>
 <p>
 A local file named yeast.vcf will be created containing all of the SNPs
-called
-by the pipeline. These can be further analyzed using tools such as <a href="http://snpeff.sourceforge.net/">SNPeff</a> or
+called by the pipeline. These can be further analyzed using tools such as <a href="http://snpeff.sourceforge.net/">SNPeff</a> or
 <a href="http://www.yandell-lab.org/software/vaast.html">VAAST</a>.
 </p>
+</div>
