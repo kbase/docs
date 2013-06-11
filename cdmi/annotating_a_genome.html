@@ -1,5 +1,5 @@
 <h1>Annotating a Genome Using KBase Tools</h1>
-
+<div>
 <p>
 <strong>Purpose:</strong> This tutorial demonstrates how to annotate a
 set of closely related genomes using KBase tools.  We will show how to
@@ -20,15 +20,15 @@ tutorial below:
 <p>
 <strong>Required Prerequisite Activities:</strong> 
 <a href="/for-users/tutorials/installing-the-kbase-app-dmg/">Download KBase: Installing the KBase Application DMG</a>, OR <a href="for-users/tutorials/navigating-iris/">Get Started with IRIS: Navigating IRIS</a> </p>
-
+</div>
 <p>
-
+<div>
 <h2>Select a genome</h2>
 
 To see which <i>Geobacter</i> genomes are in the <a name="Central Store316">Central Store</a> of KBase, use the command:
 
 <pre>
-<a href="http://kbase.us/developer-zone/api-documentation/cdm-entity-relationship-command-scripts/#all_entities_Genome" target="_blank">all_entities_Genome</a> -f scientific_name | grep Geobacter
+<a href="http://kbase.us/developer-zone/api-documentation/cdm-entity-relationship-command-scripts/#all_entities_Genome" target="_blank"><code title = "iris-tutorial">all_entities_Genome</code></a> -f scientific_name | grep Geobacter
 </pre>
 
 <p>
@@ -60,11 +60,10 @@ kb|g.835    Geobacter sp. FRC-32
 kb|g.20945  Geobacter sulfurreducens PCA
 kb|g.589    Geobacter metallireducens GS-15 
 </pre>
-
 <p>
 The genome <i>Geobacter sulfurreducens</i> KN400 (KBase ID
 "kb|g.2860") is a good example to start with.
-
+</div>
 <p>
 <h2>Get a FASTA file of contigs from the KBase Central Store</h2>
 
@@ -75,7 +74,7 @@ using the command:
 
 <p>
 <pre>
-echo 'kb|g.2860' | <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#genomes_to_contigs" target="_blank">genomes_to_contigs</a> | <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#contigs_to_sequences" target="_blank">contigs_to_sequences</a> &gt; g.2860.contigs
+echo 'kb|g.2860' | <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#genomes_to_contigs" target="_blank"><code title = "iris-tutorial">genomes_to_contigs</code></a> | <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#contigs_to_sequences" target="_blank"><code title = "iris-tutorial">contigs_to_sequences</a> </code>&gt; g.2860.contigs
 </pre>
 
 <p>
@@ -87,8 +86,9 @@ KBase Central Store, we could have used any sequence data.  For
 example, if you have sequence data for some newly sequenced microbe,
 you could upload it to KBase through the IRIS web interface into your
 work area.
-
+</div>
 <p>
+<div>
 <h2>Create project subdirectories</h2>
 
 <p>
@@ -113,8 +113,9 @@ subdirectory, and the last displays the contents of the subdirectory.
 If you're using IRIS, don't use any characters in your filenames that
 have special meaning in UNIX shells; e.g., in this case the 'kb|'
 prefix for the genome was omitted.
-
+</div>
 <p>
+<div>
 <h2>Create a genome object to annotate</h2>
 
 <p>
@@ -124,7 +125,7 @@ strain using the command:
 <p>
 <!-- needs links to API doc: -->
 <pre>
-fasta_to_genome 'Geobacter sulfurreducens KN400' Bacteria 11 &lt; g.2860.contigs &gt; genome
+<code title = "iris-tutorial">fasta_to_genome</code> 'Geobacter sulfurreducens KN400' Bacteria 11 &lt; g.2860.contigs &gt; genome
 </pre>
 
 <p>
@@ -136,8 +137,9 @@ to see the file, and then click on it in IRIS to see the encoded fields).
 Note that we have named our project subdirectory g.2860, which
 reflects the name of the genome whose contigs we copied.  The next
 step is to re-annotate the contigs, generating a whole new genome.
-
+</div>
 <p>
+<div>
 <h2>Annotate a genome object</h2>
 
 <p>
@@ -147,7 +149,7 @@ command:
 <p>
 <!-- needs links to API doc: -->
 <pre>
-annotate_genome &lt; genome &gt; annotated.genome
+<code title = "iris-tutorial">annotate_genome</code> &lt; genome &gt; annotated.genome
 </pre>
 
 <p>
@@ -167,15 +169,16 @@ in the annotated genome object is to use the command:
 <p>
 <!-- needs links to API doc: -->
 <pre>
-genomeTO_to_feature_data &lt; annotated.genome &gt; features.txt
+<code title = "iris-tutorial">genomeTO_to_feature_data </code>&lt; annotated.genome &gt; features.txt
 </pre>
 
 <p>
 This command produces a tab-separated table containing four columns:
 the feature ID, location on the genome, feature type, and assigned
 function.  Use <em>ls</em> to see the file and explore the contents.
-
+</div>
 <p>
+<div>
 <h2>Build a metabolic reconstruction from an annotated genome</h2>
 
 <p>
@@ -196,12 +199,13 @@ reconstruction for the annotated genome using the command:
 <p>
 <!-- needs links to API doc: -->
 <pre>
-genomeTO_to_reconstructionTO &lt; annotated.genome &gt; reconstruction
+<code title = "iris-tutorial">genomeTO_to_reconstructionTO</code> &lt; annotated.genome &gt; reconstruction
 </pre>
 
 <p>
 (The above command is not a typo; the "TO" stands for "typed object.")
-
+</div>
+<div>
 <p>
 The reconstruction includes a list of functional roles for which a
 gene was identified.  A "role" is a term indicating a function that a
@@ -212,7 +216,7 @@ roles that were found in your reconstruction, use the command:
 <p>
 <!-- needs links to API doc: -->
 <pre>
-reconstructionTO_to_roles &lt; reconstruction &gt; roles
+<code title = "iris-tutorial">reconstructionTO_to_roles</code> &lt; reconstruction &gt; roles
 </pre>
 
 <p>
@@ -222,7 +226,7 @@ variant codes that were assigned), use the command:
 <p>
 <!-- needs links to API doc: -->
 <pre>
-reconstructionTO_to_subsystems &lt; reconstruction &gt; subsystems
+<code title = "iris-tutorial">reconstructionTO_to_subsystems</code> &lt; reconstruction &gt; subsystems
 </pre>
 
 <p>
@@ -232,6 +236,8 @@ subsystems are listed as missing, while others are listed as present
 in the genome.
 
 <p>
+</div>
+<div>
 <h2>Find roles that might impact metabolic models</h2>
 
 <p>
@@ -245,9 +251,9 @@ the <a name="metabolic324">metabolic</a> models in KBase:
 
 <p>
 <pre>
-<a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#all_roles_used_in_models" target="_blank">all_roles_used_in_models</a> &gt; all.roles
+<a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#all_roles_used_in_models" target="_blank"><code title = "iris-tutorial">all_roles_used_in_models</code></a> &gt; all.roles
 <!-- needs links to API doc: -->
-a_and_b roles all.roles &gt; roles.for.models
+<code title = "iris-tutorial">a_and_b</code> roles all.roles &gt; roles.for.models
 </pre>
 
 The first command finds all roles used in KBase metabolic models (storing
@@ -256,6 +262,8 @@ between all roles and the roles in the initial reconstruction (storing
 the result in the file "roles.for.models").
 
 <p>
+</div>
+<div>
 <h2>Compare roles with those found in another strain</h2>
 
 <p>
@@ -274,16 +282,17 @@ species, <i>Geobacter metallireducens</i> GS-15 (KBase ID
 
 <p>
 <pre>
-echo 'kb|g.9032' | <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#genomes_to_fids" target="_blank">genomes_to_fids</a> CDS | <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#fids_to_roles" target="_blank">fids_to_roles</a> 2&gt; /dev/null | cut -f 3 &gt; roles.in.g.9032
+echo 'kb|g.9032' | <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#genomes_to_fids" target="_blank"><code title = "iris-tutorial">genomes_to_fids</code></a> CDS | <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#fids_to_roles" target="_blank"><code title = "iris-tutorial">fids_to_roles</code></a> 2&gt; /dev/null | cut -f 3 &gt; roles.in.g.9032
 </pre>
 
 <p>
 Note that the
 command <b><a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#fids_to_roles"
-target="_blank">fids_to_roles</a></b> writes error messages when it
+target="_blank"><code title = "iris-tutorial">fids_to_roles</code></a></b> writes error messages when it
 cannot match a fid to any roles, so the commands above redirect all
 warning messages to /dev/null so they don't clutter up the output.
-
+</div>
+<div>
 <p>
 Next, we'll find potentially missing roles in our reconstruction
 of <i>Geobacter metallireducens GS-15</i>, using the commands:
@@ -291,8 +300,8 @@ of <i>Geobacter metallireducens GS-15</i>, using the commands:
 <p>
 <!-- needs links to API doc: -->
 <pre>
-a_and_b roles.in.g.9032 all.roles &gt; roles.for.models.g.9032
-a_not_b roles.for.models roles.for.models.g.9032 &gt; roles.to.search.for
+<code title = "iris-tutorial">a_and_b</code> roles.in.g.9032 all.roles &gt; roles.for.models.g.9032
+<code title = "iris-tutorial">a_not_b</code> roles.for.models roles.for.models.g.9032 &gt; roles.to.search.for
 </pre>
 
 <p>
@@ -308,6 +317,8 @@ indicate errors in the new reconstruction, or they may indicate
 real differences in the biology of the two microbes.
 
 <p>
+</div>
+<div>
 <h2>Create an initial metabolic model</h2>
 
 <p>
@@ -317,14 +328,15 @@ initial <a name="metabolic326">metabolic</a> model using the command:
 <p>
 <!-- needs links to API doc: -->
 <pre>
-genome_to_fbamodel &lt; annotated.genome &gt; initial.model
+<code title = "iris-tutorial">genome_to_fbamodel</code> &lt; annotated.genome &gt; initial.model
 </pre>
 
 <p>
 After a minute or two, a <a name="metabolic327">metabolic</a> model
 object is stored in a file (named "initial.model").
-
+</div>
 <p>
+<div>
 <h2>View the model</h2>
 
 <p>
@@ -334,14 +346,15 @@ contains, using the command:
 <p>
 <!-- needs links to API doc: -->
 <pre>
-fbamodel_to_html &lt; initial.model &gt; initial.model.html
+<code title = "iris-tutorial">fbamodel_to_html</code> &lt; initial.model &gt; initial.model.html
 </pre>
 
 <p>
 After that command completes, use <em>ls</em> and click on the
 generated html.
-
+</div>
 <p>
+<div>
 <h2>Run flux balance analysis on the metabolic model</h2>
 
 <p>
@@ -355,7 +368,7 @@ are used during growth.
 <p>
 <!-- needs links to API doc: -->
 <pre>
-runfba &lt; initial.model &gt; solution.html
+<code title = "iris-tutorial">runfba</code> &lt; initial.model &gt; solution.html
 </pre>
 
 <p>
@@ -379,8 +392,9 @@ table. These are the components that cannot be produced.
 <p>
 Next, we will try to fix the model by adding reactions to enable
 production of these components.
-
+</div>
 <p>
+<div>
 <h2>Gapfill the model</h2>
 
 <p>
@@ -391,7 +405,7 @@ components:
 <p>
 <!-- needs links to API doc: -->
 <pre>
-gapfill_fbamodel &lt; initial.model &gt; gapfilled.model
+<code title = "iris-tutorial">gapfill_fbamodel</code> &lt; initial.model &gt; gapfilled.model
 </pre>
 
 <p>
@@ -403,8 +417,9 @@ by the gapfilling algorithm to enable growth.
 <p>
 We next re-run flux balance analysis to determine the biomass
 production pathways of the organism.
-
+</div>
 <p>
+<div>
 <h2>Run flux balance analysis on the gapfilled model</h2>
 
 <p>
@@ -415,7 +430,7 @@ the runfba command again:
 <p>
 <!-- needs links to API doc: -->
 <pre>
-runfba &lt; gapfilled.model &gt; solution.html
+<code title = "iris-tutorial">runfba</code> &lt; gapfilled.model &gt; solution.html
 </pre>
 
 <p>
@@ -423,8 +438,9 @@ Once this command completes, use <em>ls</em> and click on the HTML
 produced by the FBA command. Your FBA solution should now include a
 nonzero objective value as well as numerous compound and reaction
 fluxes.
-
+</div>
 <p>
+<div>
 <h2>Export the model to external tools</h2>
 
 <p>
@@ -437,9 +453,10 @@ used with these tools:
 <p>
 <!-- needs links to API doc: -->
 <pre>
-fbamodel_to_sbml &lt; gapfilled.model &gt; gapfilled.model.sbml
+<code title = "iris-tutorial">fbamodel_to_sbml</code> &lt; gapfilled.model &gt; gapfilled.model.sbml
 </pre>
 
 <p>
 After the command completes, use <em>ls</em> and select the SBML file
 for download.
+</div>
