@@ -2,7 +2,7 @@
 <h2> Introduction</h2>
 <p>The Assmebly Service currently is only availble through the KBase Download.
 This service is at an early phase, and supports the following capabilities:</p>
-<ul class="simple">
+<ul>
 <li>Velvet assembly: Velvet is a popular de Bruijn graph based assembler for de novo genomic and transcriptome sequence assembly. It was designed for short read sequencing technologies.</li>
 <li>Kiki assembly: is a de novo genome and metagenome assembler developed at Argonne. It uses a hybrid of overlap-layout-consensus and greedy extension approaches. Kiki is fast and can work on distributed-memory machines. </li>
 <li> A5: A5 is an assembly pipeline optimized for de novo assembly of microbial genomes. It is known for generating large scaffolds. </li>
@@ -11,7 +11,7 @@ This service is at an early phase, and supports the following capabilities:</p>
 <p>Here we will walk through a couple examples.</p>
 
 <h2>Logging In</h2>
-<p> Because assembly computation does not provide immediate results, users will need to login using their KBase account. 
+<p> Because assembly computation does not provide immediate results, users will need to login using their KBase account. </p>
 
 To login at the command-line, use the ar_login command:</p>
 <pre class="literal-block">
@@ -26,15 +26,14 @@ File formats supported include fasta and fastq. Compressed files are not yet sup
 <pre class="literal-block">
 wget http://www.mcs.anl.gov/~fangfang/test/se.fastq
 </pre>
-<ol class="arabic">
-<li><p class="first">Submit the file to be assembled with velvet:</p>
+<li>Submit the file to be assembled with velvet:
 <pre class="literal-block">
 ar_run -f se.fastq -a velvet -m &quot;Description of job&quot;
 </pre>
 The -a sets the tool to use for assembly. This example shows the use of velvet. 
 Users can set "-a" to velvet, kiki, a5, or idba
-</li>
-<li><p class="first">Check and monitor the status of your jobs:</p>
+<p>
+<li>Check and monitor the status of your jobs:</li>
 <pre class="literal-block">
 ar_stat -w
 </pre>
