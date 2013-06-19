@@ -9,9 +9,8 @@ This service is at an early phase, and supports the following capabilities:</p>
 <li>IDBA: IDBA is de Bruijn graph based assembler that iterates from small to large overlaps to reduce the false positive nodes in the assembly graph and improve assembly quality.</li>
 </ul>
 <p>Here we will walk through a couple examples.</p>
-</div>
-<div class="section" id="authentication">
-<h1>Logging In</h1>
+
+<h2>Logging In</h2>
 <p> Because assembly computation does not provide immediate results, users will need to login using their KBase account. 
 
 To login at the command-line, use the ar_login command:</p>
@@ -21,9 +20,8 @@ ar_login
 and to logout, ar_logout
 </pre>
 File formats supported include fasta and fastq. Compressed files are not yet supported, but we anticipate it will next release (August 2013).
-</div>
-<div class="section" id="assembling-single-end-reads-wih-velvet">
-<h1>Assembling Single-End Reads</h1>
+
+<h2>Assembling Single-End Reads</h2>
 <p>Here we will use a sample metagenome file called <a class="reference external" href="http://www.mcs.anl.gov/~fangfang/test/se.fastq">se.fastq</a></p>
 <pre class="literal-block">
 wget http://www.mcs.anl.gov/~fangfang/test/se.fastq
@@ -68,9 +66,8 @@ The ar_get command retrieves the job status, "-j" sets what job to look up and t
 <li><strong>JOB_ID_analysis.tar.gz</strong>:  assembly analysis performed via <a class="reference external" href="http://bioinf.spbau.ru/quast">QUAST</a></li>
 Follow the QUAST link to learn more about output file contents.
 </ul>
-</div>
-<div class="section" id="assembling-pair-end-reads-wih-kiki-and-velvet">
-<h1>Assembling Pair-End Reads </h1>
+
+<h2>Assembling Pair-End Reads </h2>
 <p>We will walk through the creation and comparison of two assemblies using Kiki and Velvet.
 Here we will use sample paired end files called <a class="reference external" href="http://www.mcs.anl.gov/~fangfang/test/pe_1.fastq">pe_1.fastq</a> and <a class="reference external" href="http://www.mcs.anl.gov/~fangfang/test/pe_2.fastq">pe_2.fastq</a></p>
 <pre class="literal-block">
@@ -142,7 +139,3 @@ N75                        1275     617
 </pre>
 <p>Or open <strong>report.html</strong> for visualizations:</p>
 <img alt="quast.png" src="quast.png" style="width:100%;"/>
-</div>
-</div>
-</body>
-</html>
