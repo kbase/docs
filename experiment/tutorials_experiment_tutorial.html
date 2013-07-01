@@ -1,30 +1,10 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-  <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
-  <title>Experiment Scripts Tutorial</title>
-</head>
-
-<body>
+<div>
 <h1>Experiment Scripts Tutorial</h1>
 
 <strong>Purpose:</strong> Learn how to use the experiment related command line
 scripts.
+
 </br>
-</br>
-<strong>Prequisites:</strong> 
-<a href="http://kbase.us/developer-zone/tutorials/getting-started/some-basic-exercises-using-kbase/">
-Some Basic Exercises Using KBase</a>
-</br>
-</br>
-<strong>Suggested Prerequisites:</strong> 
-<a href="http://kbase.us/developer-zone/tutorials/iris/introduction-to-the-kbase-iris-interface/">
-Some Basic Exercises using the KBase IRIS interface</a>
-</br>
-</br>
-<strong>Related Tutorials:</strong> None
 
 <h2>Generating input data for growmatch</h2>
 
@@ -36,16 +16,17 @@ although a thresholding step will be required prior to  submission to a GM
 algorithm.</p>
 
 <p>There are many input options to the main search command, 
-exp_find_growmatch_data, but here we will only focus on a few common ones. For
+<code title = "iris-tutorial">exp_find_growmatch_data</code>, but here we will only focus on a few common ones. For
 more details, run the script with the --help option.</p>
-
+</div>
+<div>
 <h3>Finding experiments of interest</h3>
 <p>There are several ways to locate experiments one may be interested in including
 in the data set, but we'll simply look at the current list of experiments and
 choose the ones we wish.</p>
 
 <pre>
-<strong>$ all_entities_ExperimentMeta -f "title"</strong>
+<strong>$ <code title = "iris-tutorial">all_entities_ExperimentMeta</code> -f "title"</strong>
 kb|expm.2	Shewanella mutant motility fitness
 kb|expm.12	Shewanella matched fitness/expression experiments in a variety of
 conditions, Arkin 2013
@@ -62,7 +43,7 @@ kb|expm.4	Shewanella mutant chemical stress condition fitness
 kb|expm.7	Shewanella mutant sulfur fitness
 kb|expm.8	Shewanella mutant phosphorous fitness
 kb|expm.10	Shewanella mutant pH fitness
-<strong>$ echo 'kb|expm.7' | get_entity_ExperimentMeta 
+<strong>$ echo 'kb|expm.7' | <code title = "iris-tutorial">get_entity_ExperimentMeta</code> 
 -f "title,description,comments"</strong>
 kb|expm.7	Shewanella mutant sulfur fitness	Fitness experiments on 
 Shewanella MR-1 strains with gene disruptions in various environments varying 
@@ -73,12 +54,14 @@ the sulfur source in shewanella minimal medium.
 Here, we simply pulled a list of experiment titles from the CDS and then got a
 bit more information about the experiment we're interested in.</p>
 
+</div>
+<div>
 <p>Now let's figure out which microarrays we wish to use from that experiment.
 </p>
 
 <pre>
-<strong>$echo 'kb|expm.7' | get_relationship_HasExperimentalUnit -to id | 
-cut -f2 | get_relationship_GroupedBy -to "id,name,comments,groupType" | 
+<strong>$echo 'kb|expm.7' | <code title = "iris-tutorial">get_relationship_HasExperimentalUnit</code> -to id | 
+cut -f2 | <code title = "iris-tutorial">get_relationship_GroupedBy</code> -to "id,name,comments,groupType" | 
 cut -f2- | uniq</strong>
 kb|expug.103	Arkin shewanella 2011 chip 146: hypotaurine		microarray
 kb|expug.102	Arkin shewanella 2011 chip 147: thiourea		microarray
@@ -91,13 +74,15 @@ kb|expug.78	Arkin shewanella 2011 chip 153: thiophosphate		microarray
 </pre>
 
 <p>Let's exclude thiosulfate from the list. It's smelly.</p>
+</div>
+<div>
 
 <h3>Setting up the workspace</h3>
 
 <p>Next we need to set up a workspace to store our growmatch data.</p>
 
 <pre>
-<strong>$ ws-login experimenttest</strong>
+<strong>$ <code title = "iris-tutorial">ws-login</code> experimenttest</strong>
 Password: **********
 Login successful. Now logged in as:
 experimenttest
@@ -105,25 +90,30 @@ experimenttest
 Workspace created with name:
 expt_tutorial
 </pre>
-
+</div>
+<div>
 <h3>Extracting the data from the CDS</h3>
 
-<p>Now we're ready to pull the data. We happen to know that the genome id for 
+<p>Now we're ready to retrieve the data. We happen to know that the genome id for 
 Shewanella MR-1 is kb|g.20848.</br> 
+(NOTE: Retrieving kbase ids for genomes in KBase, use the command <code title = "iris-tutorial">all_entities_Genome</code> <a href="http://kbase.us/developer-zone/api-documentation/cdm-entity-relationship-command-scripts/#all_entities_Genome" target="_blank">all_entities_Genome</a> -f scientific_name )
 Keep in mind there are many more options for including and excluding data than 
 are noted here - run the script with the --help option for more information.<p>
 
 <pre>
-<strong>$ exp_find_growmatch_data -g 'kb|g.20848' -w expt_tutorial 
+<strong>$ <code title = "iris-tutorial">exp_find_growmatch_data</code> -g 'kb|g.20848' -w expt_tutorial 
 -o my_growmatch_pre --experimentMetaIDs 'kb|expm.7' 
 --exclude-groups 'kb|expug.230'</strong></pre>
+
+</div>
+<div>
 
 <h3>Verify generation</h3>
 
 <p>Now we can check that the data was stored in the workspace.</p>
 
 <pre>
-<strong>$ ws-getmeta 'Growmatch data' my_growmatch_pre -w expt_tutorial</strong>
+<strong>$ <code title = "iris-tutorial">ws-getmeta</code> 'Growmatch data' my_growmatch_pre -w expt_tutorial</strong>
 Object ID: my_growmatch_pre
 Type: Growmatch data
 Workspace: expt_tutorial
@@ -142,6 +132,7 @@ large and is not simple to understand. Instead, thie object should be
 thresholded, typically manually, and then formatted into a PhenotypeSet object.
 A future tutorial will cover this topic.</p>
 
+</div>
 
 
 
