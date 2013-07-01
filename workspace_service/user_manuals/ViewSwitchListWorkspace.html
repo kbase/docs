@@ -1,3 +1,4 @@
+<div>
 <h1>Workspace Command Line Script User Manual</h1>
 <a href="Overview.html" target="_blank">Return to Workspace overview</a>
 <h2>Viewing, switching, and listing Workspaces</h2>
@@ -5,12 +6,12 @@
 currently selected workspace, and list all objects contained in the currently selected
 workspace. This includes the following workspace commands:</p>
 <ol>
-<li><a href="#STEP1">kbws-list: lists workspaces accessible by the user</a></li>
-<li><a href="#STEP2">kbws-workspace: displays and changes currently selected workspace</a></li>
-<li><a href="#STEP3">kbws-meta: displays the metadata for the currently selected workspace</a></li>
-<li><a href="#STEP4">kbws-listobj: lists objects contained in the currently selected workspace</a></li>
+<li><a href="#STEP1"><code title = "iris-tutorials">kbws-list</code>: lists workspaces accessible by the user</a></li>
+<li><a href="#STEP2"><code title = "iris-tutorials">kbws-workspace</code>: displays and changes currently selected workspace</a></li>
+<li><a href="#STEP3"><code title = "iris-tutorials">kbws-meta</code>: displays the metadata for the currently selected workspace</a></li>
+<li><a href="#STEP4"><code title = "iris-tutorials">kbws-listobj</code>: lists objects contained in the currently selected workspace</a></li>
 </ol>
-<a name="STEP1"><h3>1. kbws-list</h3></a>
+<a name="STEP1"></div><div><h3>1. kbws-list</h3></a>
 <p>The kbws-list command enables the user to list all the workspaces the user currently 
 has at least read permissions for. The following is the usage for this command:</p>
 <pre><code><i>
@@ -36,7 +37,7 @@ using the KBase login commands. If we change
 our current login, we will see the "User perm" change. The final column indicates the default
 permissions for all users of this workspace. Note, a user can be granted specific permissions
 to a workspace, which overrides the defaults.</p>
-<a name="STEP2"><h3>2. kbws-workspace</h3></a>
+<a name="STEP2"></div><div><h3>2. kbws-workspace</h3></a>
 <p>Now that we can see the list of workspaces that we currently have access to, lets use
  the kbws-workspace command to select a particular workspace to work in. The usage for the
  kbws-workspace command follows:</p>
@@ -59,7 +60,7 @@ ourselves by running the kbws-workspace command again with no arguments:</p>
 		Current workspace is:
 		test
 </i></pre></code>
-<a name="STEP3"><h3>3. kbws-meta</h3></a>
+<a name="STEP3"></div><div><h3>3. kbws-meta</h3></a>
 <p></p>
 <pre><code><i>
 	kbws-meta [-?ehw] [long options...]
@@ -83,7 +84,7 @@ ourselves by running the kbws-workspace command again with no arguments:</p>
 		1
 </i></pre></code>
 <p>The output of this command indicates...</p>
-<a name="STEP4"><h3>4. kbws-listobj</h3></a>
+<a name="STEP4"></div><div><h3>4. kbws-listobj</h3></a>
 <p></p>
 <pre><code><i>
 	kbws-listobj [-?ehstw] [long options...]
@@ -103,3 +104,4 @@ ourselves by running the kbws-workspace command again with no arguments:</p>
 		kb|g.0.fbamdl.213      Model      test 0    chenry chenry     0   chenry 
 </i></pre></code>
 <p>The output of this command indicates...</p>
+</div>
