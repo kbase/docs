@@ -1,12 +1,6 @@
+<div>
+<h1>Analysis in R: the matR extension for metagenomics</h1>
 
-
-<!DOCTYPE HTML>
-<html>
-<head>
-<title>Using the matR Package</title>
-</head>
-
-<body>
 <p>
 <b>Purpose:</b> Learn what the matR package is, what it can do, how to install it, and where to find more information.
 </p>
@@ -18,14 +12,13 @@
 <p>
 <b>Suggested Prerequisite Activities:</b> Gain some familiarity with R.  Online tutorials can be found at the <a href="http://www.r-project.org">R Language homepage</a>.  </p>
 
-<p>
-<b>Related Tutorials:</b> None.
-</p>
-
-<h1>Introduction</h1>
+<h2>Introduction</h2>
 matR is a client for analysis of metagenomic annotations built as an extension package to the popular R programming language for statistics.  It features facilities to build and examine metagenome collections, access to metadata, authentication for access to private data, customized analysis and visualization tools, and easy integration with the wide world of R extension packages.
 
-<h1>Installation</h1>
+</div>
+<div>
+
+<h2>Installation</h2>
 At the R prompt, enter: 
 <pre>
 > install.packages ("matR", type = "source",
@@ -41,7 +34,10 @@ to load the package, and finally enter:
 </pre>
 to install supporting packages.  Note that in the technical sense there are no dependencies, but without supporting packages, many features will be unusable.
 
-<h1>Example</h1>
+</div>
+<div>
+
+<h2>Example</h2>
 We use a prepackaged collection of 24 metagenomes, fifteen from a fresh water sample, the others from a hot spring.
 <pre>
 > Waters
@@ -55,6 +51,10 @@ We look at a principal coordinates analysis with samples colored by group:
 > col <- as.character (col)
 > pco (Waters, comp = c (1,2), main = "fresh vs. spring water samples", col = col)
 </pre>
+
+</div>
+<div>
+
 We can also look at principal coordinates in three dimensions, or a heatmap:
 <pre>
 > pco (Waters, comp = c (1,2,3), main = "fresh vs. spring water samples", color = col)
@@ -76,6 +76,10 @@ Using p-values, we check how many annotations are retained, at various significa
 > sum (results$stat$p.value < 0.005)
 > sum (results$stat$p.value < 0.0005)
 </pre>
+
+</div>
+<div>
+
 It is easy to subselect, leaving abundance data for the eighteen functional annotations of highest significance in differentiating the two groups:
 <pre>
 > subm <- Waters$normed [results$stat$p.value < 0.0005, ]
@@ -86,6 +90,10 @@ A heatmap restricted to these functions shows clear distinctions between fresh a
 <pre>
 > heatmap (Waters, rows = (results$stat$p.value < 0.0005))
 </pre>
+
+</div>
+<div>
+
 We can scrutinize available metadata for an explanation, and after noticing the various projects contained in the collection, it seems natural to compare sample environments:
 <pre>
 > metadata (Waters) ["project.name"]
@@ -102,6 +110,10 @@ There, we discover that the ninth spring water sample, unlike every other in the
 <pre>
 > metadata (Waters) ["library.type"]
 </pre>
+
+</div>
+<div>
+
 At this point we may wish to continue analysis with subcollections, using WGS metagenomes, only:
 <pre>
 > Waters2 <- Waters [1:23]
@@ -125,9 +137,10 @@ Significance testing could also be redone with annotations from a higher (or low
 </pre>
 We added a new view to the collection, and proceeded as before.
 
+</div>
+<div>
 
-
-<h1>Functionality</h1>
+<h2>Functionality</h2>
 This tutorial provides an overview of functionality, by example.
 
 <h2>Collections</h2>
@@ -229,7 +242,7 @@ Such analyses can be fruitfully iterated.
 <h2>Integration</h2>
 matR integrates easily with other R software.  Collection views are directly extracted as ordinary matrices with the $ operator, as above.  Metadata is an S3-classed character vector.  Visualization routines accept all standard graphical parameters.  Shortcuts are provided to write collection data and analyses to text files.
 
-<h1>Further Resources</h1>
+</div><div><h2>Further Resources</h2>
 Once the package is loaded in an R session, use:
 <pre>
 > demo (package = "matR")
