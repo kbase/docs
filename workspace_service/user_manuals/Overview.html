@@ -1,4 +1,4 @@
-
+<div>
 <h1>Workspace Command Line Script User Manual</h1>
 <h2>Workspace Overview</h2>
 <p>Workspaces are used in KBase to provide an online location for all
@@ -21,7 +21,7 @@ workspace contents</li>
 </ul>
 <p>In the following overviews, we demonstrate all functions of the
 KBase workspace.</p>
-<h2>Using the Workspace Command Line Tools</h2>
+</div><div><h2>Using the Workspace Command Line Tools</h2>
 <ol>
   <li><a href="#STEP1">Installing and accessing workspace commands</a></li>
   <li><a href="#STEP2">Viewing available workspaces, switching current
@@ -37,17 +37,17 @@ objects</a></li>
   <li><a href="#STEP9">Accessing outstanding jobs</a></li>
 </ol>
 <a name="STEP1">
-<h3>1. Installing and accessing workspace commands</h3>
+</div><div><h3>1. Installing and accessing workspace commands</h3>
 </a>
 <p>The Workspace Command Line tools are available either through the <a href="http://iris.kbase.us" target="_blank">IRIS command web interface</a>
 or through the
 <a href="http://www.kbase.us" target="_blank">KBase Client Installation</a>.
 Thus, the first step towards using the workspace commands is to either
 familiarize yourself with IRIS in the IRIS tutorial:
-<a href="/developer-zone/tutorials/iris/introduction-to-the-kbase-iris-interface/" target="_blank">IRIS Overview Tutorial</a>
+<a href="http://kbase.us/for-users/tutorials/navigating-iris/" target="_blank">IRIS Overview Tutorial</a>
 or to install and run the KBase Client Installation.
 <a name="STEP2">
-<h3>2. Viewing available workspaces, switching current workspace, and
+</div><div><h3>2. Viewing available workspaces, switching current workspace, and
 listing workspace contents</h3>
 </a></p>
 <p>This user manual covers the commands used to list available
@@ -56,17 +56,17 @@ currently selected workspace, and list all objects contained in the
 currently selected
 workspace. This includes the following specific workspace commands:</p>
 <ul>
-  <li>kbws-list: lists workspaces accessible by the user</li>
-  <li>kbws-workspace: displays and changes currently selected workspace</li>
-  <li>kbws-meta: displays the metadata for the currently selected
+  <li><code title = "iris-tutorials">kbws-list</code>: lists workspaces accessible by the user</li>
+  <li><code title = "iris-tutorials">kbws-workspace</code>: displays and changes currently selected workspace</li>
+  <li><code title = "iris-tutorials">kbws-meta</code>: displays the metadata for the currently selected
 workspace</li>
-  <li>kbws-listobj: lists objects contained in the currently selected
+  <li><code title = "iris-tutorials">kbws-listobj</code>: lists objects contained in the currently selected
 workspace</li>
 </ul>
 <a href="ViewSwitchListWorkspace.html" target="_blank">Detailed command
 documentation</a>
 <a name="STEP3">
-<h3>3. Creating, deleting, and cloning workspaces</h3>
+</div><div><h3>3. Creating, deleting, and cloning workspaces</h3>
 </a>
 <p>Now that you can list the available workspaces and view workspace
 contents, it's time
@@ -74,17 +74,17 @@ to learn how to create and delete your own workspaces. There are three
 commands to support
 the creation, deletion, and cloning of workspaces:</p>
 <ul>
-  <li>kbws-createws: creates a new workspace to be owned and managed by
+  <li><code title = "iris-tutorials">kbws-createws</code>: creates a new workspace to be owned and managed by
 you </li>
-  <li>kbws-clone: creates an exact clone of an existing workspace to
+  <li><code title = "iris-tutorials">kbws-clone</code>: creates an exact clone of an existing workspace to
 enable tinkering </li>
-  <li>kbws-deletews: deletes an existing workspace with all objects
+  <li><code title = "iris-tutorials">kbws-deletews</code>: deletes an existing workspace with all objects
 (use with caution!!!)</li>
 </ul>
 <a href="CreationCloneDeletion.html" target="_blank">Detailed command
 documentation</a>
 <a name="STEP4">
-<h3>4. Managing workspace permissions</h3>
+</div><div><h3>4. Managing workspace permissions</h3>
 </a>
 <p>Now that you can create your own workspaces, you will want to manage
 the permissions
@@ -96,16 +96,16 @@ default, but other users can be provided with administrative privileges
 if required. There
 are three commands to support the management of workspace permissions:</p>
 <ul>
-  <li>kbws-setglobalperm: resets the global default permissions for all
+  <li><code title = "iris-tutorials">kbws-setglobalperm</code>: resets the global default permissions for all
 users for a workspace</li>
-  <li>kbws-setuserperm: resets specific permissions for a list of users</li>
-  <li>kbws-perm: returns a list of all currently set user-specific
+  <li><code title = "iris-tutorials">kbws-setuserperm</code>: resets specific permissions for a list of users</li>
+  <li><code title = "iris-tutorials">kbws-perm</code>: returns a list of all currently set user-specific
 permissions for a workspace</li>
 </ul>
 <a href="PermissionsManagement.html" target="_blank">Detailed command
 documentation</a>
 <a name="STEP5">
-<h3>5. Retrieving, altering, and loading workspace objects</h3>
+</div><div><h3>5. Retrieving, altering, and loading workspace objects</h3>
 </a>
 <p>Now that we can create workspaces and manage their permissions, we
 want to start populating our workspace with objects. Workspaces provide
@@ -116,17 +116,17 @@ objects in the KBase workspace. There are four commands to support
 object retreival, load
 and deletion:</p>
 <ul>
-  <li>kbws-get: enables the retrieval of object data from the workspace</li>
-  <li>kbws-getmeta: enables the retrieval of object metadata from the
+  <li><code title = "iris-tutorials">kbws-get</code>: enables the retrieval of object data from the workspace</li>
+  <li><code title = "iris-tutorials">kbws-getmeta</code>: enables the retrieval of object metadata from the
 workspace</li>
-  <li>kbws-exists: checks if an object exists in a workspace</li>
-  <li>kbws-load: enables new objects to be loaded into a workspace</li>
-  <li>kbws-delete: enables the deletion of workspace objects</li>
+  <li><code title = "iris-tutorials">kbws-exists</code>: checks if an object exists in a workspace</li>
+  <li><code title = "iris-tutorials">kbws-load</code>: enables new objects to be loaded into a workspace</li>
+  <li><code title = "iris-tutorials">kbws-delete</code>: enables the deletion of workspace objects</li>
 </ul>
 <a href="ObjectCreationModification.html" target="_blank">Detailed
 command documentation</a>
 <a name="STEP6">
-<h3>6. Viewing object history and reverting objects</h3>
+</div><div><h3>6. Viewing object history and reverting objects</h3>
 </a>
 <p>Now that you can create and manage the objects in your workspace,
 you will want to learn about the workspace features that support object
@@ -140,17 +140,17 @@ object to any of its previous versions. There are three commands in the
 workspace that
 provide support for object history:</p>
 <ul>
-  <li>kbws-history: retrieves the metadata for all previous versions of
+  <li><code title = "iris-tutorials">kbws-history</code>: retrieves the metadata for all previous versions of
 an object</li>
-  <li>kbws-revert: reverts the current instance of an object to a
+  <li><code title = "iris-tutorials">kbws-revert</code>: reverts the current instance of an object to a
 previous version</li>
-  <li>kbws-get: enables the user to retrieve the current and all
+  <li><code title = "iris-tutorials">kbws-get</code>: enables the user to retrieve the current and all
 previous versions of an object</li>
 </ul>
 <a href="ObjectHistory.html" target="_blank">Detailed command
 documentation</a>
 <a name="STEP7">
-<h3>7. Copying and moving workspace objects</h3>
+</div><div><h3>7. Copying and moving workspace objects</h3>
 </a>
 <p>Now that you understand how to create, retrieve, and revert
 workspace object, you will
@@ -160,13 +160,13 @@ object you have read access to, and you can move any object you have
 write access to. There
 are two commands to support object copying and moving:</p>
 <ul>
-  <li>kbws-copy: copies an object from one workspace and ID to another</li>
-  <li>kbws-move: moves an object from one workspace and ID to another</li>
+  <li><code title = "iris-tutorials">kbws-copy</code>: copies an object from one workspace and ID to another</li>
+  <li><code title = "iris-tutorials">kbws-move</code>: moves an object from one workspace and ID to another</li>
 </ul>
 <a href="ObjectMovement.html" target="_blank">Detailed command
 documentation</a>
 <a name="STEP8">
-<h3>8. Managing object types in the workspace</h3>
+</div><div><h3>8. Managing object types in the workspace</h3>
 </a>
 <p>All objects stored in a KBase workspace are typed (e.g., Genome,
 FBAModel), and a recognizable type must be provided for all objects
@@ -176,23 +176,24 @@ addition of new types as
 needed by users. There are three commands to support the management of
 workspace types:</p>
 <ul>
-  <li>kbws-types: retrieves a list of all types currently recognized by
+  <li><code title = "iris-tutorials">kbws-types</code>: retrieves a list of all types currently recognized by
 the workspace</li>
-  <li>kbws-addtype: adds a new recognizable type to the workspace</li>
-  <li>kbws-removetype: removes a user-added type from the list of
+  <li><code title = "iris-tutorials">kbws-addtype</code>: adds a new recognizable type to the workspace</li>
+  <li><code title = "iris-tutorials">kbws-removetype</code>: removes a user-added type from the list of
 recognized types</li>
 </ul>
 <a href="TypeManagement.html" target="_blank">Detailed command
 documentation</a>
 <a name="STEP9">
-<h3>9. Accessing outstanding jobs</h3>
+</div><div><h3>9. Accessing outstanding jobs</h3>
 </a>
 <p>Lastly, the workspace provides commands to manage jobs submitted by
 the user to run on
 KBase cluster resources.</p>
 <ul>
-  <li>kbws-jobs: retrieves a list of jobs submitted by the user to the
+  <li><code title = "iris-tutorials">kbws-jobs</code>: retrieves a list of jobs submitted by the user to the
 workspace</li>
 </ul>
 <a href="JobHandling.html" target="_blank">Detailed command
 documentation</a>
+</div>
