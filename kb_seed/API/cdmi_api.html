@@ -2794,6 +2794,143 @@ newick_tree is a string
    <dd>
    </dd>
   </dl>
+  <h2 id="all_entities">
+   all_entities
+  </h2>
+  <pre>
+   <code>
+    $return = $obj-&gt;all_entities()
+   </code>
+  </pre>
+  <dl>
+   <dt id="Parameter-and-return-types76">
+    Parameter and return types
+   </dt>
+   <dd>
+    <pre>
+     $return is an entity_names
+entity_names is a reference to a list where each element is an entity_name
+entity_name is a string
+    </pre>
+   </dd>
+   <dt id="Description76">
+    Description
+   </dt>
+   <dd>
+    <p>
+     Returns a list of all entities in the database.
+    </p>
+   </dd>
+  </dl>
+  <h2 id="all_relationships">
+   all_relationships
+  </h2>
+  <pre>
+   <code>
+    $return = $obj-&gt;all_relationships()
+   </code>
+  </pre>
+  <dl>
+   <dt id="Parameter-and-return-types77">
+    Parameter and return types
+   </dt>
+   <dd>
+    <pre>
+     $return is a relationship_names
+relationship_names is a reference to a list where each element is a relationship_name
+relationship_name is a string
+    </pre>
+   </dd>
+   <dt id="Description77">
+    Description
+   </dt>
+   <dd>
+    <p>
+     Returns a list of all relationships in the database.
+    </p>
+   </dd>
+  </dl>
+  <h2 id="get_entity">
+   get_entity
+  </h2>
+  <pre>
+   <code>
+    $return = $obj-&gt;get_entity($entity_names)
+   </code>
+  </pre>
+  <dl>
+   <dt id="Parameter-and-return-types78">
+    Parameter and return types
+   </dt>
+   <dd>
+    <pre>
+     $entity_names is an entity_names
+$return is a reference to a hash where the key is a string and the value is an entity_info
+entity_names is a reference to a list where each element is an entity_name
+entity_name is a string
+entity_info is a reference to a hash where the following keys are defined:
+	name has a value which is a string
+	relationships has a value which is a reference to a list where each element is a reference to a list containing 2 items:
+	0: (rel_name) a string
+	1: (entity_name) a string	fields has a value which is a reference to a hash where the key is a field_name and the value is a field_info
+field_name is a string
+field_info is a reference to a hash where the following keys are defined:
+	name has a value which is a string
+	notes has a value which is a string
+	type has a value which is a string
+    </pre>
+   </dd>
+   <dt id="Description78">
+    Description
+   </dt>
+   <dd>
+    <p>
+     Returns information about a set of entities in the database. Invalid entity names are ignored.
+    </p>
+   </dd>
+  </dl>
+  <h2 id="get_relationship">
+   get_relationship
+  </h2>
+  <pre>
+   <code>
+    $return = $obj-&gt;get_relationship($relationship_names)
+   </code>
+  </pre>
+  <dl>
+   <dt id="Parameter-and-return-types79">
+    Parameter and return types
+   </dt>
+   <dd>
+    <pre>
+     $relationship_names is a relationship_names
+$return is a reference to a hash where the key is a string and the value is a relationship_info
+relationship_names is a reference to a list where each element is a relationship_name
+relationship_name is a string
+relationship_info is a reference to a hash where the following keys are defined:
+	name has a value which is a string
+	from_entity has a value which is a string
+	to_entity has a value which is a string
+	real_table has a value which is a boolean
+	converse has a value which is a string
+	fields has a value which is a reference to a hash where the key is a field_name and the value is a field_info
+boolean is an int
+field_name is a string
+field_info is a reference to a hash where the following keys are defined:
+	name has a value which is a string
+	notes has a value which is a string
+	type has a value which is a string
+    </pre>
+   </dd>
+   <dt id="Description79">
+    Description
+   </dt>
+   <dd>
+    <p>
+     Returns information about a set of relationships in the database. Invalid relationship names are ignored.
+    </p>
+   </dd>
+  </dl>
   <h2 id="version">
    version
   </h2>
@@ -2803,7 +2940,7 @@ newick_tree is a string
    </code>
   </pre>
   <dl>
-   <dt id="Parameter-and-return-types76">
+   <dt id="Parameter-and-return-types80">
     Parameter and return types
    </dt>
    <dd>
@@ -2811,7 +2948,7 @@ newick_tree is a string
      $return is a string
     </pre>
    </dd>
-   <dt id="Description76">
+   <dt id="Description80">
     Description
    </dt>
    <dd>
@@ -2866,7 +3003,7 @@ newick_tree is a string
    fid
   </h2>
   <dl>
-   <dt id="Description77">
+   <dt id="Description81">
     Description
    </dt>
    <dd>
@@ -2887,7 +3024,7 @@ newick_tree is a string
    protein_family
   </h2>
   <dl>
-   <dt id="Description78">
+   <dt id="Description82">
     Description
    </dt>
    <dd>
@@ -2908,7 +3045,7 @@ newick_tree is a string
    role
   </h2>
   <dl>
-   <dt id="Description79">
+   <dt id="Description83">
     Description
    </dt>
    <dd>
@@ -2945,7 +3082,7 @@ newick_tree is a string
    subsystem
   </h2>
   <dl>
-   <dt id="Description80">
+   <dt id="Description84">
     Description
    </dt>
    <dd>
@@ -3070,7 +3207,7 @@ newick_tree is a string
    strand
   </h2>
   <dl>
-   <dt id="Description81">
+   <dt id="Description85">
     Description
    </dt>
    <dd>
@@ -3104,7 +3241,7 @@ newick_tree is a string
    region_of_dna
   </h2>
   <dl>
-   <dt id="Description82">
+   <dt id="Description86">
     Description
    </dt>
    <dd>
@@ -3140,7 +3277,7 @@ newick_tree is a string
    location
   </h2>
   <dl>
-   <dt id="Description83">
+   <dt id="Description87">
     Description
    </dt>
    <dd>
@@ -3174,7 +3311,7 @@ newick_tree is a string
    region_of_dna_string
   </h2>
   <dl>
-   <dt id="Description84">
+   <dt id="Description88">
     Description
    </dt>
    <dd>
@@ -3307,7 +3444,7 @@ newick_tree is a string
    annotation
   </h2>
   <dl>
-   <dt id="Description85">
+   <dt id="Description89">
     Description
    </dt>
    <dd>
@@ -3340,7 +3477,7 @@ newick_tree is a string
    pubref
   </h2>
   <dl>
-   <dt id="Description86">
+   <dt id="Description90">
     Description
    </dt>
    <dd>
@@ -3698,7 +3835,7 @@ newick_tree is a string
    fc_protein_family
   </h2>
   <dl>
-   <dt id="Description87">
+   <dt id="Description91">
     Description
    </dt>
    <dd>
@@ -3735,7 +3872,7 @@ newick_tree is a string
    allele
   </h2>
   <dl>
-   <dt id="Description88">
+   <dt id="Description92">
     Description
    </dt>
    <dd>
@@ -3981,7 +4118,7 @@ newick_tree is a string
    complex_data
   </h2>
   <dl>
-   <dt id="Description89">
+   <dt id="Description93">
     Description
    </dt>
    <dd>
@@ -4424,7 +4561,7 @@ feature_location has a value which is a location
    correspondence
   </h2>
   <dl>
-   <dt id="Description90">
+   <dt id="Description94">
     Description
    </dt>
    <dd>
@@ -4455,7 +4592,7 @@ score has a value which is an int
    sequence
   </h2>
   <dl>
-   <dt id="Description91">
+   <dt id="Description95">
     Description
    </dt>
    <dd>
@@ -4534,7 +4671,7 @@ score has a value which is an int
    rep_seq_parms
   </h2>
   <dl>
-   <dt id="Description92">
+   <dt id="Description96">
     Description
    </dt>
    <dd>
@@ -4618,7 +4755,7 @@ weight2 has a value which is a string
    mafft_parms_t
   </h2>
   <dl>
-   <dt id="Description93">
+   <dt id="Description97">
     Description
    </dt>
    <dd>
@@ -4747,6 +4884,160 @@ tool_params has a value which is a string
    <dd>
     <pre>
      a string
+    </pre>
+   </dd>
+  </dl>
+  <h2 id="entity_name1">
+   entity_name
+  </h2>
+  <dl>
+   <dt id="Definition119">
+    Definition
+   </dt>
+   <dd>
+    <pre>
+     a string
+    </pre>
+   </dd>
+  </dl>
+  <h2 id="entity_names">
+   entity_names
+  </h2>
+  <dl>
+   <dt id="Definition120">
+    Definition
+   </dt>
+   <dd>
+    <pre>
+     a reference to a list where each element is an entity_name
+    </pre>
+   </dd>
+  </dl>
+  <h2 id="relationship_name">
+   relationship_name
+  </h2>
+  <dl>
+   <dt id="Definition121">
+    Definition
+   </dt>
+   <dd>
+    <pre>
+     a string
+    </pre>
+   </dd>
+  </dl>
+  <h2 id="relationship_names">
+   relationship_names
+  </h2>
+  <dl>
+   <dt id="Definition122">
+    Definition
+   </dt>
+   <dd>
+    <pre>
+     a reference to a list where each element is a relationship_name
+    </pre>
+   </dd>
+  </dl>
+  <h2 id="field_name1">
+   field_name
+  </h2>
+  <dl>
+   <dt id="Definition123">
+    Definition
+   </dt>
+   <dd>
+    <pre>
+     a string
+    </pre>
+   </dd>
+  </dl>
+  <h2 id="boolean">
+   boolean
+  </h2>
+  <dl>
+   <dt id="Definition124">
+    Definition
+   </dt>
+   <dd>
+    <pre>
+     an int
+    </pre>
+   </dd>
+  </dl>
+  <h2 id="field_info">
+   field_info
+  </h2>
+  <dl>
+   <dt id="Description98">
+    Description
+   </dt>
+   <dd>
+    <p>
+     Information about a field in the database. Includes the name of the field, any associated formatted notes, and the type.
+    </p>
+   </dd>
+   <dt id="Definition125">
+    Definition
+   </dt>
+   <dd>
+    <pre>
+     a reference to a hash where the following keys are defined:
+name has a value which is a string
+notes has a value which is a string
+type has a value which is a string
+    </pre>
+   </dd>
+  </dl>
+  <h2 id="entity_info">
+   entity_info
+  </h2>
+  <dl>
+   <dt id="Description99">
+    Description
+   </dt>
+   <dd>
+    <p>
+     Information about an entity in the database, including the entity name and its relationships and fields.
+    </p>
+   </dd>
+   <dt id="Definition126">
+    Definition
+   </dt>
+   <dd>
+    <pre>
+     a reference to a hash where the following keys are defined:
+name has a value which is a string
+relationships has a value which is a reference to a list where each element is a reference to a list containing 2 items:
+0: (rel_name) a string
+1: (entity_name) a stringfields has a value which is a reference to a hash where the key is a field_name and the value is a field_info
+    </pre>
+   </dd>
+  </dl>
+  <h2 id="relationship_info">
+   relationship_info
+  </h2>
+  <dl>
+   <dt id="Description100">
+    Description
+   </dt>
+   <dd>
+    <p>
+     Information about a relationship in the database, including the entities it relates, its name and converse name, and its fields. The real_table boolean designates that the relationship is a real table in the database rather than the converse relationship to that table.
+    </p>
+   </dd>
+   <dt id="Definition127">
+    Definition
+   </dt>
+   <dd>
+    <pre>
+     a reference to a hash where the following keys are defined:
+name has a value which is a string
+from_entity has a value which is a string
+to_entity has a value which is a string
+real_table has a value which is a boolean
+converse has a value which is a string
+fields has a value which is a reference to a hash where the key is a field_name and the value is a field_info
     </pre>
    </dd>
   </dl>

@@ -24,7 +24,7 @@
    This service provides a set of methods for querying, manipulating, and analyzing multiple sequence alignments and phylogenetic trees.
   </p>
   <p>
-   Authors --------- Michael Sneddon, LBL (mwsneddon@lbl.gov) Fangfang Xia, ANL (fangfang.xia@gmail.com) Matt Henderson, LBL (mhenderson@lbl.gov)
+   Authors --------- Michael Sneddon, LBL (mwsneddon@lbl.gov) Fangfang Xia, ANL (fangfang.xia@gmail.com) Matt Henderson, LBL (mhenderson@lbl.gov) Dylan Chivian, LBL (dcchivian@lbl.gov)
   </p>
   <h2 id="replace_node_names">
    replace_node_names
@@ -88,12 +88,12 @@ node_name is a string
     </p>
    </dd>
   </dl>
-  <h2 id="extract_leaf_node_names">
-   extract_leaf_node_names
+  <h2 id="merge_zero_distance_leaves">
+   merge_zero_distance_leaves
   </h2>
   <pre>
    <code>
-    $return = $obj-&gt;extract_leaf_node_names($tree)
+    $return = $obj-&gt;merge_zero_distance_leaves($tree)
    </code>
   </pre>
   <dl>
@@ -103,10 +103,9 @@ node_name is a string
    <dd>
     <pre>
      $tree is a newick_tree
-$return is a reference to a list where each element is a node_name
+$return is a newick_tree
 newick_tree is a tree
 tree is a string
-node_name is a string
     </pre>
    </dd>
    <dt id="Description2">
@@ -114,16 +113,16 @@ node_name is a string
    </dt>
    <dd>
     <p>
-     Given a tree in newick format, list the names of the leaf nodes.
+     Some KBase trees keep information on canonical feature ids, even if they have the same protien sequence in an alignment. In these cases, some leaves with identical sequences will have zero distance so that information on canonical features is maintained. Often this information is not useful, and a single example feature or genome is sufficient. This method will accept a tree in newick format (with distances) and merge all leaves that have zero distance between them (due to identical sequences), and keep arbitrarily only one of these leaves.
     </p>
    </dd>
   </dl>
-  <h2 id="extract_node_names">
-   extract_node_names
+  <h2 id="extract_leaf_node_names">
+   extract_leaf_node_names
   </h2>
   <pre>
    <code>
-    $return = $obj-&gt;extract_node_names($tree)
+    $return = $obj-&gt;extract_leaf_node_names($tree)
    </code>
   </pre>
   <dl>
@@ -144,6 +143,36 @@ node_name is a string
    </dt>
    <dd>
     <p>
+     Given a tree in newick format, list the names of the leaf nodes.
+    </p>
+   </dd>
+  </dl>
+  <h2 id="extract_node_names">
+   extract_node_names
+  </h2>
+  <pre>
+   <code>
+    $return = $obj-&gt;extract_node_names($tree)
+   </code>
+  </pre>
+  <dl>
+   <dt id="Parameter-and-return-types4">
+    Parameter and return types
+   </dt>
+   <dd>
+    <pre>
+     $tree is a newick_tree
+$return is a reference to a list where each element is a node_name
+newick_tree is a tree
+tree is a string
+node_name is a string
+    </pre>
+   </dd>
+   <dt id="Description4">
+    Description
+   </dt>
+   <dd>
+    <p>
      Given a tree in newick format, list the names of ALL the nodes. Note that for some trees, such as those originating from MicrobesOnline, the names of internal nodes may be bootstrap values, but will still be returned by this function.
     </p>
    </dd>
@@ -154,35 +183,6 @@ node_name is a string
   <pre>
    <code>
     $return = $obj-&gt;get_node_count($tree)
-   </code>
-  </pre>
-  <dl>
-   <dt id="Parameter-and-return-types4">
-    Parameter and return types
-   </dt>
-   <dd>
-    <pre>
-     $tree is a newick_tree
-$return is an int
-newick_tree is a tree
-tree is a string
-    </pre>
-   </dd>
-   <dt id="Description4">
-    Description
-   </dt>
-   <dd>
-    <p>
-     Given a tree, return the total number of nodes, including internal nodes and the root node.
-    </p>
-   </dd>
-  </dl>
-  <h2 id="get_leaf_count">
-   get_leaf_count
-  </h2>
-  <pre>
-   <code>
-    $return = $obj-&gt;get_leaf_count($tree)
    </code>
   </pre>
   <dl>
@@ -202,6 +202,35 @@ tree is a string
    </dt>
    <dd>
     <p>
+     Given a tree, return the total number of nodes, including internal nodes and the root node.
+    </p>
+   </dd>
+  </dl>
+  <h2 id="get_leaf_count">
+   get_leaf_count
+  </h2>
+  <pre>
+   <code>
+    $return = $obj-&gt;get_leaf_count($tree)
+   </code>
+  </pre>
+  <dl>
+   <dt id="Parameter-and-return-types6">
+    Parameter and return types
+   </dt>
+   <dd>
+    <pre>
+     $tree is a newick_tree
+$return is an int
+newick_tree is a tree
+tree is a string
+    </pre>
+   </dd>
+   <dt id="Description6">
+    Description
+   </dt>
+   <dd>
+    <p>
      Given a tree, return the total number of leaf nodes, (internal and root nodes are ignored). When the tree was based on a multiple sequence alignment, the number of leaves will match the number of sequences that were aligned.
     </p>
    </dd>
@@ -215,7 +244,7 @@ tree is a string
    </code>
   </pre>
   <dl>
-   <dt id="Parameter-and-return-types6">
+   <dt id="Parameter-and-return-types7">
     Parameter and return types
    </dt>
    <dd>
@@ -227,7 +256,7 @@ kbase_id is a string
 tree is a string
     </pre>
    </dd>
-   <dt id="Description6">
+   <dt id="Description7">
     Description
    </dt>
    <dd>
@@ -238,7 +267,8 @@ tree is a string
      <code>
       options = [
         format =&gt; &#39;newick&#39;,
-        newick_label =&gt; &#39;none&#39; || &#39;raw&#39; || &#39;feature_id&#39; || &#39;protein_sequence_id&#39; || &#39;contig_sequence_id&#39;,
+        newick_label =&gt; &#39;none&#39; || &#39;raw&#39; || &#39;feature_id&#39; || &#39;protein_sequence_id&#39; ||
+                        &#39;contig_sequence_id&#39; || &#39;best_feature_id&#39; || &#39;best_genome_id&#39;,
         newick_bootstrap =&gt; &#39;none&#39; || &#39;internal_node_labels&#39;
         newick_distance =&gt; &#39;none&#39; || &#39;raw&#39;
     ];
@@ -248,13 +278,13 @@ tree is a string
      The &#39;format&#39; key indicates what string format the tree should be returned in. Currently, there is only support for &#39;newick&#39;. The default value if not specified is &#39;newick&#39;.
     </p>
     <p>
-     The &#39;newick_label&#39; key only affects trees returned as newick format, and specifies what should be placed in the label of each leaf. &#39;none&#39; indicates that no label is added, so you get the structure of the tree only. &#39;raw&#39; indicates that the raw label mapping the leaf to an alignement row is used. &#39;feature_id&#39; indicates that the label will have an examplar feature_id in each label (typically the feature that was originally used to define the sequence). Note that exemplar feature_ids are not defined for all trees, so this may result in an empty tree. &#39;protein_sequence_id&#39; indicates that the kbase id of the protein sequence used in the alignment is used. &#39;contig_sequence_id&#39; indicates that the contig sequence id is added. Note that trees are typically built with protein sequences OR contig sequences. If you select one type of sequence, but the tree was built with the other type, then no labels will be added. The default value if none is specified is &#39;raw&#39;.
+     The &#39;newick_label&#39; key only affects trees returned as newick format, and specifies what should be placed in the label of each leaf. &#39;none&#39; indicates that no label is added, so you get the structure of the tree only. &#39;raw&#39; indicates that the raw label mapping the leaf to an alignement row is used. &#39;feature_id&#39; indicates that the label will have an examplar feature_id in each label (typically the feature that was originally used to define the sequence). Note that exemplar feature_ids are not defined for all trees, so this may result in an empty tree! &#39;protein_sequence_id&#39; indicates that the kbase id of the protein sequence used in the alignment is used. &#39;contig_sequence_id&#39; indicates that the contig sequence id is added. Note that trees are typically built with protein sequences OR contig sequences. If you select one type of sequence, but the tree was built with the other type, then no labels will be added. &#39;best_feature_id&#39; is used in the frequent case where a protein sequence has been mapped to multiple feature ids, and an example feature_id is used. Similarly, &#39;best_genome_id&#39; replaces the labels with the best example genome_id. The default value if none is specified is &#39;raw&#39;.
     </p>
     <p>
      The &#39;newick_bootstrap&#39; key allows control over whether bootstrap values are returned if they exist, and how they are returned. &#39;none&#39; indicates that no bootstrap values are returned. &#39;internal_node_labels&#39; indicates that bootstrap values are returned as internal node labels. Default value is &#39;internal_node_labels&#39;;
     </p>
     <p>
-     The &#39;newick_distance&#39; key allows control over whether distance labels are generated or not. If set to &#39;none&#39;, no distances will be output. Default is &#39;raw&#39;, which outputs the distances exactly as they appeared when loaded into kbase.
+     The &#39;newick_distance&#39; key allows control over whether distance labels are generated or not. If set to &#39;none&#39;, no distances will be output. Default is &#39;raw&#39;, which outputs the distances exactly as they appeared when loaded into KBase.
     </p>
    </dd>
   </dl>
@@ -267,7 +297,7 @@ tree is a string
    </code>
   </pre>
   <dl>
-   <dt id="Parameter-and-return-types7">
+   <dt id="Parameter-and-return-types8">
     Parameter and return types
    </dt>
    <dd>
@@ -279,7 +309,7 @@ kbase_id is a string
 alignment is a string
     </pre>
    </dd>
-   <dt id="Description7">
+   <dt id="Description8">
     Description
    </dt>
    <dd>
@@ -311,7 +341,7 @@ alignment is a string
    </code>
   </pre>
   <dl>
-   <dt id="Parameter-and-return-types8">
+   <dt id="Parameter-and-return-types9">
     Parameter and return types
    </dt>
    <dd>
@@ -334,7 +364,7 @@ tree_meta_data is a reference to a hash where the following keys are defined:
 timestamp is a string
     </pre>
    </dd>
-   <dt id="Description8">
+   <dt id="Description9">
     Description
    </dt>
    <dd>
@@ -352,7 +382,7 @@ timestamp is a string
    </code>
   </pre>
   <dl>
-   <dt id="Parameter-and-return-types9">
+   <dt id="Parameter-and-return-types10">
     Parameter and return types
    </dt>
    <dd>
@@ -376,7 +406,7 @@ alignment_meta_data is a reference to a hash where the following keys are define
 timestamp is a string
     </pre>
    </dd>
-   <dt id="Description9">
+   <dt id="Description10">
     Description
    </dt>
    <dd>
@@ -394,7 +424,7 @@ timestamp is a string
    </code>
   </pre>
   <dl>
-   <dt id="Parameter-and-return-types10">
+   <dt id="Parameter-and-return-types11">
     Parameter and return types
    </dt>
    <dd>
@@ -404,7 +434,7 @@ $return is a reference to a list where each element is a kbase_id
 kbase_id is a string
     </pre>
    </dd>
-   <dt id="Description10">
+   <dt id="Description11">
     Description
    </dt>
    <dd>
@@ -422,7 +452,7 @@ kbase_id is a string
    </code>
   </pre>
   <dl>
-   <dt id="Parameter-and-return-types11">
+   <dt id="Parameter-and-return-types12">
     Parameter and return types
    </dt>
    <dd>
@@ -432,7 +462,7 @@ $return is a reference to a list where each element is a kbase_id
 kbase_id is a string
     </pre>
    </dd>
-   <dt id="Description11">
+   <dt id="Description12">
     Description
    </dt>
    <dd>
@@ -450,7 +480,7 @@ kbase_id is a string
    </code>
   </pre>
   <dl>
-   <dt id="Parameter-and-return-types12">
+   <dt id="Parameter-and-return-types13">
     Parameter and return types
    </dt>
    <dd>
@@ -460,7 +490,7 @@ $return is a reference to a list where each element is a kbase_id
 kbase_id is a string
     </pre>
    </dd>
-   <dt id="Description12">
+   <dt id="Description13">
     Description
    </dt>
    <dd>
@@ -478,7 +508,7 @@ kbase_id is a string
    </code>
   </pre>
   <dl>
-   <dt id="Parameter-and-return-types13">
+   <dt id="Parameter-and-return-types14">
     Parameter and return types
    </dt>
    <dd>
@@ -488,7 +518,7 @@ $return is a reference to a list where each element is a kbase_id
 kbase_id is a string
     </pre>
    </dd>
-   <dt id="Description13">
+   <dt id="Description14">
     Description
    </dt>
    <dd>
@@ -506,7 +536,7 @@ kbase_id is a string
    </code>
   </pre>
   <dl>
-   <dt id="Parameter-and-return-types14">
+   <dt id="Parameter-and-return-types15">
     Parameter and return types
    </dt>
    <dd>
@@ -516,7 +546,7 @@ $return is a reference to a list where each element is a reference to a list whe
 kbase_id is a string
     </pre>
    </dd>
-   <dt id="Description14">
+   <dt id="Description15">
     Description
    </dt>
    <dd>
@@ -531,34 +561,6 @@ kbase_id is a string
   <pre>
    <code>
     $return = $obj-&gt;get_leaf_to_protein_map($tree_id)
-   </code>
-  </pre>
-  <dl>
-   <dt id="Parameter-and-return-types15">
-    Parameter and return types
-   </dt>
-   <dd>
-    <pre>
-     $tree_id is a kbase_id
-$return is a reference to a hash where the key is a kbase_id and the value is a kbase_id
-kbase_id is a string
-    </pre>
-   </dd>
-   <dt id="Description15">
-    Description
-   </dt>
-   <dd>
-    <p>
-     Given a tree id, this method returns a mapping from a tree&#39;s unique internal ID to a protein sequence ID.
-    </p>
-   </dd>
-  </dl>
-  <h2 id="get_leaf_to_feature_map">
-   get_leaf_to_feature_map
-  </h2>
-  <pre>
-   <code>
-    $return = $obj-&gt;get_leaf_to_feature_map($tree_id)
    </code>
   </pre>
   <dl>
@@ -577,6 +579,34 @@ kbase_id is a string
    </dt>
    <dd>
     <p>
+     Given a tree id, this method returns a mapping from a tree&#39;s unique internal ID to a protein sequence ID.
+    </p>
+   </dd>
+  </dl>
+  <h2 id="get_leaf_to_feature_map">
+   get_leaf_to_feature_map
+  </h2>
+  <pre>
+   <code>
+    $return = $obj-&gt;get_leaf_to_feature_map($tree_id)
+   </code>
+  </pre>
+  <dl>
+   <dt id="Parameter-and-return-types17">
+    Parameter and return types
+   </dt>
+   <dd>
+    <pre>
+     $tree_id is a kbase_id
+$return is a reference to a hash where the key is a kbase_id and the value is a kbase_id
+kbase_id is a string
+    </pre>
+   </dd>
+   <dt id="Description17">
+    Description
+   </dt>
+   <dd>
+    <p>
      Given a tree id, this method returns a mapping from a tree&#39;s unique internal ID to a KBase feature ID if and only if a cannonical feature id exists.
     </p>
    </dd>
@@ -590,7 +620,7 @@ kbase_id is a string
    </code>
   </pre>
   <dl>
-   <dt id="Parameter-and-return-types17">
+   <dt id="Parameter-and-return-types18">
     Parameter and return types
    </dt>
    <dd>
@@ -612,7 +642,7 @@ abundance_result is a reference to a hash where the following keys are defined:
 	n_reads has a value which is an int
     </pre>
    </dd>
-   <dt id="Description17">
+   <dt id="Description18">
     Description
    </dt>
    <dd>
@@ -621,6 +651,48 @@ abundance_result is a reference to a hash where the following keys are defined:
     </p>
     <p>
      [1] Edgar, R.C. (2010) Search and clustering orders of magnitude faster than BLAST, Bioinformatics 26(19), 2460-2461.
+    </p>
+   </dd>
+  </dl>
+  <h2 id="filter_abundance_profile">
+   filter_abundance_profile
+  </h2>
+  <pre>
+   <code>
+    $abundance_data_processed = $obj-&gt;filter_abundance_profile($abundance_data, $filter_params)
+   </code>
+  </pre>
+  <dl>
+   <dt id="Parameter-and-return-types19">
+    Parameter and return types
+   </dt>
+   <dd>
+    <pre>
+     $abundance_data is an abundance_data
+$filter_params is a filter_params
+$abundance_data_processed is an abundance_data
+abundance_data is a reference to a hash where the key is a string and the value is an abundance_profile
+abundance_profile is a reference to a hash where the key is a string and the value is a float
+filter_params is a reference to a hash where the following keys are defined:
+	cutoff_value has a value which is a float
+	use_cutoff_value has a value which is a bool
+	cutoff_number_of_records has a value which is a float
+	use_cutoff_number_of_records has a value which is a bool
+	normalization_scope has a value which is a string
+	normalization_type has a value which is a string
+	normalization_post_process has a value which is a string
+bool is an int
+    </pre>
+   </dd>
+   <dt id="Description19">
+    Description
+   </dt>
+   <dd>
+    <p>
+     ORDER OF OPERATIONS: 1) using normalization scope, defines whether process should occur per column or globally over every column 2) using normalization type, normalize by dividing values by the option indicated 3) apply normalization post process if set (ie take log of the result) 4) apply the cutoff_value threshold to all records, eliminating any that are not above the specified threshold 5) apply the cutoff_number_of_records (always applies per_column!!!), discarding any record that are not in the top N record values for that column
+    </p>
+    <p>
+     - if a value is not a valid number, it is ignored
     </p>
    </dd>
   </dl>
@@ -633,7 +705,7 @@ abundance_result is a reference to a hash where the following keys are defined:
    </code>
   </pre>
   <dl>
-   <dt id="Parameter-and-return-types18">
+   <dt id="Parameter-and-return-types20">
     Parameter and return types
    </dt>
    <dd>
@@ -646,7 +718,7 @@ tree is a string
 html_file is a string
     </pre>
    </dd>
-   <dt id="Description18">
+   <dt id="Description20">
     Description
    </dt>
    <dd>
@@ -662,7 +734,7 @@ html_file is a string
    bool
   </h2>
   <dl>
-   <dt id="Description19">
+   <dt id="Description21">
     Description
    </dt>
    <dd>
@@ -683,7 +755,7 @@ html_file is a string
    timestamp
   </h2>
   <dl>
-   <dt id="Description20">
+   <dt id="Description22">
     Description
    </dt>
    <dd>
@@ -704,7 +776,7 @@ html_file is a string
    position
   </h2>
   <dl>
-   <dt id="Description21">
+   <dt id="Description23">
     Description
    </dt>
    <dd>
@@ -725,7 +797,7 @@ html_file is a string
    kbase_id
   </h2>
   <dl>
-   <dt id="Description22">
+   <dt id="Description24">
     Description
    </dt>
    <dd>
@@ -746,7 +818,7 @@ html_file is a string
    tree
   </h2>
   <dl>
-   <dt id="Description23">
+   <dt id="Description25">
     Description
    </dt>
    <dd>
@@ -767,7 +839,7 @@ html_file is a string
    newick_tree
   </h2>
   <dl>
-   <dt id="Description24">
+   <dt id="Description26">
     Description
    </dt>
    <dd>
@@ -788,7 +860,7 @@ html_file is a string
    phyloXML_tree
   </h2>
   <dl>
-   <dt id="Description25">
+   <dt id="Description27">
     Description
    </dt>
    <dd>
@@ -809,7 +881,7 @@ html_file is a string
    json_tree
   </h2>
   <dl>
-   <dt id="Description26">
+   <dt id="Description28">
     Description
    </dt>
    <dd>
@@ -830,7 +902,7 @@ html_file is a string
    alignment
   </h2>
   <dl>
-   <dt id="Description27">
+   <dt id="Description29">
     Description
    </dt>
    <dd>
@@ -851,7 +923,7 @@ html_file is a string
    fasta
   </h2>
   <dl>
-   <dt id="Description28">
+   <dt id="Description30">
     Description
    </dt>
    <dd>
@@ -872,7 +944,7 @@ html_file is a string
    fasta_alignment
   </h2>
   <dl>
-   <dt id="Description29">
+   <dt id="Description31">
     Description
    </dt>
    <dd>
@@ -893,7 +965,7 @@ html_file is a string
    node_name
   </h2>
   <dl>
-   <dt id="Description30">
+   <dt id="Description32">
     Description
    </dt>
    <dd>
@@ -914,7 +986,7 @@ html_file is a string
    html_file
   </h2>
   <dl>
-   <dt id="Description31">
+   <dt id="Description33">
     Description
    </dt>
    <dd>
@@ -935,7 +1007,7 @@ html_file is a string
    tree_meta_data
   </h2>
   <dl>
-   <dt id="Description32">
+   <dt id="Description34">
     Description
    </dt>
    <dd>
@@ -983,7 +1055,7 @@ source_id has a value which is a string
    alignment_meta_data
   </h2>
   <dl>
-   <dt id="Description33">
+   <dt id="Description35">
     Description
    </dt>
    <dd>
@@ -1033,7 +1105,7 @@ source_id has a value which is a string
    abundance_params
   </h2>
   <dl>
-   <dt id="Description34">
+   <dt id="Description36">
     Description
    </dt>
    <dd>
@@ -1079,7 +1151,7 @@ mg_auth_key has a value which is a string
    abundance_result
   </h2>
   <dl>
-   <dt id="Description35">
+   <dt id="Description37">
     Description
    </dt>
    <dd>
@@ -1106,6 +1178,76 @@ mg_auth_key has a value which is a string
 abundances has a value which is a reference to a hash where the key is a string and the value is an int
 n_hits has a value which is an int
 n_reads has a value which is an int
+    </pre>
+   </dd>
+  </dl>
+  <h2 id="abundance_profile">
+   abundance_profile
+  </h2>
+  <dl>
+   <dt id="Description38">
+    Description
+   </dt>
+   <dd>
+    <p>
+     map an id to a number (e.g. feature_id mapped to a log2 normalized abundance value)
+    </p>
+   </dd>
+   <dt id="Definition17">
+    Definition
+   </dt>
+   <dd>
+    <pre>
+     a reference to a hash where the key is a string and the value is a float
+    </pre>
+   </dd>
+  </dl>
+  <h2 id="abundance_data">
+   abundance_data
+  </h2>
+  <dl>
+   <dt id="Description39">
+    Description
+   </dt>
+   <dd>
+    <p>
+     map the name of the profile with the profile data
+    </p>
+   </dd>
+   <dt id="Definition18">
+    Definition
+   </dt>
+   <dd>
+    <pre>
+     a reference to a hash where the key is a string and the value is an abundance_profile
+    </pre>
+   </dd>
+  </dl>
+  <h2 id="filter_params">
+   filter_params
+  </h2>
+  <dl>
+   <dt id="Description40">
+    Description
+   </dt>
+   <dd>
+    <p>
+     cutoff_value =&gt; def: 0 || [any_valid_float_value] use_cutoff_value =&gt; def: 0 || 1 normalization_scope =&gt; def:&#39;per_column&#39; || &#39;global&#39; normalization_type =&gt; def:&#39;none&#39; || &#39;total&#39; || &#39;mean&#39; || &#39;max&#39; || &#39;min&#39; normalization_post_process =&gt; def:&#39;none&#39; || &#39;log10&#39; || &#39;log2&#39; || &#39;ln&#39;
+    </p>
+   </dd>
+   <dt id="Definition19">
+    Definition
+   </dt>
+   <dd>
+    <pre>
+     a reference to a hash where the following keys are defined:
+cutoff_value has a value which is a float
+use_cutoff_value has a value which is a bool
+cutoff_number_of_records has a value which is a float
+use_cutoff_number_of_records has a value which is a bool
+normalization_scope has a value which is a string
+normalization_type has a value which is a string
+normalization_post_process has a value which is a string
     </pre>
    </dd>
   </dl>
