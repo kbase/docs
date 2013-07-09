@@ -1,0 +1,33 @@
+OVERVIEW
+-----------------------------------------------------------------------------------------
+The plant expression service provides gene expression retrieval service in support of the co-expression network and ontology driven data needs of the plant sciences community.  This data will be used for co-expression analysis tools, included in scripts directory. 
+
+It will serve queries for tissue and condition specific gene expression co-expression network for biologically interesting genes/samples. The samples of these experiments are manually annotated using plant ontology (PO) [http://www.plantontology.org/] and environment ontology (EO) [http://obo.cvs.sourceforge.net/viewvc/obo/obo/ontology/phenotype/environment/environment_ontology.obo] controlled vocabularies. Users can search differentially expressed genes in different tissues (e.g root or shoot etc.) or in different experimental conditions/treatments (e.g various biotic or abiotic stresses etc.). Currently the metadata annotation is provided for a subset of gene expression experiments from the NCBI GEO microarray experiments. 
+
+VERSION: 0.0.2 (Released 02/08/2013)
+-----------------------------------------------------------------------------------------
+NEW FEATURES:
+-This is the first public release of the Plant Expression Service and it has near full functional API and CLIs. It includes Poplar (Populus trichocarpa) microarray gene expression experiments from NCBI GEO and consists of 305 samples in addition to Arabidopsis thaliana samples.
+- Added the expression sample replicate information method.
+- command line scripts that wrap every client library method and are available through IRIS.
+
+UPDATED FEATURES / MAJOR BUG FIXES:
+-none.
+
+NEXT RELEASE PLAN:
+We plan to include more samples of Poplar expression data in next release.
+
+
+VERSION: 0.0.1 (Released 11/28/2012)
+-----------------------------------------------------------------------------------------
+NEW FEATURES:
+-This is the first internal release of the Plant Expression Service and it has near full functional API and CLIs. Currently, the processed data is Arabidopsis thaliana microarray gene expression experiments from NCBI GEO and consists of 7000 samples.
+
+UPDATED FEATURES / MAJOR BUG FIXES:
+-none.
+
+NEXT RELEASE PLAN:
+We plan to include Populus gene expression data in the next release.
+
+
+ 

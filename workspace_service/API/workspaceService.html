@@ -1,0 +1,3163 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+ <head>
+  <title>
+   workspaceService
+  </title>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <link rev="made" href="mailto:root@ubuntu.chicago.kbase.us" />
+ </head>
+ <body style="background-color: white">
+  <h1 id="NAME">
+   NAME
+  </h1>
+  <p>
+   Bio::KBase::workspaceService::Client
+  </p>
+  <h1 id="DESCRIPTION">
+   DESCRIPTION
+  </h1>
+  <h1 id="workspaceService">
+   workspaceService
+  </h1>
+  <h2 id="SYNOPSIS">
+   SYNOPSIS
+  </h2>
+  <p>
+   Workspaces are used in KBase to provide an online location for all data, models, and analysis results. Workspaces are a powerful tool for managing private data, tracking workflow provenance, storing and sharing large datasets, and tracking work history. They have a number of useful characteristics which you will learn about over the course of the workspace tutorials:
+  </p>
+  <p>
+   1.) Multiple users can read and write from the same workspace at the same time, facilitating collaboration
+  </p>
+  <p>
+   2.) When an object is overwritten in a workspace, the previous version is preserved and easily accessible at any time, enabling the use of workspaces to track object provenance
+  </p>
+  <p>
+   3.) Workspaces have default permissions and user-specific permissions, providing total control over the sharing and access of workspace contents
+  </p>
+  <h2 id="EXAMPLE-OF-API-USE-IN-PERL">
+   EXAMPLE OF API USE IN PERL
+  </h2>
+  <p>
+   To use the API, first you need to instantiate a workspace client object:
+  </p>
+  <p>
+   my $client = Bio::KBase::workspaceService::Client-&gt;new;
+  </p>
+  <p>
+   Next, you can run API commands on the client object:
+  </p>
+  <p>
+   my $ws = $client-&gt;create_workspace({ workspace =&gt; &quot;foo&quot;, default_permission =&gt; &quot;n&quot; }); my $objs = $client-&gt;list_workspace_objects({ workspace =&gt; &quot;foo&quot; }); print map { $_-&gt;[0] } @$objs;
+  </p>
+  <h2 id="AUTHENTICATION">
+   AUTHENTICATION
+  </h2>
+  <p>
+   Each and every function in this service takes a hash reference as its single argument. This hash reference may contain a key
+   <code>
+    auth
+   </code>
+   whose value is a bearer token for the user making the request. If this is not provided a default user &quot;public&quot; is assumed.
+  </p>
+  <h2 id="WORKSPACE">
+   WORKSPACE
+  </h2>
+  <p>
+   A workspace is a named collection of objects owned by a specific user, that may be viewable or editable by other users.Functions that operate on workspaces take a
+   <code>
+    workspace_id
+   </code>
+   , which is an alphanumeric string that uniquely identifies a workspace among all workspaces.
+  </p>
+  <h2 id="load_media_from_bio">
+   load_media_from_bio
+  </h2>
+  <pre>
+   <code>
+    $mediaMetas = $obj-&gt;load_media_from_bio($params)
+   </code>
+  </pre>
+  <dl>
+   <dt id="Parameter-and-return-types">
+    Parameter and return types
+   </dt>
+   <dd>
+    <pre>
+     $params is a load_media_from_bio_params
+$mediaMetas is a reference to a list where each element is an object_metadata
+load_media_from_bio_params is a reference to a hash where the following keys are defined:
+	mediaWS has a value which is a workspace_id
+	bioid has a value which is an object_id
+	bioWS has a value which is a workspace_id
+	clearExisting has a value which is a bool
+	overwrite has a value which is a bool
+	auth has a value which is a string
+	asHash has a value which is a bool
+workspace_id is a string
+object_id is a string
+bool is an int
+object_metadata is a reference to a list containing 11 items:
+	0: (id) an object_id
+	1: (type) an object_type
+	2: (moddate) a timestamp
+	3: (instance) an int
+	4: (command) a string
+	5: (lastmodifier) a username
+	6: (owner) a username
+	7: (workspace) a workspace_id
+	8: (ref) a workspace_ref
+	9: (chsum) a string
+	10: (metadata) a reference to a hash where the key is a string and the value is a string
+object_type is a string
+timestamp is a string
+username is a string
+workspace_ref is a string
+    </pre>
+   </dd>
+   <dt id="Description">
+    Description
+   </dt>
+   <dd>
+    <p>
+     Creates &quot;Media&quot; objects in the workspace for all media contained in the specified biochemistry
+    </p>
+   </dd>
+  </dl>
+  <h2 id="import_bio">
+   import_bio
+  </h2>
+  <pre>
+   <code>
+    $metadata = $obj-&gt;import_bio($params)
+   </code>
+  </pre>
+  <dl>
+   <dt id="Parameter-and-return-types1">
+    Parameter and return types
+   </dt>
+   <dd>
+    <pre>
+     $params is an import_bio_params
+$metadata is an object_metadata
+import_bio_params is a reference to a hash where the following keys are defined:
+	bioid has a value which is an object_id
+	bioWS has a value which is a workspace_id
+	url has a value which is a string
+	compressed has a value which is a bool
+	clearExisting has a value which is a bool
+	overwrite has a value which is a bool
+	auth has a value which is a string
+	asHash has a value which is a bool
+object_id is a string
+workspace_id is a string
+bool is an int
+object_metadata is a reference to a list containing 11 items:
+	0: (id) an object_id
+	1: (type) an object_type
+	2: (moddate) a timestamp
+	3: (instance) an int
+	4: (command) a string
+	5: (lastmodifier) a username
+	6: (owner) a username
+	7: (workspace) a workspace_id
+	8: (ref) a workspace_ref
+	9: (chsum) a string
+	10: (metadata) a reference to a hash where the key is a string and the value is a string
+object_type is a string
+timestamp is a string
+username is a string
+workspace_ref is a string
+    </pre>
+   </dd>
+   <dt id="Description1">
+    Description
+   </dt>
+   <dd>
+    <p>
+     Imports a biochemistry from a URL
+    </p>
+   </dd>
+  </dl>
+  <h2 id="import_map">
+   import_map
+  </h2>
+  <pre>
+   <code>
+    $metadata = $obj-&gt;import_map($params)
+   </code>
+  </pre>
+  <dl>
+   <dt id="Parameter-and-return-types2">
+    Parameter and return types
+   </dt>
+   <dd>
+    <pre>
+     $params is an import_map_params
+$metadata is an object_metadata
+import_map_params is a reference to a hash where the following keys are defined:
+	bioid has a value which is an object_id
+	bioWS has a value which is a workspace_id
+	mapid has a value which is an object_id
+	mapWS has a value which is a workspace_id
+	url has a value which is a string
+	compressed has a value which is a bool
+	overwrite has a value which is a bool
+	auth has a value which is a string
+	asHash has a value which is a bool
+object_id is a string
+workspace_id is a string
+bool is an int
+object_metadata is a reference to a list containing 11 items:
+	0: (id) an object_id
+	1: (type) an object_type
+	2: (moddate) a timestamp
+	3: (instance) an int
+	4: (command) a string
+	5: (lastmodifier) a username
+	6: (owner) a username
+	7: (workspace) a workspace_id
+	8: (ref) a workspace_ref
+	9: (chsum) a string
+	10: (metadata) a reference to a hash where the key is a string and the value is a string
+object_type is a string
+timestamp is a string
+username is a string
+workspace_ref is a string
+    </pre>
+   </dd>
+   <dt id="Description2">
+    Description
+   </dt>
+   <dd>
+    <p>
+     Imports a mapping from a URL
+    </p>
+   </dd>
+  </dl>
+  <h2 id="save_object">
+   save_object
+  </h2>
+  <pre>
+   <code>
+    $metadata = $obj-&gt;save_object($params)
+   </code>
+  </pre>
+  <dl>
+   <dt id="Parameter-and-return-types3">
+    Parameter and return types
+   </dt>
+   <dd>
+    <pre>
+     $params is a save_object_params
+$metadata is an object_metadata
+save_object_params is a reference to a hash where the following keys are defined:
+	id has a value which is an object_id
+	type has a value which is an object_type
+	data has a value which is an ObjectData
+	workspace has a value which is a workspace_id
+	command has a value which is a string
+	metadata has a value which is a reference to a hash where the key is a string and the value is a string
+	auth has a value which is a string
+	json has a value which is a bool
+	compressed has a value which is a bool
+	retrieveFromURL has a value which is a bool
+	asHash has a value which is a bool
+object_id is a string
+object_type is a string
+ObjectData is a reference to a hash where the following keys are defined:
+	version has a value which is an int
+workspace_id is a string
+bool is an int
+object_metadata is a reference to a list containing 11 items:
+	0: (id) an object_id
+	1: (type) an object_type
+	2: (moddate) a timestamp
+	3: (instance) an int
+	4: (command) a string
+	5: (lastmodifier) a username
+	6: (owner) a username
+	7: (workspace) a workspace_id
+	8: (ref) a workspace_ref
+	9: (chsum) a string
+	10: (metadata) a reference to a hash where the key is a string and the value is a string
+timestamp is a string
+username is a string
+workspace_ref is a string
+    </pre>
+   </dd>
+   <dt id="Description3">
+    Description
+   </dt>
+   <dd>
+    <p>
+     Saves the input object data and metadata into the selected workspace, returning the object_metadata of the saved object
+    </p>
+   </dd>
+  </dl>
+  <h2 id="delete_object">
+   delete_object
+  </h2>
+  <pre>
+   <code>
+    $metadata = $obj-&gt;delete_object($params)
+   </code>
+  </pre>
+  <dl>
+   <dt id="Parameter-and-return-types4">
+    Parameter and return types
+   </dt>
+   <dd>
+    <pre>
+     $params is a delete_object_params
+$metadata is an object_metadata
+delete_object_params is a reference to a hash where the following keys are defined:
+	id has a value which is an object_id
+	type has a value which is an object_type
+	workspace has a value which is a workspace_id
+	auth has a value which is a string
+	asHash has a value which is a bool
+object_id is a string
+object_type is a string
+workspace_id is a string
+bool is an int
+object_metadata is a reference to a list containing 11 items:
+	0: (id) an object_id
+	1: (type) an object_type
+	2: (moddate) a timestamp
+	3: (instance) an int
+	4: (command) a string
+	5: (lastmodifier) a username
+	6: (owner) a username
+	7: (workspace) a workspace_id
+	8: (ref) a workspace_ref
+	9: (chsum) a string
+	10: (metadata) a reference to a hash where the key is a string and the value is a string
+timestamp is a string
+username is a string
+workspace_ref is a string
+    </pre>
+   </dd>
+   <dt id="Description4">
+    Description
+   </dt>
+   <dd>
+    <p>
+     Deletes the specified object from the specified workspace, returning the object_metadata of the deleted object. Object is only temporarily deleted and can be recovered by using the revert command.
+    </p>
+   </dd>
+  </dl>
+  <h2 id="delete_object_permanently">
+   delete_object_permanently
+  </h2>
+  <pre>
+   <code>
+    $metadata = $obj-&gt;delete_object_permanently($params)
+   </code>
+  </pre>
+  <dl>
+   <dt id="Parameter-and-return-types5">
+    Parameter and return types
+   </dt>
+   <dd>
+    <pre>
+     $params is a delete_object_permanently_params
+$metadata is an object_metadata
+delete_object_permanently_params is a reference to a hash where the following keys are defined:
+	id has a value which is an object_id
+	type has a value which is an object_type
+	workspace has a value which is a workspace_id
+	auth has a value which is a string
+	asHash has a value which is a bool
+object_id is a string
+object_type is a string
+workspace_id is a string
+bool is an int
+object_metadata is a reference to a list containing 11 items:
+	0: (id) an object_id
+	1: (type) an object_type
+	2: (moddate) a timestamp
+	3: (instance) an int
+	4: (command) a string
+	5: (lastmodifier) a username
+	6: (owner) a username
+	7: (workspace) a workspace_id
+	8: (ref) a workspace_ref
+	9: (chsum) a string
+	10: (metadata) a reference to a hash where the key is a string and the value is a string
+timestamp is a string
+username is a string
+workspace_ref is a string
+    </pre>
+   </dd>
+   <dt id="Description5">
+    Description
+   </dt>
+   <dd>
+    <p>
+     Permanently deletes the specified object from the specified workspace. This permanently deletes the object and object history, and the data cannot be recovered. Objects cannot be permanently deleted unless they&#39;ve been deleted first.
+    </p>
+   </dd>
+  </dl>
+  <h2 id="get_object">
+   get_object
+  </h2>
+  <pre>
+   <code>
+    $output = $obj-&gt;get_object($params)
+   </code>
+  </pre>
+  <dl>
+   <dt id="Parameter-and-return-types6">
+    Parameter and return types
+   </dt>
+   <dd>
+    <pre>
+     $params is a get_object_params
+$output is a get_object_output
+get_object_params is a reference to a hash where the following keys are defined:
+	id has a value which is an object_id
+	type has a value which is an object_type
+	workspace has a value which is a workspace_id
+	instance has a value which is an int
+	auth has a value which is a string
+	asHash has a value which is a bool
+	asJSON has a value which is a bool
+object_id is a string
+object_type is a string
+workspace_id is a string
+bool is an int
+get_object_output is a reference to a hash where the following keys are defined:
+	data has a value which is a string
+	metadata has a value which is an object_metadata
+object_metadata is a reference to a list containing 11 items:
+	0: (id) an object_id
+	1: (type) an object_type
+	2: (moddate) a timestamp
+	3: (instance) an int
+	4: (command) a string
+	5: (lastmodifier) a username
+	6: (owner) a username
+	7: (workspace) a workspace_id
+	8: (ref) a workspace_ref
+	9: (chsum) a string
+	10: (metadata) a reference to a hash where the key is a string and the value is a string
+timestamp is a string
+username is a string
+workspace_ref is a string
+    </pre>
+   </dd>
+   <dt id="Description6">
+    Description
+   </dt>
+   <dd>
+    <p>
+     Retrieves the specified object from the specified workspace. Both the object data and metadata are returned. This commands provides access to all versions of the object via the instance parameter.
+    </p>
+   </dd>
+  </dl>
+  <h2 id="get_object_by_ref">
+   get_object_by_ref
+  </h2>
+  <pre>
+   <code>
+    $output = $obj-&gt;get_object_by_ref($params)
+   </code>
+  </pre>
+  <dl>
+   <dt id="Parameter-and-return-types7">
+    Parameter and return types
+   </dt>
+   <dd>
+    <pre>
+     $params is a get_object_by_ref_params
+$output is a get_object_output
+get_object_by_ref_params is a reference to a hash where the following keys are defined:
+	reference has a value which is a workspace_ref
+	auth has a value which is a string
+	asHash has a value which is a bool
+	asJSON has a value which is a bool
+workspace_ref is a string
+bool is an int
+get_object_output is a reference to a hash where the following keys are defined:
+	data has a value which is a string
+	metadata has a value which is an object_metadata
+object_metadata is a reference to a list containing 11 items:
+	0: (id) an object_id
+	1: (type) an object_type
+	2: (moddate) a timestamp
+	3: (instance) an int
+	4: (command) a string
+	5: (lastmodifier) a username
+	6: (owner) a username
+	7: (workspace) a workspace_id
+	8: (ref) a workspace_ref
+	9: (chsum) a string
+	10: (metadata) a reference to a hash where the key is a string and the value is a string
+object_id is a string
+object_type is a string
+timestamp is a string
+username is a string
+workspace_id is a string
+    </pre>
+   </dd>
+   <dt id="Description7">
+    Description
+   </dt>
+   <dd>
+    <p>
+     Retrieves the specified object from the specified workspace. Both the object data and metadata are returned. This commands provides access to all versions of the object via the instance parameter.
+    </p>
+   </dd>
+  </dl>
+  <h2 id="save_object_by_ref">
+   save_object_by_ref
+  </h2>
+  <pre>
+   <code>
+    $metadata = $obj-&gt;save_object_by_ref($params)
+   </code>
+  </pre>
+  <dl>
+   <dt id="Parameter-and-return-types8">
+    Parameter and return types
+   </dt>
+   <dd>
+    <pre>
+     $params is a save_object_by_ref_params
+$metadata is an object_metadata
+save_object_by_ref_params is a reference to a hash where the following keys are defined:
+	id has a value which is an object_id
+	type has a value which is an object_type
+	data has a value which is an ObjectData
+	command has a value which is a string
+	metadata has a value which is a reference to a hash where the key is a string and the value is a string
+	reference has a value which is a workspace_ref
+	json has a value which is a bool
+	compressed has a value which is a bool
+	retrieveFromURL has a value which is a bool
+	replace has a value which is a bool
+	auth has a value which is a string
+	asHash has a value which is a bool
+object_id is a string
+object_type is a string
+ObjectData is a reference to a hash where the following keys are defined:
+	version has a value which is an int
+workspace_ref is a string
+bool is an int
+object_metadata is a reference to a list containing 11 items:
+	0: (id) an object_id
+	1: (type) an object_type
+	2: (moddate) a timestamp
+	3: (instance) an int
+	4: (command) a string
+	5: (lastmodifier) a username
+	6: (owner) a username
+	7: (workspace) a workspace_id
+	8: (ref) a workspace_ref
+	9: (chsum) a string
+	10: (metadata) a reference to a hash where the key is a string and the value is a string
+timestamp is a string
+username is a string
+workspace_id is a string
+    </pre>
+   </dd>
+   <dt id="Description8">
+    Description
+   </dt>
+   <dd>
+    <p>
+     Retrieves the specified object from the specified workspace. Both the object data and metadata are returned. This commands provides access to all versions of the object via the instance parameter.
+    </p>
+   </dd>
+  </dl>
+  <h2 id="get_objectmeta">
+   get_objectmeta
+  </h2>
+  <pre>
+   <code>
+    $metadata = $obj-&gt;get_objectmeta($params)
+   </code>
+  </pre>
+  <dl>
+   <dt id="Parameter-and-return-types9">
+    Parameter and return types
+   </dt>
+   <dd>
+    <pre>
+     $params is a get_objectmeta_params
+$metadata is an object_metadata
+get_objectmeta_params is a reference to a hash where the following keys are defined:
+	id has a value which is an object_id
+	type has a value which is an object_type
+	workspace has a value which is a workspace_id
+	instance has a value which is an int
+	auth has a value which is a string
+	asHash has a value which is a bool
+object_id is a string
+object_type is a string
+workspace_id is a string
+bool is an int
+object_metadata is a reference to a list containing 11 items:
+	0: (id) an object_id
+	1: (type) an object_type
+	2: (moddate) a timestamp
+	3: (instance) an int
+	4: (command) a string
+	5: (lastmodifier) a username
+	6: (owner) a username
+	7: (workspace) a workspace_id
+	8: (ref) a workspace_ref
+	9: (chsum) a string
+	10: (metadata) a reference to a hash where the key is a string and the value is a string
+timestamp is a string
+username is a string
+workspace_ref is a string
+    </pre>
+   </dd>
+   <dt id="Description9">
+    Description
+   </dt>
+   <dd>
+    <p>
+     Retrieves the metadata for a specified object from the specified workspace. This commands provides access to metadata for all versions of the object via the instance parameter.
+    </p>
+   </dd>
+  </dl>
+  <h2 id="get_objectmeta_by_ref">
+   get_objectmeta_by_ref
+  </h2>
+  <pre>
+   <code>
+    $metadata = $obj-&gt;get_objectmeta_by_ref($params)
+   </code>
+  </pre>
+  <dl>
+   <dt id="Parameter-and-return-types10">
+    Parameter and return types
+   </dt>
+   <dd>
+    <pre>
+     $params is a get_objectmeta_by_ref_params
+$metadata is an object_metadata
+get_objectmeta_by_ref_params is a reference to a hash where the following keys are defined:
+	reference has a value which is a workspace_ref
+	auth has a value which is a string
+	asHash has a value which is a bool
+workspace_ref is a string
+bool is an int
+object_metadata is a reference to a list containing 11 items:
+	0: (id) an object_id
+	1: (type) an object_type
+	2: (moddate) a timestamp
+	3: (instance) an int
+	4: (command) a string
+	5: (lastmodifier) a username
+	6: (owner) a username
+	7: (workspace) a workspace_id
+	8: (ref) a workspace_ref
+	9: (chsum) a string
+	10: (metadata) a reference to a hash where the key is a string and the value is a string
+object_id is a string
+object_type is a string
+timestamp is a string
+username is a string
+workspace_id is a string
+    </pre>
+   </dd>
+   <dt id="Description10">
+    Description
+   </dt>
+   <dd>
+    <p>
+     Retrieves the specified object from the specified workspace. Both the object data and metadata are returned. This commands provides access to all versions of the object via the instance parameter.
+    </p>
+   </dd>
+  </dl>
+  <h2 id="revert_object">
+   revert_object
+  </h2>
+  <pre>
+   <code>
+    $metadata = $obj-&gt;revert_object($params)
+   </code>
+  </pre>
+  <dl>
+   <dt id="Parameter-and-return-types11">
+    Parameter and return types
+   </dt>
+   <dd>
+    <pre>
+     $params is a revert_object_params
+$metadata is an object_metadata
+revert_object_params is a reference to a hash where the following keys are defined:
+	id has a value which is an object_id
+	type has a value which is an object_type
+	workspace has a value which is a workspace_id
+	instance has a value which is an int
+	auth has a value which is a string
+	asHash has a value which is a bool
+object_id is a string
+object_type is a string
+workspace_id is a string
+bool is an int
+object_metadata is a reference to a list containing 11 items:
+	0: (id) an object_id
+	1: (type) an object_type
+	2: (moddate) a timestamp
+	3: (instance) an int
+	4: (command) a string
+	5: (lastmodifier) a username
+	6: (owner) a username
+	7: (workspace) a workspace_id
+	8: (ref) a workspace_ref
+	9: (chsum) a string
+	10: (metadata) a reference to a hash where the key is a string and the value is a string
+timestamp is a string
+username is a string
+workspace_ref is a string
+    </pre>
+   </dd>
+   <dt id="Description11">
+    Description
+   </dt>
+   <dd>
+    <p>
+     Reverts a specified object in a specifed workspace to a previous version of the object. Returns the metadata of the newly reverted object. This command still makes a new instance of the object, copying data related to the target instance to the new instance. This ensures that the object instance always increases and no portion of the object history is ever lost.
+    </p>
+   </dd>
+  </dl>
+  <h2 id="copy_object">
+   copy_object
+  </h2>
+  <pre>
+   <code>
+    $metadata = $obj-&gt;copy_object($params)
+   </code>
+  </pre>
+  <dl>
+   <dt id="Parameter-and-return-types12">
+    Parameter and return types
+   </dt>
+   <dd>
+    <pre>
+     $params is a copy_object_params
+$metadata is an object_metadata
+copy_object_params is a reference to a hash where the following keys are defined:
+	new_workspace_url has a value which is a string
+	new_id has a value which is an object_id
+	new_workspace has a value which is a workspace_id
+	source_id has a value which is an object_id
+	instance has a value which is an int
+	type has a value which is an object_type
+	source_workspace has a value which is a workspace_id
+	auth has a value which is a string
+	asHash has a value which is a bool
+object_id is a string
+workspace_id is a string
+object_type is a string
+bool is an int
+object_metadata is a reference to a list containing 11 items:
+	0: (id) an object_id
+	1: (type) an object_type
+	2: (moddate) a timestamp
+	3: (instance) an int
+	4: (command) a string
+	5: (lastmodifier) a username
+	6: (owner) a username
+	7: (workspace) a workspace_id
+	8: (ref) a workspace_ref
+	9: (chsum) a string
+	10: (metadata) a reference to a hash where the key is a string and the value is a string
+timestamp is a string
+username is a string
+workspace_ref is a string
+    </pre>
+   </dd>
+   <dt id="Description12">
+    Description
+   </dt>
+   <dd>
+    <p>
+     Copies a specified object in a specifed workspace to a new ID and/or workspace. Returns the metadata of the newly copied object. It is possible to use the version parameter to copy any version of a workspace object.
+    </p>
+   </dd>
+  </dl>
+  <h2 id="move_object">
+   move_object
+  </h2>
+  <pre>
+   <code>
+    $metadata = $obj-&gt;move_object($params)
+   </code>
+  </pre>
+  <dl>
+   <dt id="Parameter-and-return-types13">
+    Parameter and return types
+   </dt>
+   <dd>
+    <pre>
+     $params is a move_object_params
+$metadata is an object_metadata
+move_object_params is a reference to a hash where the following keys are defined:
+	new_workspace_url has a value which is a string
+	new_id has a value which is an object_id
+	new_workspace has a value which is a workspace_id
+	source_id has a value which is an object_id
+	type has a value which is an object_type
+	source_workspace has a value which is a workspace_id
+	auth has a value which is a string
+	asHash has a value which is a bool
+object_id is a string
+workspace_id is a string
+object_type is a string
+bool is an int
+object_metadata is a reference to a list containing 11 items:
+	0: (id) an object_id
+	1: (type) an object_type
+	2: (moddate) a timestamp
+	3: (instance) an int
+	4: (command) a string
+	5: (lastmodifier) a username
+	6: (owner) a username
+	7: (workspace) a workspace_id
+	8: (ref) a workspace_ref
+	9: (chsum) a string
+	10: (metadata) a reference to a hash where the key is a string and the value is a string
+timestamp is a string
+username is a string
+workspace_ref is a string
+    </pre>
+   </dd>
+   <dt id="Description13">
+    Description
+   </dt>
+   <dd>
+    <p>
+     Moves a specified object in a specifed workspace to a new ID and/or workspace. Returns the metadata of the newly moved object.
+    </p>
+   </dd>
+  </dl>
+  <h2 id="has_object">
+   has_object
+  </h2>
+  <pre>
+   <code>
+    $object_present = $obj-&gt;has_object($params)
+   </code>
+  </pre>
+  <dl>
+   <dt id="Parameter-and-return-types14">
+    Parameter and return types
+   </dt>
+   <dd>
+    <pre>
+     $params is a has_object_params
+$object_present is a bool
+has_object_params is a reference to a hash where the following keys are defined:
+	id has a value which is an object_id
+	instance has a value which is an int
+	type has a value which is an object_type
+	workspace has a value which is a workspace_id
+	auth has a value which is a string
+object_id is a string
+object_type is a string
+workspace_id is a string
+bool is an int
+    </pre>
+   </dd>
+   <dt id="Description14">
+    Description
+   </dt>
+   <dd>
+    <p>
+     Checks if a specified object in a specifed workspace exists. Returns &quot;1&quot; if the object exists, &quot;0&quot; if not
+    </p>
+   </dd>
+  </dl>
+  <h2 id="object_history">
+   object_history
+  </h2>
+  <pre>
+   <code>
+    $metadatas = $obj-&gt;object_history($params)
+   </code>
+  </pre>
+  <dl>
+   <dt id="Parameter-and-return-types15">
+    Parameter and return types
+   </dt>
+   <dd>
+    <pre>
+     $params is an object_history_params
+$metadatas is a reference to a list where each element is an object_metadata
+object_history_params is a reference to a hash where the following keys are defined:
+	id has a value which is an object_id
+	type has a value which is an object_type
+	workspace has a value which is a workspace_id
+	auth has a value which is a string
+	asHash has a value which is a bool
+object_id is a string
+object_type is a string
+workspace_id is a string
+bool is an int
+object_metadata is a reference to a list containing 11 items:
+	0: (id) an object_id
+	1: (type) an object_type
+	2: (moddate) a timestamp
+	3: (instance) an int
+	4: (command) a string
+	5: (lastmodifier) a username
+	6: (owner) a username
+	7: (workspace) a workspace_id
+	8: (ref) a workspace_ref
+	9: (chsum) a string
+	10: (metadata) a reference to a hash where the key is a string and the value is a string
+timestamp is a string
+username is a string
+workspace_ref is a string
+    </pre>
+   </dd>
+   <dt id="Description15">
+    Description
+   </dt>
+   <dd>
+    <p>
+     Returns the metadata associated with every version of a specified object in a specified workspace.
+    </p>
+   </dd>
+  </dl>
+  <h2 id="create_workspace">
+   create_workspace
+  </h2>
+  <pre>
+   <code>
+    $metadata = $obj-&gt;create_workspace($params)
+   </code>
+  </pre>
+  <dl>
+   <dt id="Parameter-and-return-types16">
+    Parameter and return types
+   </dt>
+   <dd>
+    <pre>
+     $params is a create_workspace_params
+$metadata is a workspace_metadata
+create_workspace_params is a reference to a hash where the following keys are defined:
+	workspace has a value which is a workspace_id
+	default_permission has a value which is a permission
+	auth has a value which is a string
+	asHash has a value which is a bool
+workspace_id is a string
+permission is a string
+bool is an int
+workspace_metadata is a reference to a list containing 6 items:
+	0: (id) a workspace_id
+	1: (owner) a username
+	2: (moddate) a timestamp
+	3: (objects) an int
+	4: (user_permission) a permission
+	5: (global_permission) a permission
+username is a string
+timestamp is a string
+    </pre>
+   </dd>
+   <dt id="Description16">
+    Description
+   </dt>
+   <dd>
+    <p>
+     Creates a new workspace with the specified name and default permissions.
+    </p>
+   </dd>
+  </dl>
+  <h2 id="get_workspacemeta">
+   get_workspacemeta
+  </h2>
+  <pre>
+   <code>
+    $metadata = $obj-&gt;get_workspacemeta($params)
+   </code>
+  </pre>
+  <dl>
+   <dt id="Parameter-and-return-types17">
+    Parameter and return types
+   </dt>
+   <dd>
+    <pre>
+     $params is a get_workspacemeta_params
+$metadata is a workspace_metadata
+get_workspacemeta_params is a reference to a hash where the following keys are defined:
+	workspace has a value which is a workspace_id
+	auth has a value which is a string
+	asHash has a value which is a bool
+workspace_id is a string
+bool is an int
+workspace_metadata is a reference to a list containing 6 items:
+	0: (id) a workspace_id
+	1: (owner) a username
+	2: (moddate) a timestamp
+	3: (objects) an int
+	4: (user_permission) a permission
+	5: (global_permission) a permission
+username is a string
+timestamp is a string
+permission is a string
+    </pre>
+   </dd>
+   <dt id="Description17">
+    Description
+   </dt>
+   <dd>
+    <p>
+     Retreives the metadata associated with the specified workspace.
+    </p>
+   </dd>
+  </dl>
+  <h2 id="get_workspacepermissions">
+   get_workspacepermissions
+  </h2>
+  <pre>
+   <code>
+    $user_permissions = $obj-&gt;get_workspacepermissions($params)
+   </code>
+  </pre>
+  <dl>
+   <dt id="Parameter-and-return-types18">
+    Parameter and return types
+   </dt>
+   <dd>
+    <pre>
+     $params is a get_workspacepermissions_params
+$user_permissions is a reference to a hash where the key is a username and the value is a permission
+get_workspacepermissions_params is a reference to a hash where the following keys are defined:
+	workspace has a value which is a workspace_id
+	auth has a value which is a string
+workspace_id is a string
+username is a string
+permission is a string
+    </pre>
+   </dd>
+   <dt id="Description18">
+    Description
+   </dt>
+   <dd>
+    <p>
+     Retreives a list of all users with custom permissions to the workspace.
+    </p>
+   </dd>
+  </dl>
+  <h2 id="delete_workspace">
+   delete_workspace
+  </h2>
+  <pre>
+   <code>
+    $metadata = $obj-&gt;delete_workspace($params)
+   </code>
+  </pre>
+  <dl>
+   <dt id="Parameter-and-return-types19">
+    Parameter and return types
+   </dt>
+   <dd>
+    <pre>
+     $params is a delete_workspace_params
+$metadata is a workspace_metadata
+delete_workspace_params is a reference to a hash where the following keys are defined:
+	workspace has a value which is a workspace_id
+	auth has a value which is a string
+	asHash has a value which is a bool
+workspace_id is a string
+bool is an int
+workspace_metadata is a reference to a list containing 6 items:
+	0: (id) a workspace_id
+	1: (owner) a username
+	2: (moddate) a timestamp
+	3: (objects) an int
+	4: (user_permission) a permission
+	5: (global_permission) a permission
+username is a string
+timestamp is a string
+permission is a string
+    </pre>
+   </dd>
+   <dt id="Description19">
+    Description
+   </dt>
+   <dd>
+    <p>
+     Deletes a specified workspace with all objects.
+    </p>
+   </dd>
+  </dl>
+  <h2 id="clone_workspace">
+   clone_workspace
+  </h2>
+  <pre>
+   <code>
+    $metadata = $obj-&gt;clone_workspace($params)
+   </code>
+  </pre>
+  <dl>
+   <dt id="Parameter-and-return-types20">
+    Parameter and return types
+   </dt>
+   <dd>
+    <pre>
+     $params is a clone_workspace_params
+$metadata is a workspace_metadata
+clone_workspace_params is a reference to a hash where the following keys are defined:
+	new_workspace has a value which is a workspace_id
+	new_workspace_url has a value which is a string
+	current_workspace has a value which is a workspace_id
+	default_permission has a value which is a permission
+	auth has a value which is a string
+	asHash has a value which is a bool
+workspace_id is a string
+permission is a string
+bool is an int
+workspace_metadata is a reference to a list containing 6 items:
+	0: (id) a workspace_id
+	1: (owner) a username
+	2: (moddate) a timestamp
+	3: (objects) an int
+	4: (user_permission) a permission
+	5: (global_permission) a permission
+username is a string
+timestamp is a string
+    </pre>
+   </dd>
+   <dt id="Description20">
+    Description
+   </dt>
+   <dd>
+    <p>
+     Copies a specified workspace with all objects.
+    </p>
+   </dd>
+  </dl>
+  <h2 id="list_workspaces">
+   list_workspaces
+  </h2>
+  <pre>
+   <code>
+    $workspaces = $obj-&gt;list_workspaces($params)
+   </code>
+  </pre>
+  <dl>
+   <dt id="Parameter-and-return-types21">
+    Parameter and return types
+   </dt>
+   <dd>
+    <pre>
+     $params is a list_workspaces_params
+$workspaces is a reference to a list where each element is a workspace_metadata
+list_workspaces_params is a reference to a hash where the following keys are defined:
+	auth has a value which is a string
+	asHash has a value which is a bool
+bool is an int
+workspace_metadata is a reference to a list containing 6 items:
+	0: (id) a workspace_id
+	1: (owner) a username
+	2: (moddate) a timestamp
+	3: (objects) an int
+	4: (user_permission) a permission
+	5: (global_permission) a permission
+workspace_id is a string
+username is a string
+timestamp is a string
+permission is a string
+    </pre>
+   </dd>
+   <dt id="Description21">
+    Description
+   </dt>
+   <dd>
+    <p>
+     Lists the metadata of all workspaces a user has access to.
+    </p>
+   </dd>
+  </dl>
+  <h2 id="list_workspace_objects">
+   list_workspace_objects
+  </h2>
+  <pre>
+   <code>
+    $objects = $obj-&gt;list_workspace_objects($params)
+   </code>
+  </pre>
+  <dl>
+   <dt id="Parameter-and-return-types22">
+    Parameter and return types
+   </dt>
+   <dd>
+    <pre>
+     $params is a list_workspace_objects_params
+$objects is a reference to a list where each element is an object_metadata
+list_workspace_objects_params is a reference to a hash where the following keys are defined:
+	workspace has a value which is a workspace_id
+	type has a value which is a string
+	showDeletedObject has a value which is a bool
+	auth has a value which is a string
+	asHash has a value which is a bool
+workspace_id is a string
+bool is an int
+object_metadata is a reference to a list containing 11 items:
+	0: (id) an object_id
+	1: (type) an object_type
+	2: (moddate) a timestamp
+	3: (instance) an int
+	4: (command) a string
+	5: (lastmodifier) a username
+	6: (owner) a username
+	7: (workspace) a workspace_id
+	8: (ref) a workspace_ref
+	9: (chsum) a string
+	10: (metadata) a reference to a hash where the key is a string and the value is a string
+object_id is a string
+object_type is a string
+timestamp is a string
+username is a string
+workspace_ref is a string
+    </pre>
+   </dd>
+   <dt id="Description22">
+    Description
+   </dt>
+   <dd>
+    <p>
+     Lists the metadata of all objects in the specified workspace with the specified type (or with any type).
+    </p>
+   </dd>
+  </dl>
+  <h2 id="set_global_workspace_permissions">
+   set_global_workspace_permissions
+  </h2>
+  <pre>
+   <code>
+    $metadata = $obj-&gt;set_global_workspace_permissions($params)
+   </code>
+  </pre>
+  <dl>
+   <dt id="Parameter-and-return-types23">
+    Parameter and return types
+   </dt>
+   <dd>
+    <pre>
+     $params is a set_global_workspace_permissions_params
+$metadata is a workspace_metadata
+set_global_workspace_permissions_params is a reference to a hash where the following keys are defined:
+	new_permission has a value which is a permission
+	workspace has a value which is a workspace_id
+	auth has a value which is a string
+	asHash has a value which is a bool
+permission is a string
+workspace_id is a string
+bool is an int
+workspace_metadata is a reference to a list containing 6 items:
+	0: (id) a workspace_id
+	1: (owner) a username
+	2: (moddate) a timestamp
+	3: (objects) an int
+	4: (user_permission) a permission
+	5: (global_permission) a permission
+username is a string
+timestamp is a string
+    </pre>
+   </dd>
+   <dt id="Description23">
+    Description
+   </dt>
+   <dd>
+    <p>
+     Sets the default permissions for accessing a specified workspace for all users. Must have admin privelages to change workspace global permissions.
+    </p>
+   </dd>
+  </dl>
+  <h2 id="set_workspace_permissions">
+   set_workspace_permissions
+  </h2>
+  <pre>
+   <code>
+    $success = $obj-&gt;set_workspace_permissions($params)
+   </code>
+  </pre>
+  <dl>
+   <dt id="Parameter-and-return-types24">
+    Parameter and return types
+   </dt>
+   <dd>
+    <pre>
+     $params is a set_workspace_permissions_params
+$success is a bool
+set_workspace_permissions_params is a reference to a hash where the following keys are defined:
+	users has a value which is a reference to a list where each element is a username
+	new_permission has a value which is a permission
+	workspace has a value which is a workspace_id
+	auth has a value which is a string
+username is a string
+permission is a string
+workspace_id is a string
+bool is an int
+    </pre>
+   </dd>
+   <dt id="Description24">
+    Description
+   </dt>
+   <dd>
+    <p>
+     Sets the permissions for a list of users for accessing a specified workspace. Must have admin privelages to change workspace permissions.
+    </p>
+   </dd>
+  </dl>
+  <h2 id="get_user_settings">
+   get_user_settings
+  </h2>
+  <pre>
+   <code>
+    $output = $obj-&gt;get_user_settings($params)
+   </code>
+  </pre>
+  <dl>
+   <dt id="Parameter-and-return-types25">
+    Parameter and return types
+   </dt>
+   <dd>
+    <pre>
+     $params is a get_user_settings_params
+$output is a user_settings
+get_user_settings_params is a reference to a hash where the following keys are defined:
+	auth has a value which is a string
+user_settings is a reference to a hash where the following keys are defined:
+	workspace has a value which is a workspace_id
+workspace_id is a string
+    </pre>
+   </dd>
+   <dt id="Description25">
+    Description
+   </dt>
+   <dd>
+    <p>
+     Retrieves settings for user account, including currently selected workspace
+    </p>
+   </dd>
+  </dl>
+  <h2 id="set_user_settings">
+   set_user_settings
+  </h2>
+  <pre>
+   <code>
+    $output = $obj-&gt;set_user_settings($params)
+   </code>
+  </pre>
+  <dl>
+   <dt id="Parameter-and-return-types26">
+    Parameter and return types
+   </dt>
+   <dd>
+    <pre>
+     $params is a set_user_settings_params
+$output is a user_settings
+set_user_settings_params is a reference to a hash where the following keys are defined:
+	setting has a value which is a string
+	value has a value which is a string
+	auth has a value which is a string
+user_settings is a reference to a hash where the following keys are defined:
+	workspace has a value which is a workspace_id
+workspace_id is a string
+    </pre>
+   </dd>
+   <dt id="Description26">
+    Description
+   </dt>
+   <dd>
+    <p>
+     Retrieves settings for user account, including currently selected workspace
+    </p>
+   </dd>
+  </dl>
+  <h2 id="queue_job">
+   queue_job
+  </h2>
+  <pre>
+   <code>
+    $job = $obj-&gt;queue_job($params)
+   </code>
+  </pre>
+  <dl>
+   <dt id="Parameter-and-return-types27">
+    Parameter and return types
+   </dt>
+   <dd>
+    <pre>
+     $params is a queue_job_params
+$job is a JobObject
+queue_job_params is a reference to a hash where the following keys are defined:
+	auth has a value which is a string
+	state has a value which is a string
+	type has a value which is a string
+	queuecommand has a value which is a string
+	jobdata has a value which is a reference to a hash where the key is a string and the value is a string
+JobObject is a reference to a hash where the following keys are defined:
+	id has a value which is a job_id
+	type has a value which is a string
+	auth has a value which is a string
+	status has a value which is a string
+	jobdata has a value which is a reference to a hash where the key is a string and the value is a string
+	queuetime has a value which is a string
+	starttime has a value which is a string
+	completetime has a value which is a string
+	owner has a value which is a string
+	queuecommand has a value which is a string
+job_id is a string
+    </pre>
+   </dd>
+   <dt id="Description27">
+    Description
+   </dt>
+   <dd>
+    <p>
+     Queues a new job in the workspace.
+    </p>
+   </dd>
+  </dl>
+  <h2 id="set_job_status">
+   set_job_status
+  </h2>
+  <pre>
+   <code>
+    $job = $obj-&gt;set_job_status($params)
+   </code>
+  </pre>
+  <dl>
+   <dt id="Parameter-and-return-types28">
+    Parameter and return types
+   </dt>
+   <dd>
+    <pre>
+     $params is a set_job_status_params
+$job is a JobObject
+set_job_status_params is a reference to a hash where the following keys are defined:
+	jobid has a value which is a string
+	status has a value which is a string
+	auth has a value which is a string
+	currentStatus has a value which is a string
+	jobdata has a value which is a reference to a hash where the key is a string and the value is a string
+JobObject is a reference to a hash where the following keys are defined:
+	id has a value which is a job_id
+	type has a value which is a string
+	auth has a value which is a string
+	status has a value which is a string
+	jobdata has a value which is a reference to a hash where the key is a string and the value is a string
+	queuetime has a value which is a string
+	starttime has a value which is a string
+	completetime has a value which is a string
+	owner has a value which is a string
+	queuecommand has a value which is a string
+job_id is a string
+    </pre>
+   </dd>
+   <dt id="Description28">
+    Description
+   </dt>
+   <dd>
+    <p>
+     Changes the current status of a currently queued jobs Used to manage jobs by ensuring multiple server don&#39;t claim the same job.
+    </p>
+   </dd>
+  </dl>
+  <h2 id="get_jobs">
+   get_jobs
+  </h2>
+  <pre>
+   <code>
+    $jobs = $obj-&gt;get_jobs($params)
+   </code>
+  </pre>
+  <dl>
+   <dt id="Parameter-and-return-types29">
+    Parameter and return types
+   </dt>
+   <dd>
+    <pre>
+     $params is a get_jobs_params
+$jobs is a reference to a list where each element is a JobObject
+get_jobs_params is a reference to a hash where the following keys are defined:
+	jobids has a value which is a reference to a list where each element is a string
+	type has a value which is a string
+	status has a value which is a string
+	auth has a value which is a string
+JobObject is a reference to a hash where the following keys are defined:
+	id has a value which is a job_id
+	type has a value which is a string
+	auth has a value which is a string
+	status has a value which is a string
+	jobdata has a value which is a reference to a hash where the key is a string and the value is a string
+	queuetime has a value which is a string
+	starttime has a value which is a string
+	completetime has a value which is a string
+	owner has a value which is a string
+	queuecommand has a value which is a string
+job_id is a string
+    </pre>
+   </dd>
+   <dt id="Description29">
+    Description
+   </dt>
+   <dd>
+   </dd>
+  </dl>
+  <h2 id="get_types">
+   get_types
+  </h2>
+  <pre>
+   <code>
+    $types = $obj-&gt;get_types()
+   </code>
+  </pre>
+  <dl>
+   <dt id="Parameter-and-return-types30">
+    Parameter and return types
+   </dt>
+   <dd>
+    <pre>
+     $types is a reference to a list where each element is a string
+    </pre>
+   </dd>
+   <dt id="Description30">
+    Description
+   </dt>
+   <dd>
+    <p>
+     Returns a list of all permanent and optional types currently accepted by the workspace service. An object cannot be saved in any workspace if it&#39;s type is not on this list.
+    </p>
+   </dd>
+  </dl>
+  <h2 id="add_type">
+   add_type
+  </h2>
+  <pre>
+   <code>
+    $success = $obj-&gt;add_type($params)
+   </code>
+  </pre>
+  <dl>
+   <dt id="Parameter-and-return-types31">
+    Parameter and return types
+   </dt>
+   <dd>
+    <pre>
+     $params is an add_type_params
+$success is a bool
+add_type_params is a reference to a hash where the following keys are defined:
+	type has a value which is a string
+	auth has a value which is a string
+bool is an int
+    </pre>
+   </dd>
+   <dt id="Description31">
+    Description
+   </dt>
+   <dd>
+    <p>
+     Adds a new custom type to the workspace service, so that objects of this type may be retreived. Cannot add a type that already exists.
+    </p>
+   </dd>
+  </dl>
+  <h2 id="remove_type">
+   remove_type
+  </h2>
+  <pre>
+   <code>
+    $success = $obj-&gt;remove_type($params)
+   </code>
+  </pre>
+  <dl>
+   <dt id="Parameter-and-return-types32">
+    Parameter and return types
+   </dt>
+   <dd>
+    <pre>
+     $params is a remove_type_params
+$success is a bool
+remove_type_params is a reference to a hash where the following keys are defined:
+	type has a value which is a string
+	auth has a value which is a string
+bool is an int
+    </pre>
+   </dd>
+   <dt id="Description32">
+    Description
+   </dt>
+   <dd>
+    <p>
+     Removes a custom type from the workspace service. Permanent types cannot be removed.
+    </p>
+   </dd>
+  </dl>
+  <h2 id="patch">
+   patch
+  </h2>
+  <pre>
+   <code>
+    $success = $obj-&gt;patch($params)
+   </code>
+  </pre>
+  <dl>
+   <dt id="Parameter-and-return-types33">
+    Parameter and return types
+   </dt>
+   <dd>
+    <pre>
+     $params is a patch_params
+$success is a bool
+patch_params is a reference to a hash where the following keys are defined:
+	patch_id has a value which is a string
+	auth has a value which is a string
+bool is an int
+    </pre>
+   </dd>
+   <dt id="Description33">
+    Description
+   </dt>
+   <dd>
+    <p>
+     This function patches the database after an update. Called remotely, but only callable by the admin user.
+    </p>
+   </dd>
+  </dl>
+  <h1 id="TYPES">
+   TYPES
+  </h1>
+  <h2 id="bool">
+   bool
+  </h2>
+  <dl>
+   <dt id="Description34">
+    Description
+   </dt>
+   <dd>
+    <p>
+     indicates true or false values, false &lt;= 0, true &gt;=1
+    </p>
+   </dd>
+   <dt id="Definition">
+    Definition
+   </dt>
+   <dd>
+    <pre>
+     an int
+    </pre>
+   </dd>
+  </dl>
+  <h2 id="job_id">
+   job_id
+  </h2>
+  <dl>
+   <dt id="Description35">
+    Description
+   </dt>
+   <dd>
+    <p>
+     ID of a job object
+    </p>
+   </dd>
+   <dt id="Definition1">
+    Definition
+   </dt>
+   <dd>
+    <pre>
+     a string
+    </pre>
+   </dd>
+  </dl>
+  <h2 id="workspace_id">
+   workspace_id
+  </h2>
+  <dl>
+   <dt id="Description36">
+    Description
+   </dt>
+   <dd>
+    <p>
+     A string used as an ID for a workspace. Any string consisting of alphanumeric characters and &quot;-&quot; is acceptable
+    </p>
+   </dd>
+   <dt id="Definition2">
+    Definition
+   </dt>
+   <dd>
+    <pre>
+     a string
+    </pre>
+   </dd>
+  </dl>
+  <h2 id="object_type">
+   object_type
+  </h2>
+  <dl>
+   <dt id="Description37">
+    Description
+   </dt>
+   <dd>
+    <p>
+     A string indicating the &quot;type&quot; of an object stored in a workspace. Acceptable types are returned by the &quot;get_types()&quot; command
+    </p>
+   </dd>
+   <dt id="Definition3">
+    Definition
+   </dt>
+   <dd>
+    <pre>
+     a string
+    </pre>
+   </dd>
+  </dl>
+  <h2 id="object_id">
+   object_id
+  </h2>
+  <dl>
+   <dt id="Description38">
+    Description
+   </dt>
+   <dd>
+    <p>
+     ID of an object stored in the workspace. Any string consisting of alphanumeric characters and &quot;-&quot; is acceptable
+    </p>
+   </dd>
+   <dt id="Definition4">
+    Definition
+   </dt>
+   <dd>
+    <pre>
+     a string
+    </pre>
+   </dd>
+  </dl>
+  <h2 id="permission">
+   permission
+  </h2>
+  <dl>
+   <dt id="Description39">
+    Description
+   </dt>
+   <dd>
+    <p>
+     Single letter indicating permissions on access to workspace. Options are: &#39;a&#39; for administative access, &#39;w&#39; for read/write access, &#39;r&#39; for read access, and &#39;n&#39; for no access.
+    </p>
+   </dd>
+   <dt id="Definition5">
+    Definition
+   </dt>
+   <dd>
+    <pre>
+     a string
+    </pre>
+   </dd>
+  </dl>
+  <h2 id="username">
+   username
+  </h2>
+  <dl>
+   <dt id="Description40">
+    Description
+   </dt>
+   <dd>
+    <p>
+     Login name of KBase useraccount to which permissions for workspaces are mapped
+    </p>
+   </dd>
+   <dt id="Definition6">
+    Definition
+   </dt>
+   <dd>
+    <pre>
+     a string
+    </pre>
+   </dd>
+  </dl>
+  <h2 id="timestamp">
+   timestamp
+  </h2>
+  <dl>
+   <dt id="Description41">
+    Description
+   </dt>
+   <dd>
+    <p>
+     Exact time for workspace operations. e.g. 2012-12-17T23:24:06
+    </p>
+   </dd>
+   <dt id="Definition7">
+    Definition
+   </dt>
+   <dd>
+    <pre>
+     a string
+    </pre>
+   </dd>
+  </dl>
+  <h2 id="workspace_ref">
+   workspace_ref
+  </h2>
+  <dl>
+   <dt id="Description42">
+    Description
+   </dt>
+   <dd>
+    <p>
+     A 36 character string referring to a particular instance of an object in a workspace that lasts forever. Objects should always be retreivable using this ID
+    </p>
+   </dd>
+   <dt id="Definition8">
+    Definition
+   </dt>
+   <dd>
+    <pre>
+     a string
+    </pre>
+   </dd>
+  </dl>
+  <h2 id="ObjectData">
+   ObjectData
+  </h2>
+  <dl>
+   <dt id="Description43">
+    Description
+   </dt>
+   <dd>
+    <p>
+     Generic definition for object data stored in the workspace Data objects stored in the workspace could be either a string or a reference to a complex perl data structure. So we can&#39;t really formulate a strict type definition for this data.
+    </p>
+    <p>
+     version - for complex data structures, the datastructure should include a version number to enable tracking of changes that may occur to the structure of the data over time
+    </p>
+   </dd>
+   <dt id="Definition9">
+    Definition
+   </dt>
+   <dd>
+    <pre>
+     a reference to a hash where the following keys are defined:
+version has a value which is an int
+    </pre>
+   </dd>
+  </dl>
+  <h2 id="object_metadata">
+   object_metadata
+  </h2>
+  <dl>
+   <dt id="Description44">
+    Description
+   </dt>
+   <dd>
+    <p>
+     Meta data associated with an object stored in a workspace.
+    </p>
+    <pre>
+     <code>
+      object_id id - ID of the object assigned by the user or retreived from the IDserver (e.g. kb|g.0)
+        object_type type - type of the object (e.g. Genome)
+        timestamp moddate - date when the object was modified by the user (e.g. 2012-12-17T23:24:06)
+        int instance - instance of the object, which is equal to the number of times the user has overwritten the object
+        string command - name of the command last used to modify or create the object
+        username lastmodifier - name of the user who last modified the object
+        username owner - name of the user who owns (who created) this object
+        workspace_id workspace - ID of the workspace in which the object is currently stored
+        workspace_ref ref - a 36 character ID that provides permanent undeniable access to this specific instance of this object
+        string chsum - checksum of the associated data object
+        mapping&lt;string,string&gt; metadata - custom metadata entered for data object during save operation
+     </code>
+    </pre>
+   </dd>
+   <dt id="Definition10">
+    Definition
+   </dt>
+   <dd>
+    <pre>
+     a reference to a list containing 11 items:
+0: (id) an object_id
+1: (type) an object_type
+2: (moddate) a timestamp
+3: (instance) an int
+4: (command) a string
+5: (lastmodifier) a username
+6: (owner) a username
+7: (workspace) a workspace_id
+8: (ref) a workspace_ref
+9: (chsum) a string
+10: (metadata) a reference to a hash where the key is a string and the value is a string
+    </pre>
+   </dd>
+  </dl>
+  <h2 id="workspace_metadata">
+   workspace_metadata
+  </h2>
+  <dl>
+   <dt id="Description45">
+    Description
+   </dt>
+   <dd>
+    <p>
+     Meta data associated with a workspace.
+    </p>
+    <pre>
+     <code>
+      workspace_id id - ID of the object assigned by the user or retreived from the IDserver (e.g. kb|g.0)
+        username owner - name of the user who owns (who created) this object
+        timestamp moddate - date when the workspace was last modified
+        int objects - number of objects currently stored in the workspace
+        permission user_permission - permissions for the currently logged user for the workspace
+        permission global_permission - default permissions for the workspace for all KBase users
+     </code>
+    </pre>
+   </dd>
+   <dt id="Definition11">
+    Definition
+   </dt>
+   <dd>
+    <pre>
+     a reference to a list containing 6 items:
+0: (id) a workspace_id
+1: (owner) a username
+2: (moddate) a timestamp
+3: (objects) an int
+4: (user_permission) a permission
+5: (global_permission) a permission
+    </pre>
+   </dd>
+  </dl>
+  <h2 id="JobObject">
+   JobObject
+  </h2>
+  <dl>
+   <dt id="Description46">
+    Description
+   </dt>
+   <dd>
+    <p>
+     Data structures for a job object
+    </p>
+    <p>
+     job_id id - ID of the job object string type - type of the job string auth - authentication token of job owner string status - current status of job mapping&lt;string,string&gt; jobdata; string queuetime - time when job was queued string starttime - time when job started running string completetime - time when the job was completed string owner - owner of the job string queuecommand - command used to queue job
+    </p>
+   </dd>
+   <dt id="Definition12">
+    Definition
+   </dt>
+   <dd>
+    <pre>
+     a reference to a hash where the following keys are defined:
+id has a value which is a job_id
+type has a value which is a string
+auth has a value which is a string
+status has a value which is a string
+jobdata has a value which is a reference to a hash where the key is a string and the value is a string
+queuetime has a value which is a string
+starttime has a value which is a string
+completetime has a value which is a string
+owner has a value which is a string
+queuecommand has a value which is a string
+    </pre>
+   </dd>
+  </dl>
+  <h2 id="user_settings">
+   user_settings
+  </h2>
+  <dl>
+   <dt id="Description47">
+    Description
+   </dt>
+   <dd>
+    <p>
+     Settings for user accounts stored in the workspace
+    </p>
+    <pre>
+     <code>
+      workspace_id workspace - the workspace currently selected by the user
+     </code>
+    </pre>
+   </dd>
+   <dt id="Definition13">
+    Definition
+   </dt>
+   <dd>
+    <pre>
+     a reference to a hash where the following keys are defined:
+workspace has a value which is a workspace_id
+    </pre>
+   </dd>
+  </dl>
+  <h2 id="load_media_from_bio_params">
+   load_media_from_bio_params
+  </h2>
+  <dl>
+   <dt id="Description48">
+    Description
+   </dt>
+   <dd>
+    <p>
+     Input parameters for the &quot;load_media_from_bio&quot; function.
+    </p>
+    <pre>
+     <code>
+      workspace_id mediaWS - ID of workspace where media will be loaded (an optional argument with default &quot;KBaseMedia&quot;)
+        object_id bioid - ID of biochemistry from which media will be loaded (an optional argument with default &quot;default&quot;)
+        workspace_id bioWS - ID of workspace with biochemistry from which media will be loaded (an optional argument with default &quot;kbase&quot;)
+        bool clearExisting - A boolean indicating if existing media in the specified workspace should be cleared (an optional argument with default &quot;0&quot;)
+        bool overwrite - A boolean indicating if a matching existing media should be overwritten (an optional argument with default &quot;0&quot;)
+     </code>
+    </pre>
+   </dd>
+   <dt id="Definition14">
+    Definition
+   </dt>
+   <dd>
+    <pre>
+     a reference to a hash where the following keys are defined:
+mediaWS has a value which is a workspace_id
+bioid has a value which is an object_id
+bioWS has a value which is a workspace_id
+clearExisting has a value which is a bool
+overwrite has a value which is a bool
+auth has a value which is a string
+asHash has a value which is a bool
+    </pre>
+   </dd>
+  </dl>
+  <h2 id="import_bio_params">
+   import_bio_params
+  </h2>
+  <dl>
+   <dt id="Description49">
+    Description
+   </dt>
+   <dd>
+    <p>
+     Input parameters for the &quot;import_bio&quot; function.
+    </p>
+    <pre>
+     <code>
+      object_id bioid - ID of biochemistry to be imported (an optional argument with default &quot;default&quot;)
+        workspace_id bioWS - ID of workspace to which biochemistry will be imported (an optional argument with default &quot;kbase&quot;)
+        string url - URL from which biochemistry should be retrieved
+        bool compressed - boolean indicating if biochemistry is compressed
+        bool overwrite - A boolean indicating if a matching existing biochemistry should be overwritten (an optional argument with default &quot;0&quot;)
+     </code>
+    </pre>
+   </dd>
+   <dt id="Definition15">
+    Definition
+   </dt>
+   <dd>
+    <pre>
+     a reference to a hash where the following keys are defined:
+bioid has a value which is an object_id
+bioWS has a value which is a workspace_id
+url has a value which is a string
+compressed has a value which is a bool
+clearExisting has a value which is a bool
+overwrite has a value which is a bool
+auth has a value which is a string
+asHash has a value which is a bool
+    </pre>
+   </dd>
+  </dl>
+  <h2 id="import_map_params">
+   import_map_params
+  </h2>
+  <dl>
+   <dt id="Description50">
+    Description
+   </dt>
+   <dd>
+    <p>
+     Input parameters for the &quot;import_map&quot; function.
+    </p>
+    <pre>
+     <code>
+      object_id mapid - ID of mapping to be imported (an optional argument with default &quot;default&quot;)
+        workspace_id mapWS - ID of workspace to which mapping will be imported (an optional argument with default &quot;kbase&quot;)
+        string url - URL from which mapping should be retrieved
+        bool compressed - boolean indicating if mapping is compressed
+        bool overwrite - A boolean indicating if a matching existing mapping should be overwritten (an optional argument with default &quot;0&quot;)
+     </code>
+    </pre>
+   </dd>
+   <dt id="Definition16">
+    Definition
+   </dt>
+   <dd>
+    <pre>
+     a reference to a hash where the following keys are defined:
+bioid has a value which is an object_id
+bioWS has a value which is a workspace_id
+mapid has a value which is an object_id
+mapWS has a value which is a workspace_id
+url has a value which is a string
+compressed has a value which is a bool
+overwrite has a value which is a bool
+auth has a value which is a string
+asHash has a value which is a bool
+    </pre>
+   </dd>
+  </dl>
+  <h2 id="save_object_params">
+   save_object_params
+  </h2>
+  <dl>
+   <dt id="Description51">
+    Description
+   </dt>
+   <dd>
+    <p>
+     Input parameters for the &quot;save_objects function.
+    </p>
+    <pre>
+     <code>
+      object_type type - type of the object to be saved (an essential argument)
+        workspace_id workspace - ID of the workspace where the object is to be saved (an essential argument)
+        object_id id - ID behind which the object will be saved in the workspace (an essential argument)
+        ObjectData data - string or reference to complex datastructure to be saved in the workspace (an essential argument)
+        string command - the name of the KBase command that is calling the &quot;save_object&quot; function (an optional argument with default &quot;unknown&quot;)
+        mapping&lt;string,string&gt; metadata - a hash of metadata to be associated with the object (an optional argument with default &quot;{}&quot;)
+        string auth - the authentication token of the KBase account to associate this save command (an optional argument, user is &quot;public&quot; if auth is not provided)
+        bool retrieveFromURL - a flag indicating that the &quot;data&quot; argument contains a URL from which the actual data should be downloaded (an optional argument with default &quot;0&quot;)
+        bool json - a flag indicating if the input data is encoded as a JSON string (an optional argument with default &quot;0&quot;)
+        bool compressed - a flag indicating if the input data in zipped (an optional argument with default &quot;0&quot;)
+        bool asHash - a boolean indicating if metadata should be returned as a hash
+     </code>
+    </pre>
+   </dd>
+   <dt id="Definition17">
+    Definition
+   </dt>
+   <dd>
+    <pre>
+     a reference to a hash where the following keys are defined:
+id has a value which is an object_id
+type has a value which is an object_type
+data has a value which is an ObjectData
+workspace has a value which is a workspace_id
+command has a value which is a string
+metadata has a value which is a reference to a hash where the key is a string and the value is a string
+auth has a value which is a string
+json has a value which is a bool
+compressed has a value which is a bool
+retrieveFromURL has a value which is a bool
+asHash has a value which is a bool
+    </pre>
+   </dd>
+  </dl>
+  <h2 id="delete_object_params">
+   delete_object_params
+  </h2>
+  <dl>
+   <dt id="Description52">
+    Description
+   </dt>
+   <dd>
+    <p>
+     Input parameters for the &quot;delete_object&quot; function.
+    </p>
+    <pre>
+     <code>
+      object_type type - type of the object to be deleted (an essential argument)
+        workspace_id workspace - ID of the workspace where the object is to be deleted (an essential argument)
+        object_id id - ID of the object to be deleted (an essential argument)
+        string auth - the authentication token of the KBase account to associate this deletion command (an optional argument; user is &quot;public&quot; if auth is not provided)
+        bool asHash - a boolean indicating if metadata should be returned as a hash
+     </code>
+    </pre>
+   </dd>
+   <dt id="Definition18">
+    Definition
+   </dt>
+   <dd>
+    <pre>
+     a reference to a hash where the following keys are defined:
+id has a value which is an object_id
+type has a value which is an object_type
+workspace has a value which is a workspace_id
+auth has a value which is a string
+asHash has a value which is a bool
+    </pre>
+   </dd>
+  </dl>
+  <h2 id="delete_object_permanently_params">
+   delete_object_permanently_params
+  </h2>
+  <dl>
+   <dt id="Description53">
+    Description
+   </dt>
+   <dd>
+    <p>
+     Input parameters for the &quot;delete_object_permanently&quot; function.
+    </p>
+    <pre>
+     <code>
+      object_type type - type of the object to be permanently deleted (an essential argument)
+        workspace_id workspace - ID of the workspace where the object is to be permanently deleted (an essential argument)
+        object_id id - ID of the object to be permanently deleted (an essential argument)
+        string auth - the authentication token of the KBase account to associate with this permanent deletion command (an optional argument; user is &quot;public&quot; if auth is not provided)
+        bool asHash - a boolean indicating if metadata should be returned as a hash
+     </code>
+    </pre>
+   </dd>
+   <dt id="Definition19">
+    Definition
+   </dt>
+   <dd>
+    <pre>
+     a reference to a hash where the following keys are defined:
+id has a value which is an object_id
+type has a value which is an object_type
+workspace has a value which is a workspace_id
+auth has a value which is a string
+asHash has a value which is a bool
+    </pre>
+   </dd>
+  </dl>
+  <h2 id="get_object_params">
+   get_object_params
+  </h2>
+  <dl>
+   <dt id="Description54">
+    Description
+   </dt>
+   <dd>
+    <p>
+     Input parameters for the &quot;get_object&quot; function.
+    </p>
+    <pre>
+     <code>
+      object_type type - type of the object to be retrieved (an essential argument)
+        workspace_id workspace - ID of the workspace containing the object to be retrieved (an essential argument)
+        object_id id - ID of the object to be retrieved (an essential argument)
+        int instance - Version of the object to be retrieved, enabling retrieval of any previous version of an object (an optional argument; the current version is retrieved if no version is provides)
+        string auth - the authentication token of the KBase account to associate with this object retrieval command (an optional argument; user is &quot;public&quot; if auth is not provided)
+        bool asHash - a boolean indicating if metadata should be returned as a hash
+        bool asJSON - indicates that data should be returned in JSON format (an optional argument; default is &#39;0&#39;)
+     </code>
+    </pre>
+   </dd>
+   <dt id="Definition20">
+    Definition
+   </dt>
+   <dd>
+    <pre>
+     a reference to a hash where the following keys are defined:
+id has a value which is an object_id
+type has a value which is an object_type
+workspace has a value which is a workspace_id
+instance has a value which is an int
+auth has a value which is a string
+asHash has a value which is a bool
+asJSON has a value which is a bool
+    </pre>
+   </dd>
+  </dl>
+  <h2 id="get_object_output">
+   get_object_output
+  </h2>
+  <dl>
+   <dt id="Description55">
+    Description
+   </dt>
+   <dd>
+    <p>
+     Output generated by the &quot;get_object&quot; function.
+    </p>
+    <pre>
+     <code>
+      string data - data for object retrieved in json format (an essential argument)
+        object_metadata metadata - metadata for object retrieved (an essential argument)
+     </code>
+    </pre>
+   </dd>
+   <dt id="Definition21">
+    Definition
+   </dt>
+   <dd>
+    <pre>
+     a reference to a hash where the following keys are defined:
+data has a value which is a string
+metadata has a value which is an object_metadata
+    </pre>
+   </dd>
+  </dl>
+  <h2 id="get_object_by_ref_params">
+   get_object_by_ref_params
+  </h2>
+  <dl>
+   <dt id="Description56">
+    Description
+   </dt>
+   <dd>
+    <p>
+     Input parameters for the &quot;get_object_by_ref&quot; function.
+    </p>
+    <pre>
+     <code>
+      workspace_ref reference - reference to a specific instance of a specific object in a workspace (an essential argument)
+        string auth - the authentication token of the KBase account to associate with this object retrieval command (an optional argument; user is &quot;public&quot; if auth is not provided)
+        bool asHash - a boolean indicating if metadata should be returned as a hash
+        bool asJSON - indicates that data should be returned in JSON format (an optional argument; default is &#39;0&#39;)
+     </code>
+    </pre>
+   </dd>
+   <dt id="Definition22">
+    Definition
+   </dt>
+   <dd>
+    <pre>
+     a reference to a hash where the following keys are defined:
+reference has a value which is a workspace_ref
+auth has a value which is a string
+asHash has a value which is a bool
+asJSON has a value which is a bool
+    </pre>
+   </dd>
+  </dl>
+  <h2 id="save_object_by_ref_params">
+   save_object_by_ref_params
+  </h2>
+  <dl>
+   <dt id="Description57">
+    Description
+   </dt>
+   <dd>
+    <p>
+     Input parameters for the &quot;save_object_by_ref&quot; function.
+    </p>
+    <pre>
+     <code>
+      object_id id - ID to which the model should be saved (an essential argument)
+        object_type type - type of the object for which metadata is to be retrieved (an essential argument)
+        ObjectData data - string or reference to complex datastructure to be saved in the workspace (an essential argument)
+        string command - the name of the KBase command that is calling the &quot;save_object&quot; function (an optional argument with default &quot;unknown&quot;)
+        mapping&lt;string,string&gt; metadata - a hash of metadata to be associated with the object (an optional argument with default &quot;{}&quot;)
+        workspace_ref reference - reference the object should be saved in
+        bool json - a flag indicating if the input data is encoded as a JSON string (an optional argument with default &quot;0&quot;)
+        bool compressed - a flag indicating if the input data in zipped (an optional argument with default &quot;0&quot;)
+        bool retrieveFromURL - a flag indicating that the &quot;data&quot; argument contains a URL from which the actual data should be downloaded (an optional argument with default &quot;0&quot;)
+        bool replace - a flag indicating any existing object located at the specified reference should be overwritten (an optional argument with default &quot;0&quot;)
+        string auth - the authentication token of the KBase account to associate this save command (an optional argument, user is &quot;public&quot; if auth is not provided)
+        bool asHash - a boolean indicating if metadata should be returned as a hash
+     </code>
+    </pre>
+   </dd>
+   <dt id="Definition23">
+    Definition
+   </dt>
+   <dd>
+    <pre>
+     a reference to a hash where the following keys are defined:
+id has a value which is an object_id
+type has a value which is an object_type
+data has a value which is an ObjectData
+command has a value which is a string
+metadata has a value which is a reference to a hash where the key is a string and the value is a string
+reference has a value which is a workspace_ref
+json has a value which is a bool
+compressed has a value which is a bool
+retrieveFromURL has a value which is a bool
+replace has a value which is a bool
+auth has a value which is a string
+asHash has a value which is a bool
+    </pre>
+   </dd>
+  </dl>
+  <h2 id="get_objectmeta_params">
+   get_objectmeta_params
+  </h2>
+  <dl>
+   <dt id="Description58">
+    Description
+   </dt>
+   <dd>
+    <p>
+     Input parameters for the &quot;get_objectmeta&quot; function.
+    </p>
+    <pre>
+     <code>
+      object_type type - type of the object for which metadata is to be retrieved (an essential argument)
+        workspace_id workspace - ID of the workspace containing the object for which metadata is to be retrieved (an essential argument)
+        object_id id - ID of the object for which metadata is to be retrieved (an essential argument)
+        int instance - Version of the object for which metadata is to be retrieved, enabling retrieval of any previous version of an object (an optional argument; the current metadata is retrieved if no version is provides)
+        string auth - the authentication token of the KBase account to associate with this object metadata retrieval command (an optional argument; user is &quot;public&quot; if auth is not provided)
+        bool asHash - a boolean indicating if metadata should be returned as a hash
+     </code>
+    </pre>
+   </dd>
+   <dt id="Definition24">
+    Definition
+   </dt>
+   <dd>
+    <pre>
+     a reference to a hash where the following keys are defined:
+id has a value which is an object_id
+type has a value which is an object_type
+workspace has a value which is a workspace_id
+instance has a value which is an int
+auth has a value which is a string
+asHash has a value which is a bool
+    </pre>
+   </dd>
+  </dl>
+  <h2 id="get_objectmeta_by_ref_params">
+   get_objectmeta_by_ref_params
+  </h2>
+  <dl>
+   <dt id="Description59">
+    Description
+   </dt>
+   <dd>
+    <p>
+     Input parameters for the &quot;get_objectmeta_by_ref&quot; function.
+    </p>
+    <pre>
+     <code>
+      workspace_ref reference - reference to a specific instance of a specific object in a workspace (an essential argument)
+        string auth - the authentication token of the KBase account to associate with this object retrieval command (an optional argument; user is &quot;public&quot; if auth is not provided)
+        bool asHash - a boolean indicating if metadata should be returned as a hash
+     </code>
+    </pre>
+   </dd>
+   <dt id="Definition25">
+    Definition
+   </dt>
+   <dd>
+    <pre>
+     a reference to a hash where the following keys are defined:
+reference has a value which is a workspace_ref
+auth has a value which is a string
+asHash has a value which is a bool
+    </pre>
+   </dd>
+  </dl>
+  <h2 id="revert_object_params">
+   revert_object_params
+  </h2>
+  <dl>
+   <dt id="Description60">
+    Description
+   </dt>
+   <dd>
+    <p>
+     Input parameters for the &quot;revert_object&quot; function.
+    </p>
+    <pre>
+     <code>
+      object_type type - type of the object to be reverted (an essential argument)
+        workspace_id workspace - ID of the workspace containing the object to be reverted (an essential argument)
+        object_id id - ID of the object to be reverted (an essential argument)
+        int instance - Previous version of the object to which the object should be reset (an essential argument)
+        string auth - the authentication token of the KBase account to associate with this object reversion command (an optional argument; user is &quot;public&quot; if auth is not provided)
+        bool asHash - a boolean indicating if metadata should be returned as a hash
+     </code>
+    </pre>
+   </dd>
+   <dt id="Definition26">
+    Definition
+   </dt>
+   <dd>
+    <pre>
+     a reference to a hash where the following keys are defined:
+id has a value which is an object_id
+type has a value which is an object_type
+workspace has a value which is a workspace_id
+instance has a value which is an int
+auth has a value which is a string
+asHash has a value which is a bool
+    </pre>
+   </dd>
+  </dl>
+  <h2 id="copy_object_params">
+   copy_object_params
+  </h2>
+  <dl>
+   <dt id="Description61">
+    Description
+   </dt>
+   <dd>
+    <p>
+     Input parameters for the &quot;copy_object&quot; function.
+    </p>
+    <pre>
+     <code>
+      object_type type - type of the object to be copied (an essential argument)
+        workspace_id source_workspace - ID of the workspace containing the object to be copied (an essential argument)
+        object_id source_id - ID of the object to be copied (an essential argument)
+        int instance - Version of the object to be copied, enabling retrieval of any previous version of an object (an optional argument; the current object is copied if no version is provides)
+        workspace_id new_workspace - ID of the workspace the object to be copied to (an essential argument)
+        object_id new_id - ID the object is to be copied to (an essential argument)
+        string new_workspace_url - URL of workspace server where object should be copied (an optional argument - object will be saved in the same server if not provided)
+        string auth - the authentication token of the KBase account to associate with this object copy command (an optional argument; user is &quot;public&quot; if auth is not provided)
+        bool asHash - a boolean indicating if metadata should be returned as a hash
+     </code>
+    </pre>
+   </dd>
+   <dt id="Definition27">
+    Definition
+   </dt>
+   <dd>
+    <pre>
+     a reference to a hash where the following keys are defined:
+new_workspace_url has a value which is a string
+new_id has a value which is an object_id
+new_workspace has a value which is a workspace_id
+source_id has a value which is an object_id
+instance has a value which is an int
+type has a value which is an object_type
+source_workspace has a value which is a workspace_id
+auth has a value which is a string
+asHash has a value which is a bool
+    </pre>
+   </dd>
+  </dl>
+  <h2 id="move_object_params">
+   move_object_params
+  </h2>
+  <dl>
+   <dt id="Description62">
+    Description
+   </dt>
+   <dd>
+    <p>
+     Input parameters for the &quot;move_object&quot; function.
+    </p>
+    <pre>
+     <code>
+      object_type type - type of the object to be moved (an essential argument)
+        workspace_id source_workspace - ID of the workspace containing the object to be moved (an essential argument)
+        object_id source_id - ID of the object to be moved (an essential argument)
+         workspace_id new_workspace - ID of the workspace the object to be moved to (an essential argument)
+        object_id new_id - ID the object is to be moved to (an essential argument)
+        string new_workspace_url - URL of workspace server where object should be copied (an optional argument - object will be saved in the same server if not provided)
+        string auth - the authentication token of the KBase account to associate with this object move command (an optional argument; user is &quot;public&quot; if auth is not provided)
+        bool asHash - a boolean indicating if metadata should be returned as a hash
+     </code>
+    </pre>
+   </dd>
+   <dt id="Definition28">
+    Definition
+   </dt>
+   <dd>
+    <pre>
+     a reference to a hash where the following keys are defined:
+new_workspace_url has a value which is a string
+new_id has a value which is an object_id
+new_workspace has a value which is a workspace_id
+source_id has a value which is an object_id
+type has a value which is an object_type
+source_workspace has a value which is a workspace_id
+auth has a value which is a string
+asHash has a value which is a bool
+    </pre>
+   </dd>
+  </dl>
+  <h2 id="has_object_params">
+   has_object_params
+  </h2>
+  <dl>
+   <dt id="Description63">
+    Description
+   </dt>
+   <dd>
+    <p>
+     Input parameters for the &quot;has_object&quot; function.
+    </p>
+    <pre>
+     <code>
+      object_type type - type of the object to be checked for existance (an essential argument)
+        workspace_id workspace - ID of the workspace containing the object to be checked for existance (an essential argument)
+        object_id id - ID of the object to be checked for existance (an essential argument)
+        int instance - Version of the object to be checked for existance (an optional argument; the current object is checked if no version is provided)
+        string auth - the authentication token of the KBase account to associate with this object check command (an optional argument; user is &quot;public&quot; if auth is not provided)
+     </code>
+    </pre>
+   </dd>
+   <dt id="Definition29">
+    Definition
+   </dt>
+   <dd>
+    <pre>
+     a reference to a hash where the following keys are defined:
+id has a value which is an object_id
+instance has a value which is an int
+type has a value which is an object_type
+workspace has a value which is a workspace_id
+auth has a value which is a string
+    </pre>
+   </dd>
+  </dl>
+  <h2 id="object_history_params">
+   object_history_params
+  </h2>
+  <dl>
+   <dt id="Description64">
+    Description
+   </dt>
+   <dd>
+    <p>
+     Input parameters for the &quot;object_history&quot; function.
+    </p>
+    <pre>
+     <code>
+      object_type type - type of the object to have history printed (an essential argument)
+        workspace_id workspace - ID of the workspace containing the object to have history printed (an essential argument)
+        object_id id - ID of the object to have history printed (an essential argument)
+        string auth - the authentication token of the KBase account to associate with this object history command (an optional argument; user is &quot;public&quot; if auth is not provided)
+        bool asHash - a boolean indicating if metadata should be returned as a hash
+     </code>
+    </pre>
+   </dd>
+   <dt id="Definition30">
+    Definition
+   </dt>
+   <dd>
+    <pre>
+     a reference to a hash where the following keys are defined:
+id has a value which is an object_id
+type has a value which is an object_type
+workspace has a value which is a workspace_id
+auth has a value which is a string
+asHash has a value which is a bool
+    </pre>
+   </dd>
+  </dl>
+  <h2 id="create_workspace_params">
+   create_workspace_params
+  </h2>
+  <dl>
+   <dt id="Description65">
+    Description
+   </dt>
+   <dd>
+    <p>
+     Input parameters for the &quot;create_workspace&quot; function.
+    </p>
+    <pre>
+     <code>
+      workspace_id workspace - ID of the workspace to be created (an essential argument)
+        permission default_permission - Default permissions of the workspace to be created. Accepted values are &#39;a&#39; =&gt; admin, &#39;w&#39; =&gt; write, &#39;r&#39; =&gt; read, &#39;n&#39; =&gt; none (optional argument with default &quot;n&quot;)
+        string auth - the authentication token of the KBase account that will own the created workspace (an optional argument; user is &quot;public&quot; if auth is not provided)
+        bool asHash - a boolean indicating if metadata should be returned as a hash
+     </code>
+    </pre>
+   </dd>
+   <dt id="Definition31">
+    Definition
+   </dt>
+   <dd>
+    <pre>
+     a reference to a hash where the following keys are defined:
+workspace has a value which is a workspace_id
+default_permission has a value which is a permission
+auth has a value which is a string
+asHash has a value which is a bool
+    </pre>
+   </dd>
+  </dl>
+  <h2 id="get_workspacemeta_params">
+   get_workspacemeta_params
+  </h2>
+  <dl>
+   <dt id="Description66">
+    Description
+   </dt>
+   <dd>
+    <p>
+     Input parameters for the &quot;get_workspacemeta&quot; function.
+    </p>
+    <pre>
+     <code>
+      workspace_id workspace - ID of the workspace for which metadata should be returned (an essential argument)
+        string auth - the authentication token of the KBase account accessing workspace metadata (an optional argument; user is &quot;public&quot; if auth is not provided)
+        bool asHash - a boolean indicating if metadata should be returned as a hash
+     </code>
+    </pre>
+   </dd>
+   <dt id="Definition32">
+    Definition
+   </dt>
+   <dd>
+    <pre>
+     a reference to a hash where the following keys are defined:
+workspace has a value which is a workspace_id
+auth has a value which is a string
+asHash has a value which is a bool
+    </pre>
+   </dd>
+  </dl>
+  <h2 id="get_workspacepermissions_params">
+   get_workspacepermissions_params
+  </h2>
+  <dl>
+   <dt id="Description67">
+    Description
+   </dt>
+   <dd>
+    <p>
+     Input parameters for the &quot;get_workspacepermissions&quot; function.
+    </p>
+    <pre>
+     <code>
+      workspace_id workspace - ID of the workspace for which custom user permissions should be returned (an essential argument)
+        string auth - the authentication token of the KBase account accessing workspace permissions; must have admin privelages to workspace (an optional argument; user is &quot;public&quot; if auth is not provided)
+     </code>
+    </pre>
+   </dd>
+   <dt id="Definition33">
+    Definition
+   </dt>
+   <dd>
+    <pre>
+     a reference to a hash where the following keys are defined:
+workspace has a value which is a workspace_id
+auth has a value which is a string
+    </pre>
+   </dd>
+  </dl>
+  <h2 id="delete_workspace_params">
+   delete_workspace_params
+  </h2>
+  <dl>
+   <dt id="Description68">
+    Description
+   </dt>
+   <dd>
+    <p>
+     Input parameters for the &quot;delete_workspace&quot; function.
+    </p>
+    <pre>
+     <code>
+      workspace_id workspace - ID of the workspace to be deleted (an essential argument)
+        string auth - the authentication token of the KBase account deleting the workspace; must be the workspace owner (an optional argument; user is &quot;public&quot; if auth is not provided)
+        bool asHash - a boolean indicating if metadata should be returned as a hash
+     </code>
+    </pre>
+   </dd>
+   <dt id="Definition34">
+    Definition
+   </dt>
+   <dd>
+    <pre>
+     a reference to a hash where the following keys are defined:
+workspace has a value which is a workspace_id
+auth has a value which is a string
+asHash has a value which is a bool
+    </pre>
+   </dd>
+  </dl>
+  <h2 id="clone_workspace_params">
+   clone_workspace_params
+  </h2>
+  <dl>
+   <dt id="Description69">
+    Description
+   </dt>
+   <dd>
+    <p>
+     Input parameters for the &quot;clone_workspace&quot; function.
+    </p>
+    <pre>
+     <code>
+      workspace_id current_workspace - ID of the workspace to be cloned (an essential argument)
+        workspace_id new_workspace - ID of the workspace to which the cloned workspace will be copied (an essential argument)
+        string new_workspace_url - URL of workspace server where workspace should be cloned (an optional argument - workspace will be cloned in the same server if not provided)
+        permission default_permission - Default permissions of the workspace created by the cloning process. Accepted values are &#39;a&#39; =&gt; admin, &#39;w&#39; =&gt; write, &#39;r&#39; =&gt; read, &#39;n&#39; =&gt; none (an essential argument)
+        string auth - the authentication token of the KBase account that will own the cloned workspace (an optional argument; user is &quot;public&quot; if auth is not provided)
+        bool asHash - a boolean indicating if metadata should be returned as a hash
+     </code>
+    </pre>
+   </dd>
+   <dt id="Definition35">
+    Definition
+   </dt>
+   <dd>
+    <pre>
+     a reference to a hash where the following keys are defined:
+new_workspace has a value which is a workspace_id
+new_workspace_url has a value which is a string
+current_workspace has a value which is a workspace_id
+default_permission has a value which is a permission
+auth has a value which is a string
+asHash has a value which is a bool
+    </pre>
+   </dd>
+  </dl>
+  <h2 id="list_workspaces_params">
+   list_workspaces_params
+  </h2>
+  <dl>
+   <dt id="Description70">
+    Description
+   </dt>
+   <dd>
+    <p>
+     Input parameters for the &quot;list_workspaces&quot; function.
+    </p>
+    <pre>
+     <code>
+      string auth - the authentication token of the KBase account accessing the list of workspaces (an optional argument; user is &quot;public&quot; if auth is not provided)
+        bool asHash - a boolean indicating if metadata should be returned as a hash
+     </code>
+    </pre>
+   </dd>
+   <dt id="Definition36">
+    Definition
+   </dt>
+   <dd>
+    <pre>
+     a reference to a hash where the following keys are defined:
+auth has a value which is a string
+asHash has a value which is a bool
+    </pre>
+   </dd>
+  </dl>
+  <h2 id="list_workspace_objects_params">
+   list_workspace_objects_params
+  </h2>
+  <dl>
+   <dt id="Description71">
+    Description
+   </dt>
+   <dd>
+    <p>
+     Input parameters for the &quot;list_workspace_objects&quot; function.
+    </p>
+    <pre>
+     <code>
+      workspace_id workspace - ID of the workspace for which objects should be listed (an essential argument)
+        string type - type of the objects to be listed (an optional argument; all object types will be listed if left unspecified)
+        bool showDeletedObject - a flag that, if set to &#39;1&#39;, causes any deleted objects to be included in the output (an optional argument; default is &#39;0&#39;)
+        string auth - the authentication token of the KBase account listing workspace objects; must have at least &#39;read&#39; privelages (an optional argument; user is &quot;public&quot; if auth is not provided)
+        bool asHash - a boolean indicating if metadata should be returned as a hash
+     </code>
+    </pre>
+   </dd>
+   <dt id="Definition37">
+    Definition
+   </dt>
+   <dd>
+    <pre>
+     a reference to a hash where the following keys are defined:
+workspace has a value which is a workspace_id
+type has a value which is a string
+showDeletedObject has a value which is a bool
+auth has a value which is a string
+asHash has a value which is a bool
+    </pre>
+   </dd>
+  </dl>
+  <h2 id="set_global_workspace_permissions_params">
+   set_global_workspace_permissions_params
+  </h2>
+  <dl>
+   <dt id="Description72">
+    Description
+   </dt>
+   <dd>
+    <p>
+     Input parameters for the &quot;set_global_workspace_permissions&quot; function.
+    </p>
+    <pre>
+     <code>
+      workspace_id workspace - ID of the workspace for which permissions will be set (an essential argument)
+        permission new_permission - New default permissions to which the workspace should be set. Accepted values are &#39;a&#39; =&gt; admin, &#39;w&#39; =&gt; write, &#39;r&#39; =&gt; read, &#39;n&#39; =&gt; none (an essential argument)
+        string auth - the authentication token of the KBase account changing workspace default permissions; must have &#39;admin&#39; privelages to workspace (an optional argument; user is &quot;public&quot; if auth is not provided)
+        bool asHash - a boolean indicating if metadata should be returned as a hash
+     </code>
+    </pre>
+   </dd>
+   <dt id="Definition38">
+    Definition
+   </dt>
+   <dd>
+    <pre>
+     a reference to a hash where the following keys are defined:
+new_permission has a value which is a permission
+workspace has a value which is a workspace_id
+auth has a value which is a string
+asHash has a value which is a bool
+    </pre>
+   </dd>
+  </dl>
+  <h2 id="set_workspace_permissions_params">
+   set_workspace_permissions_params
+  </h2>
+  <dl>
+   <dt id="Description73">
+    Description
+   </dt>
+   <dd>
+    <p>
+     Input parameters for the &quot;set_workspace_permissions&quot; function.
+    </p>
+    <pre>
+     <code>
+      workspace_id workspace - ID of the workspace for which permissions will be set (an essential argument)
+        list&lt;username&gt; users - list of users for which workspace privaleges are to be reset (an essential argument)
+        permission new_permission - New permissions to which all users in the user list will be set for the workspace. Accepted values are &#39;a&#39; =&gt; admin, &#39;w&#39; =&gt; write, &#39;r&#39; =&gt; read, &#39;n&#39; =&gt; none (an essential argument)
+        string auth - the authentication token of the KBase account changing workspace permissions; must have &#39;admin&#39; privelages to workspace (an optional argument; user is &quot;public&quot; if auth is not provided)
+     </code>
+    </pre>
+   </dd>
+   <dt id="Definition39">
+    Definition
+   </dt>
+   <dd>
+    <pre>
+     a reference to a hash where the following keys are defined:
+users has a value which is a reference to a list where each element is a username
+new_permission has a value which is a permission
+workspace has a value which is a workspace_id
+auth has a value which is a string
+    </pre>
+   </dd>
+  </dl>
+  <h2 id="get_user_settings_params">
+   get_user_settings_params
+  </h2>
+  <dl>
+   <dt id="Description74">
+    Description
+   </dt>
+   <dd>
+    <p>
+     Input parameters for the &quot;get_user_settings&quot; function.
+    </p>
+    <pre>
+     <code>
+      string auth - the authentication token of the KBase account changing workspace permissions; must have &#39;admin&#39; privelages to workspace (an optional argument; user is &quot;public&quot; if auth is not provided)
+     </code>
+    </pre>
+   </dd>
+   <dt id="Definition40">
+    Definition
+   </dt>
+   <dd>
+    <pre>
+     a reference to a hash where the following keys are defined:
+auth has a value which is a string
+    </pre>
+   </dd>
+  </dl>
+  <h2 id="set_user_settings_params">
+   set_user_settings_params
+  </h2>
+  <dl>
+   <dt id="Description75">
+    Description
+   </dt>
+   <dd>
+    <p>
+     Input parameters for the &quot;set_user_settings&quot; function.
+    </p>
+    <pre>
+     <code>
+      string setting - the setting to be set (an essential argument)
+        string value - new value to be set (an essential argument)
+        string auth - the authentication token of the KBase account changing workspace permissions; must have &#39;admin&#39; privelages to workspace (an optional argument; user is &quot;public&quot; if auth is not provided)
+     </code>
+    </pre>
+   </dd>
+   <dt id="Definition41">
+    Definition
+   </dt>
+   <dd>
+    <pre>
+     a reference to a hash where the following keys are defined:
+setting has a value which is a string
+value has a value which is a string
+auth has a value which is a string
+    </pre>
+   </dd>
+  </dl>
+  <h2 id="queue_job_params">
+   queue_job_params
+  </h2>
+  <dl>
+   <dt id="Description76">
+    Description
+   </dt>
+   <dd>
+    <p>
+     Input parameters for the &quot;queue_job&quot; function.
+    </p>
+    <pre>
+     <code>
+      string auth - the authentication token of the KBase account queuing the job; must have access to the job being queued (an optional argument; user is &quot;public&quot; if auth is not provided)
+        string state - the initial state to assign to the job being queued (an optional argument; default is &quot;queued&quot;)
+        string type - the type of the job being queued
+        mapping&lt;string,string&gt; jobdata - hash of data associated with job
+     </code>
+    </pre>
+   </dd>
+   <dt id="Definition42">
+    Definition
+   </dt>
+   <dd>
+    <pre>
+     a reference to a hash where the following keys are defined:
+auth has a value which is a string
+state has a value which is a string
+type has a value which is a string
+queuecommand has a value which is a string
+jobdata has a value which is a reference to a hash where the key is a string and the value is a string
+    </pre>
+   </dd>
+  </dl>
+  <h2 id="set_job_status_params">
+   set_job_status_params
+  </h2>
+  <dl>
+   <dt id="Description77">
+    Description
+   </dt>
+   <dd>
+    <p>
+     Input parameters for the &quot;set_job_status&quot; function.
+    </p>
+    <pre>
+     <code>
+      string jobid - ID of the job to be have status changed (an essential argument)
+        string status - Status to which job should be changed; accepted values are &#39;queued&#39;, &#39;running&#39;, and &#39;done&#39; (an essential argument)
+        string auth - the authentication token of the KBase account requesting job status; only status for owned jobs can be retrieved (an optional argument; user is &quot;public&quot; if auth is not provided)
+        string currentStatus - Indicates the current statues of the selected job (an optional argument; default is &quot;undef&quot;)
+        mapping&lt;string,string&gt; jobdata - hash of data associated with job
+     </code>
+    </pre>
+   </dd>
+   <dt id="Definition43">
+    Definition
+   </dt>
+   <dd>
+    <pre>
+     a reference to a hash where the following keys are defined:
+jobid has a value which is a string
+status has a value which is a string
+auth has a value which is a string
+currentStatus has a value which is a string
+jobdata has a value which is a reference to a hash where the key is a string and the value is a string
+    </pre>
+   </dd>
+  </dl>
+  <h2 id="get_jobs_params">
+   get_jobs_params
+  </h2>
+  <dl>
+   <dt id="Description78">
+    Description
+   </dt>
+   <dd>
+    <p>
+     Input parameters for the &quot;get_jobs&quot; function.
+    </p>
+    <p>
+     list&lt;string&gt; jobids - list of specific jobs to be retrieved (an optional argument; default is an empty list) string status - Status of all jobs to be retrieved; accepted values are &#39;queued&#39;, &#39;running&#39;, and &#39;done&#39; (an essential argument) string auth - the authentication token of the KBase account accessing job list; only owned jobs will be returned (an optional argument; user is &quot;public&quot; if auth is not provided)
+    </p>
+   </dd>
+   <dt id="Definition44">
+    Definition
+   </dt>
+   <dd>
+    <pre>
+     a reference to a hash where the following keys are defined:
+jobids has a value which is a reference to a list where each element is a string
+type has a value which is a string
+status has a value which is a string
+auth has a value which is a string
+    </pre>
+   </dd>
+  </dl>
+  <h2 id="add_type_params">
+   add_type_params
+  </h2>
+  <dl>
+   <dt id="Description79">
+    Description
+   </dt>
+   <dd>
+    <p>
+     Input parameters for the &quot;add_type&quot; function.
+    </p>
+    <pre>
+     <code>
+      string type - Name of type being added (an essential argument)
+        string auth - the authentication token of the KBase account adding a type (an optional argument; user is &quot;public&quot; if auth is not provided)
+     </code>
+    </pre>
+   </dd>
+   <dt id="Definition45">
+    Definition
+   </dt>
+   <dd>
+    <pre>
+     a reference to a hash where the following keys are defined:
+type has a value which is a string
+auth has a value which is a string
+    </pre>
+   </dd>
+  </dl>
+  <h2 id="remove_type_params">
+   remove_type_params
+  </h2>
+  <dl>
+   <dt id="Description80">
+    Description
+   </dt>
+   <dd>
+    <p>
+     Input parameters for the &quot;remove_type&quot; function.
+    </p>
+    <pre>
+     <code>
+      string type - name of custom type to be removed from workspace service (an essential argument)
+        string auth - the authentication token of the KBase account removing a custom type (an optional argument; user is &quot;public&quot; if auth is not provided)
+     </code>
+    </pre>
+   </dd>
+   <dt id="Definition46">
+    Definition
+   </dt>
+   <dd>
+    <pre>
+     a reference to a hash where the following keys are defined:
+type has a value which is a string
+auth has a value which is a string
+    </pre>
+   </dd>
+  </dl>
+  <h2 id="patch_params">
+   patch_params
+  </h2>
+  <dl>
+   <dt id="Description81">
+    Description
+   </dt>
+   <dd>
+    <p>
+     Input parameters for the &quot;patch&quot; function.
+    </p>
+    <p>
+     string patch_id - ID of the patch that should be run on the workspace string auth - the authentication token of the KBase account removing a custom type (an optional argument; user is &quot;public&quot; if auth is not provided)
+    </p>
+   </dd>
+   <dt id="Definition47">
+    Definition
+   </dt>
+   <dd>
+    <pre>
+     a reference to a hash where the following keys are defined:
+patch_id has a value which is a string
+auth has a value which is a string
+    </pre>
+   </dd>
+  </dl>
+ </body>
+</html>

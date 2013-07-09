@@ -1,0 +1,154 @@
+<div>
+<h1>Using the Assembly Service Command-Line Client</h1>
+<h2> Introduction</h2>
+<p>The Assmebly Service currently is only availble through the KBase Download.
+This service is at an early phase, and supports the following capabilities:</p>
+<ul>
+<li>Velvet assembly: Velvet is a popular de Bruijn graph based assembler for de novo genomic and transcriptome sequence assembly. It was designed for short read sequencing technologies.</li>
+<li>Kiki assembly: is a de novo genome and metagenome assembler developed at Argonne. It uses a hybrid of overlap-layout-consensus and greedy extension approaches. Kiki is fast and can work on distributed-memory machines. </li>
+<li> A5: A5 is an assembly pipeline optimized for de novo assembly of microbial genomes. It is known for generating large scaffolds. </li>
+<li>IDBA: IDBA is de Bruijn graph based assembler that iterates from small to large overlaps to reduce the false positive nodes in the assembly graph and improve assembly quality.</li>
+</ul>
+<p>Here we will walk through a couple examples.</p>
+</div>
+<div>
+<h2>Logging In</h2>
+<p> Because assembly computation does not provide immediate results, users will need to login using their KBase account. </p>
+
+To login at the command-line, use the ar_login command:</p>
+<pre class="literal-block">
+<code title = "iris-tutorials">ar_login</code>
+and to logout, <code title = "iris-tutorials">ar_logout</code>
+</pre>
+File formats supported include fasta and fastq. Compressed files are not yet supported, but we anticipate it will next release (August 2013).
+</div>
+<div>
+<h2>Assembling Single-End Reads</h2>
+<p>Here we will use a sample metagenome file called <a class="reference external" href="http://www.mcs.anl.gov/~fangfang/test/se.fastq">se.fastq</a></p>
+<pre class="literal-block">
+wget http://www.mcs.anl.gov/~fangfang/test/se.fastq
+</pre>
+<li>Submit the file to be assembled with velvet:
+<pre class="literal-block">
+<code title = "iris-tutorials">ar_run</code> -f se.fastq -a velvet -m &quot;Description of job&quot;
+</pre>
+The -a sets the tool to use for assembly. This example shows the use of velvet. 
+Users can set "-a" to velvet, kiki, a5, or idba
+<p>
+<li>Check and monitor the status of your jobs:</li>
+<pre class="literal-block">
+<code title = "iris-tutorials">ar_stat</code> -w
+</pre>
+</li>
+</ol>
+</div>
+<div>
+<p>Output:</p>
+<pre class="literal-block">
++--------+---------+-----------------------------------------+----------+-------------+
+| Job ID | Data ID |                  Status                 | Run time | Description |
++--------+---------+-----------------------------------------+----------+-------------+
+|   83   |    40   |           pipeline [success]            | 0:22:29  |     None    |
+|   92   |    40   |              Running: [4%]              | 0:00:22  |     None    |
+|   93   |    41   |           pipeline [success]            | 0:00:03  |     None    |
+|   94   |    44   |           pipeline [success]            | 0:22:08  |     None    |
++--------+---------+-----------------------------------------+----------+-------------+
+</pre>
+<ol class="arabic" start="3">
+<li><p class="first">Get assembly data upon completion:</p>
+<pre class="literal-block">
+<code title = "iris-tutorials">ar_get</code> -j 94
+</pre>
+The ar_get command retrieves the job status, "-j" sets what job to look up and the number (in this case 94) is the Job ID.
+</li>
+</ol>
+</div>
+<div>
+<p>The assembly service will download 3 files</p>
+<ul class="simple">
+<li><strong>JOB_ID_report.txt</strong>:  a general log of commands run and files used</li>
+<li><strong>JOB_ID_assemblies.tar.gz</strong>:  a compressed archive of assembler data</li>
+<li><strong>JOB_ID_analysis.tar.gz</strong>:  assembly analysis performed via <a class="reference external" href="http://bioinf.spbau.ru/quast">QUAST</a></li>
+Follow the QUAST link to learn more about output file contents.
+</ul>
+</div>
+<div>
+<h2>Assembling Pair-End Reads </h2>
+<p>We will walk through the creation and comparison of two assemblies using Kiki and Velvet.
+Here we will use sample paired end files called <a class="reference external" href="http://www.mcs.anl.gov/~fangfang/test/pe_1.fastq">pe_1.fastq</a> and <a class="reference external" href="http://www.mcs.anl.gov/~fangfang/test/pe_2.fastq">pe_2.fastq</a></p>
+<pre class="literal-block">
+wget http://www.mcs.anl.gov/~fangfang/test/pe_1.fastq
+wget http://www.mcs.anl.gov/~fangfang/test/pe_2.fastq
+</pre>
+<ol class="arabic">
+<li><p class="first">Submit the file to be assembled with kiki and velvet:</p>
+<pre class="literal-block">
+<code title = "iris-tutorials">ar_run</code> --pair pe_1.fastq pe_2.fastq -a kiki velvet -m &quot;Description of job&quot;
+</pre>
+</li>
+<li><p class="first">Check and monitor the status of your jobs:</p>
+<pre class="literal-block">
+<code title = "iris-tutorials">ar_stat</code> -w
+</pre>
+</li>
+</ol>
+</div>
+<div>
+<p>Output:</p>
+<pre class="literal-block">
++--------+---------+-----------------------------------------+----------+-------------+
+| Job ID | Data ID |                  Status                 | Run time | Description |
++--------+---------+-----------------------------------------+----------+-------------+
+|   83   |    40   |           pipeline [success]            | 0:22:29  |     None    |
+|   92   |    40   |              Running: [4%]              | 0:00:22  |     None    |
+|   93   |    41   |           pipeline [success]            | 0:00:03  |     None    |
+|   94   |    44   |           pipeline [success]            | 0:22:08  |     None    |
+|   95   |    44   |              Running: [50%]             | 0:00:08  |     Test    |
++--------+---------+-----------------------------------------+----------+-------------+
+</pre>
+</div>
+<div>
+<ol class="arabic" start="3">
+<li><p class="first">Get assembly data upon completion:</p>
+<pre class="literal-block">
+<code title = "iris-tutorials">ar_get</code> -j 95
+</pre>
+</li>
+</ol>
+<p>Once again, the assembly service will download 3 files:</p>
+<ul class="simple">
+<li><em>JOB_ID_report.txt</em>: a general log of commands run and files used</li>
+<li><em>JOB_ID_assemblies.tar.gz</em>: a compressed archive of assembler data</li>
+<li><em>JOB_ID_analysis.tar.gz</em>: assembly analysis performed via <a class="reference external" href="http://bioinf.spbau.ru/quast">QUAST</a></li>
+</ul>
+<ol class="arabic" start="4">
+<li><p class="first">Look at QUAST analysis by extracting the analysis archive:</p>
+<pre class="literal-block">
+mkdir results
+tar -xf 95_analysis.tar.gz -C results/
+cat results/report.txt
+</pre>
+mkdir makes a directory, in this case, called results
+the .tar.gz file is compressed and archived file. tar -xf uncompresses and extracts the files, "-C" moves the extracted files into your new directory "results".
+</li>
+</ol>
+</div>
+<div>
+<p>Output:</p>
+<pre class="literal-block">
+Assembly                   P1_Ki    P2_Vt
+# contigs (&gt;= 0 bp)        6579     12317
+# contigs (&gt;= 1000 bp)     309      190
+Total length (&gt;= 0 bp)     2698557  2573302
+Total length (&gt;= 1000 bp)  1246799  273827
+# contigs                  730      978
+Largest contig             107620   3356
+Total length               1534546  800695
+GC (%)                     40.84    41.95
+N50                        4999     806
+N75                        1275     617
+# N's per 100 kbp          0.00     0.00
+</pre>
+<p>Or open <strong>report.html</strong> for visualizations:</p>
+<img alt="quast.png" src="quast.png" style="width:100%;"/>
+</div>

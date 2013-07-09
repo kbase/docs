@@ -1,0 +1,79 @@
+<div>
+<h1>Finding Trees & Alignments</h1>
+<p> KBase has constructed a large library of precomputed protein sequece alignments and gene trees based on the genomic
+sequences stored in the CDM.  The trees and alignments range from large superfamilies with tens of thousands of sequences to
+small trees composed of a few related genes with conserved sequence but perhaps no known function.</p>
+<p>The first step, therefore, is to identifiy the set of trees and alignments that include your gene of interest.
+If you know the KBase feature ID of a particular gene, you can quickly identify trees that contain your gene of
+interest using the 'tree-find-tree-ids' command:</p>
+<pre>
+    > <code title = "iris-tutorials">tree-find-tree-ids</code> -f 'kb|g.1870.peg.3915'
+    kb|tree.11259
+    kb|tree.11314
+    kb|tree.1242
+    kb|tree.1639
+    kb|tree.1640
+    kb|tree.23396
+    kb|tree.28891
+    ....
+</pre>
+</div>
+<div>
+<p>Calling this command with the '-f' flag indicates that you want to find trees based on a KBase feature ID.  If any
+trees are found, then a list of the trees is displayed in the console.  Similarly, we can find the set of alignments
+that align this gene by calling the 'tree-find-alignment-ids' command:</p>
+<pre>
+    > <code title = "iris-tutorials">tree-find-alignment-ids</code> -f 'kb|g.1870.peg.3915'
+    kb|aln.11259
+    kb|aln.11314
+    kb|aln.1242
+    kb|aln.1639
+    kb|aln.1640
+    kb|aln.23396
+    kb|aln.28891
+    ....
+</pre>
+</div>
+<div>
+<p>Although in many cases the alignment id numbers appear to match up with the tree id numbers, as they do here,
+it is not always safe to make this assumption as multiple trees can be generated from the same alignment.</p>
+<p>You can also find trees directly from protein sequence MD5 identifiers, which are also in KBase as
+unique protein sequence IDs.  You can retrieve the protein sequence MD5 of any protein encoding feature in
+KBase with the 'fids_to_proteins' command.  With a protein sequence MD5, you can then find trees with the
+'tree-find-tree-ids' by using the '-p' flag:</p>
+<pre>
+    > echo 'kb|g.1870.peg.3915' | fids_to_proteins
+    kb|g.1870.peg.3915	ef341e0061e3f93c9c7468f6d9d09ba0
+    > <code title = "iris-tutorials">tree-find-tree-ids</code> -p 'ef341e0061e3f93c9c7468f6d9d09ba0'
+    kb|tree.11259
+    kb|tree.11314
+    kb|tree.1242
+    ....
+</pre>
+</div>
+<div>
+<p>Additionally, you can search for trees that are based on a particular gene family. A number of gene family models
+have been used to generate trees, including <a href="http://www.ncbi.nlm.nih.gov/COG/">COG</a> and
+<a href="http://pfam.sanger.ac.uk/">PFAM</a>. If a tree was explicitly built by selecting sequence which match a gene
+family model, then the ID of the gene family is stored in the 'source-id' field of the Tree entity.  You can perform
+a search on this field, for instance, to search for a specific gene family, by running the 'tree-find-tree-ids' with
+the '-s' options:</p>
+<pre>
+    > <code title = "iris-tutorials">tree-find-tree-ids</code> -s 'COG840'
+    kb|tree.991753	COG840
+</pre>
+</div>
+<div>
+<p>The '-s' option is fairly flexible because it supports the use of a two wildcard characters to help you search when
+you aren't entirely sure the exact gene family ID.  Using an '*' symbol matches any character any number of times. A '.'
+symbol matches any character exactly once. For instance, to find all trees from gene families with an ID that starts
+with 'COG' and ends with '840', search with the pattern 'COG*840':</p>
+<pre>
+    > <code title = "iris-tutorials">tree-find-tree-ids</code> -s 'COG*840'
+    kb|tree.987836	COG1840
+    kb|tree.988589	COG2840
+    kb|tree.989663	COG3840
+    kb|tree.990590	COG4840
+    kb|tree.991753	COG840
+</pre>
+</div>

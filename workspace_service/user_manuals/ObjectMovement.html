@@ -1,0 +1,46 @@
+<div>
+<h1>Workspace Command Line Script User Manual</h1>
+<a href="Overview.html" target="_blank">Return to Workspace overview</a>
+<h2>Copying and moving workspace objects</h2>
+<p>Now that you understand how to create, retrieve, and revert workspace object, you will
+want to learn how to copy and move workspace objects. The workspaces allow you to copy any
+object you have read access to, and you can move any object you have write access to. There
+are two commands to support object copying and moving:</p>
+<ol>
+<li><a href="#STEP1"><code title = "iris-tutorials">kbws-copy</code>: copies an object from one workspace and ID to another</a></li>
+<li><a href="#STEP2"><code title = "iris-tutorials">kbws-move</code>: moves an object from one workspace and ID to another</a></li>
+</ol>
+<a name="STEP1"></div><div><h3>1. kbws-copy</h3></a>
+<p></p>
+<pre><code><i>
+	kbws-copy <Object type> <Original object ID> <New object ID> [-?ehins] [long options...]
+		-n --newworkspace     ID for new workspace
+		-i --instance         Instance ID
+		-s --workspace        ID for source workspace
+		-e --showerror        Set as 1 to show any errors in execution
+		-? -h --help          Print this usage information
+</i></pre></code>
+<p></p>
+<pre><code><i>
+	$ kbws-get copy "kb|g.0"
+		...      
+</i></pre></code>
+<p></p>
+<a name="STEP2"></div><div><h3>2. kbws-move</h3></a>
+<p></p>
+<pre><code><i>
+	kbws-move <Object type> <Object ID> <New ID> [-?ehinw] [long options...]
+		-n --destws        ID for destination workspace
+		-i --instance      Instance ID
+		-w --workspace     ID for source workspace
+		-e --showerror     Set as 1 to show any errors in execution
+		-? -h --help       Print this usage information
+</i></pre></code>
+<p></p>
+<pre><code><i>
+	$ kbws-move Genome "kb|g.0"
+		...
+</i></pre></code>
+<p></p>
+
+</div>

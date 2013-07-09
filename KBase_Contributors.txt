@@ -1,0 +1,81 @@
+Arkin, Adam	CEO / CSO
+Baumohl, Jason	Expression Data
+Best, Aaron	
+Bischof, Jared	Metagenomics
+Bowen, Ben	Metabolic Analysis
+Brenner, Steven	Protein Function
+Brettin, Tom	Lead
+Canon, Shane	Infrastructure
+Chan, Stephen	Auth
+Chandonia, John-Marc	PPI, Network inference
+Chivian, Dylan	Co-lead
+Cholia, Shreyas	Cluster services
+Conrad, Neal	Website
+Cottingham, Bob	COO
+Davison, Brian	Co-lead
+Dehal, Paramvir	Lead
+DeJongh, Matt	Metabolic Modeling
+Desai, Narayan	
+Devoid, Scott	
+Disz, Terry	
+Drake, Meghan	Support
+Fang, Gang	Network Analysis
+Fei He	Postdoc (Sergei)
+Frybarger, Paul	
+Gerstein, Mark	Networks
+Glass, Elizabeth Marland	Lead
+Gordon, India	Admin for Tom
+Greiner, Annette	UX design
+Gurtowski, James	
+Harris, Nomi	Project manager
+Harrison, Travis	UI/UX
+Henderson, Matt	Visualization, Phylogenomics
+Henry, Chris	Co-lead
+Howe, Adina	Postdoc (Folker)
+Joachimiak, Marcin	biclustering services, regulatory network prediction
+Keegan, Kevin	Metagenomics
+Keller, Keith	Annotation Pipelines
+Kora, Guru	Search
+Kumari, Sunita	Expression Analysis
+Land, Miriam	Testing
+Leuze, Michael	Functional website
+Lochosvky, Lucas	Networks
+Maslov, Sergei	ASO
+Meyer, Folker	Lead
+Moulton, Steve	
+Mulligan, Silvia (Palomino)	RStevens Support
+Novichkov, Pavel	Networks, Regulatory Modeling
+Oh, Taeyun	postdoc (100% KBase)
+Olsen, Gary	Data Stores, Modeling
+Olson, Bob	Core IDL/IRIS
+Olson, Dan	Lead sys admin
+Overbeek, Ross	Data Stores, Modeling
+Paczian, Tobias	UI
+Palumbo, Tony	
+Parrello, Bruce	Data Stores
+Pasternak, Shiran	UI/Variation Analysis
+Poon, Sarah	UI/UX
+Price, Gavin	Fitness phenotypes
+Ranjan, Priya	Functional Analysis Workflows
+Riehl, Bill	GLAMM
+Ronald, Pamela	Networks
+Salazar, Jennifer Fessler	Lead PR
+Schatz, Michael	Variation Analysis
+Seaver, Sam	Postdoc, Plants
+Sneddon, Michael	Trees and MSA
+Stevens, Rick	CTO / Chief Arch
+Syed, Mustafa	
+Terry, Gwyenth	AArkin Support
+Thomason, James	UI/UX
+Tintle, Nathan	
+Trimble, Will	Mathematician
+Tuskan, Jerry	Variation Analysis
+Wang, Daifeng	Network Analysis
+Ware, Doreen	Lead
+Weston, David	Co-lead
+Whitney, Cary	Sysadmin
+Wilke, Andreas	Metagenomic analysis
+Wilkening, Jared	Metagenomics
+Xia, Fangfang	Phylogenomics
+Yoo, Shinjae	UI, Search, Networks
+Yu, Dantong	

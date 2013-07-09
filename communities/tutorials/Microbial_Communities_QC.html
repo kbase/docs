@@ -1,0 +1,343 @@
+<?xml version="1.0" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>QC</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<link rev="made" href="mailto:Andi@merle.mcs.anl.gov" />
+</head>
+
+<body style="background-color: white">
+
+
+<!-- INDEX BEGIN -->
+<div name="index">
+<p><a name="__index__"></a></p>
+
+<ul>
+
+	<li><a href="#name">NAME</a></li>
+	<li><a href="#description">DESCRIPTION</a></li>
+	<li><a href="#methods">METHODS</a></li>
+	<ul>
+
+		<li><a href="#get_drisee_compute">get_drisee_compute</a></li>
+		<li><a href="#get_drisee_instance">get_drisee_instance</a></li>
+		<li><a href="#get_histogram_compute">get_histogram_compute</a></li>
+		<li><a href="#get_histogram_instance">get_histogram_instance</a></li>
+		<li><a href="#get_kmer_compute">get_kmer_compute</a></li>
+		<li><a href="#get_kmer_instance">get_kmer_instance</a></li>
+		<li><a href="#version">version</a></li>
+	</ul>
+
+	<li><a href="#types">TYPES</a></li>
+	<ul>
+
+		<li><a href="#get_drisee_compute_params">get_drisee_compute_params</a></li>
+		<li><a href="#driseecompute">DriseeCompute</a></li>
+		<li><a href="#get_drisee_instance_params">get_drisee_instance_params</a></li>
+		<li><a href="#driseeinstance">DriseeInstance</a></li>
+		<li><a href="#get_histogram_compute_params">get_histogram_compute_params</a></li>
+		<li><a href="#histogramcompute">HistogramCompute</a></li>
+		<li><a href="#get_histogram_instance_params">get_histogram_instance_params</a></li>
+		<li><a href="#histograminstance">HistogramInstance</a></li>
+		<li><a href="#get_kmer_compute_params">get_kmer_compute_params</a></li>
+		<li><a href="#kmercompute">KmerCompute</a></li>
+		<li><a href="#get_kmer_instance_params">get_kmer_instance_params</a></li>
+		<li><a href="#kmerinstance">KmerInstance</a></li>
+	</ul>
+
+</ul>
+
+<hr name="index" />
+</div>
+<!-- INDEX END -->
+
+<p>
+</p>
+<h1><a name="name">NAME</a></h1>
+<p>Microbial_Communities_QC</p>
+<p>
+</p>
+<hr />
+<h1><a name="description">DESCRIPTION</a></h1>
+<p>
+</p>
+<hr />
+<h1><a name="methods">METHODS</a></h1>
+<p>
+</p>
+<h2><a name="get_drisee_compute">get_drisee_compute</a></h2>
+<pre>
+  $return = $obj-&gt;get_drisee_compute($get_drisee_compute_params)</pre>
+<dl>
+<dt><strong><a name="parameter_and_return_types" class="item">Parameter and return types</a></strong></dt>
+
+<pre>
+$get_drisee_compute_params is a get_drisee_compute_params
+$return is a DriseeCompute
+get_drisee_compute_params is a reference to a hash where the following keys are defined:
+	id has a value which is a string
+DriseeCompute is a reference to a hash where the following keys are defined:
+	time has a value which is a string
+	status has a value which is a string
+	error has a value which is a string
+	id has a value which is a string</pre><dt><strong><a name="description" class="item">Description</a></strong></dt>
+
+</dl>
+<p>
+</p>
+<h2><a name="get_drisee_instance">get_drisee_instance</a></h2>
+<pre>
+  $return = $obj-&gt;get_drisee_instance($get_drisee_instance_params)</pre>
+<dl>
+<dt><strong><a name="parameter_and_return_types2" class="item">Parameter and return types</a></strong></dt>
+
+<pre>
+$get_drisee_instance_params is a get_drisee_instance_params
+$return is a DriseeInstance
+get_drisee_instance_params is a reference to a hash where the following keys are defined:
+	id has a value which is a string
+DriseeInstance is a reference to a hash where the following keys are defined:
+	version has a value which is a string
+	substitution has a value which is a reference to a hash where the key is a string and the value is a string
+	insertion_delition has a value which is a float
+	created has a value which is a string
+	id has a value which is a string
+	total_errors has a value which is a float</pre><dt><strong><a name="description2" class="item">Description</a></strong></dt>
+
+</dl>
+<p>
+</p>
+<h2><a name="get_histogram_compute">get_histogram_compute</a></h2>
+<pre>
+  $return = $obj-&gt;get_histogram_compute($get_histogram_compute_params)</pre>
+<dl>
+<dt><strong><a name="parameter_and_return_types3" class="item">Parameter and return types</a></strong></dt>
+
+<pre>
+$get_histogram_compute_params is a get_histogram_compute_params
+$return is a HistogramCompute
+get_histogram_compute_params is a reference to a hash where the following keys are defined:
+	basepairs has a value which is an int
+	id has a value which is a string
+	sequences has a value which is an int
+HistogramCompute is a reference to a hash where the following keys are defined:
+	time has a value which is a string
+	status has a value which is a string
+	error has a value which is a string
+	id has a value which is a string</pre><dt><strong><a name="description3" class="item">Description</a></strong></dt>
+
+</dl>
+<p>
+</p>
+<h2><a name="get_histogram_instance">get_histogram_instance</a></h2>
+<pre>
+  $return = $obj-&gt;get_histogram_instance($get_histogram_instance_params)</pre>
+<dl>
+<dt><strong><a name="parameter_and_return_types4" class="item">Parameter and return types</a></strong></dt>
+
+<pre>
+$get_histogram_instance_params is a get_histogram_instance_params
+$return is a HistogramInstance
+get_histogram_instance_params is a reference to a hash where the following keys are defined:
+	id has a value which is a string
+HistogramInstance is a reference to a hash where the following keys are defined:
+	created has a value which is a string
+	version has a value which is a string
+	id has a value which is a string</pre><dt><strong><a name="description4" class="item">Description</a></strong></dt>
+
+</dl>
+<p>
+</p>
+<h2><a name="get_kmer_compute">get_kmer_compute</a></h2>
+<pre>
+  $return = $obj-&gt;get_kmer_compute($get_kmer_compute_params)</pre>
+<dl>
+<dt><strong><a name="parameter_and_return_types5" class="item">Parameter and return types</a></strong></dt>
+
+<pre>
+$get_kmer_compute_params is a get_kmer_compute_params
+$return is a KmerCompute
+get_kmer_compute_params is a reference to a hash where the following keys are defined:
+	kmer_length has a value which is an int
+	id has a value which is a string
+KmerCompute is a reference to a hash where the following keys are defined:
+	time has a value which is a string
+	status has a value which is a string
+	error has a value which is a string
+	id has a value which is a string</pre><dt><strong><a name="description5" class="item">Description</a></strong></dt>
+
+</dl>
+<p>
+</p>
+<h2><a name="get_kmer_instance">get_kmer_instance</a></h2>
+<pre>
+  $return = $obj-&gt;get_kmer_instance($get_kmer_instance_params)</pre>
+<dl>
+<dt><strong><a name="parameter_and_return_types6" class="item">Parameter and return types</a></strong></dt>
+
+<pre>
+$get_kmer_instance_params is a get_kmer_instance_params
+$return is a KmerInstance
+get_kmer_instance_params is a reference to a hash where the following keys are defined:
+	id has a value which is a string
+KmerInstance is a reference to a hash where the following keys are defined:
+	created has a value which is a string
+	version has a value which is a string
+	id has a value which is a string</pre><dt><strong><a name="description6" class="item">Description</a></strong></dt>
+
+</dl>
+<p>
+</p>
+<h2><a name="version">version</a></h2>
+<pre>
+  $return = $obj-&gt;version()</pre>
+<dl>
+<dt><strong><a name="parameter_and_return_types7" class="item">Parameter and return types</a></strong></dt>
+
+<pre>
+$return is a string
+</pre><dt><strong><a name="description7" class="item">Description</a></strong></dt>
+
+<dd>
+<p>Return the module version. This is a Semantic Versioning number.</p>
+</dd>
+</dl>
+<p>
+</p>
+<hr />
+<h1><a name="types">TYPES</a></h1>
+<p>
+</p>
+<h2><a name="get_drisee_compute_params">get_drisee_compute_params</a></h2>
+<dl>
+<dt><strong><a name="definition" class="item">Definition</a></strong></dt>
+
+<pre>
+a reference to a hash where the following keys are defined:
+id has a value which is a string</pre></dl>
+<p>
+</p>
+<h2><a name="driseecompute">DriseeCompute</a></h2>
+<dl>
+<dt><strong><a name="definition2" class="item">Definition</a></strong></dt>
+
+<pre>
+a reference to a hash where the following keys are defined:
+time has a value which is a string
+status has a value which is a string
+error has a value which is a string
+id has a value which is a string</pre></dl>
+<p>
+</p>
+<h2><a name="get_drisee_instance_params">get_drisee_instance_params</a></h2>
+<dl>
+<dt><strong><a name="definition3" class="item">Definition</a></strong></dt>
+
+<pre>
+a reference to a hash where the following keys are defined:
+id has a value which is a string</pre></dl>
+<p>
+</p>
+<h2><a name="driseeinstance">DriseeInstance</a></h2>
+<dl>
+<dt><strong><a name="definition4" class="item">Definition</a></strong></dt>
+
+<pre>
+a reference to a hash where the following keys are defined:
+version has a value which is a string
+substitution has a value which is a reference to a hash where the key is a string and the value is a string
+insertion_delition has a value which is a float
+created has a value which is a string
+id has a value which is a string
+total_errors has a value which is a float</pre></dl>
+<p>
+</p>
+<h2><a name="get_histogram_compute_params">get_histogram_compute_params</a></h2>
+<dl>
+<dt><strong><a name="definition5" class="item">Definition</a></strong></dt>
+
+<pre>
+a reference to a hash where the following keys are defined:
+basepairs has a value which is an int
+id has a value which is a string
+sequences has a value which is an int</pre></dl>
+<p>
+</p>
+<h2><a name="histogramcompute">HistogramCompute</a></h2>
+<dl>
+<dt><strong><a name="definition6" class="item">Definition</a></strong></dt>
+
+<pre>
+a reference to a hash where the following keys are defined:
+time has a value which is a string
+status has a value which is a string
+error has a value which is a string
+id has a value which is a string</pre></dl>
+<p>
+</p>
+<h2><a name="get_histogram_instance_params">get_histogram_instance_params</a></h2>
+<dl>
+<dt><strong><a name="definition7" class="item">Definition</a></strong></dt>
+
+<pre>
+a reference to a hash where the following keys are defined:
+id has a value which is a string</pre></dl>
+<p>
+</p>
+<h2><a name="histograminstance">HistogramInstance</a></h2>
+<dl>
+<dt><strong><a name="definition8" class="item">Definition</a></strong></dt>
+
+<pre>
+a reference to a hash where the following keys are defined:
+created has a value which is a string
+version has a value which is a string
+id has a value which is a string</pre></dl>
+<p>
+</p>
+<h2><a name="get_kmer_compute_params">get_kmer_compute_params</a></h2>
+<dl>
+<dt><strong><a name="definition9" class="item">Definition</a></strong></dt>
+
+<pre>
+a reference to a hash where the following keys are defined:
+kmer_length has a value which is an int
+id has a value which is a string</pre></dl>
+<p>
+</p>
+<h2><a name="kmercompute">KmerCompute</a></h2>
+<dl>
+<dt><strong><a name="definition10" class="item">Definition</a></strong></dt>
+
+<pre>
+a reference to a hash where the following keys are defined:
+time has a value which is a string
+status has a value which is a string
+error has a value which is a string
+id has a value which is a string</pre></dl>
+<p>
+</p>
+<h2><a name="get_kmer_instance_params">get_kmer_instance_params</a></h2>
+<dl>
+<dt><strong><a name="definition11" class="item">Definition</a></strong></dt>
+
+<pre>
+a reference to a hash where the following keys are defined:
+id has a value which is a string</pre></dl>
+<p>
+</p>
+<h2><a name="kmerinstance">KmerInstance</a></h2>
+<dl>
+<dt><strong><a name="definition12" class="item">Definition</a></strong></dt>
+
+<pre>
+a reference to a hash where the following keys are defined:
+created has a value which is a string
+version has a value which is a string
+id has a value which is a string</pre></dl>
+
+</body>
+
+</html>

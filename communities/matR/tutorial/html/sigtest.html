@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><title>R: Significance Test of Collection Annotations Against Groupings</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="R.css">
+</head><body>
+
+<table width="100%" summary="page for sigtest {matR}"><tr><td>sigtest {matR}</td><td align="right">R Documentation</td></tr></table>
+
+<h2>Significance Test of Collection Annotations Against Groupings</h2>
+
+<h3>Description</h3>
+
+<p>Applies specified significance test to annotations of a grouped collection</p>
+
+
+<h3>Usage</h3>
+
+<pre>sigtest(x, ...)</pre>
+
+
+<h3>Arguments</h3>
+
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>collection</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>further arguments as indicated below</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>A list with components expressing the result of significance testing.</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Kevin P. Keegan, Daniel T. Braithwaite</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="Collections.html">Collections</a></code>, <code><a href="sigtest-methods.html">sigtest-methods</a></code></p>
+
+
+<h3>Examples</h3>
+
+<pre>
+groups(Guts) &lt;- c(1,1,1,2,2,2,2)
+res &lt;- sigtest(Guts, view = "nrm", test = "t-test-un-paired")
+res &lt;- sigtest(Guts, "nrm", "Mann-Whitney_un-paired-Wilcoxon")
+res &lt;- sigtest(Guts, "nrm", "ANOVA-one-way")
+res &lt;- sigtest(Guts, "nrm", "Kruskal-Wallis")
+
+groups(Waters) &lt;- c(rep(1,12), rep(2,12))
+res &lt;- sigtest(Waters, "nrm", "t-test-paired")
+res &lt;- sigtest(Waters, "nrm", "t-test-un")
+res &lt;- sigtest(Waters, "nrm", "Mann-Whitney")
+res &lt;- sigtest(Waters, "nrm", "Wilcoxon-paired")
+res &lt;- sigtest(Waters, "nrm", "ANOVA")
+res &lt;- sigtest(Waters, test = "Kruskal")
+
+names(res)
+head(res$mean)
+head(res$sd)
+head(res$stat)
+head(res$p.value)
+</pre>
+
+<hr><div align="center">[Package <em>matR</em> version 0.9.9 <a href="00Index.html">Index</a>]</div>
+</body></html>

@@ -1,0 +1,43 @@
+
+<h1>Reconstruction and Analysis of Metabolic Models in KBase</h1>
+<p><strong>Purpose: </strong> This tutorial describes the series of
+command-line scripts that
+provide access to model analysis capabilities in KBase.</p>
+<p><strong>Required Prerequisite Activities: 
+</strong><a href="/for-users/tutorials/installing-the-kbase-app-dmg/">Download KBase: Installing the KBase Application DMG</a>, OR <a href="for-users/tutorials/navigating-iris/">Get Started with IRIS: Navigating IRIS</a>
+
+<h2>Introduction</h2>
+KBase includes numerous tools that enable the reconstruction
+and analysis of genome-scale <a name="metabolic708">metabolic</a>
+models. Thus far, the
+following reconstruction and analysis algorithms have been implemented
+in the KBase:
+<ol>
+  <li> genome_to_fbamodel: enables the reconstruction of a <a name="metabolic709">metabolic</a> model from an annotated genome
+object (the generation of which is covered in another tutorial) </li>
+  <li> gapfill_fbamodel: gapfills a <a name="metabolic710">metabolic</a>
+model to force growth in a specified media condition </li>
+  <li> runfba: runs flux balance analysis on a <a name="metabolic711">metabolic</a>
+model and returns a predicted flux profile </li>
+  <li> fbamodel_to_html: prints a <a name="metabolic712">metabolic</a>
+model to html format to facilitate reading the model </li>
+  <li> fbamodel_to_sbml: prints a <a name="metabolic713">metabolic</a>
+model to sbml format to facilitate analysis in other tools </li>
+</ol>
+<h2>genome_to_fbamodel</h2>
+Command syntax: genome_to_fbamodel &lt; myGenome.annotated &gt;
+myModel.ini
+<h2>gapfill_fbamodel</h2>
+Command syntax: gapfill_fbamodel &lt; myModel.ini &gt;
+myModel.gapfilled
+<h2>runfba</h2>
+Command syntax: runfba &lt; myModel.gapfilled &gt; mySolution.fba
+<h2>fbamodel_to_html</h2>
+Command syntax: fbamodel_to_html &lt; myModel.gapfilled &gt;
+myModel.html
+<h2>fbamodel_to_sbml</h2>
+Command syntax: fbamodel_to_sbml &lt; myModel.gapfilled &gt;
+myModel.sbml
+<h2>Summary</h2>
+Here we describe the <a name="metabolic714">metabolic</a> modeling
+tools currently implemented as web services in the DOE KBase.
