@@ -12,12 +12,12 @@ DOCS_ROOT = 'http://www.kbase.us/services/docs/'
 DEPLOY_DICT = [
                {'name': 'CDM API',
                 'service': 'cdmi_api', 
-                'target_dir':'cdmi_api',
+                'target_dir':'kb_seed',
                 'html_name': 'application_api'},
 
                {'name': 'CDM Entity-Relationship API',
                 'service': 'cdmi_api',
-                'target_dir':'cdmi_api',
+                'target_dir':'kb_seed',
                 'html_name': 'er_api',
                 'html_target': 'cdmi_entity_api'},
 
@@ -29,7 +29,7 @@ DEPLOY_DICT = [
 
                 {'name': 'Workspace Service',
                 'service': 'workspaceService', 
-                'target_dir':'workspace'},
+                'target_dir':'workspace_service'},
 
                 #{'name': 'Assembly Service',
                 #'service': 'assembly', 

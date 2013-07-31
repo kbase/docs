@@ -1,7 +1,6 @@
-<div id = 'tutorial'>
+<div>
         <h1>Annotating a Genome Using KBase Tools</h1>
 
-        <div>
             <p>
                 <strong>Purpose:</strong> This tutorial demonstrates how to annotate a
                 set of closely related genomes using KBase tools.  We will show how to
@@ -21,22 +20,8 @@
                 tutorial below:
             </p>
 
-            <p>
-                <strong>Required Prerequisite Activities:</strong>
-                <a href="/developer-zone/tutorials/getting-started/getting-started-with-kbase/">Getting Started with KBase</a>
-            </p>
-
-            <p>
-                <strong>Suggested Prerequisite Activities:</strong>
-                <a href="/developer-zone/tutorials/getting-started/some-basic-exercises-using-kbase/">Basic Exercises Using KBase</a>, <a href="/developer-zone/tutorials/iris/some-basic-exercises-using-the-kbase-iris-interface/">Some Basic Exercises using the KBase IRIS interface</a>
-            </p>
-
-            <p>
-                <strong>Related Tutorials:</strong> None
-            </p>
         </div>
 
-        <div>
             <div>
 
                 <h2>Select a genome</h2>
@@ -44,7 +29,7 @@
                 To see which <i>Geobacter</i> genomes are in the <a name="Central Store316">Central Store</a> of KBase, use the command:
 
                 <pre>
-                    <a href="http://kbase.us/developer-zone/api-documentation/cdm-entity-relationship-command-scripts/#all_entities_Genome" target="_blank">all_entities_Genome</a> -f scientific_name | grep Geobacter
+                    <a href="http://kbase.us/developer-zone/api-documentation/cdm-entity-relationship-command-scripts/#all_entities_Genome" target="_blank"><code title = "iris-tutorials">all_entities_Genome</code></a> -f scientific_name | grep Geobacter
                 </pre>
 
                 <p>
@@ -94,7 +79,7 @@
                 </p>
 
                 <pre>
-                    echo 'kb|g.2860' | <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#genomes_to_contigs" target="_blank">genomes_to_contigs</a> | <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#contigs_to_sequences" target="_blank">contigs_to_sequences</a> &gt; g.2860.contigs
+                    echo 'kb|g.2860' | <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#genomes_to_contigs" target="_blank"><code title = "iris-tutorials">genomes_to_contigs</code></a> | <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#contigs_to_sequences" target="_blank"><code title = "iris-tutorials">contigs_to_sequences</code></a> &gt; g.2860.contigs
                 </pre>
 
                 <p>
@@ -150,7 +135,7 @@
 
                 <!-- needs links to API doc: -->
                 <pre>
-                    fasta_to_genome 'Geobacter sulfurreducens KN400' Bacteria 11 &lt; g.2860.contigs &gt; genome
+                   <code title = "iris-tutorials"> fasta_to_genome</code> 'Geobacter sulfurreducens KN400' Bacteria 11 &lt; g.2860.contigs &gt; genome
                 </pre>
 
                 <p>
@@ -176,7 +161,7 @@
 
                 <!-- needs links to API doc: -->
                 <pre>
-                    annotate_genome &lt; genome &gt; annotated.genome
+                   <code title = "iris-tutorials"> annotate_genome</code> &lt; genome &gt; annotated.genome
                 </pre>
 
                 <p>
@@ -197,7 +182,7 @@
 
                 <!-- needs links to API doc: -->
                 <pre>
-                    genomeTO_to_feature_data &lt; annotated.genome &gt; features.txt
+                   <code title = "iris-tutorials"> genomeTO_to_feature_data</code> &lt; annotated.genome &gt; features.txt
                 </pre>
 
                 <p>
@@ -230,7 +215,7 @@
 
                 <!-- needs links to API doc: -->
                 <pre>
-                    genomeTO_to_reconstructionTO &lt; annotated.genome &gt; reconstruction
+                    <code title = "iris-tutorials">genomeTO_to_reconstructionTO</code> &lt; annotated.genome &gt; reconstruction
                 </pre>
 
                 <p>
@@ -247,7 +232,7 @@
 
                 <!-- needs links to API doc: -->
                 <pre>
-                    reconstructionTO_to_roles &lt; reconstruction &gt; roles
+                    <code title = "iris-tutorials">reconstructionTO_to_roles</code> &lt; reconstruction &gt; roles
                 </pre>
 
                 <p>
@@ -257,7 +242,7 @@
 
                 <!-- needs links to API doc: -->
                 <pre>
-                    reconstructionTO_to_subsystems &lt; reconstruction &gt; subsystems
+                    <code title = "iris-tutorials">reconstructionTO_to_subsystems</code> &lt; reconstruction &gt; subsystems
                 </pre>
 
                 <p>
@@ -282,9 +267,9 @@
                 </p>
 
                 <pre>
-                    <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#all_roles_used_in_models" target="_blank">all_roles_used_in_models</a> &gt; all.roles
+                    <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#all_roles_used_in_models" target="_blank"><code title = "iris-tutorials">all_roles_used_in_models</code></a> &gt; all.roles
                     <!-- needs links to API doc: -->
-                    a_and_b roles all.roles &gt; roles.for.models
+                   <code title = "iris-tutorials"> a_and_b</code> roles all.roles &gt; roles.for.models
                 </pre>
 
                 <p>
@@ -315,13 +300,17 @@
                 </p>
 
                 <pre>
+<<<<<<< HEAD
                     echo 'kb|g.589' | <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#genomes_to_fids" target="_blank">genomes_to_fids</a> CDS | <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#fids_to_roles" target="_blank">fids_to_roles</a> 2&gt; /dev/null | cut -f 3 &gt; roles.in.g.589
+=======
+                    echo 'kb|g.9032' | <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#genomes_to_fids" target="_blank"><code title = "iris-tutorials">genomes_to_fids</code></a> CDS | <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#fids_to_roles" target="_blank"><code title = "iris-tutorials">fids_to_roles</code></a> 2&gt; /dev/null | cut -f 3 &gt; roles.in.g.9032
+>>>>>>> 825da392f1557e432d114d939a5bca70397db23e
                 </pre>
 
                 <p>
                     Note that the
                     command <b><a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#fids_to_roles"
-                    target="_blank">fids_to_roles</a></b> writes error messages when it
+                    target="_blank"><code title = "iris-tutorials">fids_to_roles</code></a></b> writes error messages when it
                     cannot match a fid to any roles, so the commands above redirect all
                     warning messages to /dev/null so they don't clutter up the output.
                 </p>
@@ -333,8 +322,13 @@
 
                 <!-- needs links to API doc: -->
                <pre>
+<<<<<<< HEAD
                     a_and_b roles.in.g.589 all.roles &gt; roles.for.models.g.589
                     a_not_b roles.for.models roles.for.models.g.589 &gt; roles.to.search.for
+=======
+                   <code title = "iris-tutorials"> a_and_b</code> roles.in.g.9032 all.roles &gt; roles.for.models.g.9032
+                   <code title = "iris-tutorials"> a_not_b</code> roles.for.models roles.for.models.g.9032 &gt; roles.to.search.for
+>>>>>>> 825da392f1557e432d114d939a5bca70397db23e
                 </pre>
 
                 <p>
@@ -368,7 +362,7 @@
 
                 <!-- needs links to API doc: -->
                 <pre>
-                kbws-workspace tutorial
+                <code title = "iris-tutorials">kbws-workspace tutorial</code>
                 </pre>
 
                 <p>
@@ -392,7 +386,7 @@
 
                 <!-- needs links to API doc: -->
                 <pre>
-                kbfba-loadgenome annotated.genome -f
+               <code title = "iris-tutorials"> kbfba-loadgenome</code> annotated.genome -f
                 </pre>
 
                 <p>
@@ -423,7 +417,7 @@
 
                 <!-- needs links to API doc: -->
                 <pre>
-                kbws-listobj
+               <code title = "iris-tutorials"> kbws-listobj</code>
                 </pre>
 
                 <p>
@@ -448,7 +442,7 @@
 
                 <!-- needs links to API doc: -->
                 <pre>
-                kbfba-buildfbamodel <i>genome id</i>
+               <code title = "iris-tutorials"> kbfba-buildfbamodel</code> <i>genome id</i>
                 </pre>
 
                 <p>
@@ -477,7 +471,7 @@
 
                 <!-- needs links to API doc: -->
                 <pre>
-                kbfba-runfba <i>genome id</i>.fbamdl.0
+               <code title = "iris-tutorials"> kbfba-runfba</code> <i>genome id</i>.fbamdl.0
                 </pre>
 
                 <p>
@@ -518,7 +512,7 @@
 
                 <!-- needs links to API doc: -->
                 <pre>
-                kbfba-gapfill <i>genome id</i>.fbamdl.0 --intsol
+               <code title = "iris-tutorials"> kbfba-gapfill</code> <i>genome id</i>.fbamdl.0 --intsol
                 </pre>
 
                 <p>
@@ -545,7 +539,7 @@
 
                 <!-- needs links to API doc: -->
                 <pre>
-                kbws-jobs
+               <code title = "iris-tutorials"> kbws-jobs</code>
                 </pre>
 
                 <p>
@@ -570,7 +564,7 @@
 
                 <!-- needs links to API doc: -->
                 <pre>
-                kbfba-runfba <i>genome id</i>.fbamdl.0
+               <code title = "iris-tutorials"> kbfba-runfba</code> <i>genome id</i>.fbamdl.0
                 </pre>
 
                 <p>
@@ -596,7 +590,7 @@
 
                 <!-- needs links to API doc: -->
                 <pre>
-                kbfba-exportfbamodel <i>genome id</i>.fbamdl.0 sbml &gt; <i>genome id</i>.fbamdl.0.sbml
+               <code title = "iris-tutorials"> kbfba-exportfbamodel</code> <i>genome id</i>.fbamdl.0 sbml &gt; <i>genome id</i>.fbamdl.0.sbml
                 </pre>
 
                 <p>
@@ -604,5 +598,4 @@
                 for download.
                 </p>
             </div>
-        </div>
-</div>
+ 

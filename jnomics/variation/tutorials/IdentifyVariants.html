@@ -184,7 +184,7 @@ Calling SNPs takes the output from the alignment steps above and calls
 SNPs
 using the selected reference.
 </p>
-<pre>  $ <code title = "iris-tutorial">jk_compute_samtools_snp</code> -in=yeast_bowtie_align -org=yeast -out=yeast_snps<br></pre>
+<pre>  $ <code title = "iris-tutorial">jk_compute_samtools_snp</code> -in=yeast_bowtie_align -org=yeast -out=yeast_snps</pre>
 <p>
 You can check on the status of your analysis job using the <i>jk_compute_job_status
 -job=&lt;jobID&gt;</i>
@@ -197,22 +197,15 @@ take approximately 5 minutes)
 <h3>2. Merge VCF files</h3>
 <p>
 Because SNPs are called in parallel across the genome multiple files
-are created
-by the previous command. To join the SNPs into a single VCF file use
-the
-vcfmerge function </p>
-<pre>  $ <code title = "iris-tutorial">jk_compute_vcf_merge</div> -in=yeast_snps --alignments=yeast_bowtie_align -out=yeast.vcf<br></pre>
-</div>
-<div>
+are created by the previous command. To join the SNPs into a single VCF file use
+the vcfmerge function.
+<pre>  $ <code title = "iris-tutorial">jk_compute_vcf_merge</code> -in=yeast_snps --alignments=yeast_bowtie_align -out=yeast.vcf</pre>
 <h3>3. Download VCF file</h3>
 <p>
-Download the combined vcf file back to your desktop computer for local
-viewing.
-</p>
+Download the combined vcf file back to your desktop computer for local viewing.
 <pre>  $ <code title = "iris-tutorial">jk_fs_get</code> yeast.vcf<br>  $ wc -l yeast.vcf<br>  $ head yeast.vcf<br></pre>
 <p>
 A local file named yeast.vcf will be created containing all of the SNPs
 called by the pipeline. These can be further analyzed using tools such as <a href="http://snpeff.sourceforge.net/">SNPeff</a> or
 <a href="http://www.yandell-lab.org/software/vaast.html">VAAST</a>.
-</p>
 </div>

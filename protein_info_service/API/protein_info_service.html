@@ -78,6 +78,44 @@ domains is a reference to a list where each element is a string
     </p>
    </dd>
   </dl>
+  <h2 id="fids_to_domain_hits">
+   fids_to_domain_hits
+  </h2>
+  <pre>
+   <code>
+    $return = $obj-&gt;fids_to_domain_hits($fids)
+   </code>
+  </pre>
+  <dl>
+   <dt id="Parameter-and-return-types2">
+    Parameter and return types
+   </dt>
+   <dd>
+    <pre>
+     $fids is a reference to a list where each element is a fid
+$return is a reference to a hash where the key is a fid and the value is a reference to a list where each element is a hit
+fid is a string
+hit is a reference to a hash where the following keys are defined:
+	id has a value which is a string
+	subjectDb has a value which is a string
+	description has a value which is a string
+	queryBegin has a value which is an int
+	queryEnd has a value which is an int
+	subjectBegin has a value which is an int
+	subjectEnd has a value which is an int
+	score has a value which is a float
+	evalue has a value which is a float
+    </pre>
+   </dd>
+   <dt id="Description2">
+    Description
+   </dt>
+   <dd>
+    <p>
+     fids_to_domain_hits takes as input a list of feature ids, and returns a mapping of each fid to a list of hits. (This includes COG, even though COG is not part of InterProScan.)
+    </p>
+   </dd>
+  </dl>
   <h2 id="domains_to_fids">
    domains_to_fids
   </h2>
@@ -87,7 +125,7 @@ domains is a reference to a list where each element is a string
    </code>
   </pre>
   <dl>
-   <dt id="Parameter-and-return-types2">
+   <dt id="Parameter-and-return-types3">
     Parameter and return types
    </dt>
    <dd>
@@ -99,12 +137,41 @@ domain_id is a string
 fid is a string
     </pre>
    </dd>
-   <dt id="Description2">
+   <dt id="Description3">
     Description
    </dt>
    <dd>
     <p>
      domains_to_fids takes as input a list of domain_ids, and returns a mapping of each domain_id to the fids which have that domain. (This includes COG, even though COG is not part of InterProScan.)
+    </p>
+   </dd>
+  </dl>
+  <h2 id="domains_to_domain_annotations">
+   domains_to_domain_annotations
+  </h2>
+  <pre>
+   <code>
+    $return = $obj-&gt;domains_to_domain_annotations($domain_ids)
+   </code>
+  </pre>
+  <dl>
+   <dt id="Parameter-and-return-types4">
+    Parameter and return types
+   </dt>
+   <dd>
+    <pre>
+     $domain_ids is a domains
+$return is a reference to a hash where the key is a domain_id and the value is a string
+domains is a reference to a list where each element is a string
+domain_id is a string
+    </pre>
+   </dd>
+   <dt id="Description4">
+    Description
+   </dt>
+   <dd>
+    <p>
+     domains_to_domain_annotations takes as input a list of domain_ids, and returns a mapping of each domain_id to its text annotation as provided by its maintainer (usually retrieved from InterProScan, or from NCBI for COG).
     </p>
    </dd>
   </dl>
@@ -117,7 +184,7 @@ fid is a string
    </code>
   </pre>
   <dl>
-   <dt id="Parameter-and-return-types3">
+   <dt id="Parameter-and-return-types5">
     Parameter and return types
    </dt>
    <dd>
@@ -128,7 +195,7 @@ fid is a string
 ipr is a reference to a list where each element is a string
     </pre>
    </dd>
-   <dt id="Description3">
+   <dt id="Description5">
     Description
    </dt>
    <dd>
@@ -146,7 +213,7 @@ ipr is a reference to a list where each element is a string
    </code>
   </pre>
   <dl>
-   <dt id="Parameter-and-return-types4">
+   <dt id="Parameter-and-return-types6">
     Parameter and return types
    </dt>
    <dd>
@@ -157,7 +224,7 @@ fid is a string
 orthologs is a reference to a list where each element is a fid
     </pre>
    </dd>
-   <dt id="Description4">
+   <dt id="Description6">
     Description
    </dt>
    <dd>
@@ -175,7 +242,7 @@ orthologs is a reference to a list where each element is a fid
    </code>
   </pre>
   <dl>
-   <dt id="Parameter-and-return-types5">
+   <dt id="Parameter-and-return-types7">
     Parameter and return types
    </dt>
    <dd>
@@ -186,7 +253,7 @@ fid is a string
 ec is a reference to a list where each element is a string
     </pre>
    </dd>
-   <dt id="Description5">
+   <dt id="Description7">
     Description
    </dt>
    <dd>
@@ -204,7 +271,7 @@ ec is a reference to a list where each element is a string
    </code>
   </pre>
   <dl>
-   <dt id="Parameter-and-return-types6">
+   <dt id="Parameter-and-return-types8">
     Parameter and return types
    </dt>
    <dd>
@@ -215,7 +282,7 @@ fid is a string
 go is a reference to a list where each element is a string
     </pre>
    </dd>
-   <dt id="Description6">
+   <dt id="Description8">
     Description
    </dt>
    <dd>
@@ -233,7 +300,7 @@ go is a reference to a list where each element is a string
    </code>
   </pre>
   <dl>
-   <dt id="Parameter-and-return-types7">
+   <dt id="Parameter-and-return-types9">
     Parameter and return types
    </dt>
    <dd>
@@ -246,7 +313,7 @@ neighbor_threshold is a float
 neighbor is a reference to a hash where the key is a fid and the value is a float
     </pre>
    </dd>
-   <dt id="Description7">
+   <dt id="Description9">
     Description
    </dt>
    <dd>
@@ -264,7 +331,7 @@ neighbor is a reference to a hash where the key is a fid and the value is a floa
    </code>
   </pre>
   <dl>
-   <dt id="Parameter-and-return-types8">
+   <dt id="Parameter-and-return-types10">
     Parameter and return types
    </dt>
    <dd>
@@ -277,7 +344,7 @@ neighbor_threshold is a float
 neighbor is a reference to a hash where the key is a fid and the value is a float
     </pre>
    </dd>
-   <dt id="Description8">
+   <dt id="Description10">
     Description
    </dt>
    <dd>
@@ -293,7 +360,7 @@ neighbor is a reference to a hash where the key is a fid and the value is a floa
    fid
   </h2>
   <dl>
-   <dt id="Description9">
+   <dt id="Description11">
     Description
    </dt>
    <dd>
@@ -314,7 +381,7 @@ neighbor is a reference to a hash where the key is a fid and the value is a floa
    domain_id
   </h2>
   <dl>
-   <dt id="Description10">
+   <dt id="Description12">
     Description
    </dt>
    <dd>
@@ -335,7 +402,7 @@ neighbor is a reference to a hash where the key is a fid and the value is a floa
    neighbor_threshold
   </h2>
   <dl>
-   <dt id="Description11">
+   <dt id="Description13">
     Description
    </dt>
    <dd>
@@ -356,7 +423,7 @@ neighbor is a reference to a hash where the key is a fid and the value is a floa
    neighbor
   </h2>
   <dl>
-   <dt id="Description12">
+   <dt id="Description14">
     Description
    </dt>
    <dd>
@@ -377,7 +444,7 @@ neighbor is a reference to a hash where the key is a fid and the value is a floa
    domains
   </h2>
   <dl>
-   <dt id="Description13">
+   <dt id="Description15">
     Description
    </dt>
    <dd>
@@ -394,11 +461,41 @@ neighbor is a reference to a hash where the key is a fid and the value is a floa
     </pre>
    </dd>
   </dl>
+  <h2 id="hit">
+   hit
+  </h2>
+  <dl>
+   <dt id="Description16">
+    Description
+   </dt>
+   <dd>
+    <p>
+     A hit is a description of a match to another object (a fid, a gene family, an HMM). It is a structure with the following fields: id: the common identifier of the object (e.g., a fid, an HMM accession) subjectDb: the source database of the original hit (e.g., KBase for fids, TIGRFam, Pfam, COG) description: a human-readable textual description of the object (might be empty) queryBegin: the start of the hit in the input gene sequence queryEnd: the end of the hit in the input gene sequence subjectBegin: the start of the hit in the object gene sequence subjectEnd: the end of the hit in the object gene sequence score: the score (if provided) of the hit to the object evalue: the evalue (if provided) of the hit to the object
+    </p>
+   </dd>
+   <dt id="Definition5">
+    Definition
+   </dt>
+   <dd>
+    <pre>
+     a reference to a hash where the following keys are defined:
+id has a value which is a string
+subjectDb has a value which is a string
+description has a value which is a string
+queryBegin has a value which is an int
+queryEnd has a value which is an int
+subjectBegin has a value which is an int
+subjectEnd has a value which is an int
+score has a value which is a float
+evalue has a value which is a float
+    </pre>
+   </dd>
+  </dl>
   <h2 id="ec">
    ec
   </h2>
   <dl>
-   <dt id="Description14">
+   <dt id="Description17">
     Description
    </dt>
    <dd>
@@ -406,7 +503,7 @@ neighbor is a reference to a hash where the key is a fid and the value is a floa
      ECs are a list of Enzyme Commission identifiers.
     </p>
    </dd>
-   <dt id="Definition5">
+   <dt id="Definition6">
     Definition
    </dt>
    <dd>
@@ -419,7 +516,7 @@ neighbor is a reference to a hash where the key is a fid and the value is a floa
    go
   </h2>
   <dl>
-   <dt id="Description15">
+   <dt id="Description18">
     Description
    </dt>
    <dd>
@@ -427,7 +524,7 @@ neighbor is a reference to a hash where the key is a fid and the value is a floa
      GOs are a list of Gene Ontology identifiers.
     </p>
    </dd>
-   <dt id="Definition6">
+   <dt id="Definition7">
     Definition
    </dt>
    <dd>
@@ -440,7 +537,7 @@ neighbor is a reference to a hash where the key is a fid and the value is a floa
    ipr
   </h2>
   <dl>
-   <dt id="Description16">
+   <dt id="Description19">
     Description
    </dt>
    <dd>
@@ -448,7 +545,7 @@ neighbor is a reference to a hash where the key is a fid and the value is a floa
      IPRs are a list of InterPro identifiers.
     </p>
    </dd>
-   <dt id="Definition7">
+   <dt id="Definition8">
     Definition
    </dt>
    <dd>
@@ -461,7 +558,7 @@ neighbor is a reference to a hash where the key is a fid and the value is a floa
    operon
   </h2>
   <dl>
-   <dt id="Description17">
+   <dt id="Description20">
     Description
    </dt>
    <dd>
@@ -469,7 +566,7 @@ neighbor is a reference to a hash where the key is a fid and the value is a floa
      An operon is represented by a list of fids which make up that operon. The order within the list is not defined; the fids_to_locations method can report on the order of the fids in the operon.
     </p>
    </dd>
-   <dt id="Definition8">
+   <dt id="Definition9">
     Definition
    </dt>
    <dd>
@@ -482,7 +579,7 @@ neighbor is a reference to a hash where the key is a fid and the value is a floa
    orthologs
   </h2>
   <dl>
-   <dt id="Description18">
+   <dt id="Description21">
     Description
    </dt>
    <dd>
@@ -490,7 +587,7 @@ neighbor is a reference to a hash where the key is a fid and the value is a floa
      Orthologs are a list of fids which are orthologous to a given fid.
     </p>
    </dd>
-   <dt id="Definition9">
+   <dt id="Definition10">
     Definition
    </dt>
    <dd>
