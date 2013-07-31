@@ -64,9 +64,16 @@ the rows in a table is the basic style we advocate. For example,
 suppose that you wanted to find all features of <i>Streptococcus
 pneumoniae</i> that had been assigned a specific function (say, <i>triosephosphate
 isomerase</i>
-). You might try using <br>
-<pre>	<br>  <a href="http://kbase.us/developer-zone/api-documentation/cdm-entity-relationship-command-scripts/#all_entities_Genome" target="_blank">all_entities_Genome</a> -f scientific_name |<br>  grep "Streptococcus pneumoniae" |<br>  <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#genomes_to_fids" target="_blank">genomes_to_fids</a> CDS -c 1 | <br>  <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#fids_to_functions" target="_blank">fids_to_functions</a> | <br>  grep -i "triosephosphate isomerase"<br><br></pre>
-This produces output like <br>
+). You might try using (as one long command) <br>
+<pre>
+<a href="http://kbase.us/developer-zone/api-documentation/cdm-entity-relationship-command-scripts/#all_entities_Genome" target="_blank">all_entities_Genome</a> -f scientific_name |<br>  grep "Streptococcus pneumoniae" |<br>  <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#genomes_to_fids" target="_blank">genomes_to_fids</a> CDS -c 1 | <br>  <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#fids_to_functions" target="_blank">fids_to_functions</a> | <br>  grep -i "triosephosphate isomerase"<br><br></pre>
+This command may take a few minutes.  You can issue other commands while waiting for this command to finish.  An alternate way to do the above, is to break it into a series of intermediate steps.
+<pre>
+<a href="http://kbase.us/developer-zone/api-documentation/cdm-entity-relationship-command-scripts/#all_entities_Genome" target="_blank">all_entities_Genome</a> -f scientific_name |  grep "Streptococcus pneumoniae" > Strep_genomes
+cat Strep_genomes | <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#genomes_to_fids" target="_blank">genomes_to_fids</a> CDS -c 1 > Strep_genomes_with_fids 
+cat Strep_genomes_with_fids | <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#fids_to_functions" target="_blank">fids_to_functions</a> > Strep_genomes_with_functions
+grep -i "triosephosphate isomerase" Strep_genomes_with_functions<br><br></pre>
+Either of these approaches should produce output like <br>
 <pre>  kb|g.1340  Streptococcus pneumoniae SP19-BS75  kb|g.1340.peg.783   Triosephosphate isomerase (EC 5.3.1.1)<br>  kb|g.9772  Streptococcus pneumoniae SP18-BS74  kb|g.9772.peg.1261  triosephosphate isomerase<br>  kb|g.9772  Streptococcus pneumoniae SP18-BS74  kb|g.9772.peg.1663  triosephosphate isomerase<br>  kb|g.9772  Streptococcus pneumoniae SP18-BS74  kb|g.9772.peg.2175  triosephosphate isomerase<br>  kb|g.9772  Streptococcus pneumoniae SP18-BS74  kb|g.9772.peg.2207  triosephosphate isomerase<br>  kb|g.3478  Streptococcus pneumoniae SPN034183  kb|g.3478.peg.287   Triosephosphate isomerase (EC 5.3.1.1)<br>  .<br>  .<br>  .<br><br></pre>
 Here, some extra comments are necessary.
 <ol>
