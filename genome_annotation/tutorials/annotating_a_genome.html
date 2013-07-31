@@ -59,29 +59,27 @@
 
                 <pre class = 'example'>
 
-                    Here is the output from the above command:
+                    The output from the above command (on the day this was edited):
 
-                    kb|g.1495   Geobacter sp. M18
-                    kb|g.1494   Geobacter sp. M18
-                    kb|g.21614  Geobacter sp. M21
-                    kb|g.1278   Geobacter lovleyi SZ
-                    kb|g.9264   Geobacter sp. FRC-32
-                    kb|g.483    Geobacter sulfurreducens PCA
-                    kb|g.9716   Geobacter lovleyi SZ
-                    kb|g.21325  Geobacter uraniumreducens Rf4
-                    kb|g.1029   Geobacter uraniireducens Rf4
-                    kb|g.1314   Geobacter bemidjiensis Bem
-                    kb|g.1496   Geobacter sp. M21
-                    kb|g.2860   Geobacter sulfurreducens KN400
-                    kb|g.21512  Geobacter bemidjiensis Bem
-                    kb|g.9032   Geobacter metallireducens GS-15
-                    kb|g.835    Geobacter sp. FRC-32
-                    kb|g.20945  Geobacter sulfurreducens PCA
-                    kb|g.589    Geobacter metallireducens GS-15
+                    kb|g.1495	Geobacter sp. M18
+                    kb|g.1494	Geobacter sp. M18
+                    kb|g.1278	Geobacter lovleyi SZ
+                    kb|g.483	Geobacter sulfurreducens PCA
+                    kb|g.1029	Geobacter uraniireducens Rf4
+                    kb|g.1314	Geobacter bemidjiensis Bem
+                    kb|g.1496	Geobacter sp. M21
+                    kb|g.2860	Geobacter sulfurreducens KN400
+                    kb|g.835	Geobacter sp. FRC-32
+                    kb|g.589	Geobacter metallireducens GS-15
+
+
                 </pre>
 
                 <p>
-                    The genome <i>Geobacter sulfurreducens</i> KN400 (KBase ID "kb|g.2860") is a good example to start with.
+                    The genome ID numbers may change with time. The remainder of this tutorial uses the genome IDs for <i>G. sulfurreducens</i> KN400 (KBase ID "kb|g.2860") and <i>G. metallireducens</i> GS-15 (KBase ID "kb|g.589").  Please make a note if they have changed.
+		</p>
+		<p>
+                    The genome <i>Geobacter sulfurreducens</i> KN400 (KBase ID "kb|g.2860") will be used as an example for the following.
                 </p>
             </div>
 
@@ -313,11 +311,11 @@
                     As an example, we'll compare our automatically generated set of roles
                     against the set found in another <i>Geobacter</i>
                     species, <i>Geobacter metallireducens</i> GS-15 (KBase ID
-                    "kb|g.9032").  Obtain the roles for that genome using the commands:
+                    "kb|g.589").  Obtain the roles for that genome using the commands:
                 </p>
 
                 <pre>
-                    echo 'kb|g.9032' | <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#genomes_to_fids" target="_blank">genomes_to_fids</a> CDS | <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#fids_to_roles" target="_blank">fids_to_roles</a> 2&gt; /dev/null | cut -f 3 &gt; roles.in.g.9032
+                    echo 'kb|g.589' | <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#genomes_to_fids" target="_blank">genomes_to_fids</a> CDS | <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#fids_to_roles" target="_blank">fids_to_roles</a> 2&gt; /dev/null | cut -f 3 &gt; roles.in.g.589
                 </pre>
 
                 <p>
@@ -335,8 +333,8 @@
 
                 <!-- needs links to API doc: -->
                <pre>
-                    a_and_b roles.in.g.9032 all.roles &gt; roles.for.models.g.9032
-                    a_not_b roles.for.models roles.for.models.g.9032 &gt; roles.to.search.for
+                    a_and_b roles.in.g.589 all.roles &gt; roles.for.models.g.589
+                    a_not_b roles.for.models roles.for.models.g.589 &gt; roles.to.search.for
                 </pre>
 
                 <p>
