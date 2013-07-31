@@ -173,15 +173,6 @@ get Glimmers calls, one would use </p>
 This implements a multi-step approach where initial calls are made,
 these initial calls are used to train glimmer, and then a second pass
 is made to construct an estimate.
-<h3>Initial Determination of Coding Regions and Probable Functions Via
-Projection from Close Genomes</h3>
-A second approach to calling genes is based on projecting calls from
-very close genomes (if they can be located). To generate calls using
-this strategy, where input.genomeTO was produced by
-genomeTO_to_coding_regions, one would use:
-<pre>       call_CDSs_by_projection &lt; input.genomeTO &gt; output.enhanced.genomeTO<br><br></pre>
-call_CDSs_by_projection produces both identification of gene locations
-and the functions assigned to those genes.
 <h3> Merging Gene Calls </h3>
 The basic strategy used by RAST2 is to use a selected set of tools to
 propose potential genes. This includes tools to call different types of
