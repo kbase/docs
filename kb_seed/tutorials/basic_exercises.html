@@ -4,7 +4,7 @@
 (CDM) Entity-Relationshop Model and
 how to run command line tools to expose the data in it. </p>
 <p><strong>Required Prerequisite Activities: </strong><a href="/for-users/tutorials/installing-the-kbase-app-dmg/">Download
-KBase: Installing the KBase Application DMG</a>, OR <a href="for-users/tutorials/navigating-iris/">Get Started with IRIS:
+KBase: Installing the KBase Application DMG</a>, OR <a href="/for-users/tutorials/navigating-iris/">Get Started with IRIS:
 Navigating IRIS</a> </p>
 <p> <a href="/developer-zone/tutorials/the-kbase-central-data-model/the-cdm-represented-as-an-entity-relationship-model/">The
 CDM
@@ -396,8 +396,8 @@ To get the fids in a genome (constrained by type, if necessary), use <br>
 <br></pre>
 If you wish to restrict the extraction to fids of specific types, use
 the types as arguments. Thus, <br>
-<pre>  echo 'kb|g.3857' | <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#genomes_to_fids" target="_blank">genomes_to_fids</a> rna<br><br></pre>
-would restrict output to fids of type 'rna.'  It should be noted that the type used to access protein-encoding genes can be either peg or CDS.  The two choices are treated as interchangable by the command.
+<pre>  echo 'kb|g.3857' | <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#genomes_to_contigs" target="_blank">genomes_to_contigs</a> rna<br><br></pre>
+would restrict output to fids of type 'rna.'
 <h3><a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#genomes_to_md5s" target="_blank">genomes_to_md5s</a></h3>
 <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#genomes_to_md5s" target="_blank">genomes_to_md5s</a> can be used to retrieve the <a name="md5162">md5</a> hash value for any genome in KBase. Then, using
 md5_to_genomes you can find the set of genomes with identical <a name="DNA163">DNA</a> sequence (but not necessarily gene calls,
