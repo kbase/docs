@@ -1,0 +1,42 @@
+Usage: get_relationship_ContainsAlignedProtein [arguments] < ids > table.with.fields.added
+
+--show-fields
+    List the available fields.
+
+-c num        
+    Select the identifier from column num
+
+--from field-list
+    Choose a set of fields from the AlignmentRow
+    entity to return. Field-list is a comma-separated list of strings. The
+    following fields are available:
+        id
+        row_number
+        row_id
+        row_description
+        n_components
+        beg_pos_aln
+        end_pos_aln
+        md5_of_ungapped_sequence
+        sequence
+
+--rel field-list
+    Choose a set of fields from the relationship to return. Field-list is a comma-separated list of 
+    strings. The following fields are available:
+        from_link
+        to_link
+        index_in_concatenation
+        beg_pos_in_parent
+        end_pos_in_parent
+        parent_seq_len
+        beg_pos_aln
+        end_pos_aln
+        kb_feature_id
+
+--to field-list
+    Choose a set of fields from the ProteinSequence entity to 
+    return. Field-list is a comma-separated list of strings. The following fields are available:
+        id
+        sequence
+
+

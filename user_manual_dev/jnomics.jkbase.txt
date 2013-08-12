@@ -1,0 +1,8 @@
+
+Use the functions below to interact with the Cluster
+fs                                                 Commands that interact with the Cluster Filesystem
+compute                                            Commands that launch Compute tasks on the Cluster 
+-user,--username                                   Optionally specify username via commandline       
+-pass,--password                                   Optionally specify password via commandline       
+
+

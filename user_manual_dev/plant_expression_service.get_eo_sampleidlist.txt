@@ -1,0 +1,34 @@
+    DESCRIPTION
+	Retrieve the list of expression samples (GSM#s) that correspond to one or more of the environmental conditions of interest. for example if the input is:
+	 EO:0007107
+
+	 then the output looks like:
+	 EO:0007107      Arabidopsis thaliana    GSM131147
+         EO:0007107      Arabidopsis thaliana    GSM131148
+         EO:0007107      Arabidopsis thaliana    GSM131149
+         EO:0007107      Populus trichocarpa     GSM431198
+         EO:0007107      Populus trichocarpa     GSM431199
+         EO:0007107      Populus trichocarpa     GSM431200
+Usage: /kb/deployment/plbin/get_eo_sampleidlist.pl [--url=http://kbase.us/services/plant_expression_service] < eoIDs
+
+
+General options
+	--url=[http://kbase.us/services/plant_expression_service]		urlname of the server
+	--help		print help information
+	--version		print version information
+
+Examples: 
+
+echo EO:0007049 | get_eo_sampleidlist  --species=Ara
+
+
+echo EO:0007049 |get_eo_sampleidlist  --species=Pop
+
+echo EO:0007049 | /kb/deployment/plbin/get_eo_sampleidlist.pl --url=http://kbase.us/services/plant_expression_service 
+
+/kb/deployment/plbin/get_eo_sampleidlist.pl --help	print out help
+
+/kb/deployment/plbin/get_eo_sampleidlist.pl --version	print out version information
+
+Report bugs to Shinjae Yoo at sjyoo@bnl.gov
+

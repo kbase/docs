@@ -1,0 +1,7 @@
+kbfba-getmodels <Model IDs (; delimiter)> <Model workspaces (; delimiter)> [-?ehipv] [long options...]
+	-i --idtype      Type of ID
+	-p --pretty      Pretty print output
+	-e --showerror   Set as 1 to show any errors in execution
+	-v --verbose     Print verbose messages
+	-? -h --help     Print this usage information
+

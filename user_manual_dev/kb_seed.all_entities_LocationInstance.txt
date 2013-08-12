@@ -1,0 +1,17 @@
+Usage: all_entities_LocationInstance [arguments] > entity.data
+
+    --fields list   Choose a set of fields to return. List is a comma-separated list of strings.
+    -a		    Return all available fields.
+    --show-fields   List the available fields.
+
+The following fields are available:
+
+    index
+        number used to distinguish between different instances of the same type of location in a single model. Within a model, any two instances of the same location must have difference compartment index values.
+    label
+        description used to differentiate between instances of the same location in a single model
+    pH
+        pH of the cell region, which is used to determine compound charge and pH gradient across cell membranes
+    potential
+        electrochemical potential of the cell region, which is used to determine the electrochemical gradient across cell membranes
+

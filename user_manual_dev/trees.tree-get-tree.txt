@@ -1,0 +1,76 @@
+
+NAME
+      tree-get-tree -- retrieve tree or tree meta data from the CDS
+
+SYNOPSIS
+      tree-get-tree [OPTIONS] [TREE_ID]
+
+DESCRIPTION
+      Retrieve the specified tree or meta information associated with the tree.  The
+      raw tree is returned in newick format by default with leaf node labels in an
+      arbitrary internal id that is unique only within the given tree.  By default, the
+      raw tree stored in KBase is returned.  To return the tree with node labels replaced
+      with KBase protein sequence IDs or cannonical feature IDs, use the options below.  To
+      provide a list of tree IDs, pipe in the list through standard-in or specify an input
+      file to read.  In either case, each tree id should appear on a separate line.  In the
+      case of a list, results are returned in the same order they were provided as input.
+      
+      -p, --protein-sequence
+                        set this flag to return the tree with node labels replaced with
+                        protein sequence IDs
+                        
+      -f, --feature
+                        set this flag to return the tree with node labels replaced with KBase
+                        feature IDs.  Note that some trees may not have assigned cannonical
+                        feature IDs for each node, in which case blank labels will be returned.
+                        
+      -e, --best-feature
+                        set this flag to return the tree with node labels replaced with KBase
+                        feature IDs, where one feature ID is selected for each leaf. Note that
+                        in most cases, MANY feature IDs will map to one leaf, and this method
+                        will just select one.  You should not assume that the same feature ID
+                        will be selected over multiple runs as the metric for selecting the
+                        best feature may change, or new features may be added to KBase!
+                        
+      -g, --best-genome
+                        set this flag to return the tree with node labels replaced with KBase
+                        genome IDs, where one genome ID is selected for each leaf. Note that
+                        in most cases, MANY feature IDs (from many genomes) will map to one
+                        leaf, and this method will just select one.  You should not assume
+                        that the same genome ID will be selected over multiple runs as the
+                        metric for selecting the best feature may change, or new features may
+                        be added to KBase!
+                        
+      -b, --bootstrap-remove
+                        set this flag to return the tree with bootstrap values removed
+                        
+      -d, --distance-remove
+                        set this flag to return the tree without distance values removed
+                        
+      -m, --meta
+                        set this flag to return meta data instead of the tree itself
+                        
+      -i, --input [FILENAME]
+                        set this flag to specify the input file to read
+                        
+      -h, --help
+                        diplay this help message, ignore all arguments
+                        
+                        
+
+EXAMPLES
+      Retrieve the raw tree newick string
+      > tree-get-tree 'kb|tree.25'
+      
+      Retrieve meta data about a tree
+      > tree-get-tree -m 'kb|tree.25'
+      
+      
+
+SEE ALSO
+      tree-find-tree-ids
+      
+AUTHORS
+      Michael Sneddon (mwsneddon@lbl.gov)
+      
+

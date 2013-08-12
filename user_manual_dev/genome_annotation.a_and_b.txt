@@ -1,0 +1,8 @@
+
+Usage: a_and_b File1 File2 > intersection
+
+File1 --- Name of a text file
+
+File2 --- Name of text-file to be compared.
+
+

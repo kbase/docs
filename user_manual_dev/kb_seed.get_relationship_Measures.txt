@@ -1,0 +1,36 @@
+Usage: get_relationship_Measures [arguments] < ids > table.with.fields.added
+
+--show-fields
+    List the available fields.
+
+-c num        
+    Select the identifier from column num
+
+--from field-list
+    Choose a set of fields from the Trait
+    entity to return. Field-list is a comma-separated list of strings. The
+    following fields are available:
+        id
+        trait_name
+        unit_of_measure
+        TO_ID
+        protocol
+
+--rel field-list
+    Choose a set of fields from the relationship to return. Field-list is a comma-separated list of 
+    strings. The following fields are available:
+        from_link
+        to_link
+        value
+        statistic_type
+        measure_id
+
+--to field-list
+    Choose a set of fields from the ObservationalUnit entity to 
+    return. Field-list is a comma-separated list of strings. The following fields are available:
+        id
+        source_name
+        source_name2
+        plant_id
+
+

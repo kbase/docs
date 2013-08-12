@@ -1,0 +1,53 @@
+
+NAME
+      tree-normalize-abundance-profile -- normalize and filter metagenomic sample abundance data
+
+SYNOPSIS
+      tree-normalize-abundance-profile [OPTIONS]
+
+DESCRIPTION
+      Normalize metagenomic abundance read counts by sum, mean, min, or max of a column or globally,
+      take the log of the values, and threshold the data by providing a cutoff value.  These steps always
+      occur in this order, but all processing steps are optional, so executing this command multiple times
+      on the same data can
+      
+      The expected input is a tab-delimited file with tree node labels in the first column, sample names in
+      the first row, and abundance values in the remaining data matrix.  Note that this is the same format
+      as the output produced from tree-compute-abundance-profile.  The output format is identical to the input
+      format.  Missing values are acceptable and will not be used in calculations.
+      
+      Input can be piped to standard in or specified with the -i option.  Output is written to standard out.
+      
+      -s [SCOPE], --normalization-type [SCOPE]
+                        specify the scope of normalization; normalization can either be performed per column
+                        (e.g. mean is computed per column) or globally across all the data points; available
+                        options are: 'per_column', 'global'; the default option is 'per_column'
+      -t [TYPE], --normalization-type [TYPE]
+                        specify the method of normalization (ie the normalization factor); available
+                        options are 'none', 'total', 'mean', 'max', 'min'; the default value if no
+                        value is given is 'none', which performes no normalization
+      -p [OPERATION], --normalization-post-process [OPERATION]
+                        specify an operation to perform on each data element after values have been
+                        normalized; available options are 'none', 'log10', 'log2', 'ln'; the default
+                        value is 'none'
+      -v [VALUE], --cutoff-value [VALUE]
+                        specify a cutoff value to threshold the data AFTER it has been normalized and
+                        any specified post-normalization operation has been performed; the cutoff value
+                        is a floating-point number; if this option is not provided, then no thresholding
+                        is applied
+      -r [INTEGER], --cutoff-num-records [INTEGER]
+                        specify the maximum number of values to include per column, selecting those N
+                        elements in each column that are highest; note that the normalization scope
+                        parameter is completely ignored for this operation; the cutoff number must be
+                        an integer value; if this option is not provided, all records are preserved
+      -i [FILE_NAME], --input [FILE_NAME]  
+                        specify an input file to read from; if provided standard-in is ignored
+      -h, --help
+                        display this help message, ignore all arguments
+                                                
+EXAMPLES
+    
+AUTHORS
+      Michael Sneddon (mwsneddon@lbl.gov)
+      
+

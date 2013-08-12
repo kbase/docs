@@ -1,0 +1,67 @@
+
+NAME
+      tree-compute-abundance-profile -- maps reads from a metagenomic sample to abundance counts on a tree
+
+SYNOPSIS
+      tree-compute-abundance-profile [OPTIONS]
+
+DESCRIPTION
+      This method retrieves the set of metagenomic reads from a metagenomic sample that have been assigned
+      to the specified gene family.  Each read is mapped to a best hit protein sequence that corresponds to
+      a leaf in the specified KBase tree using uclust.  The result is printed to standard out as a tab
+      delimited file, and status messages on progress and results are printed to standard error.
+      
+      -t [ID], --tree-id [ID]
+                        set this flag to specify the KBase ID of the tree to compute
+                        abundances for; the tree is used to identify the set of sequences
+                        that were aligned to build the tree; each leaf node of a tree built
+                        from an alignment willbe mapped to a sequence; this script assumes
+                        that trees are built from protein sequences
+                        
+      -m [ID1;ID2;ID3;...IDN;], --metagenomic-sample-id [ID1;ID2;ID3;...IDN;]
+                        set this flag to specify the IDs of the metagenomic samples to lookup;
+                        if there are multiple samples to lookup, pass a list of IDs without
+                        spaces delimited by a semicolon; see the KBase communities service to
+                        identifiy metagenomic sample ids, and the example below for 
+                        
+      -a [KEY], --auth [KEY]
+                        set this flag to specify the authentication key that you generated with
+                        MG Rast to access private datasets; public data sets do not require
+                        this flag
+                        
+      -s [SOURCE], --source-family [SOURCE]
+                        set this flag to specify the name of the source of the protein family;
+                        currently supported protein families are: 'COG';
+                        default value is set to 'COG'
+                        
+      -f [NAME], --family-name [NAME]
+                        set this flag to specify the name of the protein family used to pull
+                        a small set of reads from a metagenomic sample; currently only COG
+                        families are supported
+                        
+      -p [VALUE], --percent-identity-threshold [VALUE]
+                        set this flag to specify the minimum acceptable percent identity for
+                        hits, provided as a percentage and not a fraction (i.e. set to 87.5
+                        for 87.5%); default value is set to 50%
+                        
+      -l [VALUE], --length-threshold [VALUE]
+                        set this flag to specify the minimum acceptable length of a match to
+                        consider a hit; default value is set to 20
+                        
+      -h, --help
+                        display this help message, ignore all arguments
+                        
+                        
+
+EXAMPLES
+      Map reads to a tree and get an abundance profile for two metagenomic samples
+      > tree-compute-abundance-profile -t 'kb|tree.991335' -f COG0556 -s COG -m '4502923.3;4502924.3'
+
+SEE ALSO
+     tree-normalize-abundance-profile
+      
+AUTHORS
+      Michael Sneddon (mwsneddon@lbl.gov)
+      Keith Keller (kkeller@lbl.gov)
+      
+

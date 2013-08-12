@@ -1,0 +1,10 @@
+
+Script for submitting metagenome to AWE
+Command name: analyze_metagenome.pl
+Parameters:
+     -metagenome_name=<metagenome/file name for sequence file in datastore, must match any metagenome name in metadata file, required>
+     -metagenome_datastore_id=<sequence/read file ID in datastore, required>
+     -metadata_datastore_id=<metadata file ID in datastore, required>
+     -conf=<configuration file, (default='awe.ini')>
+
+

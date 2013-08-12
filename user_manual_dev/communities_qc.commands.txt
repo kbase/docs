@@ -1,0 +1,14 @@
+get_kmer_compute  
+get_drisee_compute  
+kmer-tool  
+get_drisee_instance  
+consensus  
+get_histogram_instance  
+----------TEST communities_qc qiime-uclust with --help option	fail
+
+----------TEST communities_qc run_find_steiner with --help option	fail
+
+get_kmer_instance  
+get_histogram_compute  
+drisee  
+seq_length_stats  

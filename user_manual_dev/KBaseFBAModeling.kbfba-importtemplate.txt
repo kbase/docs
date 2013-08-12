@@ -1,0 +1,15 @@
+kbfba-importtemplate <Reaction file> <Biomass file> <Biomass components file> [-?dehinotvw] [long options...]
+	-n --name           Name for imported template model
+	-d --domain         Domain of life for template model
+	-t --type           Type of model produced by template
+	--templateid        ID for imported template in workspace
+	--mapping           Mapping to which the template should be linked
+	--mappingws         Workspace with mapping to which the template
+	                    should be linked
+	-i --ignoreerrors   Ignore errors encountered during load
+	-w --workspace      Workspace to save imported template
+	-o --overwrite      Overwrite any existing phenotypes with same name
+	-e --showerror      Set as 1 to show any errors in execution
+	-v --verbose        Print verbose messages
+	-? -h --help        Print this usage information
+

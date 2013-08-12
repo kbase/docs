@@ -1,0 +1,162 @@
+----------TEST assembly ar-login with -h option
+	okay
+
+
+Usage: ar_login  [-h]
+
+Authenticate with username and password, or switch account if already logged in.
+
+----------TEST assembly ar-login with --help option
+	okay
+
+
+Usage: ar_login  [-h]
+
+Authenticate with username and password, or switch account if already logged in.
+
+----------TEST assembly ar-stat with -h option
+	okay
+
+
+Usage: ar_stat [-h] [-w] [-d [FILES] | -j STAT_JOB] [-n STAT_N] [-s server_addr]
+
+Query status of running jobs
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -w, --watch           monitor in realtime
+  -d [FILES], --data [FILES]
+                        list latest or data-id specific files
+  -j STAT_JOB, --job STAT_JOB
+                        display job status
+  -n STAT_N             specify number of records to show
+  -s server_addr        specify ARAST server address
+
+----------TEST assembly ar-stat with --help option
+	okay
+
+
+Usage: ar_stat [-h] [-w] [-d [FILES] | -j STAT_JOB] [-n STAT_N] [-s server_addr]
+
+Query status of running jobs
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -w, --watch           monitor in realtime
+  -d [FILES], --data [FILES]
+                        list latest or data-id specific files
+  -j STAT_JOB, --job STAT_JOB
+                        display job status
+  -n STAT_N             specify number of records to show
+  -s server_addr        specify ARAST server address
+
+----------TEST assembly ar-logout with -h option
+	okay
+
+
+Usage: ar_logout  [-h] 
+
+Log out.
+
+----------TEST assembly ar-logout with --help option
+	okay
+
+
+Usage: ar_logout  [-h] 
+
+Log out.
+
+----------TEST assembly ar-run with -h option
+	okay
+
+
+Usage: ar_run  [-h] [-f [SINGLE [SINGLE ...]]]
+                    [-a [PIPELINE [PIPELINE ...]]]
+                    [-p [PIPELINE [PIPELINE ...]]] [-m MESSAGE]
+                    [--data DATA_ID] [--pair [PAIR [PAIR ...]]]
+                    [--single [SINGLE [SINGLE ...]]]
+                    [-s server_addr]
+
+Run an Assembly RAST job
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -f [SINGLE [SINGLE ...]]
+                        specify sequence file(s)
+  -a [PIPELINE [PIPELINE ...]], --assemblers [PIPELINE [PIPELINE ...]]
+  -p [PIPELINE [PIPELINE ...]], --pipeline [PIPELINE [PIPELINE ...]]
+                        Pipeline
+  -m MESSAGE, --message MESSAGE
+                        Attach a description to job
+  --data DATA_ID        Reuse uploaded data
+  --pair [PAIR [PAIR ...]]
+                        Specify a paired-end library and parameters
+  --single [SINGLE [SINGLE ...]]
+                        Specify a single end file and parameters
+  -s server_addr        Specify ARAST server address
+
+----------TEST assembly ar-run with --help option
+	okay
+
+
+Usage: ar_run  [-h] [-f [SINGLE [SINGLE ...]]]
+                    [-a [PIPELINE [PIPELINE ...]]]
+                    [-p [PIPELINE [PIPELINE ...]]] [-m MESSAGE]
+                    [--data DATA_ID] [--pair [PAIR [PAIR ...]]]
+                    [--single [SINGLE [SINGLE ...]]]
+                    [-s server_addr]
+
+Run an Assembly RAST job
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -f [SINGLE [SINGLE ...]]
+                        specify sequence file(s)
+  -a [PIPELINE [PIPELINE ...]], --assemblers [PIPELINE [PIPELINE ...]]
+  -p [PIPELINE [PIPELINE ...]], --pipeline [PIPELINE [PIPELINE ...]]
+                        Pipeline
+  -m MESSAGE, --message MESSAGE
+                        Attach a description to job
+  --data DATA_ID        Reuse uploaded data
+  --pair [PAIR [PAIR ...]]
+                        Specify a paired-end library and parameters
+  --single [SINGLE [SINGLE ...]]
+                        Specify a single end file and parameters
+  -s server_addr        Specify ARAST server address
+
+----------TEST assembly ar-get with -h option
+	okay
+
+
+Usage: ar_get [-h] -j JOB_ID [-a [ASSEMBLERS [ASSEMBLERS ...]]] [-s server_addr]
+
+Download result data
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -j JOB_ID, --job JOB_ID
+                        specify which job data to get
+  -a [ASSEMBLERS [ASSEMBLERS ...]], --assemblers [ASSEMBLERS [ASSEMBLERS ...]]
+                        specify which assembly data to get
+  -s server_addr        specify ARAST server address
+
+----------TEST assembly ar-get with --help option
+	okay
+
+
+Usage: ar_get [-h] -j JOB_ID [-a [ASSEMBLERS [ASSEMBLERS ...]]] [-s server_addr]
+
+Download result data
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -j JOB_ID, --job JOB_ID
+                        specify which job data to get
+  -a [ASSEMBLERS [ASSEMBLERS ...]], --assemblers [ASSEMBLERS [ASSEMBLERS ...]]
+                        specify which assembly data to get
+  -s server_addr        specify ARAST server address
+
+
+
+Error Summary:
+

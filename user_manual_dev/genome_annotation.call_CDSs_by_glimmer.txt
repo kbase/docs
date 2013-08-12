@@ -1,0 +1,11 @@
+
+Usage: call_CDSs_by_glimmer [--url service-url]  < genome-file  > genome-file
+Usage: call_CDSs_by_glimmer --input genome-file --output genome-file  [--url service-url]
+
+    --url    --- Optional URL for alternate KBase server (D: http://bio-data-1.mcs.anl.gov/services/genome_annotation)
+
+    --input  --- Option to read genome-typed-object from input file instead of from STDIN
+
+    --output --- Option to write enhanced genome-typed-object to output file instead of STDOUT
+
+

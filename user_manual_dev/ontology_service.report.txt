@@ -1,0 +1,16 @@
+----------TEST ontology_service get_go_enrichment with -h option	okay
+
+----------TEST ontology_service get_go_enrichment with --help option	okay
+
+----------TEST ontology_service get_goidlist with -h option	okay
+
+----------TEST ontology_service get_goidlist with --help option	okay
+
+----------TEST ontology_service get_go_description with -h option	okay
+
+----------TEST ontology_service get_go_description with --help option	okay
+
+
+
+Error Summary:
+

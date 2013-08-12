@@ -1,0 +1,29 @@
+Usage: get_entity_Locality [arguments] < ids > table.with.fields.added
+
+    -c num          Select the identifier from column num
+    -i filename     Use filename rather than stdin for input
+    --fields list   Choose a set of fields to return. List is a comma-separated list of strings.
+    -a		    Return all available fields.
+    --show-fields   List the available fields.
+
+The following fields are available:
+
+    source_name
+        Name or description of the location used as a collection site.
+    city
+        City of the collecting site.
+    state
+        State or province of the collecting site.
+    country
+        Country of the collecting site.
+    origcty
+        3-letter ISO 3166-1 extended country code for the country of origin.
+    elevation
+        Elevation of the collecting site, expressed in meters above sea level.  Negative values are allowed.
+    latitude
+        Latitude of the collecting site, recorded as a decimal number.  North latitudes are positive values and south latitudes are negative numbers.
+    longitude
+        Longitude of the collecting site, recorded as a decimal number.  West longitudes are positive values and east longitudes are negative numbers.
+    lo_accession
+        gazeteer ontology term ID
+

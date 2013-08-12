@@ -1,0 +1,11 @@
+
+Usage: genomeTO_to_coding_regions [--url service-url]  < genome-file  > extended-genome-file]
+Usage: genomeTO_to_coding_regions  --input genome-file  --output genome-file  [--url service-url]
+
+    --url    --- Optional URL for alternate KBase server (D: http://bio-data-1.mcs.anl.gov/services/genome_annotation)
+
+    --input  --- optional name of genome-typed-object input file
+
+    --output --- optional name of genome-typed-object output file
+
+

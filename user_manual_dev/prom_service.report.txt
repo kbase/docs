@@ -1,0 +1,28 @@
+----------TEST prom_service prom-load-expression-data with -h option	okay
+
+----------TEST prom_service prom-load-expression-data with --help option	okay
+
+----------TEST prom_service prom-change-regulatory-network-namespace with -h option	okay
+
+----------TEST prom_service prom-change-regulatory-network-namespace with --help option	okay
+
+----------TEST prom_service prom-url with -h option	okay
+
+----------TEST prom_service prom-url with --help option	okay
+
+----------TEST prom_service prom-change-expression-data-namespace with -h option	okay
+
+----------TEST prom_service prom-change-expression-data-namespace with --help option	okay
+
+----------TEST prom_service prom-load-regulatory-network with -h option	okay
+
+----------TEST prom_service prom-load-regulatory-network with --help option	okay
+
+----------TEST prom_service prom-create-constraints with -h option	okay
+
+----------TEST prom_service prom-create-constraints with --help option	okay
+
+
+
+Error Summary:
+

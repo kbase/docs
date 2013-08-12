@@ -1,0 +1,32 @@
+Usage: kmer-tool.py [options] -i <input file> -o <output file>
+
+Options:
+  -h, --help            show this help message and exit
+  -i INPUT, --input=INPUT
+                        Input file, sequence (fasta/fastq) or binary count
+                        hash.
+  -o OUTPUT, --output=OUTPUT
+                        Output file.
+  -t TYPE, --type=TYPE  Input file type, one of: fasta, fastq, hash [default
+                        'fasta']
+  -m MAX, --max=MAX     Maximum size (in Gb) to count, files larger are split
+                        [default 10.0].
+  -p PROCS, --procs=PROCS
+                        Number of processors to use [default 4].
+  -l LENGTH, --length=LENGTH
+                        Length of kmer to use.
+  -s SIZE, --size=SIZE  Size of hash to use, number of unique kmers [default
+                        '1G']
+  -c COUNT, --count=COUNT
+                        Count size in bits [default '12']
+  -f FORMAT, --format=FORMAT
+                        Output format, one of: hash, stats, dump, histo
+                        [default 'histo']
+  --histo_max=HISTO_MAX
+                        Max count value for histogram [default 10000000]
+  -r, --ranked          histo output includes additional transformations for
+                        ranked plot
+  -d TMPDIR, --tmpdir=TMPDIR
+                        Dir to store intermediate files [default is dir of
+                        output file]
+

@@ -1,0 +1,1 @@
+usage: proteins_to_sequences [-c column] < input > output

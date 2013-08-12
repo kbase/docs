@@ -1,0 +1,2 @@
+fs -put_se <reads.fq> <output.se>
+

@@ -1,0 +1,37 @@
+
+NAME
+      tree-find-alignment-ids -- returns the alignment IDs that align the specified sequence or feature
+
+SYNOPSIS
+      tree-find-alignment-ids [OPTIONS] [ID]
+
+DESCRIPTION
+      Given a KBase feature or sequence ID, retrieve the set of alignments that align the
+      given feature/sequence.  By default, if the type of ID is not specified with one of the
+      options below, then this method assumes that IDs are feature IDs.  If an ID is to be
+      passed in as an argument, then only a single ID can be used.  If you wish to call this
+      method on multiple feature/sequence IDs, then you must pass in the list through standard-in
+      or a text file, with one ID per line.
+                        
+      -f, --feature
+                        indicate that the IDs provided are feature IDs
+      -p, --protein-sequence
+                        indicate that the IDs provided are protein_sequence_ids (MD5s)                        
+      -i, --input
+                        specify input file to read from;  each feature/sequence id must
+                        be on a separate line in this file
+      -h, --help
+                        diplay this help message, ignore all arguments
+                        
+EXAMPLES
+      Retrieve alignment ids based on a feature id
+      > tree-find-alignment-ids -f 'kb|g.0.peg.2173'
+      
+      Retrieve alignment ids based on a set of protein_sequence_ids piped through standard in
+      > echo cf9e9e74e06748fb161d07c8420e1097 | tree-find-alignment-ids -p
+
+AUTHORS
+      Matt Henderson (mhenderson@lbl.gov)
+      Michael Sneddon (mwsneddon@lbl.gov)
+      
+

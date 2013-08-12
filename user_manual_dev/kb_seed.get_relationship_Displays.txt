@@ -1,0 +1,39 @@
+Usage: get_relationship_Displays [arguments] < ids > table.with.fields.added
+
+--show-fields
+    List the available fields.
+
+-c num        
+    Select the identifier from column num
+
+--from field-list
+    Choose a set of fields from the Diagram
+    entity to return. Field-list is a comma-separated list of strings. The
+    following fields are available:
+        id
+        name
+        content
+
+--rel field-list
+    Choose a set of fields from the relationship to return. Field-list is a comma-separated list of 
+    strings. The following fields are available:
+        from_link
+        to_link
+        location
+
+--to field-list
+    Choose a set of fields from the Reaction entity to 
+    return. Field-list is a comma-separated list of strings. The following fields are available:
+        id
+        mod_date
+        name
+        source_id
+        abbr
+        direction
+        deltaG
+        deltaG_error
+        thermodynamic_reversibility
+        default_protons
+        status
+
+

@@ -1,0 +1,3 @@
+usage: find_common_snps <--traits_file two column tab delimited traits file with complete path, column1 is kb_trait_id, column2 is pvalue_cutoff, (required)>[--help print this usage] [--url host]
+
+

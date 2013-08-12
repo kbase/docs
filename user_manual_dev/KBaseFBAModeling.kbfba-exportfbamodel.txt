@@ -1,0 +1,6 @@
+kbfba-exportfbamodel <FBAModel ID> <Format (html,sbml,json,cytoseed,readable)> [-?ehvw] [long options...]
+	-w --workspace     Workspace with model
+	-e --showerror     Set as 1 to show any errors in execution
+	-v --verbose       Print verbose messages
+	-? -h --help       Print this usage information
+

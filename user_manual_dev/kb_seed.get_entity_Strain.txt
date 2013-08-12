@@ -1,0 +1,23 @@
+Usage: get_entity_Strain [arguments] < ids > table.with.fields.added
+
+    -c num          Select the identifier from column num
+    -i filename     Use filename rather than stdin for input
+    --fields list   Choose a set of fields to return. List is a comma-separated list of strings.
+    -a		    Return all available fields.
+    --show-fields   List the available fields.
+
+The following fields are available:
+
+    name
+        The common or laboratory name of the strain, e.g. DH5a or JMP1004.
+    description
+        A description of the strain, e.g. knockout/modification methods, resulting phenotypes, etc.
+    source_id
+        The ID of the strain used by the data source.
+    aggregateData
+        Denotes whether this entity represents a physical strain (False) or aggregate data calculated from one or more strains (True).
+    wildtype
+        Denotes this strain is presumably identical to the parent genome.
+    referenceStrain
+        Denotes whether this strain is a reference strain; e.g. it is identical to the genome it's related to (True) or not (False). In contrast to wildtype, a referenceStrain is abstract and does not physically exist and is used for data that refers to a genome but not a particular strain. There should only exist one reference strain per genome and all reference strains are wildtype. 
+

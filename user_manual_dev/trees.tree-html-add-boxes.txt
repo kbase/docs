@@ -1,0 +1,48 @@
+
+NAME
+      tree-html-add-boxes -- add data values to tree leaves
+
+SYNOPSIS
+      tree-html-add-boxes [OPTIONS]
+
+DESCRIPTION
+      Modify html tree to include data values for each leaf as a heatmap.  Labels are 
+      justified if not already aligned.  Html tree input is taken as STDIN or as a 
+      command line arg. Modified tree is STDOUT.
+
+      -d, --data-file
+                        Required. Give the path to the data associated with each leaf.  
+                        Data file format is tab-delimited, one row per leaf with the 
+                        leaf ID as the first column and the data value(s) as the 
+                        remaining columns.  Header first line is permitted, but must
+                        have '#' in first column, and if present, will be used as 
+                        as a key in the legend.  May rerun method with new
+                        data file and additional column(s) will be appended.
+
+      -t, --tree-html-file
+                        Optional. Give the path to the html tree file, or provide 
+                        as STDIN.
+
+      -c, --color-scheme
+                        Optional. Configure the color scheme for the heatmap. May 
+                        be 'YB' for blue-black-yellow spectrum or 'RYB' for 
+                        blue-yellow-red spectrum.
+                        
+      -h, --help
+                        display this help message, ignore all arguments
+                        
+EXAMPLES
+      Add the data from data file 'leaf_data_set1.txt' to html tree file 'tree1.html' using default RYB color scheme
+      > cat tree1.html | tree-html-add-boxes -d leaf_data_set1.txt > tree1_with_data1.html
+      
+      Add the data from data file 'leaf_data_set2.txt' to previous output with color scheme 'YB'
+      > tree-html-add_boxes -d leaf_data_set2.txt -t tree1_with_with_data1.html -c YB > tree1_with_data1+2.html
+      
+SEE ALSO
+      tree-to-html
+      tree-html-relabel-leaves
+
+AUTHORS
+      Dylan Chivian (dcchivian@lbl.gov)
+      
+

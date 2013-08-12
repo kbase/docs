@@ -1,0 +1,2 @@
+fs -mv <dir/file> <dest>
+

@@ -1,0 +1,5 @@
+kbws-setuserperm <Users (; delimited)> <New permission> [-?ehw] [long options...]
+	-w --workspace     ID for workspace
+	-e --showerror     Set as 1 to show any errors in execution
+	-? -h --help       Print this usage information
+

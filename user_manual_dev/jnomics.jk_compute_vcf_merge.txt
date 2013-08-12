@@ -1,0 +1,14 @@
+
+The Variation pipelines are run in parallel.
+When they complete, many VCF files will be produced that must be merged
+This command takes the output from a variation pipeline and metadata from
+the alignment operations and produces a merged VCF file.
+The output will be a single VCF file in the Cluster's filesystem.
+The file can be downloaded with fs -get
+
+-h                                                 This Help                                         
+-in,--input                                        input (directory of vcfs)                         
+-aln,--alignments                                  alignments (directory)                            
+-out,--output                                      output (vcf file)                                 
+
+

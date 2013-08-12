@@ -1,0 +1,15 @@
+Usage: all_entities_Publication [arguments] > entity.data
+
+    --fields list   Choose a set of fields to return. List is a comma-separated list of strings.
+    -a		    Return all available fields.
+    --show-fields   List the available fields.
+
+The following fields are available:
+
+    title
+        title of the article, or (unknown) if the title is not known
+    link
+        URL of the article, DOI preferred
+    pubdate
+        publication date of the article
+

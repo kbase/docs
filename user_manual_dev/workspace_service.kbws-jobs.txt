@@ -1,0 +1,6 @@
+kbws-jobs [-?ehqs] [long options...]
+	-s --status      Job status (queued,running,done)
+	-q --showqsub    Use flag to show qsub ID for jobs
+	-e --showerror   Use flag to show any errors in execution
+	-? -h --help     Print this usage information
+

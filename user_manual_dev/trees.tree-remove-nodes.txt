@@ -1,0 +1,51 @@
+
+NAME
+      tree-remove-nodes -- remove nodes by label in a tree and simplify the tree
+
+SYNOPSIS
+      tree-remove-nodes [OPTIONS] [NEWICK_TREE]
+
+DESCRIPTION
+     Given a tree in newick format, remove the nodes with the given names indicated
+     in the list, and simplify the tree.  Simplifying a tree involves removing unnamed
+     internal nodes that have only one child, and removing unnamed leaf nodes.  During
+     the removal process, edge lengths (if they exist) are conserved so that the summed
+     end to end distance between any two nodes left in the tree will remain the same.
+     If the tree is not provided as an argument and no input file is specified,
+     the tree is read in from standard-in.
+      
+      -r [FILE_NAME], --removal-list [FILE_NAME]
+                        specify the file name of the list of nodes to remove; this file should
+                        be a one column file where each line contains the name of the node to
+                        remove; if multiple nodes have a identical labels, they are all
+                        removed
+                        
+      -s [FILE_NAME], --save-list [FILE_NAME]
+                        instead of specifying the set set of nodes to remove, this flag indicates
+                        that the list includes the list of nodes to save; if a node label is
+                        on this list it is saved, otherwise it is removed
+                        
+      -z, --merge-zero-distance-leaves
+                        after other removal operations have been performed, setting this flags
+                        specifies that all leaves with distance zero are merged into a single
+                        leaf, and an arbitrary leaf is kept.
+                        
+      -i [FILE_NAME], --input [FILE_NAME]
+                        specify an input file to read the tree from
+                        
+      -h, --help
+                        diplay this help message, ignore all arguments
+                        
+                        
+EXAMPLES
+      Replace node names based on the file mapping.txt
+      > cat removal_list.txt
+      mr_tree
+      > tree-remove-nodes -r removal_list.txt '(l1,mr_tree,l3,l4)root;'
+      (l1,l3,l4)root;
+
+AUTHORS
+      Michael Sneddon (mwsneddon@lbl.gov)
+      Matt Henderson (mhenderson@lbl.gov)
+
+

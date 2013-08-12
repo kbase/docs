@@ -1,0 +1,10 @@
+
+Usage: sort_by_id [-c N] < input  > sorted.input
+
+    -c N     --- The number of the column (from 1) that contains the feature ID.
+
+    --input  --- Option to read from input file instead of from STDIN
+
+    --output --- Option to write to output file instead of STDOUT
+
+

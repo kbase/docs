@@ -1,0 +1,13 @@
+
+Usage: genome_to_intergenic_regions -g GenomeID [-pad=num] > output
+
+    -g GenomeID
+
+        This is required and specifies a KBase genome
+
+    -pad PadSize [defaults to 0]
+
+        If the intergenic regions are to be padded with characters from the Fids,
+        this specifies the size.
+
+

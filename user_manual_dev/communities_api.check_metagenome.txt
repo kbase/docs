@@ -1,0 +1,9 @@
+
+Script for checking status of metagenome in AWE
+Command name: check_metagenome.pl
+Parameters:
+     -awe_job_url=<url for AWE job, required>
+     -task_status <option variable to include status of individual tasks>
+     -conf=<configuration file (default='awe.ini')>
+
+

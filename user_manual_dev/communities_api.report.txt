@@ -1,0 +1,111 @@
+----------TEST communities_api get_analysisset with -h option	okay
+
+----------TEST communities_api get_analysisset with --help option	okay
+
+----------TEST communities_api get_library_instance with -h option	okay
+
+----------TEST communities_api get_library_instance with --help option	okay
+
+----------TEST communities_api get_sample_query with -h option	okay
+
+----------TEST communities_api get_sample_query with --help option	okay
+
+----------TEST communities_api get_sequenceset with -h option	okay
+
+----------TEST communities_api get_sequenceset with --help option	okay
+
+----------TEST communities_api get_library_query with -h option	okay
+
+----------TEST communities_api get_library_query with --help option	okay
+
+----------TEST communities_api metagenome with -h option	okay
+
+----------TEST communities_api metagenome with --help option	okay
+
+----------TEST communities_api get_sample_instance with -h option	okay
+
+----------TEST communities_api get_sample_instance with --help option	okay
+
+----------TEST communities_api get_sample with -h option	okay
+
+----------TEST communities_api get_sample with --help option	okay
+
+----------TEST communities_api get_project_instance with -h option	okay
+
+----------TEST communities_api get_project_instance with --help option	okay
+
+----------TEST communities_api get_metagenome_query with -h option	okay
+
+----------TEST communities_api get_metagenome_query with --help option	okay
+
+----------TEST communities_api get_library with -h option	okay
+
+----------TEST communities_api get_library with --help option	okay
+
+----------TEST communities_api get_project_list with -h option	okay
+
+----------TEST communities_api get_project_list with --help option	okay
+
+----------TEST communities_api get_abundanceprofile with -h option	okay
+
+----------TEST communities_api get_abundanceprofile with --help option	okay
+
+----------TEST communities_api get_metagenome with -h option	okay
+
+----------TEST communities_api get_metagenome with --help option	okay
+
+----------TEST communities_api get_metagenome_instance with -h option	okay
+
+----------TEST communities_api get_metagenome_instance with --help option	okay
+
+----------TEST communities_api get_sequenceset_instance with -h option	okay
+
+----------TEST communities_api get_sequenceset_instance with --help option	okay
+
+----------TEST communities_api get_metagenome_analysis with -h option	okay
+
+----------TEST communities_api get_metagenome_analysis with --help option	fail
+
+----------TEST communities_api check_metagenome with -h option	okay
+
+----------TEST communities_api check_metagenome with --help option	fail
+
+----------TEST communities_api get_project with -h option	okay
+
+----------TEST communities_api get_project with --help option	okay
+
+----------TEST communities_api get_abundanceprofile_instance with -h option	okay
+
+----------TEST communities_api get_abundanceprofile_instance with --help option	okay
+
+----------TEST communities_api get_metagenome_list with -h option	okay
+
+----------TEST communities_api get_metagenome_list with --help option	okay
+
+----------TEST communities_api get_project_query with -h option	okay
+
+----------TEST communities_api get_project_query with --help option	okay
+
+----------TEST communities_api get_sample_list with -h option	okay
+
+----------TEST communities_api get_sample_list with --help option	okay
+
+----------TEST communities_api get_metagenome_statistics with -h option	okay
+
+----------TEST communities_api get_metagenome_statistics with --help option	okay
+
+----------TEST communities_api analyze_metagenome with -h option	okay
+
+----------TEST communities_api analyze_metagenome with --help option	fail
+
+----------TEST communities_api get_library_list with -h option	okay
+
+----------TEST communities_api get_library_list with --help option	okay
+
+
+
+Error Summary:
+get_metagenome_analysis                  --help      256 
+check_metagenome                         --help      256 
+analyze_metagenome                       --help      256 
+

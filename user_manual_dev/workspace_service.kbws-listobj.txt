@@ -1,0 +1,7 @@
+kbws-listobj [-?ehstw] [long options...]
+	-w --workspace     ID for workspace
+	-t --type          Type required
+	-s --showdeleted   show all objects that have been deleted
+	-e --showerror     Set as 1 to show any errors in execution
+	-? -h --help       Print this usage information
+

@@ -1,0 +1,2 @@
+-put <local_file> [destination]
+

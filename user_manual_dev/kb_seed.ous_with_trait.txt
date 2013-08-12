@@ -1,0 +1,11 @@
+
+Usage: ous_with_trait -g Genome -mtype MeasurementType -min MinVal -max MaxVal < traits_input > output_with_ous
+
+    -c num        Select the identifier from column num
+    -i filename   Use filename rather than stdin for input
+    -g genome     We are extracting ous for which this is the reference genome
+    -mtype Type   Measurement Type
+    -min MinVal   Minimum value of measurement
+    -max MaxVal   Maximum value of measurement
+
+

@@ -1,0 +1,10 @@
+kbfba-importfbamodel <Genome ID> <Model file> <Biomass equation> [-?ehimovw] [long options...]
+	-m --modelid        ID for imported model in workspace
+	--genomews          Workspace with genome object
+	-i --ignoreerrors   Ignore errors encountered during load
+	-w --workspace      Workspace to save imported model in
+	-o --overwrite      Overwrite any existing phenotypes with same name
+	-e --showerror      Set as 1 to show any errors in execution
+	-v --verbose        Print verbose messages
+	-? -h --help        Print this usage information
+

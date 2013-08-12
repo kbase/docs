@@ -1,0 +1,56 @@
+----------TEST communities_qc get_kmer_compute with -h option	okay
+
+----------TEST communities_qc get_kmer_compute with --help option	okay
+
+----------TEST communities_qc get_drisee_compute with -h option	okay
+
+----------TEST communities_qc get_drisee_compute with --help option	okay
+
+----------TEST communities_qc kmer-tool with -h option	okay
+
+----------TEST communities_qc kmer-tool with --help option	okay
+
+----------TEST communities_qc get_drisee_instance with -h option	okay
+
+----------TEST communities_qc get_drisee_instance with --help option	okay
+
+----------TEST communities_qc consensus with -h option	okay
+
+----------TEST communities_qc consensus with --help option	okay
+
+----------TEST communities_qc get_histogram_instance with -h option	okay
+
+----------TEST communities_qc get_histogram_instance with --help option	okay
+
+----------TEST communities_qc qiime-uclust with -h option	fail
+
+----------TEST communities_qc qiime-uclust with --help option	fail
+
+----------TEST communities_qc run_find_steiner with -h option	fail
+
+----------TEST communities_qc run_find_steiner with --help option	fail
+
+----------TEST communities_qc get_kmer_instance with -h option	okay
+
+----------TEST communities_qc get_kmer_instance with --help option	okay
+
+----------TEST communities_qc get_histogram_compute with -h option	okay
+
+----------TEST communities_qc get_histogram_compute with --help option	okay
+
+----------TEST communities_qc drisee with -h option	okay
+
+----------TEST communities_qc drisee with --help option	okay
+
+----------TEST communities_qc seq_length_stats with -h option	okay
+
+----------TEST communities_qc seq_length_stats with --help option	okay
+
+
+
+Error Summary:
+qiime-uclust                             -h        32512 
+qiime-uclust                             --help    32512 
+run_find_steiner                         -h        32512 
+run_find_steiner                         --help    32512 
+

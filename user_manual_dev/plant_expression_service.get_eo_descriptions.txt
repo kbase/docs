@@ -1,0 +1,22 @@
+     DESCRIPTION
+	 Retrieve the list of selected plant environment ontology IDs (EOIDs) description corresponding to an input list of EOIDs.
+	 For example for an input list of EOIDs: EO:0007041,EO:0007049 the output is:
+         EO:0007041	antibiotic regimen
+         EO:0007049	soil environment
+Usage: /kb/deployment/plbin/get_eo_descriptions.pl [--url=http://kbase.us/services/plant_expression_service] < eoIDs
+
+
+General options
+	--url=[http://kbase.us/services/plant_expression_service]		urlname of the server
+	--help		print help information
+	--version		print version information
+
+Examples: 
+echo EO:0007049 | /kb/deployment/plbin/get_eo_descriptions.pl --url=http://kbase.us/services/plant_expression_service 
+
+/kb/deployment/plbin/get_eo_descriptions.pl --help	print out help
+
+/kb/deployment/plbin/get_eo_descriptions.pl --version	print out version information
+
+Report bugs to Shinjae Yoo at sjyoo@bnl.gov
+

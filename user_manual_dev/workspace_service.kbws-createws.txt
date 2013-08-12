@@ -1,0 +1,5 @@
+kb_createws <Workspace ID> <Default permissions> [-?ehv] [long options...]
+	-e --showerror   Show any errors in execution
+	-v --verbose     Print verbose messages
+	-? -h --help     Print this usage information
+

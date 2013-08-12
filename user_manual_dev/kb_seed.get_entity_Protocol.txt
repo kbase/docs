@@ -1,0 +1,17 @@
+Usage: get_entity_Protocol [arguments] < ids > table.with.fields.added
+
+    -c num          Select the identifier from column num
+    -i filename     Use filename rather than stdin for input
+    --fields list   Choose a set of fields to return. List is a comma-separated list of strings.
+    -a		    Return all available fields.
+    --show-fields   List the available fields.
+
+The following fields are available:
+
+    name
+        The name of the protocol.
+    description
+        The step by step instructions for performing the experiment, including measurement details, materials, and equipment. A researcher should be able to reproduce the experimental results with this information.
+    source_id
+        The ID of the protocol used by the data source.
+

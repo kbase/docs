@@ -1,0 +1,8 @@
+
+Usage: region_to_fids [arguments] <input > output
+
+    -d Distance   All feature-IDs within this distance of a query will be reported (Default=5000)
+    -c num        Select the identifier from column num
+    -i filename   Use filename rather than stdin for input
+
+
