@@ -1,0 +1,2 @@
+rank_pgenes --wgene 'kb|g.3899.locus.6994' --pgenes 'kb|g.3907.locus.19887,kb|g.3907.locus.24709'
+
