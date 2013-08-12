@@ -1,0 +1,58 @@
+----------TEST regprecise simple_getRegulomeModelsBySourceType with -h option	fail
+
+----------TEST regprecise simple_getRegulomeModelsBySourceType with --help option	fail
+
+----------TEST regprecise simple_getRegulomeModel with -h option	fail
+
+----------TEST regprecise simple_getRegulomeModel with --help option	fail
+
+----------TEST regprecise simple_getRegulonModel with -h option	fail
+
+----------TEST regprecise simple_getRegulonModel with --help option	fail
+
+----------TEST regprecise simple_getRegulomeModelsByGenomeId with -h option	fail
+
+----------TEST regprecise simple_getRegulomeModelsByGenomeId with --help option	fail
+
+----------TEST regprecise simple_getRegulonModelStats with -h option	fail
+
+----------TEST regprecise simple_getRegulonModelStats with --help option	fail
+
+----------TEST regprecise simple_getRegulomeModelCollection with -h option	fail
+
+----------TEST regprecise simple_getRegulomeModelCollection with --help option	fail
+
+----------TEST regprecise simple_getRegulomeModelsByCollectionId with -h option	fail
+
+----------TEST regprecise simple_getRegulomeModelsByCollectionId with --help option	fail
+
+----------TEST regprecise simple_getProcessState with -h option	fail
+
+----------TEST regprecise simple_getProcessState with --help option	fail
+
+----------TEST regprecise simple_getRegulomeModelCollections with -h option	fail
+
+----------TEST regprecise simple_getRegulomeModelCollections with --help option	fail
+
+
+
+Error Summary:
+simple_getRegulomeModelsBySourceType     -h        65280 
+simple_getRegulomeModelsBySourceType     --help    65280 
+simple_getRegulomeModel                  -h        65280 
+simple_getRegulomeModel                  --help    65280 
+simple_getRegulonModel                   -h        65280 
+simple_getRegulonModel                   --help    65280 
+simple_getRegulomeModelsByGenomeId       -h        65280 
+simple_getRegulomeModelsByGenomeId       --help    65280 
+simple_getRegulonModelStats              -h        65280 
+simple_getRegulonModelStats              --help    65280 
+simple_getRegulomeModelCollection        -h        65280 
+simple_getRegulomeModelCollection        --help    65280 
+simple_getRegulomeModelsByCollectionId   -h        65280 
+simple_getRegulomeModelsByCollectionId   --help    65280 
+simple_getProcessState                   -h        65280 
+simple_getProcessState                   --help    65280 
+simple_getRegulomeModelCollections       -h        65280 
+simple_getRegulomeModelCollections       --help    65280 
+

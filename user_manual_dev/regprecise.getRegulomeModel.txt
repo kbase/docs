@@ -1,0 +1,1 @@
+usage: getRegulomeModel [-c column] < input > output

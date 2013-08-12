@@ -1,0 +1,94 @@
+----------TEST regprecise simple_getRegulomeModelsBySourceType with -h option
+Unknown option: h
+Usage: getRegulomeModelsBySourceType [--port port] [--url url] regulomeSource
+
+----------TEST regprecise simple_getRegulomeModelsBySourceType with --help option
+Unknown option: help
+Usage: getRegulomeModelsBySourceType [--port port] [--url url] regulomeSource
+
+----------TEST regprecise simple_getRegulomeModel with -h option
+Unknown option: h
+Usage: getRegulomeModel [--port port] [--url url] regulomeModelId
+
+----------TEST regprecise simple_getRegulomeModel with --help option
+Unknown option: help
+Usage: getRegulomeModel [--port port] [--url url] regulomeModelId
+
+----------TEST regprecise simple_getRegulonModel with -h option
+Unknown option: h
+Usage: getRegulonModel [--port port] [--url url] regulonModelId
+
+----------TEST regprecise simple_getRegulonModel with --help option
+Unknown option: help
+Usage: getRegulonModel [--port port] [--url url] regulonModelId
+
+----------TEST regprecise simple_getRegulomeModelsByGenomeId with -h option
+Unknown option: h
+Usage: getRegulomeModelsByGenomeId [--port port] [--url url] genomeId
+
+----------TEST regprecise simple_getRegulomeModelsByGenomeId with --help option
+Unknown option: help
+Usage: getRegulomeModelsByGenomeId [--port port] [--url url] genomeId
+
+----------TEST regprecise simple_getRegulonModelStats with -h option
+Unknown option: h
+Usage: getRegulonModelStats [--port port] [--url url] regulomeModelId
+
+----------TEST regprecise simple_getRegulonModelStats with --help option
+Unknown option: help
+Usage: getRegulonModelStats [--port port] [--url url] regulomeModelId
+
+----------TEST regprecise simple_getRegulomeModelCollection with -h option
+Unknown option: h
+Usage: getRegulomeModelCollection [--port port] [--url url] collectionId
+
+----------TEST regprecise simple_getRegulomeModelCollection with --help option
+Unknown option: help
+Usage: getRegulomeModelCollection [--port port] [--url url] collectionId
+
+----------TEST regprecise simple_getRegulomeModelsByCollectionId with -h option
+Unknown option: h
+Usage: getRegulomeModelsByCollectionId [--port port] [--url url] collectionId
+
+----------TEST regprecise simple_getRegulomeModelsByCollectionId with --help option
+Unknown option: help
+Usage: getRegulomeModelsByCollectionId [--port port] [--url url] collectionId
+
+----------TEST regprecise simple_getProcessState with -h option
+Unknown option: h
+Usage: getProcessState [--port port] [--url url] processId
+
+----------TEST regprecise simple_getProcessState with --help option
+Unknown option: help
+Usage: getProcessState [--port port] [--url url] processId
+
+----------TEST regprecise simple_getRegulomeModelCollections with -h option
+Unknown option: h
+Usage: getRegulomeModelCollections [--port port] [--url url]
+
+----------TEST regprecise simple_getRegulomeModelCollections with --help option
+Unknown option: help
+Usage: getRegulomeModelCollections [--port port] [--url url]
+
+
+
+Error Summary:
+simple_getRegulomeModelsBySourceType     -h        65280 
+simple_getRegulomeModelsBySourceType     --help    65280 
+simple_getRegulomeModel                  -h        65280 
+simple_getRegulomeModel                  --help    65280 
+simple_getRegulonModel                   -h        65280 
+simple_getRegulonModel                   --help    65280 
+simple_getRegulomeModelsByGenomeId       -h        65280 
+simple_getRegulomeModelsByGenomeId       --help    65280 
+simple_getRegulonModelStats              -h        65280 
+simple_getRegulonModelStats              --help    65280 
+simple_getRegulomeModelCollection        -h        65280 
+simple_getRegulomeModelCollection        --help    65280 
+simple_getRegulomeModelsByCollectionId   -h        65280 
+simple_getRegulomeModelsByCollectionId   --help    65280 
+simple_getProcessState                   -h        65280 
+simple_getProcessState                   --help    65280 
+simple_getRegulomeModelCollections       -h        65280 
+simple_getRegulomeModelCollections       --help    65280 
+
