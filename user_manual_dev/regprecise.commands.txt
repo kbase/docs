@@ -1,0 +1,18 @@
+----------TEST regprecise simple_getRegulomeModelsBySourceType with --help option	fail
+
+----------TEST regprecise simple_getRegulomeModel with --help option	fail
+
+----------TEST regprecise simple_getRegulonModel with --help option	fail
+
+----------TEST regprecise simple_getRegulomeModelsByGenomeId with --help option	fail
+
+----------TEST regprecise simple_getRegulonModelStats with --help option	fail
+
+----------TEST regprecise simple_getRegulomeModelCollection with --help option	fail
+
+----------TEST regprecise simple_getRegulomeModelsByCollectionId with --help option	fail
+
+----------TEST regprecise simple_getProcessState with --help option	fail
+
+----------TEST regprecise simple_getRegulomeModelCollections with --help option	fail
+

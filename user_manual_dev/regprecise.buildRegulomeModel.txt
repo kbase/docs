@@ -1,0 +1,1 @@
+usage: buildRegulomeModel [-c column] < input > output
