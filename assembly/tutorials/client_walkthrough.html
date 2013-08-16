@@ -15,10 +15,10 @@ This service is at an early phase, and supports the following capabilities:</p>
 <h2>Logging In</h2>
 <p> Because assembly computation does not provide immediate results, users will need to login using their KBase account. </p>
 
-To login at the command-line, use the ar_login command:</p>
+To login at the command-line, use the ar-login command:</p>
 <pre class="literal-block">
-<code title = "iris-tutorials">ar_login</code>
-and to logout, <code title = "iris-tutorials">ar_logout</code>
+<code title = "iris-tutorials">ar-login</code>
+and to logout, <code title = "iris-tutorials">ar-logout</code>
 </pre>
 File formats supported include fasta and fastq. Compressed files are not yet supported, but we anticipate it will next release (August 2013).
 </div>
@@ -30,14 +30,14 @@ wget http://www.mcs.anl.gov/~fangfang/test/se.fastq
 </pre>
 <li>Submit the file to be assembled with velvet:
 <pre class="literal-block">
-<code title = "iris-tutorials">ar_run</code> -f se.fastq -a velvet -m &quot;Description of job&quot;
+<code title = "iris-tutorials">ar-run</code> -f se.fastq -a velvet -m &quot;Description of job&quot;
 </pre>
 The -a sets the tool to use for assembly. This example shows the use of velvet. 
 Users can set "-a" to velvet, kiki, a5, or idba
 <p>
 <li>Check and monitor the status of your jobs:</li>
 <pre class="literal-block">
-<code title = "iris-tutorials">ar_stat</code> -w
+<code title = "iris-tutorials">ar-stat</code> -w
 </pre>
 </li>
 </ol>
@@ -57,9 +57,9 @@ Users can set "-a" to velvet, kiki, a5, or idba
 <ol class="arabic" start="3">
 <li><p class="first">Get assembly data upon completion:</p>
 <pre class="literal-block">
-<code title = "iris-tutorials">ar_get</code> -j 94
+<code title = "iris-tutorials">ar-get</code> -j 94
 </pre>
-The ar_get command retrieves the job status, "-j" sets what job to look up and the number (in this case 94) is the Job ID.
+The ar-get command retrieves the job status, "-j" sets what job to look up and the number (in this case 94) is the Job ID.
 </li>
 </ol>
 </div>
@@ -83,12 +83,12 @@ wget http://www.mcs.anl.gov/~fangfang/test/pe_2.fastq
 <ol class="arabic">
 <li><p class="first">Submit the file to be assembled with kiki and velvet:</p>
 <pre class="literal-block">
-<code title = "iris-tutorials">ar_run</code> --pair pe_1.fastq pe_2.fastq -a kiki velvet -m &quot;Description of job&quot;
+<code title = "iris-tutorials">ar-run</code> --pair pe_1.fastq pe_2.fastq -a kiki velvet -m &quot;Description of job&quot;
 </pre>
 </li>
 <li><p class="first">Check and monitor the status of your jobs:</p>
 <pre class="literal-block">
-<code title = "iris-tutorials">ar_stat</code> -w
+<code title = "iris-tutorials">ar-stat</code> -w
 </pre>
 </li>
 </ol>
@@ -111,7 +111,7 @@ wget http://www.mcs.anl.gov/~fangfang/test/pe_2.fastq
 <ol class="arabic" start="3">
 <li><p class="first">Get assembly data upon completion:</p>
 <pre class="literal-block">
-<code title = "iris-tutorials">ar_get</code> -j 95
+<code title = "iris-tutorials">ar-get</code> -j 95
 </pre>
 </li>
 </ol>
