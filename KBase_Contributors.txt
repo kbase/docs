@@ -1,5 +1,6 @@
 Arkin, Adam	CEO / CSO
 Baumohl, Jason	Expression Data
+Benedict, Matthew	Metabolic Modeling
 Best, Aaron	
 Bischof, Jared	Metagenomics
 Bowen, Ben	Metabolic Analysis
@@ -44,6 +45,7 @@ Maslov, Sergei	ASO
 Meyer, Folker	Lead
 Moulton, Steve	
 Mulligan, Silvia (Palomino)	RStevens Support
+Mundy, Mike	Metabolic Modeling
 Novichkov, Pavel	Networks, Regulatory Modeling
 Oh, Taeyun	postdoc (100% KBase)
 Olsen, Gary	Data Stores, Modeling
