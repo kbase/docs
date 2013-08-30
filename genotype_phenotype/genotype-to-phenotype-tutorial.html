@@ -1,15 +1,27 @@
 <div>
-<h1>A Short Tutorial on using genome wide association analysis (GWAS) data and performing post GWAS analysis</h1>
+<h1>A Short tutorial on using genome wide association analysis (GWAS) data and performing post GWAS analysis</h1>
 
-This tutorial uses several KBase data access api’s and underlying databases including kb_seed, genotype_phenotype_api, networks, and ontology_service. In this short tutorial we will describe how to access GWAS data and filter candidate genes by integrating GWAS results with functional genomics data including expression profiles, co-expression networks, functional networks, gene ontology enrichment and pathway enrichment.
+<H2>Introduction</H2>This tutorial uses several KBase data access APIs and underlying
+  databases including kb_seed, genotype_phenotype_api, networks, and
+  ontology_service. In this short tutorial we will describe how to
+  access GWAS data and filter candidate genes by integrating GWAS
+  results with functional genomics data including expression profiles,
+  co-expression networks, functional networks, gene ontology
+  enrichment and pathway enrichment.
+<p>
+<strong>Required Prerequisite Activities:</strong> 
+<a href="/for-users/tutorials/installing-the-kbase-app-dmg/">Download KBase: Installing the KBase Application DMG</a>, OR <a href="/for-users/tutorials/navigating-iris/">Get Started with IRIS: Navigating IRIS</a> </p>
+<p>KBase Interfaces, IRIS or the Command-line, use Linux commands. To familiarize yourself, check out these quick guides: <a href= "https://www.cfa.harvard.edu/~jbattat/computer/linuxReferenceCard.pdf"> Reference card</a>, <a href= "http://mally.stanford.edu/~sr/computing/basic-unix.html">Beginners Guide</a></p>
+
+
 
 </div><div><h2>Genomes with trait</h2>
 To see list of organisms/genomes in CS (KBase central store) with GWAS data, use the following command
-     <i><code title = "iris-tutorials">genomes_with_trait</code><i>
+     <i><code title = "iris-tutorials">genomes_with_trait</code></i>
 
 This returns list of KBase genome identifiers for genomes with GWAS data.
 
-<br><br><table border=1><tr><td><b>Kbase Genome ID</b></td></tr>
+<br><br><table border=1><tr><td><b>KBase Genome ID</b></td></tr>
 <tr><td>kb|g.3899</td></tr>
 <tr><td>kb|g.3907</td></tr>
 </table><br><br>

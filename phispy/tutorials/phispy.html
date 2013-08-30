@@ -1,22 +1,25 @@
 <h1>PhiSpy - Finding Prophages in a Genome</h1>
 
 <div>
-<p>
-<strong>Purpose:</strong> 
-How to find prophages in prokaryotic genome by ranking genomic regions enriched in distinctive phage traits, which leads to the successful prediction of 94% of prophages in 50 complete bacterial genomes with a 6% false-negative rate and a 0.66% false-positive rate.
+
+
 
 <p>
 Like with other services, you can use phispy on your local installation of KBase and IRIS.
 <p>
 <strong>Required Prerequisite Activities:</strong> 
 <a href="/for-users/tutorials/installing-the-kbase-app-dmg/">Download KBase: Installing the KBase Application DMG</a>, OR <a href="/for-users/tutorials/navigating-iris/">Get Started with IRIS: Navigating IRIS</a> </p>
-
+<p>KBase Interfaces, IRIS or the Command-line, use Linux commands. To familiarize yourself, check out these quick guides: <a href= "https://www.cfa.harvard.edu/~jbattat/computer/linuxReferenceCard.pdf"> Reference card</a>, <a href= "http://mally.stanford.edu/~sr/computing/basic-unix.html">Beginners Guide</a></p>
 </div>
 <p>
 <div>
 
 <h2>Introduction</h2>
-This service can used from the command-line (KBase downloadable application) and our web-based terminal, IRIS.
+Learn how to find prophages in prokaryotic genome by ranking genomic regions
+  enriched in distinctive phage traits, which leads to the successful
+  prediction of 94% of prophages in 50 complete bacterial genomes with
+  a 6% false-negative rate and a 0.66% false-positive rate.
+  This service can used from the command-line (KBase downloadable application) and our web-based terminal, IRIS.
 Prophages are phages in lysogeny that are integrated into, and replicated as part of, the host bacterial genome. These mobile elements can have tremendous impact on their bacterial hosts’ genomes and phenotypes, which may lead to strain emergence and diversification, increased virulence or antibiotic resistance. However, finding prophages in microbial genomes remains a problem with no definitive solution. The majority of existing tools rely on detecting genomic regions enriched in protein-coding genes with known phage homologs, which hinders the de novo discovery of phage regions. 
 <p>
 PhiSpy is a weighted phage detection algorithm that was developed based on seven distinctive characteristics of prophages, i.e. protein length, transcription strand directionality, customized AT and GC skew, the abundance of unique phage words, phage insertion points and the similarity of phage proteins. The first five characteristics are capable of identifying prophages without any sequence similarity with known phage genes. PhiSpy locates prophages by ranking genomic regions enriched in distinctive phage traits, which leads to the successful prediction of 94% of prophages in 50 complete bacterial genomes with a 6% false-negative rate and a 0.66% false-positive rate.
