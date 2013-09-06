@@ -1,11 +1,11 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version="1.0" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
  <head>
   <title>
   </title>
-  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-  <link rev="made" href="mailto:root@ubuntu.chicago.kbase.us" />
+  <meta content="text/html; charset=utf-8" http-equiv="content-type"/>
+  <link href="mailto:root@ubuntu.chicago.kbase.us" rev="made"/>
  </head>
  <body style="background-color: white">
   <h1 id="NAME">
@@ -23,22 +23,17 @@
   <h2 id="fids_to_operons">
    fids_to_operons
   </h2>
-  <pre>
-   <code>
-    $return = $obj-&gt;fids_to_operons($fids)
-   </code>
-  </pre>
+  <pre><code>  $return = $obj-&gt;fids_to_operons($fids)</code></pre>
   <dl>
    <dt id="Parameter-and-return-types">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $fids is a reference to a list where each element is a fid
+$fids is a reference to a list where each element is a fid
 $return is a reference to a hash where the key is a fid and the value is an operon
 fid is a string
-operon is a reference to a list where each element is a fid
-    </pre>
+operon is a reference to a list where each element is a fid</pre>
    </dd>
    <dt id="Description">
     Description
@@ -52,22 +47,17 @@ operon is a reference to a list where each element is a fid
   <h2 id="fids_to_domains">
    fids_to_domains
   </h2>
-  <pre>
-   <code>
-    $return = $obj-&gt;fids_to_domains($fids)
-   </code>
-  </pre>
+  <pre><code>  $return = $obj-&gt;fids_to_domains($fids)</code></pre>
   <dl>
    <dt id="Parameter-and-return-types1">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $fids is a reference to a list where each element is a fid
+$fids is a reference to a list where each element is a fid
 $return is a reference to a hash where the key is a fid and the value is a domains
 fid is a string
-domains is a reference to a list where each element is a string
-    </pre>
+domains is a reference to a list where each element is a string</pre>
    </dd>
    <dt id="Description1">
     Description
@@ -81,18 +71,14 @@ domains is a reference to a list where each element is a string
   <h2 id="fids_to_domain_hits">
    fids_to_domain_hits
   </h2>
-  <pre>
-   <code>
-    $return = $obj-&gt;fids_to_domain_hits($fids)
-   </code>
-  </pre>
+  <pre><code>  $return = $obj-&gt;fids_to_domain_hits($fids)</code></pre>
   <dl>
    <dt id="Parameter-and-return-types2">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $fids is a reference to a list where each element is a fid
+$fids is a reference to a list where each element is a fid
 $return is a reference to a hash where the key is a fid and the value is a reference to a list where each element is a hit
 fid is a string
 hit is a reference to a hash where the following keys are defined:
@@ -104,8 +90,7 @@ hit is a reference to a hash where the following keys are defined:
 	subjectBegin has a value which is an int
 	subjectEnd has a value which is an int
 	score has a value which is a float
-	evalue has a value which is a float
-    </pre>
+	evalue has a value which is a float</pre>
    </dd>
    <dt id="Description2">
     Description
@@ -119,23 +104,18 @@ hit is a reference to a hash where the following keys are defined:
   <h2 id="domains_to_fids">
    domains_to_fids
   </h2>
-  <pre>
-   <code>
-    $return = $obj-&gt;domains_to_fids($domain_ids)
-   </code>
-  </pre>
+  <pre><code>  $return = $obj-&gt;domains_to_fids($domain_ids)</code></pre>
   <dl>
    <dt id="Parameter-and-return-types3">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $domain_ids is a domains
+$domain_ids is a domains
 $return is a reference to a hash where the key is a domain_id and the value is a reference to a list where each element is a fid
 domains is a reference to a list where each element is a string
 domain_id is a string
-fid is a string
-    </pre>
+fid is a string</pre>
    </dd>
    <dt id="Description3">
     Description
@@ -149,22 +129,17 @@ fid is a string
   <h2 id="domains_to_domain_annotations">
    domains_to_domain_annotations
   </h2>
-  <pre>
-   <code>
-    $return = $obj-&gt;domains_to_domain_annotations($domain_ids)
-   </code>
-  </pre>
+  <pre><code>  $return = $obj-&gt;domains_to_domain_annotations($domain_ids)</code></pre>
   <dl>
    <dt id="Parameter-and-return-types4">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $domain_ids is a domains
+$domain_ids is a domains
 $return is a reference to a hash where the key is a domain_id and the value is a string
 domains is a reference to a list where each element is a string
-domain_id is a string
-    </pre>
+domain_id is a string</pre>
    </dd>
    <dt id="Description4">
     Description
@@ -178,22 +153,17 @@ domain_id is a string
   <h2 id="fids_to_ipr">
    fids_to_ipr
   </h2>
-  <pre>
-   <code>
-    $return = $obj-&gt;fids_to_ipr($fids)
-   </code>
-  </pre>
+  <pre><code>  $return = $obj-&gt;fids_to_ipr($fids)</code></pre>
   <dl>
    <dt id="Parameter-and-return-types5">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $fids is a reference to a list where each element is a fid
+$fids is a reference to a list where each element is a fid
 $return is a reference to a hash where the key is a fid and the value is an ipr
 fid is a string
-ipr is a reference to a list where each element is a string
-    </pre>
+ipr is a reference to a list where each element is a string</pre>
    </dd>
    <dt id="Description5">
     Description
@@ -207,22 +177,17 @@ ipr is a reference to a list where each element is a string
   <h2 id="fids_to_orthologs">
    fids_to_orthologs
   </h2>
-  <pre>
-   <code>
-    $return = $obj-&gt;fids_to_orthologs($fids)
-   </code>
-  </pre>
+  <pre><code>  $return = $obj-&gt;fids_to_orthologs($fids)</code></pre>
   <dl>
    <dt id="Parameter-and-return-types6">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $fids is a reference to a list where each element is a fid
+$fids is a reference to a list where each element is a fid
 $return is a reference to a hash where the key is a fid and the value is an orthologs
 fid is a string
-orthologs is a reference to a list where each element is a fid
-    </pre>
+orthologs is a reference to a list where each element is a fid</pre>
    </dd>
    <dt id="Description6">
     Description
@@ -236,22 +201,17 @@ orthologs is a reference to a list where each element is a fid
   <h2 id="fids_to_ec">
    fids_to_ec
   </h2>
-  <pre>
-   <code>
-    $return = $obj-&gt;fids_to_ec($fids)
-   </code>
-  </pre>
+  <pre><code>  $return = $obj-&gt;fids_to_ec($fids)</code></pre>
   <dl>
    <dt id="Parameter-and-return-types7">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $fids is a reference to a list where each element is a fid
+$fids is a reference to a list where each element is a fid
 $return is a reference to a hash where the key is a fid and the value is an ec
 fid is a string
-ec is a reference to a list where each element is a string
-    </pre>
+ec is a reference to a list where each element is a string</pre>
    </dd>
    <dt id="Description7">
     Description
@@ -265,22 +225,17 @@ ec is a reference to a list where each element is a string
   <h2 id="fids_to_go">
    fids_to_go
   </h2>
-  <pre>
-   <code>
-    $return = $obj-&gt;fids_to_go($fids)
-   </code>
-  </pre>
+  <pre><code>  $return = $obj-&gt;fids_to_go($fids)</code></pre>
   <dl>
    <dt id="Parameter-and-return-types8">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $fids is a reference to a list where each element is a fid
+$fids is a reference to a list where each element is a fid
 $return is a reference to a hash where the key is a fid and the value is a go
 fid is a string
-go is a reference to a list where each element is a string
-    </pre>
+go is a reference to a list where each element is a string</pre>
    </dd>
    <dt id="Description8">
     Description
@@ -294,24 +249,19 @@ go is a reference to a list where each element is a string
   <h2 id="fid_to_neighbors">
    fid_to_neighbors
   </h2>
-  <pre>
-   <code>
-    $return = $obj-&gt;fid_to_neighbors($id, $thresh)
-   </code>
-  </pre>
+  <pre><code>  $return = $obj-&gt;fid_to_neighbors($id, $thresh)</code></pre>
   <dl>
    <dt id="Parameter-and-return-types9">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $id is a fid
+$id is a fid
 $thresh is a neighbor_threshold
 $return is a neighbor
 fid is a string
 neighbor_threshold is a float
-neighbor is a reference to a hash where the key is a fid and the value is a float
-    </pre>
+neighbor is a reference to a hash where the key is a fid and the value is a float</pre>
    </dd>
    <dt id="Description9">
     Description
@@ -325,24 +275,19 @@ neighbor is a reference to a hash where the key is a fid and the value is a floa
   <h2 id="fidlist_to_neighbors">
    fidlist_to_neighbors
   </h2>
-  <pre>
-   <code>
-    $return = $obj-&gt;fidlist_to_neighbors($fids, $thresh)
-   </code>
-  </pre>
+  <pre><code>  $return = $obj-&gt;fidlist_to_neighbors($fids, $thresh)</code></pre>
   <dl>
    <dt id="Parameter-and-return-types10">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $fids is a reference to a list where each element is a fid
+$fids is a reference to a list where each element is a fid
 $thresh is a neighbor_threshold
 $return is a reference to a hash where the key is a fid and the value is a reference to a list where each element is a neighbor
 fid is a string
 neighbor_threshold is a float
-neighbor is a reference to a hash where the key is a fid and the value is a float
-    </pre>
+neighbor is a reference to a hash where the key is a fid and the value is a float</pre>
    </dd>
    <dt id="Description10">
     Description
@@ -373,8 +318,8 @@ neighbor is a reference to a hash where the key is a fid and the value is a floa
    </dt>
    <dd>
     <pre>
-     a string
-    </pre>
+a string
+</pre>
    </dd>
   </dl>
   <h2 id="domain_id">
@@ -394,8 +339,8 @@ neighbor is a reference to a hash where the key is a fid and the value is a floa
    </dt>
    <dd>
     <pre>
-     a string
-    </pre>
+a string
+</pre>
    </dd>
   </dl>
   <h2 id="neighbor_threshold">
@@ -415,8 +360,8 @@ neighbor is a reference to a hash where the key is a fid and the value is a floa
    </dt>
    <dd>
     <pre>
-     a float
-    </pre>
+a float
+</pre>
    </dd>
   </dl>
   <h2 id="neighbor">
@@ -436,8 +381,8 @@ neighbor is a reference to a hash where the key is a fid and the value is a floa
    </dt>
    <dd>
     <pre>
-     a reference to a hash where the key is a fid and the value is a float
-    </pre>
+a reference to a hash where the key is a fid and the value is a float
+</pre>
    </dd>
   </dl>
   <h2 id="domains">
@@ -457,8 +402,8 @@ neighbor is a reference to a hash where the key is a fid and the value is a floa
    </dt>
    <dd>
     <pre>
-     a reference to a list where each element is a string
-    </pre>
+a reference to a list where each element is a string
+</pre>
    </dd>
   </dl>
   <h2 id="hit">
@@ -478,7 +423,7 @@ neighbor is a reference to a hash where the key is a fid and the value is a floa
    </dt>
    <dd>
     <pre>
-     a reference to a hash where the following keys are defined:
+a reference to a hash where the following keys are defined:
 id has a value which is a string
 subjectDb has a value which is a string
 description has a value which is a string
@@ -487,8 +432,7 @@ queryEnd has a value which is an int
 subjectBegin has a value which is an int
 subjectEnd has a value which is an int
 score has a value which is a float
-evalue has a value which is a float
-    </pre>
+evalue has a value which is a float</pre>
    </dd>
   </dl>
   <h2 id="ec">
@@ -508,8 +452,8 @@ evalue has a value which is a float
    </dt>
    <dd>
     <pre>
-     a reference to a list where each element is a string
-    </pre>
+a reference to a list where each element is a string
+</pre>
    </dd>
   </dl>
   <h2 id="go">
@@ -529,8 +473,8 @@ evalue has a value which is a float
    </dt>
    <dd>
     <pre>
-     a reference to a list where each element is a string
-    </pre>
+a reference to a list where each element is a string
+</pre>
    </dd>
   </dl>
   <h2 id="ipr">
@@ -550,8 +494,8 @@ evalue has a value which is a float
    </dt>
    <dd>
     <pre>
-     a reference to a list where each element is a string
-    </pre>
+a reference to a list where each element is a string
+</pre>
    </dd>
   </dl>
   <h2 id="operon">
@@ -571,8 +515,8 @@ evalue has a value which is a float
    </dt>
    <dd>
     <pre>
-     a reference to a list where each element is a fid
-    </pre>
+a reference to a list where each element is a fid
+</pre>
    </dd>
   </dl>
   <h2 id="orthologs">
@@ -592,8 +536,8 @@ evalue has a value which is a float
    </dt>
    <dd>
     <pre>
-     a reference to a list where each element is a fid
-    </pre>
+a reference to a list where each element is a fid
+</pre>
    </dd>
   </dl>
  </body>
