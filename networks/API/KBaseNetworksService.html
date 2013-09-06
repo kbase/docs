@@ -1,11 +1,11 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version="1.0" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
  <head>
   <title>
   </title>
-  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-  <link rev="made" href="mailto:root@ubuntu.chicago.kbase.us" />
+  <meta content="text/html; charset=utf-8" http-equiv="content-type"/>
+  <link href="mailto:root@ubuntu.chicago.kbase.us" rev="made"/>
  </head>
  <body style="background-color: white">
   <h1 id="NAME">
@@ -29,18 +29,14 @@
   <h2 id="allDatasets">
    allDatasets
   </h2>
-  <pre>
-   <code>
-    $datasets = $obj-&gt;allDatasets()
-   </code>
-  </pre>
+  <pre><code>  $datasets = $obj-&gt;allDatasets()</code></pre>
   <dl>
    <dt id="Parameter-and-return-types">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $datasets is a reference to a list where each element is a Dataset
+$datasets is a reference to a list where each element is a Dataset
 Dataset is a reference to a hash where the following keys are defined:
 	id has a value which is a string
 	name has a value which is a string
@@ -51,8 +47,7 @@ Dataset is a reference to a hash where the following keys are defined:
 	properties has a value which is a reference to a hash where the key is a string and the value is a string
 NetworkType is a string
 DatasetSourceRef is a string
-Taxon is a string
-    </pre>
+Taxon is a string</pre>
    </dd>
    <dt id="Description">
     Description
@@ -66,26 +61,21 @@ Taxon is a string
   <h2 id="allDatasetSources">
    allDatasetSources
   </h2>
-  <pre>
-   <code>
-    $datasetSources = $obj-&gt;allDatasetSources()
-   </code>
-  </pre>
+  <pre><code>  $datasetSources = $obj-&gt;allDatasetSources()</code></pre>
   <dl>
    <dt id="Parameter-and-return-types1">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $datasetSources is a reference to a list where each element is a DatasetSource
+$datasetSources is a reference to a list where each element is a DatasetSource
 DatasetSource is a reference to a hash where the following keys are defined:
 	id has a value which is a string
 	name has a value which is a string
 	reference has a value which is a DatasetSourceRef
 	description has a value which is a string
 	resourceURL has a value which is a string
-DatasetSourceRef is a string
-    </pre>
+DatasetSourceRef is a string</pre>
    </dd>
    <dt id="Description1">
     Description
@@ -99,20 +89,15 @@ DatasetSourceRef is a string
   <h2 id="allNetworkTypes">
    allNetworkTypes
   </h2>
-  <pre>
-   <code>
-    $networkTypes = $obj-&gt;allNetworkTypes()
-   </code>
-  </pre>
+  <pre><code>  $networkTypes = $obj-&gt;allNetworkTypes()</code></pre>
   <dl>
    <dt id="Parameter-and-return-types2">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $networkTypes is a reference to a list where each element is a NetworkType
-NetworkType is a string
-    </pre>
+$networkTypes is a reference to a list where each element is a NetworkType
+NetworkType is a string</pre>
    </dd>
    <dt id="Description2">
     Description
@@ -126,18 +111,14 @@ NetworkType is a string
   <h2 id="datasetSource2Datasets">
    datasetSource2Datasets
   </h2>
-  <pre>
-   <code>
-    $datasets = $obj-&gt;datasetSource2Datasets($datasetSourceRef)
-   </code>
-  </pre>
+  <pre><code>  $datasets = $obj-&gt;datasetSource2Datasets($datasetSourceRef)</code></pre>
   <dl>
    <dt id="Parameter-and-return-types3">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $datasetSourceRef is a DatasetSourceRef
+$datasetSourceRef is a DatasetSourceRef
 $datasets is a reference to a list where each element is a Dataset
 DatasetSourceRef is a string
 Dataset is a reference to a hash where the following keys are defined:
@@ -149,8 +130,7 @@ Dataset is a reference to a hash where the following keys are defined:
 	taxons has a value which is a reference to a list where each element is a Taxon
 	properties has a value which is a reference to a hash where the key is a string and the value is a string
 NetworkType is a string
-Taxon is a string
-    </pre>
+Taxon is a string</pre>
    </dd>
    <dt id="Description3">
     Description
@@ -164,18 +144,14 @@ Taxon is a string
   <h2 id="taxon2Datasets">
    taxon2Datasets
   </h2>
-  <pre>
-   <code>
-    $datasets = $obj-&gt;taxon2Datasets($taxon)
-   </code>
-  </pre>
+  <pre><code>  $datasets = $obj-&gt;taxon2Datasets($taxon)</code></pre>
   <dl>
    <dt id="Parameter-and-return-types4">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $taxon is a Taxon
+$taxon is a Taxon
 $datasets is a reference to a list where each element is a Dataset
 Taxon is a string
 Dataset is a reference to a hash where the following keys are defined:
@@ -187,8 +163,7 @@ Dataset is a reference to a hash where the following keys are defined:
 	taxons has a value which is a reference to a list where each element is a Taxon
 	properties has a value which is a reference to a hash where the key is a string and the value is a string
 NetworkType is a string
-DatasetSourceRef is a string
-    </pre>
+DatasetSourceRef is a string</pre>
    </dd>
    <dt id="Description4">
     Description
@@ -202,18 +177,14 @@ DatasetSourceRef is a string
   <h2 id="networkType2Datasets">
    networkType2Datasets
   </h2>
-  <pre>
-   <code>
-    $datasets = $obj-&gt;networkType2Datasets($networkType)
-   </code>
-  </pre>
+  <pre><code>  $datasets = $obj-&gt;networkType2Datasets($networkType)</code></pre>
   <dl>
    <dt id="Parameter-and-return-types5">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $networkType is a NetworkType
+$networkType is a NetworkType
 $datasets is a reference to a list where each element is a Dataset
 NetworkType is a string
 Dataset is a reference to a hash where the following keys are defined:
@@ -225,8 +196,7 @@ Dataset is a reference to a hash where the following keys are defined:
 	taxons has a value which is a reference to a list where each element is a Taxon
 	properties has a value which is a reference to a hash where the key is a string and the value is a string
 DatasetSourceRef is a string
-Taxon is a string
-    </pre>
+Taxon is a string</pre>
    </dd>
    <dt id="Description5">
     Description
@@ -240,18 +210,14 @@ Taxon is a string
   <h2 id="entity2Datasets">
    entity2Datasets
   </h2>
-  <pre>
-   <code>
-    $datasets = $obj-&gt;entity2Datasets($entityId)
-   </code>
-  </pre>
+  <pre><code>  $datasets = $obj-&gt;entity2Datasets($entityId)</code></pre>
   <dl>
    <dt id="Parameter-and-return-types6">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $entityId is a string
+$entityId is a string
 $datasets is a reference to a list where each element is a Dataset
 Dataset is a reference to a hash where the following keys are defined:
 	id has a value which is a string
@@ -263,8 +229,7 @@ Dataset is a reference to a hash where the following keys are defined:
 	properties has a value which is a reference to a hash where the key is a string and the value is a string
 NetworkType is a string
 DatasetSourceRef is a string
-Taxon is a string
-    </pre>
+Taxon is a string</pre>
    </dd>
    <dt id="Description6">
     Description
@@ -278,18 +243,14 @@ Taxon is a string
   <h2 id="buildFirstNeighborNetwork">
    buildFirstNeighborNetwork
   </h2>
-  <pre>
-   <code>
-    $network = $obj-&gt;buildFirstNeighborNetwork($datasetIds, $entityIds, $edgeTypes)
-   </code>
-  </pre>
+  <pre><code>  $network = $obj-&gt;buildFirstNeighborNetwork($datasetIds, $entityIds, $edgeTypes)</code></pre>
   <dl>
    <dt id="Parameter-and-return-types7">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $datasetIds is a reference to a list where each element is a string
+$datasetIds is a reference to a list where each element is a string
 $entityIds is a reference to a list where each element is a string
 $edgeTypes is a reference to a list where each element is an EdgeType
 $network is a Network
@@ -332,33 +293,28 @@ Dataset is a reference to a hash where the following keys are defined:
 	properties has a value which is a reference to a hash where the key is a string and the value is a string
 NetworkType is a string
 DatasetSourceRef is a string
-Taxon is a string
-    </pre>
+Taxon is a string</pre>
    </dd>
    <dt id="Description7">
     Description
    </dt>
    <dd>
     <p>
-     Returns a &quot;first-neighbor&quot; network constructed based on a given list of datasets. A first-neighbor network contains &quot;source&quot; nodes and all other nodes that have at least one interaction with the &quot;source&quot; nodes. Only interactions of given types are considered. list&lt;string&gt; datasetIds - List of dataset identifiers to be used for building a network list&lt;string&gt; entityIds - List of entity identifiers to be used as source nodes list&lt;EdgeType&gt; edgeTypes - List of possible edge types to be considered for building a network
+     Returns a "first-neighbor" network constructed based on a given list of datasets. A first-neighbor network contains "source" nodes and all other nodes that have at least one interaction with the "source" nodes. Only interactions of given types are considered. list&lt;string&gt; datasetIds - List of dataset identifiers to be used for building a network list&lt;string&gt; entityIds - List of entity identifiers to be used as source nodes list&lt;EdgeType&gt; edgeTypes - List of possible edge types to be considered for building a network
     </p>
    </dd>
   </dl>
   <h2 id="buildFirstNeighborNetworkLimtedByStrength">
    buildFirstNeighborNetworkLimtedByStrength
   </h2>
-  <pre>
-   <code>
-    $network = $obj-&gt;buildFirstNeighborNetworkLimtedByStrength($datasetIds, $entityIds, $edgeTypes, $cutOff)
-   </code>
-  </pre>
+  <pre><code>  $network = $obj-&gt;buildFirstNeighborNetworkLimtedByStrength($datasetIds, $entityIds, $edgeTypes, $cutOff)</code></pre>
   <dl>
    <dt id="Parameter-and-return-types8">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $datasetIds is a reference to a list where each element is a string
+$datasetIds is a reference to a list where each element is a string
 $entityIds is a reference to a list where each element is a string
 $edgeTypes is a reference to a list where each element is an EdgeType
 $cutOff is a float
@@ -402,33 +358,28 @@ Dataset is a reference to a hash where the following keys are defined:
 	properties has a value which is a reference to a hash where the key is a string and the value is a string
 NetworkType is a string
 DatasetSourceRef is a string
-Taxon is a string
-    </pre>
+Taxon is a string</pre>
    </dd>
    <dt id="Description8">
     Description
    </dt>
    <dd>
     <p>
-     Returns a &quot;first-neighbor&quot; network constructed basing on a given list of datasets. First-neighbor network contains &quot;source&quot; nodes and all other nodes that have at least one interaction with the &quot;source&quot; nodes. Only interactions of given types are considered. Additional cutOff parameter allows setting a threshold on the strength of edges to be considered. list&lt;string&gt; datasetIds - List of dataset identifiers to be used for building a network list&lt;string&gt; entityIds - List of entity identifiers to be used as source nodes list&lt;EdgeType&gt; edgeTypes - List of possible edge types to be considered for building a network float cutOff - The threshold on the strength of edges to be considered for building a network
+     Returns a "first-neighbor" network constructed basing on a given list of datasets. First-neighbor network contains "source" nodes and all other nodes that have at least one interaction with the "source" nodes. Only interactions of given types are considered. Additional cutOff parameter allows setting a threshold on the strength of edges to be considered. list&lt;string&gt; datasetIds - List of dataset identifiers to be used for building a network list&lt;string&gt; entityIds - List of entity identifiers to be used as source nodes list&lt;EdgeType&gt; edgeTypes - List of possible edge types to be considered for building a network float cutOff - The threshold on the strength of edges to be considered for building a network
     </p>
    </dd>
   </dl>
   <h2 id="buildInternalNetwork">
    buildInternalNetwork
   </h2>
-  <pre>
-   <code>
-    $network = $obj-&gt;buildInternalNetwork($datasetIds, $geneIds, $edgeTypes)
-   </code>
-  </pre>
+  <pre><code>  $network = $obj-&gt;buildInternalNetwork($datasetIds, $geneIds, $edgeTypes)</code></pre>
   <dl>
    <dt id="Parameter-and-return-types9">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $datasetIds is a reference to a list where each element is a string
+$datasetIds is a reference to a list where each element is a string
 $geneIds is a reference to a list where each element is a string
 $edgeTypes is a reference to a list where each element is an EdgeType
 $network is a Network
@@ -471,33 +422,28 @@ Dataset is a reference to a hash where the following keys are defined:
 	properties has a value which is a reference to a hash where the key is a string and the value is a string
 NetworkType is a string
 DatasetSourceRef is a string
-Taxon is a string
-    </pre>
+Taxon is a string</pre>
    </dd>
    <dt id="Description9">
     Description
    </dt>
    <dd>
     <p>
-     Returns an &quot;internal&quot; network constructed based on a given list of datasets. Internal network contains only the nodes defined by the geneIds parameter, and edges representing interactions between these nodes. Only interactions of given types are considered. list&lt;string&gt; datasetIds - List of dataset identifiers to be used for building a network list&lt;string&gt; geneIds - Identifiers of genes of interest for building a network list&lt;EdgeType&gt; edgeTypes - List of possible edge types to be considered for building a network
+     Returns an "internal" network constructed based on a given list of datasets. Internal network contains only the nodes defined by the geneIds parameter, and edges representing interactions between these nodes. Only interactions of given types are considered. list&lt;string&gt; datasetIds - List of dataset identifiers to be used for building a network list&lt;string&gt; geneIds - Identifiers of genes of interest for building a network list&lt;EdgeType&gt; edgeTypes - List of possible edge types to be considered for building a network
     </p>
    </dd>
   </dl>
   <h2 id="buildInternalNetworkLimitedByStrength">
    buildInternalNetworkLimitedByStrength
   </h2>
-  <pre>
-   <code>
-    $network = $obj-&gt;buildInternalNetworkLimitedByStrength($datasetIds, $geneIds, $edgeTypes, $cutOff)
-   </code>
-  </pre>
+  <pre><code>  $network = $obj-&gt;buildInternalNetworkLimitedByStrength($datasetIds, $geneIds, $edgeTypes, $cutOff)</code></pre>
   <dl>
    <dt id="Parameter-and-return-types10">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $datasetIds is a reference to a list where each element is a string
+$datasetIds is a reference to a list where each element is a string
 $geneIds is a reference to a list where each element is a string
 $edgeTypes is a reference to a list where each element is an EdgeType
 $cutOff is a float
@@ -541,15 +487,14 @@ Dataset is a reference to a hash where the following keys are defined:
 	properties has a value which is a reference to a hash where the key is a string and the value is a string
 NetworkType is a string
 DatasetSourceRef is a string
-Taxon is a string
-    </pre>
+Taxon is a string</pre>
    </dd>
    <dt id="Description10">
     Description
    </dt>
    <dd>
     <p>
-     Returns an &quot;internal&quot; network constructed based on a given list of datasets. Internal network contains the only nodes defined by the geneIds parameter, and edges representing interactions between these nodes. Only interactions of given types are considered. Additional cutOff parameter allows to set a threshold on the strength of edges to be considered. list&lt;string&gt; datasetIds - List of dataset identifiers to be used for building a network list&lt;string&gt; geneIds - Identifiers of genes of interest for building a network list&lt;EdgeType&gt; edgeTypes - List of possible edge types to be considered for building a network float cutOff - The threshold on the strength of edges to be considered for building a network
+     Returns an "internal" network constructed based on a given list of datasets. Internal network contains the only nodes defined by the geneIds parameter, and edges representing interactions between these nodes. Only interactions of given types are considered. Additional cutOff parameter allows to set a threshold on the strength of edges to be considered. list&lt;string&gt; datasetIds - List of dataset identifiers to be used for building a network list&lt;string&gt; geneIds - Identifiers of genes of interest for building a network list&lt;EdgeType&gt; edgeTypes - List of possible edge types to be considered for building a network float cutOff - The threshold on the strength of edges to be considered for building a network
     </p>
    </dd>
   </dl>
@@ -573,8 +518,8 @@ Taxon is a string
    </dt>
    <dd>
     <pre>
-     a string
-    </pre>
+a string
+</pre>
    </dd>
   </dl>
   <h2 id="NetworkType">
@@ -594,8 +539,8 @@ Taxon is a string
    </dt>
    <dd>
     <pre>
-     a string
-    </pre>
+a string
+</pre>
    </dd>
   </dl>
   <h2 id="NodeType">
@@ -615,8 +560,8 @@ Taxon is a string
    </dt>
    <dd>
     <pre>
-     a string
-    </pre>
+a string
+</pre>
    </dd>
   </dl>
   <h2 id="EdgeType">
@@ -636,8 +581,8 @@ Taxon is a string
    </dt>
    <dd>
     <pre>
-     a string
-    </pre>
+a string
+</pre>
    </dd>
   </dl>
   <h2 id="Taxon">
@@ -657,8 +602,8 @@ Taxon is a string
    </dt>
    <dd>
     <pre>
-     a string
-    </pre>
+a string
+</pre>
    </dd>
   </dl>
   <h2 id="Boolean">
@@ -670,7 +615,7 @@ Taxon is a string
    </dt>
    <dd>
     <p>
-     Helper type to represent boolean values; either &quot;true&quot; or &quot;false&quot;
+     Helper type to represent boolean values; either "true" or "false"
     </p>
    </dd>
    <dt id="Definition5">
@@ -678,8 +623,8 @@ Taxon is a string
    </dt>
    <dd>
     <pre>
-     a string
-    </pre>
+a string
+</pre>
    </dd>
   </dl>
   <h2 id="DatasetSource">
@@ -699,13 +644,12 @@ Taxon is a string
    </dt>
    <dd>
     <pre>
-     a reference to a hash where the following keys are defined:
+a reference to a hash where the following keys are defined:
 id has a value which is a string
 name has a value which is a string
 reference has a value which is a DatasetSourceRef
 description has a value which is a string
-resourceURL has a value which is a string
-    </pre>
+resourceURL has a value which is a string</pre>
    </dd>
   </dl>
   <h2 id="Dataset">
@@ -725,15 +669,14 @@ resourceURL has a value which is a string
    </dt>
    <dd>
     <pre>
-     a reference to a hash where the following keys are defined:
+a reference to a hash where the following keys are defined:
 id has a value which is a string
 name has a value which is a string
 description has a value which is a string
 networkType has a value which is a NetworkType
 sourceReference has a value which is a DatasetSourceRef
 taxons has a value which is a reference to a list where each element is a Taxon
-properties has a value which is a reference to a hash where the key is a string and the value is a string
-    </pre>
+properties has a value which is a reference to a hash where the key is a string and the value is a string</pre>
    </dd>
   </dl>
   <h2 id="Node">
@@ -753,14 +696,13 @@ properties has a value which is a reference to a hash where the key is a string 
    </dt>
    <dd>
     <pre>
-     a reference to a hash where the following keys are defined:
+a reference to a hash where the following keys are defined:
 id has a value which is a string
 name has a value which is a string
 entityId has a value which is a string
 type has a value which is a NodeType
 properties has a value which is a reference to a hash where the key is a string and the value is a string
-userAnnotations has a value which is a reference to a hash where the key is a string and the value is a string
-    </pre>
+userAnnotations has a value which is a reference to a hash where the key is a string and the value is a string</pre>
    </dd>
   </dl>
   <h2 id="Edge">
@@ -772,7 +714,7 @@ userAnnotations has a value which is a reference to a hash where the key is a st
    </dt>
    <dd>
     <p>
-     Represents an edge in a network. string id - A unique KBase identifier of an edge string name - String representation of an edge. It should be a concise but informative representation that is easy for a person to read. string nodeId1 - Identifier of the first node (source node, if the edge is directed) connected by a given edge string nodeId2 - Identifier of the second node (target node, if the edge is directed) connected by a given edge Boolean directed - Specify whether the edge is directed or not. &quot;true&quot; if it is directed, &quot;false&quot; if it is not directed float confidence - Value from 0 to 1 representing a probability that the interaction represented by a given edge is a true interaction float strength - Value from 0 to 1 representing a strength of an interaction represented by a given edge string datasetId - The identifier of a dataset that provided an interaction represented by a given edge mapping&lt;string,string&gt; properties - Other edge properties mapping&lt;string,string&gt; userAnnotations - User annotations of an edge
+     Represents an edge in a network. string id - A unique KBase identifier of an edge string name - String representation of an edge. It should be a concise but informative representation that is easy for a person to read. string nodeId1 - Identifier of the first node (source node, if the edge is directed) connected by a given edge string nodeId2 - Identifier of the second node (target node, if the edge is directed) connected by a given edge Boolean directed - Specify whether the edge is directed or not. "true" if it is directed, "false" if it is not directed float confidence - Value from 0 to 1 representing a probability that the interaction represented by a given edge is a true interaction float strength - Value from 0 to 1 representing a strength of an interaction represented by a given edge string datasetId - The identifier of a dataset that provided an interaction represented by a given edge mapping&lt;string,string&gt; properties - Other edge properties mapping&lt;string,string&gt; userAnnotations - User annotations of an edge
     </p>
    </dd>
    <dt id="Definition9">
@@ -780,7 +722,7 @@ userAnnotations has a value which is a reference to a hash where the key is a st
    </dt>
    <dd>
     <pre>
-     a reference to a hash where the following keys are defined:
+a reference to a hash where the following keys are defined:
 id has a value which is a string
 name has a value which is a string
 nodeId1 has a value which is a string
@@ -790,8 +732,7 @@ confidence has a value which is a float
 strength has a value which is a float
 datasetId has a value which is a string
 properties has a value which is a reference to a hash where the key is a string and the value is a string
-userAnnotations has a value which is a reference to a hash where the key is a string and the value is a string
-    </pre>
+userAnnotations has a value which is a reference to a hash where the key is a string and the value is a string</pre>
    </dd>
   </dl>
   <h2 id="Network">
@@ -811,15 +752,14 @@ userAnnotations has a value which is a reference to a hash where the key is a st
    </dt>
    <dd>
     <pre>
-     a reference to a hash where the following keys are defined:
+a reference to a hash where the following keys are defined:
 id has a value which is a string
 name has a value which is a string
 edges has a value which is a reference to a list where each element is an Edge
 nodes has a value which is a reference to a list where each element is a Node
 datasets has a value which is a reference to a list where each element is a Dataset
 properties has a value which is a reference to a hash where the key is a string and the value is a string
-userAnnotations has a value which is a reference to a hash where the key is a string and the value is a string
-    </pre>
+userAnnotations has a value which is a reference to a hash where the key is a string and the value is a string</pre>
    </dd>
   </dl>
  </body>

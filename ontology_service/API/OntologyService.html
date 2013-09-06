@@ -1,11 +1,11 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version="1.0" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
  <head>
   <title>
   </title>
-  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-  <link rev="made" href="mailto:root@ubuntu.chicago.kbase.us" />
+  <meta content="text/html; charset=utf-8" http-equiv="content-type"/>
+  <link href="mailto:root@ubuntu.chicago.kbase.us" rev="made"/>
  </head>
  <body style="background-color: white">
   <h1 id="NAME">
@@ -18,23 +18,19 @@
    DESCRIPTION
   </h1>
   <p>
-   This module provides public interface/APIs for KBase gene ontology (GO) services in a species-independent manner. It encapsulates the basic functionality of extracting domain ontologies (e.g. biological process, molecular function, cellular process) of interest for a given set of species specific genes. It only accepts KBase gene ids. External gene ids need to be converted to KBase ids. Additionally, it also allows gene ontology enrichment analysis (&quot;hypergeometric&quot;) to be performed on a set of genes that identifies statistically overrepresented GO terms within given gene sets, say for example, GO enrichment of over-expressed genes in drought stress in plant roots. To support these key features, currently this modules provides five API-functions that are backed by custom defined data structures. Majority of these API-functions accept a list of input items (majority of them being text strings) such as list of gene-ids, list of go-ids, list of ontology-domains, and Test type ( &quot;hypergeometric&quot;) and return the requested results as tabular dataset.
+   This module provides public interface/APIs for KBase gene ontology (GO) services in a species-independent manner. It encapsulates the basic functionality of extracting domain ontologies (e.g. biological process, molecular function, cellular process) of interest for a given set of species specific genes. It only accepts KBase gene ids. External gene ids need to be converted to KBase ids. Additionally, it also allows gene ontology enrichment analysis ("hypergeometric") to be performed on a set of genes that identifies statistically overrepresented GO terms within given gene sets, say for example, GO enrichment of over-expressed genes in drought stress in plant roots. To support these key features, currently this modules provides five API-functions that are backed by custom defined data structures. Majority of these API-functions accept a list of input items (majority of them being text strings) such as list of gene-ids, list of go-ids, list of ontology-domains, and Test type ( "hypergeometric") and return the requested results as tabular dataset.
   </p>
   <h2 id="get_goidlist">
    get_goidlist
   </h2>
-  <pre>
-   <code>
-    $results = $obj-&gt;get_goidlist($geneIDList, $domainList, $ecList)
-   </code>
-  </pre>
+  <pre><code>  $results = $obj-&gt;get_goidlist($geneIDList, $domainList, $ecList)</code></pre>
   <dl>
    <dt id="Parameter-and-return-types">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $geneIDList is a GeneIDList
+$geneIDList is a GeneIDList
 $domainList is a DomainList
 $ecList is an EvidenceCodeList
 $results is a GeneIDMap2GoInfo
@@ -52,38 +48,32 @@ GoTermInfo is a reference to a hash where the following keys are defined:
 	domain has a value which is a Domain
 	ec has a value which is an EvidenceCode
 	desc has a value which is a GoDesc
-GoDesc is a string
-    </pre>
+GoDesc is a string</pre>
    </dd>
    <dt id="Description">
     Description
    </dt>
    <dd>
     <p>
-     This function call accepts three parameters: a list of kbase gene-identifiers, a list of ontology domains, and a list of evidence codes. The list of gene identifiers cannot be empty; however the list of ontology domains and the list of evidence codes can be empty. If any of the last two lists is not empty then the gene-id and go-id pairs retrieved from KBase are further filtered by using the desired ontology domains and/or evidence codes supplied as input. So, if you don&#39;t want to filter the initial results then it is recommended to provide empty domain and evidence code lists. Finally, this function returns a mapping of kbase gene id to go-ids along with go-description, ontology domain, and evidence code; note that in the returned table of results, each gene-id is associated with a list of one of more go-ids. Also, if no species is provided as input then by default, Arabidopsis thaliana is used as the input species.
+     This function call accepts three parameters: a list of kbase gene-identifiers, a list of ontology domains, and a list of evidence codes. The list of gene identifiers cannot be empty; however the list of ontology domains and the list of evidence codes can be empty. If any of the last two lists is not empty then the gene-id and go-id pairs retrieved from KBase are further filtered by using the desired ontology domains and/or evidence codes supplied as input. So, if you don't want to filter the initial results then it is recommended to provide empty domain and evidence code lists. Finally, this function returns a mapping of kbase gene id to go-ids along with go-description, ontology domain, and evidence code; note that in the returned table of results, each gene-id is associated with a list of one of more go-ids. Also, if no species is provided as input then by default, Arabidopsis thaliana is used as the input species.
     </p>
    </dd>
   </dl>
   <h2 id="get_go_description">
    get_go_description
   </h2>
-  <pre>
-   <code>
-    $results = $obj-&gt;get_go_description($goIDList)
-   </code>
-  </pre>
+  <pre><code>  $results = $obj-&gt;get_go_description($goIDList)</code></pre>
   <dl>
    <dt id="Parameter-and-return-types1">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $goIDList is a GoIDList
+$goIDList is a GoIDList
 $results is a reference to a hash where the key is a GoID and the value is a StringArray
 GoIDList is a reference to a list where each element is a GoID
 GoID is a string
-StringArray is a reference to a list where each element is a string
-    </pre>
+StringArray is a reference to a list where each element is a string</pre>
    </dd>
    <dt id="Description1">
     Description
@@ -97,18 +87,14 @@ StringArray is a reference to a list where each element is a string
   <h2 id="get_go_enrichment">
    get_go_enrichment
   </h2>
-  <pre>
-   <code>
-    $results = $obj-&gt;get_go_enrichment($geneIDList, $domainList, $ecList, $type, $ontologytype)
-   </code>
-  </pre>
+  <pre><code>  $results = $obj-&gt;get_go_enrichment($geneIDList, $domainList, $ecList, $type, $ontologytype)</code></pre>
   <dl>
    <dt id="Parameter-and-return-types2">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $geneIDList is a GeneIDList
+$geneIDList is a GeneIDList
 $domainList is a DomainList
 $ecList is an EvidenceCodeList
 $type is a TestType
@@ -128,15 +114,14 @@ Enrichment is a reference to a hash where the following keys are defined:
 	goDesc has a value which is a GoDesc
 	pvalue has a value which is a float
 GoID is a string
-GoDesc is a string
-    </pre>
+GoDesc is a string</pre>
    </dd>
    <dt id="Description2">
     Description
    </dt>
    <dd>
     <p>
-     For a given list of kbase gene ids from a particular genome (for example &quot;Athaliana&quot; ) find out the significantly enriched GO terms in your gene set. This function accepts four parameters: A list of kbase gene-identifiers, a list of ontology domains (e.g.&quot;biological process&quot;, &quot;molecular function&quot;, &quot;cellular component&quot;), a list of evidence codes (e.g.&quot;IEA&quot;,&quot;IDA&quot;,&quot;IEP&quot; etc.), and test type (e.g. &quot;hypergeometric&quot;). The list of kbase gene identifiers cannot be empty; however the list of ontology domains and the list of evidence codes can be empty. If any of these two lists is not empty then the gene-id and the go-id pairs retrieved from KBase are further filtered by using the desired ontology domains and/or evidence codes supplied as input. So, if you don&#39;t want to filter the initial results then it is recommended to provide empty domain and evidence code lists. Final filtered list of the kbase gene-id to go-ids mapping is used to calculate GO enrichment using hypergeometric test and provides pvalues.The default pvalue cutoff is used as 0.05. Also, if input species is not provided then by default Arabidopsis thaliana is considered the input species. The current released version ignores test type and by default, it uses hypergeometric test. So even if you do not provide TestType, it will do hypergeometric test.
+     For a given list of kbase gene ids from a particular genome (for example "Athaliana" ) find out the significantly enriched GO terms in your gene set. This function accepts four parameters: A list of kbase gene-identifiers, a list of ontology domains (e.g."biological process", "molecular function", "cellular component"), a list of evidence codes (e.g."IEA","IDA","IEP" etc.), and test type (e.g. "hypergeometric"). The list of kbase gene identifiers cannot be empty; however the list of ontology domains and the list of evidence codes can be empty. If any of these two lists is not empty then the gene-id and the go-id pairs retrieved from KBase are further filtered by using the desired ontology domains and/or evidence codes supplied as input. So, if you don't want to filter the initial results then it is recommended to provide empty domain and evidence code lists. Final filtered list of the kbase gene-id to go-ids mapping is used to calculate GO enrichment using hypergeometric test and provides pvalues.The default pvalue cutoff is used as 0.05. Also, if input species is not provided then by default Arabidopsis thaliana is considered the input species. The current released version ignores test type and by default, it uses hypergeometric test. So even if you do not provide TestType, it will do hypergeometric test.
     </p>
    </dd>
   </dl>
@@ -154,9 +139,7 @@ GoDesc is a string
     <p>
      Plant Species names.
     </p>
-    <pre>
-     <code>
-      The current list of plant species includes: 
+    <pre><code>     The current list of plant species includes: 
      Alyrata: Arabidopsis lyrata
      Athaliana: Arabidopsis thaliana
      Bdistachyon: Brachypodium distachyon
@@ -169,17 +152,15 @@ GoDesc is a string
      Sbicolor: Sorghum bicolor 
      Smoellendorffii:  Selaginella moellendorffii
      Vvinifera: Vitis vinefera 
-     Zmays: Zea mays
-     </code>
-    </pre>
+     Zmays: Zea mays</code></pre>
    </dd>
    <dt id="Definition">
     Definition
    </dt>
    <dd>
     <pre>
-     a string
-    </pre>
+a string
+</pre>
    </dd>
   </dl>
   <h2 id="GoID">
@@ -199,8 +180,8 @@ GoDesc is a string
    </dt>
    <dd>
     <pre>
-     a string
-    </pre>
+a string
+</pre>
    </dd>
   </dl>
   <h2 id="GoDesc">
@@ -220,8 +201,8 @@ GoDesc is a string
    </dt>
    <dd>
     <pre>
-     a string
-    </pre>
+a string
+</pre>
    </dd>
   </dl>
   <h2 id="GeneID">
@@ -241,8 +222,8 @@ GoDesc is a string
    </dt>
    <dd>
     <pre>
-     a string
-    </pre>
+a string
+</pre>
    </dd>
   </dl>
   <h2 id="EvidenceCode">
@@ -280,8 +261,8 @@ GoDesc is a string
    </dt>
    <dd>
     <pre>
-     a string
-    </pre>
+a string
+</pre>
    </dd>
   </dl>
   <h2 id="Domain">
@@ -293,7 +274,7 @@ GoDesc is a string
    </dt>
    <dd>
     <p>
-     Captures which branch of knowledge the GO terms refers to e.g. &quot;biological_process&quot;, &quot;molecular_function&quot;, &quot;cellular_component&quot; etc.
+     Captures which branch of knowledge the GO terms refers to e.g. "biological_process", "molecular_function", "cellular_component" etc.
     </p>
    </dd>
    <dt id="Definition5">
@@ -301,8 +282,8 @@ GoDesc is a string
    </dt>
    <dd>
     <pre>
-     a string
-    </pre>
+a string
+</pre>
    </dd>
   </dl>
   <h2 id="TestType">
@@ -314,7 +295,7 @@ GoDesc is a string
    </dt>
    <dd>
     <p>
-     Test type, whether it&#39;s &quot;hypergeometric&quot; and &quot;chisq&quot;
+     Test type, whether it's "hypergeometric" and "chisq"
     </p>
    </dd>
    <dt id="Definition6">
@@ -322,8 +303,8 @@ GoDesc is a string
    </dt>
    <dd>
     <pre>
-     a string
-    </pre>
+a string
+</pre>
    </dd>
   </dl>
   <h2 id="GoIDList">
@@ -343,8 +324,8 @@ GoDesc is a string
    </dt>
    <dd>
     <pre>
-     a reference to a list where each element is a GoID
-    </pre>
+a reference to a list where each element is a GoID
+</pre>
    </dd>
   </dl>
   <h2 id="GoDescList">
@@ -364,8 +345,8 @@ GoDesc is a string
    </dt>
    <dd>
     <pre>
-     a reference to a list where each element is a GoDesc
-    </pre>
+a reference to a list where each element is a GoDesc
+</pre>
    </dd>
   </dl>
   <h2 id="GeneIDList">
@@ -385,8 +366,8 @@ GoDesc is a string
    </dt>
    <dd>
     <pre>
-     a reference to a list where each element is a GeneID
-    </pre>
+a reference to a list where each element is a GeneID
+</pre>
    </dd>
   </dl>
   <h2 id="DomainList">
@@ -406,8 +387,8 @@ GoDesc is a string
    </dt>
    <dd>
     <pre>
-     a reference to a list where each element is a Domain
-    </pre>
+a reference to a list where each element is a Domain
+</pre>
    </dd>
   </dl>
   <h2 id="StringArray">
@@ -419,8 +400,8 @@ GoDesc is a string
    </dt>
    <dd>
     <pre>
-     a reference to a list where each element is a string
-    </pre>
+a reference to a list where each element is a string
+</pre>
    </dd>
   </dl>
   <h2 id="EvidenceCodeList">
@@ -440,8 +421,8 @@ GoDesc is a string
    </dt>
    <dd>
     <pre>
-     a reference to a list where each element is an EvidenceCode
-    </pre>
+a reference to a list where each element is an EvidenceCode
+</pre>
    </dd>
   </dl>
   <h2 id="ontology_type">
@@ -453,8 +434,8 @@ GoDesc is a string
    </dt>
    <dd>
     <pre>
-     a string
-    </pre>
+a string
+</pre>
    </dd>
   </dl>
   <h2 id="GoTermInfo">
@@ -466,11 +447,10 @@ GoDesc is a string
    </dt>
    <dd>
     <pre>
-     a reference to a hash where the following keys are defined:
+a reference to a hash where the following keys are defined:
 domain has a value which is a Domain
 ec has a value which is an EvidenceCode
-desc has a value which is a GoDesc
-    </pre>
+desc has a value which is a GoDesc</pre>
    </dd>
   </dl>
   <h2 id="GoTermInfoList">
@@ -482,8 +462,8 @@ desc has a value which is a GoDesc
    </dt>
    <dd>
     <pre>
-     a reference to a list where each element is a GoTermInfo
-    </pre>
+a reference to a list where each element is a GoTermInfo
+</pre>
    </dd>
   </dl>
   <h2 id="GoIDMap2GoTermInfo">
@@ -495,8 +475,8 @@ desc has a value which is a GoDesc
    </dt>
    <dd>
     <pre>
-     a reference to a hash where the key is a GoID and the value is a GoTermInfoList
-    </pre>
+a reference to a hash where the key is a GoID and the value is a GoTermInfoList
+</pre>
    </dd>
   </dl>
   <h2 id="GeneIDMap2GoInfo">
@@ -508,8 +488,8 @@ desc has a value which is a GoDesc
    </dt>
    <dd>
     <pre>
-     a reference to a hash where the key is a GeneID and the value is a GoIDMap2GoTermInfo
-    </pre>
+a reference to a hash where the key is a GeneID and the value is a GoIDMap2GoTermInfo
+</pre>
    </dd>
   </dl>
   <h2 id="Enrichment">
@@ -529,11 +509,10 @@ desc has a value which is a GoDesc
    </dt>
    <dd>
     <pre>
-     a reference to a hash where the following keys are defined:
+a reference to a hash where the following keys are defined:
 goID has a value which is a GoID
 goDesc has a value which is a GoDesc
-pvalue has a value which is a float
-    </pre>
+pvalue has a value which is a float</pre>
    </dd>
   </dl>
   <h2 id="EnrichmentList">
@@ -553,8 +532,8 @@ pvalue has a value which is a float
    </dt>
    <dd>
     <pre>
-     a reference to a list where each element is an Enrichment
-    </pre>
+a reference to a list where each element is an Enrichment
+</pre>
    </dd>
   </dl>
  </body>

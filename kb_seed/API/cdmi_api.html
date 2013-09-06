@@ -1,12 +1,12 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version="1.0" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
  <head>
   <title>
    Central Store Application API
   </title>
-  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-  <link rev="made" href="mailto:root@ubuntu.chicago.kbase.us" />
+  <meta content="text/html; charset=utf-8" http-equiv="content-type"/>
+  <link href="mailto:root@ubuntu.chicago.kbase.us" rev="made"/>
  </head>
  <body style="background-color: white">
   <h1 id="NAME">
@@ -28,14 +28,12 @@
    There are several broad categories of routines supported in the CDMI-API.
   </p>
   <p>
-   The simplest is set of &quot;get entity&quot; routines -- each returning data extracted from instances of a single entity type. These routines all take as input a list of ids referencing instances of a single type of entity. They construct as output a mapping which takes as input an id and associates as output a set of fields from that instance of the entity. Each routine allows the user to specify which fields are desired.
+   The simplest is set of "get entity" routines -- each returning data extracted from instances of a single entity type. These routines all take as input a list of ids referencing instances of a single type of entity. They construct as output a mapping which takes as input an id and associates as output a set of fields from that instance of the entity. Each routine allows the user to specify which fields are desired.
   </p>
   <p>
-   For example, assume you have an input file &quot;Staphylococci,&quot; which is a list of genome IDs for each species of Staphylococcus in the database. The get_entity_Genome command is used to retrieve detailed information about each genome in the file. By using different modifiers, you can specify what kind of information you want to display. In this example, the modifier &quot;contigs&quot; was used. Thus, the number next to the genome ID in the output file indicates the number of contigs each Staphylococcus genome has. For a list of available modifiers relating to each identity, please refer to the ER model.
+   For example, assume you have an input file "Staphylococci," which is a list of genome IDs for each species of Staphylococcus in the database. The get_entity_Genome command is used to retrieve detailed information about each genome in the file. By using different modifiers, you can specify what kind of information you want to display. In this example, the modifier "contigs" was used. Thus, the number next to the genome ID in the output file indicates the number of contigs each Staphylococcus genome has. For a list of available modifiers relating to each identity, please refer to the ER model.
   </p>
-  <pre>
-   <code>
-    &gt; / cat Staphylococci | cut -f 1 | get_entity_Genome - f contigs
+  <pre><code>        &gt; / cat Staphylococci | cut -f 1 | get_entity_Genome - f contigs
         kb|g.134        2
         kb|g.636        1
         kb|g.2506        15
@@ -47,31 +45,21 @@
         kb|g.19928        2
         kb|g.1852        131
         kb|g.8476        1
-        kb|g.2742        46
-   </code>
-  </pre>
+        kb|g.2742        46</code></pre>
   <p>
    To use these routines effectively, a user will need to gradually become familiar with the entities supported in the CDM. We suggest perusing the entity-relationship model that underlies the CDM to get a good introduction.
   </p>
   <p>
-   The next simplest set of routines provide the &quot;get relationship&quot; routines. These take as input a list of ids for a specific entity type, and the give access to the relationship nodes associated with each entity. Thus, get_relationship_WasSubmittedBy takes the input genome ID and outputs the ID with an added column showing the source of that particular genome. It is essential to be able to navigate the ER model to successfully implement these commands, since not all relationship types are applicable to each entity.
+   The next simplest set of routines provide the "get relationship" routines. These take as input a list of ids for a specific entity type, and the give access to the relationship nodes associated with each entity. Thus, get_relationship_WasSubmittedBy takes the input genome ID and outputs the ID with an added column showing the source of that particular genome. It is essential to be able to navigate the ER model to successfully implement these commands, since not all relationship types are applicable to each entity.
   </p>
-  <pre>
-   <code>
-    &gt; / echo &#39;kb|g.0&#39; | get_relationship_WasSubmittedBy -to id
-        kb|g.0        SEED
-   </code>
-  </pre>
+  <pre><code>        &gt; / echo 'kb|g.0' | get_relationship_WasSubmittedBy -to id
+        kb|g.0        SEED</code></pre>
   <p>
-   Of the remaining CDMI-API routines, most are used to extract data by &quot;crossing one or more relationships&quot;. Thus,
+   Of the remaining CDMI-API routines, most are used to extract data by "crossing one or more relationships". Thus,
   </p>
-  <pre>
-   <code>
-    my $references = $kbO-&gt;fids_to_literature($fids)
-   </code>
-  </pre>
+  <pre><code>        my $references = $kbO-&gt;fids_to_literature($fids)</code></pre>
   <p>
-   takes as input a list of feature ids referenced by the variable $fids. It creates a hash ($references) which maps each input key to a list of literature references. The construction of the literature references for a given ID involves crossing relationships from the entity &#39;Feature&#39; to &#39;ProteinSequence&#39; to &#39;Publication&#39;. We have attempted to package this specific search in a convenient form. We anticipate that the number of queries of this last class will grow (especially as new entities are added to the model).
+   takes as input a list of feature ids referenced by the variable $fids. It creates a hash ($references) which maps each input key to a list of literature references. The construction of the literature references for a given ID involves crossing relationships from the entity 'Feature' to 'ProteinSequence' to 'Publication'. We have attempted to package this specific search in a convenient form. We anticipate that the number of queries of this last class will grow (especially as new entities are added to the model).
   </p>
   <h2 id="Batching-queries">
    Batching queries
@@ -79,11 +67,7 @@
   <p>
    A majority of the CS-API routines take a list of ids as input. Each id may be thought of as input to a query that produces an output result. We support processing an input list, since the performance (which is usually governed by network interactions) is much better if you process a batch of items, rather than invoking the API repeatedly for each of the ids. Normally, the output would be a mapping (a hash for Perl versions) from the input ids to the output results. Thus, a routine like
   </p>
-  <pre>
-   <code>
-    fids_to_literature
-   </code>
-  </pre>
+  <pre><code>             fids_to_literature</code></pre>
   <p>
    will take a list of feature ids as input. The returned value will be a mapping from feature ids (fids) to publication references.
   </p>
@@ -96,18 +80,14 @@
   <h2 id="fids_to_annotations">
    fids_to_annotations
   </h2>
-  <pre>
-   <code>
-    $return = $obj-&gt;fids_to_annotations($fids)
-   </code>
-  </pre>
+  <pre><code>  $return = $obj-&gt;fids_to_annotations($fids)</code></pre>
   <dl>
    <dt id="Parameter-and-return-types">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $fids is a fids
+$fids is a fids
 $return is a reference to a hash where the key is a fid and the value is an annotations
 fids is a reference to a list where each element is a fid
 fid is a string
@@ -118,8 +98,7 @@ annotation is a reference to a list containing 3 items:
 	2: an annotation_time
 comment is a string
 annotator is a string
-annotation_time is an int
-    </pre>
+annotation_time is an int</pre>
    </dd>
    <dt id="Description">
     Description
@@ -133,23 +112,18 @@ annotation_time is an int
   <h2 id="fids_to_functions">
    fids_to_functions
   </h2>
-  <pre>
-   <code>
-    $return = $obj-&gt;fids_to_functions($fids)
-   </code>
-  </pre>
+  <pre><code>  $return = $obj-&gt;fids_to_functions($fids)</code></pre>
   <dl>
    <dt id="Parameter-and-return-types1">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $fids is a fids
+$fids is a fids
 $return is a reference to a hash where the key is a fid and the value is a function
 fids is a reference to a list where each element is a fid
 fid is a string
-function is a string
-    </pre>
+function is a string</pre>
    </dd>
    <dt id="Description1">
     Description
@@ -163,18 +137,14 @@ function is a string
   <h2 id="fids_to_literature">
    fids_to_literature
   </h2>
-  <pre>
-   <code>
-    $return = $obj-&gt;fids_to_literature($fids)
-   </code>
-  </pre>
+  <pre><code>  $return = $obj-&gt;fids_to_literature($fids)</code></pre>
   <dl>
    <dt id="Parameter-and-return-types2">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $fids is a fids
+$fids is a fids
 $return is a reference to a hash where the key is a fid and the value is a pubrefs
 fids is a reference to a list where each element is a fid
 fid is a string
@@ -182,39 +152,33 @@ pubrefs is a reference to a list where each element is a pubref
 pubref is a reference to a list containing 3 items:
 	0: (id) a string
 	1: (link) a string
-	2: (title) a string
-    </pre>
+	2: (title) a string</pre>
    </dd>
    <dt id="Description2">
     Description
    </dt>
    <dd>
     <p>
-     We try to associate features and publications, when the publications constitute supporting evidence of the function. We connect a paper to a feature when we believe that an &quot;expert&quot; has asserted that the function of the feature is basically what we have associated with the feature. Thus, we might attach a paper reporting the crystal structure of a protein, even though the paper is clearly not the paper responsible for the original characterization. Our position in this matter is somewhat controversial, but we are seeking to characterize some assertions as relatively solid, and this strategy seems to support that goal. Please note that we certainly wish we could also capture original publications, and when experts can provide those connections, we hope that they will help record the associations.
+     We try to associate features and publications, when the publications constitute supporting evidence of the function. We connect a paper to a feature when we believe that an "expert" has asserted that the function of the feature is basically what we have associated with the feature. Thus, we might attach a paper reporting the crystal structure of a protein, even though the paper is clearly not the paper responsible for the original characterization. Our position in this matter is somewhat controversial, but we are seeking to characterize some assertions as relatively solid, and this strategy seems to support that goal. Please note that we certainly wish we could also capture original publications, and when experts can provide those connections, we hope that they will help record the associations.
     </p>
    </dd>
   </dl>
   <h2 id="fids_to_protein_families">
    fids_to_protein_families
   </h2>
-  <pre>
-   <code>
-    $return = $obj-&gt;fids_to_protein_families($fids)
-   </code>
-  </pre>
+  <pre><code>  $return = $obj-&gt;fids_to_protein_families($fids)</code></pre>
   <dl>
    <dt id="Parameter-and-return-types3">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $fids is a fids
+$fids is a fids
 $return is a reference to a hash where the key is a fid and the value is a protein_families
 fids is a reference to a list where each element is a fid
 fid is a string
 protein_families is a reference to a list where each element is a protein_family
-protein_family is a string
-    </pre>
+protein_family is a string</pre>
    </dd>
    <dt id="Description3">
     Description
@@ -228,24 +192,19 @@ protein_family is a string
   <h2 id="fids_to_roles">
    fids_to_roles
   </h2>
-  <pre>
-   <code>
-    $return = $obj-&gt;fids_to_roles($fids)
-   </code>
-  </pre>
+  <pre><code>  $return = $obj-&gt;fids_to_roles($fids)</code></pre>
   <dl>
    <dt id="Parameter-and-return-types4">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $fids is a fids
+$fids is a fids
 $return is a reference to a hash where the key is a fid and the value is a roles
 fids is a reference to a list where each element is a fid
 fid is a string
 roles is a reference to a list where each element is a role
-role is a string
-    </pre>
+role is a string</pre>
    </dd>
    <dt id="Description4">
     Description
@@ -259,57 +218,47 @@ role is a string
   <h2 id="fids_to_subsystems">
    fids_to_subsystems
   </h2>
-  <pre>
-   <code>
-    $return = $obj-&gt;fids_to_subsystems($fids)
-   </code>
-  </pre>
+  <pre><code>  $return = $obj-&gt;fids_to_subsystems($fids)</code></pre>
   <dl>
    <dt id="Parameter-and-return-types5">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $fids is a fids
+$fids is a fids
 $return is a reference to a hash where the key is a fid and the value is a subsystems
 fids is a reference to a list where each element is a fid
 fid is a string
 subsystems is a reference to a list where each element is a subsystem
-subsystem is a string
-    </pre>
+subsystem is a string</pre>
    </dd>
    <dt id="Description5">
     Description
    </dt>
    <dd>
     <p>
-     fids in subsystems normally have somewhat more reliable assigned functions than those not in subsystems. Hence, it is common to ask &quot;Is this protein-encoding gene included in any subsystems?&quot; fids_to_subsystems can be used to see which subsystems contain a fid (or, you can submit as input a set of fids and get the subsystems for each).
+     fids in subsystems normally have somewhat more reliable assigned functions than those not in subsystems. Hence, it is common to ask "Is this protein-encoding gene included in any subsystems?" fids_to_subsystems can be used to see which subsystems contain a fid (or, you can submit as input a set of fids and get the subsystems for each).
     </p>
    </dd>
   </dl>
   <h2 id="fids_to_co_occurring_fids">
    fids_to_co_occurring_fids
   </h2>
-  <pre>
-   <code>
-    $return = $obj-&gt;fids_to_co_occurring_fids($fids)
-   </code>
-  </pre>
+  <pre><code>  $return = $obj-&gt;fids_to_co_occurring_fids($fids)</code></pre>
   <dl>
    <dt id="Parameter-and-return-types6">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $fids is a fids
+$fids is a fids
 $return is a reference to a hash where the key is a fid and the value is a scored_fids
 fids is a reference to a list where each element is a fid
 fid is a string
 scored_fids is a reference to a list where each element is a scored_fid
 scored_fid is a reference to a list containing 2 items:
 	0: a fid
-	1: (score) a float
-    </pre>
+	1: (score) a float</pre>
    </dd>
    <dt id="Description6">
     Description
@@ -326,18 +275,14 @@ scored_fid is a reference to a list containing 2 items:
   <h2 id="fids_to_locations">
    fids_to_locations
   </h2>
-  <pre>
-   <code>
-    $return = $obj-&gt;fids_to_locations($fids)
-   </code>
-  </pre>
+  <pre><code>  $return = $obj-&gt;fids_to_locations($fids)</code></pre>
   <dl>
    <dt id="Parameter-and-return-types7">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $fids is a fids
+$fids is a fids
 $return is a reference to a hash where the key is a fid and the value is a location
 fids is a reference to a list where each element is a fid
 fid is a string
@@ -350,24 +295,19 @@ region_of_dna is a reference to a list containing 4 items:
 contig is a string
 begin is an int
 strand is a string
-length is an int
-    </pre>
+length is an int</pre>
    </dd>
    <dt id="Description7">
     Description
    </dt>
    <dd>
     <p>
-     A &quot;location&quot; is a sequence of &quot;regions&quot;. A region is a contiguous set of bases in a contig. We work with locations in both the string form and as structures. fids_to_locations takes as input a list of fids. For each fid, a structured location is returned. The location is a list of regions; a region is given as a pointer to a list containing
+     A "location" is a sequence of "regions". A region is a contiguous set of bases in a contig. We work with locations in both the string form and as structures. fids_to_locations takes as input a list of fids. For each fid, a structured location is returned. The location is a list of regions; a region is given as a pointer to a list containing
     </p>
-    <pre>
-     <code>
-      the contig,
+    <pre><code>             the contig,
              the beginning base in the contig (from 1).
              the strand (+ or -), and
-             the length
-     </code>
-    </pre>
+             the length</code></pre>
     <p>
      Note that specifying a region using these 4 values allows you to represent a single base-pair region on either strand unambiguously (which giving begin/end pairs does not achieve).
     </p>
@@ -376,57 +316,47 @@ length is an int
   <h2 id="locations_to_fids">
    locations_to_fids
   </h2>
-  <pre>
-   <code>
-    $return = $obj-&gt;locations_to_fids($region_of_dna_strings)
-   </code>
-  </pre>
+  <pre><code>  $return = $obj-&gt;locations_to_fids($region_of_dna_strings)</code></pre>
   <dl>
    <dt id="Parameter-and-return-types8">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $region_of_dna_strings is a region_of_dna_strings
+$region_of_dna_strings is a region_of_dna_strings
 $return is a reference to a hash where the key is a region_of_dna_string and the value is a fids
 region_of_dna_strings is a reference to a list where each element is a region_of_dna_string
 region_of_dna_string is a string
 fids is a reference to a list where each element is a fid
-fid is a string
-    </pre>
+fid is a string</pre>
    </dd>
    <dt id="Description8">
     Description
    </dt>
    <dd>
     <p>
-     It is frequently the case that one wishes to look up the genes that occur in a given region of a contig. Location_to_fids can be used to extract such sets of genes for each region in the input set of regions. We define a gene as &quot;occuring&quot; in a region if the location of the gene overlaps the designated region.
+     It is frequently the case that one wishes to look up the genes that occur in a given region of a contig. Location_to_fids can be used to extract such sets of genes for each region in the input set of regions. We define a gene as "occuring" in a region if the location of the gene overlaps the designated region.
     </p>
    </dd>
   </dl>
   <h2 id="alleles_to_bp_locs">
    alleles_to_bp_locs
   </h2>
-  <pre>
-   <code>
-    $return = $obj-&gt;alleles_to_bp_locs($alleles)
-   </code>
-  </pre>
+  <pre><code>  $return = $obj-&gt;alleles_to_bp_locs($alleles)</code></pre>
   <dl>
    <dt id="Parameter-and-return-types9">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $alleles is an alleles
+$alleles is an alleles
 $return is a reference to a hash where the key is an allele and the value is a bp_loc
 alleles is a reference to a list where each element is an allele
 allele is a string
 bp_loc is a reference to a list containing 2 items:
 	0: a contig
 	1: (position) an int
-contig is a string
-    </pre>
+contig is a string</pre>
    </dd>
    <dt id="Description9">
     Description
@@ -437,18 +367,14 @@ contig is a string
   <h2 id="region_to_fids">
    region_to_fids
   </h2>
-  <pre>
-   <code>
-    $return = $obj-&gt;region_to_fids($region_of_dna)
-   </code>
-  </pre>
+  <pre><code>  $return = $obj-&gt;region_to_fids($region_of_dna)</code></pre>
   <dl>
    <dt id="Parameter-and-return-types10">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $region_of_dna is a region_of_dna
+$region_of_dna is a region_of_dna
 $return is a fids
 region_of_dna is a reference to a list containing 4 items:
 	0: a contig
@@ -460,8 +386,7 @@ begin is an int
 strand is a string
 length is an int
 fids is a reference to a list where each element is a fid
-fid is a string
-    </pre>
+fid is a string</pre>
    </dd>
    <dt id="Description10">
     Description
@@ -472,18 +397,14 @@ fid is a string
   <h2 id="region_to_alleles">
    region_to_alleles
   </h2>
-  <pre>
-   <code>
-    $return = $obj-&gt;region_to_alleles($region_of_dna)
-   </code>
-  </pre>
+  <pre><code>  $return = $obj-&gt;region_to_alleles($region_of_dna)</code></pre>
   <dl>
    <dt id="Parameter-and-return-types11">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $region_of_dna is a region_of_dna
+$region_of_dna is a region_of_dna
 $return is a reference to a list where each element is a reference to a list containing 2 items:
 	0: an allele
 	1: (position) an int
@@ -496,8 +417,7 @@ contig is a string
 begin is an int
 strand is a string
 length is an int
-allele is a string
-    </pre>
+allele is a string</pre>
    </dd>
    <dt id="Description11">
     Description
@@ -508,24 +428,19 @@ allele is a string
   <h2 id="alleles_to_traits">
    alleles_to_traits
   </h2>
-  <pre>
-   <code>
-    $return = $obj-&gt;alleles_to_traits($alleles)
-   </code>
-  </pre>
+  <pre><code>  $return = $obj-&gt;alleles_to_traits($alleles)</code></pre>
   <dl>
    <dt id="Parameter-and-return-types12">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $alleles is an alleles
+$alleles is an alleles
 $return is a reference to a hash where the key is an allele and the value is a traits
 alleles is a reference to a list where each element is an allele
 allele is a string
 traits is a reference to a list where each element is a trait
-trait is a string
-    </pre>
+trait is a string</pre>
    </dd>
    <dt id="Description12">
     Description
@@ -536,24 +451,19 @@ trait is a string
   <h2 id="traits_to_alleles">
    traits_to_alleles
   </h2>
-  <pre>
-   <code>
-    $return = $obj-&gt;traits_to_alleles($traits)
-   </code>
-  </pre>
+  <pre><code>  $return = $obj-&gt;traits_to_alleles($traits)</code></pre>
   <dl>
    <dt id="Parameter-and-return-types13">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $traits is a traits
+$traits is a traits
 $return is a reference to a hash where the key is a trait and the value is an alleles
 traits is a reference to a list where each element is a trait
 trait is a string
 alleles is a reference to a list where each element is an allele
-allele is a string
-    </pre>
+allele is a string</pre>
    </dd>
    <dt id="Description13">
     Description
@@ -564,18 +474,14 @@ allele is a string
   <h2 id="ous_with_trait">
    ous_with_trait
   </h2>
-  <pre>
-   <code>
-    $return = $obj-&gt;ous_with_trait($genome, $trait, $measurement_type, $min_value, $max_value)
-   </code>
-  </pre>
+  <pre><code>  $return = $obj-&gt;ous_with_trait($genome, $trait, $measurement_type, $min_value, $max_value)</code></pre>
   <dl>
    <dt id="Parameter-and-return-types14">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $genome is a genome
+$genome is a genome
 $trait is a trait
 $measurement_type is a measurement_type
 $min_value is a float
@@ -587,8 +493,7 @@ genome is a string
 trait is a string
 measurement_type is a string
 ou is a string
-measurement_value is a float
-    </pre>
+measurement_value is a float</pre>
    </dd>
    <dt id="Description14">
     Description
@@ -599,18 +504,14 @@ measurement_value is a float
   <h2 id="locations_to_dna_sequences">
    locations_to_dna_sequences
   </h2>
-  <pre>
-   <code>
-    $dna_seqs = $obj-&gt;locations_to_dna_sequences($locations)
-   </code>
-  </pre>
+  <pre><code>  $dna_seqs = $obj-&gt;locations_to_dna_sequences($locations)</code></pre>
   <dl>
    <dt id="Parameter-and-return-types15">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $locations is a locations
+$locations is a locations
 $dna_seqs is a reference to a list where each element is a reference to a list containing 2 items:
 	0: a location
 	1: a dna
@@ -625,8 +526,7 @@ contig is a string
 begin is an int
 strand is a string
 length is an int
-dna is a string
-    </pre>
+dna is a string</pre>
    </dd>
    <dt id="Description15">
     Description
@@ -635,11 +535,7 @@ dna is a string
     <p>
      locations_to_dna_sequences takes as input a list of locations (each in the form of a list of regions). The routine constructs 2-tuples composed of
     </p>
-    <pre>
-     <code>
-      [the input location,the dna string]
-     </code>
-    </pre>
+    <pre><code>     [the input location,the dna string]</code></pre>
     <p>
      The returned DNA string is formed by concatenating the DNA for each of the regions that make up the location.
     </p>
@@ -648,24 +544,19 @@ dna is a string
   <h2 id="proteins_to_fids">
    proteins_to_fids
   </h2>
-  <pre>
-   <code>
-    $return = $obj-&gt;proteins_to_fids($proteins)
-   </code>
-  </pre>
+  <pre><code>  $return = $obj-&gt;proteins_to_fids($proteins)</code></pre>
   <dl>
    <dt id="Parameter-and-return-types16">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $proteins is a proteins
+$proteins is a proteins
 $return is a reference to a hash where the key is a protein and the value is a fids
 proteins is a reference to a list where each element is a protein
 protein is a string
 fids is a reference to a list where each element is a fid
-fid is a string
-    </pre>
+fid is a string</pre>
    </dd>
    <dt id="Description16">
     Description
@@ -679,24 +570,19 @@ fid is a string
   <h2 id="proteins_to_protein_families">
    proteins_to_protein_families
   </h2>
-  <pre>
-   <code>
-    $return = $obj-&gt;proteins_to_protein_families($proteins)
-   </code>
-  </pre>
+  <pre><code>  $return = $obj-&gt;proteins_to_protein_families($proteins)</code></pre>
   <dl>
    <dt id="Parameter-and-return-types17">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $proteins is a proteins
+$proteins is a proteins
 $return is a reference to a hash where the key is a protein and the value is a protein_families
 proteins is a reference to a list where each element is a protein
 protein is a string
 protein_families is a reference to a list where each element is a protein_family
-protein_family is a string
-    </pre>
+protein_family is a string</pre>
    </dd>
    <dt id="Description17">
     Description
@@ -710,18 +596,14 @@ protein_family is a string
   <h2 id="proteins_to_literature">
    proteins_to_literature
   </h2>
-  <pre>
-   <code>
-    $return = $obj-&gt;proteins_to_literature($proteins)
-   </code>
-  </pre>
+  <pre><code>  $return = $obj-&gt;proteins_to_literature($proteins)</code></pre>
   <dl>
    <dt id="Parameter-and-return-types18">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $proteins is a proteins
+$proteins is a proteins
 $return is a reference to a hash where the key is a protein and the value is a pubrefs
 proteins is a reference to a list where each element is a protein
 protein is a string
@@ -729,8 +611,7 @@ pubrefs is a reference to a list where each element is a pubref
 pubref is a reference to a list containing 3 items:
 	0: (id) a string
 	1: (link) a string
-	2: (title) a string
-    </pre>
+	2: (title) a string</pre>
    </dd>
    <dt id="Description18">
     Description
@@ -744,18 +625,14 @@ pubref is a reference to a list containing 3 items:
   <h2 id="proteins_to_functions">
    proteins_to_functions
   </h2>
-  <pre>
-   <code>
-    $return = $obj-&gt;proteins_to_functions($proteins)
-   </code>
-  </pre>
+  <pre><code>  $return = $obj-&gt;proteins_to_functions($proteins)</code></pre>
   <dl>
    <dt id="Parameter-and-return-types19">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $proteins is a proteins
+$proteins is a proteins
 $return is a reference to a hash where the key is a protein and the value is a fid_function_pairs
 proteins is a reference to a list where each element is a protein
 protein is a string
@@ -764,8 +641,7 @@ fid_function_pair is a reference to a list containing 2 items:
 	0: a fid
 	1: a function
 fid is a string
-function is a string
-    </pre>
+function is a string</pre>
    </dd>
    <dt id="Description19">
     Description
@@ -782,24 +658,19 @@ function is a string
   <h2 id="proteins_to_roles">
    proteins_to_roles
   </h2>
-  <pre>
-   <code>
-    $return = $obj-&gt;proteins_to_roles($proteins)
-   </code>
-  </pre>
+  <pre><code>  $return = $obj-&gt;proteins_to_roles($proteins)</code></pre>
   <dl>
    <dt id="Parameter-and-return-types20">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $proteins is a proteins
+$proteins is a proteins
 $return is a reference to a hash where the key is a protein and the value is a roles
 proteins is a reference to a list where each element is a protein
 protein is a string
 roles is a reference to a list where each element is a role
-role is a string
-    </pre>
+role is a string</pre>
    </dd>
    <dt id="Description20">
     Description
@@ -819,24 +690,19 @@ role is a string
   <h2 id="roles_to_proteins">
    roles_to_proteins
   </h2>
-  <pre>
-   <code>
-    $return = $obj-&gt;roles_to_proteins($roles)
-   </code>
-  </pre>
+  <pre><code>  $return = $obj-&gt;roles_to_proteins($roles)</code></pre>
   <dl>
    <dt id="Parameter-and-return-types21">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $roles is a roles
+$roles is a roles
 $return is a reference to a hash where the key is a role and the value is a proteins
 roles is a reference to a list where each element is a role
 role is a string
 proteins is a reference to a list where each element is a protein
-protein is a string
-    </pre>
+protein is a string</pre>
    </dd>
    <dt id="Description21">
     Description
@@ -850,24 +716,19 @@ protein is a string
   <h2 id="roles_to_subsystems">
    roles_to_subsystems
   </h2>
-  <pre>
-   <code>
-    $return = $obj-&gt;roles_to_subsystems($roles)
-   </code>
-  </pre>
+  <pre><code>  $return = $obj-&gt;roles_to_subsystems($roles)</code></pre>
   <dl>
    <dt id="Parameter-and-return-types22">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $roles is a roles
+$roles is a roles
 $return is a reference to a hash where the key is a role and the value is a subsystems
 roles is a reference to a list where each element is a role
 role is a string
 subsystems is a reference to a list where each element is a subsystem
-subsystem is a string
-    </pre>
+subsystem is a string</pre>
    </dd>
    <dt id="Description22">
     Description
@@ -881,24 +742,19 @@ subsystem is a string
   <h2 id="roles_to_protein_families">
    roles_to_protein_families
   </h2>
-  <pre>
-   <code>
-    $return = $obj-&gt;roles_to_protein_families($roles)
-   </code>
-  </pre>
+  <pre><code>  $return = $obj-&gt;roles_to_protein_families($roles)</code></pre>
   <dl>
    <dt id="Parameter-and-return-types23">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $roles is a roles
+$roles is a roles
 $return is a reference to a hash where the key is a role and the value is a protein_families
 roles is a reference to a list where each element is a role
 role is a string
 protein_families is a reference to a list where each element is a protein_family
-protein_family is a string
-    </pre>
+protein_family is a string</pre>
    </dd>
    <dt id="Description23">
     Description
@@ -912,26 +768,21 @@ protein_family is a string
   <h2 id="fids_to_coexpressed_fids">
    fids_to_coexpressed_fids
   </h2>
-  <pre>
-   <code>
-    $return = $obj-&gt;fids_to_coexpressed_fids($fids)
-   </code>
-  </pre>
+  <pre><code>  $return = $obj-&gt;fids_to_coexpressed_fids($fids)</code></pre>
   <dl>
    <dt id="Parameter-and-return-types24">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $fids is a fids
+$fids is a fids
 $return is a reference to a hash where the key is a fid and the value is a scored_fids
 fids is a reference to a list where each element is a fid
 fid is a string
 scored_fids is a reference to a list where each element is a scored_fid
 scored_fid is a reference to a list containing 2 items:
 	0: a fid
-	1: (score) a float
-    </pre>
+	1: (score) a float</pre>
    </dd>
    <dt id="Description24">
     Description
@@ -945,24 +796,19 @@ scored_fid is a reference to a list containing 2 items:
   <h2 id="protein_families_to_fids">
    protein_families_to_fids
   </h2>
-  <pre>
-   <code>
-    $return = $obj-&gt;protein_families_to_fids($protein_families)
-   </code>
-  </pre>
+  <pre><code>  $return = $obj-&gt;protein_families_to_fids($protein_families)</code></pre>
   <dl>
    <dt id="Parameter-and-return-types25">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $protein_families is a protein_families
+$protein_families is a protein_families
 $return is a reference to a hash where the key is a protein_family and the value is a fids
 protein_families is a reference to a list where each element is a protein_family
 protein_family is a string
 fids is a reference to a list where each element is a fid
-fid is a string
-    </pre>
+fid is a string</pre>
    </dd>
    <dt id="Description25">
     Description
@@ -976,24 +822,19 @@ fid is a string
   <h2 id="protein_families_to_proteins">
    protein_families_to_proteins
   </h2>
-  <pre>
-   <code>
-    $return = $obj-&gt;protein_families_to_proteins($protein_families)
-   </code>
-  </pre>
+  <pre><code>  $return = $obj-&gt;protein_families_to_proteins($protein_families)</code></pre>
   <dl>
    <dt id="Parameter-and-return-types26">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $protein_families is a protein_families
+$protein_families is a protein_families
 $return is a reference to a hash where the key is a protein_family and the value is a proteins
 protein_families is a reference to a list where each element is a protein_family
 protein_family is a string
 proteins is a reference to a list where each element is a protein
-protein is a string
-    </pre>
+protein is a string</pre>
    </dd>
    <dt id="Description26">
     Description
@@ -1007,23 +848,18 @@ protein is a string
   <h2 id="protein_families_to_functions">
    protein_families_to_functions
   </h2>
-  <pre>
-   <code>
-    $return = $obj-&gt;protein_families_to_functions($protein_families)
-   </code>
-  </pre>
+  <pre><code>  $return = $obj-&gt;protein_families_to_functions($protein_families)</code></pre>
   <dl>
    <dt id="Parameter-and-return-types27">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $protein_families is a protein_families
+$protein_families is a protein_families
 $return is a reference to a hash where the key is a protein_family and the value is a function
 protein_families is a reference to a list where each element is a protein_family
 protein_family is a string
-function is a string
-    </pre>
+function is a string</pre>
    </dd>
    <dt id="Description27">
     Description
@@ -1037,18 +873,14 @@ function is a string
   <h2 id="protein_families_to_co_occurring_families">
    protein_families_to_co_occurring_families
   </h2>
-  <pre>
-   <code>
-    $return = $obj-&gt;protein_families_to_co_occurring_families($protein_families)
-   </code>
-  </pre>
+  <pre><code>  $return = $obj-&gt;protein_families_to_co_occurring_families($protein_families)</code></pre>
   <dl>
    <dt id="Parameter-and-return-types28">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $protein_families is a protein_families
+$protein_families is a protein_families
 $return is a reference to a hash where the key is a protein_family and the value is a fc_protein_families
 protein_families is a reference to a list where each element is a protein_family
 protein_family is a string
@@ -1058,8 +890,7 @@ fc_protein_family is a reference to a list containing 3 items:
 	1: a score
 	2: a function
 score is a float
-function is a string
-    </pre>
+function is a string</pre>
    </dd>
    <dt id="Description28">
     Description
@@ -1073,18 +904,14 @@ function is a string
   <h2 id="co_occurrence_evidence">
    co_occurrence_evidence
   </h2>
-  <pre>
-   <code>
-    $return = $obj-&gt;co_occurrence_evidence($pairs_of_fids)
-   </code>
-  </pre>
+  <pre><code>  $return = $obj-&gt;co_occurrence_evidence($pairs_of_fids)</code></pre>
   <dl>
    <dt id="Parameter-and-return-types29">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $pairs_of_fids is a pairs_of_fids
+$pairs_of_fids is a pairs_of_fids
 $return is a reference to a list where each element is a reference to a list containing 2 items:
 	0: a pair_of_fids
 	1: an evidence
@@ -1093,8 +920,7 @@ pair_of_fids is a reference to a list containing 2 items:
 	0: a fid
 	1: a fid
 fid is a string
-evidence is a reference to a list where each element is a pair_of_fids
-    </pre>
+evidence is a reference to a list where each element is a pair_of_fids</pre>
    </dd>
    <dt id="Description29">
     Description
@@ -1114,23 +940,18 @@ evidence is a reference to a list where each element is a pair_of_fids
   <h2 id="contigs_to_sequences">
    contigs_to_sequences
   </h2>
-  <pre>
-   <code>
-    $return = $obj-&gt;contigs_to_sequences($contigs)
-   </code>
-  </pre>
+  <pre><code>  $return = $obj-&gt;contigs_to_sequences($contigs)</code></pre>
   <dl>
    <dt id="Parameter-and-return-types30">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $contigs is a contigs
+$contigs is a contigs
 $return is a reference to a hash where the key is a contig and the value is a dna
 contigs is a reference to a list where each element is a contig
 contig is a string
-dna is a string
-    </pre>
+dna is a string</pre>
    </dd>
    <dt id="Description30">
     Description
@@ -1144,23 +965,18 @@ dna is a string
   <h2 id="contigs_to_lengths">
    contigs_to_lengths
   </h2>
-  <pre>
-   <code>
-    $return = $obj-&gt;contigs_to_lengths($contigs)
-   </code>
-  </pre>
+  <pre><code>  $return = $obj-&gt;contigs_to_lengths($contigs)</code></pre>
   <dl>
    <dt id="Parameter-and-return-types31">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $contigs is a contigs
+$contigs is a contigs
 $return is a reference to a hash where the key is a contig and the value is a length
 contigs is a reference to a list where each element is a contig
 contig is a string
-length is an int
-    </pre>
+length is an int</pre>
    </dd>
    <dt id="Description31">
     Description
@@ -1174,23 +990,18 @@ length is an int
   <h2 id="contigs_to_md5s">
    contigs_to_md5s
   </h2>
-  <pre>
-   <code>
-    $return = $obj-&gt;contigs_to_md5s($contigs)
-   </code>
-  </pre>
+  <pre><code>  $return = $obj-&gt;contigs_to_md5s($contigs)</code></pre>
   <dl>
    <dt id="Parameter-and-return-types32">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $contigs is a contigs
+$contigs is a contigs
 $return is a reference to a hash where the key is a contig and the value is a md5
 contigs is a reference to a list where each element is a contig
 contig is a string
-md5 is a string
-    </pre>
+md5 is a string</pre>
    </dd>
    <dt id="Description32">
     Description
@@ -1207,24 +1018,19 @@ md5 is a string
   <h2 id="md5s_to_genomes">
    md5s_to_genomes
   </h2>
-  <pre>
-   <code>
-    $return = $obj-&gt;md5s_to_genomes($md5s)
-   </code>
-  </pre>
+  <pre><code>  $return = $obj-&gt;md5s_to_genomes($md5s)</code></pre>
   <dl>
    <dt id="Parameter-and-return-types33">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $md5s is a md5s
+$md5s is a md5s
 $return is a reference to a hash where the key is a md5 and the value is a genomes
 md5s is a reference to a list where each element is a md5
 md5 is a string
 genomes is a reference to a list where each element is a genome
-genome is a string
-    </pre>
+genome is a string</pre>
    </dd>
    <dt id="Description33">
     Description
@@ -1233,37 +1039,28 @@ genome is a string
     <p>
      md5s to genomes is used to get the genomes associated with each of a list of input md5 values.
     </p>
-    <pre>
-     <code>
-      The routine takes as input a list of MD5 values.  It constructs a mapping from each input
+    <pre><code>           The routine takes as input a list of MD5 values.  It constructs a mapping from each input
            MD5 value to a list of genomes that share the same MD5 value.
 
            The MD5 value for a genome is independent of the names of contigs and the case of the DNA sequence
-           data.
-     </code>
-    </pre>
+           data.</code></pre>
    </dd>
   </dl>
   <h2 id="genomes_to_md5s">
    genomes_to_md5s
   </h2>
-  <pre>
-   <code>
-    $return = $obj-&gt;genomes_to_md5s($genomes)
-   </code>
-  </pre>
+  <pre><code>  $return = $obj-&gt;genomes_to_md5s($genomes)</code></pre>
   <dl>
    <dt id="Parameter-and-return-types34">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $genomes is a genomes
+$genomes is a genomes
 $return is a reference to a hash where the key is a genome and the value is a md5
 genomes is a reference to a list where each element is a genome
 genome is a string
-md5 is a string
-    </pre>
+md5 is a string</pre>
    </dd>
    <dt id="Description34">
     Description
@@ -1280,24 +1077,19 @@ md5 is a string
   <h2 id="genomes_to_contigs">
    genomes_to_contigs
   </h2>
-  <pre>
-   <code>
-    $return = $obj-&gt;genomes_to_contigs($genomes)
-   </code>
-  </pre>
+  <pre><code>  $return = $obj-&gt;genomes_to_contigs($genomes)</code></pre>
   <dl>
    <dt id="Parameter-and-return-types35">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $genomes is a genomes
+$genomes is a genomes
 $return is a reference to a hash where the key is a genome and the value is a contigs
 genomes is a reference to a list where each element is a genome
 genome is a string
 contigs is a reference to a list where each element is a contig
-contig is a string
-    </pre>
+contig is a string</pre>
    </dd>
    <dt id="Description35">
     Description
@@ -1311,18 +1103,14 @@ contig is a string
   <h2 id="genomes_to_fids">
    genomes_to_fids
   </h2>
-  <pre>
-   <code>
-    $return = $obj-&gt;genomes_to_fids($genomes, $types_of_fids)
-   </code>
-  </pre>
+  <pre><code>  $return = $obj-&gt;genomes_to_fids($genomes, $types_of_fids)</code></pre>
   <dl>
    <dt id="Parameter-and-return-types36">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $genomes is a genomes
+$genomes is a genomes
 $types_of_fids is a types_of_fids
 $return is a reference to a hash where the key is a genome and the value is a fids
 genomes is a reference to a list where each element is a genome
@@ -1330,8 +1118,7 @@ genome is a string
 types_of_fids is a reference to a list where each element is a type_of_fid
 type_of_fid is a string
 fids is a reference to a list where each element is a fid
-fid is a string
-    </pre>
+fid is a string</pre>
    </dd>
    <dt id="Description36">
     Description
@@ -1345,24 +1132,19 @@ fid is a string
   <h2 id="genomes_to_taxonomies">
    genomes_to_taxonomies
   </h2>
-  <pre>
-   <code>
-    $return = $obj-&gt;genomes_to_taxonomies($genomes)
-   </code>
-  </pre>
+  <pre><code>  $return = $obj-&gt;genomes_to_taxonomies($genomes)</code></pre>
   <dl>
    <dt id="Parameter-and-return-types37">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $genomes is a genomes
+$genomes is a genomes
 $return is a reference to a hash where the key is a genome and the value is a taxonomic_groups
 genomes is a reference to a list where each element is a genome
 genome is a string
 taxonomic_groups is a reference to a list where each element is a taxonomic_group
-taxonomic_group is a string
-    </pre>
+taxonomic_group is a string</pre>
    </dd>
    <dt id="Description37">
     Description
@@ -1371,36 +1153,28 @@ taxonomic_group is a string
     <p>
      The routine genomes_to_taxonomies can be used to retrieve taxonomic information for each of a list of input genomes. For each genome in the input list of genomes, a list of taxonomic groups is returned. Kbase will use the groups maintained by NCBI. For an NCBI taxonomic string like
     </p>
-    <pre>
-     <code>
-      cellular organisms;
+    <pre><code>     cellular organisms;
      Bacteria;
      Proteobacteria;
      Gammaproteobacteria;
      Enterobacteriales;
      Enterobacteriaceae;
      Escherichia;
-     Escherichia coli
-     </code>
-    </pre>
+     Escherichia coli</code></pre>
     <p>
-     associated with the strain &#39;Escherichia coli 1412&#39;, this routine would return a list of these taxonomic groups:
+     associated with the strain 'Escherichia coli 1412', this routine would return a list of these taxonomic groups:
     </p>
-    <pre>
-     <code>
-      [&#39;Bacteria&#39;,
-      &#39;Proteobacteria&#39;,
-      &#39;Gammaproteobacteria&#39;,
-      &#39;Enterobacteriales&#39;,
-      &#39;Enterobacteriaceae&#39;,
-      &#39;Escherichia&#39;,
-      &#39;Escherichia coli&#39;,
-      &#39;Escherichia coli 1412&#39;
-     ]
-     </code>
-    </pre>
+    <pre><code>     ['Bacteria',
+      'Proteobacteria',
+      'Gammaproteobacteria',
+      'Enterobacteriales',
+      'Enterobacteriaceae',
+      'Escherichia',
+      'Escherichia coli',
+      'Escherichia coli 1412'
+     ]</code></pre>
     <p>
-     That is, the initial &quot;cellular organisms&quot; has been deleted, and the strain ID has been added as the last &quot;grouping&quot;.
+     That is, the initial "cellular organisms" has been deleted, and the strain ID has been added as the last "grouping".
     </p>
     <p>
      The output is a mapping from genome IDs to lists of the form shown above.
@@ -1410,18 +1184,14 @@ taxonomic_group is a string
   <h2 id="genomes_to_subsystems">
    genomes_to_subsystems
   </h2>
-  <pre>
-   <code>
-    $return = $obj-&gt;genomes_to_subsystems($genomes)
-   </code>
-  </pre>
+  <pre><code>  $return = $obj-&gt;genomes_to_subsystems($genomes)</code></pre>
   <dl>
    <dt id="Parameter-and-return-types38">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $genomes is a genomes
+$genomes is a genomes
 $return is a reference to a hash where the key is a genome and the value is a variant_subsystem_pairs
 genomes is a reference to a list where each element is a genome
 genome is a string
@@ -1430,41 +1200,35 @@ variant_of_subsystem is a reference to a list containing 2 items:
 	0: a subsystem
 	1: a variant
 subsystem is a string
-variant is a string
-    </pre>
+variant is a string</pre>
    </dd>
    <dt id="Description38">
     Description
    </dt>
    <dd>
     <p>
-     A user can invoke genomes_to_subsystems to rerieve the names of the subsystems relevant to each genome. The input is a list of genomes. The output is a mapping from genome to a list of 2-tuples, where each 2-tuple give a variant code and a subsystem name. Variant codes of -1 (or *-1) amount to assertions that the genome contains no active variant. A variant code of 0 means &quot;work in progress&quot;, and presence or absence of the subsystem in the genome should be undetermined.
+     A user can invoke genomes_to_subsystems to rerieve the names of the subsystems relevant to each genome. The input is a list of genomes. The output is a mapping from genome to a list of 2-tuples, where each 2-tuple give a variant code and a subsystem name. Variant codes of -1 (or *-1) amount to assertions that the genome contains no active variant. A variant code of 0 means "work in progress", and presence or absence of the subsystem in the genome should be undetermined.
     </p>
    </dd>
   </dl>
   <h2 id="subsystems_to_genomes">
    subsystems_to_genomes
   </h2>
-  <pre>
-   <code>
-    $return = $obj-&gt;subsystems_to_genomes($subsystems)
-   </code>
-  </pre>
+  <pre><code>  $return = $obj-&gt;subsystems_to_genomes($subsystems)</code></pre>
   <dl>
    <dt id="Parameter-and-return-types39">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $subsystems is a subsystems
+$subsystems is a subsystems
 $return is a reference to a hash where the key is a subsystem and the value is a reference to a list where each element is a reference to a list containing 2 items:
 	0: a variant
 	1: a genome
 subsystems is a reference to a list where each element is a subsystem
 subsystem is a string
 variant is a string
-genome is a string
-    </pre>
+genome is a string</pre>
    </dd>
    <dt id="Description39">
     Description
@@ -1478,18 +1242,14 @@ genome is a string
   <h2 id="subsystems_to_fids">
    subsystems_to_fids
   </h2>
-  <pre>
-   <code>
-    $return = $obj-&gt;subsystems_to_fids($subsystems, $genomes)
-   </code>
-  </pre>
+  <pre><code>  $return = $obj-&gt;subsystems_to_fids($subsystems, $genomes)</code></pre>
   <dl>
    <dt id="Parameter-and-return-types40">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $subsystems is a subsystems
+$subsystems is a subsystems
 $genomes is a genomes
 $return is a reference to a hash where the key is a subsystem and the value is a reference to a hash where the key is a genome and the value is a reference to a list where each element is a reference to a list containing 2 items:
 	0: a variant
@@ -1500,66 +1260,56 @@ genomes is a reference to a list where each element is a genome
 genome is a string
 variant is a string
 fids is a reference to a list where each element is a fid
-fid is a string
-    </pre>
+fid is a string</pre>
    </dd>
    <dt id="Description40">
     Description
    </dt>
    <dd>
     <p>
-     The routine subsystems_to_fids allows the user to map subsystem names into the fids that occur in genomes in the subsystems. Specifically, the input is a list of subsystem names. What is returned is a mapping from subsystem names to a &quot;genome-mapping&quot;. The genome-mapping takes genome IDs to 2-tuples that capture the variant code of the genome and the fids from the genome that are included in the subsystem.
+     The routine subsystems_to_fids allows the user to map subsystem names into the fids that occur in genomes in the subsystems. Specifically, the input is a list of subsystem names. What is returned is a mapping from subsystem names to a "genome-mapping". The genome-mapping takes genome IDs to 2-tuples that capture the variant code of the genome and the fids from the genome that are included in the subsystem.
     </p>
    </dd>
   </dl>
   <h2 id="subsystems_to_roles">
    subsystems_to_roles
   </h2>
-  <pre>
-   <code>
-    $return = $obj-&gt;subsystems_to_roles($subsystems, $aux)
-   </code>
-  </pre>
+  <pre><code>  $return = $obj-&gt;subsystems_to_roles($subsystems, $aux)</code></pre>
   <dl>
    <dt id="Parameter-and-return-types41">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $subsystems is a subsystems
+$subsystems is a subsystems
 $aux is an aux
 $return is a reference to a hash where the key is a subsystem and the value is a roles
 subsystems is a reference to a list where each element is a subsystem
 subsystem is a string
 aux is an int
 roles is a reference to a list where each element is a role
-role is a string
-    </pre>
+role is a string</pre>
    </dd>
    <dt id="Description41">
     Description
    </dt>
    <dd>
     <p>
-     The routine subsystem_to_roles is used to determine the role descriptions that occur in a subsystem. The input is a list of subsystem names. A map is returned connecting subsystem names to lists of roles. &#39;aux&#39; is a boolean variable. If it is 0, auxiliary roles are not returned. If it is 1, they are returned.
+     The routine subsystem_to_roles is used to determine the role descriptions that occur in a subsystem. The input is a list of subsystem names. A map is returned connecting subsystem names to lists of roles. 'aux' is a boolean variable. If it is 0, auxiliary roles are not returned. If it is 1, they are returned.
     </p>
    </dd>
   </dl>
   <h2 id="subsystems_to_spreadsheets">
    subsystems_to_spreadsheets
   </h2>
-  <pre>
-   <code>
-    $return = $obj-&gt;subsystems_to_spreadsheets($subsystems, $genomes)
-   </code>
-  </pre>
+  <pre><code>  $return = $obj-&gt;subsystems_to_spreadsheets($subsystems, $genomes)</code></pre>
   <dl>
    <dt id="Parameter-and-return-types42">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $subsystems is a subsystems
+$subsystems is a subsystems
 $genomes is a genomes
 $return is a reference to a hash where the key is a subsystem and the value is a reference to a hash where the key is a genome and the value is a row
 subsystems is a reference to a list where each element is a subsystem
@@ -1572,36 +1322,30 @@ row is a reference to a list containing 2 items:
 variant is a string
 role is a string
 fids is a reference to a list where each element is a fid
-fid is a string
-    </pre>
+fid is a string</pre>
    </dd>
    <dt id="Description42">
     Description
    </dt>
    <dd>
     <p>
-     The subsystem_to_spreadsheet routine allows a user to extract the subsystem spreadsheets for a specified set of subsystem names. In the returned output, each subsystem is mapped to a hash that takes as input a genome ID and maps it to the &quot;row&quot; for the genome in the subsystem. The &quot;row&quot; is itself a 2-tuple composed of the variant code, and a mapping from role descriptions to lists of fids. We suggest writing a simple test script to get, say, the subsystem named &#39;Histidine Degradation&#39;, extracting the spreadsheet, and then using something like Dumper to make sure that it all makes sense.
+     The subsystem_to_spreadsheet routine allows a user to extract the subsystem spreadsheets for a specified set of subsystem names. In the returned output, each subsystem is mapped to a hash that takes as input a genome ID and maps it to the "row" for the genome in the subsystem. The "row" is itself a 2-tuple composed of the variant code, and a mapping from role descriptions to lists of fids. We suggest writing a simple test script to get, say, the subsystem named 'Histidine Degradation', extracting the spreadsheet, and then using something like Dumper to make sure that it all makes sense.
     </p>
    </dd>
   </dl>
   <h2 id="all_roles_used_in_models">
    all_roles_used_in_models
   </h2>
-  <pre>
-   <code>
-    $return = $obj-&gt;all_roles_used_in_models()
-   </code>
-  </pre>
+  <pre><code>  $return = $obj-&gt;all_roles_used_in_models()</code></pre>
   <dl>
    <dt id="Parameter-and-return-types43">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $return is a roles
+$return is a roles
 roles is a reference to a list where each element is a role
-role is a string
-    </pre>
+role is a string</pre>
    </dd>
    <dt id="Description43">
     Description
@@ -1615,18 +1359,14 @@ role is a string
   <h2 id="complexes_to_complex_data">
    complexes_to_complex_data
   </h2>
-  <pre>
-   <code>
-    $return = $obj-&gt;complexes_to_complex_data($complexes)
-   </code>
-  </pre>
+  <pre><code>  $return = $obj-&gt;complexes_to_complex_data($complexes)</code></pre>
   <dl>
    <dt id="Parameter-and-return-types44">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $complexes is a complexes
+$complexes is a complexes
 $return is a reference to a hash where the key is a complex and the value is a complex_data
 complexes is a reference to a list where each element is a complex
 complex is a string
@@ -1642,8 +1382,7 @@ role_with_flag is a reference to a list containing 2 items:
 role is a string
 optional is a string
 reactions is a reference to a list where each element is a reaction
-reaction is a string
-    </pre>
+reaction is a string</pre>
    </dd>
    <dt id="Description44">
     Description
@@ -1654,18 +1393,14 @@ reaction is a string
   <h2 id="genomes_to_genome_data">
    genomes_to_genome_data
   </h2>
-  <pre>
-   <code>
-    $return = $obj-&gt;genomes_to_genome_data($genomes)
-   </code>
-  </pre>
+  <pre><code>  $return = $obj-&gt;genomes_to_genome_data($genomes)</code></pre>
   <dl>
    <dt id="Parameter-and-return-types45">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $genomes is a genomes
+$genomes is a genomes
 $return is a reference to a hash where the key is a genome and the value is a genome_data
 genomes is a reference to a list where each element is a genome
 genome is a string
@@ -1679,8 +1414,7 @@ genome_data is a reference to a hash where the following keys are defined:
 	rnas has a value which is an int
 	scientific_name has a value which is a string
 	taxonomy has a value which is a string
-	genome_md5 has a value which is a string
-    </pre>
+	genome_md5 has a value which is a string</pre>
    </dd>
    <dt id="Description45">
     Description
@@ -1691,18 +1425,14 @@ genome_data is a reference to a hash where the following keys are defined:
   <h2 id="fids_to_regulon_data">
    fids_to_regulon_data
   </h2>
-  <pre>
-   <code>
-    $return = $obj-&gt;fids_to_regulon_data($fids)
-   </code>
-  </pre>
+  <pre><code>  $return = $obj-&gt;fids_to_regulon_data($fids)</code></pre>
   <dl>
    <dt id="Parameter-and-return-types46">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $fids is a fids
+$fids is a fids
 $return is a reference to a hash where the key is a fid and the value is a regulons_data
 fids is a reference to a list where each element is a fid
 fid is a string
@@ -1711,8 +1441,7 @@ regulon_data is a reference to a hash where the following keys are defined:
 	regulon_id has a value which is a regulon
 	regulon_set has a value which is a fids
 	tfs has a value which is a fids
-regulon is a string
-    </pre>
+regulon is a string</pre>
    </dd>
    <dt id="Description46">
     Description
@@ -1723,24 +1452,19 @@ regulon is a string
   <h2 id="regulons_to_fids">
    regulons_to_fids
   </h2>
-  <pre>
-   <code>
-    $return = $obj-&gt;regulons_to_fids($regulons)
-   </code>
-  </pre>
+  <pre><code>  $return = $obj-&gt;regulons_to_fids($regulons)</code></pre>
   <dl>
    <dt id="Parameter-and-return-types47">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $regulons is a regulons
+$regulons is a regulons
 $return is a reference to a hash where the key is a regulon and the value is a fids
 regulons is a reference to a list where each element is a regulon
 regulon is a string
 fids is a reference to a list where each element is a fid
-fid is a string
-    </pre>
+fid is a string</pre>
    </dd>
    <dt id="Description47">
     Description
@@ -1751,18 +1475,14 @@ fid is a string
   <h2 id="fids_to_feature_data">
    fids_to_feature_data
   </h2>
-  <pre>
-   <code>
-    $return = $obj-&gt;fids_to_feature_data($fids)
-   </code>
-  </pre>
+  <pre><code>  $return = $obj-&gt;fids_to_feature_data($fids)</code></pre>
   <dl>
    <dt id="Parameter-and-return-types48">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $fids is a fids
+$fids is a fids
 $return is a reference to a hash where the key is a fid and the value is a feature_data
 fids is a reference to a list where each element is a fid
 fid is a string
@@ -1787,8 +1507,7 @@ region_of_dna is a reference to a list containing 4 items:
 contig is a string
 begin is an int
 strand is a string
-length is an int
-    </pre>
+length is an int</pre>
    </dd>
    <dt id="Description48">
     Description
@@ -1799,18 +1518,14 @@ length is an int
   <h2 id="equiv_sequence_assertions">
    equiv_sequence_assertions
   </h2>
-  <pre>
-   <code>
-    $return = $obj-&gt;equiv_sequence_assertions($proteins)
-   </code>
-  </pre>
+  <pre><code>  $return = $obj-&gt;equiv_sequence_assertions($proteins)</code></pre>
   <dl>
    <dt id="Parameter-and-return-types49">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $proteins is a proteins
+$proteins is a proteins
 $return is a reference to a hash where the key is a protein and the value is a function_assertions
 proteins is a reference to a list where each element is a protein
 protein is a string
@@ -1821,33 +1536,28 @@ function_assertion is a reference to a list containing 3 items:
 	2: a source
 id is a string
 function is a string
-source is a string
-    </pre>
+source is a string</pre>
    </dd>
    <dt id="Description49">
     Description
    </dt>
    <dd>
     <p>
-     Different groups have made assertions of function for numerous protein sequences. The equiv_sequence_assertions allows the user to gather function assertions from all of the sources. Each assertion includes a field indicating whether the person making the assertion viewed themself as an &quot;expert&quot;. The routine gathers assertions for all proteins having identical protein sequence.
+     Different groups have made assertions of function for numerous protein sequences. The equiv_sequence_assertions allows the user to gather function assertions from all of the sources. Each assertion includes a field indicating whether the person making the assertion viewed themself as an "expert". The routine gathers assertions for all proteins having identical protein sequence.
     </p>
    </dd>
   </dl>
   <h2 id="fids_to_atomic_regulons">
    fids_to_atomic_regulons
   </h2>
-  <pre>
-   <code>
-    $return = $obj-&gt;fids_to_atomic_regulons($fids)
-   </code>
-  </pre>
+  <pre><code>  $return = $obj-&gt;fids_to_atomic_regulons($fids)</code></pre>
   <dl>
    <dt id="Parameter-and-return-types50">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $fids is a fids
+$fids is a fids
 $return is a reference to a hash where the key is a fid and the value is an atomic_regulon_size_pairs
 fids is a reference to a list where each element is a fid
 fid is a string
@@ -1856,8 +1566,7 @@ atomic_regulon_size_pair is a reference to a list containing 2 items:
 	0: an atomic_regulon
 	1: an atomic_regulon_size
 atomic_regulon is a string
-atomic_regulon_size is an int
-    </pre>
+atomic_regulon_size is an int</pre>
    </dd>
    <dt id="Description50">
     Description
@@ -1871,24 +1580,19 @@ atomic_regulon_size is an int
   <h2 id="atomic_regulons_to_fids">
    atomic_regulons_to_fids
   </h2>
-  <pre>
-   <code>
-    $return = $obj-&gt;atomic_regulons_to_fids($atomic_regulons)
-   </code>
-  </pre>
+  <pre><code>  $return = $obj-&gt;atomic_regulons_to_fids($atomic_regulons)</code></pre>
   <dl>
    <dt id="Parameter-and-return-types51">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $atomic_regulons is an atomic_regulons
+$atomic_regulons is an atomic_regulons
 $return is a reference to a hash where the key is an atomic_regulon and the value is a fids
 atomic_regulons is a reference to a list where each element is an atomic_regulon
 atomic_regulon is a string
 fids is a reference to a list where each element is a fid
-fid is a string
-    </pre>
+fid is a string</pre>
    </dd>
    <dt id="Description51">
     Description
@@ -1902,23 +1606,18 @@ fid is a string
   <h2 id="fids_to_protein_sequences">
    fids_to_protein_sequences
   </h2>
-  <pre>
-   <code>
-    $return = $obj-&gt;fids_to_protein_sequences($fids)
-   </code>
-  </pre>
+  <pre><code>  $return = $obj-&gt;fids_to_protein_sequences($fids)</code></pre>
   <dl>
    <dt id="Parameter-and-return-types52">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $fids is a fids
+$fids is a fids
 $return is a reference to a hash where the key is a fid and the value is a protein_sequence
 fids is a reference to a list where each element is a fid
 fid is a string
-protein_sequence is a string
-    </pre>
+protein_sequence is a string</pre>
    </dd>
    <dt id="Description52">
     Description
@@ -1932,23 +1631,18 @@ protein_sequence is a string
   <h2 id="fids_to_proteins">
    fids_to_proteins
   </h2>
-  <pre>
-   <code>
-    $return = $obj-&gt;fids_to_proteins($fids)
-   </code>
-  </pre>
+  <pre><code>  $return = $obj-&gt;fids_to_proteins($fids)</code></pre>
   <dl>
    <dt id="Parameter-and-return-types53">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $fids is a fids
+$fids is a fids
 $return is a reference to a hash where the key is a fid and the value is a md5
 fids is a reference to a list where each element is a fid
 fid is a string
-md5 is a string
-    </pre>
+md5 is a string</pre>
    </dd>
    <dt id="Description53">
     Description
@@ -1959,23 +1653,18 @@ md5 is a string
   <h2 id="fids_to_dna_sequences">
    fids_to_dna_sequences
   </h2>
-  <pre>
-   <code>
-    $return = $obj-&gt;fids_to_dna_sequences($fids)
-   </code>
-  </pre>
+  <pre><code>  $return = $obj-&gt;fids_to_dna_sequences($fids)</code></pre>
   <dl>
    <dt id="Parameter-and-return-types54">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $fids is a fids
+$fids is a fids
 $return is a reference to a hash where the key is a fid and the value is a dna_sequence
 fids is a reference to a list where each element is a fid
 fid is a string
-dna_sequence is a string
-    </pre>
+dna_sequence is a string</pre>
    </dd>
    <dt id="Description54">
     Description
@@ -1989,63 +1678,50 @@ dna_sequence is a string
   <h2 id="roles_to_fids">
    roles_to_fids
   </h2>
-  <pre>
-   <code>
-    $return = $obj-&gt;roles_to_fids($roles, $genomes)
-   </code>
-  </pre>
+  <pre><code>  $return = $obj-&gt;roles_to_fids($roles, $genomes)</code></pre>
   <dl>
    <dt id="Parameter-and-return-types55">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $roles is a roles
+$roles is a roles
 $genomes is a genomes
 $return is a reference to a hash where the key is a role and the value is a fid
 roles is a reference to a list where each element is a role
 role is a string
 genomes is a reference to a list where each element is a genome
 genome is a string
-fid is a string
-    </pre>
+fid is a string</pre>
    </dd>
    <dt id="Description55">
     Description
    </dt>
    <dd>
     <p>
-     A &quot;function&quot; is a set of &quot;roles&quot; (often called &quot;functional roles&quot;);
+     A "function" is a set of "roles" (often called "functional roles");
     </p>
-    <pre>
-     <code>
-      F1 / F2  (where F1 and F2 are roles)  is a function that implements
+    <pre><code>                F1 / F2  (where F1 and F2 are roles)  is a function that implements
                           two functional roles in different domains of the protein.
                 F1 @ F2 implements multiple roles through broad specificity
                 F1; F2  is thought to implement F1 or f2 (uncertainty)
 
             You often wish to find the fids in one or more genomes that
             implement specific functional roles.  To do this, you can use
-            roles_to_fids.
-     </code>
-    </pre>
+            roles_to_fids.</code></pre>
    </dd>
   </dl>
   <h2 id="reactions_to_complexes">
    reactions_to_complexes
   </h2>
-  <pre>
-   <code>
-    $return = $obj-&gt;reactions_to_complexes($reactions)
-   </code>
-  </pre>
+  <pre><code>  $return = $obj-&gt;reactions_to_complexes($reactions)</code></pre>
   <dl>
    <dt id="Parameter-and-return-types56">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $reactions is a reactions
+$reactions is a reactions
 $return is a reference to a hash where the key is a reaction and the value is a complexes_with_flags
 reactions is a reference to a list where each element is a reaction
 reaction is a string
@@ -2054,8 +1730,7 @@ complex_with_flag is a reference to a list containing 2 items:
 	0: a complex
 	1: an optional
 complex is a string
-optional is a string
-    </pre>
+optional is a string</pre>
    </dd>
    <dt id="Description56">
     Description
@@ -2069,23 +1744,18 @@ optional is a string
   <h2 id="aliases_to_fids">
    aliases_to_fids
   </h2>
-  <pre>
-   <code>
-    $return = $obj-&gt;aliases_to_fids($aliases)
-   </code>
-  </pre>
+  <pre><code>  $return = $obj-&gt;aliases_to_fids($aliases)</code></pre>
   <dl>
    <dt id="Parameter-and-return-types57">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $aliases is an aliases
+$aliases is an aliases
 $return is a reference to a hash where the key is an alias and the value is a fid
 aliases is a reference to a list where each element is an alias
 alias is a string
-fid is a string
-    </pre>
+fid is a string</pre>
    </dd>
    <dt id="Description57">
     Description
@@ -2096,24 +1766,19 @@ fid is a string
   <h2 id="external_ids_to_fids">
    external_ids_to_fids
   </h2>
-  <pre>
-   <code>
-    $return = $obj-&gt;external_ids_to_fids($external_ids, $prefix_match)
-   </code>
-  </pre>
+  <pre><code>  $return = $obj-&gt;external_ids_to_fids($external_ids, $prefix_match)</code></pre>
   <dl>
    <dt id="Parameter-and-return-types58">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $external_ids is an external_ids
+$external_ids is an external_ids
 $prefix_match is an int
 $return is a reference to a hash where the key is an external_id and the value is a fid
 external_ids is a reference to a list where each element is an external_id
 external_id is a string
-fid is a string
-    </pre>
+fid is a string</pre>
    </dd>
    <dt id="Description58">
     Description
@@ -2124,24 +1789,19 @@ fid is a string
   <h2 id="reaction_strings">
    reaction_strings
   </h2>
-  <pre>
-   <code>
-    $return = $obj-&gt;reaction_strings($reactions, $name_parameter)
-   </code>
-  </pre>
+  <pre><code>  $return = $obj-&gt;reaction_strings($reactions, $name_parameter)</code></pre>
   <dl>
    <dt id="Parameter-and-return-types59">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $reactions is a reactions
+$reactions is a reactions
 $name_parameter is a name_parameter
 $return is a reference to a hash where the key is a reaction and the value is a string
 reactions is a reference to a list where each element is a reaction
 reaction is a string
-name_parameter is a string
-    </pre>
+name_parameter is a string</pre>
    </dd>
    <dt id="Description59">
     Description
@@ -2155,24 +1815,19 @@ name_parameter is a string
   <h2 id="roles_to_complexes">
    roles_to_complexes
   </h2>
-  <pre>
-   <code>
-    $return = $obj-&gt;roles_to_complexes($roles)
-   </code>
-  </pre>
+  <pre><code>  $return = $obj-&gt;roles_to_complexes($roles)</code></pre>
   <dl>
    <dt id="Parameter-and-return-types60">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $roles is a roles
+$roles is a roles
 $return is a reference to a hash where the key is a role and the value is a complexes
 roles is a reference to a list where each element is a role
 role is a string
 complexes is a reference to a list where each element is a complex
-complex is a string
-    </pre>
+complex is a string</pre>
    </dd>
    <dt id="Description60">
     Description
@@ -2182,31 +1837,26 @@ complex is a string
      roles_to_complexes allows a user to connect Roles to Complexes, from there, the connection exists to Reactions (although in the actual ER-model model, the connection from Complex to Reaction goes through ReactionComplex). Since Roles also connect to fids, the connection between fids and Reactions is induced.
     </p>
     <p>
-     The &quot;name_parameter&quot; can be 0, 1 or &#39;only&#39;. If 1, then the compound name will be included with the ID in the output. If only, the compound name will be included instead of the ID. If 0, only the ID will be included. The default is 0.
+     The "name_parameter" can be 0, 1 or 'only'. If 1, then the compound name will be included with the ID in the output. If only, the compound name will be included instead of the ID. If 0, only the ID will be included. The default is 0.
     </p>
    </dd>
   </dl>
   <h2 id="complexes_to_roles">
    complexes_to_roles
   </h2>
-  <pre>
-   <code>
-    $return = $obj-&gt;complexes_to_roles($complexes)
-   </code>
-  </pre>
+  <pre><code>  $return = $obj-&gt;complexes_to_roles($complexes)</code></pre>
   <dl>
    <dt id="Parameter-and-return-types61">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $complexes is a complexes
+$complexes is a complexes
 $return is a reference to a hash where the key is a complexes and the value is a roles
 complexes is a reference to a list where each element is a complex
 complex is a string
 roles is a reference to a list where each element is a role
-role is a string
-    </pre>
+role is a string</pre>
    </dd>
    <dt id="Description61">
     Description
@@ -2217,18 +1867,14 @@ role is a string
   <h2 id="fids_to_subsystem_data">
    fids_to_subsystem_data
   </h2>
-  <pre>
-   <code>
-    $return = $obj-&gt;fids_to_subsystem_data($fids)
-   </code>
-  </pre>
+  <pre><code>  $return = $obj-&gt;fids_to_subsystem_data($fids)</code></pre>
   <dl>
    <dt id="Parameter-and-return-types62">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $fids is a fids
+$fids is a fids
 $return is a reference to a hash where the key is a fid and the value is a ss_var_role_tuples
 fids is a reference to a list where each element is a fid
 fid is a string
@@ -2239,8 +1885,7 @@ ss_var_role_tuple is a reference to a list containing 3 items:
 	2: a role
 subsystem is a string
 variant is a string
-role is a string
-    </pre>
+role is a string</pre>
    </dd>
    <dt id="Description62">
     Description
@@ -2251,22 +1896,17 @@ role is a string
   <h2 id="representative">
    representative
   </h2>
-  <pre>
-   <code>
-    $return = $obj-&gt;representative($genomes)
-   </code>
-  </pre>
+  <pre><code>  $return = $obj-&gt;representative($genomes)</code></pre>
   <dl>
    <dt id="Parameter-and-return-types63">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $genomes is a genomes
+$genomes is a genomes
 $return is a reference to a hash where the key is a genome and the value is a genome
 genomes is a reference to a list where each element is a genome
-genome is a string
-    </pre>
+genome is a string</pre>
    </dd>
    <dt id="Description63">
     Description
@@ -2277,23 +1917,18 @@ genome is a string
   <h2 id="otu_members">
    otu_members
   </h2>
-  <pre>
-   <code>
-    $return = $obj-&gt;otu_members($genomes)
-   </code>
-  </pre>
+  <pre><code>  $return = $obj-&gt;otu_members($genomes)</code></pre>
   <dl>
    <dt id="Parameter-and-return-types64">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $genomes is a genomes
+$genomes is a genomes
 $return is a reference to a hash where the key is a genome and the value is a reference to a hash where the key is a genome and the value is a genome_name
 genomes is a reference to a list where each element is a genome
 genome is a string
-genome_name is a string
-    </pre>
+genome_name is a string</pre>
    </dd>
    <dt id="Description64">
     Description
@@ -2304,21 +1939,16 @@ genome_name is a string
   <h2 id="otus_to_representatives">
    otus_to_representatives
   </h2>
-  <pre>
-   <code>
-    $return = $obj-&gt;otus_to_representatives($otus)
-   </code>
-  </pre>
+  <pre><code>  $return = $obj-&gt;otus_to_representatives($otus)</code></pre>
   <dl>
    <dt id="Parameter-and-return-types65">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $otus is a reference to a list where each element is an int
+$otus is a reference to a list where each element is an int
 $return is a reference to a hash where the key is an int and the value is a genome
-genome is a string
-    </pre>
+genome is a string</pre>
    </dd>
    <dt id="Description65">
     Description
@@ -2329,23 +1959,18 @@ genome is a string
   <h2 id="fids_to_genomes">
    fids_to_genomes
   </h2>
-  <pre>
-   <code>
-    $return = $obj-&gt;fids_to_genomes($fids)
-   </code>
-  </pre>
+  <pre><code>  $return = $obj-&gt;fids_to_genomes($fids)</code></pre>
   <dl>
    <dt id="Parameter-and-return-types66">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $fids is a fids
+$fids is a fids
 $return is a reference to a hash where the key is a fid and the value is a genome
 fids is a reference to a list where each element is a fid
 fid is a string
-genome is a string
-    </pre>
+genome is a string</pre>
    </dd>
    <dt id="Description66">
     Description
@@ -2356,18 +1981,14 @@ genome is a string
   <h2 id="text_search">
    text_search
   </h2>
-  <pre>
-   <code>
-    $return = $obj-&gt;text_search($input, $start, $count, $entities)
-   </code>
-  </pre>
+  <pre><code>  $return = $obj-&gt;text_search($input, $start, $count, $entities)</code></pre>
   <dl>
    <dt id="Parameter-and-return-types67">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $input is a string
+$input is a string
 $start is an int
 $count is an int
 $entities is a reference to a list where each element is a string
@@ -2377,33 +1998,28 @@ search_hit is a reference to a list containing 2 items:
 	0: a weight
 	1: a reference to a hash where the key is a field_name and the value is a string
 weight is an int
-field_name is a string
-    </pre>
+field_name is a string</pre>
    </dd>
    <dt id="Description67">
     Description
    </dt>
    <dd>
     <p>
-     text_search performs a search against a full-text index maintained for the CDMI. The parameter &quot;input&quot; is the text string to be searched for. The parameter &quot;entities&quot; defines the entities to be searched. If the list is empty, all indexed entities will be searched. The &quot;start&quot; and &quot;count&quot; parameters limit the results to &quot;count&quot; hits starting at &quot;start&quot;.
+     text_search performs a search against a full-text index maintained for the CDMI. The parameter "input" is the text string to be searched for. The parameter "entities" defines the entities to be searched. If the list is empty, all indexed entities will be searched. The "start" and "count" parameters limit the results to "count" hits starting at "start".
     </p>
    </dd>
   </dl>
   <h2 id="corresponds">
    corresponds
   </h2>
-  <pre>
-   <code>
-    $return = $obj-&gt;corresponds($fids, $genome)
-   </code>
-  </pre>
+  <pre><code>  $return = $obj-&gt;corresponds($fids, $genome)</code></pre>
   <dl>
    <dt id="Parameter-and-return-types68">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $fids is a fids
+$fids is a fids
 $genome is a genome
 $return is a reference to a hash where the key is a fid and the value is a correspondence
 fids is a reference to a list where each element is a fid
@@ -2419,8 +2035,7 @@ correspondence is a reference to a hash where the following keys are defined:
 	b2 has a value which is an int
 	e2 has a value which is an int
 	ln2 has a value which is an int
-	score has a value which is an int
-    </pre>
+	score has a value which is an int</pre>
    </dd>
    <dt id="Description68">
     Description
@@ -2431,18 +2046,14 @@ correspondence is a reference to a hash where the following keys are defined:
   <h2 id="corresponds_from_sequences">
    corresponds_from_sequences
   </h2>
-  <pre>
-   <code>
-    $return = $obj-&gt;corresponds_from_sequences($g1_sequences, $g1_locations, $g2_sequences, $g2_locations)
-   </code>
-  </pre>
+  <pre><code>  $return = $obj-&gt;corresponds_from_sequences($g1_sequences, $g1_locations, $g2_sequences, $g2_locations)</code></pre>
   <dl>
    <dt id="Parameter-and-return-types69">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $g1_sequences is a reference to a list where each element is a reference to a list containing 2 items:
+$g1_sequences is a reference to a list where each element is a reference to a list containing 2 items:
 	0: a fid
 	1: a protein_sequence
 $g1_locations is a reference to a list where each element is a reference to a list containing 2 items:
@@ -2477,8 +2088,7 @@ correspondence is a reference to a hash where the following keys are defined:
 	b2 has a value which is an int
 	e2 has a value which is an int
 	ln2 has a value which is an int
-	score has a value which is an int
-    </pre>
+	score has a value which is an int</pre>
    </dd>
    <dt id="Description69">
     Description
@@ -2489,18 +2099,14 @@ correspondence is a reference to a hash where the following keys are defined:
   <h2 id="close_genomes">
    close_genomes
   </h2>
-  <pre>
-   <code>
-    $return = $obj-&gt;close_genomes($seq_set, $n)
-   </code>
-  </pre>
+  <pre><code>  $return = $obj-&gt;close_genomes($seq_set, $n)</code></pre>
   <dl>
    <dt id="Parameter-and-return-types70">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $seq_set is a seq_set
+$seq_set is a seq_set
 $n is an int
 $return is a reference to a list where each element is a reference to a list containing 2 items:
 	0: a genome
@@ -2513,8 +2119,7 @@ seq_triple is a reference to a list containing 3 items:
 id is a string
 comment is a string
 sequence is a string
-genome is a string
-    </pre>
+genome is a string</pre>
    </dd>
    <dt id="Description70">
     Description
@@ -2525,18 +2130,14 @@ genome is a string
   <h2 id="representative_sequences">
    representative_sequences
   </h2>
-  <pre>
-   <code>
-    $return_1, $return_2 = $obj-&gt;representative_sequences($seq_set, $rep_seq_parms)
-   </code>
-  </pre>
+  <pre><code>  $return_1, $return_2 = $obj-&gt;representative_sequences($seq_set, $rep_seq_parms)</code></pre>
   <dl>
    <dt id="Parameter-and-return-types71">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $seq_set is a seq_set
+$seq_set is a seq_set
 $rep_seq_parms is a rep_seq_parms
 $return_1 is an id_set
 $return_2 is a reference to a list where each element is an id_set
@@ -2554,8 +2155,7 @@ rep_seq_parms is a reference to a hash where the following keys are defined:
 	alg has a value which is an int
 	type_sim has a value which is a string
 	cutoff has a value which is a float
-id_set is a reference to a list where each element is an id
-    </pre>
+id_set is a reference to a list where each element is an id</pre>
    </dd>
    <dt id="Description71">
     Description
@@ -2569,18 +2169,14 @@ id_set is a reference to a list where each element is an id
   <h2 id="align_sequences">
    align_sequences
   </h2>
-  <pre>
-   <code>
-    $return = $obj-&gt;align_sequences($seq_set, $align_seq_parms)
-   </code>
-  </pre>
+  <pre><code>  $return = $obj-&gt;align_sequences($seq_set, $align_seq_parms)</code></pre>
   <dl>
    <dt id="Parameter-and-return-types72">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $seq_set is a seq_set
+$seq_set is a seq_set
 $align_seq_parms is an align_seq_parms
 $return is an alignment
 seq_set is a reference to a list where each element is a seq_triple
@@ -2681,8 +2277,7 @@ mafft_parms_t is a reference to a hash where the following keys are defined:
 	thread has a value which is a string
 	tm has a value which is a string
 	weighti has a value which is a string
-alignment is a seq_set
-    </pre>
+alignment is a seq_set</pre>
    </dd>
    <dt id="Description72">
     Description
@@ -2693,18 +2288,14 @@ alignment is a seq_set
   <h2 id="build_tree">
    build_tree
   </h2>
-  <pre>
-   <code>
-    $return = $obj-&gt;build_tree($alignment, $build_tree_parms)
-   </code>
-  </pre>
+  <pre><code>  $return = $obj-&gt;build_tree($alignment, $build_tree_parms)</code></pre>
   <dl>
    <dt id="Parameter-and-return-types73">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $alignment is an alignment
+$alignment is an alignment
 $build_tree_parms is a build_tree_parms
 $return is a newick_tree
 alignment is a seq_set
@@ -2725,8 +2316,7 @@ build_tree_parms is a reference to a hash where the following keys are defined:
 	search has a value which is a string
 	tool has a value which is a string
 	tool_params has a value which is a string
-newick_tree is a string
-    </pre>
+newick_tree is a string</pre>
    </dd>
    <dt id="Description73">
     Description
@@ -2737,18 +2327,14 @@ newick_tree is a string
   <h2 id="alignment_by_id">
    alignment_by_id
   </h2>
-  <pre>
-   <code>
-    $return = $obj-&gt;alignment_by_id($aln_id)
-   </code>
-  </pre>
+  <pre><code>  $return = $obj-&gt;alignment_by_id($aln_id)</code></pre>
   <dl>
    <dt id="Parameter-and-return-types74">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $aln_id is an aln_id
+$aln_id is an aln_id
 $return is an alignment
 aln_id is a string
 alignment is a seq_set
@@ -2759,8 +2345,7 @@ seq_triple is a reference to a list containing 3 items:
 	2: a sequence
 id is a string
 comment is a string
-sequence is a string
-    </pre>
+sequence is a string</pre>
    </dd>
    <dt id="Description74">
     Description
@@ -2771,22 +2356,17 @@ sequence is a string
   <h2 id="tree_by_id">
    tree_by_id
   </h2>
-  <pre>
-   <code>
-    $return = $obj-&gt;tree_by_id($tree_id)
-   </code>
-  </pre>
+  <pre><code>  $return = $obj-&gt;tree_by_id($tree_id)</code></pre>
   <dl>
    <dt id="Parameter-and-return-types75">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $tree_id is a tree_id
+$tree_id is a tree_id
 $return is a newick_tree
 tree_id is a string
-newick_tree is a string
-    </pre>
+newick_tree is a string</pre>
    </dd>
    <dt id="Description75">
     Description
@@ -2797,21 +2377,16 @@ newick_tree is a string
   <h2 id="all_entities">
    all_entities
   </h2>
-  <pre>
-   <code>
-    $return = $obj-&gt;all_entities()
-   </code>
-  </pre>
+  <pre><code>  $return = $obj-&gt;all_entities()</code></pre>
   <dl>
    <dt id="Parameter-and-return-types76">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $return is an entity_names
+$return is an entity_names
 entity_names is a reference to a list where each element is an entity_name
-entity_name is a string
-    </pre>
+entity_name is a string</pre>
    </dd>
    <dt id="Description76">
     Description
@@ -2825,21 +2400,16 @@ entity_name is a string
   <h2 id="all_relationships">
    all_relationships
   </h2>
-  <pre>
-   <code>
-    $return = $obj-&gt;all_relationships()
-   </code>
-  </pre>
+  <pre><code>  $return = $obj-&gt;all_relationships()</code></pre>
   <dl>
    <dt id="Parameter-and-return-types77">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $return is a relationship_names
+$return is a relationship_names
 relationship_names is a reference to a list where each element is a relationship_name
-relationship_name is a string
-    </pre>
+relationship_name is a string</pre>
    </dd>
    <dt id="Description77">
     Description
@@ -2853,18 +2423,14 @@ relationship_name is a string
   <h2 id="get_entity">
    get_entity
   </h2>
-  <pre>
-   <code>
-    $return = $obj-&gt;get_entity($entity_names)
-   </code>
-  </pre>
+  <pre><code>  $return = $obj-&gt;get_entity($entity_names)</code></pre>
   <dl>
    <dt id="Parameter-and-return-types78">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $entity_names is an entity_names
+$entity_names is an entity_names
 $return is a reference to a hash where the key is a string and the value is an entity_info
 entity_names is a reference to a list where each element is an entity_name
 entity_name is a string
@@ -2878,7 +2444,7 @@ field_info is a reference to a hash where the following keys are defined:
 	name has a value which is a string
 	notes has a value which is a string
 	type has a value which is a string
-    </pre>
+</pre>
    </dd>
    <dt id="Description78">
     Description
@@ -2892,18 +2458,14 @@ field_info is a reference to a hash where the following keys are defined:
   <h2 id="get_relationship">
    get_relationship
   </h2>
-  <pre>
-   <code>
-    $return = $obj-&gt;get_relationship($relationship_names)
-   </code>
-  </pre>
+  <pre><code>  $return = $obj-&gt;get_relationship($relationship_names)</code></pre>
   <dl>
    <dt id="Parameter-and-return-types79">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $relationship_names is a relationship_names
+$relationship_names is a relationship_names
 $return is a reference to a hash where the key is a string and the value is a relationship_info
 relationship_names is a reference to a list where each element is a relationship_name
 relationship_name is a string
@@ -2919,8 +2481,7 @@ field_name is a string
 field_info is a reference to a hash where the following keys are defined:
 	name has a value which is a string
 	notes has a value which is a string
-	type has a value which is a string
-    </pre>
+	type has a value which is a string</pre>
    </dd>
    <dt id="Description79">
     Description
@@ -2934,19 +2495,15 @@ field_info is a reference to a hash where the following keys are defined:
   <h2 id="version">
    version
   </h2>
-  <pre>
-   <code>
-    $return = $obj-&gt;version()
-   </code>
-  </pre>
+  <pre><code>  $return = $obj-&gt;version()</code></pre>
   <dl>
    <dt id="Parameter-and-return-types80">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $return is a string
-    </pre>
+$return is a string
+</pre>
    </dd>
    <dt id="Description80">
     Description
@@ -2969,8 +2526,8 @@ field_info is a reference to a hash where the following keys are defined:
    </dt>
    <dd>
     <pre>
-     a string
-    </pre>
+a string
+</pre>
    </dd>
   </dl>
   <h2 id="annotation_time">
@@ -2982,8 +2539,8 @@ field_info is a reference to a hash where the following keys are defined:
    </dt>
    <dd>
     <pre>
-     an int
-    </pre>
+an int
+</pre>
    </dd>
   </dl>
   <h2 id="comment">
@@ -2995,8 +2552,8 @@ field_info is a reference to a hash where the following keys are defined:
    </dt>
    <dd>
     <pre>
-     a string
-    </pre>
+a string
+</pre>
    </dd>
   </dl>
   <h2 id="fid">
@@ -3008,7 +2565,7 @@ field_info is a reference to a hash where the following keys are defined:
    </dt>
    <dd>
     <p>
-     A fid is a &quot;feature id&quot;. A feature represents an ordered list of regions from the contigs of a genome. Features all have types. This allows you to speak of not only protein-encoding genes (PEGs) and RNAs, but also binding sites, large regions, etc. The location of a fid is defined as a list of &quot;location of a contiguous DNA string&quot; pieces (see the description of the type &quot;location&quot;)
+     A fid is a "feature id". A feature represents an ordered list of regions from the contigs of a genome. Features all have types. This allows you to speak of not only protein-encoding genes (PEGs) and RNAs, but also binding sites, large regions, etc. The location of a fid is defined as a list of "location of a contiguous DNA string" pieces (see the description of the type "location")
     </p>
    </dd>
    <dt id="Definition3">
@@ -3016,8 +2573,8 @@ field_info is a reference to a hash where the following keys are defined:
    </dt>
    <dd>
     <pre>
-     a string
-    </pre>
+a string
+</pre>
    </dd>
   </dl>
   <h2 id="protein_family">
@@ -3029,7 +2586,7 @@ field_info is a reference to a hash where the following keys are defined:
    </dt>
    <dd>
     <p>
-     A protein_family is thought of as a set of isofunctional, homologous protein sequences. This is not exactly what other groups have meant by &quot;protein families&quot;. There is no hierarchy of super-family, family, sub-family. We plan on loading different collections of protein families, but in many cases there will need to be a transformation into the concept used by Kbase.
+     A protein_family is thought of as a set of isofunctional, homologous protein sequences. This is not exactly what other groups have meant by "protein families". There is no hierarchy of super-family, family, sub-family. We plan on loading different collections of protein families, but in many cases there will need to be a transformation into the concept used by Kbase.
     </p>
    </dd>
    <dt id="Definition4">
@@ -3037,8 +2594,8 @@ field_info is a reference to a hash where the following keys are defined:
    </dt>
    <dd>
     <pre>
-     a string
-    </pre>
+a string
+</pre>
    </dd>
   </dl>
   <h2 id="role">
@@ -3050,23 +2607,15 @@ field_info is a reference to a hash where the following keys are defined:
    </dt>
    <dd>
     <p>
-     The concept of &quot;role&quot; or &quot;functional role&quot; is basically an atomic functional unit. The &quot;function of a protein&quot; is made up of one or more roles. That is, a bifunctional protein with an assigned function of
+     The concept of "role" or "functional role" is basically an atomic functional unit. The "function of a protein" is made up of one or more roles. That is, a bifunctional protein with an assigned function of
     </p>
-    <pre>
-     <code>
-      5-Enolpyruvylshikimate-3-phosphate synthase (EC 2.5.1.19) / Cytidylate kinase (EC 2.7.4.14)
-     </code>
-    </pre>
+    <pre><code>   5-Enolpyruvylshikimate-3-phosphate synthase (EC 2.5.1.19) / Cytidylate kinase (EC 2.7.4.14)</code></pre>
     <p>
-     would implement two distinct roles (the &quot;function1 / function2&quot; notation is intended to assert that the initial part of the protein implements function1, and the terminal part of the protein implements function2). It is worth noting that a protein often implements multiple roles due to broad specificity. In this case, we suggest describing the protein function as
+     would implement two distinct roles (the "function1 / function2" notation is intended to assert that the initial part of the protein implements function1, and the terminal part of the protein implements function2). It is worth noting that a protein often implements multiple roles due to broad specificity. In this case, we suggest describing the protein function as
     </p>
-    <pre>
-     <code>
-      function1 @ function2
-     </code>
-    </pre>
+    <pre><code>     function1 @ function2</code></pre>
     <p>
-     That is the &#39; / &#39; separator is used to represent multiple roles implemented by distinct domains of the protein, while &#39; @ &#39; is used to represent multiple roles implemented by distinct domains.
+     That is the ' / ' separator is used to represent multiple roles implemented by distinct domains of the protein, while ' @ ' is used to represent multiple roles implemented by distinct domains.
     </p>
    </dd>
    <dt id="Definition5">
@@ -3074,8 +2623,8 @@ field_info is a reference to a hash where the following keys are defined:
    </dt>
    <dd>
     <pre>
-     a string
-    </pre>
+a string
+</pre>
    </dd>
   </dl>
   <h2 id="subsystem">
@@ -3087,16 +2636,12 @@ field_info is a reference to a hash where the following keys are defined:
    </dt>
    <dd>
     <p>
-     A substem is composed of two components: a set of roles that are gathered to be annotated simultaneously and a spreadsheet depicting the proteins within each genome that implement the roles. The set of roles may correspond to a pathway, a complex, an inventory (say, &quot;transporters&quot;) or whatever other principle an annotator used to formulate the subsystem.
+     A substem is composed of two components: a set of roles that are gathered to be annotated simultaneously and a spreadsheet depicting the proteins within each genome that implement the roles. The set of roles may correspond to a pathway, a complex, an inventory (say, "transporters") or whatever other principle an annotator used to formulate the subsystem.
     </p>
     <p>
-     The subsystem spreadsheet is a list of &quot;rows&quot;, each representing the subsytem in a specific genome. Each row includes a variant code (indicating what version of the molecular machine exists in the genome) and cells. Each cell is a 2-tuple:
+     The subsystem spreadsheet is a list of "rows", each representing the subsytem in a specific genome. Each row includes a variant code (indicating what version of the molecular machine exists in the genome) and cells. Each cell is a 2-tuple:
     </p>
-    <pre>
-     <code>
-      [role,protein-encoding genes that implement the role in the genome]
-     </code>
-    </pre>
+    <pre><code>     [role,protein-encoding genes that implement the role in the genome]</code></pre>
     <p>
      Annotators construct subsystems, and in the process impose a controlled vocabulary for roles and functions.
     </p>
@@ -3106,8 +2651,8 @@ field_info is a reference to a hash where the following keys are defined:
    </dt>
    <dd>
     <pre>
-     a string
-    </pre>
+a string
+</pre>
    </dd>
   </dl>
   <h2 id="variant">
@@ -3119,8 +2664,8 @@ field_info is a reference to a hash where the following keys are defined:
    </dt>
    <dd>
     <pre>
-     a string
-    </pre>
+a string
+</pre>
    </dd>
   </dl>
   <h2 id="variant_of_subsystem">
@@ -3132,10 +2677,9 @@ field_info is a reference to a hash where the following keys are defined:
    </dt>
    <dd>
     <pre>
-     a reference to a list containing 2 items:
+a reference to a list containing 2 items:
 0: a subsystem
-1: a variant
-    </pre>
+1: a variant</pre>
    </dd>
   </dl>
   <h2 id="variant_subsystem_pairs">
@@ -3147,8 +2691,8 @@ field_info is a reference to a hash where the following keys are defined:
    </dt>
    <dd>
     <pre>
-     a reference to a list where each element is a variant_of_subsystem
-    </pre>
+a reference to a list where each element is a variant_of_subsystem
+</pre>
    </dd>
   </dl>
   <h2 id="type_of_fid">
@@ -3160,8 +2704,8 @@ field_info is a reference to a hash where the following keys are defined:
    </dt>
    <dd>
     <pre>
-     a string
-    </pre>
+a string
+</pre>
    </dd>
   </dl>
   <h2 id="types_of_fids">
@@ -3173,8 +2717,8 @@ field_info is a reference to a hash where the following keys are defined:
    </dt>
    <dd>
     <pre>
-     a reference to a list where each element is a type_of_fid
-    </pre>
+a reference to a list where each element is a type_of_fid
+</pre>
    </dd>
   </dl>
   <h2 id="length">
@@ -3186,8 +2730,8 @@ field_info is a reference to a hash where the following keys are defined:
    </dt>
    <dd>
     <pre>
-     an int
-    </pre>
+an int
+</pre>
    </dd>
   </dl>
   <h2 id="begin">
@@ -3199,8 +2743,8 @@ field_info is a reference to a hash where the following keys are defined:
    </dt>
    <dd>
     <pre>
-     an int
-    </pre>
+an int
+</pre>
    </dd>
   </dl>
   <h2 id="strand">
@@ -3212,7 +2756,7 @@ field_info is a reference to a hash where the following keys are defined:
    </dt>
    <dd>
     <p>
-     In encodings of locations, we often specify strands. We specify the strand as &#39;+&#39; or &#39;-&#39;
+     In encodings of locations, we often specify strands. We specify the strand as '+' or '-'
     </p>
    </dd>
    <dt id="Definition14">
@@ -3220,8 +2764,8 @@ field_info is a reference to a hash where the following keys are defined:
    </dt>
    <dd>
     <pre>
-     a string
-    </pre>
+a string
+</pre>
    </dd>
   </dl>
   <h2 id="contig">
@@ -3233,8 +2777,8 @@ field_info is a reference to a hash where the following keys are defined:
    </dt>
    <dd>
     <pre>
-     a string
-    </pre>
+a string
+</pre>
    </dd>
   </dl>
   <h2 id="region_of_dna">
@@ -3248,29 +2792,24 @@ field_info is a reference to a hash where the following keys are defined:
     <p>
      A region of DNA is maintained as a tuple of four components:
     </p>
-    <pre>
-     <code>
-      the contig
+    <pre><code>                the contig
                 the beginning position (from 1)
                 the strand
                 the length
 
-           We often speak of &quot;a region&quot;.  By &quot;location&quot;, we mean a sequence
-           of regions from the same genome (perhaps from distinct contigs).
-     </code>
-    </pre>
+           We often speak of "a region".  By "location", we mean a sequence
+           of regions from the same genome (perhaps from distinct contigs).</code></pre>
    </dd>
    <dt id="Definition16">
     Definition
    </dt>
    <dd>
     <pre>
-     a reference to a list containing 4 items:
+a reference to a list containing 4 items:
 0: a contig
 1: a begin
 2: a strand
-3: a length
-    </pre>
+3: a length</pre>
    </dd>
   </dl>
   <h2 id="location">
@@ -3282,7 +2821,7 @@ field_info is a reference to a hash where the following keys are defined:
    </dt>
    <dd>
     <p>
-     a &quot;location&quot; refers to a sequence of regions
+     a "location" refers to a sequence of regions
     </p>
    </dd>
    <dt id="Definition17">
@@ -3290,8 +2829,8 @@ field_info is a reference to a hash where the following keys are defined:
    </dt>
    <dd>
     <pre>
-     a reference to a list where each element is a region_of_dna
-    </pre>
+a reference to a list where each element is a region_of_dna
+</pre>
    </dd>
   </dl>
   <h2 id="locations">
@@ -3303,8 +2842,8 @@ field_info is a reference to a hash where the following keys are defined:
    </dt>
    <dd>
     <pre>
-     a reference to a list where each element is a location
-    </pre>
+a reference to a list where each element is a location
+</pre>
    </dd>
   </dl>
   <h2 id="region_of_dna_string">
@@ -3318,11 +2857,7 @@ field_info is a reference to a hash where the following keys are defined:
     <p>
      we often need to represent regions or locations as strings. We would use something like
     </p>
-    <pre>
-     <code>
-      contigA_200+100,contigA_402+188
-     </code>
-    </pre>
+    <pre><code>     contigA_200+100,contigA_402+188</code></pre>
     <p>
      to represent a location composed of two regions
     </p>
@@ -3332,8 +2867,8 @@ field_info is a reference to a hash where the following keys are defined:
    </dt>
    <dd>
     <pre>
-     a string
-    </pre>
+a string
+</pre>
    </dd>
   </dl>
   <h2 id="region_of_dna_strings">
@@ -3345,8 +2880,8 @@ field_info is a reference to a hash where the following keys are defined:
    </dt>
    <dd>
     <pre>
-     a reference to a list where each element is a region_of_dna_string
-    </pre>
+a reference to a list where each element is a region_of_dna_string
+</pre>
    </dd>
   </dl>
   <h2 id="location_string">
@@ -3358,8 +2893,8 @@ field_info is a reference to a hash where the following keys are defined:
    </dt>
    <dd>
     <pre>
-     a string
-    </pre>
+a string
+</pre>
    </dd>
   </dl>
   <h2 id="dna">
@@ -3371,8 +2906,8 @@ field_info is a reference to a hash where the following keys are defined:
    </dt>
    <dd>
     <pre>
-     a string
-    </pre>
+a string
+</pre>
    </dd>
   </dl>
   <h2 id="function">
@@ -3384,8 +2919,8 @@ field_info is a reference to a hash where the following keys are defined:
    </dt>
    <dd>
     <pre>
-     a string
-    </pre>
+a string
+</pre>
    </dd>
   </dl>
   <h2 id="protein">
@@ -3397,8 +2932,8 @@ field_info is a reference to a hash where the following keys are defined:
    </dt>
    <dd>
     <pre>
-     a string
-    </pre>
+a string
+</pre>
    </dd>
   </dl>
   <h2 id="md5">
@@ -3410,8 +2945,8 @@ field_info is a reference to a hash where the following keys are defined:
    </dt>
    <dd>
     <pre>
-     a string
-    </pre>
+a string
+</pre>
    </dd>
   </dl>
   <h2 id="genome">
@@ -3423,8 +2958,8 @@ field_info is a reference to a hash where the following keys are defined:
    </dt>
    <dd>
     <pre>
-     a string
-    </pre>
+a string
+</pre>
    </dd>
   </dl>
   <h2 id="taxonomic_group">
@@ -3436,8 +2971,8 @@ field_info is a reference to a hash where the following keys are defined:
    </dt>
    <dd>
     <pre>
-     a string
-    </pre>
+a string
+</pre>
    </dd>
   </dl>
   <h2 id="annotation">
@@ -3451,26 +2986,21 @@ field_info is a reference to a hash where the following keys are defined:
     <p>
      The Kbase stores annotations relating to features. Each annotation is a 3-tuple:
     </p>
-    <pre>
-     <code>
-      the text of the annotation (often a record of assertion of function)
+    <pre><code>     the text of the annotation (often a record of assertion of function)
 
      the annotator attaching the annotation to the feature
 
-     the time (in seconds from the epoch) at which the annotation was attached
-     </code>
-    </pre>
+     the time (in seconds from the epoch) at which the annotation was attached</code></pre>
    </dd>
    <dt id="Definition28">
     Definition
    </dt>
    <dd>
     <pre>
-     a reference to a list containing 3 items:
+a reference to a list containing 3 items:
 0: a comment
 1: an annotator
-2: an annotation_time
-    </pre>
+2: an annotation_time</pre>
    </dd>
   </dl>
   <h2 id="pubref">
@@ -3484,15 +3014,11 @@ field_info is a reference to a hash where the following keys are defined:
     <p>
      The Kbase will include a growing body of literature supporting protein functions, asserted phenotypes, etc. References are encoded as 3-tuples:
     </p>
-    <pre>
-     <code>
-      an id (often a PubMed ID)
+    <pre><code>     an id (often a PubMed ID)
 
      a URL to the paper
 
-     a title of the paper
-     </code>
-    </pre>
+     a title of the paper</code></pre>
     <p>
      The URL and title are often missing (but, can usually be inferred from the pubmed ID).
     </p>
@@ -3502,11 +3028,10 @@ field_info is a reference to a hash where the following keys are defined:
    </dt>
    <dd>
     <pre>
-     a reference to a list containing 3 items:
+a reference to a list containing 3 items:
 0: (id) a string
 1: (link) a string
-2: (title) a string
-    </pre>
+2: (title) a string</pre>
    </dd>
   </dl>
   <h2 id="scored_fid">
@@ -3518,10 +3043,9 @@ field_info is a reference to a hash where the following keys are defined:
    </dt>
    <dd>
     <pre>
-     a reference to a list containing 2 items:
+a reference to a list containing 2 items:
 0: a fid
-1: (score) a float
-    </pre>
+1: (score) a float</pre>
    </dd>
   </dl>
   <h2 id="annotations">
@@ -3533,8 +3057,8 @@ field_info is a reference to a hash where the following keys are defined:
    </dt>
    <dd>
     <pre>
-     a reference to a list where each element is an annotation
-    </pre>
+a reference to a list where each element is an annotation
+</pre>
    </dd>
   </dl>
   <h2 id="pubrefs">
@@ -3546,8 +3070,8 @@ field_info is a reference to a hash where the following keys are defined:
    </dt>
    <dd>
     <pre>
-     a reference to a list where each element is a pubref
-    </pre>
+a reference to a list where each element is a pubref
+</pre>
    </dd>
   </dl>
   <h2 id="roles">
@@ -3559,8 +3083,8 @@ field_info is a reference to a hash where the following keys are defined:
    </dt>
    <dd>
     <pre>
-     a reference to a list where each element is a role
-    </pre>
+a reference to a list where each element is a role
+</pre>
    </dd>
   </dl>
   <h2 id="optional">
@@ -3572,8 +3096,8 @@ field_info is a reference to a hash where the following keys are defined:
    </dt>
    <dd>
     <pre>
-     a string
-    </pre>
+a string
+</pre>
    </dd>
   </dl>
   <h2 id="role_with_flag">
@@ -3585,10 +3109,9 @@ field_info is a reference to a hash where the following keys are defined:
    </dt>
    <dd>
     <pre>
-     a reference to a list containing 2 items:
+a reference to a list containing 2 items:
 0: a role
-1: an optional
-    </pre>
+1: an optional</pre>
    </dd>
   </dl>
   <h2 id="roles_with_flags">
@@ -3600,8 +3123,8 @@ field_info is a reference to a hash where the following keys are defined:
    </dt>
    <dd>
     <pre>
-     a reference to a list where each element is a role_with_flag
-    </pre>
+a reference to a list where each element is a role_with_flag
+</pre>
    </dd>
   </dl>
   <h2 id="scored_fids">
@@ -3613,8 +3136,8 @@ field_info is a reference to a hash where the following keys are defined:
    </dt>
    <dd>
     <pre>
-     a reference to a list where each element is a scored_fid
-    </pre>
+a reference to a list where each element is a scored_fid
+</pre>
    </dd>
   </dl>
   <h2 id="proteins">
@@ -3626,8 +3149,8 @@ field_info is a reference to a hash where the following keys are defined:
    </dt>
    <dd>
     <pre>
-     a reference to a list where each element is a protein
-    </pre>
+a reference to a list where each element is a protein
+</pre>
    </dd>
   </dl>
   <h2 id="functions">
@@ -3639,8 +3162,8 @@ field_info is a reference to a hash where the following keys are defined:
    </dt>
    <dd>
     <pre>
-     a reference to a list where each element is a function
-    </pre>
+a reference to a list where each element is a function
+</pre>
    </dd>
   </dl>
   <h2 id="taxonomic_groups">
@@ -3652,8 +3175,8 @@ field_info is a reference to a hash where the following keys are defined:
    </dt>
    <dd>
     <pre>
-     a reference to a list where each element is a taxonomic_group
-    </pre>
+a reference to a list where each element is a taxonomic_group
+</pre>
    </dd>
   </dl>
   <h2 id="subsystems">
@@ -3665,8 +3188,8 @@ field_info is a reference to a hash where the following keys are defined:
    </dt>
    <dd>
     <pre>
-     a reference to a list where each element is a subsystem
-    </pre>
+a reference to a list where each element is a subsystem
+</pre>
    </dd>
   </dl>
   <h2 id="contigs">
@@ -3678,8 +3201,8 @@ field_info is a reference to a hash where the following keys are defined:
    </dt>
    <dd>
     <pre>
-     a reference to a list where each element is a contig
-    </pre>
+a reference to a list where each element is a contig
+</pre>
    </dd>
   </dl>
   <h2 id="md5s">
@@ -3691,8 +3214,8 @@ field_info is a reference to a hash where the following keys are defined:
    </dt>
    <dd>
     <pre>
-     a reference to a list where each element is a md5
-    </pre>
+a reference to a list where each element is a md5
+</pre>
    </dd>
   </dl>
   <h2 id="genomes">
@@ -3704,8 +3227,8 @@ field_info is a reference to a hash where the following keys are defined:
    </dt>
    <dd>
     <pre>
-     a reference to a list where each element is a genome
-    </pre>
+a reference to a list where each element is a genome
+</pre>
    </dd>
   </dl>
   <h2 id="pair_of_fids">
@@ -3717,10 +3240,9 @@ field_info is a reference to a hash where the following keys are defined:
    </dt>
    <dd>
     <pre>
-     a reference to a list containing 2 items:
+a reference to a list containing 2 items:
 0: a fid
-1: a fid
-    </pre>
+1: a fid</pre>
    </dd>
   </dl>
   <h2 id="pairs_of_fids">
@@ -3732,8 +3254,8 @@ field_info is a reference to a hash where the following keys are defined:
    </dt>
    <dd>
     <pre>
-     a reference to a list where each element is a pair_of_fids
-    </pre>
+a reference to a list where each element is a pair_of_fids
+</pre>
    </dd>
   </dl>
   <h2 id="protein_families">
@@ -3745,8 +3267,8 @@ field_info is a reference to a hash where the following keys are defined:
    </dt>
    <dd>
     <pre>
-     a reference to a list where each element is a protein_family
-    </pre>
+a reference to a list where each element is a protein_family
+</pre>
    </dd>
   </dl>
   <h2 id="score">
@@ -3758,8 +3280,8 @@ field_info is a reference to a hash where the following keys are defined:
    </dt>
    <dd>
     <pre>
-     a float
-    </pre>
+a float
+</pre>
    </dd>
   </dl>
   <h2 id="evidence">
@@ -3771,8 +3293,8 @@ field_info is a reference to a hash where the following keys are defined:
    </dt>
    <dd>
     <pre>
-     a reference to a list where each element is a pair_of_fids
-    </pre>
+a reference to a list where each element is a pair_of_fids
+</pre>
    </dd>
   </dl>
   <h2 id="fids">
@@ -3784,8 +3306,8 @@ field_info is a reference to a hash where the following keys are defined:
    </dt>
    <dd>
     <pre>
-     a reference to a list where each element is a fid
-    </pre>
+a reference to a list where each element is a fid
+</pre>
    </dd>
   </dl>
   <h2 id="row">
@@ -3797,10 +3319,9 @@ field_info is a reference to a hash where the following keys are defined:
    </dt>
    <dd>
     <pre>
-     a reference to a list containing 2 items:
+a reference to a list containing 2 items:
 0: a variant
-1: a reference to a hash where the key is a role and the value is a fids
-    </pre>
+1: a reference to a hash where the key is a role and the value is a fids</pre>
    </dd>
   </dl>
   <h2 id="fid_function_pair">
@@ -3812,10 +3333,9 @@ field_info is a reference to a hash where the following keys are defined:
    </dt>
    <dd>
     <pre>
-     a reference to a list containing 2 items:
+a reference to a list containing 2 items:
 0: a fid
-1: a function
-    </pre>
+1: a function</pre>
    </dd>
   </dl>
   <h2 id="fid_function_pairs">
@@ -3827,8 +3347,8 @@ field_info is a reference to a hash where the following keys are defined:
    </dt>
    <dd>
     <pre>
-     a reference to a list where each element is a fid_function_pair
-    </pre>
+a reference to a list where each element is a fid_function_pair
+</pre>
    </dd>
   </dl>
   <h2 id="fc_protein_family">
@@ -3848,11 +3368,10 @@ field_info is a reference to a hash where the following keys are defined:
    </dt>
    <dd>
     <pre>
-     a reference to a list containing 3 items:
+a reference to a list containing 3 items:
 0: a protein_family
 1: a score
-2: a function
-    </pre>
+2: a function</pre>
    </dd>
   </dl>
   <h2 id="fc_protein_families">
@@ -3864,8 +3383,8 @@ field_info is a reference to a hash where the following keys are defined:
    </dt>
    <dd>
     <pre>
-     a reference to a list where each element is a fc_protein_family
-    </pre>
+a reference to a list where each element is a fc_protein_family
+</pre>
    </dd>
   </dl>
   <h2 id="allele">
@@ -3885,8 +3404,8 @@ field_info is a reference to a hash where the following keys are defined:
    </dt>
    <dd>
     <pre>
-     a string
-    </pre>
+a string
+</pre>
    </dd>
   </dl>
   <h2 id="alleles">
@@ -3898,8 +3417,8 @@ field_info is a reference to a hash where the following keys are defined:
    </dt>
    <dd>
     <pre>
-     a reference to a list where each element is an allele
-    </pre>
+a reference to a list where each element is an allele
+</pre>
    </dd>
   </dl>
   <h2 id="trait">
@@ -3911,8 +3430,8 @@ field_info is a reference to a hash where the following keys are defined:
    </dt>
    <dd>
     <pre>
-     a string
-    </pre>
+a string
+</pre>
    </dd>
   </dl>
   <h2 id="traits">
@@ -3924,8 +3443,8 @@ field_info is a reference to a hash where the following keys are defined:
    </dt>
    <dd>
     <pre>
-     a reference to a list where each element is a trait
-    </pre>
+a reference to a list where each element is a trait
+</pre>
    </dd>
   </dl>
   <h2 id="ou">
@@ -3937,8 +3456,8 @@ field_info is a reference to a hash where the following keys are defined:
    </dt>
    <dd>
     <pre>
-     a string
-    </pre>
+a string
+</pre>
    </dd>
   </dl>
   <h2 id="ous">
@@ -3950,8 +3469,8 @@ field_info is a reference to a hash where the following keys are defined:
    </dt>
    <dd>
     <pre>
-     a reference to a list where each element is an ou
-    </pre>
+a reference to a list where each element is an ou
+</pre>
    </dd>
   </dl>
   <h2 id="bp_loc">
@@ -3963,10 +3482,9 @@ field_info is a reference to a hash where the following keys are defined:
    </dt>
    <dd>
     <pre>
-     a reference to a list containing 2 items:
+a reference to a list containing 2 items:
 0: a contig
-1: (position) an int
-    </pre>
+1: (position) an int</pre>
    </dd>
   </dl>
   <h2 id="measurement_type">
@@ -3978,8 +3496,8 @@ field_info is a reference to a hash where the following keys are defined:
    </dt>
    <dd>
     <pre>
-     a string
-    </pre>
+a string
+</pre>
    </dd>
   </dl>
   <h2 id="measurement_value">
@@ -3991,8 +3509,8 @@ field_info is a reference to a hash where the following keys are defined:
    </dt>
    <dd>
     <pre>
-     a float
-    </pre>
+a float
+</pre>
    </dd>
   </dl>
   <h2 id="aux">
@@ -4004,8 +3522,8 @@ field_info is a reference to a hash where the following keys are defined:
    </dt>
    <dd>
     <pre>
-     an int
-    </pre>
+an int
+</pre>
    </dd>
   </dl>
   <h2 id="fields">
@@ -4017,8 +3535,8 @@ field_info is a reference to a hash where the following keys are defined:
    </dt>
    <dd>
     <pre>
-     a reference to a list where each element is a string
-    </pre>
+a reference to a list where each element is a string
+</pre>
    </dd>
   </dl>
   <h2 id="complex">
@@ -4030,8 +3548,8 @@ field_info is a reference to a hash where the following keys are defined:
    </dt>
    <dd>
     <pre>
-     a string
-    </pre>
+a string
+</pre>
    </dd>
   </dl>
   <h2 id="complex_with_flag">
@@ -4043,10 +3561,9 @@ field_info is a reference to a hash where the following keys are defined:
    </dt>
    <dd>
     <pre>
-     a reference to a list containing 2 items:
+a reference to a list containing 2 items:
 0: a complex
-1: an optional
-    </pre>
+1: an optional</pre>
    </dd>
   </dl>
   <h2 id="complexes_with_flags">
@@ -4058,8 +3575,8 @@ field_info is a reference to a hash where the following keys are defined:
    </dt>
    <dd>
     <pre>
-     a reference to a list where each element is a complex_with_flag
-    </pre>
+a reference to a list where each element is a complex_with_flag
+</pre>
    </dd>
   </dl>
   <h2 id="complexes">
@@ -4071,8 +3588,8 @@ field_info is a reference to a hash where the following keys are defined:
    </dt>
    <dd>
     <pre>
-     a reference to a list where each element is a complex
-    </pre>
+a reference to a list where each element is a complex
+</pre>
    </dd>
   </dl>
   <h2 id="name">
@@ -4084,8 +3601,8 @@ field_info is a reference to a hash where the following keys are defined:
    </dt>
    <dd>
     <pre>
-     a string
-    </pre>
+a string
+</pre>
    </dd>
   </dl>
   <h2 id="reaction">
@@ -4097,8 +3614,8 @@ field_info is a reference to a hash where the following keys are defined:
    </dt>
    <dd>
     <pre>
-     a string
-    </pre>
+a string
+</pre>
    </dd>
   </dl>
   <h2 id="reactions">
@@ -4110,8 +3627,8 @@ field_info is a reference to a hash where the following keys are defined:
    </dt>
    <dd>
     <pre>
-     a reference to a list where each element is a reaction
-    </pre>
+a reference to a list where each element is a reaction
+</pre>
    </dd>
   </dl>
   <h2 id="complex_data">
@@ -4131,11 +3648,10 @@ field_info is a reference to a hash where the following keys are defined:
    </dt>
    <dd>
     <pre>
-     a reference to a hash where the following keys are defined:
+a reference to a hash where the following keys are defined:
 complex_name has a value which is a name
 complex_roles has a value which is a roles_with_flags
-complex_reactions has a value which is a reactions
-    </pre>
+complex_reactions has a value which is a reactions</pre>
    </dd>
   </dl>
   <h2 id="genome_data">
@@ -4147,7 +3663,7 @@ complex_reactions has a value which is a reactions
    </dt>
    <dd>
     <pre>
-     a reference to a hash where the following keys are defined:
+a reference to a hash where the following keys are defined:
 complete has a value which is an int
 contigs has a value which is an int
 dna_size has a value which is an int
@@ -4157,8 +3673,7 @@ pegs has a value which is an int
 rnas has a value which is an int
 scientific_name has a value which is a string
 taxonomy has a value which is a string
-genome_md5 has a value which is a string
-    </pre>
+genome_md5 has a value which is a string</pre>
    </dd>
   </dl>
   <h2 id="regulon">
@@ -4170,8 +3685,8 @@ genome_md5 has a value which is a string
    </dt>
    <dd>
     <pre>
-     a string
-    </pre>
+a string
+</pre>
    </dd>
   </dl>
   <h2 id="regulons">
@@ -4183,8 +3698,8 @@ genome_md5 has a value which is a string
    </dt>
    <dd>
     <pre>
-     a reference to a list where each element is a regulon
-    </pre>
+a reference to a list where each element is a regulon
+</pre>
    </dd>
   </dl>
   <h2 id="regulon_data">
@@ -4196,11 +3711,10 @@ genome_md5 has a value which is a string
    </dt>
    <dd>
     <pre>
-     a reference to a hash where the following keys are defined:
+a reference to a hash where the following keys are defined:
 regulon_id has a value which is a regulon
 regulon_set has a value which is a fids
-tfs has a value which is a fids
-    </pre>
+tfs has a value which is a fids</pre>
    </dd>
   </dl>
   <h2 id="regulons_data">
@@ -4212,8 +3726,8 @@ tfs has a value which is a fids
    </dt>
    <dd>
     <pre>
-     a reference to a list where each element is a regulon_data
-    </pre>
+a reference to a list where each element is a regulon_data
+</pre>
    </dd>
   </dl>
   <h2 id="feature_data">
@@ -4225,14 +3739,13 @@ tfs has a value which is a fids
    </dt>
    <dd>
     <pre>
-     a reference to a hash where the following keys are defined:
+a reference to a hash where the following keys are defined:
 feature_id has a value which is a fid
 genome_name has a value which is a string
 feature_function has a value which is a string
 feature_length has a value which is an int
 feature_publications has a value which is a pubrefs
-feature_location has a value which is a location
-    </pre>
+feature_location has a value which is a location</pre>
    </dd>
   </dl>
   <h2 id="expert">
@@ -4244,8 +3757,8 @@ feature_location has a value which is a location
    </dt>
    <dd>
     <pre>
-     a string
-    </pre>
+a string
+</pre>
    </dd>
   </dl>
   <h2 id="source">
@@ -4257,8 +3770,8 @@ feature_location has a value which is a location
    </dt>
    <dd>
     <pre>
-     a string
-    </pre>
+a string
+</pre>
    </dd>
   </dl>
   <h2 id="id">
@@ -4270,8 +3783,8 @@ feature_location has a value which is a location
    </dt>
    <dd>
     <pre>
-     a string
-    </pre>
+a string
+</pre>
    </dd>
   </dl>
   <h2 id="function_assertion">
@@ -4283,11 +3796,10 @@ feature_location has a value which is a location
    </dt>
    <dd>
     <pre>
-     a reference to a list containing 3 items:
+a reference to a list containing 3 items:
 0: an id
 1: a function
-2: a source
-    </pre>
+2: a source</pre>
    </dd>
   </dl>
   <h2 id="function_assertions">
@@ -4299,8 +3811,8 @@ feature_location has a value which is a location
    </dt>
    <dd>
     <pre>
-     a reference to a list where each element is a function_assertion
-    </pre>
+a reference to a list where each element is a function_assertion
+</pre>
    </dd>
   </dl>
   <h2 id="atomic_regulon">
@@ -4312,8 +3824,8 @@ feature_location has a value which is a location
    </dt>
    <dd>
     <pre>
-     a string
-    </pre>
+a string
+</pre>
    </dd>
   </dl>
   <h2 id="atomic_regulon_size">
@@ -4325,8 +3837,8 @@ feature_location has a value which is a location
    </dt>
    <dd>
     <pre>
-     an int
-    </pre>
+an int
+</pre>
    </dd>
   </dl>
   <h2 id="atomic_regulon_size_pair">
@@ -4338,10 +3850,9 @@ feature_location has a value which is a location
    </dt>
    <dd>
     <pre>
-     a reference to a list containing 2 items:
+a reference to a list containing 2 items:
 0: an atomic_regulon
-1: an atomic_regulon_size
-    </pre>
+1: an atomic_regulon_size</pre>
    </dd>
   </dl>
   <h2 id="atomic_regulon_size_pairs">
@@ -4353,8 +3864,8 @@ feature_location has a value which is a location
    </dt>
    <dd>
     <pre>
-     a reference to a list where each element is an atomic_regulon_size_pair
-    </pre>
+a reference to a list where each element is an atomic_regulon_size_pair
+</pre>
    </dd>
   </dl>
   <h2 id="atomic_regulons">
@@ -4366,8 +3877,8 @@ feature_location has a value which is a location
    </dt>
    <dd>
     <pre>
-     a reference to a list where each element is an atomic_regulon
-    </pre>
+a reference to a list where each element is an atomic_regulon
+</pre>
    </dd>
   </dl>
   <h2 id="protein_sequence">
@@ -4379,8 +3890,8 @@ feature_location has a value which is a location
    </dt>
    <dd>
     <pre>
-     a string
-    </pre>
+a string
+</pre>
    </dd>
   </dl>
   <h2 id="dna_sequence">
@@ -4392,8 +3903,8 @@ feature_location has a value which is a location
    </dt>
    <dd>
     <pre>
-     a string
-    </pre>
+a string
+</pre>
    </dd>
   </dl>
   <h2 id="alias">
@@ -4405,8 +3916,8 @@ feature_location has a value which is a location
    </dt>
    <dd>
     <pre>
-     a string
-    </pre>
+a string
+</pre>
    </dd>
   </dl>
   <h2 id="aliases">
@@ -4418,8 +3929,8 @@ feature_location has a value which is a location
    </dt>
    <dd>
     <pre>
-     a reference to a list where each element is an alias
-    </pre>
+a reference to a list where each element is an alias
+</pre>
    </dd>
   </dl>
   <h2 id="external_id">
@@ -4431,8 +3942,8 @@ feature_location has a value which is a location
    </dt>
    <dd>
     <pre>
-     a string
-    </pre>
+a string
+</pre>
    </dd>
   </dl>
   <h2 id="external_ids">
@@ -4444,8 +3955,8 @@ feature_location has a value which is a location
    </dt>
    <dd>
     <pre>
-     a reference to a list where each element is an external_id
-    </pre>
+a reference to a list where each element is an external_id
+</pre>
    </dd>
   </dl>
   <h2 id="name_parameter">
@@ -4457,8 +3968,8 @@ feature_location has a value which is a location
    </dt>
    <dd>
     <pre>
-     a string
-    </pre>
+a string
+</pre>
    </dd>
   </dl>
   <h2 id="ss_var_role_tuple">
@@ -4470,11 +3981,10 @@ feature_location has a value which is a location
    </dt>
    <dd>
     <pre>
-     a reference to a list containing 3 items:
+a reference to a list containing 3 items:
 0: a subsystem
 1: a variant
-2: a role
-    </pre>
+2: a role</pre>
    </dd>
   </dl>
   <h2 id="ss_var_role_tuples">
@@ -4486,8 +3996,8 @@ feature_location has a value which is a location
    </dt>
    <dd>
     <pre>
-     a reference to a list where each element is a ss_var_role_tuple
-    </pre>
+a reference to a list where each element is a ss_var_role_tuple
+</pre>
    </dd>
   </dl>
   <h2 id="genome_name">
@@ -4499,8 +4009,8 @@ feature_location has a value which is a location
    </dt>
    <dd>
     <pre>
-     a string
-    </pre>
+a string
+</pre>
    </dd>
   </dl>
   <h2 id="entity_name">
@@ -4512,8 +4022,8 @@ feature_location has a value which is a location
    </dt>
    <dd>
     <pre>
-     a string
-    </pre>
+a string
+</pre>
    </dd>
   </dl>
   <h2 id="weight">
@@ -4525,8 +4035,8 @@ feature_location has a value which is a location
    </dt>
    <dd>
     <pre>
-     an int
-    </pre>
+an int
+</pre>
    </dd>
   </dl>
   <h2 id="field_name">
@@ -4538,8 +4048,8 @@ feature_location has a value which is a location
    </dt>
    <dd>
     <pre>
-     a string
-    </pre>
+a string
+</pre>
    </dd>
   </dl>
   <h2 id="search_hit">
@@ -4551,10 +4061,9 @@ feature_location has a value which is a location
    </dt>
    <dd>
     <pre>
-     a reference to a list containing 2 items:
+a reference to a list containing 2 items:
 0: a weight
-1: a reference to a hash where the key is a field_name and the value is a string
-    </pre>
+1: a reference to a hash where the key is a field_name and the value is a string</pre>
    </dd>
   </dl>
   <h2 id="correspondence">
@@ -4566,7 +4075,7 @@ feature_location has a value which is a location
    </dt>
    <dd>
     <p>
-     A correspondence is generated as a mapping of fids to fids. The mapping attempts to map a fid to another that performs the same function. The correspondence describes the regions that are similar, the strength of the similarity, the number of genes in the chromosomal context that appear to &quot;correspond&quot; and a score from 0 to 1 that loosely corresponds to confidence in the correspondence.
+     A correspondence is generated as a mapping of fids to fids. The mapping attempts to map a fid to another that performs the same function. The correspondence describes the regions that are similar, the strength of the similarity, the number of genes in the chromosomal context that appear to "correspond" and a score from 0 to 1 that loosely corresponds to confidence in the correspondence.
     </p>
    </dd>
    <dt id="Definition105">
@@ -4574,7 +4083,7 @@ feature_location has a value which is a location
    </dt>
    <dd>
     <pre>
-     a reference to a hash where the following keys are defined:
+a reference to a hash where the following keys are defined:
 to has a value which is a fid
 iden has a value which is a float
 ncontext has a value which is an int
@@ -4584,8 +4093,7 @@ ln1 has a value which is an int
 b2 has a value which is an int
 e2 has a value which is an int
 ln2 has a value which is an int
-score has a value which is an int
-    </pre>
+score has a value which is an int</pre>
    </dd>
   </dl>
   <h2 id="sequence">
@@ -4608,8 +4116,8 @@ score has a value which is an int
    </dt>
    <dd>
     <pre>
-     a string
-    </pre>
+a string
+</pre>
    </dd>
   </dl>
   <h2 id="seq_triple">
@@ -4621,11 +4129,10 @@ score has a value which is an int
    </dt>
    <dd>
     <pre>
-     a reference to a list containing 3 items:
+a reference to a list containing 3 items:
 0: an id
 1: a comment
-2: a sequence
-    </pre>
+2: a sequence</pre>
    </dd>
   </dl>
   <h2 id="seq_set">
@@ -4637,8 +4144,8 @@ score has a value which is an int
    </dt>
    <dd>
     <pre>
-     a reference to a list where each element is a seq_triple
-    </pre>
+a reference to a list where each element is a seq_triple
+</pre>
    </dd>
   </dl>
   <h2 id="id_set">
@@ -4650,8 +4157,8 @@ score has a value which is an int
    </dt>
    <dd>
     <pre>
-     a reference to a list where each element is an id
-    </pre>
+a reference to a list where each element is an id
+</pre>
    </dd>
   </dl>
   <h2 id="alignment">
@@ -4663,8 +4170,8 @@ score has a value which is an int
    </dt>
    <dd>
     <pre>
-     a seq_set
-    </pre>
+a seq_set
+</pre>
    </dd>
   </dl>
   <h2 id="rep_seq_parms">
@@ -4684,13 +4191,12 @@ score has a value which is an int
    </dt>
    <dd>
     <pre>
-     a reference to a hash where the following keys are defined:
+a reference to a hash where the following keys are defined:
 existing_reps has a value which is a seq_set
 order has a value which is a string
 alg has a value which is an int
 type_sim has a value which is a string
-cutoff has a value which is a float
-    </pre>
+cutoff has a value which is a float</pre>
    </dd>
   </dl>
   <h2 id="muscle_parms_t">
@@ -4702,7 +4208,7 @@ cutoff has a value which is a float
    </dt>
    <dd>
     <pre>
-     a reference to a hash where the following keys are defined:
+a reference to a hash where the following keys are defined:
 anchors has a value which is an int
 brenner has a value which is an int
 cluster has a value which is an int
@@ -4747,8 +4253,7 @@ spscore has a value which is a string
 SUEFF has a value which is a string
 usetree has a value which is a string
 weight1 has a value which is a string
-weight2 has a value which is a string
-    </pre>
+weight2 has a value which is a string</pre>
    </dd>
   </dl>
   <h2 id="mafft_parms_t">
@@ -4768,7 +4273,7 @@ weight2 has a value which is a string
    </dt>
    <dd>
     <pre>
-     a reference to a hash where the following keys are defined:
+a reference to a hash where the following keys are defined:
 sixmerpair has a value which is an int
 amino has a value which is an int
 anysymbol has a value which is an int
@@ -4806,8 +4311,7 @@ partsize has a value which is a string
 retree has a value which is a string
 thread has a value which is a string
 tm has a value which is a string
-weighti has a value which is a string
-    </pre>
+weighti has a value which is a string</pre>
    </dd>
   </dl>
   <h2 id="align_seq_parms">
@@ -4819,12 +4323,11 @@ weighti has a value which is a string
    </dt>
    <dd>
     <pre>
-     a reference to a hash where the following keys are defined:
+a reference to a hash where the following keys are defined:
 muscle_parms has a value which is a muscle_parms_t
 mafft_parms has a value which is a mafft_parms_t
 tool has a value which is a string
-align_ends_with_clustal has a value which is an int
-    </pre>
+align_ends_with_clustal has a value which is an int</pre>
    </dd>
   </dl>
   <h2 id="newick_tree">
@@ -4836,8 +4339,8 @@ align_ends_with_clustal has a value which is an int
    </dt>
    <dd>
     <pre>
-     a string
-    </pre>
+a string
+</pre>
    </dd>
   </dl>
   <h2 id="build_tree_parms">
@@ -4849,7 +4352,7 @@ align_ends_with_clustal has a value which is an int
    </dt>
    <dd>
     <pre>
-     a reference to a hash where the following keys are defined:
+a reference to a hash where the following keys are defined:
 bootstrap has a value which is a string
 model has a value which is a string
 nclasses has a value which is a string
@@ -4857,8 +4360,7 @@ nproc has a value which is a string
 rate has a value which is a string
 search has a value which is a string
 tool has a value which is a string
-tool_params has a value which is a string
-    </pre>
+tool_params has a value which is a string</pre>
    </dd>
   </dl>
   <h2 id="aln_id">
@@ -4870,8 +4372,8 @@ tool_params has a value which is a string
    </dt>
    <dd>
     <pre>
-     a string
-    </pre>
+a string
+</pre>
    </dd>
   </dl>
   <h2 id="tree_id">
@@ -4883,8 +4385,8 @@ tool_params has a value which is a string
    </dt>
    <dd>
     <pre>
-     a string
-    </pre>
+a string
+</pre>
    </dd>
   </dl>
   <h2 id="entity_name1">
@@ -4896,8 +4398,8 @@ tool_params has a value which is a string
    </dt>
    <dd>
     <pre>
-     a string
-    </pre>
+a string
+</pre>
    </dd>
   </dl>
   <h2 id="entity_names">
@@ -4909,8 +4411,8 @@ tool_params has a value which is a string
    </dt>
    <dd>
     <pre>
-     a reference to a list where each element is an entity_name
-    </pre>
+a reference to a list where each element is an entity_name
+</pre>
    </dd>
   </dl>
   <h2 id="relationship_name">
@@ -4922,8 +4424,8 @@ tool_params has a value which is a string
    </dt>
    <dd>
     <pre>
-     a string
-    </pre>
+a string
+</pre>
    </dd>
   </dl>
   <h2 id="relationship_names">
@@ -4935,8 +4437,8 @@ tool_params has a value which is a string
    </dt>
    <dd>
     <pre>
-     a reference to a list where each element is a relationship_name
-    </pre>
+a reference to a list where each element is a relationship_name
+</pre>
    </dd>
   </dl>
   <h2 id="field_name1">
@@ -4948,8 +4450,8 @@ tool_params has a value which is a string
    </dt>
    <dd>
     <pre>
-     a string
-    </pre>
+a string
+</pre>
    </dd>
   </dl>
   <h2 id="boolean">
@@ -4961,8 +4463,8 @@ tool_params has a value which is a string
    </dt>
    <dd>
     <pre>
-     an int
-    </pre>
+an int
+</pre>
    </dd>
   </dl>
   <h2 id="field_info">
@@ -4982,11 +4484,10 @@ tool_params has a value which is a string
    </dt>
    <dd>
     <pre>
-     a reference to a hash where the following keys are defined:
+a reference to a hash where the following keys are defined:
 name has a value which is a string
 notes has a value which is a string
-type has a value which is a string
-    </pre>
+type has a value which is a string</pre>
    </dd>
   </dl>
   <h2 id="entity_info">
@@ -5006,12 +4507,11 @@ type has a value which is a string
    </dt>
    <dd>
     <pre>
-     a reference to a hash where the following keys are defined:
+a reference to a hash where the following keys are defined:
 name has a value which is a string
 relationships has a value which is a reference to a list where each element is a reference to a list containing 2 items:
 0: (rel_name) a string
-1: (entity_name) a stringfields has a value which is a reference to a hash where the key is a field_name and the value is a field_info
-    </pre>
+1: (entity_name) a stringfields has a value which is a reference to a hash where the key is a field_name and the value is a field_info</pre>
    </dd>
   </dl>
   <h2 id="relationship_info">
@@ -5031,14 +4531,13 @@ relationships has a value which is a reference to a list where each element is a
    </dt>
    <dd>
     <pre>
-     a reference to a hash where the following keys are defined:
+a reference to a hash where the following keys are defined:
 name has a value which is a string
 from_entity has a value which is a string
 to_entity has a value which is a string
 real_table has a value which is a boolean
 converse has a value which is a string
-fields has a value which is a reference to a hash where the key is a field_name and the value is a field_info
-    </pre>
+fields has a value which is a reference to a hash where the key is a field_name and the value is a field_info</pre>
    </dd>
   </dl>
  </body>
