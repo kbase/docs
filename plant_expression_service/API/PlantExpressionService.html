@@ -1,11 +1,11 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version="1.0" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
  <head>
   <title>
   </title>
-  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-  <link rev="made" href="mailto:root@ubuntu.chicago.kbase.us" />
+  <meta content="text/html; charset=utf-8" http-equiv="content-type"/>
+  <link href="mailto:root@ubuntu.chicago.kbase.us" rev="made"/>
  </head>
  <body style="background-color: white">
   <h1 id="NAME">
@@ -20,40 +20,31 @@
   <p>
    Plant Expression Service APIs
   </p>
-  <pre>
-   <code>
-    This module provides services for plant expression data in support of the coexpression
+  <pre><code> This module provides services for plant expression data in support of the coexpression
  network and ontology driven data needs of the plant sciences community. This version of
  the modules supports retrieval of the following information:
  1. Retrieval of GEO sample ID list for given EO (environmental ontology) and/or PO (plant ontology -plant tissues/organs of interest).
  2. Retrieval of the expression values for given GEO sample ID list.  
- 3. For given expression values tables, it computes co-expression clusters or network (CLI only).
-   </code>
-  </pre>
+ 3. For given expression values tables, it computes co-expression clusters or network (CLI only).</code></pre>
   <p>
    It will serve queries for tissue and condition specific gene expression co-expression network for biologically interesting genes/samples. Users can search differentially expressed genes in different tissues or in numerous experimental conditions or treatments (e.g various biotic or abiotic stresses). Currently the metadata annotation is provided for a subset of gene expression experiments from the NCBI GEO microarray experiments for Arabidopsis and Poplar. The samples of these experiments are manually annotated using plant ontology (PO) [http://www.plantontology.org/] and environment ontology (EO) [http://obo.cvs.sourceforge.net/viewvc/obo/obo/ontology/phenotype/environment/environment_ontology.obo]
   </p>
   <h2 id="get_repid_by_sampleid">
    get_repid_by_sampleid
   </h2>
-  <pre>
-   <code>
-    $results = $obj-&gt;get_repid_by_sampleid($ids)
-   </code>
-  </pre>
+  <pre><code>  $results = $obj-&gt;get_repid_by_sampleid($ids)</code></pre>
   <dl>
    <dt id="Parameter-and-return-types">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $ids is a SampleIDList
+$ids is a SampleIDList
 $results is a Sample
 SampleIDList is a reference to a list where each element is a SampleID
 SampleID is a string
 Sample is a reference to a hash where the key is a SampleID and the value is a ValueList
-ValueList is a reference to a list where each element is a float
-    </pre>
+ValueList is a reference to a list where each element is a float</pre>
    </dd>
    <dt id="Description">
     Description
@@ -67,18 +58,14 @@ ValueList is a reference to a list where each element is a float
   <h2 id="get_experiments_by_seriesid">
    get_experiments_by_seriesid
   </h2>
-  <pre>
-   <code>
-    $results = $obj-&gt;get_experiments_by_seriesid($ids)
-   </code>
-  </pre>
+  <pre><code>  $results = $obj-&gt;get_experiments_by_seriesid($ids)</code></pre>
   <dl>
    <dt id="Parameter-and-return-types1">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $ids is a SeriesIDList
+$ids is a SeriesIDList
 $results is an Experiments
 SeriesIDList is a reference to a list where each element is a SeriesID
 SeriesID is a string
@@ -90,8 +77,7 @@ Sample is a reference to a hash where the key is a SampleID and the value is a V
 SampleID is a string
 ValueList is a reference to a list where each element is a float
 GeneIDList is a reference to a list where each element is a GeneID
-GeneID is a string
-    </pre>
+GeneID is a string</pre>
    </dd>
    <dt id="Description1">
     Description
@@ -105,18 +91,14 @@ GeneID is a string
   <h2 id="get_experiments_by_sampleid">
    get_experiments_by_sampleid
   </h2>
-  <pre>
-   <code>
-    $results = $obj-&gt;get_experiments_by_sampleid($ids)
-   </code>
-  </pre>
+  <pre><code>  $results = $obj-&gt;get_experiments_by_sampleid($ids)</code></pre>
   <dl>
    <dt id="Parameter-and-return-types2">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $ids is a SampleIDList
+$ids is a SampleIDList
 $results is an Experiment
 SampleIDList is a reference to a list where each element is a SampleID
 SampleID is a string
@@ -126,8 +108,7 @@ Experiment is a reference to a hash where the following keys are defined:
 Sample is a reference to a hash where the key is a SampleID and the value is a ValueList
 ValueList is a reference to a list where each element is a float
 GeneIDList is a reference to a list where each element is a GeneID
-GeneID is a string
-    </pre>
+GeneID is a string</pre>
    </dd>
    <dt id="Description2">
     Description
@@ -141,18 +122,14 @@ GeneID is a string
   <h2 id="get_experiments_by_sampleid_geneid">
    get_experiments_by_sampleid_geneid
   </h2>
-  <pre>
-   <code>
-    $results = $obj-&gt;get_experiments_by_sampleid_geneid($ids, $gl)
-   </code>
-  </pre>
+  <pre><code>  $results = $obj-&gt;get_experiments_by_sampleid_geneid($ids, $gl)</code></pre>
   <dl>
    <dt id="Parameter-and-return-types3">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $ids is a SampleIDList
+$ids is a SampleIDList
 $gl is a GeneIDList
 $results is an Experiment
 SampleIDList is a reference to a list where each element is a SampleID
@@ -163,8 +140,7 @@ Experiment is a reference to a hash where the following keys are defined:
 	series has a value which is a Sample
 	genes has a value which is a GeneIDList
 Sample is a reference to a hash where the key is a SampleID and the value is a ValueList
-ValueList is a reference to a list where each element is a float
-    </pre>
+ValueList is a reference to a list where each element is a float</pre>
    </dd>
    <dt id="Description3">
     Description
@@ -178,25 +154,20 @@ ValueList is a reference to a list where each element is a float
   <h2 id="get_eo_sampleidlist">
    get_eo_sampleidlist
   </h2>
-  <pre>
-   <code>
-    $results = $obj-&gt;get_eo_sampleidlist($lst)
-   </code>
-  </pre>
+  <pre><code>  $results = $obj-&gt;get_eo_sampleidlist($lst)</code></pre>
   <dl>
    <dt id="Parameter-and-return-types4">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $lst is an EOIDList
+$lst is an EOIDList
 $results is an EOID2Sample
 EOIDList is a reference to a list where each element is an EOID
 EOID is a string
 EOID2Sample is a reference to a hash where the key is an EOID and the value is a SampleIDList
 SampleIDList is a reference to a list where each element is a SampleID
-SampleID is a string
-    </pre>
+SampleID is a string</pre>
    </dd>
    <dt id="Description4">
     Description
@@ -210,25 +181,20 @@ SampleID is a string
   <h2 id="get_po_sampleidlist">
    get_po_sampleidlist
   </h2>
-  <pre>
-   <code>
-    $results = $obj-&gt;get_po_sampleidlist($lst)
-   </code>
-  </pre>
+  <pre><code>  $results = $obj-&gt;get_po_sampleidlist($lst)</code></pre>
   <dl>
    <dt id="Parameter-and-return-types5">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $lst is a POIDList
+$lst is a POIDList
 $results is a POID2Sample
 POIDList is a reference to a list where each element is a POID
 POID is a string
 POID2Sample is a reference to a hash where the key is a POID and the value is a SampleIDList
 SampleIDList is a reference to a list where each element is a SampleID
-SampleID is a string
-    </pre>
+SampleID is a string</pre>
    </dd>
    <dt id="Description5">
     Description
@@ -242,21 +208,16 @@ SampleID is a string
   <h2 id="get_all_po">
    get_all_po
   </h2>
-  <pre>
-   <code>
-    $results = $obj-&gt;get_all_po()
-   </code>
-  </pre>
+  <pre><code>  $results = $obj-&gt;get_all_po()</code></pre>
   <dl>
    <dt id="Parameter-and-return-types6">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $results is a POID2Description
+$results is a POID2Description
 POID2Description is a reference to a hash where the key is a POID and the value is a string
-POID is a string
-    </pre>
+POID is a string</pre>
    </dd>
    <dt id="Description6">
     Description
@@ -267,29 +228,20 @@ POID is a string
   <h2 id="getAllPO">
    getAllPO
   </h2>
-  <pre>
-   <code>
-    Retrieve the list of all plant ontology IDs (POIDs) currently available in the database.
-   </code>
-  </pre>
+  <pre><code> Retrieve the list of all plant ontology IDs (POIDs) currently available in the database.</code></pre>
   <h2 id="get_all_eo">
    get_all_eo
   </h2>
-  <pre>
-   <code>
-    $results = $obj-&gt;get_all_eo()
-   </code>
-  </pre>
+  <pre><code>  $results = $obj-&gt;get_all_eo()</code></pre>
   <dl>
    <dt id="Parameter-and-return-types7">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $results is an EOID2Description
+$results is an EOID2Description
 EOID2Description is a reference to a hash where the key is an EOID and the value is a string
-EOID is a string
-    </pre>
+EOID is a string</pre>
    </dd>
    <dt id="Description7">
     Description
@@ -303,23 +255,18 @@ EOID is a string
   <h2 id="get_po_descriptions">
    get_po_descriptions
   </h2>
-  <pre>
-   <code>
-    $results = $obj-&gt;get_po_descriptions($ids)
-   </code>
-  </pre>
+  <pre><code>  $results = $obj-&gt;get_po_descriptions($ids)</code></pre>
   <dl>
    <dt id="Parameter-and-return-types8">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $ids is a POIDList
+$ids is a POIDList
 $results is a POID2Description
 POIDList is a reference to a list where each element is a POID
 POID is a string
-POID2Description is a reference to a hash where the key is a POID and the value is a string
-    </pre>
+POID2Description is a reference to a hash where the key is a POID and the value is a string</pre>
    </dd>
    <dt id="Description8">
     Description
@@ -333,23 +280,18 @@ POID2Description is a reference to a hash where the key is a POID and the value 
   <h2 id="get_eo_descriptions">
    get_eo_descriptions
   </h2>
-  <pre>
-   <code>
-    $results = $obj-&gt;get_eo_descriptions($ids)
-   </code>
-  </pre>
+  <pre><code>  $results = $obj-&gt;get_eo_descriptions($ids)</code></pre>
   <dl>
    <dt id="Parameter-and-return-types9">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $ids is an EOIDList
+$ids is an EOIDList
 $results is an EOID2Description
 EOIDList is a reference to a list where each element is an EOID
 EOID is a string
-EOID2Description is a reference to a hash where the key is an EOID and the value is a string
-    </pre>
+EOID2Description is a reference to a hash where the key is an EOID and the value is a string</pre>
    </dd>
    <dt id="Description9">
     Description
@@ -374,9 +316,7 @@ EOID2Description is a reference to a hash where the key is an EOID and the value
     <p>
      external environment ontology id
     </p>
-    <pre>
-     <code>
-      The supported EO ids are :
+    <pre><code>     The supported EO ids are :
        EO:0007001        UV-B light regimen
        EO:0007002        UV-A light regimen
        EO:0007041        antibiotic regimen
@@ -416,17 +356,15 @@ EOID2Description is a reference to a hash where the key is an EOID and the value
        EO:0007303        carbon nutrient regimen
        EO:0007373        mechanical damage
        EO:0007404        drought environment
-       EO:0007409        brassinosteroid
-     </code>
-    </pre>
+       EO:0007409        brassinosteroid</code></pre>
    </dd>
    <dt id="Definition">
     Definition
    </dt>
    <dd>
     <pre>
-     a string
-    </pre>
+a string
+</pre>
    </dd>
   </dl>
   <h2 id="POID">
@@ -440,9 +378,7 @@ EOID2Description is a reference to a hash where the key is an EOID and the value
     <p>
      external plant ontology id
     </p>
-    <pre>
-     <code>
-      The supported PO ids are :
+    <pre><code>     The supported PO ids are :
        PO:0000003        whole plant
        PO:0000005        cultured cell
        PO:0000006        cultured protoplast
@@ -452,17 +388,15 @@ EOID2Description is a reference to a hash where the key is an EOID and the value
        PO:0009046        flower
        PO:0009049        Inflorescence
        PO:0009001        fruit
-       PO:0009010        seed
-     </code>
-    </pre>
+       PO:0009010        seed</code></pre>
    </dd>
    <dt id="Definition1">
     Definition
    </dt>
    <dd>
     <pre>
-     a string
-    </pre>
+a string
+</pre>
    </dd>
   </dl>
   <h2 id="GeneID">
@@ -482,8 +416,8 @@ EOID2Description is a reference to a hash where the key is an EOID and the value
    </dt>
    <dd>
     <pre>
-     a string
-    </pre>
+a string
+</pre>
    </dd>
   </dl>
   <h2 id="SampleID">
@@ -503,8 +437,8 @@ EOID2Description is a reference to a hash where the key is an EOID and the value
    </dt>
    <dd>
     <pre>
-     a string
-    </pre>
+a string
+</pre>
    </dd>
   </dl>
   <h2 id="SeriesID">
@@ -524,8 +458,8 @@ EOID2Description is a reference to a hash where the key is an EOID and the value
    </dt>
    <dd>
     <pre>
-     a string
-    </pre>
+a string
+</pre>
    </dd>
   </dl>
   <h2 id="GeneIDList">
@@ -545,8 +479,8 @@ EOID2Description is a reference to a hash where the key is an EOID and the value
    </dt>
    <dd>
     <pre>
-     a reference to a list where each element is a GeneID
-    </pre>
+a reference to a list where each element is a GeneID
+</pre>
    </dd>
   </dl>
   <h2 id="SampleIDList">
@@ -566,8 +500,8 @@ EOID2Description is a reference to a hash where the key is an EOID and the value
    </dt>
    <dd>
     <pre>
-     a reference to a list where each element is a SampleID
-    </pre>
+a reference to a list where each element is a SampleID
+</pre>
    </dd>
   </dl>
   <h2 id="EOIDList">
@@ -587,8 +521,8 @@ EOID2Description is a reference to a hash where the key is an EOID and the value
    </dt>
    <dd>
     <pre>
-     a reference to a list where each element is an EOID
-    </pre>
+a reference to a list where each element is an EOID
+</pre>
    </dd>
   </dl>
   <h2 id="POIDList">
@@ -608,8 +542,8 @@ EOID2Description is a reference to a hash where the key is an EOID and the value
    </dt>
    <dd>
     <pre>
-     a reference to a list where each element is a POID
-    </pre>
+a reference to a list where each element is a POID
+</pre>
    </dd>
   </dl>
   <h2 id="SeriesIDList">
@@ -621,8 +555,8 @@ EOID2Description is a reference to a hash where the key is an EOID and the value
    </dt>
    <dd>
     <pre>
-     a reference to a list where each element is a SeriesID
-    </pre>
+a reference to a list where each element is a SeriesID
+</pre>
    </dd>
   </dl>
   <h2 id="ValueList">
@@ -634,8 +568,8 @@ EOID2Description is a reference to a hash where the key is an EOID and the value
    </dt>
    <dd>
     <pre>
-     a reference to a list where each element is a float
-    </pre>
+a reference to a list where each element is a float
+</pre>
    </dd>
   </dl>
   <h2 id="Sample">
@@ -647,8 +581,8 @@ EOID2Description is a reference to a hash where the key is an EOID and the value
    </dt>
    <dd>
     <pre>
-     a reference to a hash where the key is a SampleID and the value is a ValueList
-    </pre>
+a reference to a hash where the key is a SampleID and the value is a ValueList
+</pre>
    </dd>
   </dl>
   <h2 id="SampleList">
@@ -660,8 +594,8 @@ EOID2Description is a reference to a hash where the key is an EOID and the value
    </dt>
    <dd>
     <pre>
-     a reference to a list where each element is a Sample
-    </pre>
+a reference to a list where each element is a Sample
+</pre>
    </dd>
   </dl>
   <h2 id="Experiment">
@@ -673,10 +607,9 @@ EOID2Description is a reference to a hash where the key is an EOID and the value
    </dt>
    <dd>
     <pre>
-     a reference to a hash where the following keys are defined:
+a reference to a hash where the following keys are defined:
 series has a value which is a Sample
-genes has a value which is a GeneIDList
-    </pre>
+genes has a value which is a GeneIDList</pre>
    </dd>
   </dl>
   <h2 id="Experiments">
@@ -688,8 +621,8 @@ genes has a value which is a GeneIDList
    </dt>
    <dd>
     <pre>
-     a reference to a hash where the key is a SeriesID and the value is an Experiment
-    </pre>
+a reference to a hash where the key is a SeriesID and the value is an Experiment
+</pre>
    </dd>
   </dl>
   <h2 id="EOID2Sample">
@@ -701,8 +634,8 @@ genes has a value which is a GeneIDList
    </dt>
    <dd>
     <pre>
-     a reference to a hash where the key is an EOID and the value is a SampleIDList
-    </pre>
+a reference to a hash where the key is an EOID and the value is a SampleIDList
+</pre>
    </dd>
   </dl>
   <h2 id="POID2Sample">
@@ -714,8 +647,8 @@ genes has a value which is a GeneIDList
    </dt>
    <dd>
     <pre>
-     a reference to a hash where the key is a POID and the value is a SampleIDList
-    </pre>
+a reference to a hash where the key is a POID and the value is a SampleIDList
+</pre>
    </dd>
   </dl>
   <h2 id="POID2Description">
@@ -727,8 +660,8 @@ genes has a value which is a GeneIDList
    </dt>
    <dd>
     <pre>
-     a reference to a hash where the key is a POID and the value is a string
-    </pre>
+a reference to a hash where the key is a POID and the value is a string
+</pre>
    </dd>
   </dl>
   <h2 id="EOID2Description">
@@ -740,8 +673,8 @@ genes has a value which is a GeneIDList
    </dt>
    <dd>
     <pre>
-     a reference to a hash where the key is an EOID and the value is a string
-    </pre>
+a reference to a hash where the key is an EOID and the value is a string
+</pre>
    </dd>
   </dl>
   <h1 id="POD-ERRORS">
@@ -759,7 +692,7 @@ genes has a value which is a GeneIDList
    </dt>
    <dd>
     <p>
-     You forgot a &#39;=back&#39; before &#39;=head2&#39;
+     You forgot a '=back' before '=head2'
     </p>
    </dd>
    <dt id="Around-line-661:">
