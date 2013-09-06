@@ -1,0 +1,630 @@
+Communities API Service 
+
+DESCRIPTION
+The Communities API offers data retrieval methods for all available microbial communities data. This release contains two new commands:
+   
+- metagenome      Provides information about single metagenomes or list of available metagenomes.
+
+- analyse_metagenome   Initiates the analysis of an uploaded metagenomic sequence file with metadata.
+
+
+COMMANDS 
+   get_analysisset  
+   get_library_instance  
+   get_sample_query  
+   get_sequenceset  
+   get_library_query  
+   get_sample_instance  
+   get_sample  
+   get_metagenome_query  
+   get_library  
+   get_project_list  
+   get_abundanceprofile  
+   get_metagenome  
+   get_metagenome_instance  
+   get_sequenceset_instance  
+   get_metagenome_analysis
+   check_metagenome   
+   get_project  
+   get_abundanceprofile_instance  
+   get_metagenome_list  
+   get_project_query  
+   get_sample_list  
+   get_metagenome_statistics  
+   analyze_metagenome  
+   get_library_list 
+
+
+NAME
+get_analysisset -- This command will retrieve an analysis set from the communities API.
+  
+VERSION
+1.0
+
+SYNOPSIS
+get_analysisset [id] [-help] [-user] [-pass] [-token] [-webkey] [-verbosity]
+
+DESCRIPTION 
+INPUT:     This command requires the analysis set ID as input.
+
+OUTPUT:    The output of this command is an analysis set. 
+
+PARAMETERS:
+id             The analysis set ID, to be retrieved from the API.
+-help          Display this message.
+-user          Username to authenticate against the API, requires a password to be set as well.
+-pass          Password to authenticate against the API, requires a username to be set as well.
+-token         Globus Online authentication token.
+-webkey        MG-RAST webkey to synch with the passed Globus Online authentication.
+-verbosity     Verbosity of the result data, can be one of : minimal, verbose,or full.
+
+
+NAME
+get_library_instance -- This command will retrieve a library from the communities API.
+
+VERSION
+1.0
+
+SYNOPSIS
+get_library_instance  [id] [-help] [-user] [-pass] [-token] [-webkey] [-verbosity] 
+
+
+DESCRIPTION
+INPUT:     This command requires the library ID as input.
+
+OUTPUT:    The output of this command is a library. 
+
+PARAMETERS:
+id             The is the ID of the library to be retrieved from the API.
+-help          Display this message.
+-user          Username to authenticate against the API, requires a password to be set as well.
+-pass          Password to authenticate against the API, requires a username to be set as well.
+-token         Globus Online authentication token.
+-webkey        MG-RAST webkey to synch with the passed Globus Online authentication.
+-verbosity     Verbosity of the result data, can be one of: minimal, verbose,or full.
+ 
+
+NAME
+get_sample_query  -- This command will retrieve a list of samples from the communities API.
+
+VERSION
+1.0
+
+SYNOPSIS
+get_sample_list [-help] [-user] [-pass] [-token] [-webkey] [-verbosity] [-limit] [-offset]
+ 
+
+DESCRIPTION
+INPUT:     
+
+OUTPUT:    The output of this command is a list of samples. 
+
+PARAMETERS:
+-help           Display this message.
+-user           Username to authenticate against the API, requires a password to be set as well.
+-pass           Password to authenticate against the API, requires a username to be set as well.
+-token          Globus Online authentication token.
+-webkey         MG-RAST webkey to synch with the passed Globus Online authentication.
+-verbosity      Verbosity of the result data, can be one of [ minimal, verbose, full ].
+-limit          The maximum number of data items to be returned.
+-offset         The zero-based index of the first data item to be returned.
+  
+ 
+NAME
+get_sequenceset  -- This command will retrieve a sequence set from the communities API.
+
+VERSION
+1.0
+
+SYNOPSIS
+get_sequenceset [id] [-help] [-user] [-pass] [-token] [-webkey] [-verbosity] 
+
+DESCRIPTION
+INPUT:     This command requires the sequence set ID as input.
+
+OUTPUT:    The output of this command is a sequence set.
+
+PARAMETERS:
+id              The ID of the sequence set to be retrieved from the API.
+-help           Display this message.
+-user           Username to authenticate against the API, requires a password to be set as well.
+-pass           Password to authenticate against the API, requires a username to be set as well.
+-token          Globus Online authentication token.
+-webkey         MG-RAST webkey to synch with the passed Globus Online authentication.
+-verbosity      Verbosity of the result data, can be one of [ minimal, verbose, full ].
+ 
+
+
+NAME
+get_library_query -- This command will retrieve a list of libraries from the communities API.
+
+VERSION
+1.0
+
+SYNOPSIS
+get_library_query [-help] [-user] [-pass] [-token] [-webkey] [-verbosity] [-limit] [-offset]
+
+DESCRIPTION
+INPUT:
+
+OUTPUT:     The output of this command is a list of libraries.
+
+PARAMETERS: 
+-help           Display this message.
+-user           Username to authenticate against the API, requires a password to be set as well.
+-pass           Password to authenticate against the API, requires a username to be set as well.
+-token          Globus Online authentication token.
+-webkey         MG-RAST webkey to synch with the passed Globus Online authentication.
+-verbosity      Verbosity of the result data, can be one of [ minimal, verbose, full ].
+-limit          The maximum number of data items to be returned.
+-offset         The zero-based index of the first data item to be returned.
+ 
+
+NAME
+get_sample_instance -- This command will retrieve a sample from the communities API.
+
+VERSION
+1.0
+
+SYNOPSIS
+get_sample_instance [id] [-help] [-user] [-pass] [-token] [-webkey] [-verbosity] 
+
+DESCRIPTION
+INPUT:    This command requires the sample ID as input.
+
+OUTPUT:   The output of this command is a sample.
+
+PARAMETERS: 
+id              The ID of the sample to be retrieved from the API.
+-help           Display this message.
+-user           Username to authenticate against the API, requires a password to be set as well.
+-pass           Password to authenticate against the API, requires a username to be set as well.
+-token          Globus Online authentication token.
+-webkey         MG-RAST webkey to synch with the passed Globus Online authentication.
+-verbosity      Verbosity of the result data, can be one of [ minimal, verbose, full ].
+
+
+
+NAME
+get_sample -- This command will retrieve a sample from the communities API.
+
+VERSION
+1.0
+
+SYNOPSIS
+get_sample [id] [-help] [-user] [-pass] [-token] [-webkey] [-verbosity] 
+
+
+DESCRIPTION
+INPUT:    This command requires the sample ID as input.
+
+OUTPUT:   The output of this command is a sample.
+
+PARAMETERS:
+id              The ID of the sample to be retrieved from the API.
+-help           Display this message.
+-user           Username to authenticate against the API, requires a password to be set as well.
+-pass           Password to authenticate against the API, requires a username to be set as well.
+-token          Globus Online authentication token.
+-webkey         MG-RAST webkey to synch with the passed Globus Online authentication.
+-verbosity      Verbosity of the result data, can be one of [ minimal, verbose, full ].
+
+ 
+
+NAME
+get_metagenome_query -- This command will retrieve a list of metagenomes from the communities API.
+
+VERSION
+1.0
+
+SYNOPSIS
+get_metagenome_list [-help] [-user] [-pass] [-token] [-webkey] [-verbosity] [-limit] [-offset]
+
+
+DESCRIPTION
+INPUT:
+
+OUTPUT:    The output of this command is a list of metagenomes.
+
+PARAMETERS: 
+-help           Display this message.
+-user           Username to authenticate against the API, requires a password to be set as well.
+-pass           Password to authenticate against the API, requires a username to be set as well.
+-token          Globus Online authentication token.
+-webkey         MG-RAST webkey to synch with the passed Globus Online authentication.
+-verbosity      Verbosity of the result data, can be one of [ minimal, verbose, full ].
+-limit          The maximum number of data items to be returned.
+-offset         The zero-based index of the first data item to be returned.
+
+
+NAME
+get_library -- This command will retrieve a library from the communities API.
+
+
+VERSION
+1.0
+
+SYNOPSIS
+get_library [id] [-help] [-user] [-pass] [-token] [-webkey] [-verbosity]
+
+
+DESCRIPTION
+INPUT:     This command requires the library ID as input.
+
+OUTPUT:    The output of this command is a library.
+
+PARAMETERS:
+id              The ID of the library to be retrieved from the API.
+-help           Display this message.
+-user           Username to authenticate against the API, requires a password to be set as well.
+-pass           Password to authenticate against the API, requires a username to be set as well.
+-token          Globus Online authentication token.
+-webkey         MG-RAST webkey to synch with the passed Globus Online authentication.
+-verbosity      Verbosity of the result data, can be one of [ minimal, verbose, full ].
+
+
+NAME
+get_project_list -- This command will retrieve a list of projects from the communities API.
+
+VERSION
+1.0
+
+SYNOPSIS
+get_project_list [-help] [-user] [-pass] [-token] [-webkey] [-verbosity] [-limit] [-offset]
+
+DESCRIPTION
+INPUT:
+
+OUTPUT:    The output of this command is a list of projects.
+
+PARAMETERS:
+-help           Display this message.
+-user           Username to authenticate against the API, requires a password to be set as well.
+-pass           Password to authenticate against the API, requires a username to be set as well.
+-token          Globus Online authentication token.
+-webkey         MG-RAST webkey to synch with the passed Globus Online authentication.
+-verbosity      Verbosity of the result data, can be one of [ minimal, verbose, full ].
+-limit          The maximum number of data items to be returned.
+-offset         The zero-based index of the first data item to be returned.
+ 
+
+NAME
+get_abundanceprofile -- This command will retrieve an abundance profile from the communities API.
+
+VERSION
+1.0
+
+SYNOPSIS
+get_abundanceprofile [id] [-help] [-user] [-pass] [-token] [-webkey] [-verbosity] 
+
+DESCRIPTION
+INPUT:   This command requires the abundance profile ID as input.
+
+OUTPUT:   The output of this command is an abundance profile.
+
+PARAMETERS:
+id              The ID of the abundance profile to be retrieved from the API.
+-help           Display this message.
+-user           Username to authenticate against the API, requires a password to be set as well.
+-pass           Password to authenticate against the API, requires a username to be set as well.
+-token          Globus Online authentication token.
+-webkey         MG-RAST webkey to synch with the passed Globus Online authentication.
+-verbosity      Verbosity of the result data, can be one of [ minimal, verbose, full ].
+
+
+NAME  
+get_metagenome -- This command will retrieve a metagenome from the communities API.
+
+
+VERSION
+1.0
+
+SYNOPSIS
+get_metagenome [id] [-help] [-user] [-pass] [-token] [-webkey] [-verbosity] 
+ 
+DESCRIPTION
+INPUT:     This command requires the metagenome ID as input.
+
+OUTPUT:    The output of this command is a metagenome.
+
+PARAMETERS:
+id              The ID of the metagenome to be retrieved from the API.
+-help           Display this message.
+-user           Username to authenticate against the API, requires a password to be set as well.
+-pass           Password to authenticate against the API, requires a username to be set as well.
+-token          Globus Online authentication token.
+-webkey         MG-RAST webkey to synch with the passed Globus Online authentication.
+-verbosity      Verbosity of the result data, can be one of [ minimal, verbose, full ].
+ 
+
+NAME
+get_metagenome_instance -- This command will retrieve a metagenome from the communities API.
+
+
+VERSION
+1.0
+
+SYNOPSIS
+get_metagenome_instance [id] [-help] [-user] [-pass] [-token] [-webkey] [-verbosity] 
+
+DESCRIPTION
+INPUT:     This command requires the metagenome ID as input.
+
+OUTPUT:    The output of this command is a metagenome.
+
+PARAMETERS: 
+id              The ID of the metagenome to be retrieved from the API.
+-help           Display this message.
+-user           Username to authenticate against the API, requires a password to be set as well.
+-pass           Password to authenticate against the API, requires a username to be set as well.
+-token          Globus Online authentication token.
+-webkey         MG-RAST webkey to synch with the passed Globus Online authentication.
+-verbosity      Verbosity of the result data, can be one of [ minimal, verbose, full ].
+
+
+
+NAME
+get_sequenceset_instance -- This command will retrieve a sequence set from the communities API.
+
+VERSION
+1.0
+
+SYNOPSIS
+get_sequenceset_instance [id] [-help] [-user] [-pass] [-token] [-webkey] [-verbosity]
+
+DESCRIPTION
+INPUT:     This command requires the sequence set ID as input.
+
+OUTPUT:    The output of this command is a sequence set.
+
+PARAMETERS:
+id              The ID of the sequence set to be retrieved from the API.
+-help           Display this message.
+-user           Username to authenticate against the API, requires a password to be set as well.
+-pass           Password to authenticate against the API, requires a username to be set as well.
+-token          Globus Online authentication token.
+-webkey         MG-RAST webkey to synch with the passed Globus Online authentication.
+-verbosity      Verbosity of the result data, can be one of [ minimal, verbose, full ].
+ 
+
+
+NAME
+get_metagenome_analysis -- This command will display a list of output files and provides the option to download output files from an analyzed metagenome in AWE.
+
+VERSION
+1.0
+
+SYNOPSIS
+get_metagenome_analysis [-awe_job_url] [-download] [-conf]
+
+DESCRIPTION
+INPUT:     This command requires the input of the AWE job URL. 
+
+OUTPUT:    The output of this command is either a list of output files or a download of the analyzed metagenome output files. 
+
+PARAMETERS:
+-awe_job_url          Url for AWE job, required.
+-download             Option variable to download output files.
+-conf                 Configuration file (default='awe.ini').
+
+
+NAME
+check_metagenome -- This command will check the status of metagenome in AWE.
+
+VERSION
+1.0
+
+SYNOPSIS
+check_metagenome [-awe_job_url] [-download] [-conf]
+
+DESCRIPTION
+INPUT:     This command requires the input of the AWE job URL.
+
+OUTPUT:    The output of this command is the status of the metagenome in AWE.
+
+PARAMETERS:
+-awe_job_url          Url for AWE job, required.
+-task_status          Option variable to include status of individual tasks.
+-conf                 Configuration file (default='awe.ini').
+ 
+ 
+
+NAME
+get_project  -- This command will retrieve a project from the communities API.
+
+VERSION
+1.0
+
+SYNOPSIS
+get_project [id] [-help] [-user] [-pass] [-token] [-webkey] [-verbosity] 
+
+
+DESCRIPTION
+INPUT:     This command requires the project ID as input.
+
+OUTPUT:    The output of this command is a project.
+
+PARAMETERS: 
+id              The ID of the project to be retrieved from the API.
+-help           Display this message.
+-user           Username to authenticate against the API, requires a password to be set as well.
+-pass           Password to authenticate against the API, requires a username to be set as well.
+-token          Globus Online authentication token.
+-webkey         MG-RAST webkey to synch with the passed Globus Online authentication.
+-verbosity      Verbosity of the result data, can be one of [ minimal, verbose, full ].
+
+
+NAME
+get_abundanceprofile_instance -- This command will retrieve an abundance profile from the communities API.
+
+VERSION
+1.0
+
+SYNOPSIS
+get_abundanceprofile_instance [id] [-help] [-user] [-pass] [-token] [-webkey] [-verbosity]
+
+DESCRIPTION
+INPUT:     This command requires the abundance profile ID as input.
+
+OUTPUT:    The output of this command is an abundance profile.
+
+PARAMETERS:
+id              The ID of the abundance profile to be retrieved from the API.
+-help           Display this message.
+-user           Username to authenticate against the API, requires a password to be set as well.
+-pass           Password to authenticate against the API, requires a username to be set as well.
+-token          Globus Online authentication token.
+-webkey         MG-RAST webkey to synch with the passed Globus Online authentication.
+-verbosity      Verbosity of the result data, can be one of [ minimal, verbose, full ].
+
+
+ 
+NAME 
+get_metagenome_list -- This command will retrieve a list of metagenomes from the communities API.
+
+VERSION
+1.0
+
+SYNOPSIS
+get_metagenome_list [-help] [-user] [-pass] [-token] [-webkey] [-verbosity] [-limit] [-offset]
+
+DESCRIPTION
+INPUT:
+
+OUTPUT:   The output of this command is a list of metagenomes. 
+
+PARAMETERS:
+-help           Display this message.
+-user           Username to authenticate against the API, requires a password to be set as well.
+-pass           Password to authenticate against the API, requires a username to be set as well.
+-token          Globus Online authentication token.
+-webkey         MG-RAST webkey to synch with the passed Globus Online authentication.
+-verbosity      Verbosity of the result data, can be one of [ minimal, verbose, full ].
+-limit          The maximum number of data items to be returned.
+-offset         The zero-based index of the first data item to be returned.
+
+
+
+NAME
+get_project_query -- This command will retrieve a list of projects from the communities API.
+
+VERSION
+1.0
+
+SYNOPSIS
+get_project_query [-help] [-user] [-pass] [-token] [-webkey] [-verbosity] [-limit] [-offset]
+
+DESCRIPTION
+INPUT:
+
+OUTPUT:    The output of this command is a list of projects. 
+
+PARAMETERS:
+-help           Display this message.
+-user           Username to authenticate against the API, requires a password to be set as well.
+-pass           Password to authenticate against the API, requires a username to be set as well.
+-token          Globus Online authentication token.
+-webkey         MG-RAST webkey to synch with the passed Globus Online authentication.
+-verbosity      Verbosity of the result data, can be one of [ minimal, verbose, full ].
+-limit          The maximum number of data items to be returned.
+-offset         The zero-based index of the first data item to be returned.
+
+
+
+NAME
+get_sample_list -- This command will retrieve a list of samples from the communities API.
+
+VERSION
+1.0
+
+SYNOPSIS
+get_sample_list [-help] [-user] [-pass] [-token] [-webkey] [-verbosity] [-limit] [-offset]
+
+DESCRIPTION
+INPUT:
+
+OUTPUT:    The output of this command is a list of samples. 
+
+PARAMETERS: 
+-help           Display this message.
+-user           Username to authenticate against the API, requires a password to be set as well.
+-pass           Password to authenticate against the API, requires a username to be set as well.
+-token          Globus Online authentication token.
+-webkey         MG-RAST webkey to synch with the passed Globus Online authentication.
+-verbosity      Verbosity of the result data, can be one of [ minimal, verbose, full ].
+-limit          The maximum number of data items to be returned.
+-offset         The zero-based index of the first data item to be returned.
+ 
+
+NAME
+get_metagenome_statistics  -- This command will retrieve metagenome statistics from the communities API.
+
+VERSION
+1.0
+
+SYNOPSIS
+get_metagenome_statistics [id] [-help] [-user] [-pass] [-token] [-webkey] [-verbosity] 
+
+DESCRIPTION
+INPUT:     This command requires the metagenome statistics ID as input.
+
+OUTPUT:    The output of this command is the metagenome statistics.
+
+PARAMETERS:
+id              The ID of the metagenome statistics to be retrieved from the API.
+-help           Display this message.
+-user           Username to authenticate against the API, requires a password to be set as well.
+-pass           Password to authenticate against the API, requires a username to be set as well.
+-token          Globus Online authentication token.
+-webkey         MG-RAST webkey to synch with the passed Globus Online authentication.
+-verbosity      Verbosity of the result data, can be one of [ minimal, verbose, full ].
+
+
+
+NAME
+analyze_metagenome  -- This command is utilized for submitting metagenome to AWE.
+
+VERSION
+1.0
+
+SYNOPSIS
+analyze_metagenome [-metagenome_name] [-metagenome_datastore_id] [-metadata_datastore_id] [-conf]
+
+DESCRIPTION
+INPUT:     This command requires the metagenome or file name for the sequence lie in datastore, the sequence or read file ID in datastore and the metadata fuel ID in datastore as input variables. 
+
+OUTPUT:    
+
+PARAMETERS:
+-metagenome_name            Metagenome/file name for sequence file in datastore, 
+                            must match any metagenome name in metadata file, required.
+-metagenome_datastore_id    Sequence/read file ID in datastore, required.
+-metadata_datastore_id      Metadata file ID in datastore, required.
+-conf                       Configuration file, (default='awe.ini').
+
+
+
+NAME
+get_library_list -- This command will retrieve a list of libraries from the communities API.
+
+VERSION
+1.0
+
+SYNOPSIS
+get_library_list [-help] [-user] [-pass] [-token] [-webkey] [-verbosity] [-limit] [-offset]
+
+DESCRIPTION
+INPUT:    
+
+OUTPUT:     The output of this command is a list of libraries.
+
+PARAMETERS:
+-help           Display this message.
+-user           Username to authenticate against the API, requires a password to be set as well.
+-pass           Password to authenticate against the API, requires a username to be set as well.
+-token          Globus Online authentication token.
+-webkey         MG-RAST webkey to synch with the passed Globus Online authentication.
+-verbosity      Verbosity of the result data, can be one of [ minimal, verbose, full ].
+-limit          The maximum number of data items to be returned.
+-offset         The zero-based index of the first data item to be returned.
+
