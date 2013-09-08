@@ -9,32 +9,30 @@ The Communities API offers data retrieval methods for all available microbial co
 
 
 COMMANDS 
-   1 get_analysisset  
-   2 get_library_instance  
-   3 get_sample_query  
-   4 get_sequenceset  
-   5 get_library_query  
-   6 metagenome  
-   7 get_sample_instance  
-   8 get_sample  
-   9 get_project_instance  
-  10 get_metagenome_query  
-  11 get_library  
-  12 get_project_list  
-  13 get_abundanceprofile  
-  14 get_metagenome  
-  15 get_metagenome_instance  
-  16 get_sequenceset_instance  
-  17 get_metagenome_analysis
-  18 check_metagenome   
-  19 get_project  
-  20 get_abundanceprofile_instance  
-  21 get_metagenome_list  
-  22 get_project_query  
-  23 get_sample_list  
-  24 get_metagenome_statistics  
-  25 analyze_metagenome  
-  26 get_library_list 
+   get_analysisset  
+   get_library_instance  
+   get_sample_query  
+   get_sequenceset  
+   get_library_query  
+   get_sample_instance  
+   get_sample  
+   get_metagenome_query  
+   get_library  
+   get_project_list  
+   get_abundanceprofile  
+   get_metagenome  
+   get_metagenome_instance  
+   get_sequenceset_instance  
+   get_metagenome_analysis
+   check_metagenome   
+   get_project  
+   get_abundanceprofile_instance  
+   get_metagenome_list  
+   get_project_query  
+   get_sample_list  
+   get_metagenome_statistics  
+   analyze_metagenome  
+   get_library_list 
 
 
 NAME
@@ -161,38 +159,15 @@ PARAMETERS:
 -limit          The maximum number of data items to be returned.
 -offset         The zero-based index of the first data item to be returned.
  
+
 NAME
-get_metagenome -- This command will retrieve a metagenome from the communities API.
+get_sample_instance -- This command will retrieve a sample from the communities API.
 
 VERSION
 1.0
 
 SYNOPSIS
-get_metagenome [id] [-help] [-user] [-pass] [-token] [-webkey] [-verbosity] 
-
-DESCRIPTION
-INPUT:    This command requires the metagenome ID as input.
-
-OUTPUT:   The output of this command is a metagenome.
-
-PARAMETERS:
-id              The ID of the metagenome to be retrieved from the API.
--help           Display this message.
--user           Username to authenticate against the API, requires a password to be set as well.
--pass           Password to authenticate against the API, requires a username to be set as well.
--token          Globus Online authentication token.
--webkey         MG-RAST webkey to synch with the passed Globus Online authentication.
--verbosity      Verbosity of the result data, can be one of [ minimal, verbose, full ].
-
-
-NAME
-get_sample -- This command will retrieve a sample from the communities API.
-
-VERSION
-1.0
-
-SYNOPSIS
-get_sample [id] [-help] [-user] [-pass] [-token] [-webkey] [-verbosity] 
+get_sample_instance [id] [-help] [-user] [-pass] [-token] [-webkey] [-verbosity] 
 
 DESCRIPTION
 INPUT:    This command requires the sample ID as input.
@@ -234,36 +209,10 @@ id              The ID of the sample to be retrieved from the API.
 -webkey         MG-RAST webkey to synch with the passed Globus Online authentication.
 -verbosity      Verbosity of the result data, can be one of [ minimal, verbose, full ].
 
-
-
-NAME 
-get_project -- This command will retrieve a project from the communities API.
-
-VERSION
-1.0
-
-SYNOPSIS
-get_project [id] [-help] [-user] [-pass] [-token] [-webkey] [-verbosity]
-
-
-DESCRIPTION
-INPUT:     This command requires the project ID as input.
-
-OUTPUT:    The output of this command is a project.
-
-PARAMETERS:
-id              The ID of the project to be retrieved from the API.
--help           Display this message.
--user           Username to authenticate against the API, requires a password to be set as well.
--pass           Password to authenticate against the API, requires a username to be set as well.
--token          Globus Online authentication token.
--webkey         MG-RAST webkey to synch with the passed Globus Online authentication.
--verbosity      Verbosity of the result data, can be one of [ minimal, verbose, full ].
- 433 
  
 
 NAME
-get_metagenome_list -- This command will retrieve a list of metagenomes from the communities API.
+get_metagenome_query -- This command will retrieve a list of metagenomes from the communities API.
 
 VERSION
 1.0
