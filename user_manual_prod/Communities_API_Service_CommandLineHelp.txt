@@ -370,7 +370,7 @@ VERSION
 1.0
 
 SYNOPSIS
-get_sequenceset_instance [id] [-help] [-user] [-pass] [-token] [-webkey] [-verbosity]
+get_sequenceset_instance <id> [-help] [-user] [-pass] [-token] [-webkey] [-verbosity]
 
 DESCRIPTION
 INPUT:     This command requires the sequence set ID as input.
@@ -395,7 +395,7 @@ VERSION
 1.0
 
 SYNOPSIS
-get_metagenome_analysis [-awe_job_url] [-download] [-conf]
+get_metagenome_analysis <-awe_job_url> [-download] [-conf]
 
 DESCRIPTION
 INPUT:     This command requires the input of the AWE job URL. 
@@ -415,7 +415,7 @@ VERSION
 1.0
 
 SYNOPSIS
-check_metagenome [-awe_job_url] [-download] [-conf]
+check_metagenome <-awe_job_url> [-download] [-conf]
 
 DESCRIPTION
 INPUT:     This command requires the input of the AWE job URL.
@@ -436,7 +436,7 @@ VERSION
 1.0
 
 SYNOPSIS
-get_project [id] [-help] [-user] [-pass] [-token] [-webkey] [-verbosity] 
+get_project <id> [-help] [-user] [-pass] [-token] [-webkey] [-verbosity] 
 
 
 DESCRIPTION
@@ -461,7 +461,7 @@ VERSION
 1.0
 
 SYNOPSIS
-get_abundanceprofile_instance [id] [-help] [-user] [-pass] [-token] [-webkey] [-verbosity]
+get_abundanceprofile_instance <id> [-help] [-user] [-pass] [-token] [-webkey] [-verbosity]
 
 DESCRIPTION
 INPUT:     This command requires the abundance profile ID as input.
@@ -563,7 +563,7 @@ VERSION
 1.0
 
 SYNOPSIS
-get_metagenome_statistics [id] [-help] [-user] [-pass] [-token] [-webkey] [-verbosity] 
+get_metagenome_statistics <id> [-help] [-user] [-pass] [-token] [-webkey] [-verbosity] 
 
 DESCRIPTION
 INPUT:     This command requires the metagenome statistics ID as input.
@@ -588,10 +588,10 @@ VERSION
 1.0
 
 SYNOPSIS
-analyze_metagenome [-metagenome_name] [-metagenome_datastore_id] [-metadata_datastore_id] [-conf]
+analyze_metagenome <-metagenome_name> <-metagenome_datastore_id> <-metadata_datastore_id> [-conf]
 
 DESCRIPTION
-INPUT:     This command requires the metagenome or file name for the sequence lie in datastore, the sequence or read file ID in datastore and the metadata fuel ID in datastore as input variables. 
+INPUT:     This command requires the metagenome or file name for the sequence file in datastore, the sequence or read file ID in datastore and the metadata file ID in datastore as input variables. 
 
 OUTPUT:    
 
