@@ -422,12 +422,64 @@ workspace_ref is a string</pre>
     </p>
    </dd>
   </dl>
+  <h2 id="get_objects">
+   get_objects
+  </h2>
+  <pre><code>  $output = $obj-&gt;get_objects($params)</code></pre>
+  <dl>
+   <dt id="Parameter-and-return-types7">
+    Parameter and return types
+   </dt>
+   <dd>
+    <pre>
+$params is a get_objects_params
+$output is a reference to a list where each element is a get_object_output
+get_objects_params is a reference to a hash where the following keys are defined:
+	ids has a value which is a reference to a list where each element is an object_id
+	types has a value which is a reference to a list where each element is an object_type
+	workspaces has a value which is a reference to a list where each element is a workspace_id
+	instances has a value which is a reference to a list where each element is an int
+	auth has a value which is a string
+	asHash has a value which is a bool
+	asJSON has a value which is a bool
+object_id is a string
+object_type is a string
+workspace_id is a string
+bool is an int
+get_object_output is a reference to a hash where the following keys are defined:
+	data has a value which is a string
+	metadata has a value which is an object_metadata
+object_metadata is a reference to a list containing 11 items:
+	0: (id) an object_id
+	1: (type) an object_type
+	2: (moddate) a timestamp
+	3: (instance) an int
+	4: (command) a string
+	5: (lastmodifier) a username
+	6: (owner) a username
+	7: (workspace) a workspace_id
+	8: (ref) a workspace_ref
+	9: (chsum) a string
+	10: (metadata) a reference to a hash where the key is a string and the value is a string
+timestamp is a string
+username is a string
+workspace_ref is a string</pre>
+   </dd>
+   <dt id="Description7">
+    Description
+   </dt>
+   <dd>
+    <p>
+     Retrieves the specified objects from the specified workspaces. Both the object data and metadata are returned. This commands provides access to all versions of the objects via the instances parameter.
+    </p>
+   </dd>
+  </dl>
   <h2 id="get_object_by_ref">
    get_object_by_ref
   </h2>
   <pre><code>  $output = $obj-&gt;get_object_by_ref($params)</code></pre>
   <dl>
-   <dt id="Parameter-and-return-types7">
+   <dt id="Parameter-and-return-types8">
     Parameter and return types
    </dt>
    <dd>
@@ -462,7 +514,7 @@ timestamp is a string
 username is a string
 workspace_id is a string</pre>
    </dd>
-   <dt id="Description7">
+   <dt id="Description8">
     Description
    </dt>
    <dd>
@@ -476,7 +528,7 @@ workspace_id is a string</pre>
   </h2>
   <pre><code>  $metadata = $obj-&gt;save_object_by_ref($params)</code></pre>
   <dl>
-   <dt id="Parameter-and-return-types8">
+   <dt id="Parameter-and-return-types9">
     Parameter and return types
    </dt>
    <dd>
@@ -518,7 +570,7 @@ timestamp is a string
 username is a string
 workspace_id is a string</pre>
    </dd>
-   <dt id="Description8">
+   <dt id="Description9">
     Description
    </dt>
    <dd>
@@ -532,7 +584,7 @@ workspace_id is a string</pre>
   </h2>
   <pre><code>  $metadata = $obj-&gt;get_objectmeta($params)</code></pre>
   <dl>
-   <dt id="Parameter-and-return-types9">
+   <dt id="Parameter-and-return-types10">
     Parameter and return types
    </dt>
    <dd>
@@ -566,7 +618,7 @@ timestamp is a string
 username is a string
 workspace_ref is a string</pre>
    </dd>
-   <dt id="Description9">
+   <dt id="Description10">
     Description
    </dt>
    <dd>
@@ -580,7 +632,7 @@ workspace_ref is a string</pre>
   </h2>
   <pre><code>  $metadata = $obj-&gt;get_objectmeta_by_ref($params)</code></pre>
   <dl>
-   <dt id="Parameter-and-return-types10">
+   <dt id="Parameter-and-return-types11">
     Parameter and return types
    </dt>
    <dd>
@@ -611,7 +663,7 @@ timestamp is a string
 username is a string
 workspace_id is a string</pre>
    </dd>
-   <dt id="Description10">
+   <dt id="Description11">
     Description
    </dt>
    <dd>
@@ -625,7 +677,7 @@ workspace_id is a string</pre>
   </h2>
   <pre><code>  $metadata = $obj-&gt;revert_object($params)</code></pre>
   <dl>
-   <dt id="Parameter-and-return-types11">
+   <dt id="Parameter-and-return-types12">
     Parameter and return types
    </dt>
    <dd>
@@ -659,7 +711,7 @@ timestamp is a string
 username is a string
 workspace_ref is a string</pre>
    </dd>
-   <dt id="Description11">
+   <dt id="Description12">
     Description
    </dt>
    <dd>
@@ -673,7 +725,7 @@ workspace_ref is a string</pre>
   </h2>
   <pre><code>  $metadata = $obj-&gt;copy_object($params)</code></pre>
   <dl>
-   <dt id="Parameter-and-return-types12">
+   <dt id="Parameter-and-return-types13">
     Parameter and return types
    </dt>
    <dd>
@@ -710,7 +762,7 @@ timestamp is a string
 username is a string
 workspace_ref is a string</pre>
    </dd>
-   <dt id="Description12">
+   <dt id="Description13">
     Description
    </dt>
    <dd>
@@ -724,7 +776,7 @@ workspace_ref is a string</pre>
   </h2>
   <pre><code>  $metadata = $obj-&gt;move_object($params)</code></pre>
   <dl>
-   <dt id="Parameter-and-return-types13">
+   <dt id="Parameter-and-return-types14">
     Parameter and return types
    </dt>
    <dd>
@@ -760,7 +812,7 @@ timestamp is a string
 username is a string
 workspace_ref is a string</pre>
    </dd>
-   <dt id="Description13">
+   <dt id="Description14">
     Description
    </dt>
    <dd>
@@ -774,7 +826,7 @@ workspace_ref is a string</pre>
   </h2>
   <pre><code>  $object_present = $obj-&gt;has_object($params)</code></pre>
   <dl>
-   <dt id="Parameter-and-return-types14">
+   <dt id="Parameter-and-return-types15">
     Parameter and return types
    </dt>
    <dd>
@@ -792,7 +844,7 @@ object_type is a string
 workspace_id is a string
 bool is an int</pre>
    </dd>
-   <dt id="Description14">
+   <dt id="Description15">
     Description
    </dt>
    <dd>
@@ -806,7 +858,7 @@ bool is an int</pre>
   </h2>
   <pre><code>  $metadatas = $obj-&gt;object_history($params)</code></pre>
   <dl>
-   <dt id="Parameter-and-return-types15">
+   <dt id="Parameter-and-return-types16">
     Parameter and return types
    </dt>
    <dd>
@@ -839,7 +891,7 @@ timestamp is a string
 username is a string
 workspace_ref is a string</pre>
    </dd>
-   <dt id="Description15">
+   <dt id="Description16">
     Description
    </dt>
    <dd>
@@ -853,7 +905,7 @@ workspace_ref is a string</pre>
   </h2>
   <pre><code>  $metadata = $obj-&gt;create_workspace($params)</code></pre>
   <dl>
-   <dt id="Parameter-and-return-types16">
+   <dt id="Parameter-and-return-types17">
     Parameter and return types
    </dt>
    <dd>
@@ -878,7 +930,7 @@ workspace_metadata is a reference to a list containing 6 items:
 username is a string
 timestamp is a string</pre>
    </dd>
-   <dt id="Description16">
+   <dt id="Description17">
     Description
    </dt>
    <dd>
@@ -892,7 +944,7 @@ timestamp is a string</pre>
   </h2>
   <pre><code>  $metadata = $obj-&gt;get_workspacemeta($params)</code></pre>
   <dl>
-   <dt id="Parameter-and-return-types17">
+   <dt id="Parameter-and-return-types18">
     Parameter and return types
    </dt>
    <dd>
@@ -916,7 +968,7 @@ username is a string
 timestamp is a string
 permission is a string</pre>
    </dd>
-   <dt id="Description17">
+   <dt id="Description18">
     Description
    </dt>
    <dd>
@@ -930,7 +982,7 @@ permission is a string</pre>
   </h2>
   <pre><code>  $user_permissions = $obj-&gt;get_workspacepermissions($params)</code></pre>
   <dl>
-   <dt id="Parameter-and-return-types18">
+   <dt id="Parameter-and-return-types19">
     Parameter and return types
    </dt>
    <dd>
@@ -944,7 +996,7 @@ workspace_id is a string
 username is a string
 permission is a string</pre>
    </dd>
-   <dt id="Description18">
+   <dt id="Description19">
     Description
    </dt>
    <dd>
@@ -958,7 +1010,7 @@ permission is a string</pre>
   </h2>
   <pre><code>  $metadata = $obj-&gt;delete_workspace($params)</code></pre>
   <dl>
-   <dt id="Parameter-and-return-types19">
+   <dt id="Parameter-and-return-types20">
     Parameter and return types
    </dt>
    <dd>
@@ -982,7 +1034,7 @@ username is a string
 timestamp is a string
 permission is a string</pre>
    </dd>
-   <dt id="Description19">
+   <dt id="Description20">
     Description
    </dt>
    <dd>
@@ -996,7 +1048,7 @@ permission is a string</pre>
   </h2>
   <pre><code>  $metadata = $obj-&gt;clone_workspace($params)</code></pre>
   <dl>
-   <dt id="Parameter-and-return-types20">
+   <dt id="Parameter-and-return-types21">
     Parameter and return types
    </dt>
    <dd>
@@ -1023,7 +1075,7 @@ workspace_metadata is a reference to a list containing 6 items:
 username is a string
 timestamp is a string</pre>
    </dd>
-   <dt id="Description20">
+   <dt id="Description21">
     Description
    </dt>
    <dd>
@@ -1037,7 +1089,7 @@ timestamp is a string</pre>
   </h2>
   <pre><code>  $workspaces = $obj-&gt;list_workspaces($params)</code></pre>
   <dl>
-   <dt id="Parameter-and-return-types21">
+   <dt id="Parameter-and-return-types22">
     Parameter and return types
    </dt>
    <dd>
@@ -1060,7 +1112,7 @@ username is a string
 timestamp is a string
 permission is a string</pre>
    </dd>
-   <dt id="Description21">
+   <dt id="Description22">
     Description
    </dt>
    <dd>
@@ -1074,7 +1126,7 @@ permission is a string</pre>
   </h2>
   <pre><code>  $objects = $obj-&gt;list_workspace_objects($params)</code></pre>
   <dl>
-   <dt id="Parameter-and-return-types22">
+   <dt id="Parameter-and-return-types23">
     Parameter and return types
    </dt>
    <dd>
@@ -1107,7 +1159,7 @@ timestamp is a string
 username is a string
 workspace_ref is a string</pre>
    </dd>
-   <dt id="Description22">
+   <dt id="Description23">
     Description
    </dt>
    <dd>
@@ -1121,7 +1173,7 @@ workspace_ref is a string</pre>
   </h2>
   <pre><code>  $metadata = $obj-&gt;set_global_workspace_permissions($params)</code></pre>
   <dl>
-   <dt id="Parameter-and-return-types23">
+   <dt id="Parameter-and-return-types24">
     Parameter and return types
    </dt>
    <dd>
@@ -1146,7 +1198,7 @@ workspace_metadata is a reference to a list containing 6 items:
 username is a string
 timestamp is a string</pre>
    </dd>
-   <dt id="Description23">
+   <dt id="Description24">
     Description
    </dt>
    <dd>
@@ -1160,7 +1212,7 @@ timestamp is a string</pre>
   </h2>
   <pre><code>  $success = $obj-&gt;set_workspace_permissions($params)</code></pre>
   <dl>
-   <dt id="Parameter-and-return-types24">
+   <dt id="Parameter-and-return-types25">
     Parameter and return types
    </dt>
    <dd>
@@ -1177,7 +1229,7 @@ permission is a string
 workspace_id is a string
 bool is an int</pre>
    </dd>
-   <dt id="Description24">
+   <dt id="Description25">
     Description
    </dt>
    <dd>
@@ -1191,7 +1243,7 @@ bool is an int</pre>
   </h2>
   <pre><code>  $output = $obj-&gt;get_user_settings($params)</code></pre>
   <dl>
-   <dt id="Parameter-and-return-types25">
+   <dt id="Parameter-and-return-types26">
     Parameter and return types
    </dt>
    <dd>
@@ -1199,35 +1251,6 @@ bool is an int</pre>
 $params is a get_user_settings_params
 $output is a user_settings
 get_user_settings_params is a reference to a hash where the following keys are defined:
-	auth has a value which is a string
-user_settings is a reference to a hash where the following keys are defined:
-	workspace has a value which is a workspace_id
-workspace_id is a string</pre>
-   </dd>
-   <dt id="Description25">
-    Description
-   </dt>
-   <dd>
-    <p>
-     Retrieves settings for user account, including currently selected workspace
-    </p>
-   </dd>
-  </dl>
-  <h2 id="set_user_settings">
-   set_user_settings
-  </h2>
-  <pre><code>  $output = $obj-&gt;set_user_settings($params)</code></pre>
-  <dl>
-   <dt id="Parameter-and-return-types26">
-    Parameter and return types
-   </dt>
-   <dd>
-    <pre>
-$params is a set_user_settings_params
-$output is a user_settings
-set_user_settings_params is a reference to a hash where the following keys are defined:
-	setting has a value which is a string
-	value has a value which is a string
 	auth has a value which is a string
 user_settings is a reference to a hash where the following keys are defined:
 	workspace has a value which is a workspace_id
@@ -1242,12 +1265,41 @@ workspace_id is a string</pre>
     </p>
    </dd>
   </dl>
+  <h2 id="set_user_settings">
+   set_user_settings
+  </h2>
+  <pre><code>  $output = $obj-&gt;set_user_settings($params)</code></pre>
+  <dl>
+   <dt id="Parameter-and-return-types27">
+    Parameter and return types
+   </dt>
+   <dd>
+    <pre>
+$params is a set_user_settings_params
+$output is a user_settings
+set_user_settings_params is a reference to a hash where the following keys are defined:
+	setting has a value which is a string
+	value has a value which is a string
+	auth has a value which is a string
+user_settings is a reference to a hash where the following keys are defined:
+	workspace has a value which is a workspace_id
+workspace_id is a string</pre>
+   </dd>
+   <dt id="Description27">
+    Description
+   </dt>
+   <dd>
+    <p>
+     Retrieves settings for user account, including currently selected workspace
+    </p>
+   </dd>
+  </dl>
   <h2 id="queue_job">
    queue_job
   </h2>
   <pre><code>  $job = $obj-&gt;queue_job($params)</code></pre>
   <dl>
-   <dt id="Parameter-and-return-types27">
+   <dt id="Parameter-and-return-types28">
     Parameter and return types
    </dt>
    <dd>
@@ -1273,7 +1325,7 @@ JobObject is a reference to a hash where the following keys are defined:
 	queuecommand has a value which is a string
 job_id is a string</pre>
    </dd>
-   <dt id="Description27">
+   <dt id="Description28">
     Description
    </dt>
    <dd>
@@ -1287,7 +1339,7 @@ job_id is a string</pre>
   </h2>
   <pre><code>  $job = $obj-&gt;set_job_status($params)</code></pre>
   <dl>
-   <dt id="Parameter-and-return-types28">
+   <dt id="Parameter-and-return-types29">
     Parameter and return types
    </dt>
    <dd>
@@ -1313,7 +1365,7 @@ JobObject is a reference to a hash where the following keys are defined:
 	queuecommand has a value which is a string
 job_id is a string</pre>
    </dd>
-   <dt id="Description28">
+   <dt id="Description29">
     Description
    </dt>
    <dd>
@@ -1327,7 +1379,7 @@ job_id is a string</pre>
   </h2>
   <pre><code>  $jobs = $obj-&gt;get_jobs($params)</code></pre>
   <dl>
-   <dt id="Parameter-and-return-types29">
+   <dt id="Parameter-and-return-types30">
     Parameter and return types
    </dt>
    <dd>
@@ -1352,7 +1404,7 @@ JobObject is a reference to a hash where the following keys are defined:
 	queuecommand has a value which is a string
 job_id is a string</pre>
    </dd>
-   <dt id="Description29">
+   <dt id="Description30">
     Description
    </dt>
    <dd>
@@ -1363,14 +1415,14 @@ job_id is a string</pre>
   </h2>
   <pre><code>  $types = $obj-&gt;get_types()</code></pre>
   <dl>
-   <dt id="Parameter-and-return-types30">
+   <dt id="Parameter-and-return-types31">
     Parameter and return types
    </dt>
    <dd>
     <pre>
 $types is a reference to a list where each element is a string</pre>
    </dd>
-   <dt id="Description30">
+   <dt id="Description31">
     Description
    </dt>
    <dd>
@@ -1384,7 +1436,7 @@ $types is a reference to a list where each element is a string</pre>
   </h2>
   <pre><code>  $success = $obj-&gt;add_type($params)</code></pre>
   <dl>
-   <dt id="Parameter-and-return-types31">
+   <dt id="Parameter-and-return-types32">
     Parameter and return types
    </dt>
    <dd>
@@ -1396,7 +1448,7 @@ add_type_params is a reference to a hash where the following keys are defined:
 	auth has a value which is a string
 bool is an int</pre>
    </dd>
-   <dt id="Description31">
+   <dt id="Description32">
     Description
    </dt>
    <dd>
@@ -1410,7 +1462,7 @@ bool is an int</pre>
   </h2>
   <pre><code>  $success = $obj-&gt;remove_type($params)</code></pre>
   <dl>
-   <dt id="Parameter-and-return-types32">
+   <dt id="Parameter-and-return-types33">
     Parameter and return types
    </dt>
    <dd>
@@ -1422,7 +1474,7 @@ remove_type_params is a reference to a hash where the following keys are defined
 	auth has a value which is a string
 bool is an int</pre>
    </dd>
-   <dt id="Description32">
+   <dt id="Description33">
     Description
    </dt>
    <dd>
@@ -1436,7 +1488,7 @@ bool is an int</pre>
   </h2>
   <pre><code>  $success = $obj-&gt;patch($params)</code></pre>
   <dl>
-   <dt id="Parameter-and-return-types33">
+   <dt id="Parameter-and-return-types34">
     Parameter and return types
    </dt>
    <dd>
@@ -1448,7 +1500,7 @@ patch_params is a reference to a hash where the following keys are defined:
 	auth has a value which is a string
 bool is an int</pre>
    </dd>
-   <dt id="Description33">
+   <dt id="Description34">
     Description
    </dt>
    <dd>
@@ -1464,7 +1516,7 @@ bool is an int</pre>
    bool
   </h2>
   <dl>
-   <dt id="Description34">
+   <dt id="Description35">
     Description
    </dt>
    <dd>
@@ -1485,7 +1537,7 @@ an int
    job_id
   </h2>
   <dl>
-   <dt id="Description35">
+   <dt id="Description36">
     Description
    </dt>
    <dd>
@@ -1506,7 +1558,7 @@ a string
    workspace_id
   </h2>
   <dl>
-   <dt id="Description36">
+   <dt id="Description37">
     Description
    </dt>
    <dd>
@@ -1527,7 +1579,7 @@ a string
    object_type
   </h2>
   <dl>
-   <dt id="Description37">
+   <dt id="Description38">
     Description
    </dt>
    <dd>
@@ -1548,7 +1600,7 @@ a string
    object_id
   </h2>
   <dl>
-   <dt id="Description38">
+   <dt id="Description39">
     Description
    </dt>
    <dd>
@@ -1569,7 +1621,7 @@ a string
    permission
   </h2>
   <dl>
-   <dt id="Description39">
+   <dt id="Description40">
     Description
    </dt>
    <dd>
@@ -1590,7 +1642,7 @@ a string
    username
   </h2>
   <dl>
-   <dt id="Description40">
+   <dt id="Description41">
     Description
    </dt>
    <dd>
@@ -1611,7 +1663,7 @@ a string
    timestamp
   </h2>
   <dl>
-   <dt id="Description41">
+   <dt id="Description42">
     Description
    </dt>
    <dd>
@@ -1632,7 +1684,7 @@ a string
    workspace_ref
   </h2>
   <dl>
-   <dt id="Description42">
+   <dt id="Description43">
     Description
    </dt>
    <dd>
@@ -1653,7 +1705,7 @@ a string
    ObjectData
   </h2>
   <dl>
-   <dt id="Description43">
+   <dt id="Description44">
     Description
    </dt>
    <dd>
@@ -1677,7 +1729,7 @@ version has a value which is an int</pre>
    object_metadata
   </h2>
   <dl>
-   <dt id="Description44">
+   <dt id="Description45">
     Description
    </dt>
    <dd>
@@ -1719,7 +1771,7 @@ a reference to a list containing 11 items:
    workspace_metadata
   </h2>
   <dl>
-   <dt id="Description45">
+   <dt id="Description46">
     Description
    </dt>
    <dd>
@@ -1751,7 +1803,7 @@ a reference to a list containing 6 items:
    JobObject
   </h2>
   <dl>
-   <dt id="Description46">
+   <dt id="Description47">
     Description
    </dt>
    <dd>
@@ -1784,7 +1836,7 @@ queuecommand has a value which is a string</pre>
    user_settings
   </h2>
   <dl>
-   <dt id="Description47">
+   <dt id="Description48">
     Description
    </dt>
    <dd>
@@ -1806,7 +1858,7 @@ workspace has a value which is a workspace_id</pre>
    load_media_from_bio_params
   </h2>
   <dl>
-   <dt id="Description48">
+   <dt id="Description49">
     Description
    </dt>
    <dd>
@@ -1838,7 +1890,7 @@ asHash has a value which is a bool</pre>
    import_bio_params
   </h2>
   <dl>
-   <dt id="Description49">
+   <dt id="Description50">
     Description
    </dt>
    <dd>
@@ -1871,7 +1923,7 @@ asHash has a value which is a bool</pre>
    import_map_params
   </h2>
   <dl>
-   <dt id="Description50">
+   <dt id="Description51">
     Description
    </dt>
    <dd>
@@ -1905,7 +1957,7 @@ asHash has a value which is a bool</pre>
    save_object_params
   </h2>
   <dl>
-   <dt id="Description51">
+   <dt id="Description52">
     Description
    </dt>
    <dd>
@@ -1947,7 +1999,7 @@ asHash has a value which is a bool</pre>
    delete_object_params
   </h2>
   <dl>
-   <dt id="Description52">
+   <dt id="Description53">
     Description
    </dt>
    <dd>
@@ -1977,7 +2029,7 @@ asHash has a value which is a bool</pre>
    delete_object_permanently_params
   </h2>
   <dl>
-   <dt id="Description53">
+   <dt id="Description54">
     Description
    </dt>
    <dd>
@@ -2007,7 +2059,7 @@ asHash has a value which is a bool</pre>
    get_object_params
   </h2>
   <dl>
-   <dt id="Description54">
+   <dt id="Description55">
     Description
    </dt>
    <dd>
@@ -2041,7 +2093,7 @@ asJSON has a value which is a bool</pre>
    get_object_output
   </h2>
   <dl>
-   <dt id="Description55">
+   <dt id="Description56">
     Description
    </dt>
    <dd>
@@ -2061,11 +2113,45 @@ data has a value which is a string
 metadata has a value which is an object_metadata</pre>
    </dd>
   </dl>
+  <h2 id="get_objects_params">
+   get_objects_params
+  </h2>
+  <dl>
+   <dt id="Description57">
+    Description
+   </dt>
+   <dd>
+    <p>
+     Input parameters for the "get_object" function.
+    </p>
+    <pre><code>        list&lt;object_id&gt; ids - ID of the object to be retrieved (an essential argument)
+        list&lt;object_type&gt; types - type of the object to be retrieved (an essential argument)
+        list&lt;workspace_id&gt; workspaces - ID of the workspace containing the object to be retrieved (an essential argument)
+        list&lt;int&gt; instances  - Version of the object to be retrieved, enabling retrieval of any previous version of an object (an optional argument; the current version is retrieved if no version is provides)
+        string auth - the authentication token of the KBase account to associate with this object retrieval command (an optional argument; user is "public" if auth is not provided)
+        bool asHash - a boolean indicating if metadata should be returned as a hash
+        bool asJSON - indicates that data should be returned in JSON format (an optional argument; default is '0')</code></pre>
+   </dd>
+   <dt id="Definition22">
+    Definition
+   </dt>
+   <dd>
+    <pre>
+a reference to a hash where the following keys are defined:
+ids has a value which is a reference to a list where each element is an object_id
+types has a value which is a reference to a list where each element is an object_type
+workspaces has a value which is a reference to a list where each element is a workspace_id
+instances has a value which is a reference to a list where each element is an int
+auth has a value which is a string
+asHash has a value which is a bool
+asJSON has a value which is a bool</pre>
+   </dd>
+  </dl>
   <h2 id="get_object_by_ref_params">
    get_object_by_ref_params
   </h2>
   <dl>
-   <dt id="Description56">
+   <dt id="Description58">
     Description
    </dt>
    <dd>
@@ -2077,7 +2163,7 @@ metadata has a value which is an object_metadata</pre>
         bool asHash - a boolean indicating if metadata should be returned as a hash
         bool asJSON - indicates that data should be returned in JSON format (an optional argument; default is '0')</code></pre>
    </dd>
-   <dt id="Definition22">
+   <dt id="Definition23">
     Definition
    </dt>
    <dd>
@@ -2093,7 +2179,7 @@ asJSON has a value which is a bool</pre>
    save_object_by_ref_params
   </h2>
   <dl>
-   <dt id="Description57">
+   <dt id="Description59">
     Description
    </dt>
    <dd>
@@ -2113,7 +2199,7 @@ asJSON has a value which is a bool</pre>
         string auth - the authentication token of the KBase account to associate this save command (an optional argument, user is "public" if auth is not provided)
         bool asHash - a boolean indicating if metadata should be returned as a hash</code></pre>
    </dd>
-   <dt id="Definition23">
+   <dt id="Definition24">
     Definition
    </dt>
    <dd>
@@ -2137,7 +2223,7 @@ asHash has a value which is a bool</pre>
    get_objectmeta_params
   </h2>
   <dl>
-   <dt id="Description58">
+   <dt id="Description60">
     Description
    </dt>
    <dd>
@@ -2151,7 +2237,7 @@ asHash has a value which is a bool</pre>
         string auth - the authentication token of the KBase account to associate with this object metadata retrieval command (an optional argument; user is "public" if auth is not provided)
         bool asHash - a boolean indicating if metadata should be returned as a hash</code></pre>
    </dd>
-   <dt id="Definition24">
+   <dt id="Definition25">
     Definition
    </dt>
    <dd>
@@ -2169,7 +2255,7 @@ asHash has a value which is a bool</pre>
    get_objectmeta_by_ref_params
   </h2>
   <dl>
-   <dt id="Description59">
+   <dt id="Description61">
     Description
    </dt>
    <dd>
@@ -2180,7 +2266,7 @@ asHash has a value which is a bool</pre>
         string auth - the authentication token of the KBase account to associate with this object retrieval command (an optional argument; user is "public" if auth is not provided)
         bool asHash - a boolean indicating if metadata should be returned as a hash</code></pre>
    </dd>
-   <dt id="Definition25">
+   <dt id="Definition26">
     Definition
    </dt>
    <dd>
@@ -2195,7 +2281,7 @@ asHash has a value which is a bool</pre>
    revert_object_params
   </h2>
   <dl>
-   <dt id="Description60">
+   <dt id="Description62">
     Description
    </dt>
    <dd>
@@ -2209,7 +2295,7 @@ asHash has a value which is a bool</pre>
         string auth - the authentication token of the KBase account to associate with this object reversion command (an optional argument; user is "public" if auth is not provided)
         bool asHash - a boolean indicating if metadata should be returned as a hash</code></pre>
    </dd>
-   <dt id="Definition26">
+   <dt id="Definition27">
     Definition
    </dt>
    <dd>
@@ -2227,7 +2313,7 @@ asHash has a value which is a bool</pre>
    copy_object_params
   </h2>
   <dl>
-   <dt id="Description61">
+   <dt id="Description63">
     Description
    </dt>
    <dd>
@@ -2244,7 +2330,7 @@ asHash has a value which is a bool</pre>
         string auth - the authentication token of the KBase account to associate with this object copy command (an optional argument; user is "public" if auth is not provided)
         bool asHash - a boolean indicating if metadata should be returned as a hash</code></pre>
    </dd>
-   <dt id="Definition27">
+   <dt id="Definition28">
     Definition
    </dt>
    <dd>
@@ -2265,7 +2351,7 @@ asHash has a value which is a bool</pre>
    move_object_params
   </h2>
   <dl>
-   <dt id="Description62">
+   <dt id="Description64">
     Description
    </dt>
    <dd>
@@ -2281,7 +2367,7 @@ asHash has a value which is a bool</pre>
         string auth - the authentication token of the KBase account to associate with this object move command (an optional argument; user is "public" if auth is not provided)
         bool asHash - a boolean indicating if metadata should be returned as a hash</code></pre>
    </dd>
-   <dt id="Definition28">
+   <dt id="Definition29">
     Definition
    </dt>
    <dd>
@@ -2301,7 +2387,7 @@ asHash has a value which is a bool</pre>
    has_object_params
   </h2>
   <dl>
-   <dt id="Description63">
+   <dt id="Description65">
     Description
    </dt>
    <dd>
@@ -2314,7 +2400,7 @@ asHash has a value which is a bool</pre>
         int instance - Version of the object to be checked for existance (an optional argument; the current object is checked if no version is provided)
         string auth - the authentication token of the KBase account to associate with this object check command (an optional argument; user is "public" if auth is not provided)</code></pre>
    </dd>
-   <dt id="Definition29">
+   <dt id="Definition30">
     Definition
    </dt>
    <dd>
@@ -2331,7 +2417,7 @@ auth has a value which is a string</pre>
    object_history_params
   </h2>
   <dl>
-   <dt id="Description64">
+   <dt id="Description66">
     Description
    </dt>
    <dd>
@@ -2344,7 +2430,7 @@ auth has a value which is a string</pre>
         string auth - the authentication token of the KBase account to associate with this object history command (an optional argument; user is "public" if auth is not provided)
         bool asHash - a boolean indicating if metadata should be returned as a hash</code></pre>
    </dd>
-   <dt id="Definition30">
+   <dt id="Definition31">
     Definition
    </dt>
    <dd>
@@ -2361,7 +2447,7 @@ asHash has a value which is a bool</pre>
    create_workspace_params
   </h2>
   <dl>
-   <dt id="Description65">
+   <dt id="Description67">
     Description
    </dt>
    <dd>
@@ -2373,7 +2459,7 @@ asHash has a value which is a bool</pre>
         string auth - the authentication token of the KBase account that will own the created workspace (an optional argument; user is "public" if auth is not provided)
         bool asHash - a boolean indicating if metadata should be returned as a hash</code></pre>
    </dd>
-   <dt id="Definition31">
+   <dt id="Definition32">
     Definition
    </dt>
    <dd>
@@ -2389,7 +2475,7 @@ asHash has a value which is a bool</pre>
    get_workspacemeta_params
   </h2>
   <dl>
-   <dt id="Description66">
+   <dt id="Description68">
     Description
    </dt>
    <dd>
@@ -2400,7 +2486,7 @@ asHash has a value which is a bool</pre>
         string auth - the authentication token of the KBase account accessing workspace metadata (an optional argument; user is "public" if auth is not provided)
         bool asHash - a boolean indicating if metadata should be returned as a hash</code></pre>
    </dd>
-   <dt id="Definition32">
+   <dt id="Definition33">
     Definition
    </dt>
    <dd>
@@ -2415,7 +2501,7 @@ asHash has a value which is a bool</pre>
    get_workspacepermissions_params
   </h2>
   <dl>
-   <dt id="Description67">
+   <dt id="Description69">
     Description
    </dt>
    <dd>
@@ -2425,7 +2511,7 @@ asHash has a value which is a bool</pre>
     <pre><code>        workspace_id workspace - ID of the workspace for which custom user permissions should be returned (an essential argument)
         string auth - the authentication token of the KBase account accessing workspace permissions; must have admin privelages to workspace (an optional argument; user is "public" if auth is not provided)</code></pre>
    </dd>
-   <dt id="Definition33">
+   <dt id="Definition34">
     Definition
    </dt>
    <dd>
@@ -2439,7 +2525,7 @@ auth has a value which is a string</pre>
    delete_workspace_params
   </h2>
   <dl>
-   <dt id="Description68">
+   <dt id="Description70">
     Description
    </dt>
    <dd>
@@ -2450,7 +2536,7 @@ auth has a value which is a string</pre>
         string auth - the authentication token of the KBase account deleting the workspace; must be the workspace owner (an optional argument; user is "public" if auth is not provided)
         bool asHash - a boolean indicating if metadata should be returned as a hash</code></pre>
    </dd>
-   <dt id="Definition34">
+   <dt id="Definition35">
     Definition
    </dt>
    <dd>
@@ -2465,7 +2551,7 @@ asHash has a value which is a bool</pre>
    clone_workspace_params
   </h2>
   <dl>
-   <dt id="Description69">
+   <dt id="Description71">
     Description
    </dt>
    <dd>
@@ -2479,7 +2565,7 @@ asHash has a value which is a bool</pre>
         string auth - the authentication token of the KBase account that will own the cloned workspace (an optional argument; user is "public" if auth is not provided)
         bool asHash - a boolean indicating if metadata should be returned as a hash</code></pre>
    </dd>
-   <dt id="Definition35">
+   <dt id="Definition36">
     Definition
    </dt>
    <dd>
@@ -2497,7 +2583,7 @@ asHash has a value which is a bool</pre>
    list_workspaces_params
   </h2>
   <dl>
-   <dt id="Description70">
+   <dt id="Description72">
     Description
    </dt>
    <dd>
@@ -2507,7 +2593,7 @@ asHash has a value which is a bool</pre>
     <pre><code>        string auth - the authentication token of the KBase account accessing the list of workspaces (an optional argument; user is "public" if auth is not provided)
         bool asHash - a boolean indicating if metadata should be returned as a hash</code></pre>
    </dd>
-   <dt id="Definition36">
+   <dt id="Definition37">
     Definition
    </dt>
    <dd>
@@ -2521,7 +2607,7 @@ asHash has a value which is a bool</pre>
    list_workspace_objects_params
   </h2>
   <dl>
-   <dt id="Description71">
+   <dt id="Description73">
     Description
    </dt>
    <dd>
@@ -2534,7 +2620,7 @@ asHash has a value which is a bool</pre>
         string auth - the authentication token of the KBase account listing workspace objects; must have at least 'read' privelages (an optional argument; user is "public" if auth is not provided)
         bool asHash - a boolean indicating if metadata should be returned as a hash</code></pre>
    </dd>
-   <dt id="Definition37">
+   <dt id="Definition38">
     Definition
    </dt>
    <dd>
@@ -2551,7 +2637,7 @@ asHash has a value which is a bool</pre>
    set_global_workspace_permissions_params
   </h2>
   <dl>
-   <dt id="Description72">
+   <dt id="Description74">
     Description
    </dt>
    <dd>
@@ -2563,7 +2649,7 @@ asHash has a value which is a bool</pre>
         string auth - the authentication token of the KBase account changing workspace default permissions; must have 'admin' privelages to workspace (an optional argument; user is "public" if auth is not provided)
         bool asHash - a boolean indicating if metadata should be returned as a hash</code></pre>
    </dd>
-   <dt id="Definition38">
+   <dt id="Definition39">
     Definition
    </dt>
    <dd>
@@ -2579,7 +2665,7 @@ asHash has a value which is a bool</pre>
    set_workspace_permissions_params
   </h2>
   <dl>
-   <dt id="Description73">
+   <dt id="Description75">
     Description
    </dt>
    <dd>
@@ -2591,7 +2677,7 @@ asHash has a value which is a bool</pre>
         permission new_permission - New permissions to which all users in the user list will be set for the workspace. Accepted values are 'a' =&gt; admin, 'w' =&gt; write, 'r' =&gt; read, 'n' =&gt; none (an essential argument)
         string auth - the authentication token of the KBase account changing workspace permissions; must have 'admin' privelages to workspace (an optional argument; user is "public" if auth is not provided)</code></pre>
    </dd>
-   <dt id="Definition39">
+   <dt id="Definition40">
     Definition
    </dt>
    <dd>
@@ -2607,7 +2693,7 @@ auth has a value which is a string</pre>
    get_user_settings_params
   </h2>
   <dl>
-   <dt id="Description74">
+   <dt id="Description76">
     Description
    </dt>
    <dd>
@@ -2616,7 +2702,7 @@ auth has a value which is a string</pre>
     </p>
     <pre><code>        string auth - the authentication token of the KBase account changing workspace permissions; must have 'admin' privelages to workspace (an optional argument; user is "public" if auth is not provided)</code></pre>
    </dd>
-   <dt id="Definition40">
+   <dt id="Definition41">
     Definition
    </dt>
    <dd>
@@ -2629,7 +2715,7 @@ auth has a value which is a string</pre>
    set_user_settings_params
   </h2>
   <dl>
-   <dt id="Description75">
+   <dt id="Description77">
     Description
    </dt>
    <dd>
@@ -2640,7 +2726,7 @@ auth has a value which is a string</pre>
         string value - new value to be set (an essential argument)
         string auth - the authentication token of the KBase account changing workspace permissions; must have 'admin' privelages to workspace (an optional argument; user is "public" if auth is not provided)</code></pre>
    </dd>
-   <dt id="Definition41">
+   <dt id="Definition42">
     Definition
    </dt>
    <dd>
@@ -2655,7 +2741,7 @@ auth has a value which is a string</pre>
    queue_job_params
   </h2>
   <dl>
-   <dt id="Description76">
+   <dt id="Description78">
     Description
    </dt>
    <dd>
@@ -2667,7 +2753,7 @@ auth has a value which is a string</pre>
         string type - the type of the job being queued
         mapping&lt;string,string&gt; jobdata - hash of data associated with job</code></pre>
    </dd>
-   <dt id="Definition42">
+   <dt id="Definition43">
     Definition
    </dt>
    <dd>
@@ -2684,7 +2770,7 @@ jobdata has a value which is a reference to a hash where the key is a string and
    set_job_status_params
   </h2>
   <dl>
-   <dt id="Description77">
+   <dt id="Description79">
     Description
    </dt>
    <dd>
@@ -2697,7 +2783,7 @@ jobdata has a value which is a reference to a hash where the key is a string and
         string currentStatus - Indicates the current statues of the selected job (an optional argument; default is "undef")
         mapping&lt;string,string&gt; jobdata - hash of data associated with job</code></pre>
    </dd>
-   <dt id="Definition43">
+   <dt id="Definition44">
     Definition
    </dt>
    <dd>
@@ -2714,7 +2800,7 @@ jobdata has a value which is a reference to a hash where the key is a string and
    get_jobs_params
   </h2>
   <dl>
-   <dt id="Description78">
+   <dt id="Description80">
     Description
    </dt>
    <dd>
@@ -2725,7 +2811,7 @@ jobdata has a value which is a reference to a hash where the key is a string and
      list&lt;string&gt; jobids - list of specific jobs to be retrieved (an optional argument; default is an empty list) string status - Status of all jobs to be retrieved; accepted values are 'queued', 'running', and 'done' (an essential argument) string auth - the authentication token of the KBase account accessing job list; only owned jobs will be returned (an optional argument; user is "public" if auth is not provided)
     </p>
    </dd>
-   <dt id="Definition44">
+   <dt id="Definition45">
     Definition
    </dt>
    <dd>
@@ -2741,7 +2827,7 @@ auth has a value which is a string</pre>
    add_type_params
   </h2>
   <dl>
-   <dt id="Description79">
+   <dt id="Description81">
     Description
    </dt>
    <dd>
@@ -2751,7 +2837,7 @@ auth has a value which is a string</pre>
     <pre><code>        string type - Name of type being added (an essential argument)
         string auth - the authentication token of the KBase account adding a type (an optional argument; user is "public" if auth is not provided)</code></pre>
    </dd>
-   <dt id="Definition45">
+   <dt id="Definition46">
     Definition
    </dt>
    <dd>
@@ -2765,7 +2851,7 @@ auth has a value which is a string</pre>
    remove_type_params
   </h2>
   <dl>
-   <dt id="Description80">
+   <dt id="Description82">
     Description
    </dt>
    <dd>
@@ -2775,7 +2861,7 @@ auth has a value which is a string</pre>
     <pre><code>        string type - name of custom type to be removed from workspace service (an essential argument)
         string auth - the authentication token of the KBase account removing a custom type (an optional argument; user is "public" if auth is not provided)</code></pre>
    </dd>
-   <dt id="Definition46">
+   <dt id="Definition47">
     Definition
    </dt>
    <dd>
@@ -2789,7 +2875,7 @@ auth has a value which is a string</pre>
    patch_params
   </h2>
   <dl>
-   <dt id="Description81">
+   <dt id="Description83">
     Description
    </dt>
    <dd>
@@ -2800,7 +2886,7 @@ auth has a value which is a string</pre>
      string patch_id - ID of the patch that should be run on the workspace string auth - the authentication token of the KBase account removing a custom type (an optional argument; user is "public" if auth is not provided)
     </p>
    </dd>
-   <dt id="Definition47">
+   <dt id="Definition48">
     Definition
    </dt>
    <dd>

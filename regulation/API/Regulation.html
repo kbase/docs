@@ -1,11 +1,11 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version="1.0" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
  <head>
   <title>
   </title>
-  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-  <link rev="made" href="mailto:root@ubuntu.chicago.kbase.us" />
+  <meta content="text/html; charset=utf-8" http-equiv="content-type"/>
+  <link href="mailto:root@ubuntu.chicago.kbase.us" rev="made"/>
  </head>
  <body style="background-color: white">
   <h1 id="NAME">
@@ -29,18 +29,14 @@
   <h2 id="getRegulomeModelCollections">
    getRegulomeModelCollections
   </h2>
-  <pre>
-   <code>
-    $regulomeModelCollections = $obj-&gt;getRegulomeModelCollections()
-   </code>
-  </pre>
+  <pre><code>  $regulomeModelCollections = $obj-&gt;getRegulomeModelCollections()</code></pre>
   <dl>
    <dt id="Parameter-and-return-types">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $regulomeModelCollections is a reference to a list where each element is a RegulomeModelCollection
+$regulomeModelCollections is a reference to a list where each element is a RegulomeModelCollection
 RegulomeModelCollection is a reference to a hash where the following keys are defined:
 	collectionId has a value which is a string
 	name has a value which is a string
@@ -52,8 +48,7 @@ RegulomeModelCollection is a reference to a hash where the following keys are de
 	buildParams has a value which is a string
 	regulomeModelCount has a value which is an int
 Date is a string
-RegulomeSource is a string
-    </pre>
+RegulomeSource is a string</pre>
    </dd>
    <dt id="Description">
     Description
@@ -67,18 +62,14 @@ RegulomeSource is a string
   <h2 id="getRegulomeModelCollection">
    getRegulomeModelCollection
   </h2>
-  <pre>
-   <code>
-    $regulomeModelCollection = $obj-&gt;getRegulomeModelCollection($collectionId)
-   </code>
-  </pre>
+  <pre><code>  $regulomeModelCollection = $obj-&gt;getRegulomeModelCollection($collectionId)</code></pre>
   <dl>
    <dt id="Parameter-and-return-types1">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $collectionId is a string
+$collectionId is a string
 $regulomeModelCollection is a RegulomeModelCollection
 RegulomeModelCollection is a reference to a hash where the following keys are defined:
 	collectionId has a value which is a string
@@ -91,8 +82,7 @@ RegulomeModelCollection is a reference to a hash where the following keys are de
 	buildParams has a value which is a string
 	regulomeModelCount has a value which is an int
 Date is a string
-RegulomeSource is a string
-    </pre>
+RegulomeSource is a string</pre>
    </dd>
    <dt id="Description1">
     Description
@@ -109,18 +99,14 @@ RegulomeSource is a string
   <h2 id="getRegulomeModelsByCollectionId">
    getRegulomeModelsByCollectionId
   </h2>
-  <pre>
-   <code>
-    $regulomeModels = $obj-&gt;getRegulomeModelsByCollectionId($collectionId)
-   </code>
-  </pre>
+  <pre><code>  $regulomeModels = $obj-&gt;getRegulomeModelsByCollectionId($collectionId)</code></pre>
   <dl>
    <dt id="Parameter-and-return-types2">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $collectionId is a string
+$collectionId is a string
 $regulomeModels is a reference to a list where each element is a RegulomeModel
 RegulomeModel is a reference to a hash where the following keys are defined:
 	regulomeModelId has a value which is a string
@@ -133,8 +119,7 @@ RegulomeModel is a reference to a hash where the following keys are defined:
 	tfRegulonCount has a value which is an int
 	rnaRegulonCount has a value which is an int
 Date is a string
-RegulomeSource is a string
-    </pre>
+RegulomeSource is a string</pre>
    </dd>
    <dt id="Description2">
     Description
@@ -151,18 +136,14 @@ RegulomeSource is a string
   <h2 id="getRegulomeModelsByGenomeId">
    getRegulomeModelsByGenomeId
   </h2>
-  <pre>
-   <code>
-    $regulomeModels = $obj-&gt;getRegulomeModelsByGenomeId($genomeId)
-   </code>
-  </pre>
+  <pre><code>  $regulomeModels = $obj-&gt;getRegulomeModelsByGenomeId($genomeId)</code></pre>
   <dl>
    <dt id="Parameter-and-return-types3">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $genomeId is a string
+$genomeId is a string
 $regulomeModels is a reference to a list where each element is a RegulomeModel
 RegulomeModel is a reference to a hash where the following keys are defined:
 	regulomeModelId has a value which is a string
@@ -175,8 +156,7 @@ RegulomeModel is a reference to a hash where the following keys are defined:
 	tfRegulonCount has a value which is an int
 	rnaRegulonCount has a value which is an int
 Date is a string
-RegulomeSource is a string
-    </pre>
+RegulomeSource is a string</pre>
    </dd>
    <dt id="Description3">
     Description
@@ -193,18 +173,14 @@ RegulomeSource is a string
   <h2 id="getRegulomeModelsBySourceType">
    getRegulomeModelsBySourceType
   </h2>
-  <pre>
-   <code>
-    $regulomeModels = $obj-&gt;getRegulomeModelsBySourceType($regulomeSource)
-   </code>
-  </pre>
+  <pre><code>  $regulomeModels = $obj-&gt;getRegulomeModelsBySourceType($regulomeSource)</code></pre>
   <dl>
    <dt id="Parameter-and-return-types4">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $regulomeSource is a string
+$regulomeSource is a string
 $regulomeModels is a reference to a list where each element is a RegulomeModel
 RegulomeModel is a reference to a hash where the following keys are defined:
 	regulomeModelId has a value which is a string
@@ -217,8 +193,7 @@ RegulomeModel is a reference to a hash where the following keys are defined:
 	tfRegulonCount has a value which is an int
 	rnaRegulonCount has a value which is an int
 Date is a string
-RegulomeSource is a string
-    </pre>
+RegulomeSource is a string</pre>
    </dd>
    <dt id="Description4">
     Description
@@ -235,18 +210,14 @@ RegulomeSource is a string
   <h2 id="getRegulomeModel">
    getRegulomeModel
   </h2>
-  <pre>
-   <code>
-    $regulomeModel = $obj-&gt;getRegulomeModel($regulomeModelId)
-   </code>
-  </pre>
+  <pre><code>  $regulomeModel = $obj-&gt;getRegulomeModel($regulomeModelId)</code></pre>
   <dl>
    <dt id="Parameter-and-return-types5">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $regulomeModelId is a string
+$regulomeModelId is a string
 $regulomeModel is a RegulomeModel
 RegulomeModel is a reference to a hash where the following keys are defined:
 	regulomeModelId has a value which is a string
@@ -259,8 +230,7 @@ RegulomeModel is a reference to a hash where the following keys are defined:
 	tfRegulonCount has a value which is an int
 	rnaRegulonCount has a value which is an int
 Date is a string
-RegulomeSource is a string
-    </pre>
+RegulomeSource is a string</pre>
    </dd>
    <dt id="Description5">
     Description
@@ -277,18 +247,14 @@ RegulomeSource is a string
   <h2 id="getRegulonModelStats">
    getRegulonModelStats
   </h2>
-  <pre>
-   <code>
-    $regulonModelStats = $obj-&gt;getRegulonModelStats($regulomeModelId)
-   </code>
-  </pre>
+  <pre><code>  $regulonModelStats = $obj-&gt;getRegulonModelStats($regulomeModelId)</code></pre>
   <dl>
    <dt id="Parameter-and-return-types6">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $regulomeModelId is a string
+$regulomeModelId is a string
 $regulonModelStats is a reference to a list where each element is a RegulonModelStat
 RegulonModelStat is a reference to a hash where the following keys are defined:
 	regulonModelId has a value which is a string
@@ -298,8 +264,7 @@ RegulonModelStat is a reference to a hash where the following keys are defined:
 	regulatedOperonCount has a value which is an int
 	regulatedGeneCount has a value which is an int
 	sitesCount has a value which is an int
-RegulationType is a string
-    </pre>
+RegulationType is a string</pre>
    </dd>
    <dt id="Description6">
     Description
@@ -316,18 +281,14 @@ RegulationType is a string
   <h2 id="getRegulonModel">
    getRegulonModel
   </h2>
-  <pre>
-   <code>
-    $regulonModel = $obj-&gt;getRegulonModel($regulonModelId)
-   </code>
-  </pre>
+  <pre><code>  $regulonModel = $obj-&gt;getRegulonModel($regulonModelId)</code></pre>
   <dl>
    <dt id="Parameter-and-return-types7">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $regulonModelId is a string
+$regulonModelId is a string
 $regulonModel is a RegulonModel
 RegulonModel is a reference to a hash where the following keys are defined:
 	regulonModelId has a value which is a string
@@ -386,8 +347,7 @@ RegulonEvidence is a reference to a hash where the following keys are defined:
 	description has a value which is a string
 	strength has a value which is a float
 	confidence has a value which is a float
-	srcRegPreciseRegulogId has a value which is an int
-    </pre>
+	srcRegPreciseRegulogId has a value which is an int</pre>
    </dd>
    <dt id="Description7">
     Description
@@ -404,18 +364,14 @@ RegulonEvidence is a reference to a hash where the following keys are defined:
   <h2 id="buildRegulomeModel">
    buildRegulomeModel
   </h2>
-  <pre>
-   <code>
-    $processState = $obj-&gt;buildRegulomeModel($param)
-   </code>
-  </pre>
+  <pre><code>  $processState = $obj-&gt;buildRegulomeModel($param)</code></pre>
   <dl>
    <dt id="Parameter-and-return-types8">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $param is a BuildRegulomeModelParam
+$param is a BuildRegulomeModelParam
 $processState is a ProcessState
 BuildRegulomeModelParam is a reference to a hash where the following keys are defined:
 	targetGenomeId has a value which is a string
@@ -426,8 +382,7 @@ ProcessState is a reference to a hash where the following keys are defined:
 	description has a value which is a string
 	done has a value which is a Boolean
 	modelId has a value which is a string
-Boolean is a string
-    </pre>
+Boolean is a string</pre>
    </dd>
    <dt id="Description8">
     Description
@@ -444,18 +399,14 @@ Boolean is a string
   <h2 id="getProcessState">
    getProcessState
   </h2>
-  <pre>
-   <code>
-    $processState = $obj-&gt;getProcessState($processId)
-   </code>
-  </pre>
+  <pre><code>  $processState = $obj-&gt;getProcessState($processId)</code></pre>
   <dl>
    <dt id="Parameter-and-return-types9">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $processId is an int
+$processId is an int
 $processState is a ProcessState
 ProcessState is a reference to a hash where the following keys are defined:
 	processId has a value which is an int
@@ -463,8 +414,7 @@ ProcessState is a reference to a hash where the following keys are defined:
 	description has a value which is a string
 	done has a value which is a Boolean
 	modelId has a value which is a string
-Boolean is a string
-    </pre>
+Boolean is a string</pre>
    </dd>
    <dt id="Description9">
     Description
@@ -492,20 +442,16 @@ Boolean is a string
     <p>
      The source of regulome model. The value can be one of the following:
     </p>
-    <pre>
-     <code>
-      REGPRECISE_CURATED - indicates that regulome is based on the curated regulons from RegPrecise database
-        REGPRECISE_PROPAGATED - indicates that regulom model was automatically built by conservation propagation of RegPrecise reference regulons
-     </code>
-    </pre>
+    <pre><code>        REGPRECISE_CURATED - indicates that regulome is based on the curated regulons from RegPrecise database
+        REGPRECISE_PROPAGATED - indicates that regulom model was automatically built by conservation propagation of RegPrecise reference regulons</code></pre>
    </dd>
    <dt id="Definition">
     Definition
    </dt>
    <dd>
     <pre>
-     a string
-    </pre>
+a string
+</pre>
    </dd>
   </dl>
   <h2 id="RegulationType">
@@ -519,20 +465,16 @@ Boolean is a string
     <p>
      Type of regulation. The value can be one of the following:
     </p>
-    <pre>
-     <code>
-      TF - for regulation by transcription factor
-        RNA - for regulation by RNA regulatory element (e.g. riboswitch)
-     </code>
-    </pre>
+    <pre><code>        TF - for regulation by transcription factor
+        RNA - for regulation by RNA regulatory element (e.g. riboswitch)</code></pre>
    </dd>
    <dt id="Definition1">
     Definition
    </dt>
    <dd>
     <pre>
-     a string
-    </pre>
+a string
+</pre>
    </dd>
   </dl>
   <h2 id="EvidenceType">
@@ -546,22 +488,18 @@ Boolean is a string
     <p>
      Type of evidence. Several types of reconstructed objects (regulons, transcription factors, etc) are provided with evidences to enable the further curation and improving the model that was created by automatic procedure.
     </p>
-    <pre>
-     <code>
-      OPERON_GENE_DISTANCE_EVIDENCE - evidence for the gene content of operon basing on the intergenic distances
+    <pre><code>        OPERON_GENE_DISTANCE_EVIDENCE - evidence for the gene content of operon basing on the intergenic distances
         REGULON_COMPARATIVE_GENOMICS_EVIDENCE - evidence for predcited regulon based on the orthologous regulon from another genome
         REGULATOR_COMPARATIVE_GENOMICS_EVIDENCE - evidence for orthology of transcription factor basing on 
-        SITE_COMPARATIVE_GENOMICS_EVIDENCE - evidence for TFBS based on the its conservation between several genomes (comparative genomics)
-     </code>
-    </pre>
+        SITE_COMPARATIVE_GENOMICS_EVIDENCE - evidence for TFBS based on the its conservation between several genomes (comparative genomics)</code></pre>
    </dd>
    <dt id="Definition2">
     Definition
    </dt>
    <dd>
     <pre>
-     a string
-    </pre>
+a string
+</pre>
    </dd>
   </dl>
   <h2 id="Date">
@@ -581,8 +519,8 @@ Boolean is a string
    </dt>
    <dd>
     <pre>
-     a string
-    </pre>
+a string
+</pre>
    </dd>
   </dl>
   <h2 id="Boolean">
@@ -602,8 +540,8 @@ Boolean is a string
    </dt>
    <dd>
     <pre>
-     a string
-    </pre>
+a string
+</pre>
    </dd>
   </dl>
   <h2 id="Site">
@@ -632,11 +570,10 @@ Boolean is a string
    </dt>
    <dd>
     <pre>
-     a reference to a hash where the following keys are defined:
+a reference to a hash where the following keys are defined:
 sequence has a value which is a string
 position has a value which is an int
-score has a value which is a float
-    </pre>
+score has a value which is a float</pre>
    </dd>
   </dl>
   <h2 id="Gene">
@@ -665,11 +602,10 @@ score has a value which is a float
    </dt>
    <dd>
     <pre>
-     a reference to a hash where the following keys are defined:
+a reference to a hash where the following keys are defined:
 geneId has a value which is a string
 locusTag has a value which is a string
-name has a value which is a string
-    </pre>
+name has a value which is a string</pre>
    </dd>
   </dl>
   <h2 id="RegulatorEvidence">
@@ -689,15 +625,12 @@ name has a value which is a string
     <p>
      string description Description of evidence
     </p>
-    <pre>
-     <code>
-      float  strength
+    <pre><code>            float  strength
             Value from 0 to 1 representing a strength of evidence
 
             float  confidence
             Value from 0 to 1 representing a probability of evidence
-     </code>
-    </pre>
+        </code></pre>
     <p>
      string srcRegulatorId Unique identifier of the source regulator by similarity to which the orthology assignment was made
     </p>
@@ -710,14 +643,13 @@ name has a value which is a string
    </dt>
    <dd>
     <pre>
-     a reference to a hash where the following keys are defined:
+a reference to a hash where the following keys are defined:
 type has a value which is an EvidenceType
 description has a value which is a string
 strength has a value which is a float
 confidence has a value which is a float
 srcRegulatorId has a value which is a string
-srcRegulatorLocusTag has a value which is a string
-    </pre>
+srcRegulatorLocusTag has a value which is a string</pre>
    </dd>
   </dl>
   <h2 id="Regulator">
@@ -746,11 +678,10 @@ srcRegulatorLocusTag has a value which is a string
    </dt>
    <dd>
     <pre>
-     a reference to a hash where the following keys are defined:
+a reference to a hash where the following keys are defined:
 regulatorId has a value which is a string
 locusTag has a value which is a string
-evidences has a value which is a reference to a list where each element is a RegulatorEvidence
-    </pre>
+evidences has a value which is a reference to a list where each element is a RegulatorEvidence</pre>
    </dd>
   </dl>
   <h2 id="SiteEvidence">
@@ -770,15 +701,11 @@ evidences has a value which is a reference to a list where each element is a Reg
     <p>
      string description Description of evidence
     </p>
-    <pre>
-     <code>
-      float  strength
+    <pre><code>            float  strength
             Value from 0 to 1 representing a strength of evidence
 
             float  confidence
-            Value from 0 to 1 representing a probability of evidence
-     </code>
-    </pre>
+            Value from 0 to 1 representing a probability of evidence</code></pre>
     <p>
      float siteScoreThreshold Threshold used to predict TFBS
     </p>
@@ -803,7 +730,7 @@ evidences has a value which is a reference to a list where each element is a Reg
    </dt>
    <dd>
     <pre>
-     a reference to a hash where the following keys are defined:
+a reference to a hash where the following keys are defined:
 type has a value which is an EvidenceType
 description has a value which is a string
 strength has a value which is a float
@@ -813,8 +740,7 @@ srcRegulomeId has a value which is a string
 srcTaxonomyId has a value which is an int
 srcGenomeName has a value which is a string
 srcGenes has a value which is a reference to a list where each element is a Gene
-srcSites has a value which is a reference to a list where each element is a Site
-    </pre>
+srcSites has a value which is a reference to a list where each element is a Site</pre>
    </dd>
   </dl>
   <h2 id="OperonEvidence">
@@ -834,9 +760,7 @@ srcSites has a value which is a reference to a list where each element is a Site
     <p>
      string description Description of evidence
     </p>
-    <pre>
-     <code>
-      float  strength
+    <pre><code>            float  strength
             Value from 0 to 1 representing a strength of evidence
 
             float  confidence
@@ -844,8 +768,7 @@ srcSites has a value which is a reference to a list where each element is a Site
 
  int intergenicDistance
  Maximum observed distance between genes in a predicted operon
-     </code>
-    </pre>
+ </code></pre>
     <p>
      int maxIntergenicDistance Maximum expected distance between genes in a predicted operon
     </p>
@@ -855,14 +778,13 @@ srcSites has a value which is a reference to a list where each element is a Site
    </dt>
    <dd>
     <pre>
-     a reference to a hash where the following keys are defined:
+a reference to a hash where the following keys are defined:
 type has a value which is an EvidenceType
 description has a value which is a string
 strength has a value which is a float
 confidence has a value which is a float
 intergenicDistance has a value which is an int
-maxIntergenicDistance has a value which is an int
-    </pre>
+maxIntergenicDistance has a value which is an int</pre>
    </dd>
   </dl>
   <h2 id="OperonModel">
@@ -894,12 +816,11 @@ maxIntergenicDistance has a value which is an int
    </dt>
    <dd>
     <pre>
-     a reference to a hash where the following keys are defined:
+a reference to a hash where the following keys are defined:
 genes has a value which is a reference to a list where each element is a Gene
 sites has a value which is a reference to a list where each element is a Site
 operonEvidences has a value which is a reference to a list where each element is an OperonEvidence
-siteEvidences has a value which is a reference to a list where each element is a SiteEvidence
-    </pre>
+siteEvidences has a value which is a reference to a list where each element is a SiteEvidence</pre>
    </dd>
   </dl>
   <h2 id="RegulonEvidence">
@@ -919,15 +840,11 @@ siteEvidences has a value which is a reference to a list where each element is a
     <p>
      string description Description of evidence
     </p>
-    <pre>
-     <code>
-      float  strength
+    <pre><code>            float  strength
             Value from 0 to 1 representing a strength of evidence
 
             float  confidence
-            Value from 0 to 1 representing a probability of evidence
-     </code>
-    </pre>
+            Value from 0 to 1 representing a probability of evidence</code></pre>
     <p>
      int srcRegPreciseRegulogId Identifier of the source regulog id used as a reference in the propagation procedure
     </p>
@@ -937,13 +854,12 @@ siteEvidences has a value which is a reference to a list where each element is a
    </dt>
    <dd>
     <pre>
-     a reference to a hash where the following keys are defined:
+a reference to a hash where the following keys are defined:
 type has a value which is an EvidenceType
 description has a value which is a string
 strength has a value which is a float
 confidence has a value which is a float
-srcRegPreciseRegulogId has a value which is an int
-    </pre>
+srcRegPreciseRegulogId has a value which is an int</pre>
    </dd>
   </dl>
   <h2 id="RegulonModel">
@@ -984,15 +900,14 @@ srcRegPreciseRegulogId has a value which is an int
    </dt>
    <dd>
     <pre>
-     a reference to a hash where the following keys are defined:
+a reference to a hash where the following keys are defined:
 regulonModelId has a value which is a string
 regulomeModelId has a value which is a string
 regulatorName has a value which is a string
 regulationType has a value which is a RegulationType
 regulators has a value which is a reference to a list where each element is a Regulator
 operons has a value which is a reference to a list where each element is an OperonModel
-evidences has a value which is a reference to a list where each element is a RegulonEvidence
-    </pre>
+evidences has a value which is a reference to a list where each element is a RegulonEvidence</pre>
    </dd>
   </dl>
   <h2 id="RegulonModelStat">
@@ -1033,15 +948,14 @@ evidences has a value which is a reference to a list where each element is a Reg
    </dt>
    <dd>
     <pre>
-     a reference to a hash where the following keys are defined:
+a reference to a hash where the following keys are defined:
 regulonModelId has a value which is a string
 regulomeModelId has a value which is a string
 regulatorName has a value which is a string
 regulationType has a value which is a RegulationType
 regulatedOperonCount has a value which is an int
 regulatedGeneCount has a value which is an int
-sitesCount has a value which is an int
-    </pre>
+sitesCount has a value which is an int</pre>
    </dd>
   </dl>
   <h2 id="RegulomeModel">
@@ -1088,7 +1002,7 @@ sitesCount has a value which is an int
    </dt>
    <dd>
     <pre>
-     a reference to a hash where the following keys are defined:
+a reference to a hash where the following keys are defined:
 regulomeModelId has a value which is a string
 genomeId has a value which is a string
 genomeName has a value which is a string
@@ -1097,8 +1011,7 @@ createDate has a value which is a Date
 regulomeSource has a value which is a RegulomeSource
 buildParams has a value which is a string
 tfRegulonCount has a value which is an int
-rnaRegulonCount has a value which is an int
-    </pre>
+rnaRegulonCount has a value which is an int</pre>
    </dd>
   </dl>
   <h2 id="RegulomeModelCollection">
@@ -1145,7 +1058,7 @@ rnaRegulonCount has a value which is an int
    </dt>
    <dd>
     <pre>
-     a reference to a hash where the following keys are defined:
+a reference to a hash where the following keys are defined:
 collectionId has a value which is a string
 name has a value which is a string
 taxonName has a value which is a string
@@ -1154,8 +1067,7 @@ description has a value which is a string
 createDate has a value which is a Date
 regulomeSource has a value which is a RegulomeSource
 buildParams has a value which is a string
-regulomeModelCount has a value which is an int
-    </pre>
+regulomeModelCount has a value which is an int</pre>
    </dd>
   </dl>
   <h2 id="BuildRegulomeModelParam">
@@ -1181,10 +1093,9 @@ regulomeModelCount has a value which is an int
    </dt>
    <dd>
     <pre>
-     a reference to a hash where the following keys are defined:
+a reference to a hash where the following keys are defined:
 targetGenomeId has a value which is a string
-sourceRegulomeCollectionId has a value which is a string
-    </pre>
+sourceRegulomeCollectionId has a value which is a string</pre>
    </dd>
   </dl>
   <h2 id="ProcessState">
@@ -1219,13 +1130,12 @@ sourceRegulomeCollectionId has a value which is a string
    </dt>
    <dd>
     <pre>
-     a reference to a hash where the following keys are defined:
+a reference to a hash where the following keys are defined:
 processId has a value which is an int
 percentDone has a value which is an int
 description has a value which is a string
 done has a value which is a Boolean
-modelId has a value which is a string
-    </pre>
+modelId has a value which is a string</pre>
    </dd>
   </dl>
  </body>

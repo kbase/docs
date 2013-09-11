@@ -24,7 +24,7 @@
    This service provides a set of methods for querying, manipulating, and analyzing multiple sequence alignments and phylogenetic trees.
   </p>
   <p>
-   Authors --------- Michael Sneddon, LBL (mwsneddon@lbl.gov) Fangfang Xia, ANL (fangfang.xia@gmail.com) Matt Henderson, LBL (mhenderson@lbl.gov) Dylan Chivian, LBL (dcchivian@lbl.gov)
+   Authors --------- Michael Sneddon, LBL (mwsneddon@lbl.gov) Fangfang Xia, ANL (fangfang.xia@gmail.com) Keith Keller, LBL (kkeller@lbl.gov) Matt Henderson, LBL (mhenderson@lbl.gov) Dylan Chivian, LBL (dcchivian@lbl.gov)
   </p>
   <h2 id="replace_node_names">
    replace_node_names
@@ -292,9 +292,9 @@ alignment is a string</pre>
    <dd>
     <pre>
 $tree_ids is a reference to a list where each element is a kbase_id
-$return is a reference to a hash where the key is a kbase_id and the value is a tree_meta_data
+$return is a reference to a hash where the key is a kbase_id and the value is a TreeMetaData
 kbase_id is a string
-tree_meta_data is a reference to a hash where the following keys are defined:
+TreeMetaData is a reference to a hash where the following keys are defined:
 	alignment_id has a value which is a kbase_id
 	type has a value which is a string
 	status has a value which is a string
@@ -328,9 +328,9 @@ timestamp is a string</pre>
    <dd>
     <pre>
 $alignment_ids is a reference to a list where each element is a kbase_id
-$return is a reference to a hash where the key is a kbase_id and the value is an alignment_meta_data
+$return is a reference to a hash where the key is a kbase_id and the value is an AlignmentMetaData
 kbase_id is a string
-alignment_meta_data is a reference to a hash where the following keys are defined:
+AlignmentMetaData is a reference to a hash where the following keys are defined:
 	tree_ids has a value which is a reference to a list where each element is a kbase_id
 	status has a value which is a string
 	sequence_type has a value which is a string
@@ -525,9 +525,9 @@ kbase_id is a string</pre>
    </dt>
    <dd>
     <pre>
-$abundance_params is an abundance_params
-$abundance_result is an abundance_result
-abundance_params is a reference to a hash where the following keys are defined:
+$abundance_params is an AbundanceParams
+$abundance_result is an AbundanceResult
+AbundanceParams is a reference to a hash where the following keys are defined:
 	tree_id has a value which is a kbase_id
 	protein_family_name has a value which is a string
 	protein_family_source has a value which is a string
@@ -536,7 +536,7 @@ abundance_params is a reference to a hash where the following keys are defined:
 	match_length_threshold has a value which is an int
 	mg_auth_key has a value which is a string
 kbase_id is a string
-abundance_result is a reference to a hash where the following keys are defined:
+AbundanceResult is a reference to a hash where the following keys are defined:
 	abundances has a value which is a reference to a hash where the key is a string and the value is an int
 	n_hits has a value which is an int
 	n_reads has a value which is an int</pre>
@@ -564,19 +564,19 @@ abundance_result is a reference to a hash where the following keys are defined:
    <dd>
     <pre>
 $abundance_data is an abundance_data
-$filter_params is a filter_params
+$filter_params is a FilterParams
 $abundance_data_processed is an abundance_data
 abundance_data is a reference to a hash where the key is a string and the value is an abundance_profile
 abundance_profile is a reference to a hash where the key is a string and the value is a float
-filter_params is a reference to a hash where the following keys are defined:
+FilterParams is a reference to a hash where the following keys are defined:
 	cutoff_value has a value which is a float
-	use_cutoff_value has a value which is a bool
+	use_cutoff_value has a value which is a boolean
 	cutoff_number_of_records has a value which is a float
-	use_cutoff_number_of_records has a value which is a bool
+	use_cutoff_number_of_records has a value which is a boolean
 	normalization_scope has a value which is a string
 	normalization_type has a value which is a string
 	normalization_post_process has a value which is a string
-bool is an int</pre>
+boolean is an int</pre>
    </dd>
    <dt id="Description19">
     Description
@@ -619,8 +619,8 @@ html_file is a string</pre>
   <h1 id="TYPES">
    TYPES
   </h1>
-  <h2 id="bool">
-   bool
+  <h2 id="boolean">
+   boolean
   </h2>
   <dl>
    <dt id="Description21">
@@ -712,7 +712,7 @@ a string
    </dt>
    <dd>
     <p>
-     A string representation of a phylogenetic tree. The format/syntax of the string is specified by using one of the available typedefs declaring a particular format, such as 'newick_tree', 'phyloXML_tree' or 'json_tree'. When a format is not explictily specified, it is possible to return trees in different formats depending on addtional parameters. Regardless of format, all leaf nodes in trees built from MSAs are indexed to a specific MSA row. You can use the appropriate functionality of the API to replace these IDs with other KBase Ids instead. Internal nodes may or may not be named. Nodes, depending on the format, may also be annotated with structured data such as bootstrap values and distances.
+     A string representation of a phylogenetic tree. The format/syntax of the string is specified by using one of the available typedefs declaring a particular format, such as 'newick_tree', 'phylo_xml_tree' or 'json_tree'. When a format is not explictily specified, it is possible to return trees in different formats depending on addtional parameters. Regardless of format, all leaf nodes in trees built from MSAs are indexed to a specific MSA row. You can use the appropriate functionality of the API to replace these IDs with other KBase Ids instead. Internal nodes may or may not be named. Nodes, depending on the format, may also be annotated with structured data such as bootstrap values and distances.
     </p>
    </dd>
    <dt id="Definition4">
@@ -745,8 +745,8 @@ a tree
 </pre>
    </dd>
   </dl>
-  <h2 id="phyloXML_tree">
-   phyloXML_tree
+  <h2 id="phylo_xml_tree">
+   phylo_xml_tree
   </h2>
   <dl>
    <dt id="Description27">
@@ -892,8 +892,8 @@ a string
 </pre>
    </dd>
   </dl>
-  <h2 id="tree_meta_data">
-   tree_meta_data
+  <h2 id="TreeMetaData">
+   TreeMetaData
   </h2>
   <dl>
    <dt id="Description34">
@@ -935,8 +935,8 @@ source_db has a value which is a string
 source_id has a value which is a string</pre>
    </dd>
   </dl>
-  <h2 id="alignment_meta_data">
-   alignment_meta_data
+  <h2 id="AlignmentMetaData">
+   AlignmentMetaData
   </h2>
   <dl>
    <dt id="Description35">
@@ -949,7 +949,7 @@ source_id has a value which is a string</pre>
     <pre><code>    list&lt;kbase_id&gt; tree_ids - the set of trees that were built from this alignment
     string status - set to 'active' if this is the latest alignment for a particular set of sequences
     string sequence_type - indicates what type of sequence is aligned (e.g. protein vs. dna)
-    bool is_concatenation - true if the alignment is based on the concatenation of multiple non-contiguous
+    boolean is_concatenation - true if the alignment is based on the concatenation of multiple non-contiguous
                             sequences, false if each row cooresponds to exactly one sequence (possibly with gaps)
     timestamp date_created - time at which the alignment was built/loaded in seconds since the epoch
     int n_rows - number of rows in the alignment
@@ -980,8 +980,8 @@ source_db has a value which is a string
 source_id has a value which is a string</pre>
    </dd>
   </dl>
-  <h2 id="abundance_params">
-   abundance_params
+  <h2 id="AbundanceParams">
+   AbundanceParams
   </h2>
   <dl>
    <dt id="Description36">
@@ -1021,8 +1021,8 @@ match_length_threshold has a value which is an int
 mg_auth_key has a value which is a string</pre>
    </dd>
   </dl>
-  <h2 id="abundance_result">
-   abundance_result
+  <h2 id="AbundanceResult">
+   AbundanceResult
   </h2>
   <dl>
    <dt id="Description37">
@@ -1092,8 +1092,8 @@ a reference to a hash where the key is a string and the value is an abundance_pr
 </pre>
    </dd>
   </dl>
-  <h2 id="filter_params">
-   filter_params
+  <h2 id="FilterParams">
+   FilterParams
   </h2>
   <dl>
    <dt id="Description40">
@@ -1111,9 +1111,9 @@ a reference to a hash where the key is a string and the value is an abundance_pr
     <pre>
 a reference to a hash where the following keys are defined:
 cutoff_value has a value which is a float
-use_cutoff_value has a value which is a bool
+use_cutoff_value has a value which is a boolean
 cutoff_number_of_records has a value which is a float
-use_cutoff_number_of_records has a value which is a bool
+use_cutoff_number_of_records has a value which is a boolean
 normalization_scope has a value which is a string
 normalization_type has a value which is a string
 normalization_post_process has a value which is a string</pre>

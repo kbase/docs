@@ -18,6 +18,12 @@
   <h1 id="DESCRIPTION">
    DESCRIPTION
   </h1>
+  <p>
+   API Access to the Genome Annotation Service.
+  </p>
+  <p>
+   Provides support for gene calling, functional annotation, re-annotation. Use to extract annotation in formation about an existing genome, or to create new annotations.
+  </p>
   <h1 id="METHODS">
    METHODS
   </h1>
@@ -59,14 +65,14 @@ feature_id is a string
 location is a reference to a list where each element is a region_of_dna
 region_of_dna is a reference to a list containing 4 items:
 	0: a contig_id
-	1: an int
-	2: a string
-	3: an int
+	1: (begin) an int
+	2: (strand) a string
+	3: (length) an int
 feature_type is a string
 annotation is a reference to a list containing 3 items:
-	0: a string
-	1: a string
-	2: an int
+	0: (comment) a string
+	1: (annotator) a string
+	2: (annotation_time) an int
 reconstructionTO is a reference to a hash where the following keys are defined:
 	subsystems has a value which is a variant_subsystem_pairs
 	bindings has a value which is a fid_role_pairs
@@ -133,14 +139,14 @@ feature_id is a string
 location is a reference to a list where each element is a region_of_dna
 region_of_dna is a reference to a list containing 4 items:
 	0: a contig_id
-	1: an int
-	2: a string
-	3: an int
+	1: (begin) an int
+	2: (strand) a string
+	3: (length) an int
 feature_type is a string
 annotation is a reference to a list containing 3 items:
-	0: a string
-	1: a string
-	2: an int
+	0: (comment) a string
+	1: (annotator) a string
+	2: (annotation_time) an int
 fid_data_tuples is a reference to a list where each element is a fid_data_tuple
 fid_data_tuple is a reference to a list containing 4 items:
 	0: a fid
@@ -275,14 +281,14 @@ feature_id is a string
 location is a reference to a list where each element is a region_of_dna
 region_of_dna is a reference to a list containing 4 items:
 	0: a contig_id
-	1: an int
-	2: a string
-	3: an int
+	1: (begin) an int
+	2: (strand) a string
+	3: (length) an int
 feature_type is a string
 annotation is a reference to a list containing 3 items:
-	0: a string
-	1: a string
-	2: an int</pre>
+	0: (comment) a string
+	1: (annotator) a string
+	2: (annotation_time) an int</pre>
    </dd>
    <dt id="Description4">
     Description
@@ -331,14 +337,14 @@ feature_id is a string
 location is a reference to a list where each element is a region_of_dna
 region_of_dna is a reference to a list containing 4 items:
 	0: a contig_id
-	1: an int
-	2: a string
-	3: an int
+	1: (begin) an int
+	2: (strand) a string
+	3: (length) an int
 feature_type is a string
 annotation is a reference to a list containing 3 items:
-	0: a string
-	1: a string
-	2: an int</pre>
+	0: (comment) a string
+	1: (annotator) a string
+	2: (annotation_time) an int</pre>
    </dd>
    <dt id="Description5">
     Description
@@ -384,14 +390,14 @@ feature_id is a string
 location is a reference to a list where each element is a region_of_dna
 region_of_dna is a reference to a list containing 4 items:
 	0: a contig_id
-	1: an int
-	2: a string
-	3: an int
+	1: (begin) an int
+	2: (strand) a string
+	3: (length) an int
 feature_type is a string
 annotation is a reference to a list containing 3 items:
-	0: a string
-	1: a string
-	2: an int</pre>
+	0: (comment) a string
+	1: (annotator) a string
+	2: (annotation_time) an int</pre>
    </dd>
    <dt id="Description6">
     Description
@@ -437,14 +443,14 @@ feature_id is a string
 location is a reference to a list where each element is a region_of_dna
 region_of_dna is a reference to a list containing 4 items:
 	0: a contig_id
-	1: an int
-	2: a string
-	3: an int
+	1: (begin) an int
+	2: (strand) a string
+	3: (length) an int
 feature_type is a string
 annotation is a reference to a list containing 3 items:
-	0: a string
-	1: a string
-	2: an int</pre>
+	0: (comment) a string
+	1: (annotator) a string
+	2: (annotation_time) an int</pre>
    </dd>
    <dt id="Description7">
     Description
@@ -490,14 +496,14 @@ feature_id is a string
 location is a reference to a list where each element is a region_of_dna
 region_of_dna is a reference to a list containing 4 items:
 	0: a contig_id
-	1: an int
-	2: a string
-	3: an int
+	1: (begin) an int
+	2: (strand) a string
+	3: (length) an int
 feature_type is a string
 annotation is a reference to a list containing 3 items:
-	0: a string
-	1: a string
-	2: an int</pre>
+	0: (comment) a string
+	1: (annotator) a string
+	2: (annotation_time) an int</pre>
    </dd>
    <dt id="Description8">
     Description
@@ -543,14 +549,14 @@ feature_id is a string
 location is a reference to a list where each element is a region_of_dna
 region_of_dna is a reference to a list containing 4 items:
 	0: a contig_id
-	1: an int
-	2: a string
-	3: an int
+	1: (begin) an int
+	2: (strand) a string
+	3: (length) an int
 feature_type is a string
 annotation is a reference to a list containing 3 items:
-	0: a string
-	1: a string
-	2: an int</pre>
+	0: (comment) a string
+	1: (annotator) a string
+	2: (annotation_time) an int</pre>
    </dd>
    <dt id="Description9">
     Description
@@ -596,14 +602,14 @@ feature_id is a string
 location is a reference to a list where each element is a region_of_dna
 region_of_dna is a reference to a list containing 4 items:
 	0: a contig_id
-	1: an int
-	2: a string
-	3: an int
+	1: (begin) an int
+	2: (strand) a string
+	3: (length) an int
 feature_type is a string
 annotation is a reference to a list containing 3 items:
-	0: a string
-	1: a string
-	2: an int</pre>
+	0: (comment) a string
+	1: (annotator) a string
+	2: (annotation_time) an int</pre>
    </dd>
    <dt id="Description10">
     Description
@@ -649,14 +655,14 @@ feature_id is a string
 location is a reference to a list where each element is a region_of_dna
 region_of_dna is a reference to a list containing 4 items:
 	0: a contig_id
-	1: an int
-	2: a string
-	3: an int
+	1: (begin) an int
+	2: (strand) a string
+	3: (length) an int
 feature_type is a string
 annotation is a reference to a list containing 3 items:
-	0: a string
-	1: a string
-	2: an int</pre>
+	0: (comment) a string
+	1: (annotator) a string
+	2: (annotation_time) an int</pre>
    </dd>
    <dt id="Description11">
     Description
@@ -705,14 +711,14 @@ feature_id is a string
 location is a reference to a list where each element is a region_of_dna
 region_of_dna is a reference to a list containing 4 items:
 	0: a contig_id
-	1: an int
-	2: a string
-	3: an int
+	1: (begin) an int
+	2: (strand) a string
+	3: (length) an int
 feature_type is a string
 annotation is a reference to a list containing 3 items:
-	0: a string
-	1: a string
-	2: an int</pre>
+	0: (comment) a string
+	1: (annotator) a string
+	2: (annotation_time) an int</pre>
    </dd>
    <dt id="Description12">
     Description
@@ -758,14 +764,14 @@ feature_id is a string
 location is a reference to a list where each element is a region_of_dna
 region_of_dna is a reference to a list containing 4 items:
 	0: a contig_id
-	1: an int
-	2: a string
-	3: an int
+	1: (begin) an int
+	2: (strand) a string
+	3: (length) an int
 feature_type is a string
 annotation is a reference to a list containing 3 items:
-	0: a string
-	1: a string
-	2: an int</pre>
+	0: (comment) a string
+	1: (annotator) a string
+	2: (annotation_time) an int</pre>
    </dd>
    <dt id="Description13">
     Description
@@ -814,14 +820,14 @@ feature_id is a string
 location is a reference to a list where each element is a region_of_dna
 region_of_dna is a reference to a list containing 4 items:
 	0: a contig_id
-	1: an int
-	2: a string
-	3: an int
+	1: (begin) an int
+	2: (strand) a string
+	3: (length) an int
 feature_type is a string
 annotation is a reference to a list containing 3 items:
-	0: a string
-	1: a string
-	2: an int</pre>
+	0: (comment) a string
+	1: (annotator) a string
+	2: (annotation_time) an int</pre>
    </dd>
    <dt id="Description14">
     Description
@@ -958,9 +964,9 @@ a string
     <pre>
 a reference to a list containing 4 items:
 0: a contig_id
-1: an int
-2: a string
-3: an int</pre>
+1: (begin) an int
+2: (strand) a string
+3: (length) an int</pre>
    </dd>
   </dl>
   <h2 id="location">
@@ -994,15 +1000,23 @@ a reference to a list where each element is a region_of_dna
    <dd>
     <pre>
 a reference to a list containing 3 items:
-0: a string
-1: a string
-2: an int</pre>
+0: (comment) a string
+1: (annotator) a string
+2: (annotation_time) an int</pre>
    </dd>
   </dl>
   <h2 id="feature">
    feature
   </h2>
   <dl>
+   <dt id="Description18">
+    Description
+   </dt>
+   <dd>
+    <p>
+     represents a feature on the genome location on the contig with a type, and if a protein has translation, any aliases associated current history of annoation in style of SEED
+    </p>
+   </dd>
    <dt id="Definition9">
     Definition
    </dt>
@@ -1022,6 +1036,14 @@ annotations has a value which is a reference to a list where each element is an 
    contig
   </h2>
   <dl>
+   <dt id="Description19">
+    Description
+   </dt>
+   <dd>
+    <p>
+     Data for DNA contig
+    </p>
+   </dd>
    <dt id="Definition10">
     Definition
    </dt>
@@ -1036,6 +1058,14 @@ dna has a value which is a string</pre>
    genomeTO
   </h2>
   <dl>
+   <dt id="Description20">
+    Description
+   </dt>
+   <dd>
+    <p>
+     All of the information about particular genome
+    </p>
+   </dd>
    <dt id="Definition11">
     Definition
    </dt>
@@ -1202,6 +1232,14 @@ a reference to a list where each element is a fid_function_pair
    reconstructionTO
   </h2>
   <dl>
+   <dt id="Description21">
+    Description
+   </dt>
+   <dd>
+    <p>
+     Metabolic reconstruction represents the set of subsystems that we infer are present in this genome
+    </p>
+   </dd>
    <dt id="Definition23">
     Definition
    </dt>
