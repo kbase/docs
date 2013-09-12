@@ -1,11 +1,11 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version="1.0" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
  <head>
   <title>
   </title>
-  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-  <link rev="made" href="mailto:root@ubuntu.chicago.kbase.us" />
+  <meta content="text/html; charset=utf-8" http-equiv="content-type"/>
+  <link href="mailto:root@ubuntu.chicago.kbase.us" rev="made"/>
  </head>
  <body style="background-color: white">
   <h1 id="NAME">
@@ -24,60 +24,50 @@
    This service provides a set of methods for querying, manipulating, and analyzing multiple sequence alignments and phylogenetic trees.
   </p>
   <p>
-   Authors --------- Michael Sneddon, LBL (mwsneddon@lbl.gov) Fangfang Xia, ANL (fangfang.xia@gmail.com) Matt Henderson, LBL (mhenderson@lbl.gov) Dylan Chivian, LBL (dcchivian@lbl.gov)
+   Authors --------- Michael Sneddon, LBL (mwsneddon@lbl.gov) Fangfang Xia, ANL (fangfang.xia@gmail.com) Keith Keller, LBL (kkeller@lbl.gov) Matt Henderson, LBL (mhenderson@lbl.gov) Dylan Chivian, LBL (dcchivian@lbl.gov)
   </p>
   <h2 id="replace_node_names">
    replace_node_names
   </h2>
-  <pre>
-   <code>
-    $return = $obj-&gt;replace_node_names($tree, $replacements)
-   </code>
-  </pre>
+  <pre><code>  $return = $obj-&gt;replace_node_names($tree, $replacements)</code></pre>
   <dl>
    <dt id="Parameter-and-return-types">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $tree is a newick_tree
+$tree is a newick_tree
 $replacements is a reference to a hash where the key is a node_name and the value is a node_name
 $return is a newick_tree
 newick_tree is a tree
 tree is a string
-node_name is a string
-    </pre>
+node_name is a string</pre>
    </dd>
    <dt id="Description">
     Description
    </dt>
    <dd>
     <p>
-     Given a tree in newick format, replace the node names indicated as keys in the &#39;replacements&#39; mapping with new node names indicated as values in the &#39;replacements&#39; mapping. Matching is EXACT and will not handle regular expression patterns.
+     Given a tree in newick format, replace the node names indicated as keys in the 'replacements' mapping with new node names indicated as values in the 'replacements' mapping. Matching is EXACT and will not handle regular expression patterns.
     </p>
    </dd>
   </dl>
   <h2 id="remove_node_names_and_simplify">
    remove_node_names_and_simplify
   </h2>
-  <pre>
-   <code>
-    $return = $obj-&gt;remove_node_names_and_simplify($tree, $removal_list)
-   </code>
-  </pre>
+  <pre><code>  $return = $obj-&gt;remove_node_names_and_simplify($tree, $removal_list)</code></pre>
   <dl>
    <dt id="Parameter-and-return-types1">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $tree is a newick_tree
+$tree is a newick_tree
 $removal_list is a reference to a list where each element is a node_name
 $return is a newick_tree
 newick_tree is a tree
 tree is a string
-node_name is a string
-    </pre>
+node_name is a string</pre>
    </dd>
    <dt id="Description1">
     Description
@@ -91,22 +81,17 @@ node_name is a string
   <h2 id="merge_zero_distance_leaves">
    merge_zero_distance_leaves
   </h2>
-  <pre>
-   <code>
-    $return = $obj-&gt;merge_zero_distance_leaves($tree)
-   </code>
-  </pre>
+  <pre><code>  $return = $obj-&gt;merge_zero_distance_leaves($tree)</code></pre>
   <dl>
    <dt id="Parameter-and-return-types2">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $tree is a newick_tree
+$tree is a newick_tree
 $return is a newick_tree
 newick_tree is a tree
-tree is a string
-    </pre>
+tree is a string</pre>
    </dd>
    <dt id="Description2">
     Description
@@ -120,23 +105,18 @@ tree is a string
   <h2 id="extract_leaf_node_names">
    extract_leaf_node_names
   </h2>
-  <pre>
-   <code>
-    $return = $obj-&gt;extract_leaf_node_names($tree)
-   </code>
-  </pre>
+  <pre><code>  $return = $obj-&gt;extract_leaf_node_names($tree)</code></pre>
   <dl>
    <dt id="Parameter-and-return-types3">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $tree is a newick_tree
+$tree is a newick_tree
 $return is a reference to a list where each element is a node_name
 newick_tree is a tree
 tree is a string
-node_name is a string
-    </pre>
+node_name is a string</pre>
    </dd>
    <dt id="Description3">
     Description
@@ -150,23 +130,18 @@ node_name is a string
   <h2 id="extract_node_names">
    extract_node_names
   </h2>
-  <pre>
-   <code>
-    $return = $obj-&gt;extract_node_names($tree)
-   </code>
-  </pre>
+  <pre><code>  $return = $obj-&gt;extract_node_names($tree)</code></pre>
   <dl>
    <dt id="Parameter-and-return-types4">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $tree is a newick_tree
+$tree is a newick_tree
 $return is a reference to a list where each element is a node_name
 newick_tree is a tree
 tree is a string
-node_name is a string
-    </pre>
+node_name is a string</pre>
    </dd>
    <dt id="Description4">
     Description
@@ -180,22 +155,17 @@ node_name is a string
   <h2 id="get_node_count">
    get_node_count
   </h2>
-  <pre>
-   <code>
-    $return = $obj-&gt;get_node_count($tree)
-   </code>
-  </pre>
+  <pre><code>  $return = $obj-&gt;get_node_count($tree)</code></pre>
   <dl>
    <dt id="Parameter-and-return-types5">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $tree is a newick_tree
+$tree is a newick_tree
 $return is an int
 newick_tree is a tree
-tree is a string
-    </pre>
+tree is a string</pre>
    </dd>
    <dt id="Description5">
     Description
@@ -209,22 +179,17 @@ tree is a string
   <h2 id="get_leaf_count">
    get_leaf_count
   </h2>
-  <pre>
-   <code>
-    $return = $obj-&gt;get_leaf_count($tree)
-   </code>
-  </pre>
+  <pre><code>  $return = $obj-&gt;get_leaf_count($tree)</code></pre>
   <dl>
    <dt id="Parameter-and-return-types6">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $tree is a newick_tree
+$tree is a newick_tree
 $return is an int
 newick_tree is a tree
-tree is a string
-    </pre>
+tree is a string</pre>
    </dd>
    <dt id="Description6">
     Description
@@ -238,23 +203,18 @@ tree is a string
   <h2 id="get_tree">
    get_tree
   </h2>
-  <pre>
-   <code>
-    $return = $obj-&gt;get_tree($tree_id, $options)
-   </code>
-  </pre>
+  <pre><code>  $return = $obj-&gt;get_tree($tree_id, $options)</code></pre>
   <dl>
    <dt id="Parameter-and-return-types7">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $tree_id is a kbase_id
+$tree_id is a kbase_id
 $options is a reference to a hash where the key is a string and the value is a string
 $return is a tree
 kbase_id is a string
-tree is a string
-    </pre>
+tree is a string</pre>
    </dd>
    <dt id="Description7">
     Description
@@ -263,51 +223,43 @@ tree is a string
     <p>
      Returns the specified tree in the specified format, or an empty string if the tree does not exist. The options hash provides a way to return the tree with different labels replaced or with different attached meta information. Currently, the available flags and understood options are listed below.
     </p>
-    <pre>
-     <code>
-      options = [
-        format =&gt; &#39;newick&#39;,
-        newick_label =&gt; &#39;none&#39; || &#39;raw&#39; || &#39;feature_id&#39; || &#39;protein_sequence_id&#39; ||
-                        &#39;contig_sequence_id&#39; || &#39;best_feature_id&#39; || &#39;best_genome_id&#39;,
-        newick_bootstrap =&gt; &#39;none&#39; || &#39;internal_node_labels&#39;
-        newick_distance =&gt; &#39;none&#39; || &#39;raw&#39;
+    <pre><code>    options = [
+        format =&gt; 'newick',
+        newick_label =&gt; 'none' || 'raw' || 'feature_id' || 'protein_sequence_id' ||
+                        'contig_sequence_id' || 'best_feature_id' || 'best_genome_id',
+        newick_bootstrap =&gt; 'none' || 'internal_node_labels'
+        newick_distance =&gt; 'none' || 'raw'
     ];
-     </code>
-    </pre>
+ </code></pre>
     <p>
-     The &#39;format&#39; key indicates what string format the tree should be returned in. Currently, there is only support for &#39;newick&#39;. The default value if not specified is &#39;newick&#39;.
+     The 'format' key indicates what string format the tree should be returned in. Currently, there is only support for 'newick'. The default value if not specified is 'newick'.
     </p>
     <p>
-     The &#39;newick_label&#39; key only affects trees returned as newick format, and specifies what should be placed in the label of each leaf. &#39;none&#39; indicates that no label is added, so you get the structure of the tree only. &#39;raw&#39; indicates that the raw label mapping the leaf to an alignement row is used. &#39;feature_id&#39; indicates that the label will have an examplar feature_id in each label (typically the feature that was originally used to define the sequence). Note that exemplar feature_ids are not defined for all trees, so this may result in an empty tree! &#39;protein_sequence_id&#39; indicates that the kbase id of the protein sequence used in the alignment is used. &#39;contig_sequence_id&#39; indicates that the contig sequence id is added. Note that trees are typically built with protein sequences OR contig sequences. If you select one type of sequence, but the tree was built with the other type, then no labels will be added. &#39;best_feature_id&#39; is used in the frequent case where a protein sequence has been mapped to multiple feature ids, and an example feature_id is used. Similarly, &#39;best_genome_id&#39; replaces the labels with the best example genome_id. The default value if none is specified is &#39;raw&#39;.
+     The 'newick_label' key only affects trees returned as newick format, and specifies what should be placed in the label of each leaf. 'none' indicates that no label is added, so you get the structure of the tree only. 'raw' indicates that the raw label mapping the leaf to an alignement row is used. 'feature_id' indicates that the label will have an examplar feature_id in each label (typically the feature that was originally used to define the sequence). Note that exemplar feature_ids are not defined for all trees, so this may result in an empty tree! 'protein_sequence_id' indicates that the kbase id of the protein sequence used in the alignment is used. 'contig_sequence_id' indicates that the contig sequence id is added. Note that trees are typically built with protein sequences OR contig sequences. If you select one type of sequence, but the tree was built with the other type, then no labels will be added. 'best_feature_id' is used in the frequent case where a protein sequence has been mapped to multiple feature ids, and an example feature_id is used. Similarly, 'best_genome_id' replaces the labels with the best example genome_id. The default value if none is specified is 'raw'.
     </p>
     <p>
-     The &#39;newick_bootstrap&#39; key allows control over whether bootstrap values are returned if they exist, and how they are returned. &#39;none&#39; indicates that no bootstrap values are returned. &#39;internal_node_labels&#39; indicates that bootstrap values are returned as internal node labels. Default value is &#39;internal_node_labels&#39;;
+     The 'newick_bootstrap' key allows control over whether bootstrap values are returned if they exist, and how they are returned. 'none' indicates that no bootstrap values are returned. 'internal_node_labels' indicates that bootstrap values are returned as internal node labels. Default value is 'internal_node_labels';
     </p>
     <p>
-     The &#39;newick_distance&#39; key allows control over whether distance labels are generated or not. If set to &#39;none&#39;, no distances will be output. Default is &#39;raw&#39;, which outputs the distances exactly as they appeared when loaded into KBase.
+     The 'newick_distance' key allows control over whether distance labels are generated or not. If set to 'none', no distances will be output. Default is 'raw', which outputs the distances exactly as they appeared when loaded into KBase.
     </p>
    </dd>
   </dl>
   <h2 id="get_alignment">
    get_alignment
   </h2>
-  <pre>
-   <code>
-    $return = $obj-&gt;get_alignment($alignment_id, $options)
-   </code>
-  </pre>
+  <pre><code>  $return = $obj-&gt;get_alignment($alignment_id, $options)</code></pre>
   <dl>
    <dt id="Parameter-and-return-types8">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $alignment_id is a kbase_id
+$alignment_id is a kbase_id
 $options is a reference to a hash where the key is a string and the value is a string
 $return is an alignment
 kbase_id is a string
-alignment is a string
-    </pre>
+alignment is a string</pre>
    </dd>
    <dt id="Description8">
     Description
@@ -316,40 +268,33 @@ alignment is a string
     <p>
      Returns the specified alignment in the specified format, or an empty string if the alignment does not exist. The options hash provides a way to return the alignment with different labels replaced or with different attached meta information. Currently, the available flags and understood options are listed below.
     </p>
-    <pre>
-     <code>
-      options = [
-        format =&gt; &#39;fasta&#39;,
-        sequence_label =&gt; &#39;none&#39; || &#39;raw&#39; || &#39;feature_id&#39; || &#39;protein_sequence_id&#39; || &#39;contig_sequence_id&#39;,
+    <pre><code>    options = [
+        format =&gt; 'fasta',
+        sequence_label =&gt; 'none' || 'raw' || 'feature_id' || 'protein_sequence_id' || 'contig_sequence_id',
     ];
-     </code>
-    </pre>
+ </code></pre>
     <p>
-     The &#39;format&#39; key indicates what string format the alignment should be returned in. Currently, there is only support for &#39;fasta&#39;. The default value if not specified is &#39;fasta&#39;.
+     The 'format' key indicates what string format the alignment should be returned in. Currently, there is only support for 'fasta'. The default value if not specified is 'fasta'.
     </p>
     <p>
-     The &#39;sequence_label&#39; specifies what should be placed in the label of each sequence. &#39;none&#39; indicates that no label is added, so you get the sequence only. &#39;raw&#39; indicates that the raw label of the alignement row is used. &#39;feature_id&#39; indicates that the label will have an examplar feature_id in each label (typically the feature that was originally used to define the sequence). Note that exemplar feature_ids are not defined for all alignments, so this may result in an unlabeled alignment. &#39;protein_sequence_id&#39; indicates that the kbase id of the protein sequence used in the alignment is used. &#39;contig_sequence_id&#39; indicates that the contig sequence id is used. Note that trees are typically built with protein sequences OR contig sequences. If you select one type of sequence, but the alignment was built with the other type, then no labels will be added. The default value if none is specified is &#39;raw&#39;.
+     The 'sequence_label' specifies what should be placed in the label of each sequence. 'none' indicates that no label is added, so you get the sequence only. 'raw' indicates that the raw label of the alignement row is used. 'feature_id' indicates that the label will have an examplar feature_id in each label (typically the feature that was originally used to define the sequence). Note that exemplar feature_ids are not defined for all alignments, so this may result in an unlabeled alignment. 'protein_sequence_id' indicates that the kbase id of the protein sequence used in the alignment is used. 'contig_sequence_id' indicates that the contig sequence id is used. Note that trees are typically built with protein sequences OR contig sequences. If you select one type of sequence, but the alignment was built with the other type, then no labels will be added. The default value if none is specified is 'raw'.
     </p>
    </dd>
   </dl>
   <h2 id="get_tree_data">
    get_tree_data
   </h2>
-  <pre>
-   <code>
-    $return = $obj-&gt;get_tree_data($tree_ids)
-   </code>
-  </pre>
+  <pre><code>  $return = $obj-&gt;get_tree_data($tree_ids)</code></pre>
   <dl>
    <dt id="Parameter-and-return-types9">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $tree_ids is a reference to a list where each element is a kbase_id
-$return is a reference to a hash where the key is a kbase_id and the value is a tree_meta_data
+$tree_ids is a reference to a list where each element is a kbase_id
+$return is a reference to a hash where the key is a kbase_id and the value is a TreeMetaData
 kbase_id is a string
-tree_meta_data is a reference to a hash where the following keys are defined:
+TreeMetaData is a reference to a hash where the following keys are defined:
 	alignment_id has a value which is a kbase_id
 	type has a value which is a string
 	status has a value which is a string
@@ -361,8 +306,7 @@ tree_meta_data is a reference to a hash where the following keys are defined:
 	leaf_count has a value which is an int
 	source_db has a value which is a string
 	source_id has a value which is a string
-timestamp is a string
-    </pre>
+timestamp is a string</pre>
    </dd>
    <dt id="Description9">
     Description
@@ -376,21 +320,17 @@ timestamp is a string
   <h2 id="get_alignment_data">
    get_alignment_data
   </h2>
-  <pre>
-   <code>
-    $return = $obj-&gt;get_alignment_data($alignment_ids)
-   </code>
-  </pre>
+  <pre><code>  $return = $obj-&gt;get_alignment_data($alignment_ids)</code></pre>
   <dl>
    <dt id="Parameter-and-return-types10">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $alignment_ids is a reference to a list where each element is a kbase_id
-$return is a reference to a hash where the key is a kbase_id and the value is an alignment_meta_data
+$alignment_ids is a reference to a list where each element is a kbase_id
+$return is a reference to a hash where the key is a kbase_id and the value is an AlignmentMetaData
 kbase_id is a string
-alignment_meta_data is a reference to a hash where the following keys are defined:
+AlignmentMetaData is a reference to a hash where the following keys are defined:
 	tree_ids has a value which is a reference to a list where each element is a kbase_id
 	status has a value which is a string
 	sequence_type has a value which is a string
@@ -403,8 +343,7 @@ alignment_meta_data is a reference to a hash where the following keys are define
 	alignment_protocol has a value which is a string
 	source_db has a value which is a string
 	source_id has a value which is a string
-timestamp is a string
-    </pre>
+timestamp is a string</pre>
    </dd>
    <dt id="Description10">
     Description
@@ -418,21 +357,16 @@ timestamp is a string
   <h2 id="get_tree_ids_by_feature">
    get_tree_ids_by_feature
   </h2>
-  <pre>
-   <code>
-    $return = $obj-&gt;get_tree_ids_by_feature($feature_ids)
-   </code>
-  </pre>
+  <pre><code>  $return = $obj-&gt;get_tree_ids_by_feature($feature_ids)</code></pre>
   <dl>
    <dt id="Parameter-and-return-types11">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $feature_ids is a reference to a list where each element is a kbase_id
+$feature_ids is a reference to a list where each element is a kbase_id
 $return is a reference to a list where each element is a kbase_id
-kbase_id is a string
-    </pre>
+kbase_id is a string</pre>
    </dd>
    <dt id="Description11">
     Description
@@ -446,21 +380,16 @@ kbase_id is a string
   <h2 id="get_tree_ids_by_protein_sequence">
    get_tree_ids_by_protein_sequence
   </h2>
-  <pre>
-   <code>
-    $return = $obj-&gt;get_tree_ids_by_protein_sequence($protein_sequence_ids)
-   </code>
-  </pre>
+  <pre><code>  $return = $obj-&gt;get_tree_ids_by_protein_sequence($protein_sequence_ids)</code></pre>
   <dl>
    <dt id="Parameter-and-return-types12">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $protein_sequence_ids is a reference to a list where each element is a kbase_id
+$protein_sequence_ids is a reference to a list where each element is a kbase_id
 $return is a reference to a list where each element is a kbase_id
-kbase_id is a string
-    </pre>
+kbase_id is a string</pre>
    </dd>
    <dt id="Description12">
     Description
@@ -474,21 +403,16 @@ kbase_id is a string
   <h2 id="get_alignment_ids_by_feature">
    get_alignment_ids_by_feature
   </h2>
-  <pre>
-   <code>
-    $return = $obj-&gt;get_alignment_ids_by_feature($feature_ids)
-   </code>
-  </pre>
+  <pre><code>  $return = $obj-&gt;get_alignment_ids_by_feature($feature_ids)</code></pre>
   <dl>
    <dt id="Parameter-and-return-types13">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $feature_ids is a reference to a list where each element is a kbase_id
+$feature_ids is a reference to a list where each element is a kbase_id
 $return is a reference to a list where each element is a kbase_id
-kbase_id is a string
-    </pre>
+kbase_id is a string</pre>
    </dd>
    <dt id="Description13">
     Description
@@ -502,21 +426,16 @@ kbase_id is a string
   <h2 id="get_alignment_ids_by_protein_sequence">
    get_alignment_ids_by_protein_sequence
   </h2>
-  <pre>
-   <code>
-    $return = $obj-&gt;get_alignment_ids_by_protein_sequence($protein_sequence_ids)
-   </code>
-  </pre>
+  <pre><code>  $return = $obj-&gt;get_alignment_ids_by_protein_sequence($protein_sequence_ids)</code></pre>
   <dl>
    <dt id="Parameter-and-return-types14">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $protein_sequence_ids is a reference to a list where each element is a kbase_id
+$protein_sequence_ids is a reference to a list where each element is a kbase_id
 $return is a reference to a list where each element is a kbase_id
-kbase_id is a string
-    </pre>
+kbase_id is a string</pre>
    </dd>
    <dt id="Description14">
     Description
@@ -530,104 +449,85 @@ kbase_id is a string
   <h2 id="get_tree_ids_by_source_id_pattern">
    get_tree_ids_by_source_id_pattern
   </h2>
-  <pre>
-   <code>
-    $return = $obj-&gt;get_tree_ids_by_source_id_pattern($pattern)
-   </code>
-  </pre>
+  <pre><code>  $return = $obj-&gt;get_tree_ids_by_source_id_pattern($pattern)</code></pre>
   <dl>
    <dt id="Parameter-and-return-types15">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $pattern is a string
+$pattern is a string
 $return is a reference to a list where each element is a reference to a list where each element is a kbase_id
-kbase_id is a string
-    </pre>
+kbase_id is a string</pre>
    </dd>
    <dt id="Description15">
     Description
    </dt>
    <dd>
     <p>
-     This method searches for a tree having a source ID that matches the input pattern. This method accepts one argument, which is the pattern. The pattern is very simple and includes only two special characters, wildcard character, &#39;*&#39;, and a match-once character, &#39;.&#39; The wildcard character matches any number (including 0) of any character, the &#39;.&#39; matches exactly one of any character. These special characters can be escaped with a backslash. To match a blackslash literally, you must also escape it. Note that source IDs are generally defined by the gene family model which was used to identifiy the sequences to be included in the tree. Therefore, matching a source ID is a convenient way to find trees for a specific set of gene families.
+     This method searches for a tree having a source ID that matches the input pattern. This method accepts one argument, which is the pattern. The pattern is very simple and includes only two special characters, wildcard character, '*', and a match-once character, '.' The wildcard character matches any number (including 0) of any character, the '.' matches exactly one of any character. These special characters can be escaped with a backslash. To match a blackslash literally, you must also escape it. Note that source IDs are generally defined by the gene family model which was used to identifiy the sequences to be included in the tree. Therefore, matching a source ID is a convenient way to find trees for a specific set of gene families.
     </p>
    </dd>
   </dl>
   <h2 id="get_leaf_to_protein_map">
    get_leaf_to_protein_map
   </h2>
-  <pre>
-   <code>
-    $return = $obj-&gt;get_leaf_to_protein_map($tree_id)
-   </code>
-  </pre>
+  <pre><code>  $return = $obj-&gt;get_leaf_to_protein_map($tree_id)</code></pre>
   <dl>
    <dt id="Parameter-and-return-types16">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $tree_id is a kbase_id
+$tree_id is a kbase_id
 $return is a reference to a hash where the key is a kbase_id and the value is a kbase_id
-kbase_id is a string
-    </pre>
+kbase_id is a string</pre>
    </dd>
    <dt id="Description16">
     Description
    </dt>
    <dd>
     <p>
-     Given a tree id, this method returns a mapping from a tree&#39;s unique internal ID to a protein sequence ID.
+     Given a tree id, this method returns a mapping from a tree's unique internal ID to a protein sequence ID.
     </p>
    </dd>
   </dl>
   <h2 id="get_leaf_to_feature_map">
    get_leaf_to_feature_map
   </h2>
-  <pre>
-   <code>
-    $return = $obj-&gt;get_leaf_to_feature_map($tree_id)
-   </code>
-  </pre>
+  <pre><code>  $return = $obj-&gt;get_leaf_to_feature_map($tree_id)</code></pre>
   <dl>
    <dt id="Parameter-and-return-types17">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $tree_id is a kbase_id
+$tree_id is a kbase_id
 $return is a reference to a hash where the key is a kbase_id and the value is a kbase_id
-kbase_id is a string
-    </pre>
+kbase_id is a string</pre>
    </dd>
    <dt id="Description17">
     Description
    </dt>
    <dd>
     <p>
-     Given a tree id, this method returns a mapping from a tree&#39;s unique internal ID to a KBase feature ID if and only if a cannonical feature id exists.
+     Given a tree id, this method returns a mapping from a tree's unique internal ID to a KBase feature ID if and only if a cannonical feature id exists.
     </p>
    </dd>
   </dl>
   <h2 id="compute_abundance_profile">
    compute_abundance_profile
   </h2>
-  <pre>
-   <code>
-    $abundance_result = $obj-&gt;compute_abundance_profile($abundance_params)
-   </code>
-  </pre>
+  <pre><code>  $abundance_result = $obj-&gt;compute_abundance_profile($abundance_params)</code></pre>
   <dl>
    <dt id="Parameter-and-return-types18">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $abundance_params is an abundance_params
-$abundance_result is an abundance_result
-abundance_params is a reference to a hash where the following keys are defined:
+$abundance_params is an AbundanceParams
+$abundance_result is an AbundanceResult
+AbundanceParams is a reference to a hash where the following keys are defined:
 	tree_id has a value which is a kbase_id
 	protein_family_name has a value which is a string
 	protein_family_source has a value which is a string
@@ -636,18 +536,17 @@ abundance_params is a reference to a hash where the following keys are defined:
 	match_length_threshold has a value which is an int
 	mg_auth_key has a value which is a string
 kbase_id is a string
-abundance_result is a reference to a hash where the following keys are defined:
+AbundanceResult is a reference to a hash where the following keys are defined:
 	abundances has a value which is a reference to a hash where the key is a string and the value is an int
 	n_hits has a value which is an int
-	n_reads has a value which is an int
-    </pre>
+	n_reads has a value which is an int</pre>
    </dd>
    <dt id="Description18">
     Description
    </dt>
    <dd>
     <p>
-     Given an input KBase tree built from a sequence alignment, a metagenomic sample, and a protein family, this method will tabulate the number of reads that match to every leaf of the input tree. First, a set of assembled reads from a metagenomic sample are pulled from the KBase communities service which have been determined to be a likely hit to the specified protein family. Second, the sequences aligned to generate the tree are retrieved. Third, UCLUST [1] is used to map reads to target sequences of the tree. Finally, for each leaf in the tree, the number of hits matching the input search criteria is tabulated and returned. See the defined objects &#39;abundance_params&#39; and &#39;abundance_result&#39; for additional details on specifying the input parameters and handling the results.
+     Given an input KBase tree built from a sequence alignment, a metagenomic sample, and a protein family, this method will tabulate the number of reads that match to every leaf of the input tree. First, a set of assembled reads from a metagenomic sample are pulled from the KBase communities service which have been determined to be a likely hit to the specified protein family. Second, the sequences aligned to generate the tree are retrieved. Third, UCLUST [1] is used to map reads to target sequences of the tree. Finally, for each leaf in the tree, the number of hits matching the input search criteria is tabulated and returned. See the defined objects 'abundance_params' and 'abundance_result' for additional details on specifying the input parameters and handling the results.
     </p>
     <p>
      [1] Edgar, R.C. (2010) Search and clustering orders of magnitude faster than BLAST, Bioinformatics 26(19), 2460-2461.
@@ -657,32 +556,27 @@ abundance_result is a reference to a hash where the following keys are defined:
   <h2 id="filter_abundance_profile">
    filter_abundance_profile
   </h2>
-  <pre>
-   <code>
-    $abundance_data_processed = $obj-&gt;filter_abundance_profile($abundance_data, $filter_params)
-   </code>
-  </pre>
+  <pre><code>  $abundance_data_processed = $obj-&gt;filter_abundance_profile($abundance_data, $filter_params)</code></pre>
   <dl>
    <dt id="Parameter-and-return-types19">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $abundance_data is an abundance_data
-$filter_params is a filter_params
+$abundance_data is an abundance_data
+$filter_params is a FilterParams
 $abundance_data_processed is an abundance_data
 abundance_data is a reference to a hash where the key is a string and the value is an abundance_profile
 abundance_profile is a reference to a hash where the key is a string and the value is a float
-filter_params is a reference to a hash where the following keys are defined:
+FilterParams is a reference to a hash where the following keys are defined:
 	cutoff_value has a value which is a float
-	use_cutoff_value has a value which is a bool
+	use_cutoff_value has a value which is a boolean
 	cutoff_number_of_records has a value which is a float
-	use_cutoff_number_of_records has a value which is a bool
+	use_cutoff_number_of_records has a value which is a boolean
 	normalization_scope has a value which is a string
 	normalization_type has a value which is a string
 	normalization_post_process has a value which is a string
-bool is an int
-    </pre>
+boolean is an int</pre>
    </dd>
    <dt id="Description19">
     Description
@@ -699,24 +593,19 @@ bool is an int
   <h2 id="draw_html_tree">
    draw_html_tree
   </h2>
-  <pre>
-   <code>
-    $return = $obj-&gt;draw_html_tree($tree, $display_options)
-   </code>
-  </pre>
+  <pre><code>  $return = $obj-&gt;draw_html_tree($tree, $display_options)</code></pre>
   <dl>
    <dt id="Parameter-and-return-types20">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $tree is a newick_tree
+$tree is a newick_tree
 $display_options is a reference to a hash where the key is a string and the value is a string
 $return is a html_file
 newick_tree is a tree
 tree is a string
-html_file is a string
-    </pre>
+html_file is a string</pre>
    </dd>
    <dt id="Description20">
     Description
@@ -730,8 +619,8 @@ html_file is a string
   <h1 id="TYPES">
    TYPES
   </h1>
-  <h2 id="bool">
-   bool
+  <h2 id="boolean">
+   boolean
   </h2>
   <dl>
    <dt id="Description21">
@@ -747,8 +636,8 @@ html_file is a string
    </dt>
    <dd>
     <pre>
-     an int
-    </pre>
+an int
+</pre>
    </dd>
   </dl>
   <h2 id="timestamp">
@@ -768,8 +657,8 @@ html_file is a string
    </dt>
    <dd>
     <pre>
-     a string
-    </pre>
+a string
+</pre>
    </dd>
   </dl>
   <h2 id="position">
@@ -789,8 +678,8 @@ html_file is a string
    </dt>
    <dd>
     <pre>
-     an int
-    </pre>
+an int
+</pre>
    </dd>
   </dl>
   <h2 id="kbase_id">
@@ -802,7 +691,7 @@ html_file is a string
    </dt>
    <dd>
     <p>
-     A KBase ID is a string starting with the characters &quot;kb|&quot;. KBase IDs are typed. The types are designated using a short string. For instance,&quot; g&quot; denotes a genome, &quot;tree&quot; denotes a Tree, and &quot;aln&quot; denotes a sequence alignment. KBase IDs may be hierarchical. For example, if a KBase genome identifier is &quot;kb|g.1234&quot;, a protein encoding gene within that genome may be represented as &quot;kb|g.1234.peg.771&quot;.
+     A KBase ID is a string starting with the characters "kb|". KBase IDs are typed. The types are designated using a short string. For instance," g" denotes a genome, "tree" denotes a Tree, and "aln" denotes a sequence alignment. KBase IDs may be hierarchical. For example, if a KBase genome identifier is "kb|g.1234", a protein encoding gene within that genome may be represented as "kb|g.1234.peg.771".
     </p>
    </dd>
    <dt id="Definition3">
@@ -810,8 +699,8 @@ html_file is a string
    </dt>
    <dd>
     <pre>
-     a string
-    </pre>
+a string
+</pre>
    </dd>
   </dl>
   <h2 id="tree">
@@ -823,7 +712,7 @@ html_file is a string
    </dt>
    <dd>
     <p>
-     A string representation of a phylogenetic tree. The format/syntax of the string is specified by using one of the available typedefs declaring a particular format, such as &#39;newick_tree&#39;, &#39;phyloXML_tree&#39; or &#39;json_tree&#39;. When a format is not explictily specified, it is possible to return trees in different formats depending on addtional parameters. Regardless of format, all leaf nodes in trees built from MSAs are indexed to a specific MSA row. You can use the appropriate functionality of the API to replace these IDs with other KBase Ids instead. Internal nodes may or may not be named. Nodes, depending on the format, may also be annotated with structured data such as bootstrap values and distances.
+     A string representation of a phylogenetic tree. The format/syntax of the string is specified by using one of the available typedefs declaring a particular format, such as 'newick_tree', 'phylo_xml_tree' or 'json_tree'. When a format is not explictily specified, it is possible to return trees in different formats depending on addtional parameters. Regardless of format, all leaf nodes in trees built from MSAs are indexed to a specific MSA row. You can use the appropriate functionality of the API to replace these IDs with other KBase Ids instead. Internal nodes may or may not be named. Nodes, depending on the format, may also be annotated with structured data such as bootstrap values and distances.
     </p>
    </dd>
    <dt id="Definition4">
@@ -831,8 +720,8 @@ html_file is a string
    </dt>
    <dd>
     <pre>
-     a string
-    </pre>
+a string
+</pre>
    </dd>
   </dl>
   <h2 id="newick_tree">
@@ -852,12 +741,12 @@ html_file is a string
    </dt>
    <dd>
     <pre>
-     a tree
-    </pre>
+a tree
+</pre>
    </dd>
   </dl>
-  <h2 id="phyloXML_tree">
-   phyloXML_tree
+  <h2 id="phylo_xml_tree">
+   phylo_xml_tree
   </h2>
   <dl>
    <dt id="Description27">
@@ -873,8 +762,8 @@ html_file is a string
    </dt>
    <dd>
     <pre>
-     a tree
-    </pre>
+a tree
+</pre>
    </dd>
   </dl>
   <h2 id="json_tree">
@@ -894,8 +783,8 @@ html_file is a string
    </dt>
    <dd>
     <pre>
-     a tree
-    </pre>
+a tree
+</pre>
    </dd>
   </dl>
   <h2 id="alignment">
@@ -915,8 +804,8 @@ html_file is a string
    </dt>
    <dd>
     <pre>
-     a string
-    </pre>
+a string
+</pre>
    </dd>
   </dl>
   <h2 id="fasta">
@@ -928,7 +817,7 @@ html_file is a string
    </dt>
    <dd>
     <p>
-     String representation of a sequence or set of sequences in FASTA format. The precise alphabet used is not yet specified, but will be similar to sequences stored in KBase with &#39;-&#39; to denote gaps in alignments.
+     String representation of a sequence or set of sequences in FASTA format. The precise alphabet used is not yet specified, but will be similar to sequences stored in KBase with '-' to denote gaps in alignments.
     </p>
    </dd>
    <dt id="Definition9">
@@ -936,8 +825,8 @@ html_file is a string
    </dt>
    <dd>
     <pre>
-     a string
-    </pre>
+a string
+</pre>
    </dd>
   </dl>
   <h2 id="fasta_alignment">
@@ -949,7 +838,7 @@ html_file is a string
    </dt>
    <dd>
     <p>
-     String representation of an alignment in FASTA format. The precise alphabet and syntax of the alignment string is not yet specified, but will be similar to sequences stored in KBase with &#39;-&#39; to denote gaps in alignments.
+     String representation of an alignment in FASTA format. The precise alphabet and syntax of the alignment string is not yet specified, but will be similar to sequences stored in KBase with '-' to denote gaps in alignments.
     </p>
    </dd>
    <dt id="Definition10">
@@ -957,8 +846,8 @@ html_file is a string
    </dt>
    <dd>
     <pre>
-     a fasta
-    </pre>
+a fasta
+</pre>
    </dd>
   </dl>
   <h2 id="node_name">
@@ -978,8 +867,8 @@ html_file is a string
    </dt>
    <dd>
     <pre>
-     a string
-    </pre>
+a string
+</pre>
    </dd>
   </dl>
   <h2 id="html_file">
@@ -999,12 +888,12 @@ html_file is a string
    </dt>
    <dd>
     <pre>
-     a string
-    </pre>
+a string
+</pre>
    </dd>
   </dl>
-  <h2 id="tree_meta_data">
-   tree_meta_data
+  <h2 id="TreeMetaData">
+   TreeMetaData
   </h2>
   <dl>
    <dt id="Description34">
@@ -1014,12 +903,10 @@ html_file is a string
     <p>
      Meta data associated with a tree.
     </p>
-    <pre>
-     <code>
-      kbase_id alignment_id - if this tree was built from an alignment, this provides that alignment id
-    string type - the type of tree; possible values currently are &quot;sequence_alignment&quot; and &quot;genome&quot; for trees
+    <pre><code>    kbase_id alignment_id - if this tree was built from an alignment, this provides that alignment id
+    string type - the type of tree; possible values currently are "sequence_alignment" and "genome" for trees
                   either built from a sequence alignment, or imported directly indexed to genomes.
-    string status - set to &#39;active&#39; if this is the latest built tree for a particular gene family
+    string status - set to 'active' if this is the latest built tree for a particular gene family
     timestamp date_created - time at which the tree was built/loaded in seconds since the epoch
     string tree_contruction_method - the name of the software used to construct the tree
     string tree_construction_parameters - any non-default parameters of the tree construction method
@@ -1027,16 +914,14 @@ html_file is a string
     int node_count - total number of nodes in the tree
     int leaf_count - total number of leaf nodes in the tree (generally this cooresponds to the number of sequences)
     string source_db - the source database where this tree originated, if one exists
-    string source_id - the id of this tree in an external database, if one exists
-     </code>
-    </pre>
+    string source_id - the id of this tree in an external database, if one exists</code></pre>
    </dd>
    <dt id="Definition13">
     Definition
    </dt>
    <dd>
     <pre>
-     a reference to a hash where the following keys are defined:
+a reference to a hash where the following keys are defined:
 alignment_id has a value which is a kbase_id
 type has a value which is a string
 status has a value which is a string
@@ -1047,12 +932,11 @@ tree_protocol has a value which is a string
 node_count has a value which is an int
 leaf_count has a value which is an int
 source_db has a value which is a string
-source_id has a value which is a string
-    </pre>
+source_id has a value which is a string</pre>
    </dd>
   </dl>
-  <h2 id="alignment_meta_data">
-   alignment_meta_data
+  <h2 id="AlignmentMetaData">
+   AlignmentMetaData
   </h2>
   <dl>
    <dt id="Description35">
@@ -1062,12 +946,10 @@ source_id has a value which is a string
     <p>
      Meta data associated with an alignment.
     </p>
-    <pre>
-     <code>
-      list&lt;kbase_id&gt; tree_ids - the set of trees that were built from this alignment
-    string status - set to &#39;active&#39; if this is the latest alignment for a particular set of sequences
+    <pre><code>    list&lt;kbase_id&gt; tree_ids - the set of trees that were built from this alignment
+    string status - set to 'active' if this is the latest alignment for a particular set of sequences
     string sequence_type - indicates what type of sequence is aligned (e.g. protein vs. dna)
-    bool is_concatenation - true if the alignment is based on the concatenation of multiple non-contiguous
+    boolean is_concatenation - true if the alignment is based on the concatenation of multiple non-contiguous
                             sequences, false if each row cooresponds to exactly one sequence (possibly with gaps)
     timestamp date_created - time at which the alignment was built/loaded in seconds since the epoch
     int n_rows - number of rows in the alignment
@@ -1076,16 +958,14 @@ source_id has a value which is a string
     string alignment_construction_parameters - set of non-default parameters used to construct the alignment
     string alignment_protocol - simple free-form text which may provide additional details of how the alignment was built
     string source_db - the source database where this alignment originated, if one exists
-    string source_id - the id of this alignment in an external database, if one exists
-     </code>
-    </pre>
+    string source_id - the id of this alignment in an external database, if one exists</code></pre>
    </dd>
    <dt id="Definition14">
     Definition
    </dt>
    <dd>
     <pre>
-     a reference to a hash where the following keys are defined:
+a reference to a hash where the following keys are defined:
 tree_ids has a value which is a reference to a list where each element is a kbase_id
 status has a value which is a string
 sequence_type has a value which is a string
@@ -1097,12 +977,11 @@ alignment_construction_method has a value which is a string
 alignment_construction_parameters has a value which is a string
 alignment_protocol has a value which is a string
 source_db has a value which is a string
-source_id has a value which is a string
-    </pre>
+source_id has a value which is a string</pre>
    </dd>
   </dl>
-  <h2 id="abundance_params">
-   abundance_params
+  <h2 id="AbundanceParams">
+   AbundanceParams
   </h2>
   <dl>
    <dt id="Description36">
@@ -1112,9 +991,7 @@ source_id has a value which is a string
     <p>
      Structure to group input parameters to the compute_abundance_profile method.
     </p>
-    <pre>
-     <code>
-      kbase_id tree_id                - the KBase ID of the tree to compute abundances for; the tree is
+    <pre><code>    kbase_id tree_id                - the KBase ID of the tree to compute abundances for; the tree is
                                       used to identify the set of sequences that were aligned to build
                                       the tree; each leaf node of a tree built from an alignment will
                                       be mapped to a sequence; the compute_abundance_profile method
@@ -1122,33 +999,30 @@ source_id has a value which is a string
     string protein_family_name      - the name of the protein family used to pull a small set of reads
                                       from a metagenomic sample; currently only COG families are supported
     string protein_family_source    - the name of the source of the protein family; currently supported
-                                      protein families are: &#39;COG&#39;
+                                      protein families are: 'COG'
     string metagenomic_sample_id    - the ID of the metagenomic sample to lookup; see the KBase communities
                                       service to identifiy metagenomic samples
     int percent_identity_threshold  - the minimum acceptable percent identity for hits, provided as a percentage
                                       and not a fraction (i.e. set to 87.5 for 87.5%)
-    int match_length_threshold      - the minimum acceptable length of a match to consider a hit
-     </code>
-    </pre>
+    int match_length_threshold      - the minimum acceptable length of a match to consider a hit</code></pre>
    </dd>
    <dt id="Definition15">
     Definition
    </dt>
    <dd>
     <pre>
-     a reference to a hash where the following keys are defined:
+a reference to a hash where the following keys are defined:
 tree_id has a value which is a kbase_id
 protein_family_name has a value which is a string
 protein_family_source has a value which is a string
 metagenomic_sample_id has a value which is a string
 percent_identity_threshold has a value which is an int
 match_length_threshold has a value which is an int
-mg_auth_key has a value which is a string
-    </pre>
+mg_auth_key has a value which is a string</pre>
    </dd>
   </dl>
-  <h2 id="abundance_result">
-   abundance_result
+  <h2 id="AbundanceResult">
+   AbundanceResult
   </h2>
   <dl>
    <dt id="Description37">
@@ -1158,27 +1032,22 @@ mg_auth_key has a value which is a string
     <p>
      Structure to group output of the compute_abundance_profile method.
     </p>
-    <pre>
-     <code>
-      mapping &lt;string,int&gt; abundances - maps the raw row ID of each leaf node in the input tree to the number
+    <pre><code>    mapping &lt;string,int&gt; abundances - maps the raw row ID of each leaf node in the input tree to the number
                                       of hits that map to the given leaf; only row IDs with 1 or more hits
                                       are added to this map, thus missing leaf nodes imply 0 hits
     int n_hits                      - the total number of hits in this sample to any leaf
     int n_reads                     - the total number of reads that were identified for the input protein
-                                      family; if the protein family could not be found this will be zero.
-     </code>
-    </pre>
+                                      family; if the protein family could not be found this will be zero.</code></pre>
    </dd>
    <dt id="Definition16">
     Definition
    </dt>
    <dd>
     <pre>
-     a reference to a hash where the following keys are defined:
+a reference to a hash where the following keys are defined:
 abundances has a value which is a reference to a hash where the key is a string and the value is an int
 n_hits has a value which is an int
-n_reads has a value which is an int
-    </pre>
+n_reads has a value which is an int</pre>
    </dd>
   </dl>
   <h2 id="abundance_profile">
@@ -1198,8 +1067,8 @@ n_reads has a value which is an int
    </dt>
    <dd>
     <pre>
-     a reference to a hash where the key is a string and the value is a float
-    </pre>
+a reference to a hash where the key is a string and the value is a float
+</pre>
    </dd>
   </dl>
   <h2 id="abundance_data">
@@ -1219,12 +1088,12 @@ n_reads has a value which is an int
    </dt>
    <dd>
     <pre>
-     a reference to a hash where the key is a string and the value is an abundance_profile
-    </pre>
+a reference to a hash where the key is a string and the value is an abundance_profile
+</pre>
    </dd>
   </dl>
-  <h2 id="filter_params">
-   filter_params
+  <h2 id="FilterParams">
+   FilterParams
   </h2>
   <dl>
    <dt id="Description40">
@@ -1232,7 +1101,7 @@ n_reads has a value which is an int
    </dt>
    <dd>
     <p>
-     cutoff_value =&gt; def: 0 || [any_valid_float_value] use_cutoff_value =&gt; def: 0 || 1 normalization_scope =&gt; def:&#39;per_column&#39; || &#39;global&#39; normalization_type =&gt; def:&#39;none&#39; || &#39;total&#39; || &#39;mean&#39; || &#39;max&#39; || &#39;min&#39; normalization_post_process =&gt; def:&#39;none&#39; || &#39;log10&#39; || &#39;log2&#39; || &#39;ln&#39;
+     cutoff_value =&gt; def: 0 || [any_valid_float_value] use_cutoff_value =&gt; def: 0 || 1 normalization_scope =&gt; def:'per_column' || 'global' normalization_type =&gt; def:'none' || 'total' || 'mean' || 'max' || 'min' normalization_post_process =&gt; def:'none' || 'log10' || 'log2' || 'ln'
     </p>
    </dd>
    <dt id="Definition19">
@@ -1240,15 +1109,14 @@ n_reads has a value which is an int
    </dt>
    <dd>
     <pre>
-     a reference to a hash where the following keys are defined:
+a reference to a hash where the following keys are defined:
 cutoff_value has a value which is a float
-use_cutoff_value has a value which is a bool
+use_cutoff_value has a value which is a boolean
 cutoff_number_of_records has a value which is a float
-use_cutoff_number_of_records has a value which is a bool
+use_cutoff_number_of_records has a value which is a boolean
 normalization_scope has a value which is a string
 normalization_type has a value which is a string
-normalization_post_process has a value which is a string
-    </pre>
+normalization_post_process has a value which is a string</pre>
    </dd>
   </dl>
  </body>

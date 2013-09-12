@@ -1,11 +1,11 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version="1.0" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
  <head>
   <title>
   </title>
-  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-  <link rev="made" href="mailto:root@ubuntu.chicago.kbase.us" />
+  <meta content="text/html; charset=utf-8" http-equiv="content-type"/>
+  <link href="mailto:root@ubuntu.chicago.kbase.us" rev="made"/>
  </head>
  <body style="background-color: white">
   <h1 id="NAME">
@@ -23,22 +23,17 @@
   <h2 id="get_all_training_sets">
    get_all_training_sets
   </h2>
-  <pre>
-   <code>
-    $return = $obj-&gt;get_all_training_sets()
-   </code>
-  </pre>
+  <pre><code>  $return = $obj-&gt;get_all_training_sets()</code></pre>
   <dl>
    <dt id="Parameter-and-return-types">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $return is a reference to a list where each element is a TrainingSet
+$return is a reference to a list where each element is a TrainingSet
 TrainingSet is a reference to a hash where the following keys are defined:
 	training_set_id has a value which is an int
-	genome_name has a value which is a string
-    </pre>
+	genome_name has a value which is a string</pre>
    </dd>
    <dt id="Description">
     Description
@@ -52,18 +47,14 @@ TrainingSet is a reference to a hash where the following keys are defined:
   <h2 id="find_prophages">
    find_prophages
   </h2>
-  <pre>
-   <code>
-    $return_1, $analysis = $obj-&gt;find_prophages($training_set_id, $genomeTO)
-   </code>
-  </pre>
+  <pre><code>  $return_1, $analysis = $obj-&gt;find_prophages($training_set_id, $genomeTO)</code></pre>
   <dl>
    <dt id="Parameter-and-return-types1">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $training_set_id is an int
+$training_set_id is an int
 $genomeTO is a genomeTO
 $return_1 is a genomeTO
 $analysis is a reference to a list where each element is a prophage_feature
@@ -116,8 +107,7 @@ prophage_feature is a reference to a list containing 15 items:
 	11: (start_of_attR) an int
 	12: (end_of_attR) an int
 	13: (sequence_of_attL) a string
-	14: (sequence_of_attR) a string
-    </pre>
+	14: (sequence_of_attR) a string</pre>
    </dd>
    <dt id="Description1">
     Description
@@ -151,8 +141,8 @@ prophage_feature is a reference to a list containing 15 items:
    </dt>
    <dd>
     <pre>
-     a string
-    </pre>
+a string
+</pre>
    </dd>
   </dl>
   <h2 id="feature_id">
@@ -164,8 +154,8 @@ prophage_feature is a reference to a list containing 15 items:
    </dt>
    <dd>
     <pre>
-     a string
-    </pre>
+a string
+</pre>
    </dd>
   </dl>
   <h2 id="contig_id">
@@ -177,8 +167,8 @@ prophage_feature is a reference to a list containing 15 items:
    </dt>
    <dd>
     <pre>
-     a string
-    </pre>
+a string
+</pre>
    </dd>
   </dl>
   <h2 id="feature_type">
@@ -190,8 +180,8 @@ prophage_feature is a reference to a list containing 15 items:
    </dt>
    <dd>
     <pre>
-     a string
-    </pre>
+a string
+</pre>
    </dd>
   </dl>
   <h2 id="region_of_dna">
@@ -205,29 +195,24 @@ prophage_feature is a reference to a list containing 15 items:
     <p>
      A region of DNA is maintained as a tuple of four components:
     </p>
-    <pre>
-     <code>
-      the contig
+    <pre><code>                the contig
                 the beginning position (from 1)
                 the strand
                 the length
 
-           We often speak of &quot;a region&quot;.  By &quot;location&quot;, we mean a sequence
-           of regions from the same genome (perhaps from distinct contigs).
-     </code>
-    </pre>
+           We often speak of "a region".  By "location", we mean a sequence
+           of regions from the same genome (perhaps from distinct contigs).</code></pre>
    </dd>
    <dt id="Definition4">
     Definition
    </dt>
    <dd>
     <pre>
-     a reference to a list containing 4 items:
+a reference to a list containing 4 items:
 0: a contig_id
 1: (begin) an int
 2: (strand) a string
-3: (length) an int
-    </pre>
+3: (length) an int</pre>
    </dd>
   </dl>
   <h2 id="location">
@@ -239,7 +224,7 @@ prophage_feature is a reference to a list containing 15 items:
    </dt>
    <dd>
     <p>
-     a &quot;location&quot; refers to a sequence of regions
+     a "location" refers to a sequence of regions
     </p>
    </dd>
    <dt id="Definition5">
@@ -247,8 +232,8 @@ prophage_feature is a reference to a list containing 15 items:
    </dt>
    <dd>
     <pre>
-     a reference to a list where each element is a region_of_dna
-    </pre>
+a reference to a list where each element is a region_of_dna
+</pre>
    </dd>
   </dl>
   <h2 id="annotation">
@@ -260,11 +245,10 @@ prophage_feature is a reference to a list containing 15 items:
    </dt>
    <dd>
     <pre>
-     a reference to a list containing 3 items:
+a reference to a list containing 3 items:
 0: (comment) a string
 1: (annotator) a string
-2: (annotation_time) an int
-    </pre>
+2: (annotation_time) an int</pre>
    </dd>
   </dl>
   <h2 id="feature">
@@ -284,15 +268,14 @@ prophage_feature is a reference to a list containing 15 items:
    </dt>
    <dd>
     <pre>
-     a reference to a hash where the following keys are defined:
+a reference to a hash where the following keys are defined:
 id has a value which is a feature_id
 location has a value which is a location
 type has a value which is a feature_type
 function has a value which is a string
 protein_translation has a value which is a string
 aliases has a value which is a reference to a list where each element is a string
-annotations has a value which is a reference to a list where each element is an annotation
-    </pre>
+annotations has a value which is a reference to a list where each element is an annotation</pre>
    </dd>
   </dl>
   <h2 id="contig">
@@ -312,10 +295,9 @@ annotations has a value which is a reference to a list where each element is an 
    </dt>
    <dd>
     <pre>
-     a reference to a hash where the following keys are defined:
+a reference to a hash where the following keys are defined:
 id has a value which is a contig_id
-dna has a value which is a string
-    </pre>
+dna has a value which is a string</pre>
    </dd>
   </dl>
   <h2 id="genomeTO">
@@ -335,7 +317,7 @@ dna has a value which is a string
    </dt>
    <dd>
     <pre>
-     a reference to a hash where the following keys are defined:
+a reference to a hash where the following keys are defined:
 id has a value which is a genome_id
 scientific_name has a value which is a string
 domain has a value which is a string
@@ -343,8 +325,7 @@ genetic_code has a value which is an int
 source has a value which is a string
 source_id has a value which is a string
 contigs has a value which is a reference to a list where each element is a contig
-features has a value which is a reference to a list where each element is a feature
-    </pre>
+features has a value which is a reference to a list where each element is a feature</pre>
    </dd>
   </dl>
   <h2 id="TrainingSet">
@@ -364,10 +345,9 @@ features has a value which is a reference to a list where each element is a feat
    </dt>
    <dd>
     <pre>
-     a reference to a hash where the following keys are defined:
+a reference to a hash where the following keys are defined:
 training_set_id has a value which is an int
-genome_name has a value which is a string
-    </pre>
+genome_name has a value which is a string</pre>
    </dd>
   </dl>
   <h2 id="prophage_feature">
@@ -387,7 +367,7 @@ genome_name has a value which is a string
    </dt>
    <dd>
     <pre>
-     a reference to a list containing 15 items:
+a reference to a list containing 15 items:
 0: a feature_id
 1: a contig_id
 2: (start) an int
@@ -402,8 +382,7 @@ genome_name has a value which is a string
 11: (start_of_attR) an int
 12: (end_of_attR) an int
 13: (sequence_of_attL) a string
-14: (sequence_of_attR) a string
-    </pre>
+14: (sequence_of_attR) a string</pre>
    </dd>
   </dl>
  </body>

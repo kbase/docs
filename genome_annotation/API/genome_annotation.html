@@ -1,12 +1,12 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version="1.0" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
  <head>
   <title>
    Genome Annotation Service API
   </title>
-  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-  <link rev="made" href="mailto:root@ubuntu.chicago.kbase.us" />
+  <meta content="text/html; charset=utf-8" http-equiv="content-type"/>
+  <link href="mailto:root@ubuntu.chicago.kbase.us" rev="made"/>
  </head>
  <body style="background-color: white">
   <h1 id="NAME">
@@ -18,24 +18,26 @@
   <h1 id="DESCRIPTION">
    DESCRIPTION
   </h1>
+  <p>
+   API Access to the Genome Annotation Service.
+  </p>
+  <p>
+   Provides support for gene calling, functional annotation, re-annotation. Use to extract annotation in formation about an existing genome, or to create new annotations.
+  </p>
   <h1 id="METHODS">
    METHODS
   </h1>
   <h2 id="genomeTO_to_reconstructionTO">
    genomeTO_to_reconstructionTO
   </h2>
-  <pre>
-   <code>
-    $return = $obj-&gt;genomeTO_to_reconstructionTO($genomeTO)
-   </code>
-  </pre>
+  <pre><code>  $return = $obj-&gt;genomeTO_to_reconstructionTO($genomeTO)</code></pre>
   <dl>
    <dt id="Parameter-and-return-types">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $genomeTO is a genomeTO
+$genomeTO is a genomeTO
 $return is a reconstructionTO
 genomeTO is a reference to a hash where the following keys are defined:
 	id has a value which is a genome_id
@@ -63,14 +65,14 @@ feature_id is a string
 location is a reference to a list where each element is a region_of_dna
 region_of_dna is a reference to a list containing 4 items:
 	0: a contig_id
-	1: an int
-	2: a string
-	3: an int
+	1: (begin) an int
+	2: (strand) a string
+	3: (length) an int
 feature_type is a string
 annotation is a reference to a list containing 3 items:
-	0: a string
-	1: a string
-	2: an int
+	0: (comment) a string
+	1: (annotator) a string
+	2: (annotation_time) an int
 reconstructionTO is a reference to a hash where the following keys are defined:
 	subsystems has a value which is a variant_subsystem_pairs
 	bindings has a value which is a fid_role_pairs
@@ -91,8 +93,7 @@ fid_function_pairs is a reference to a list where each element is a fid_function
 fid_function_pair is a reference to a list containing 2 items:
 	0: a fid
 	1: a function
-function is a string
-    </pre>
+function is a string</pre>
    </dd>
    <dt id="Description">
     Description
@@ -103,18 +104,14 @@ function is a string
   <h2 id="genomeTO_to_feature_data">
    genomeTO_to_feature_data
   </h2>
-  <pre>
-   <code>
-    $return = $obj-&gt;genomeTO_to_feature_data($genomeTO)
-   </code>
-  </pre>
+  <pre><code>  $return = $obj-&gt;genomeTO_to_feature_data($genomeTO)</code></pre>
   <dl>
    <dt id="Parameter-and-return-types1">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $genomeTO is a genomeTO
+$genomeTO is a genomeTO
 $return is a fid_data_tuples
 genomeTO is a reference to a hash where the following keys are defined:
 	id has a value which is a genome_id
@@ -142,14 +139,14 @@ feature_id is a string
 location is a reference to a list where each element is a region_of_dna
 region_of_dna is a reference to a list containing 4 items:
 	0: a contig_id
-	1: an int
-	2: a string
-	3: an int
+	1: (begin) an int
+	2: (strand) a string
+	3: (length) an int
 feature_type is a string
 annotation is a reference to a list containing 3 items:
-	0: a string
-	1: a string
-	2: an int
+	0: (comment) a string
+	1: (annotator) a string
+	2: (annotation_time) an int
 fid_data_tuples is a reference to a list where each element is a fid_data_tuple
 fid_data_tuple is a reference to a list containing 4 items:
 	0: a fid
@@ -158,8 +155,7 @@ fid_data_tuple is a reference to a list containing 4 items:
 	3: a function
 fid is a string
 md5 is a string
-function is a string
-    </pre>
+function is a string</pre>
    </dd>
    <dt id="Description1">
     Description
@@ -170,18 +166,14 @@ function is a string
   <h2 id="reconstructionTO_to_roles">
    reconstructionTO_to_roles
   </h2>
-  <pre>
-   <code>
-    $return = $obj-&gt;reconstructionTO_to_roles($reconstructionTO)
-   </code>
-  </pre>
+  <pre><code>  $return = $obj-&gt;reconstructionTO_to_roles($reconstructionTO)</code></pre>
   <dl>
    <dt id="Parameter-and-return-types2">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $reconstructionTO is a reconstructionTO
+$reconstructionTO is a reconstructionTO
 $return is a reference to a list where each element is a role
 reconstructionTO is a reference to a hash where the following keys are defined:
 	subsystems has a value which is a variant_subsystem_pairs
@@ -203,8 +195,7 @@ fid_function_pairs is a reference to a list where each element is a fid_function
 fid_function_pair is a reference to a list containing 2 items:
 	0: a fid
 	1: a function
-function is a string
-    </pre>
+function is a string</pre>
    </dd>
    <dt id="Description2">
     Description
@@ -215,18 +206,14 @@ function is a string
   <h2 id="reconstructionTO_to_subsystems">
    reconstructionTO_to_subsystems
   </h2>
-  <pre>
-   <code>
-    $return = $obj-&gt;reconstructionTO_to_subsystems($reconstructionTO)
-   </code>
-  </pre>
+  <pre><code>  $return = $obj-&gt;reconstructionTO_to_subsystems($reconstructionTO)</code></pre>
   <dl>
    <dt id="Parameter-and-return-types3">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $reconstructionTO is a reconstructionTO
+$reconstructionTO is a reconstructionTO
 $return is a variant_subsystem_pairs
 reconstructionTO is a reference to a hash where the following keys are defined:
 	subsystems has a value which is a variant_subsystem_pairs
@@ -248,8 +235,7 @@ fid_function_pairs is a reference to a list where each element is a fid_function
 fid_function_pair is a reference to a list containing 2 items:
 	0: a fid
 	1: a function
-function is a string
-    </pre>
+function is a string</pre>
    </dd>
    <dt id="Description3">
     Description
@@ -260,18 +246,14 @@ function is a string
   <h2 id="annotate_genome">
    annotate_genome
   </h2>
-  <pre>
-   <code>
-    $return = $obj-&gt;annotate_genome($genomeTO)
-   </code>
-  </pre>
+  <pre><code>  $return = $obj-&gt;annotate_genome($genomeTO)</code></pre>
   <dl>
    <dt id="Parameter-and-return-types4">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $genomeTO is a genomeTO
+$genomeTO is a genomeTO
 $return is a genomeTO
 genomeTO is a reference to a hash where the following keys are defined:
 	id has a value which is a genome_id
@@ -299,40 +281,35 @@ feature_id is a string
 location is a reference to a list where each element is a region_of_dna
 region_of_dna is a reference to a list containing 4 items:
 	0: a contig_id
-	1: an int
-	2: a string
-	3: an int
+	1: (begin) an int
+	2: (strand) a string
+	3: (length) an int
 feature_type is a string
 annotation is a reference to a list containing 3 items:
-	0: a string
-	1: a string
-	2: an int
-    </pre>
+	0: (comment) a string
+	1: (annotator) a string
+	2: (annotation_time) an int</pre>
    </dd>
    <dt id="Description4">
     Description
    </dt>
    <dd>
     <p>
-     Given a genome object populated with contig data, perform gene calling and functional annotation and return the annotated genome. NOTE: Many of these &quot;transformations&quot; modify the input hash and copy the pointer. Be warned.
+     Given a genome object populated with contig data, perform gene calling and functional annotation and return the annotated genome. NOTE: Many of these "transformations" modify the input hash and copy the pointer. Be warned.
     </p>
    </dd>
   </dl>
   <h2 id="call_selenoproteins">
    call_selenoproteins
   </h2>
-  <pre>
-   <code>
-    $return = $obj-&gt;call_selenoproteins($genomeTO)
-   </code>
-  </pre>
+  <pre><code>  $return = $obj-&gt;call_selenoproteins($genomeTO)</code></pre>
   <dl>
    <dt id="Parameter-and-return-types5">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $genomeTO is a genomeTO
+$genomeTO is a genomeTO
 $return is a genomeTO
 genomeTO is a reference to a hash where the following keys are defined:
 	id has a value which is a genome_id
@@ -360,15 +337,14 @@ feature_id is a string
 location is a reference to a list where each element is a region_of_dna
 region_of_dna is a reference to a list containing 4 items:
 	0: a contig_id
-	1: an int
-	2: a string
-	3: an int
+	1: (begin) an int
+	2: (strand) a string
+	3: (length) an int
 feature_type is a string
 annotation is a reference to a list containing 3 items:
-	0: a string
-	1: a string
-	2: an int
-    </pre>
+	0: (comment) a string
+	1: (annotator) a string
+	2: (annotation_time) an int</pre>
    </dd>
    <dt id="Description5">
     Description
@@ -379,18 +355,14 @@ annotation is a reference to a list containing 3 items:
   <h2 id="call_pyrrolysoproteins">
    call_pyrrolysoproteins
   </h2>
-  <pre>
-   <code>
-    $return = $obj-&gt;call_pyrrolysoproteins($genomeTO)
-   </code>
-  </pre>
+  <pre><code>  $return = $obj-&gt;call_pyrrolysoproteins($genomeTO)</code></pre>
   <dl>
    <dt id="Parameter-and-return-types6">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $genomeTO is a genomeTO
+$genomeTO is a genomeTO
 $return is a genomeTO
 genomeTO is a reference to a hash where the following keys are defined:
 	id has a value which is a genome_id
@@ -418,15 +390,14 @@ feature_id is a string
 location is a reference to a list where each element is a region_of_dna
 region_of_dna is a reference to a list containing 4 items:
 	0: a contig_id
-	1: an int
-	2: a string
-	3: an int
+	1: (begin) an int
+	2: (strand) a string
+	3: (length) an int
 feature_type is a string
 annotation is a reference to a list containing 3 items:
-	0: a string
-	1: a string
-	2: an int
-    </pre>
+	0: (comment) a string
+	1: (annotator) a string
+	2: (annotation_time) an int</pre>
    </dd>
    <dt id="Description6">
     Description
@@ -437,18 +408,14 @@ annotation is a reference to a list containing 3 items:
   <h2 id="call_RNAs">
    call_RNAs
   </h2>
-  <pre>
-   <code>
-    $return = $obj-&gt;call_RNAs($genomeTO)
-   </code>
-  </pre>
+  <pre><code>  $return = $obj-&gt;call_RNAs($genomeTO)</code></pre>
   <dl>
    <dt id="Parameter-and-return-types7">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $genomeTO is a genomeTO
+$genomeTO is a genomeTO
 $return is a genomeTO
 genomeTO is a reference to a hash where the following keys are defined:
 	id has a value which is a genome_id
@@ -476,15 +443,14 @@ feature_id is a string
 location is a reference to a list where each element is a region_of_dna
 region_of_dna is a reference to a list containing 4 items:
 	0: a contig_id
-	1: an int
-	2: a string
-	3: an int
+	1: (begin) an int
+	2: (strand) a string
+	3: (length) an int
 feature_type is a string
 annotation is a reference to a list containing 3 items:
-	0: a string
-	1: a string
-	2: an int
-    </pre>
+	0: (comment) a string
+	1: (annotator) a string
+	2: (annotation_time) an int</pre>
    </dd>
    <dt id="Description7">
     Description
@@ -495,18 +461,14 @@ annotation is a reference to a list containing 3 items:
   <h2 id="call_CDSs">
    call_CDSs
   </h2>
-  <pre>
-   <code>
-    $return = $obj-&gt;call_CDSs($genomeTO)
-   </code>
-  </pre>
+  <pre><code>  $return = $obj-&gt;call_CDSs($genomeTO)</code></pre>
   <dl>
    <dt id="Parameter-and-return-types8">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $genomeTO is a genomeTO
+$genomeTO is a genomeTO
 $return is a genomeTO
 genomeTO is a reference to a hash where the following keys are defined:
 	id has a value which is a genome_id
@@ -534,15 +496,14 @@ feature_id is a string
 location is a reference to a list where each element is a region_of_dna
 region_of_dna is a reference to a list containing 4 items:
 	0: a contig_id
-	1: an int
-	2: a string
-	3: an int
+	1: (begin) an int
+	2: (strand) a string
+	3: (length) an int
 feature_type is a string
 annotation is a reference to a list containing 3 items:
-	0: a string
-	1: a string
-	2: an int
-    </pre>
+	0: (comment) a string
+	1: (annotator) a string
+	2: (annotation_time) an int</pre>
    </dd>
    <dt id="Description8">
     Description
@@ -553,18 +514,14 @@ annotation is a reference to a list containing 3 items:
   <h2 id="find_close_neighbors">
    find_close_neighbors
   </h2>
-  <pre>
-   <code>
-    $return = $obj-&gt;find_close_neighbors($genomeTO)
-   </code>
-  </pre>
+  <pre><code>  $return = $obj-&gt;find_close_neighbors($genomeTO)</code></pre>
   <dl>
    <dt id="Parameter-and-return-types9">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $genomeTO is a genomeTO
+$genomeTO is a genomeTO
 $return is a genomeTO
 genomeTO is a reference to a hash where the following keys are defined:
 	id has a value which is a genome_id
@@ -592,15 +549,14 @@ feature_id is a string
 location is a reference to a list where each element is a region_of_dna
 region_of_dna is a reference to a list containing 4 items:
 	0: a contig_id
-	1: an int
-	2: a string
-	3: an int
+	1: (begin) an int
+	2: (strand) a string
+	3: (length) an int
 feature_type is a string
 annotation is a reference to a list containing 3 items:
-	0: a string
-	1: a string
-	2: an int
-    </pre>
+	0: (comment) a string
+	1: (annotator) a string
+	2: (annotation_time) an int</pre>
    </dd>
    <dt id="Description9">
     Description
@@ -611,18 +567,14 @@ annotation is a reference to a list containing 3 items:
   <h2 id="assign_functions_to_CDSs">
    assign_functions_to_CDSs
   </h2>
-  <pre>
-   <code>
-    $return = $obj-&gt;assign_functions_to_CDSs($genomeTO)
-   </code>
-  </pre>
+  <pre><code>  $return = $obj-&gt;assign_functions_to_CDSs($genomeTO)</code></pre>
   <dl>
    <dt id="Parameter-and-return-types10">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $genomeTO is a genomeTO
+$genomeTO is a genomeTO
 $return is a genomeTO
 genomeTO is a reference to a hash where the following keys are defined:
 	id has a value which is a genome_id
@@ -650,15 +602,14 @@ feature_id is a string
 location is a reference to a list where each element is a region_of_dna
 region_of_dna is a reference to a list containing 4 items:
 	0: a contig_id
-	1: an int
-	2: a string
-	3: an int
+	1: (begin) an int
+	2: (strand) a string
+	3: (length) an int
 feature_type is a string
 annotation is a reference to a list containing 3 items:
-	0: a string
-	1: a string
-	2: an int
-    </pre>
+	0: (comment) a string
+	1: (annotator) a string
+	2: (annotation_time) an int</pre>
    </dd>
    <dt id="Description10">
     Description
@@ -669,18 +620,14 @@ annotation is a reference to a list containing 3 items:
   <h2 id="annotate_proteins">
    annotate_proteins
   </h2>
-  <pre>
-   <code>
-    $return = $obj-&gt;annotate_proteins($genomeTO)
-   </code>
-  </pre>
+  <pre><code>  $return = $obj-&gt;annotate_proteins($genomeTO)</code></pre>
   <dl>
    <dt id="Parameter-and-return-types11">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $genomeTO is a genomeTO
+$genomeTO is a genomeTO
 $return is a genomeTO
 genomeTO is a reference to a hash where the following keys are defined:
 	id has a value which is a genome_id
@@ -708,15 +655,14 @@ feature_id is a string
 location is a reference to a list where each element is a region_of_dna
 region_of_dna is a reference to a list containing 4 items:
 	0: a contig_id
-	1: an int
-	2: a string
-	3: an int
+	1: (begin) an int
+	2: (strand) a string
+	3: (length) an int
 feature_type is a string
 annotation is a reference to a list containing 3 items:
-	0: a string
-	1: a string
-	2: an int
-    </pre>
+	0: (comment) a string
+	1: (annotator) a string
+	2: (annotation_time) an int</pre>
    </dd>
    <dt id="Description11">
     Description
@@ -730,18 +676,14 @@ annotation is a reference to a list containing 3 items:
   <h2 id="call_CDSs_by_projection">
    call_CDSs_by_projection
   </h2>
-  <pre>
-   <code>
-    $return = $obj-&gt;call_CDSs_by_projection($genomeTO)
-   </code>
-  </pre>
+  <pre><code>  $return = $obj-&gt;call_CDSs_by_projection($genomeTO)</code></pre>
   <dl>
    <dt id="Parameter-and-return-types12">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $genomeTO is a genomeTO
+$genomeTO is a genomeTO
 $return is a genomeTO
 genomeTO is a reference to a hash where the following keys are defined:
 	id has a value which is a genome_id
@@ -769,15 +711,14 @@ feature_id is a string
 location is a reference to a list where each element is a region_of_dna
 region_of_dna is a reference to a list containing 4 items:
 	0: a contig_id
-	1: an int
-	2: a string
-	3: an int
+	1: (begin) an int
+	2: (strand) a string
+	3: (length) an int
 feature_type is a string
 annotation is a reference to a list containing 3 items:
-	0: a string
-	1: a string
-	2: an int
-    </pre>
+	0: (comment) a string
+	1: (annotator) a string
+	2: (annotation_time) an int</pre>
    </dd>
    <dt id="Description12">
     Description
@@ -788,18 +729,14 @@ annotation is a reference to a list containing 3 items:
   <h2 id="get_strep_suis_repeats">
    get_strep_suis_repeats
   </h2>
-  <pre>
-   <code>
-    $return = $obj-&gt;get_strep_suis_repeats($genomeTO)
-   </code>
-  </pre>
+  <pre><code>  $return = $obj-&gt;get_strep_suis_repeats($genomeTO)</code></pre>
   <dl>
    <dt id="Parameter-and-return-types13">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $genomeTO is a genomeTO
+$genomeTO is a genomeTO
 $return is a genomeTO
 genomeTO is a reference to a hash where the following keys are defined:
 	id has a value which is a genome_id
@@ -827,40 +764,35 @@ feature_id is a string
 location is a reference to a list where each element is a region_of_dna
 region_of_dna is a reference to a list containing 4 items:
 	0: a contig_id
-	1: an int
-	2: a string
-	3: an int
+	1: (begin) an int
+	2: (strand) a string
+	3: (length) an int
 feature_type is a string
 annotation is a reference to a list containing 3 items:
-	0: a string
-	1: a string
-	2: an int
-    </pre>
+	0: (comment) a string
+	1: (annotator) a string
+	2: (annotation_time) an int</pre>
    </dd>
    <dt id="Description13">
     Description
    </dt>
    <dd>
     <p>
-     Interface to Strep repeats and &quot;boxes&quot; tools
+     Interface to Strep repeats and "boxes" tools
     </p>
    </dd>
   </dl>
   <h2 id="get_strep_pneumo_repeats">
    get_strep_pneumo_repeats
   </h2>
-  <pre>
-   <code>
-    $return = $obj-&gt;get_strep_pneumo_repeats($genomeTO)
-   </code>
-  </pre>
+  <pre><code>  $return = $obj-&gt;get_strep_pneumo_repeats($genomeTO)</code></pre>
   <dl>
    <dt id="Parameter-and-return-types14">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $genomeTO is a genomeTO
+$genomeTO is a genomeTO
 $return is a genomeTO
 genomeTO is a reference to a hash where the following keys are defined:
 	id has a value which is a genome_id
@@ -888,15 +820,14 @@ feature_id is a string
 location is a reference to a list where each element is a region_of_dna
 region_of_dna is a reference to a list containing 4 items:
 	0: a contig_id
-	1: an int
-	2: a string
-	3: an int
+	1: (begin) an int
+	2: (strand) a string
+	3: (length) an int
 feature_type is a string
 annotation is a reference to a list containing 3 items:
-	0: a string
-	1: a string
-	2: an int
-    </pre>
+	0: (comment) a string
+	1: (annotator) a string
+	2: (annotation_time) an int</pre>
    </dd>
    <dt id="Description14">
     Description
@@ -907,19 +838,15 @@ annotation is a reference to a list containing 3 items:
   <h2 id="version">
    version
   </h2>
-  <pre>
-   <code>
-    $return = $obj-&gt;version()
-   </code>
-  </pre>
+  <pre><code>  $return = $obj-&gt;version()</code></pre>
   <dl>
    <dt id="Parameter-and-return-types15">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $return is a string
-    </pre>
+$return is a string
+</pre>
    </dd>
    <dt id="Description15">
     Description
@@ -942,8 +869,8 @@ annotation is a reference to a list containing 3 items:
    </dt>
    <dd>
     <pre>
-     a string
-    </pre>
+a string
+</pre>
    </dd>
   </dl>
   <h2 id="md5s">
@@ -955,8 +882,8 @@ annotation is a reference to a list containing 3 items:
    </dt>
    <dd>
     <pre>
-     a reference to a list where each element is a md5
-    </pre>
+a reference to a list where each element is a md5
+</pre>
    </dd>
   </dl>
   <h2 id="genome_id">
@@ -968,8 +895,8 @@ annotation is a reference to a list containing 3 items:
    </dt>
    <dd>
     <pre>
-     a string
-    </pre>
+a string
+</pre>
    </dd>
   </dl>
   <h2 id="feature_id">
@@ -981,8 +908,8 @@ annotation is a reference to a list containing 3 items:
    </dt>
    <dd>
     <pre>
-     a string
-    </pre>
+a string
+</pre>
    </dd>
   </dl>
   <h2 id="contig_id">
@@ -994,8 +921,8 @@ annotation is a reference to a list containing 3 items:
    </dt>
    <dd>
     <pre>
-     a string
-    </pre>
+a string
+</pre>
    </dd>
   </dl>
   <h2 id="feature_type">
@@ -1007,8 +934,8 @@ annotation is a reference to a list containing 3 items:
    </dt>
    <dd>
     <pre>
-     a string
-    </pre>
+a string
+</pre>
    </dd>
   </dl>
   <h2 id="region_of_dna">
@@ -1022,29 +949,24 @@ annotation is a reference to a list containing 3 items:
     <p>
      A region of DNA is maintained as a tuple of four components:
     </p>
-    <pre>
-     <code>
-      the contig
+    <pre><code>                the contig
                 the beginning position (from 1)
                 the strand
                 the length
 
-           We often speak of &quot;a region&quot;.  By &quot;location&quot;, we mean a sequence
-           of regions from the same genome (perhaps from distinct contigs).
-     </code>
-    </pre>
+           We often speak of "a region".  By "location", we mean a sequence
+           of regions from the same genome (perhaps from distinct contigs).</code></pre>
    </dd>
    <dt id="Definition6">
     Definition
    </dt>
    <dd>
     <pre>
-     a reference to a list containing 4 items:
+a reference to a list containing 4 items:
 0: a contig_id
-1: an int
-2: a string
-3: an int
-    </pre>
+1: (begin) an int
+2: (strand) a string
+3: (length) an int</pre>
    </dd>
   </dl>
   <h2 id="location">
@@ -1056,7 +978,7 @@ annotation is a reference to a list containing 3 items:
    </dt>
    <dd>
     <p>
-     a &quot;location&quot; refers to a sequence of regions
+     a "location" refers to a sequence of regions
     </p>
    </dd>
    <dt id="Definition7">
@@ -1064,8 +986,8 @@ annotation is a reference to a list containing 3 items:
    </dt>
    <dd>
     <pre>
-     a reference to a list where each element is a region_of_dna
-    </pre>
+a reference to a list where each element is a region_of_dna
+</pre>
    </dd>
   </dl>
   <h2 id="annotation">
@@ -1077,58 +999,79 @@ annotation is a reference to a list containing 3 items:
    </dt>
    <dd>
     <pre>
-     a reference to a list containing 3 items:
-0: a string
-1: a string
-2: an int
-    </pre>
+a reference to a list containing 3 items:
+0: (comment) a string
+1: (annotator) a string
+2: (annotation_time) an int</pre>
    </dd>
   </dl>
   <h2 id="feature">
    feature
   </h2>
   <dl>
+   <dt id="Description18">
+    Description
+   </dt>
+   <dd>
+    <p>
+     represents a feature on the genome location on the contig with a type, and if a protein has translation, any aliases associated current history of annoation in style of SEED
+    </p>
+   </dd>
    <dt id="Definition9">
     Definition
    </dt>
    <dd>
     <pre>
-     a reference to a hash where the following keys are defined:
+a reference to a hash where the following keys are defined:
 id has a value which is a feature_id
 location has a value which is a location
 type has a value which is a feature_type
 function has a value which is a string
 protein_translation has a value which is a string
 aliases has a value which is a reference to a list where each element is a string
-annotations has a value which is a reference to a list where each element is an annotation
-    </pre>
+annotations has a value which is a reference to a list where each element is an annotation</pre>
    </dd>
   </dl>
   <h2 id="contig">
    contig
   </h2>
   <dl>
+   <dt id="Description19">
+    Description
+   </dt>
+   <dd>
+    <p>
+     Data for DNA contig
+    </p>
+   </dd>
    <dt id="Definition10">
     Definition
    </dt>
    <dd>
     <pre>
-     a reference to a hash where the following keys are defined:
+a reference to a hash where the following keys are defined:
 id has a value which is a contig_id
-dna has a value which is a string
-    </pre>
+dna has a value which is a string</pre>
    </dd>
   </dl>
   <h2 id="genomeTO">
    genomeTO
   </h2>
   <dl>
+   <dt id="Description20">
+    Description
+   </dt>
+   <dd>
+    <p>
+     All of the information about particular genome
+    </p>
+   </dd>
    <dt id="Definition11">
     Definition
    </dt>
    <dd>
     <pre>
-     a reference to a hash where the following keys are defined:
+a reference to a hash where the following keys are defined:
 id has a value which is a genome_id
 scientific_name has a value which is a string
 domain has a value which is a string
@@ -1136,8 +1079,7 @@ genetic_code has a value which is an int
 source has a value which is a string
 source_id has a value which is a string
 contigs has a value which is a reference to a list where each element is a contig
-features has a value which is a reference to a list where each element is a feature
-    </pre>
+features has a value which is a reference to a list where each element is a feature</pre>
    </dd>
   </dl>
   <h2 id="subsystem">
@@ -1149,8 +1091,8 @@ features has a value which is a reference to a list where each element is a feat
    </dt>
    <dd>
     <pre>
-     a string
-    </pre>
+a string
+</pre>
    </dd>
   </dl>
   <h2 id="variant">
@@ -1162,8 +1104,8 @@ features has a value which is a reference to a list where each element is a feat
    </dt>
    <dd>
     <pre>
-     a string
-    </pre>
+a string
+</pre>
    </dd>
   </dl>
   <h2 id="variant_of_subsystem">
@@ -1175,10 +1117,9 @@ features has a value which is a reference to a list where each element is a feat
    </dt>
    <dd>
     <pre>
-     a reference to a list containing 2 items:
+a reference to a list containing 2 items:
 0: a subsystem
-1: a variant
-    </pre>
+1: a variant</pre>
    </dd>
   </dl>
   <h2 id="variant_subsystem_pairs">
@@ -1190,8 +1131,8 @@ features has a value which is a reference to a list where each element is a feat
    </dt>
    <dd>
     <pre>
-     a reference to a list where each element is a variant_of_subsystem
-    </pre>
+a reference to a list where each element is a variant_of_subsystem
+</pre>
    </dd>
   </dl>
   <h2 id="fid">
@@ -1203,8 +1144,8 @@ features has a value which is a reference to a list where each element is a feat
    </dt>
    <dd>
     <pre>
-     a string
-    </pre>
+a string
+</pre>
    </dd>
   </dl>
   <h2 id="role">
@@ -1216,8 +1157,8 @@ features has a value which is a reference to a list where each element is a feat
    </dt>
    <dd>
     <pre>
-     a string
-    </pre>
+a string
+</pre>
    </dd>
   </dl>
   <h2 id="function">
@@ -1229,8 +1170,8 @@ features has a value which is a reference to a list where each element is a feat
    </dt>
    <dd>
     <pre>
-     a string
-    </pre>
+a string
+</pre>
    </dd>
   </dl>
   <h2 id="fid_role_pair">
@@ -1242,10 +1183,9 @@ features has a value which is a reference to a list where each element is a feat
    </dt>
    <dd>
     <pre>
-     a reference to a list containing 2 items:
+a reference to a list containing 2 items:
 0: a fid
-1: a role
-    </pre>
+1: a role</pre>
    </dd>
   </dl>
   <h2 id="fid_role_pairs">
@@ -1257,8 +1197,8 @@ features has a value which is a reference to a list where each element is a feat
    </dt>
    <dd>
     <pre>
-     a reference to a list where each element is a fid_role_pair
-    </pre>
+a reference to a list where each element is a fid_role_pair
+</pre>
    </dd>
   </dl>
   <h2 id="fid_function_pair">
@@ -1270,10 +1210,9 @@ features has a value which is a reference to a list where each element is a feat
    </dt>
    <dd>
     <pre>
-     a reference to a list containing 2 items:
+a reference to a list containing 2 items:
 0: a fid
-1: a function
-    </pre>
+1: a function</pre>
    </dd>
   </dl>
   <h2 id="fid_function_pairs">
@@ -1285,24 +1224,31 @@ features has a value which is a reference to a list where each element is a feat
    </dt>
    <dd>
     <pre>
-     a reference to a list where each element is a fid_function_pair
-    </pre>
+a reference to a list where each element is a fid_function_pair
+</pre>
    </dd>
   </dl>
   <h2 id="reconstructionTO">
    reconstructionTO
   </h2>
   <dl>
+   <dt id="Description21">
+    Description
+   </dt>
+   <dd>
+    <p>
+     Metabolic reconstruction represents the set of subsystems that we infer are present in this genome
+    </p>
+   </dd>
    <dt id="Definition23">
     Definition
    </dt>
    <dd>
     <pre>
-     a reference to a hash where the following keys are defined:
+a reference to a hash where the following keys are defined:
 subsystems has a value which is a variant_subsystem_pairs
 bindings has a value which is a fid_role_pairs
-assignments has a value which is a fid_function_pairs
-    </pre>
+assignments has a value which is a fid_function_pairs</pre>
    </dd>
   </dl>
   <h2 id="fid_data_tuple">
@@ -1314,12 +1260,11 @@ assignments has a value which is a fid_function_pairs
    </dt>
    <dd>
     <pre>
-     a reference to a list containing 4 items:
+a reference to a list containing 4 items:
 0: a fid
 1: a md5
 2: a location
-3: a function
-    </pre>
+3: a function</pre>
    </dd>
   </dl>
   <h2 id="fid_data_tuples">
@@ -1331,8 +1276,8 @@ assignments has a value which is a fid_function_pairs
    </dt>
    <dd>
     <pre>
-     a reference to a list where each element is a fid_data_tuple
-    </pre>
+a reference to a list where each element is a fid_data_tuple
+</pre>
    </dd>
   </dl>
  </body>

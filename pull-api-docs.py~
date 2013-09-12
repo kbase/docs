@@ -10,32 +10,31 @@ from HTMLParser import HTMLParser
 DOCS_ROOT = 'http://www.kbase.us/services/docs/'
 
 DEPLOY_DICT = [
-               {'name': 'CDM API',
-                'service': 'cdmi_api', 
-                'target_dir':'kb_seed',
-                'html_name': 'application_api'},  
+               #{'name': 'CDM API',
+               # 'service': 'cdmi_api', 
+               # 'target_dir':'kb_seed',
+               # 'html_name': 'application_api'},  # fixme
 
                {'name': 'CDM Entity-Relationship API',
                 'service': 'cdmi_api',
                 'target_dir':'kb_seed',
                 'html_name': 'er_api',
-                'html_target': 'cdmi_entity_api'},  
+                'html_target': 'cdmi_entity_api'},
 
                {'name': 'ID Server API',
                 'service': 'idserver', 
                 'target_dir':'idserver',
                 'html_name': 'idserver_client_api',
-                'html_target':'idserver_api'},  
+                'html_target':'idserver_api'},
 
                 {'name': 'Workspace Service',
                 'service': 'workspaceService', 
                 'target_dir':'workspace_service'},
 
-                #{'name': 'Assembly Service', #fixme
+                #{'name': 'Assembly Service',
                 #'service': 'assembly', 
-                #'target_dir': 'assembly',
-                #'html_name': 'assembly'}
-                #'html_target': 'assembly-service'},
+                #'target_dir':'assembly',
+                #'html_name': ''},
 
                {'name': 'Plant Expression Service',
                 'service': 'PlantExpressionService', 
@@ -96,20 +95,20 @@ DEPLOY_DICT = [
                 'target_dir':'protein_info_service', 
                 'html_name': 'ProteinInfoService'},
 
-               #{'name': 'Experiment Service', #removed 
-                #'service': 'experiment', 
-                #'target_dir':'experiment', 
-                #'html_name': 'experiment'},
+               {'name': 'Experiment Service',
+                'service': 'experiment', 
+                'target_dir':'experiment', 
+                'html_name': 'experiment'},
 
-                {'name': 'FBA Modeling Service', #look at and fix
-                'service': 'fbaModelServices', 
-                'target_dir':'KBaseFBAModeling', 
-                'html_name': 'fbaModelServices'},
+                #{'name': 'FBA Modeling Service',
+                #'service': 'fbaModelServices', 
+                #'target_dir':'KBaseFBAModeling', 
+                #'html_name': 'fbaModelServices'},
 
-               #{'name': 'Genotype Phenotype Service', #look at and fix
-                #'service': 'Genotype_PhenotypeAPI', 
-                #'target_dir':'genotype_phenotype', 
-                #'html_name': 'Genotype_PhenotypeAPI'},                             
+               {'name': 'Genotype Phenotype Service',
+                'service': 'Genotype_PhenotypeAPI', 
+                'target_dir':'genotype_phenotype', 
+                'html_name': 'Genotype_PhenotypeAPI'},                             
 
                {'name': 'PROM Service',
                 'service': 'prom_service', 

@@ -1,11 +1,11 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version="1.0" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
  <head>
   <title>
   </title>
-  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-  <link rev="made" href="mailto:root@ubuntu.chicago.kbase.us" />
+  <meta content="text/html; charset=utf-8" http-equiv="content-type"/>
+  <link href="mailto:root@ubuntu.chicago.kbase.us" rev="made"/>
  </head>
  <body style="background-color: white">
   <h1 id="NAME">
@@ -26,22 +26,17 @@
   <h2 id="fids_to_moLocusIds">
    fids_to_moLocusIds
   </h2>
-  <pre>
-   <code>
-    $return = $obj-&gt;fids_to_moLocusIds($fids)
-   </code>
-  </pre>
+  <pre><code>  $return = $obj-&gt;fids_to_moLocusIds($fids)</code></pre>
   <dl>
    <dt id="Parameter-and-return-types">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $fids is a reference to a list where each element is a fid
+$fids is a reference to a list where each element is a fid
 $return is a reference to a hash where the key is a fid and the value is a reference to a list where each element is a moLocusId
 fid is a string
-moLocusId is an int
-    </pre>
+moLocusId is an int</pre>
    </dd>
    <dt id="Description">
     Description
@@ -55,22 +50,17 @@ moLocusId is an int
   <h2 id="proteins_to_moLocusIds">
    proteins_to_moLocusIds
   </h2>
-  <pre>
-   <code>
-    $return = $obj-&gt;proteins_to_moLocusIds($proteins)
-   </code>
-  </pre>
+  <pre><code>  $return = $obj-&gt;proteins_to_moLocusIds($proteins)</code></pre>
   <dl>
    <dt id="Parameter-and-return-types1">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $proteins is a reference to a list where each element is a protein
+$proteins is a reference to a list where each element is a protein
 $return is a reference to a hash where the key is a protein and the value is a reference to a list where each element is a moLocusId
 protein is a string
-moLocusId is an int
-    </pre>
+moLocusId is an int</pre>
    </dd>
    <dt id="Description1">
     Description
@@ -84,22 +74,17 @@ moLocusId is an int
   <h2 id="moLocusIds_to_fids">
    moLocusIds_to_fids
   </h2>
-  <pre>
-   <code>
-    $return = $obj-&gt;moLocusIds_to_fids($moLocusIds)
-   </code>
-  </pre>
+  <pre><code>  $return = $obj-&gt;moLocusIds_to_fids($moLocusIds)</code></pre>
   <dl>
    <dt id="Parameter-and-return-types2">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $moLocusIds is a reference to a list where each element is a moLocusId
+$moLocusIds is a reference to a list where each element is a moLocusId
 $return is a reference to a hash where the key is a moLocusId and the value is a reference to a list where each element is a fid
 moLocusId is an int
-fid is a string
-    </pre>
+fid is a string</pre>
    </dd>
    <dt id="Description2">
     Description
@@ -113,22 +98,17 @@ fid is a string
   <h2 id="moLocusIds_to_proteins">
    moLocusIds_to_proteins
   </h2>
-  <pre>
-   <code>
-    $return = $obj-&gt;moLocusIds_to_proteins($moLocusIds)
-   </code>
-  </pre>
+  <pre><code>  $return = $obj-&gt;moLocusIds_to_proteins($moLocusIds)</code></pre>
   <dl>
    <dt id="Parameter-and-return-types3">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $moLocusIds is a reference to a list where each element is a moLocusId
+$moLocusIds is a reference to a list where each element is a moLocusId
 $return is a reference to a hash where the key is a moLocusId and the value is a protein
 moLocusId is an int
-protein is a string
-    </pre>
+protein is a string</pre>
    </dd>
    <dt id="Description3">
     Description
@@ -142,18 +122,14 @@ protein is a string
   <h2 id="map_to_fid">
    map_to_fid
   </h2>
-  <pre>
-   <code>
-    $return_1, $log = $obj-&gt;map_to_fid($query_sequences, $genomeId)
-   </code>
-  </pre>
+  <pre><code>  $return_1, $log = $obj-&gt;map_to_fid($query_sequences, $genomeId)</code></pre>
   <dl>
    <dt id="Parameter-and-return-types4">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $query_sequences is a reference to a list where each element is a query_sequence
+$query_sequences is a reference to a list where each element is a query_sequence
 $genomeId is a genomeId
 $return_1 is a reference to a hash where the key is a protein_id and the value is a result
 $log is a status
@@ -171,8 +147,7 @@ result is a reference to a hash where the following keys are defined:
 	best_match has a value which is a fid
 	status has a value which is a status
 fid is a string
-status is a string
-    </pre>
+status is a string</pre>
    </dd>
    <dt id="Description4">
     Description
@@ -195,18 +170,14 @@ status is a string
   <h2 id="map_to_fid_fast">
    map_to_fid_fast
   </h2>
-  <pre>
-   <code>
-    $return_1, $log = $obj-&gt;map_to_fid_fast($query_md5s, $genomeId)
-   </code>
-  </pre>
+  <pre><code>  $return_1, $log = $obj-&gt;map_to_fid_fast($query_md5s, $genomeId)</code></pre>
   <dl>
    <dt id="Parameter-and-return-types5">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $query_md5s is a reference to a list where each element is a query_md5
+$query_md5s is a reference to a list where each element is a query_md5
 $genomeId is a genomeId
 $return_1 is a reference to a hash where the key is a protein_id and the value is a result
 $log is a status
@@ -224,8 +195,7 @@ result is a reference to a hash where the following keys are defined:
 	best_match has a value which is a fid
 	status has a value which is a status
 fid is a string
-status is a string
-    </pre>
+status is a string</pre>
    </dd>
    <dt id="Description5">
     Description
@@ -239,18 +209,14 @@ status is a string
   <h2 id="moLocusIds_to_fid_in_genome">
    moLocusIds_to_fid_in_genome
   </h2>
-  <pre>
-   <code>
-    $return_1, $log = $obj-&gt;moLocusIds_to_fid_in_genome($moLocusIds, $genomeId)
-   </code>
-  </pre>
+  <pre><code>  $return_1, $log = $obj-&gt;moLocusIds_to_fid_in_genome($moLocusIds, $genomeId)</code></pre>
   <dl>
    <dt id="Parameter-and-return-types6">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $moLocusIds is a reference to a list where each element is a moLocusId
+$moLocusIds is a reference to a list where each element is a moLocusId
 $genomeId is a genomeId
 $return_1 is a reference to a hash where the key is a moLocusId and the value is a result
 $log is a status
@@ -261,33 +227,28 @@ result is a reference to a hash where the following keys are defined:
 	best_match has a value which is a fid
 	status has a value which is a status
 fid is a string
-status is a string
-    </pre>
+status is a string</pre>
    </dd>
    <dt id="Description6">
     Description
    </dt>
    <dd>
     <p>
-     A method designed to map MicrobesOnline locus ids to the features of a specific target genome in kbase. Under the hood, this method simply fetches MicrobesOnline data and calls the &#39;map_to_fid&#39; method defined in this service. Therefore, all the caveats and disclaimers of the &#39;map_to_fid&#39; method apply to this function as well, so be sure to read the documenation for the &#39;map_to_fid&#39; method as well!
+     A method designed to map MicrobesOnline locus ids to the features of a specific target genome in kbase. Under the hood, this method simply fetches MicrobesOnline data and calls the 'map_to_fid' method defined in this service. Therefore, all the caveats and disclaimers of the 'map_to_fid' method apply to this function as well, so be sure to read the documenation for the 'map_to_fid' method as well!
     </p>
    </dd>
   </dl>
   <h2 id="moLocusIds_to_fid_in_genome_fast">
    moLocusIds_to_fid_in_genome_fast
   </h2>
-  <pre>
-   <code>
-    $return_1, $log = $obj-&gt;moLocusIds_to_fid_in_genome_fast($moLocusIds, $genomeId)
-   </code>
-  </pre>
+  <pre><code>  $return_1, $log = $obj-&gt;moLocusIds_to_fid_in_genome_fast($moLocusIds, $genomeId)</code></pre>
   <dl>
    <dt id="Parameter-and-return-types7">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $moLocusIds is a reference to a list where each element is a moLocusId
+$moLocusIds is a reference to a list where each element is a moLocusId
 $genomeId is a genomeId
 $return_1 is a reference to a hash where the key is a moLocusId and the value is a result
 $log is a status
@@ -298,8 +259,7 @@ result is a reference to a hash where the following keys are defined:
 	best_match has a value which is a fid
 	status has a value which is a status
 fid is a string
-status is a string
-    </pre>
+status is a string</pre>
    </dd>
    <dt id="Description7">
     Description
@@ -313,30 +273,25 @@ status is a string
   <h2 id="moTaxonomyId_to_genomes">
    moTaxonomyId_to_genomes
   </h2>
-  <pre>
-   <code>
-    $return = $obj-&gt;moTaxonomyId_to_genomes($moTaxonomyId)
-   </code>
-  </pre>
+  <pre><code>  $return = $obj-&gt;moTaxonomyId_to_genomes($moTaxonomyId)</code></pre>
   <dl>
    <dt id="Parameter-and-return-types8">
     Parameter and return types
    </dt>
    <dd>
     <pre>
-     $moTaxonomyId is a moTaxonomyId
+$moTaxonomyId is a moTaxonomyId
 $return is a reference to a list where each element is a genomeId
 moTaxonomyId is an int
 genomeId is a kbaseId
-kbaseId is a string
-    </pre>
+kbaseId is a string</pre>
    </dd>
    <dt id="Description8">
     Description
    </dt>
    <dd>
     <p>
-     A method to map a MicrobesOnline genome (identified by taxonomy Id) to the set of identical kbase genomes based on an MD5 checksum of the contig sequences. If you already know your MD5 value for your genome (computed in the KBase way), then you should avoid this method and directly query the CDS using the CDMI API, which includes a method &#39;md5s_to_genomes&#39;.
+     A method to map a MicrobesOnline genome (identified by taxonomy Id) to the set of identical kbase genomes based on an MD5 checksum of the contig sequences. If you already know your MD5 value for your genome (computed in the KBase way), then you should avoid this method and directly query the CDS using the CDMI API, which includes a method 'md5s_to_genomes'.
     </p>
    </dd>
   </dl>
@@ -360,8 +315,8 @@ kbaseId is a string
    </dt>
    <dd>
     <pre>
-     a string
-    </pre>
+a string
+</pre>
    </dd>
   </dl>
   <h2 id="kbaseId">
@@ -381,8 +336,8 @@ kbaseId is a string
    </dt>
    <dd>
     <pre>
-     a string
-    </pre>
+a string
+</pre>
    </dd>
   </dl>
   <h2 id="genomeId">
@@ -402,8 +357,8 @@ kbaseId is a string
    </dt>
    <dd>
     <pre>
-     a kbaseId
-    </pre>
+a kbaseId
+</pre>
    </dd>
   </dl>
   <h2 id="fid">
@@ -423,8 +378,8 @@ kbaseId is a string
    </dt>
    <dd>
     <pre>
-     a string
-    </pre>
+a string
+</pre>
    </dd>
   </dl>
   <h2 id="moLocusId">
@@ -444,8 +399,8 @@ kbaseId is a string
    </dt>
    <dd>
     <pre>
-     an int
-    </pre>
+an int
+</pre>
    </dd>
   </dl>
   <h2 id="moScaffoldId">
@@ -465,8 +420,8 @@ kbaseId is a string
    </dt>
    <dd>
     <pre>
-     an int
-    </pre>
+an int
+</pre>
    </dd>
   </dl>
   <h2 id="moTaxonomyId">
@@ -486,8 +441,8 @@ kbaseId is a string
    </dt>
    <dd>
     <pre>
-     an int
-    </pre>
+an int
+</pre>
    </dd>
   </dl>
   <h2 id="protein_sequence">
@@ -507,8 +462,8 @@ kbaseId is a string
    </dt>
    <dd>
     <pre>
-     a string
-    </pre>
+a string
+</pre>
    </dd>
   </dl>
   <h2 id="protein_id">
@@ -528,8 +483,8 @@ kbaseId is a string
    </dt>
    <dd>
     <pre>
-     a string
-    </pre>
+a string
+</pre>
    </dd>
   </dl>
   <h2 id="position">
@@ -549,8 +504,8 @@ kbaseId is a string
    </dt>
    <dd>
     <pre>
-     an int
-    </pre>
+an int
+</pre>
    </dd>
   </dl>
   <h2 id="status">
@@ -570,8 +525,8 @@ kbaseId is a string
    </dt>
    <dd>
     <pre>
-     a string
-    </pre>
+a string
+</pre>
    </dd>
   </dl>
   <h2 id="query_sequence">
@@ -583,29 +538,24 @@ kbaseId is a string
    </dt>
    <dd>
     <p>
-     A structure for specifying the input sequence queries for the map_to_fid method. This structure, for now, assumes you will be making queries with identical genomes, so it requires the start and stop. In the future, if this assumption is relaxed, then start and stop will be optional parameters. We should probably also add an MD5 string which can optionally be provided so that we don&#39;t have to compute it on the fly.
+     A structure for specifying the input sequence queries for the map_to_fid method. This structure, for now, assumes you will be making queries with identical genomes, so it requires the start and stop. In the future, if this assumption is relaxed, then start and stop will be optional parameters. We should probably also add an MD5 string which can optionally be provided so that we don't have to compute it on the fly.
     </p>
-    <pre>
-     <code>
-      protein_id id         - arbitrary ID that must be unique within the set of query sequences
+    <pre><code>        protein_id id         - arbitrary ID that must be unique within the set of query sequences
         protein_sequence seq  - the one letter code AA sequence of the protein
         position start        - the start position of the start codon in the genome contig (may be a larger
                                 number than stop if the gene is on the reverse strand)
-        position stop         - the last position of he stop codon in the genome contig
-     </code>
-    </pre>
+        position stop         - the last position of he stop codon in the genome contig</code></pre>
    </dd>
    <dt id="Definition11">
     Definition
    </dt>
    <dd>
     <pre>
-     a reference to a hash where the following keys are defined:
+a reference to a hash where the following keys are defined:
 id has a value which is a protein_id
 seq has a value which is a protein_sequence
 start has a value which is a position
-stop has a value which is a position
-    </pre>
+stop has a value which is a position</pre>
    </dd>
   </dl>
   <h2 id="query_md5">
@@ -619,27 +569,22 @@ stop has a value which is a position
     <p>
      A structure for specifying the input md5 queries for the map_to_fid_fast method. This structure assumes you will be making queries with identical genomes, so it requires the start and stop.
     </p>
-    <pre>
-     <code>
-      protein_id id         - arbitrary ID that must be unique within the set of query sequences
+    <pre><code>        protein_id id         - arbitrary ID that must be unique within the set of query sequences
         protein md5           - the computed md5 of the protein sequence
         position start        - the start position of the start codon in the genome contig (may be a larger
                                 number than stop if the gene is on the reverse strand)
-        position stop         - the last position of he stop codon in the genome contig
-     </code>
-    </pre>
+        position stop         - the last position of he stop codon in the genome contig</code></pre>
    </dd>
    <dt id="Definition12">
     Definition
    </dt>
    <dd>
     <pre>
-     a reference to a hash where the following keys are defined:
+a reference to a hash where the following keys are defined:
 id has a value which is a protein_id
 md5 has a value which is a protein
 start has a value which is a position
-stop has a value which is a position
-    </pre>
+stop has a value which is a position</pre>
    </dd>
   </dl>
   <h2 id="result">
@@ -653,22 +598,17 @@ stop has a value which is a position
     <p>
      A simple structure which returns the best matching FID to a given query (see query_sequence) and attaches a short status string indicating how the match was made, or which consoles you after a match could not be made.
     </p>
-    <pre>
-     <code>
-      fid best_match - the feature ID of a KBase feature that offers the best mapping to your query
-        status status  - a short note explaining how the match was made
-     </code>
-    </pre>
+    <pre><code>        fid best_match - the feature ID of a KBase feature that offers the best mapping to your query
+        status status  - a short note explaining how the match was made</code></pre>
    </dd>
    <dt id="Definition13">
     Definition
    </dt>
    <dd>
     <pre>
-     a reference to a hash where the following keys are defined:
+a reference to a hash where the following keys are defined:
 best_match has a value which is a fid
-status has a value which is a status
-    </pre>
+status has a value which is a status</pre>
    </dd>
   </dl>
  </body>

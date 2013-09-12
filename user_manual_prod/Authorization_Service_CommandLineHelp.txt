@@ -1,0 +1,54 @@
+Authorization Service 
+
+
+DESCRIPTION
+This release of the authorization_service includes the following features:
+Support for synchronizing role members against Globus Online groups service.
+Globus Nexus libraries extended to support ssh-agent authentication using paramiko.
+Support for generating a new session based on an existing token.
+Support for acquiring login sessions through a javascript UI widget. 
+This is still in flux and under active development. 
+Documentation will be forthcoming. The endpoint is at .../Sessions/*
+The roles service now uses json schema validation to ensure that correct types are passed in are of the correct type.
+
+
+COMMANDS
+kbase-login
+kbase-logout
+
+
+NAME
+kbase-login -- This command prompts the user to supply user name and password to log into KBase. 
+
+VERSION
+1.0
+
+SYNOPSIS
+kbase-login [-?|--help] <--password> [long options]
+            
+
+DESCRIPTION
+INPUTS:      Users can input their password. 
+
+
+OUTPUTS:     There are no outputs for this command. 
+
+PARAMETERS:
+--password           User password.
+-?, --help           Display help message to standard out and exit with error code zero;                                                    
+                     ignore all other command-line arguments.   
+
+NAME
+kbase-logout -- This command logs the user out of KBase. 
+
+VERSION 1.0
+
+SYNOPSIS
+kbase-logout
+
+DESCRIPTION
+INPUTS:     There are no inputs for this commands. 
+OUTPUTS:    There are no outputs for this command.
+PARAMETERS: There are no parameters for this command. 
+
+
