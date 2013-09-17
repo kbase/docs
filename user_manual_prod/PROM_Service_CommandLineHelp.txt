@@ -1,0 +1,151 @@
+PROM Service
+
+DESCRIPTION
+The PROM Service: enables the creation of FBA models with regulatory network constraints inferred from gene expression data.
+
+The PROM Service has a number of useful capabilities:
+Managing filenames and workspace
+Loading data
+Create constraints
+Run FBA model with constraints
+
+COMMANDS
+prom-change-expression-data-namespace
+prom-change-regulatory-network-namespace
+prom-create-constraints
+prom-load-expression-data
+prom-load-regulatory-network
+prom-url
+
+
+NAME
+prom-change-expression-data-namespace -- Will update the gene names in the expression data sets.
+
+VERSION
+1.0
+
+SYNOPSIS
+prom-change-expression-data-namespace [-h] [-e [expression data ID]] [-m [file]] [-w [workspace ID]] [-v]
+
+DESCRIPTION
+INPUTS:     An expression data collection saved to a workspace,
+
+OUTPUTS:     None - only new namespace.
+
+PARAMETERS:
+-h, --help			Display help message to standard out and exit with error code zero; ignore all other command-line arguments. 
+-e [EXP_ID], 			Expression-data [EXP_ID] : Indicate the id of the expression data collection with which to operate on in the workspace.
+-m [FILE], --map [FILE]	 Indicate the name of the file that contains the mapping information. The format of the file should be a two column, tab-delimited ASCII text file without a header line where the original gene names are listed in the left column and the corresponding gene name replacements are listed in the right column.
+-w [WORKSPACE_ID], --workspace [WORKSPACE_ID] : Specify the workspace to use. If left blank, the default workspace that is configured by the workspace service scripts is used.
+-v, --verbose : In addition to the expression data collection ID, which will be on the last line, status messages are displayed.
+
+
+NAME
+prom-change-regulatory-network-namespace --  Will update the gene names in the regulatory network.
+
+VERSION
+1.0
+
+SYNOPSIS
+prom-change-regulatory-network-namespace  [-h] [-r [regulatory-network data ID]] [-m [file]] [-w [workspace ID]] [-v]
+
+DESCRIPTION
+INPUTS:     A regulatory network saved to a workspace
+
+OUTPUTS:     None - only new namespace.
+
+PARAMETERS:
+-h, --help			Display help message to standard out and exit with error code zero; ignore all other command-line arguments. 
+-r [REG_NET_ID], --regulatory-network [REG_NET_ID]   	Indicate the id of the regulatory network with which to operate on in the workspace.
+-m [FILE], --map [FILE]		      Indicate the name of the file that contains the mapping information. The format of the file should be a two column, tab-delimited ASCII text file without a header line where the original gene names are listed in the left column and the corresponding gene name replacements are listed in the right column.
+-w [WORKSPACE_ID], --workspace [WORKSPACE_ID]  	   Specify the workspace to use. If left blank, the default workspace that is configured by the workspace service scripts is used.
+-v, --verbose	   	       In addition to the expression data collection ID, which will be on the last line, status messages are displayed.
+
+
+NAME
+prom-create-constraints -- Creates a set of FBA model constraints from gene expression, genome and regulatory network data.
+
+VERSION
+1.0
+
+SYNOPSIS
+prom-create-constraints [-h] [-g [genome ID]] [-e [expression data ID]] [ -r [regulatory network ID]] [-w [workspace ID]] 
+e.g. prom-create-constraints -g 'kb|g.20848'
+
+DESCRIPTION
+INPUTS:	Genome ID, expression data ID or regulatory network ID or workspace ID
+
+OUTPUTS:	Returns the ID of the new PROM model constraints object 
+
+PARAMETERS:
+-h, --help			Display help message to standard out and exit with error code zero; ignore all other command-line arguments. 
+-g [GENOME_ID], --genome [GENOME_ID] Indicate the genome object ID of a genome in the workspace to link the constraints to; a genome object can be created with the kbfba-loadgenome script.
+-e [EXP_ID], --expression-data [EXP_ID] Indicate the ID of the expression data collection with which to use.
+-r [REG_NET_ID], --regulatory-network [REG_NET_ID] Indicate the ID of the regulatory network with which to use.
+-w [WORKSPACE_ID], --workspace [WORKSPACE_ID] Specify the workspace to use. If left blank, the default workspace that is configured by the workspace service scripts is used.
+-v, --verbose In addition to the expression data collection ID, which will be on the last line, status messages are displayed.
+
+
+NAME
+prom-load-expression-data -- Load expression data to a workspace
+
+VERSION
+1.0
+
+SYNOPSIS
+prom-load-expression-data  [-h] [-g [genome ID]] [-w [workspace ID]] 
+e.g. Load expression data for E.coli genome kb|g.0:
+prom-load-expression-data -g 'kb|g.0'  E9C193DC-6B03-11E2-8DAE-9375BC200E61
+
+DESCRIPTION
+INPUTS:	Genome ID, Workspace ID
+
+OUTPUTS:	Prints out the ID of the expression data collection that is created
+
+PARAMETERS:
+-h, --help			Display help message to standard out and exit with error code zero; ignore all other command-line arguments. 
+-g [GENOME_ID], --genome [GENOME_ID] Indicate the genome ID of the regulatory network to load into the current workspace.
+-w [WORKSPACE_ID], --workspace [WORKSPACE_ID] Specify the workspace to use. If left blank, the default workspace that is configured by the workspace service scripts is used.
+-v, --verbose In addition to the workspace regulatory network ID, which will be on the last line, status messages are displayed.
+
+
+NAME
+prom-load-regulatory-network --load a regulatory network to a workspace.
+
+VERSION
+1.0
+
+SYNOPSIS
+prom-load-regulatory-network [-h] [-g [genome ID]] [-w [workspace ID] [-v]
+e.g. Load a regulatory network for genome kb|g.20848:
+prom-load-regulatory-network -g 'kb|g.20848' AF74A066-6B03-11E2-8DAE-9375BC200E61
+
+DESCRIPTION
+INPUTS:     Genome ID, Workspace ID
+
+OUTPUTS:     Prints out the ID of the regulatory network object that is created
+
+PARAMETERS:
+-h, --help			Display help message to standard out and exit with error code zero; ignore all other command-line arguments. 
+-g [GENOME_ID], --genome [GENOME_ID] Indicate the genome ID of the regulatory network to load into the current workspace.
+-w [WORKSPACE_ID], --workspace [WORKSPACE_ID] Specify the workspace to use. If left blank, the default workspace that is configured by the workspace service scripts is used.
+-v, --verbose In addition to the workspace regulatory network ID, which will be on the last line, status messages are displayed.
+
+
+NAME
+prom-url -- Display or set the URL endpoint for the PROM Service.
+
+VERSION
+1.0
+
+SYNOPSIS
+prom-url [-h] [NEW_URL]
+prom-url  http://kbase.us/services/PROM
+
+DESCRIPTION
+INPUTS:     current URL
+
+OUTPUTS:     None -sets to specified URL.
+
+PARAMETERS:
+-h, --help			Display help message to standard out and exit with error code zero; ignore all other command-line arguments. 
