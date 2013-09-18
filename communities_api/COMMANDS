@@ -1,0 +1,3 @@
+#group-name	mgapi	Metagenomics Scripts
+command-set	scripts/(.*).pl	mg
+command-set	scripts/(.*).py	mg
