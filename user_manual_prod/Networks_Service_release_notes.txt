@@ -1,0 +1,201 @@
+Networks Service 
+
+This service allows KBase users or services to access data for network-related datasets including protein-protein interaction, regulatory, metabolic, and functional association networks in microbes and plants.
+
+Report bugs to kbase-networks@lists.kbase.us
+
+COMMANDS:
+
+   1 net_network_type_to_datasets  
+   2 net_get_all_dataset_sources  
+   3 net_dataset_source_to_datasets  
+   4 net_build_internal_network_limited_by_strength  
+   5 net_taxon_to_datasets  
+   6 net_get_all_datasets  
+   7 net_build_internal_network  
+   8 net_build_first_neighbor_network  
+   9 net_entity_to_datasets  
+  10 net_get_all_network_types  
+  11 net_build_first_neighbor_network_limited_by_strength
+
+USAGE: net_network_type_to_datasets [--url=http://kbase.us/services/networks] < network_type
+ 
+General options
+--url=[http://kbase.us/services/networks/]    the url of the service
+--help                                        print help information
+--version                                     print version information
+  
+Examples: 
+echo 'PROT_PROT_INTERACTION' | net_network_type_to_datasets
+   
+net_network_type_to_datasets --help     print out help
+  
+net_network_type_to_datasets --version  print out version information
+ 
+
+USAGE: net_get_all_dataset_sources [--url=http://kbase.us/services/networks]
+
+General options
+--url=[http://kbase.us/services/networks/]     the url of the service
+--help                                         print help information
+--version                                      print version information
+   
+Examples: 
+net_get_all_dataset_sources
+  
+net_get_all_dataset_sources --help      print out help
+   
+net_get_all_dataset_sources --version   print out version information
+   
+
+
+USAGE:  net_dataset_source_to_datasets [--url=http://kbase.us/services/networks] < datasource_id
+  
+General options
+--url=[http://kbase.us/services/networks/]      the url of the service
+--help                                          print help information
+--version                                       print version information
+  
+Examples: 
+echo 'INTACT' | net_dataset_source_to_datasets
+   
+net_dataset_source_to_datasets --help   print out help
+   
+net_dataset_source_to_datasets --version        print out version information
+  
+ 
+USAGE:  net_build_internal_network_limited_by_strength [--url=http://kbase.us/services/networks] dataset_ids edge_types cut_off < query_entity_ids
+ 
+General options
+--url=[http://kbase.us/services/networks]       the service url
+--help                                          print help information
+--version                                       print version information
+dataset_ids=[xxx,yyy,zzz,...]                   dataset id list(comma separated)
+edge_types=[xxx,yyy,zzz,...]                    interested edge types(comma separated)
+cut_off=xx.yy                                   edge strength cut off threshold
+
+Examples: 
+echo 'kb|g.3899.locus.10 kb|g.3899.locus.11' | net_build_internal_network_limited_by_strength 'kb|netdataset.plant.fn.25,kb|netdataset.plant.cn.6' 'GENE_GENE'
+  
+net_build_internal_network_limited_by_strength --help        print out help
+   
+net_build_internal_network_limited_by_strength --version     print out version information
+
+ 
+
+USAGE: net_taxon_to_datasets [--url=http://kbase.us/services/networks] < taxon_id
+ 
+General options
+--url=[http://kbase.us/services/networks/]       the url of the service
+--help                                           print help information
+--version                                        print version information
+
+Examples: 
+echo 'kb|g.3899' | net_taxon_to_datasets
+ 
+net_taxon_to_datasets --help    print out help
+
+net_taxon_to_datasets --version print out version information
+
+
+USAGE:  net_get_all_datasets [--url=http://kbase.us/services/networks]
+
+General options
+--url=[http://kbase.us/services/networks]         the url of the service
+--help                                            print help information
+--version                                         print version information
+ 
+Examples: 
+net_get_all_datasets
+ 
+net_get_all_datasets --help          print out help
+
+net_get_all_datasets --version  print out version information
+ 
+
+USAGE: net_build_internal_network [--url=http://kbase.us/services/networks] dataset_ids edge_types < query_entity_ids
+
+General options
+--url=[http://kbase.us/services/networks]         the service url
+--help                                            print help information
+--version                                         print version information
+dataset_ids=[xxx,yyy,zzz,...]                     dataset id list(comma separated)
+edge_types=[xxx,yyy,zzz,...]                      interested edge types(comma separated)
+
+Examples: 
+echo 'kb|g.3899.locus.10 kb|g.3899.locus.11' | net_build_internal_network 'kb|netdataset.plant.fn.25,kb|netdataset.plant.cn.6' 'GENE_GENE'
+ 
+net_build_internal_network --help       print out help
+
+net_build_internal_network --version    print out version information
+
+
+USAGE:  net_build_first_neighbor_network [--url=http://kbase.us/services/networks] dataset_ids edge_types < query_entity_ids
+
+General options
+--url=[http://kbase.us/services/networks]          the service url
+--help                                             print help information
+--version                                          print version information
+dataset_ids=[xxx,yyy,zzz,...]                      dataset id list(comma separated)
+edge_types=[xxx,yyy,zzz,...]                       interested edge types(comma separated)
+
+Examples: 
+echo 'kb|g.3899.locus.10 kb|g.3899.locus.11' | net_build_first_neighbor_network 'kb|netdataset.plant.fn.25,kb|netdataset.plant.cn.6' 'GENE_GENE'
+ 
+net_build_first_neighbor_network --help print out help
+ 
+net_build_first_neighbor_network --version      print out version information
+ 
+ 
+
+USAGE:  net_entity_to_datasets [--url=http://kbase.us/services/networks] < entity_id
+
+General options
+--url=[http://kbase.us/services/networks/]          the url of the service
+--help                                              print help information
+--version                                           print version information
+
+Examples: 
+echo 'kb|g.3899.locus.10' | net_entity_to_datasets
+
+net_entity_to_datasets --help                       print out help
+ 
+net_entity_to_datasets --version                    print out version information
+
+
+ 
+USAGE:  net_get_all_network_types [--url=http://kbase.us/services/networks]
+  
+General options
+--url=[http://kbase.us/services/networks/]           the url of the service
+--help                                               print help information
+--version                                            print version information
+
+Examples: 
+net_get_all_network_types
+
+net_get_all_network_types --help                     print out help
+ 
+net_get_all_network_types --version                  print out version information
+ 
+ 
+USAGE:  net_build_first_neighbor_network_limited_by_strength [--url=http://kbase.us/services/networks] dataset_ids edge_types cut_off < query_entity_ids
+ 
+General options
+--url=[http://kbase.us/services/networks]             the service url
+--help                                                print help information
+--version                                             print version information
+dataset_ids=[xxx,yyy,zzz,...]                         dataset id list(comma separated)
+edge_types=[xxx,yyy,zzz,...]                          interested edge types(comma separated)
+cut_off=xx.yy                                         edge strength cut off threshold
+ 
+Examples: 
+echo 'kb|g.3899.locus.10 kb|g.3899.locus.11' | net_build_first_neighbor_network_limited_by_strength 'kb|netdataset.plant.fn.25,kb|netdataset.plant.cn.6' 'GENE_GENE' 0.8
+ 
+net_build_first_neighbor_network_limited_by_strength --help     print out help
+
+net_build_first_neighbor_network_limited_by_strength --version  print out version information
+ 
+   
+
+

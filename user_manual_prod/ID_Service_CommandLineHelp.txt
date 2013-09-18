@@ -1,0 +1,57 @@
+ID Service
+
+DESCRIPTION
+The ID Service provides access to the mappings between KBase identifiers and external identifiers (the original identifiers for data that was migrated from other databases into KBase). 
+The ID Service has a number of useful capabiliites:
+Given a set of KBase identifiers, look up the associated external identifiers. If no external ID is associated with the KBase id, no entry will be present in the return.
+If an external ID has already been registered, the existing registration will be returned instead of a new ID being allocated.
+Allocate a set of identifiers. This allows efficient registration of a large number of identifiers (e.g. several thousand features in a genome).
+Register the mappings for a set of external identifiers. The KBase identifiers used here were previously allocated using allocate_id_range.
+
+
+COMMANDS
+external_ids_to_kbase_ids
+kbase_ids_to_external_ids
+
+NAME
+external_ids_to_kbase_ids -- Given a set of external identifiers, look up the associated KBase identifiers. If no KBase ID is associated with the external id, no entry will be present in the return.
+
+VERSION
+1.0
+
+SYNOPSIS
+external_ids_to_kbase_ids [-c column] DB-name < input > output
+
+DESCRIPTION
+INPUTS:      The standard input should be a tab-separated table (i.e., each line is a tab-separated set of fields). Normally, the last field in each line would contain the identifer. If another column contains the identifier use
+    -c N
+where N is the column (from 1) that contains the identifier.
+
+OUTPUTS:     The standard output is a tab-delimited file. It consists of the input file with extra columns added (database and ids).
+
+PARAMETERS:
+-h, --help     		Display help message to standard out and exit with error code zero; ignore all other command-line arguments. 
+DB-name		 The name of the external database to look up.
+-c Column	 This is used only if the column containing the identifier is not the last column.
+-i 		      	 InputFile [ use InputFile, rather than stdin ] 
+
+
+NAME
+kbase_ids_to_external_ids -- Given a set of KBase identifiers, look up the associated external identifiers.
+
+VERSION
+1.0
+
+SYNOPSIS
+kbase_ids_to_external_ids [-c column] < input > output
+
+DESCRIPTION
+INPUTS:      The standard input should be a tab-separated table (i.e., each line is a tab-separated set of fields). Normally, the last field in each line would contain the identifer. If another column contains the identifier use
+    -c N
+where N is the column (from 1) that contains the identifier.
+
+OUTPUTS:     The standard output is a tab-delimited file. It consists of the input file with extra columns added (database and ids).
+
+PARAMETERS:
+
+
