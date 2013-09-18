@@ -4,6 +4,48 @@ This KBase service provides helper methods for performing data access, manipulat
 and visualization of multiple sequence alignments (MSAs) and phylogenetic trees.
 
 
+
+
+VERSION: 0.91
+------------------------------------------
+NEW FEATURES:
+- none
+
+UPDATED FEATURES / MAJOR BUG FIXES:
+-trivial update to conform to API standards
+-deprecated script tree-url (because users should no longer change the url, and
+ it doesn't work in IRIS)
+-migrated to COMMANDS.json format for deploy
+-allow deploying commands on make to dev_container/bin
+
+
+
+VERSION: 0.9 (Released 8/5/2013)
+------------------------------------------
+NEW FEATURES:
+- none
+
+UPDATED FEATURES / MAJOR BUG FIXES:
+-general backend code cleanup, improvement
+-trivial API changes to conform to new API standards (note, may break old Java clients)
+-removed dependency on kb_seed
+-improved test coverage
+
+
+VERSION: 0.04 (Released 4/4/2013)
+------------------------------------------
+NEW FEATURES:
+-abundance profile workflow operates on tables of data (grouping by sample) rather than
+requiring iteration over each sample.
+-get_tree method supports options to replace node names with a feature id or genome id
+even when there is no canonical feature per leaf
+-added api method to merge leaves that have zero distance; this method is exposed through
+the tree-remove-nodes script.
+
+UPDATED FEATURES / MAJOR BUG FIXES:
+-fixed scripts so that end-to-end abundance profiling workflow can operate in IRIS.
+
+
 VERSION: 0.03 (Released 2/4/2013)
 ------------------------------------------
 NEW FEATURES:
