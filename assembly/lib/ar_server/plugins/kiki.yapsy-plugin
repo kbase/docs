@@ -1,0 +1,17 @@
+[Core]
+Name = kiki
+Module = kiki
+
+[Settings]
+short_name = ki
+executable = ../../bin/ki
+filetypes = fasta,fa,fastq,fq
+dashes = 1
+k = 29
+contig_threshold = 1000
+
+[Documentation]
+Author = Chris Bun
+Version = 0.1
+Description = Kiki read assembler
+
