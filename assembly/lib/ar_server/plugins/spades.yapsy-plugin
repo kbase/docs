@@ -1,0 +1,16 @@
+[Core]
+Name = spades
+Module = spades
+
+[Settings]
+short_name = Sp
+executable = ../../bin/spades/bin/spades.py
+filetypes = fasta,fa,fastq,fq
+only_assembler = True
+read_length = short
+
+[Documentation]
+Author = Chris Bun
+Version = 0.1
+Description = SPAdes assembler
+

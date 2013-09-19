@@ -1,0 +1,38 @@
+{
+    "iris": {
+        "group-names":  [
+                {"group-name": "tree", "description": "Trees scripts"}
+            ]
+    },
+    "cli": {
+        "commands": [
+                {"file-spec": "scripts/tree-aln-to-html.pl",                      "lang":"perl",   "iris-group-name": "tree"},
+                {"file-spec": "scripts/tree-compute-abundance-profile.pl",        "lang":"perl",   "iris-group-name": "tree"},
+                {"file-spec": "scripts/tree-create-group-file.pl",                "lang":"perl",   "iris-group-name": "tree"},
+                {"file-spec": "scripts/tree-create-url-map.pl",                   "lang":"perl",   "iris-group-name": "tree"},
+                {"file-spec": "scripts/tree-filter-abundance-profile-column.pl",  "lang":"perl",   "iris-group-name": "tree"},
+                {"file-spec": "scripts/tree-find-alignment-ids.pl",               "lang":"perl",   "iris-group-name": "tree"},
+                {"file-spec": "scripts/tree-find-tree-ids.pl",                    "lang":"perl",   "iris-group-name": "tree"},
+                {"file-spec": "scripts/tree-get-alignment.pl",                    "lang":"perl",   "iris-group-name": "tree"},
+                {"file-spec": "scripts/tree-get-leaf-id-mapping.pl",              "lang":"perl",   "iris-group-name": "tree"},
+                {"file-spec": "scripts/tree-get-leaf-nodes.pl",                   "lang":"perl",   "iris-group-name": "tree"},
+                {"file-spec": "scripts/tree-get-tree.pl",                         "lang":"perl",   "iris-group-name": "tree"},
+                {"file-spec": "scripts/tree-html-add-boxes.pl",                   "lang":"perl",   "iris-group-name": "tree"},
+                {"file-spec": "scripts/tree-html-relabel-leaves.pl",              "lang":"perl",   "iris-group-name": "tree"},
+                {"file-spec": "scripts/tree-normalize-abundance-profile.pl",      "lang":"perl",   "iris-group-name": "tree"},
+                {"file-spec": "scripts/tree-relabel-node-names.pl",               "lang":"perl",   "iris-group-name": "tree"},
+                {"file-spec": "scripts/tree-remove-nodes.pl",                     "lang":"perl",   "iris-group-name": "tree"},
+                {"file-spec": "scripts/tree-to-html.pl",                          "lang":"perl",   "iris-group-name": "tree"}
+            ],
+        "deprecated-commands": [
+            {
+                    "deprecated-name": "tree-url",
+                    "file-name": "scripts/tree-url.pl",
+                    "lang":"perl",
+                    "deploy-to-iris":false,
+                    "new-command-name": "NONE",
+                    "warning-mssg":"You should not have to change urls for the tree scripts."
+            }
+        ]
+    }
+}
