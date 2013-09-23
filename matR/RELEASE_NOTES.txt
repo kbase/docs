@@ -1,0 +1,19 @@
+OVERVIEW
+-----------------------------------------
+
+matR is an analysis client for metagnomic data  built as an extension package to the popular R programming language for statistics.  This package is in development. Easy acccess to lightly structured metadata, authentication for access to private data, and customized versions of relevant statistical and visualization tools are provided. 
+
+
+VERSION: 1.0.0 (Released AUG 2013)
+------------------------------------------
+NEW FEATURES: 
+- none
+
+VERSION: 1.0.0 (Released JAN 2013)
+------------------------------------------
+NEW FEATURES: 
+
+- help and documentation
+- quick reference guide
+- demos
+
