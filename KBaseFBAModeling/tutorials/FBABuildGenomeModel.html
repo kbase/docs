@@ -49,7 +49,7 @@
 			You must decide which genome you want to use to build a model. You can either select a genome that is already in our Central Data Store (CDS) or you can use a genome that you have annotated ourselves. In this tutorial, I will use the genome of <i>Pseudomonas stutzeri</i> A1501 from the CDS. If you want to use a genome not in the CDS, or alter the annotation of a KBase genome, please refer to the Genome Annotation Tutorial which will guide you through the process of annotating a genome from an assembly fasta file.
 		</P>
 		<P>
-			To import a genome fromt the CDS into our workspace, you use the command <i><code title = "iris-tutorial">kbfba-loadgenome</code></i>. To use this command, you must give it a valid KBase genome id. The easiest way to find the KBase genome id is to use the <A HREF="http://140.221.84.217/genome_info/genome.html">Genome Browser</A>. Since I know what genome I am looking for, I will type the name into the search box. As I type, the displayed set of genomes will change. I can click on the scientific name of the organism and bring up more information about the genome and make sure the annotation is up to date.
+			To import a genome fromt the CDS into our workspace, you use the command <i><code title = "iris-tutorial">kbfba-loadfbagenome</code></i>. To use this command, you must give it a valid KBase genome id. The easiest way to find the KBase genome id is to use the <A HREF="http://140.221.84.217/genome_info/genome.html">Genome Browser</A>. Since I know what genome I am looking for, I will type the name into the search box. As I type, the displayed set of genomes will change. I can click on the scientific name of the organism and bring up more information about the genome and make sure the annotation is up to date.
 			<img src="/docs/KBaseFBAModeling/tutorials/img/GenomeBrowserPseudomonas.png" style="width: 100%;">
 		</P>
 		<P>
@@ -64,11 +64,11 @@
 			Draft Model
 		</H3>
 		<P>
-			Now that you have the genome object in our workspace, you can build a draft model using our genome object. The draft model is based only on the existing gene annotations in our genome model. It is relatively simple using the <i><code title = "iris-tutorial">kbfba-buildmodel</code></i> command with our genome as the argument:
+			Now that you have the genome object in our workspace, you can build a draft model using our genome object. The draft model is based only on the existing gene annotations in our genome model. It is relatively simple using the <i><code title = "iris-tutorial">kbfba-buildfbamodel</code></i> command with our genome as the argument:
 			<img src="/docs/KBaseFBAModeling/tutorials/img/IRISbuildfbamodelrunning.png" style="width: 100%;">
 		</P>
 		<P>
-			Here, you may notice that the <i><code title = "iris-tutorial">kbfba-buildmodel</code></i> command has not completed. Although the IRIS command prompt has returned, and you can execute more commands. Our <i><code title = "iris-tutorial">kbfba-buildmodel</code></i> command is still running and can be seen on the left side of the IRIS screen, under the "Running processes" header. When the command completes, it will be removed from under the "Running processes" header and a "Command complete" message will be printed to the IRIS screen.
+			Here, you may notice that the <i><code title = "iris-tutorial">kbfba-buildfbamodel</code></i> command has not completed. Although the IRIS command prompt has returned, and you can execute more commands. Our <i><code title = "iris-tutorial">kbfba-buildfbamodel</code></i> command is still running and can be seen on the left side of the IRIS screen, under the "Running processes" header. When the command completes, it will be removed from under the "Running processes" header and a "Command complete" message will be printed to the IRIS screen.
 		</P>
 </div>
 <div>
