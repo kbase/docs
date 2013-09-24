@@ -53,7 +53,7 @@
 			<img src="/docs/KBaseFBAModeling/tutorials/img/GenomeBrowserPseudomonas.png" style="width: 100%;">
 		</P>
 		<P>
-			You will use the "kb|g.1147" KBase genome id. Now you can return to IRIS and load the genome into our workspace by using the <i><code title = "iris-tutorial">kbfba-loadfbagenome</code></i> command with "kb|g.1147" as it's argument. Since our workspace is still set to "pseudomonas," our genome object will be created here. 
+			You will use the "kb|g.1147" KBase genome id. Now you can return to IRIS and load the genome into our workspace by using the <i><code title = "iris-tutorial">kbfba-loadgenome</code></i> command with "kb|g.1147" as it's argument. Since our workspace is still set to "pseudomonas," our genome object will be created here. 
 			<img src="/docs/KBaseFBAModeling/tutorials/img/IRISLoadFBAGenome.png" style="width: 100%;">
 			You can use the <i><code title = "iris-tutorial">kbws-listobj</code></i> command to verify that the "kb|g.1147" genome object has been created in your workspace.
 </div>
@@ -64,11 +64,11 @@
 			Draft Model
 		</H3>
 		<P>
-			Now that you have the genome object in our workspace, you can build a draft model using our genome object. The draft model is based only on the existing gene annotations in our genome model. It is relatively simple using the <i><code title = "iris-tutorial">kbfba-buildmodel</code></i> command with our genome as the argument:
+			Now that you have the genome object in our workspace, you can build a draft model using our genome object. The draft model is based only on the existing gene annotations in our genome model. It is relatively simple using the <i><code title = "iris-tutorial">kbfba-buildfbamodel</code></i> command with our genome as the argument:
 			<img src="/docs/KBaseFBAModeling/tutorials/img/IRISbuildfbamodelrunning.png" style="width: 100%;">
 		</P>
 		<P>
-			Here, you may notice that the <i><code title = "iris-tutorial">kbfba-buildmodel</code></i> command has not completed. Although the IRIS command prompt has returned, and you can execute more commands. Our <i><code title = "iris-tutorial">kbfba-buildmodel</code></i> command is still running and can be seen on the left side of the IRIS screen, under the "Running processes" header. When the command completes, it will be removed from under the "Running processes" header and a "Command complete" message will be printed to the IRIS screen.
+			Here, you may notice that the <i><code title = "iris-tutorial">kbfba-buildfbamodel</code></i> command has not completed. Although the IRIS command prompt has returned, and you can execute more commands. Our <i><code title = "iris-tutorial">kbfba-buildfbamodel</code></i> command is still running and can be seen on the left side of the IRIS screen, under the "Running processes" header. When the command completes, it will be removed from under the "Running processes" header and a "Command complete" message will be printed to the IRIS screen.
 		</P>
 </div>
 <div>
