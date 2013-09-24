@@ -1,0 +1,34 @@
+
+NAME
+      tree-aln-to-html -- render a sequence alignment as in a static HTML file
+
+SYNOPSIS
+      tree-aln-to-html [OPTIONS] [FASTA_ALIGNMENT]
+
+DESCRIPTION
+     Given an alignment in FASTA, render the alignment as a static HTML file with
+     the options defined below.  The alignment must be passed in through standard-in,
+     and the HTML output is returned through standard out.
+      
+	-c          #  specify color scheme [conservation|conservation2|residue|none]
+	-d          #  Omit pop-up sequence definitions
+	-j          #  Omit JavaScript (only valid with -t)
+	-l          #  Omit legend
+	-n          #  Treat residues as nucleotides 
+	-p          #  Treat residues as amino acids 
+	-s seqfile  #  Add unaligned residues to the ends of the alignment
+	-t          #  Write html table (Default is write a self-contained page)
+
+EXAMPLES
+      Render a tree with species name labels and links to KBase labs feature pages:
+      > tree-get-tree 'kb|tree.1000000' -f > my.tree
+      > tree-get-leaf-nodes -i my.tree > feature.list
+      > cat feature.data | cut -f 1,13 > species.name.map
+      > cat features.list | tree-create-url-map -u 'http://140.221.92.12/feature_info/feature.html?id=' > feature.links
+      > cat my.tree | tree-to-html -a species.name.map -l feature.links > out.html
+
+AUTHORS
+      Fangfang Xia, ANL (fangfang.xia@gmail.com)
+      Michael Sneddon (mwsneddon@lbl.gov)
+
+

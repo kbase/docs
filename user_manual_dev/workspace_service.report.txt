@@ -1,0 +1,120 @@
+----------TEST workspace_service kbws-checkjob with -h option	okay
+
+----------TEST workspace_service kbws-checkjob with --help option	okay
+
+----------TEST workspace_service kbws-copy with -h option	okay
+
+----------TEST workspace_service kbws-copy with --help option	okay
+
+----------TEST workspace_service kbws-login with -h option	okay
+
+----------TEST workspace_service kbws-login with --help option	okay
+
+----------TEST workspace_service kbws-revert with -h option	okay
+
+----------TEST workspace_service kbws-revert with --help option	okay
+
+----------TEST workspace_service kbws-deletews with -h option	okay
+
+----------TEST workspace_service kbws-deletews with --help option	okay
+
+----------TEST workspace_service kbws-resetjob with -h option	okay
+
+----------TEST workspace_service kbws-resetjob with --help option	okay
+
+----------TEST workspace_service kbws-move with -h option	okay
+
+----------TEST workspace_service kbws-move with --help option	okay
+
+----------TEST workspace_service kbws-list with -h option	okay
+
+----------TEST workspace_service kbws-list with --help option	okay
+
+----------TEST workspace_service kbws-perm with -h option	okay
+
+----------TEST workspace_service kbws-perm with --help option	okay
+
+----------TEST workspace_service kbws-delete with -h option	okay
+
+----------TEST workspace_service kbws-delete with --help option	okay
+
+----------TEST workspace_service kbws-jobs with -h option	okay
+
+----------TEST workspace_service kbws-jobs with --help option	okay
+
+----------TEST workspace_service kbws-meta with -h option	okay
+
+----------TEST workspace_service kbws-meta with --help option	okay
+
+----------TEST workspace_service kbws-clone with -h option	okay
+
+----------TEST workspace_service kbws-clone with --help option	okay
+
+----------TEST workspace_service kbws-workspace with -h option	okay
+
+----------TEST workspace_service kbws-workspace with --help option	okay
+
+----------TEST workspace_service kbws-removetype with -h option	okay
+
+----------TEST workspace_service kbws-removetype with --help option	okay
+
+----------TEST workspace_service kbws-get with -h option	okay
+
+----------TEST workspace_service kbws-get with --help option	okay
+
+----------TEST workspace_service kbws-whoami with -h option	okay
+
+----------TEST workspace_service kbws-whoami with --help option	okay
+
+----------TEST workspace_service kbws-setuserperm with -h option	okay
+
+----------TEST workspace_service kbws-setuserperm with --help option	okay
+
+----------TEST workspace_service kbws-exists with -h option	okay
+
+----------TEST workspace_service kbws-exists with --help option	okay
+
+----------TEST workspace_service kbws-getmeta with -h option	okay
+
+----------TEST workspace_service kbws-getmeta with --help option	okay
+
+----------TEST workspace_service kbws-load with -h option	okay
+
+----------TEST workspace_service kbws-load with --help option	okay
+
+----------TEST workspace_service kbws-url with -h option	okay
+
+----------TEST workspace_service kbws-url with --help option	okay
+
+----------TEST workspace_service kbws-createws with -h option	okay
+
+----------TEST workspace_service kbws-createws with --help option	okay
+
+----------TEST workspace_service kbws-setglobalperm with -h option	okay
+
+----------TEST workspace_service kbws-setglobalperm with --help option	okay
+
+----------TEST workspace_service kbws-listobj with -h option	okay
+
+----------TEST workspace_service kbws-listobj with --help option	okay
+
+----------TEST workspace_service kbws-history with -h option	okay
+
+----------TEST workspace_service kbws-history with --help option	okay
+
+----------TEST workspace_service kbws-logout with -h option	okay
+
+----------TEST workspace_service kbws-logout with --help option	okay
+
+----------TEST workspace_service kbws-addtype with -h option	okay
+
+----------TEST workspace_service kbws-addtype with --help option	okay
+
+----------TEST workspace_service kbws-types with -h option	okay
+
+----------TEST workspace_service kbws-types with --help option	okay
+
+
+
+Error Summary:
+

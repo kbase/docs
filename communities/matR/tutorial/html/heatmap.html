@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><title>R: Heatmap of Collection</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="R.css">
+</head><body>
+
+<table width="100%" summary="page for heatmap {matR}"><tr><td>heatmap {matR}</td><td align="right">R Documentation</td></tr></table>
+
+<h2>Heatmap of Collection</h2>
+
+<h3>Description</h3>
+
+<p>Creates heatmap of the specified view of a collection.  This function wraps and customizes <code>heatmap.2()</code> from package <code>gplots</code>.</p>
+
+
+<h3>Usage</h3>
+
+<pre>heatmap(x, ...)</pre>
+
+
+<h3>Arguments</h3>
+
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>collection</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>further arguments as indicated below</p>
+</td></tr>
+</table>
+
+
+<h3>Author(s)</h3>
+
+<p>Kevin P. Keegan, Daniel T. Braithwaite</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="heatmap-methods.html">heatmap-methods</a></code></p>
+
+
+<h3>Examples</h3>
+
+<pre>
+# simple use
+heatmap (Waters)
+
+# map a different view
+Waters$lev2 &lt;- c (entry = "normed", level = "level2")
+heatmap (Waters, view = "lev2")
+
+# map only selected rows, including a few graphical parameters (see ?gplots::heatmap.2)
+groups (Waters) &lt;- c (rep (1, 15), rep (2, 9))
+results &lt;- sigtest (Waters, view = "lev2", test = "Kruskal-Wallis")
+heatmap (Waters, view = "lev2", rows = (results$p.value &lt; 0.05), main = "Comparison of Water Samples", labCol = 1:24)
+</pre>
+
+<hr><div align="center">[Package <em>matR</em> version 0.9.9 <a href="00Index.html">Index</a>]</div>
+</body></html>

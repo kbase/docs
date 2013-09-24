@@ -1,0 +1,414 @@
+----------TEST workspace_service kbws-checkjob with -h option
+	okay
+
+kbws-checkjob <Job ID> [-?eh] [long options...]
+	-e --showerror   Use flag to show any errors in execution
+	-? -h --help     Print this usage information
+----------TEST workspace_service kbws-checkjob with --help option
+	okay
+
+kbws-checkjob <Job ID> [-?eh] [long options...]
+	-e --showerror   Use flag to show any errors in execution
+	-? -h --help     Print this usage information
+----------TEST workspace_service kbws-copy with -h option
+	okay
+
+kbws-copy <Object type> <Original object ID> <New object ID> [-?ehins] [long options...]
+	-n --newworkspace     ID for new workspace
+	-i --instance         Instance ID
+	-s --workspace        ID for source workspace
+	-e --showerror        Set as 1 to show any errors in execution
+	-? -h --help          Print this usage information
+----------TEST workspace_service kbws-copy with --help option
+	okay
+
+kbws-copy <Object type> <Original object ID> <New object ID> [-?ehins] [long options...]
+	-n --newworkspace     ID for new workspace
+	-i --instance         Instance ID
+	-s --workspace        ID for source workspace
+	-e --showerror        Set as 1 to show any errors in execution
+	-? -h --help          Print this usage information
+----------TEST workspace_service kbws-login with -h option
+	okay
+
+kbws-login <Username> [-?hp] [long options...]
+	-p --password     User password
+	-? -h --help      Print this usage information
+----------TEST workspace_service kbws-login with --help option
+	okay
+
+kbws-login <Username> [-?hp] [long options...]
+	-p --password     User password
+	-? -h --help      Print this usage information
+----------TEST workspace_service kbws-revert with -h option
+	okay
+
+kbws-revert <Object type> <Object ID> [-?ehiw] [long options...]
+	-w --workspace     ID for workspace
+	-i --instance      Instance ID
+	-e --showerror     Set as 1 to show any errors in execution
+	-? -h --help       Print this usage information
+----------TEST workspace_service kbws-revert with --help option
+	okay
+
+kbws-revert <Object type> <Object ID> [-?ehiw] [long options...]
+	-w --workspace     ID for workspace
+	-i --instance      Instance ID
+	-e --showerror     Set as 1 to show any errors in execution
+	-? -h --help       Print this usage information
+----------TEST workspace_service kbws-deletews with -h option
+	okay
+
+kbws-deletews <Workspace ID> [-?eh] [long options...]
+	-e --showerror   Set as 1 to show any errors in execution
+	-? -h --help     Print this usage information
+----------TEST workspace_service kbws-deletews with --help option
+	okay
+
+kbws-deletews <Workspace ID> [-?eh] [long options...]
+	-e --showerror   Set as 1 to show any errors in execution
+	-? -h --help     Print this usage information
+----------TEST workspace_service kbws-resetjob with -h option
+	okay
+
+kbws-resetjob <Job ID> [-?dehs] [long options...]
+	-s --status      New status to assign to job
+	-d --delete      Delete job
+	-e --showerror   Set as 1 to show any errors in execution
+	-? -h --help     Print this usage information
+----------TEST workspace_service kbws-resetjob with --help option
+	okay
+
+kbws-resetjob <Job ID> [-?dehs] [long options...]
+	-s --status      New status to assign to job
+	-d --delete      Delete job
+	-e --showerror   Set as 1 to show any errors in execution
+	-? -h --help     Print this usage information
+----------TEST workspace_service kbws-move with -h option
+	okay
+
+kbws-move <Object type> <Object ID> <New ID> [-?ehinw] [long options...]
+	-n --destws        ID for destination workspace
+	-i --instance      Instance ID
+	-w --workspace     ID for source workspace
+	-e --showerror     Set as 1 to show any errors in execution
+	-? -h --help       Print this usage information
+----------TEST workspace_service kbws-move with --help option
+	okay
+
+kbws-move <Object type> <Object ID> <New ID> [-?ehinw] [long options...]
+	-n --destws        ID for destination workspace
+	-i --instance      Instance ID
+	-w --workspace     ID for source workspace
+	-e --showerror     Set as 1 to show any errors in execution
+	-? -h --help       Print this usage information
+----------TEST workspace_service kbws-list with -h option
+	okay
+
+kbws-list [-?eh] [long options...]
+	-e --showerror   Show any errors in execution
+	-? -h --help     Print this usage information
+----------TEST workspace_service kbws-list with --help option
+	okay
+
+kbws-list [-?eh] [long options...]
+	-e --showerror   Show any errors in execution
+	-? -h --help     Print this usage information
+----------TEST workspace_service kbws-perm with -h option
+	okay
+
+kbws-perm [-?ehw] [long options...]
+	-w --workspace     ID for workspace
+	-e --showerror     Set as 1 to show any errors in execution
+	-? -h --help       Print this usage information
+----------TEST workspace_service kbws-perm with --help option
+	okay
+
+kbws-perm [-?ehw] [long options...]
+	-w --workspace     ID for workspace
+	-e --showerror     Set as 1 to show any errors in execution
+	-? -h --help       Print this usage information
+----------TEST workspace_service kbws-delete with -h option
+	okay
+
+kbws-delete <Object type> <Object ID> [-?ehpw] [long options...]
+	-w --workspace     ID for workspace
+	-p --permanent     Permanently delete object
+	-e --showerror     Set as 1 to show any errors in execution
+	-? -h --help       Print this usage information
+----------TEST workspace_service kbws-delete with --help option
+	okay
+
+kbws-delete <Object type> <Object ID> [-?ehpw] [long options...]
+	-w --workspace     ID for workspace
+	-p --permanent     Permanently delete object
+	-e --showerror     Set as 1 to show any errors in execution
+	-? -h --help       Print this usage information
+----------TEST workspace_service kbws-jobs with -h option
+	okay
+
+kbws-jobs [-?ehqs] [long options...]
+	-s --status      Job status (queued,running,done)
+	-q --showqsub    Use flag to show qsub ID for jobs
+	-e --showerror   Use flag to show any errors in execution
+	-? -h --help     Print this usage information
+----------TEST workspace_service kbws-jobs with --help option
+	okay
+
+kbws-jobs [-?ehqs] [long options...]
+	-s --status      Job status (queued,running,done)
+	-q --showqsub    Use flag to show qsub ID for jobs
+	-e --showerror   Use flag to show any errors in execution
+	-? -h --help     Print this usage information
+----------TEST workspace_service kbws-meta with -h option
+	okay
+
+kbws-meta [-?ehw] [long options...]
+	-w --workspace     ID for workspace
+	-e --showerror     Set as 1 to show any errors in execution
+	-? -h --help       Print this usage information
+----------TEST workspace_service kbws-meta with --help option
+	okay
+
+kbws-meta [-?ehw] [long options...]
+	-w --workspace     ID for workspace
+	-e --showerror     Set as 1 to show any errors in execution
+	-? -h --help       Print this usage information
+----------TEST workspace_service kbws-clone with -h option
+	okay
+
+kbws-clone <Destination workspace ID> <Destination workspace permission> [-?ehw] [long options...]
+	-w --workspace     ID for current workspace
+	-e --showerror     Show any errors in execution
+	-? -h --help       Print this usage information
+----------TEST workspace_service kbws-clone with --help option
+	okay
+
+kbws-clone <Destination workspace ID> <Destination workspace permission> [-?ehw] [long options...]
+	-w --workspace     ID for current workspace
+	-e --showerror     Show any errors in execution
+	-? -h --help       Print this usage information
+----------TEST workspace_service kbws-workspace with -h option
+	okay
+
+kbws-workspace <New workspace> [-?h] [long options...]
+	-? -h --help  Print this usage information
+----------TEST workspace_service kbws-workspace with --help option
+	okay
+
+kbws-workspace <New workspace> [-?h] [long options...]
+	-? -h --help  Print this usage information
+----------TEST workspace_service kbws-removetype with -h option
+	okay
+
+kbws-removetype <Type to remove> [-?eh] [long options...]
+	-e --showerror   Set as 1 to show any errors in execution
+	-? -h --help     Print this usage information
+----------TEST workspace_service kbws-removetype with --help option
+	okay
+
+kbws-removetype <Type to remove> [-?eh] [long options...]
+	-e --showerror   Set as 1 to show any errors in execution
+	-? -h --help     Print this usage information
+----------TEST workspace_service kbws-get with -h option
+	okay
+
+kbws-get <Object type> <Object ID> [-?ehipw] [long options...]
+	-w --workspace     ID for workspace
+	-i --instance      Instance ID
+	-p --pretty        Pretty print JSON object
+	-e --showerror     Set as 1 to show any errors in execution
+	-? -h --help       Print this usage information
+----------TEST workspace_service kbws-get with --help option
+	okay
+
+kbws-get <Object type> <Object ID> [-?ehipw] [long options...]
+	-w --workspace     ID for workspace
+	-i --instance      Instance ID
+	-p --pretty        Pretty print JSON object
+	-e --showerror     Set as 1 to show any errors in execution
+	-? -h --help       Print this usage information
+----------TEST workspace_service kbws-whoami with -h option
+	okay
+
+Logged in as:
+public
+----------TEST workspace_service kbws-whoami with --help option
+	okay
+
+Logged in as:
+public
+----------TEST workspace_service kbws-setuserperm with -h option
+	okay
+
+kbws-setuserperm <Users (; delimited)> <New permission> [-?ehw] [long options...]
+	-w --workspace     ID for workspace
+	-e --showerror     Set as 1 to show any errors in execution
+	-? -h --help       Print this usage information
+----------TEST workspace_service kbws-setuserperm with --help option
+	okay
+
+kbws-setuserperm <Users (; delimited)> <New permission> [-?ehw] [long options...]
+	-w --workspace     ID for workspace
+	-e --showerror     Set as 1 to show any errors in execution
+	-? -h --help       Print this usage information
+----------TEST workspace_service kbws-exists with -h option
+	okay
+
+kbws-exists <Object type> <Object ID> [-?ehiw] [long options...]
+	-w --workspace     ID for workspace
+	-i --instance      Instance ID
+	-e --showerror     Set as 1 to show any errors in execution
+	-? -h --help       Print this usage information
+----------TEST workspace_service kbws-exists with --help option
+	okay
+
+kbws-exists <Object type> <Object ID> [-?ehiw] [long options...]
+	-w --workspace     ID for workspace
+	-i --instance      Instance ID
+	-e --showerror     Set as 1 to show any errors in execution
+	-? -h --help       Print this usage information
+----------TEST workspace_service kbws-getmeta with -h option
+	okay
+
+kbws-getmeta <Object type> <Object ID> [-?ehiw] [long options...]
+	-w --workspace     ID for workspace
+	-i --instance      Instance ID
+	-e --showerror     Set as 1 to show any errors in execution
+	-? -h --help       Print this usage information
+----------TEST workspace_service kbws-getmeta with --help option
+	okay
+
+kbws-getmeta <Object type> <Object ID> [-?ehiw] [long options...]
+	-w --workspace     ID for workspace
+	-i --instance      Instance ID
+	-e --showerror     Set as 1 to show any errors in execution
+	-? -h --help       Print this usage information
+----------TEST workspace_service kbws-load with -h option
+	okay
+
+kbws-load <Object type> <Object ID> <Filename, data, or URL> [-?cehmsw] [long options...]
+	-w --workspace     ID for workspace
+	-m --metadata      Filename with metadata to associate with object
+	-s --stringdata    Data is a simple string
+	-c --compressed    Uploaded data will be compressed
+	-e --showerror     Set as 1 to show any errors in execution
+	-? -h --help       Print this usage information
+----------TEST workspace_service kbws-load with --help option
+	okay
+
+kbws-load <Object type> <Object ID> <Filename, data, or URL> [-?cehmsw] [long options...]
+	-w --workspace     ID for workspace
+	-m --metadata      Filename with metadata to associate with object
+	-s --stringdata    Data is a simple string
+	-c --compressed    Uploaded data will be compressed
+	-e --showerror     Set as 1 to show any errors in execution
+	-? -h --help       Print this usage information
+----------TEST workspace_service kbws-url with -h option
+	okay
+
+kbws-url <New server URL> [-?h] [long options...]
+	-? -h --help  Print this usage information
+----------TEST workspace_service kbws-url with --help option
+	okay
+
+kbws-url <New server URL> [-?h] [long options...]
+	-? -h --help  Print this usage information
+----------TEST workspace_service kbws-createws with -h option
+	okay
+
+kb_createws <Workspace ID> <Default permissions> [-?ehv] [long options...]
+	-e --showerror   Show any errors in execution
+	-v --verbose     Print verbose messages
+	-? -h --help     Print this usage information
+----------TEST workspace_service kbws-createws with --help option
+	okay
+
+kb_createws <Workspace ID> <Default permissions> [-?ehv] [long options...]
+	-e --showerror   Show any errors in execution
+	-v --verbose     Print verbose messages
+	-? -h --help     Print this usage information
+----------TEST workspace_service kbws-setglobalperm with -h option
+	okay
+
+kbws-setglobalperm <New default permission> [-?ehw] [long options...]
+	-w --workspace     ID for workspace
+	-e --showerror     Set as 1 to show any errors in execution
+	-? -h --help       Print this usage information
+----------TEST workspace_service kbws-setglobalperm with --help option
+	okay
+
+kbws-setglobalperm <New default permission> [-?ehw] [long options...]
+	-w --workspace     ID for workspace
+	-e --showerror     Set as 1 to show any errors in execution
+	-? -h --help       Print this usage information
+----------TEST workspace_service kbws-listobj with -h option
+	okay
+
+kbws-listobj [-?ehstw] [long options...]
+	-w --workspace     ID for workspace
+	-t --type          Type required
+	-s --showdeleted   show all objects that have been deleted
+	-e --showerror     Set as 1 to show any errors in execution
+	-? -h --help       Print this usage information
+----------TEST workspace_service kbws-listobj with --help option
+	okay
+
+kbws-listobj [-?ehstw] [long options...]
+	-w --workspace     ID for workspace
+	-t --type          Type required
+	-s --showdeleted   show all objects that have been deleted
+	-e --showerror     Set as 1 to show any errors in execution
+	-? -h --help       Print this usage information
+----------TEST workspace_service kbws-history with -h option
+	okay
+
+kbws-history <Object type> <Object ID> [-?ehw] [long options...]
+	-w --workspace     ID for workspace
+	-e --showerror     Set as 1 to show any errors in execution
+	-? -h --help       Print this usage information
+----------TEST workspace_service kbws-history with --help option
+	okay
+
+kbws-history <Object type> <Object ID> [-?ehw] [long options...]
+	-w --workspace     ID for workspace
+	-e --showerror     Set as 1 to show any errors in execution
+	-? -h --help       Print this usage information
+----------TEST workspace_service kbws-logout with -h option
+	okay
+
+Logged in as:
+public
+----------TEST workspace_service kbws-logout with --help option
+	okay
+
+Logged in as:
+public
+----------TEST workspace_service kbws-addtype with -h option
+	okay
+
+kbws-addtype <Object type> [-?eh] [long options...]
+	-e --showerror   Set as 1 to show any errors in execution
+	-? -h --help     Print this usage information
+----------TEST workspace_service kbws-addtype with --help option
+	okay
+
+kbws-addtype <Object type> [-?eh] [long options...]
+	-e --showerror   Set as 1 to show any errors in execution
+	-? -h --help     Print this usage information
+----------TEST workspace_service kbws-types with -h option
+	okay
+
+kbws-types [-?eh] [long options...]
+	-e --showerror   Set as 1 to show any errors in execution
+	-? -h --help     Print this usage information
+----------TEST workspace_service kbws-types with --help option
+	okay
+
+kbws-types [-?eh] [long options...]
+	-e --showerror   Set as 1 to show any errors in execution
+	-? -h --help     Print this usage information
+
+
+Error Summary:
+

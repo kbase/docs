@@ -1,0 +1,40 @@
+<div>
+<h1>Using the Tree Services</h1>
+
+  <strong>Required Prerequisite Activities:</strong> 
+<a href="/for-users/tutorials/installing-the-kbase-app-dmg/">Download KBase: Installing the KBase Application DMG</a>, OR <a href="/for-users/tutorials/navigating-iris/">Get Started with IRIS: Navigating IRIS</a> </p>
+<p>KBase Interfaces, IRIS or the Command-line, use Linux commands. To familiarize yourself, check out these quick guides: <a href= "https://www.cfa.harvard.edu/~jbattat/computer/linuxReferenceCard.pdf"> Reference card</a>, <a href= "http://mally.stanford.edu/~sr/computing/basic-unix.html">Beginners Guide</a></p>
+
+ 
+</div><div><h2>Introduction</h3>
+<p>This tutorial provides a general introduction to the Tree service command line scripts. Phylogenetic trees of gene families are an essential tool for determining and understanding the functional
+role of sequenced genes.  The KBase Tree service provides a set of functions to find, manipulate, and visualize
+phylogenetic trees and the multiple sequence alignments that are used to construct phylogenetic trees.  Additionally,
+the service provides a growing library of methods for analyzing data from metagenomic samples in the context of
+isolate gene trees.</p>
+<p>Trees in KBase are stored by default in <a href="http://en.wikipedia.org/wiki/Newick_format">Newick format</a>, which
+is a succinct, text-based format for representing tree structures.  Richer meta data associated with particular
+trees or nodes is stored directly in the CDM so that it is more amenable to search.  Most phylogenetic trees are
+constructed from protein sequence alignments.  When associated alignment data is available, KBase will store the relationship
+between trees and their alignments in the relationship named 'IsUsedToBuildTree'. </p>
+<p>All of the tree service commands provide help and usage information if they are run with the '-h' or '--help'
+options, which may be useful throughout this tutorial.  You can also use the autocompletion feature of your command line
+enviornment to list the available tree commands.  On a Linux or Mac environment, simply type 'tree-' followed by a tab.
+In the IRIS environment, type 'tree-' followed by the right arrow key.</p>
+
+
+</div><div><h2>Detailed descriptions</h2>
+<p>
+<h4>base functionality</h4>
+<ul>
+<li><a href="/docs/trees/user_manuals/scripts/trees_user_manual_sections/finding_trees_and_alignments.html">Finding Trees &amp; Alignments</a>
+<li><a href="/docs/trees/user_manuals/scripts/trees_user_manual_sections/retrieving_tree_and_alignment_meta_information.html">Retrieving Tree &amp; Alignment Meta Information</a>
+<li><a href="/docs/trees/user_manuals/scripts/trees_user_manual_sections/retrieving_tree_structure_and_alignment_data.html">Retrieving Tree Structure and Alignment Data</a>
+<li><a href="/docs/trees/user_manuals/scripts/trees_user_manual_sections/tree_and_alignment_visualization_and_manipulation.html">Tree &amp; Alignment Visualization and Manipulation</a>
+</ul>
+<p>
+<h4>use cases</h4>
+<ul>
+<li><a href="/docs/trees/user_manuals/scripts/trees_user_manual_sections/retrieving_and_visualizing_metagenomic_abundance_data.html">Retrieving and Visualizing Metagenomic Abundance Data</a>
+</ul>
+</div>

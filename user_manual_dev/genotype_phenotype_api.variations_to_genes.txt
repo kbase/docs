@@ -1,0 +1,3 @@
+usage: variations_to_genes <--positions_file two column tab delimited chomosomal positions file with complete path, column1 is kb_chromosome_id, column2 is position on that chromosome, (required)> <--distance distance in bp, distance around a SNP to look for genes, type:integer, (required);> [--help print this usage] [--url host]
+
+

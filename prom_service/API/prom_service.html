@@ -1,0 +1,831 @@
+<?xml version="1.0" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+ <head>
+  <title>
+  </title>
+  <meta content="text/html; charset=utf-8" http-equiv="content-type"/>
+  <link href="mailto:root@ubuntu.chicago.kbase.us" rev="made"/>
+ </head>
+ <body style="background-color: white">
+  <h1 id="NAME">
+   NAME
+  </h1>
+  <p>
+   Bio::KBase::PROM::Client
+  </p>
+  <h1 id="DESCRIPTION">
+   DESCRIPTION
+  </h1>
+  <p>
+   PROM (Probabilistic Regulation of Metabolism) Service
+  </p>
+  <p>
+   This service enables the creation of FBA model constraints objects that are based on regulatory networks and expression data, as described in [1]. Constraints are constructed by either automatically aggregating necessary information from the CDS (if available for a given genome), or by adding user expression and regulatory data. PROM provides the capability to simulate transcription factor knockout phenotypes. PROM model constraint objects are created in a user's workspace, and can be operated on and used in conjunction with an FBA model with the KBase FBA Modeling Service.
+  </p>
+  <p>
+   Note: for legacy reasons, auth tokens are passed in as parameters rather than handled automatically by the auto-generated client/server infrastructure. This will be fixed soon in one of the next builds.
+  </p>
+  <p>
+   Note: this module is currently unstable as the workspace, regulatory network, expression, and fba services are currently in a state of flux. A new version that is compatible with these new services should be availble in late 2013.
+  </p>
+  <p>
+   [1] Chandrasekarana S. and Price ND. Probabilistic integrative modeling of genome-scale metabolic and regulatory networks in Escherichia coli and Mycobacterium tuberculosis. PNAS (2010) 107:17845-50.
+  </p>
+  <p>
+   AUTHORS: Michael Sneddon (mwsneddon@lbl.gov) Matt DeJongh (dejongh@hope.edu)
+  </p>
+  <p>
+   created 11/27/2012 - msneddon
+  </p>
+  <h2 id="get_expression_data_by_genome">
+   get_expression_data_by_genome
+  </h2>
+  <pre><code>  $status, $expression_data_collection_id = $obj-&gt;get_expression_data_by_genome($genome_id, $workspace_name, $token)</code></pre>
+  <dl>
+   <dt id="Parameter-and-return-types">
+    Parameter and return types
+   </dt>
+   <dd>
+    <pre>
+$genome_id is a genome_id
+$workspace_name is a workspace_name
+$token is an auth_token
+$status is a status
+$expression_data_collection_id is an expression_data_collection_id
+genome_id is a kbase_id
+kbase_id is a string
+workspace_name is a string
+auth_token is a string
+status is a string
+expression_data_collection_id is a string</pre>
+   </dd>
+   <dt id="Description">
+    Description
+   </dt>
+   <dd>
+    <p>
+     This method fetches all gene expression data available in the CDS that is associated with the given genome id. It then constructs an expression_data_collection object in the specified workspace. The method returns the ID of the expression data collection in the workspace, along with a status message that provides details on what was retrieved and if anything failed. If the method does fail, or if there is no data for the given genome, then no expression data collection is created and no ID is returned.
+    </p>
+    <p>
+     Note 1: this method currently can take a long time to complete if there are many expression data sets in the CDS Note 2: the current implementation relies on on/off calls stored in the CDM (correct as of 1/2013). This will almost certainly change, at which point logic for making on/off calls will be required as input Note 3: this method should be migrated to the expression service, which currently does not exist Note 4: this method should use the type compiler auth, but for simplicity we now just pass an auth token directly.
+    </p>
+   </dd>
+  </dl>
+  <h2 id="create_expression_data_collection">
+   create_expression_data_collection
+  </h2>
+  <pre><code>  $status, $expression_data_collection_id = $obj-&gt;create_expression_data_collection($workspace_name, $token)</code></pre>
+  <dl>
+   <dt id="Parameter-and-return-types1">
+    Parameter and return types
+   </dt>
+   <dd>
+    <pre>
+$workspace_name is a workspace_name
+$token is an auth_token
+$status is a status
+$expression_data_collection_id is an expression_data_collection_id
+workspace_name is a string
+auth_token is a string
+status is a string
+expression_data_collection_id is a string</pre>
+   </dd>
+   <dt id="Description1">
+    Description
+   </dt>
+   <dd>
+    <p>
+     This method creates a new, empty, expression data collection in the specified workspace. If the method was successful, the ID of the expression data set will be returned. The method also returns a status message providing additional details of the steps that occured or a message that indicates what failed. If the method fails, no expression data ID is returned.
+    </p>
+   </dd>
+  </dl>
+  <h2 id="add_expression_data_to_collection">
+   add_expression_data_to_collection
+  </h2>
+  <pre><code>  $status = $obj-&gt;add_expression_data_to_collection($expression_data, $expression_data_collecion_id, $workspace_name, $token)</code></pre>
+  <dl>
+   <dt id="Parameter-and-return-types2">
+    Parameter and return types
+   </dt>
+   <dd>
+    <pre>
+$expression_data is a reference to a list where each element is a BooleanGeneExpressionData
+$expression_data_collecion_id is an expression_data_collection_id
+$workspace_name is a workspace_name
+$token is an auth_token
+$status is a status
+BooleanGeneExpressionData is a reference to a hash where the following keys are defined:
+	id has a value which is a boolean_gene_expression_data_id
+	on_off_call has a value which is a reference to a hash where the key is a feature_id and the value is an on_off_state
+	expression_data_source has a value which is a source
+	expression_data_source_id has a value which is a source
+boolean_gene_expression_data_id is a string
+feature_id is a kbase_id
+kbase_id is a string
+on_off_state is an int
+source is a string
+expression_data_collection_id is a string
+workspace_name is a string
+auth_token is a string
+status is a string</pre>
+   </dd>
+   <dt id="Description2">
+    Description
+   </dt>
+   <dd>
+    <p>
+     This method provides a way to attach a set of boolean expression data to an expression data collection object created in the current workspace. Data collections can thus be composed of both CDS data and user data in this way. The method returns a status message providing additional details of the steps that occured or a message that indicates what failed. If the method fails, then all updates to the expression_data_collection are not made, although some of the boolean gene expression data may have been created in the workspace (see status message for IDs of the new expession data objects).
+    </p>
+    <p>
+     Note: when defining expression data, the id field must be explicitly defined. This will be the ID used to save the expression data in the workspace. If expression data with that ID already exists, this method will overwrite that data and you will have to use the workspace service revert method to undo the change.
+    </p>
+   </dd>
+  </dl>
+  <h2 id="change_expression_data_namespace">
+   change_expression_data_namespace
+  </h2>
+  <pre><code>  $status = $obj-&gt;change_expression_data_namespace($expression_data_collection_id, $new_feature_names, $workspace_name, $token)</code></pre>
+  <dl>
+   <dt id="Parameter-and-return-types3">
+    Parameter and return types
+   </dt>
+   <dd>
+    <pre>
+$expression_data_collection_id is an expression_data_collection_id
+$new_feature_names is a reference to a hash where the key is a string and the value is a string
+$workspace_name is a workspace_name
+$token is an auth_token
+$status is a status
+expression_data_collection_id is a string
+workspace_name is a string
+auth_token is a string
+status is a string</pre>
+   </dd>
+   <dt id="Description3">
+    Description
+   </dt>
+   <dd>
+    <p>
+     Maps the expression data collection stored in a workspace in one genome namespace to an alternate genome namespace. This is useful, for instance, if expression data is available for one genome, but you intend to use it for a related genome or a genome with different gene calls. If a gene in the original expression data cannot be found in the translation mapping, then it is ignored and left as is so that the number of features in the expression data set is not altered. NOTE!: this is different from the default behavior of change_regulatory_network_namespace, which will drop all genes that are not found in the mapping. If successful, this method returns the expression collection ID of the newly created expression data colleion. This method also returns a status message indicating what happened or what went wrong.
+    </p>
+    <p>
+     The mapping&lt;string,string&gt; new_features_names should be defined so that existing IDs are the key and the replacement IDs are the values stored.
+    </p>
+   </dd>
+  </dl>
+  <h2 id="get_regulatory_network_by_genome">
+   get_regulatory_network_by_genome
+  </h2>
+  <pre><code>  $status, $regulatory_network_id = $obj-&gt;get_regulatory_network_by_genome($genome_id, $workspace_name, $token)</code></pre>
+  <dl>
+   <dt id="Parameter-and-return-types4">
+    Parameter and return types
+   </dt>
+   <dd>
+    <pre>
+$genome_id is a genome_id
+$workspace_name is a workspace_name
+$token is an auth_token
+$status is a status
+$regulatory_network_id is a regulatory_network_id
+genome_id is a kbase_id
+kbase_id is a string
+workspace_name is a string
+auth_token is a string
+status is a string
+regulatory_network_id is a string</pre>
+   </dd>
+   <dt id="Description4">
+    Description
+   </dt>
+   <dd>
+    <p>
+     This method fetches a regulatory network from the regulation service that is associated with the given genome id. If there are multiple regulome models available for the given genome, then the model with the most regulons is selected. The method then constructs a regulatory network object in the specified workspace. The method returns the ID of the regulatory network in the workspace, along with a status message that provides details on what was retrieved and if anything failed. If the method does fail, or if there is no regulome for the given genome, then no regulatory network ID is returned.
+    </p>
+    <p>
+     Note 1: this method should be migrated to the regulation service Note 2: this method should use the type compiler auth, but for simplicity we now just pass an auth token directly.
+    </p>
+   </dd>
+  </dl>
+  <h2 id="change_regulatory_network_namespace">
+   change_regulatory_network_namespace
+  </h2>
+  <pre><code>  $status, $new_regulatory_network_id = $obj-&gt;change_regulatory_network_namespace($regulatory_network_id, $new_feature_names, $workspace_name, $token)</code></pre>
+  <dl>
+   <dt id="Parameter-and-return-types5">
+    Parameter and return types
+   </dt>
+   <dd>
+    <pre>
+$regulatory_network_id is a regulatory_network_id
+$new_feature_names is a reference to a hash where the key is a string and the value is a string
+$workspace_name is a workspace_name
+$token is an auth_token
+$status is a status
+$new_regulatory_network_id is a regulatory_network_id
+regulatory_network_id is a string
+workspace_name is a string
+auth_token is a string
+status is a string</pre>
+   </dd>
+   <dt id="Description5">
+    Description
+   </dt>
+   <dd>
+    <p>
+     Maps the regulatory network stored in a workspace in one genome namespace to an alternate genome namespace. This is useful, for instance, if a regulatory network was built and is available for one genome, but you intend to use it for a related genome or a genome with different gene calls. If a gene in the original regulatory network cannot be found in the translation mapping, then it is simply removed from the new regulatory network. Thus, if you are only changing the names of some genes, you still must provide an entry in the input mapping for the genes you wish to keep. If successful, this method returns the regulatory network ID of the newly created regulatory network. This method also returns a status message indicating what happened or what went wrong.
+    </p>
+    <p>
+     The mapping&lt;string,string&gt; new_features_names should be defined so that existing IDs are the key and the replacement IDs are the values stored.
+    </p>
+   </dd>
+  </dl>
+  <h2 id="create_prom_constraints">
+   create_prom_constraints
+  </h2>
+  <pre><code>  $status, $prom_constraints_id = $obj-&gt;create_prom_constraints($params)</code></pre>
+  <dl>
+   <dt id="Parameter-and-return-types6">
+    Parameter and return types
+   </dt>
+   <dd>
+    <pre>
+$params is a CreatePromConstraintsParameters
+$status is a status
+$prom_constraints_id is a prom_constraints_id
+CreatePromConstraintsParameters is a reference to a hash where the following keys are defined:
+	genome_object_id has a value which is a genome_object_id
+	expression_data_collection_id has a value which is an expression_data_collection_id
+	regulatory_network_id has a value which is a regulatory_network_id
+	workspace_name has a value which is a workspace_name
+	token has a value which is an auth_token
+genome_object_id is a string
+expression_data_collection_id is a string
+regulatory_network_id is a string
+workspace_name is a string
+auth_token is a string
+status is a string
+prom_constraints_id is a string</pre>
+   </dd>
+   <dt id="Description6">
+    Description
+   </dt>
+   <dd>
+    <p>
+     This method creates a set of Prom constraints for a given genome annotation based on a regulatory network and a collection of gene expression data stored on a workspace. Parameters are specified in the create_prom_constraints_parameters object. A status object is returned indicating success or failure along with a message on what went wrong or statistics on the retrieved objects. If the method was successful, the ID of the new Prom constraints object is also returned. The Prom constraints can then be used in conjunction with an FBA model using FBA Model Services.
+    </p>
+   </dd>
+  </dl>
+  <h1 id="TYPES">
+   TYPES
+  </h1>
+  <h2 id="kbase_id">
+   kbase_id
+  </h2>
+  <dl>
+   <dt id="Description7">
+    Description
+   </dt>
+   <dd>
+    <p>
+     A KBase ID is a string starting with the characters "kb|". KBase IDs are typed. The types are designated using a short string. KBase IDs may be hierarchical. See the standard KBase documentation for more information.
+    </p>
+   </dd>
+   <dt id="Definition">
+    Definition
+   </dt>
+   <dd>
+    <pre>
+a string
+</pre>
+   </dd>
+  </dl>
+  <h2 id="feature_id">
+   feature_id
+  </h2>
+  <dl>
+   <dt id="Description8">
+    Description
+   </dt>
+   <dd>
+    <p>
+     A KBase ID for a genome feature
+    </p>
+   </dd>
+   <dt id="Definition1">
+    Definition
+   </dt>
+   <dd>
+    <pre>
+a kbase_id
+</pre>
+   </dd>
+  </dl>
+  <h2 id="genome_id">
+   genome_id
+  </h2>
+  <dl>
+   <dt id="Description9">
+    Description
+   </dt>
+   <dd>
+    <p>
+     A KBase ID for a genome
+    </p>
+   </dd>
+   <dt id="Definition2">
+    Definition
+   </dt>
+   <dd>
+    <pre>
+a kbase_id
+</pre>
+   </dd>
+  </dl>
+  <h2 id="workspace_name">
+   workspace_name
+  </h2>
+  <dl>
+   <dt id="Description10">
+    Description
+   </dt>
+   <dd>
+    <p>
+     The name of a workspace
+    </p>
+   </dd>
+   <dt id="Definition3">
+    Definition
+   </dt>
+   <dd>
+    <pre>
+a string
+</pre>
+   </dd>
+  </dl>
+  <h2 id="boolean_gene_expression_data_id">
+   boolean_gene_expression_data_id
+  </h2>
+  <dl>
+   <dt id="Description11">
+    Description
+   </dt>
+   <dd>
+    <p>
+     A workspace ID for a gene expression data object.
+    </p>
+   </dd>
+   <dt id="Definition4">
+    Definition
+   </dt>
+   <dd>
+    <pre>
+a string
+</pre>
+   </dd>
+  </dl>
+  <h2 id="expression_data_collection_id">
+   expression_data_collection_id
+  </h2>
+  <dl>
+   <dt id="Description12">
+    Description
+   </dt>
+   <dd>
+    <p>
+     A workspace id for a set of expression data on/off calls
+    </p>
+   </dd>
+   <dt id="Definition5">
+    Definition
+   </dt>
+   <dd>
+    <pre>
+a string
+</pre>
+   </dd>
+  </dl>
+  <h2 id="regulatory_network_id">
+   regulatory_network_id
+  </h2>
+  <dl>
+   <dt id="Description13">
+    Description
+   </dt>
+   <dd>
+    <p>
+     A workspace ID for a regulatory network object
+    </p>
+   </dd>
+   <dt id="Definition6">
+    Definition
+   </dt>
+   <dd>
+    <pre>
+a string
+</pre>
+   </dd>
+  </dl>
+  <h2 id="status">
+   status
+  </h2>
+  <dl>
+   <dt id="Description14">
+    Description
+   </dt>
+   <dd>
+    <p>
+     Status message used by this service to provide information on the final status of a step
+    </p>
+   </dd>
+   <dt id="Definition7">
+    Definition
+   </dt>
+   <dd>
+    <pre>
+a string
+</pre>
+   </dd>
+  </dl>
+  <h2 id="prom_constraints_id">
+   prom_constraints_id
+  </h2>
+  <dl>
+   <dt id="Description15">
+    Description
+   </dt>
+   <dd>
+    <p>
+     A workspace ID for the prom constraints object in a user's workpace
+    </p>
+   </dd>
+   <dt id="Definition8">
+    Definition
+   </dt>
+   <dd>
+    <pre>
+a string
+</pre>
+   </dd>
+  </dl>
+  <h2 id="genome_object_id">
+   genome_object_id
+  </h2>
+  <dl>
+   <dt id="Description16">
+    Description
+   </dt>
+   <dd>
+    <p>
+     A workspace ID for a genome object in a user's workspace, used to link a prom_constraint Object to a genome
+    </p>
+   </dd>
+   <dt id="Definition9">
+    Definition
+   </dt>
+   <dd>
+    <pre>
+a string
+</pre>
+   </dd>
+  </dl>
+  <h2 id="source">
+   source
+  </h2>
+  <dl>
+   <dt id="Description17">
+    Description
+   </dt>
+   <dd>
+    <p>
+     Specifies the source of a data object, e.g. KBase or MicrobesOnline
+    </p>
+   </dd>
+   <dt id="Definition10">
+    Definition
+   </dt>
+   <dd>
+    <pre>
+a string
+</pre>
+   </dd>
+  </dl>
+  <h2 id="source_id">
+   source_id
+  </h2>
+  <dl>
+   <dt id="Description18">
+    Description
+   </dt>
+   <dd>
+    <p>
+     Specifies the ID of the data object in the source
+    </p>
+   </dd>
+   <dt id="Definition11">
+    Definition
+   </dt>
+   <dd>
+    <pre>
+a string
+</pre>
+   </dd>
+  </dl>
+  <h2 id="auth_token">
+   auth_token
+  </h2>
+  <dl>
+   <dt id="Description19">
+    Description
+   </dt>
+   <dd>
+    <p>
+     The string representation of the bearer token needed to authenticate on the workspace service, this will eventually be eliminated when this service is updated to use the auto type-compiler auth functionality
+    </p>
+   </dd>
+   <dt id="Definition12">
+    Definition
+   </dt>
+   <dd>
+    <pre>
+a string
+</pre>
+   </dd>
+  </dl>
+  <h2 id="on_off_state">
+   on_off_state
+  </h2>
+  <dl>
+   <dt id="Description20">
+    Description
+   </dt>
+   <dd>
+    <p>
+     Indicates on/off state of a gene, 1=on, -1=off, 0=unknown
+    </p>
+   </dd>
+   <dt id="Definition13">
+    Definition
+   </dt>
+   <dd>
+    <pre>
+an int
+</pre>
+   </dd>
+  </dl>
+  <h2 id="BooleanGeneExpressionData">
+   BooleanGeneExpressionData
+  </h2>
+  <dl>
+   <dt id="Description21">
+    Description
+   </dt>
+   <dd>
+    <p>
+     A simplified representation of gene expression data under a SINGLE condition. Note that the condition information is not explicitly tracked here. also NOTE: this data object should be migrated to the Expression Data service, and simply imported here.
+    </p>
+    <pre><code>    mapping&lt;feature_id,on_off_state&gt; on_off_call - a mapping of genome features to on/off calls under the given
+                                           condition (true=on, false=off).  It is therefore assumed that
+                                           the features are protein coding genes.
+    source expression_data_source        - the source of this collection of expression data
+    source_id expression_data_source_id  - the id of this data object in the workspace</code></pre>
+   </dd>
+   <dt id="Definition14">
+    Definition
+   </dt>
+   <dd>
+    <pre>
+a reference to a hash where the following keys are defined:
+id has a value which is a boolean_gene_expression_data_id
+on_off_call has a value which is a reference to a hash where the key is a feature_id and the value is an on_off_state
+expression_data_source has a value which is a source
+expression_data_source_id has a value which is a source</pre>
+   </dd>
+  </dl>
+  <h2 id="BooleanGeneExpressionDataCollection">
+   BooleanGeneExpressionDataCollection
+  </h2>
+  <dl>
+   <dt id="Description22">
+    Description
+   </dt>
+   <dd>
+    <p>
+     A collection of gene expression data for a single genome under a range of conditions. This data is returned as a list of IDs for boolean gene expression data objects in the workspace. This is a simple object for creating a PROM Model. NOTE: this data object should be migrated to the Expression Data service, and simply imported here.
+    </p>
+   </dd>
+   <dt id="Definition15">
+    Definition
+   </dt>
+   <dd>
+    <pre>
+a reference to a hash where the following keys are defined:
+id has a value which is an expression_data_collection_id
+expression_data_ids has a value which is a reference to a list where each element is a BooleanGeneExpressionData</pre>
+   </dd>
+  </dl>
+  <h2 id="RegulatoryInteraction">
+   RegulatoryInteraction
+  </h2>
+  <dl>
+   <dt id="Description23">
+    Description
+   </dt>
+   <dd>
+    <p>
+     A simplified representation of a regulatory interaction that also stores the probability of the interaction (specificially, as the probability the target is on given that the regulator is off), which is necessary for PROM to construct FBA constraints. NOTE: this data object should be migrated to the Regulation service, and simply imported here. NOTE 2: feature_id may actually be a more general ID, as models can potentially be loaded that are not in the kbase namespace. In this case everything, including expression data and the fba model must be in the same namespace.
+    </p>
+    <pre><code>    feature_id TF            - the genome feature that is the regulator
+    feature_id target        - the genome feature that is the target of regulation</code></pre>
+    <p>
+     @deprecated
+    </p>
+   </dd>
+   <dt id="Definition16">
+    Definition
+   </dt>
+   <dd>
+    <pre>
+a reference to a hash where the following keys are defined:
+TF has a value which is a feature_id
+target has a value which is a feature_id</pre>
+   </dd>
+  </dl>
+  <h2 id="regulatory_network">
+   regulatory_network
+  </h2>
+  <dl>
+   <dt id="Description24">
+    Description
+   </dt>
+   <dd>
+    <p>
+     A collection of regulatory interactions that together form a regulatory network. This is an extremely simplified data object for use in constructing a PROM model. NOTE: this data object should be migrated to the Regulation service, and simply imported here.
+    </p>
+   </dd>
+   <dt id="Definition17">
+    Definition
+   </dt>
+   <dd>
+    <pre>
+a reference to a list where each element is a RegulatoryInteraction
+</pre>
+   </dd>
+  </dl>
+  <h2 id="RegulatoryTarget">
+   RegulatoryTarget
+  </h2>
+  <dl>
+   <dt id="Description25">
+    Description
+   </dt>
+   <dd>
+    <p>
+     Object required by the prom_constraints object which defines the computed probabilities for a target gene. The TF regulating this target can be deduced based on the tfMap object.
+    </p>
+    <pre><code>    string target_uuid        - id of the target gene in the annotation object namespace
+    float tfOffProbability    - PROB(target=ON|TF=OFF)
+                                the probability that the transcriptional target is ON, given that the
+                                transcription factor is not expressed, as defined in Candrasekarana &amp;
+                                Price, PNAS 2010 and used to predict cumulative effects of multiple
+                                regulatory interactions with a single target.  Set to null or empty if
+                                this probability has not been calculated yet.
+    float probTTonGivenTFon   - PROB(target=ON|TF=ON)
+                                the probability that the transcriptional target is ON, given that the
+                                transcription factor is expressed.    Set to null or empty if
+                                this probability has not been calculated yet.
+@deprecated</code></pre>
+   </dd>
+   <dt id="Definition18">
+    Definition
+   </dt>
+   <dd>
+    <pre>
+a reference to a hash where the following keys are defined:
+target_uuid has a value which is a string
+tfOnProbability has a value which is a float
+tfOffProbability has a value which is a float</pre>
+   </dd>
+  </dl>
+  <h2 id="TFMap">
+   TFMap
+  </h2>
+  <dl>
+   <dt id="Description26">
+    Description
+   </dt>
+   <dd>
+    <p>
+     Object required by the prom_constraints object, this maps a transcription factor by its uuid (in some annotation namespace) to a group of regulatory target genes.
+    </p>
+    <pre><code>    string transcriptionFactor_uuid                       - id of the TF in the annotation object namespace
+    list &lt;regulatory_target&gt; transcriptionFactorMapTarget - collection of regulatory target genes for the TF
+                                                            along with associated joint probabilities for each
+                                                            target to be on given that the TF is on or off.</code></pre>
+    <p>
+     @deprecated
+    </p>
+   </dd>
+   <dt id="Definition19">
+    Definition
+   </dt>
+   <dd>
+    <pre>
+a reference to a hash where the following keys are defined:
+transcriptionFactor_uuid has a value which is a string
+transcriptionFactorMapTargets has a value which is a reference to a list where each element is a RegulatoryTarget</pre>
+   </dd>
+  </dl>
+  <h2 id="annotation_uuid">
+   annotation_uuid
+  </h2>
+  <dl>
+   <dt id="Description27">
+    Description
+   </dt>
+   <dd>
+    <p>
+     the ID of the genome annotation object kept for reference in the prom_constraints object
+    </p>
+   </dd>
+   <dt id="Definition20">
+    Definition
+   </dt>
+   <dd>
+    <pre>
+a string
+</pre>
+   </dd>
+  </dl>
+  <h2 id="PromConstraint">
+   PromConstraint
+  </h2>
+  <dl>
+   <dt id="Description28">
+    Description
+   </dt>
+   <dd>
+    <p>
+     An object that encapsulates the information necessary to apply PROM-based constraints to an FBA model. This includes a regulatory network consisting of a set of regulatory interactions (implied by the set of TFMap objects) and interaction probabilities as defined in each regulatory_target object. A link the the annotation object is required in order to properly link to an FBA model object. A reference to the expression_data_collection used to compute the interaction probabilities is provided for future reference.
+    </p>
+    <pre><code>    prom_constraints_id id                                         - the id of this prom_constraints object in a
+                                                                    workspace
+    annotation_uuid annotation_uuid                               - the id of the annotation object in the workspace
+                                                                    which specfies how TFs and targets are named
+    list &lt;TFMap&gt; transcriptionFactorMaps                          - the list of TFMaps which specifies both the
+                                                                    regulatory network and interaction probabilities
+                                                                    between TF and target genes
+    expression_data_collection_id expression_data_collection_id   - the id of the expresion_data_collection object in
+                                                                    the workspace which was used to compute the
+                                                                    regulatory interaction probabilities</code></pre>
+    <p>
+     @deprecated
+    </p>
+   </dd>
+   <dt id="Definition21">
+    Definition
+   </dt>
+   <dd>
+    <pre>
+a reference to a hash where the following keys are defined:
+id has a value which is a prom_constraints_id
+annotation_uuid has a value which is an annotation_uuid
+transcriptionFactorMaps has a value which is a reference to a list where each element is a TFMap
+expression_data_collection_id has a value which is an expression_data_collection_id</pre>
+   </dd>
+  </dl>
+  <h2 id="CreatePromConstraintsParameters">
+   CreatePromConstraintsParameters
+  </h2>
+  <dl>
+   <dt id="Description29">
+    Description
+   </dt>
+   <dd>
+    <p>
+     Named parameters for 'create_prom_constraints' method. Currently all options are required.
+    </p>
+    <pre><code>    genome_object_id genome_object_id            - the workspace ID of the genome to link to the prom object
+    expression_data_collection_id
+               expression_data_collection_id     - the workspace ID of the expression data collection needed to
+                                                   build the PROM constraints.
+    regulatory_network_id regulatory_network_id  - the workspace ID of the regulatory network data to use
+    workspace_name workspace_name                - the name of the workspace to use
+    auth_token token                             - the auth token that has permission to write in the specified workspace</code></pre>
+   </dd>
+   <dt id="Definition22">
+    Definition
+   </dt>
+   <dd>
+    <pre>
+a reference to a hash where the following keys are defined:
+genome_object_id has a value which is a genome_object_id
+expression_data_collection_id has a value which is an expression_data_collection_id
+regulatory_network_id has a value which is a regulatory_network_id
+workspace_name has a value which is a workspace_name
+token has a value which is an auth_token</pre>
+   </dd>
+  </dl>
+ </body>
+</html>

@@ -1,0 +1,23 @@
+get_project
+
+retrieve a project from the communities API
+
+Parameters
+
+	id - the is of the project to be retrieved from the API
+
+Options
+
+	help - display this message
+
+	user - username to authenticate against the API, requires a password to be set as well
+
+	pass - password to authenticate against the API, requires a username to be set as well
+
+	token - Globus Online authentication token
+
+	webkey - MG-RAST webkey to synch with the passed Globus Online authentication
+
+	verbosity - verbosity of the result data, can be one of [ minimal, verbose, full ]
+
+

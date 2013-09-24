@@ -1,0 +1,3 @@
+
+Usage: reconstructionTO_to_subsystems [--input genome-file] [--output genome-file] [--url service-url] [< genome-file] [> subsystems-file]                                                                                                               
+

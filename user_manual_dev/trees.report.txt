@@ -1,0 +1,76 @@
+----------TEST trees tree-get-tree with -h option	okay
+
+----------TEST trees tree-get-tree with --help option	okay
+
+----------TEST trees tree-create-url-map with -h option	okay
+
+----------TEST trees tree-create-url-map with --help option	okay
+
+----------TEST trees tree-find-tree-ids with -h option	okay
+
+----------TEST trees tree-find-tree-ids with --help option	okay
+
+----------TEST trees tree-get-leaf-nodes with -h option	okay
+
+----------TEST trees tree-get-leaf-nodes with --help option	okay
+
+----------TEST trees tree-html-relabel-leaves with -h option	okay
+
+----------TEST trees tree-html-relabel-leaves with --help option	okay
+
+----------TEST trees tree-to-html with -h option	okay
+
+----------TEST trees tree-to-html with --help option	okay
+
+----------TEST trees tree-remove-nodes with -h option	okay
+
+----------TEST trees tree-remove-nodes with --help option	okay
+
+----------TEST trees tree-create-group-file with -h option	okay
+
+----------TEST trees tree-create-group-file with --help option	okay
+
+----------TEST trees tree-html-add-boxes with -h option	okay
+
+----------TEST trees tree-html-add-boxes with --help option	okay
+
+----------TEST trees tree-url with -h option	okay
+
+----------TEST trees tree-url with --help option	okay
+
+----------TEST trees tree-aln-to-html with -h option	okay
+
+----------TEST trees tree-aln-to-html with --help option	okay
+
+----------TEST trees tree-compute-abundance-profile with -h option	okay
+
+----------TEST trees tree-compute-abundance-profile with --help option	okay
+
+----------TEST trees tree-get-alignment with -h option	okay
+
+----------TEST trees tree-get-alignment with --help option	okay
+
+----------TEST trees tree-relabel-node-names with -h option	okay
+
+----------TEST trees tree-relabel-node-names with --help option	okay
+
+----------TEST trees tree-normalize-abundance-profile with -h option	okay
+
+----------TEST trees tree-normalize-abundance-profile with --help option	okay
+
+----------TEST trees tree-get-leaf-id-mapping with -h option	okay
+
+----------TEST trees tree-get-leaf-id-mapping with --help option	okay
+
+----------TEST trees tree-filter-abundance-profile-column with -h option	okay
+
+----------TEST trees tree-filter-abundance-profile-column with --help option	okay
+
+----------TEST trees tree-find-alignment-ids with -h option	okay
+
+----------TEST trees tree-find-alignment-ids with --help option	okay
+
+
+
+Error Summary:
+

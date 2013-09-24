@@ -1,0 +1,1320 @@
+----------TEST plant_expression_service get_eo_sampleidlist with -h option
+	okay
+
+    DESCRIPTION
+	Retrieve the list of expression samples (GSM#s) that correspond to one or more of the environmental conditions of interest. for example if the input is:
+	 EO:0007107
+
+	 then the output looks like:
+	 EO:0007107      Arabidopsis thaliana    GSM131147
+         EO:0007107      Arabidopsis thaliana    GSM131148
+         EO:0007107      Arabidopsis thaliana    GSM131149
+         EO:0007107      Populus trichocarpa     GSM431198
+         EO:0007107      Populus trichocarpa     GSM431199
+         EO:0007107      Populus trichocarpa     GSM431200
+Usage: /kb/deployment/plbin/get_eo_sampleidlist.pl [--url=http://kbase.us/services/plant_expression_service] < eoIDs
+
+
+General options
+	--url=[http://kbase.us/services/plant_expression_service]		urlname of the server
+	--help		print help information
+	--version		print version information
+
+Examples: 
+
+echo EO:0007049 | get_eo_sampleidlist  --species=Ara
+
+
+echo EO:0007049 |get_eo_sampleidlist  --species=Pop
+
+echo EO:0007049 | /kb/deployment/plbin/get_eo_sampleidlist.pl --url=http://kbase.us/services/plant_expression_service 
+
+/kb/deployment/plbin/get_eo_sampleidlist.pl --help	print out help
+
+/kb/deployment/plbin/get_eo_sampleidlist.pl --version	print out version information
+
+Report bugs to Shinjae Yoo at sjyoo@bnl.gov
+----------TEST plant_expression_service get_eo_sampleidlist with --help option
+	okay
+
+    DESCRIPTION
+	Retrieve the list of expression samples (GSM#s) that correspond to one or more of the environmental conditions of interest. for example if the input is:
+	 EO:0007107
+
+	 then the output looks like:
+	 EO:0007107      Arabidopsis thaliana    GSM131147
+         EO:0007107      Arabidopsis thaliana    GSM131148
+         EO:0007107      Arabidopsis thaliana    GSM131149
+         EO:0007107      Populus trichocarpa     GSM431198
+         EO:0007107      Populus trichocarpa     GSM431199
+         EO:0007107      Populus trichocarpa     GSM431200
+Usage: /kb/deployment/plbin/get_eo_sampleidlist.pl [--url=http://kbase.us/services/plant_expression_service] < eoIDs
+
+
+General options
+	--url=[http://kbase.us/services/plant_expression_service]		urlname of the server
+	--help		print help information
+	--version		print version information
+
+Examples: 
+
+echo EO:0007049 | get_eo_sampleidlist  --species=Ara
+
+
+echo EO:0007049 |get_eo_sampleidlist  --species=Pop
+
+echo EO:0007049 | /kb/deployment/plbin/get_eo_sampleidlist.pl --url=http://kbase.us/services/plant_expression_service 
+
+/kb/deployment/plbin/get_eo_sampleidlist.pl --help	print out help
+
+/kb/deployment/plbin/get_eo_sampleidlist.pl --version	print out version information
+
+Report bugs to Shinjae Yoo at sjyoo@bnl.gov
+----------TEST plant_expression_service get_po_descriptions with -h option
+	okay
+
+   DESCRIPTION 
+ Retrieve the list of selected plant ontology IDs (POIDs) descriptions corresponding to an input list of POIDs. For example if the input list=PO:0000003,PO:0000005,PO:0000006 then the output looks like:
+
+   PO:0000003	whole plant
+   PO:0000005	cultured cell
+   PO:0000006	cultured protoplast
+Usage: /kb/deployment/plbin/get_po_descriptions.pl [--url=http://kbase.us/services/plant_expression_service] < poIDs
+
+
+General options
+	--url=[http://kbase.us/services/plant_expression_service]		urlname of the server
+	--help		print help information
+	--version		print version information
+
+Examples: 
+echo PO:0006979 | /kb/deployment/plbin/get_po_descriptions.pl --url=http://kbase.us/services/plant_expression_service 
+
+/kb/deployment/plbin/get_po_descriptions.pl --help	print out help
+
+/kb/deployment/plbin/get_po_descriptions.pl --version	print out version information
+
+Report bugs to Shinjae Yoo at sjyoo@bnl.gov
+----------TEST plant_expression_service get_po_descriptions with --help option
+	okay
+
+   DESCRIPTION 
+ Retrieve the list of selected plant ontology IDs (POIDs) descriptions corresponding to an input list of POIDs. For example if the input list=PO:0000003,PO:0000005,PO:0000006 then the output looks like:
+
+   PO:0000003	whole plant
+   PO:0000005	cultured cell
+   PO:0000006	cultured protoplast
+Usage: /kb/deployment/plbin/get_po_descriptions.pl [--url=http://kbase.us/services/plant_expression_service] < poIDs
+
+
+General options
+	--url=[http://kbase.us/services/plant_expression_service]		urlname of the server
+	--help		print help information
+	--version		print version information
+
+Examples: 
+echo PO:0006979 | /kb/deployment/plbin/get_po_descriptions.pl --url=http://kbase.us/services/plant_expression_service 
+
+/kb/deployment/plbin/get_po_descriptions.pl --help	print out help
+
+/kb/deployment/plbin/get_po_descriptions.pl --version	print out version information
+
+Report bugs to Shinjae Yoo at sjyoo@bnl.gov
+----------TEST plant_expression_service coex_net with -h option
+	okay
+
+Usage: 
+NAME
+
+	coex_net -- construct gene co-expression network
+
+SYNOPSIS
+
+	/kb/deployment/rsbin/coex_net.r [-imcrkpto]
+
+DESCRIPTION
+
+	For a data matrix that represents gene expressions across samples, this function constructs the gene co-expression network
+using correlation matrix or weighted gene co-expression network analysis (WGCNA, http://www.genetics.ucla.edu/labs/horvath/CoexpressionNetwork/Rpackages/WGCNA). 
+
+Input: a table of gene expression data matrix in .csv file
+
+Output: edge list or adjacency matrix of gene co-expression network in .csv file
+
+Options:
+	-i INPUT, --input=INPUT
+		REQUIRED: Input file name that stores the gene expression data matrix that users want to construct gene co-expression network and do clustering. Each row corresponds to a gene, and each column corresponds to a replicate. The column names are replicate names. The row names are gene names.
+
+	-a GENES1, --genes1=GENES1
+		The first set of the genes of interest.  Leaving this out means all of the genes will be used.
+
+	-b GENES2, --genes2=GENES2
+		The second set of the genes of interest.  Leaving this out means all of the genes will be used.
+
+	-m METHOD, --method=METHOD
+		Method to construct gene co-expression network. When method = ‘simple’ or ‘s’, the function constructs gene co-expression network using Pearson correlation matrix whose elements less than corr_thld are set to be zero. When method = “WGCNA” or ‘W’, the function constructs gene co-expression network using Pearson correlations between genes, and “signed” network by WGCNA. [default "simple"]
+
+	-c CORR_THLD, --corr_thld=CORR_THLD
+		Maximum threshold to set elements of Pearson correlation matrix to be zero when method=’simple’. [default 0.75]
+
+	-q P_THLD, --p_thld=P_THLD
+		Maximum threshold for p from Pearson correlation when method=’simple’. [default NULL]
+
+	-r MINRSQ, --minRsq=MINRSQ
+		Minimum threshold for R2 that measures the fitness of gene co-expression network to scale-free topology in WGCNA. See pickSoftThreshold() of WGCNA for details. [default 0.8]
+
+	-k MAXMEDIANK, --maxmediank=MAXMEDIANK
+		Maximum median connections for genes in network. See pickSoftThreshold() of WGCNA for details. [default 40]
+
+	-p MAXPOWER, --maxpower=MAXPOWER
+		Maximum power to decide the soft threshold. See pickSoftThreshold() of WGCNA for details. [default 50]
+
+	-t TYPE, --type=TYPE
+		Type of output. When method = ‘edge’ or ‘e’, the function outputs edge list of gene co-expression network consisting of gene pairs with Pearson correlation greater than corr_thld. When method = “adjmat” or ‘a’, the function outputs the adjacency matrix of constructed gene co-expression network. [default "edge"]
+
+	-o OUTPUT, --output=OUTPUT
+		Output file name. [default "coexpression_network.csv"]
+
+	-h, --help
+		Show this help message and exit
+
+
+EXAMPLES 
+
+	$coex_net  -i data.csv -c 0.8 –o edge_list.csv 
+
+	$coex_net  -i data.csv -m WGCNA -p 100 -r 0.7 -t adjmat –o adjmat.csv
+
+SEE ALSO 
+
+	coex_filter 
+
+	coex_cluster 
+
+	coex_cluster2
+
+AUTHORS 
+
+	Daifeng Wang, Gang Fang, Mark Gerstein, Eric Pan, Yale University
+
+----------TEST plant_expression_service coex_net with --help option
+	okay
+
+Usage: 
+NAME
+
+	coex_net -- construct gene co-expression network
+
+SYNOPSIS
+
+	/kb/deployment/rsbin/coex_net.r [-imcrkpto]
+
+DESCRIPTION
+
+	For a data matrix that represents gene expressions across samples, this function constructs the gene co-expression network
+using correlation matrix or weighted gene co-expression network analysis (WGCNA, http://www.genetics.ucla.edu/labs/horvath/CoexpressionNetwork/Rpackages/WGCNA). 
+
+Input: a table of gene expression data matrix in .csv file
+
+Output: edge list or adjacency matrix of gene co-expression network in .csv file
+
+Options:
+	-i INPUT, --input=INPUT
+		REQUIRED: Input file name that stores the gene expression data matrix that users want to construct gene co-expression network and do clustering. Each row corresponds to a gene, and each column corresponds to a replicate. The column names are replicate names. The row names are gene names.
+
+	-a GENES1, --genes1=GENES1
+		The first set of the genes of interest.  Leaving this out means all of the genes will be used.
+
+	-b GENES2, --genes2=GENES2
+		The second set of the genes of interest.  Leaving this out means all of the genes will be used.
+
+	-m METHOD, --method=METHOD
+		Method to construct gene co-expression network. When method = ‘simple’ or ‘s’, the function constructs gene co-expression network using Pearson correlation matrix whose elements less than corr_thld are set to be zero. When method = “WGCNA” or ‘W’, the function constructs gene co-expression network using Pearson correlations between genes, and “signed” network by WGCNA. [default "simple"]
+
+	-c CORR_THLD, --corr_thld=CORR_THLD
+		Maximum threshold to set elements of Pearson correlation matrix to be zero when method=’simple’. [default 0.75]
+
+	-q P_THLD, --p_thld=P_THLD
+		Maximum threshold for p from Pearson correlation when method=’simple’. [default NULL]
+
+	-r MINRSQ, --minRsq=MINRSQ
+		Minimum threshold for R2 that measures the fitness of gene co-expression network to scale-free topology in WGCNA. See pickSoftThreshold() of WGCNA for details. [default 0.8]
+
+	-k MAXMEDIANK, --maxmediank=MAXMEDIANK
+		Maximum median connections for genes in network. See pickSoftThreshold() of WGCNA for details. [default 40]
+
+	-p MAXPOWER, --maxpower=MAXPOWER
+		Maximum power to decide the soft threshold. See pickSoftThreshold() of WGCNA for details. [default 50]
+
+	-t TYPE, --type=TYPE
+		Type of output. When method = ‘edge’ or ‘e’, the function outputs edge list of gene co-expression network consisting of gene pairs with Pearson correlation greater than corr_thld. When method = “adjmat” or ‘a’, the function outputs the adjacency matrix of constructed gene co-expression network. [default "edge"]
+
+	-o OUTPUT, --output=OUTPUT
+		Output file name. [default "coexpression_network.csv"]
+
+	-h, --help
+		Show this help message and exit
+
+
+EXAMPLES 
+
+	$coex_net  -i data.csv -c 0.8 –o edge_list.csv 
+
+	$coex_net  -i data.csv -m WGCNA -p 100 -r 0.7 -t adjmat –o adjmat.csv
+
+SEE ALSO 
+
+	coex_filter 
+
+	coex_cluster 
+
+	coex_cluster2
+
+AUTHORS 
+
+	Daifeng Wang, Gang Fang, Mark Gerstein, Eric Pan, Yale University
+
+----------TEST plant_expression_service get_repid_by_sampleid with -h option
+	okay
+
+    DESCRIPTION
+	For a given list of expression experiment samples (GSM#s):GSM131288,GSM131291,GSM131292 find out the replicate ids. e.g  output looks like: 1605,1605,1604. All replicates have same identifier. e.g GSM131288 and GSM131291 are sample replicates as identified by replicate id 1605.
+Usage: /kb/deployment/plbin/get_repid_by_sampleid.pl [--url=http://kbase.us/services/plant_expression_service] < sampleIDs
+
+
+General options
+	--url=[http://kbase.us/services/plant_expression_service]		urlname of the server
+	--help		print help information
+	--version		print version information
+
+Examples: 
+echo GSM131288,GSM131291,GSM131292| /kb/deployment/plbin/get_repid_by_sampleid.pl --url=http://kbase.us/services/plant_expression_service 
+
+/kb/deployment/plbin/get_repid_by_sampleid.pl --help	print out help
+
+/kb/deployment/plbin/get_repid_by_sampleid.pl --version	print out version information
+
+Report bugs to Fei He at feihe@bnl.gov
+----------TEST plant_expression_service get_repid_by_sampleid with --help option
+	okay
+
+    DESCRIPTION
+	For a given list of expression experiment samples (GSM#s):GSM131288,GSM131291,GSM131292 find out the replicate ids. e.g  output looks like: 1605,1605,1604. All replicates have same identifier. e.g GSM131288 and GSM131291 are sample replicates as identified by replicate id 1605.
+Usage: /kb/deployment/plbin/get_repid_by_sampleid.pl [--url=http://kbase.us/services/plant_expression_service] < sampleIDs
+
+
+General options
+	--url=[http://kbase.us/services/plant_expression_service]		urlname of the server
+	--help		print help information
+	--version		print version information
+
+Examples: 
+echo GSM131288,GSM131291,GSM131292| /kb/deployment/plbin/get_repid_by_sampleid.pl --url=http://kbase.us/services/plant_expression_service 
+
+/kb/deployment/plbin/get_repid_by_sampleid.pl --help	print out help
+
+/kb/deployment/plbin/get_repid_by_sampleid.pl --version	print out version information
+
+Report bugs to Fei He at feihe@bnl.gov
+----------TEST plant_expression_service coex_pipeline with -h option
+	okay
+
+NAME
+    coex_pipeline -- pipeline to identify highly differentially expressed genes, construct gene co-expression network, and cluster genes into co-expression modules
+
+SYNOPSIS
+    coex_pipeline [-ifqnusmcvrkptelzwoxy]
+
+DESCRIPTION
+    Pipeline for computing gene coexpression network and clustering genes into co-expression modules using:
+    coex_filter.r => coex_network.r => (coex_cluster.r | coex_cluster2.r)
+    
+    Please read the help description for the above functions for further help.
+    
+    NOTE: It is highly recommended that you use the long options to avoid confusion, since there are so many of them.
+    
+    Inputs: none, unless you do not specify '--sample_index', and then you will have to answer (y|n) to the prompt(s).  It is highly recommended that you input the '--sample_index' option.
+    
+    Outputs: command line arguments that were run, the output of each step in the pipeline, and writes specified files to disk.
+    
+    Options:
+    --skip_filter             skips coex_filter.r
+    --skip_network            skips coex_net.r
+    --skip_cluster            skips coex_cluster.r
+    --skip_cluster2_hclust    skips coex_cluster2.r using hclust method
+    --skip_cluster2_wgcna     skips coex_cluster2.r using wgcna method
+    
+    Python-generated argument list:
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -d DIRECTORY, --directory DIRECTORY
+                        Directory containing the input file and where you want the files saved.  Leaving this out means that you must specify locations in the input and output files, or all intermediate files will be saved in your current directory, replacing the existing files.
+  -i INPUTFILE, --input INPUTFILE
+                        Input file name that stores original gene expression data matrix. Each row corresponds to a gene, and each column corresponds to a replicate. The column names are replicate names. The row names are gene names.
+  -f FILTERMETHOD, --filter_method FILTERMETHOD
+                        Method to identify highly differential expressed genes. Choices include anova and log-odd ratio (lor).
+  -q FILTERP, --filter_p FILTERP
+                        Maximum p-value up to which genes significantly highly differentially express
+  -n TOPNUMBER, --top_number TOPNUMBER
+                        Number of top genes that most highly differentially express
+  -u FILTEROUTPUT, --filter_output FILTEROUTPUT
+                        Output file name that stores gene expression data matrix including selected genes only.  NOTE: This is the same as the input to coex_net.r
+  -s SAMPLEINDEX, --sample_index SAMPLEINDEX
+                        RECOMMENDED unless no replicates in data: The file that stores a numeric vector to indicate the sample indices that replicates correspond. For example, if sample_index is equal to c(1,1,2,2,3,3), the first two columns of data correspond to Sample 1, the third and fourth columns correspond to Sample 2, and the fifth and sixth columns correspond to Sample 3. Default is that every two columns correspond to a different sample.
+  -m NETWORKMETHOD, --network_method NETWORKMETHOD
+                        Method to identify highly differential expressed genes. Choices include anova and log-odd ratio (lor).
+  -a GENELIST1, --gene_list_1 GENELIST1
+                        The first set of the genes of interest.  Leaving this out means all of the genes will be used.
+  -b GENELIST2, --gene_list_2 GENELIST2
+                        The second set of the genes of interest.  Leaving this out means all of the genes will be used.
+  -c CORRTHRESHOLD, --corr_threshold CORRTHRESHOLD
+                        Maximum threshold to set elements of Pearson correlation matrix to be zero when method='simple'.
+  -v PTHRESHOLD, --p_threshold PTHRESHOLD
+                        Maximum p-value up to which genes significantly highly differentially express
+  -r MINRSQ, --minRsq MINRSQ
+                        Minimum threshold for R2 that measures the fitness of gene co-expression network to scale-free topology in WGCNA. See pickSoftThreshold() of WGCNA for details.
+  -k MAXMEDIANK, --max_median_k MAXMEDIANK
+                        Maximum median connections for genes in network. See pickSoftThreshold() of WGCNA for details.
+  -p MAXPOWER, --max_power MAXPOWER
+                        Maximum power to decide the soft threshold. See pickSoftThreshold() of WGCNA for details.
+  -t OUTPUTTYPE, --output_type OUTPUTTYPE
+                        Type of output. When method = 'edge' or 'e', the function outputs edge list of gene co-expression network consisting of gene pairs with Pearson correlation greater than corr_threshold. When method = 'adjmat' or 'a', the function outputs the adjacency matrix of constructed gene co-expression network.
+  -e NETWORKOUTPUT, --network_output NETWORKOUTPUT
+                        Output file name.  NOTE: This is the same as the input to coex_cluster.r or coex_cluster2.r, depending on what you selected for '--output_type'
+  -l CLUSTERMETHOD, --cluster_method CLUSTERMETHOD
+                        Method to cluster genes into co-expression modules. When method = 'hclust' or 'h',the function uses hierarchical clustering. When method = 'WGCNA' or 'W', the function uses WGCNA. If users want to use 'hclust', the original adjacent matrix without any cutcoff (e.g., -c -1.2) is recommended.
+  -z MINMODULESIZE, --min_module_size MINMODULESIZE
+                        Minimum size of modules when method is WGCNA.
+  -w DETECTCUTHEIGHT, --detect_cut_height DETECTCUTHEIGHT
+                        Maximum heights to join modules in clustering.
+  -o OUTPUTFILE, --output OUTPUTFILE
+                        Output file name that stores the clustering results. The first column includes gene names, and the second column includes their modules.
+  -x HCLUSTOUTPUT, --hclust_output HCLUSTOUTPUT
+                        Output file name that stores the clustering results from the hierarchial clustering method.
+  -y WGCNAOUTPUT, --wgcna_output WGCNAOUTPUT
+                        Output file name that stores the clustering results from the WGCNA method.
+
+EXAMPLES
+    $ ./coex_pipeline.py -d arabidopsis/cultured-protoplast-cell -i data.csv --filter_p 0.0001 --filter_method a --sample_index sample_id.csv --filter_output datafilter.csv --corr_threshold 0.8 --network_output coexpression_network_edge_list.csv --min_module_size 50 --max_median_k 2000 --hclust_output coex_module_h.csv --wgcna_output coex_module_w.csv
+    $ ./coex_pipeline.py -d arabidopsis/fruit -i data.csv --filter_p 0.05 --sample_index sample_id.csv --filter_output datafilter.csv --corr_threshold 0.8 --network_output coexpression_network_edge_list.csv --min_module_size 50 --max_power 100 --minRsq 0.75 --hclust_output coex_module_h.csv --skip_cluster2_wgcna
+    $ ./coex_pipeline.py -d poplar/xylem -i data.csv
+
+SEE ALSO
+    coex_filter.r
+    coex_net.r
+    coex_cluster.r
+    coex_cluster2.r
+
+AUTHORS
+    Eric Pan, Daifeng Wang, Gang Fang, Mark Gerstein, Yale University
+----------TEST plant_expression_service coex_pipeline with --help option
+	okay
+
+NAME
+    coex_pipeline -- pipeline to identify highly differentially expressed genes, construct gene co-expression network, and cluster genes into co-expression modules
+
+SYNOPSIS
+    coex_pipeline [-ifqnusmcvrkptelzwoxy]
+
+DESCRIPTION
+    Pipeline for computing gene coexpression network and clustering genes into co-expression modules using:
+    coex_filter.r => coex_network.r => (coex_cluster.r | coex_cluster2.r)
+    
+    Please read the help description for the above functions for further help.
+    
+    NOTE: It is highly recommended that you use the long options to avoid confusion, since there are so many of them.
+    
+    Inputs: none, unless you do not specify '--sample_index', and then you will have to answer (y|n) to the prompt(s).  It is highly recommended that you input the '--sample_index' option.
+    
+    Outputs: command line arguments that were run, the output of each step in the pipeline, and writes specified files to disk.
+    
+    Options:
+    --skip_filter             skips coex_filter.r
+    --skip_network            skips coex_net.r
+    --skip_cluster            skips coex_cluster.r
+    --skip_cluster2_hclust    skips coex_cluster2.r using hclust method
+    --skip_cluster2_wgcna     skips coex_cluster2.r using wgcna method
+    
+    Python-generated argument list:
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -d DIRECTORY, --directory DIRECTORY
+                        Directory containing the input file and where you want the files saved.  Leaving this out means that you must specify locations in the input and output files, or all intermediate files will be saved in your current directory, replacing the existing files.
+  -i INPUTFILE, --input INPUTFILE
+                        Input file name that stores original gene expression data matrix. Each row corresponds to a gene, and each column corresponds to a replicate. The column names are replicate names. The row names are gene names.
+  -f FILTERMETHOD, --filter_method FILTERMETHOD
+                        Method to identify highly differential expressed genes. Choices include anova and log-odd ratio (lor).
+  -q FILTERP, --filter_p FILTERP
+                        Maximum p-value up to which genes significantly highly differentially express
+  -n TOPNUMBER, --top_number TOPNUMBER
+                        Number of top genes that most highly differentially express
+  -u FILTEROUTPUT, --filter_output FILTEROUTPUT
+                        Output file name that stores gene expression data matrix including selected genes only.  NOTE: This is the same as the input to coex_net.r
+  -s SAMPLEINDEX, --sample_index SAMPLEINDEX
+                        RECOMMENDED unless no replicates in data: The file that stores a numeric vector to indicate the sample indices that replicates correspond. For example, if sample_index is equal to c(1,1,2,2,3,3), the first two columns of data correspond to Sample 1, the third and fourth columns correspond to Sample 2, and the fifth and sixth columns correspond to Sample 3. Default is that every two columns correspond to a different sample.
+  -m NETWORKMETHOD, --network_method NETWORKMETHOD
+                        Method to identify highly differential expressed genes. Choices include anova and log-odd ratio (lor).
+  -a GENELIST1, --gene_list_1 GENELIST1
+                        The first set of the genes of interest.  Leaving this out means all of the genes will be used.
+  -b GENELIST2, --gene_list_2 GENELIST2
+                        The second set of the genes of interest.  Leaving this out means all of the genes will be used.
+  -c CORRTHRESHOLD, --corr_threshold CORRTHRESHOLD
+                        Maximum threshold to set elements of Pearson correlation matrix to be zero when method='simple'.
+  -v PTHRESHOLD, --p_threshold PTHRESHOLD
+                        Maximum p-value up to which genes significantly highly differentially express
+  -r MINRSQ, --minRsq MINRSQ
+                        Minimum threshold for R2 that measures the fitness of gene co-expression network to scale-free topology in WGCNA. See pickSoftThreshold() of WGCNA for details.
+  -k MAXMEDIANK, --max_median_k MAXMEDIANK
+                        Maximum median connections for genes in network. See pickSoftThreshold() of WGCNA for details.
+  -p MAXPOWER, --max_power MAXPOWER
+                        Maximum power to decide the soft threshold. See pickSoftThreshold() of WGCNA for details.
+  -t OUTPUTTYPE, --output_type OUTPUTTYPE
+                        Type of output. When method = 'edge' or 'e', the function outputs edge list of gene co-expression network consisting of gene pairs with Pearson correlation greater than corr_threshold. When method = 'adjmat' or 'a', the function outputs the adjacency matrix of constructed gene co-expression network.
+  -e NETWORKOUTPUT, --network_output NETWORKOUTPUT
+                        Output file name.  NOTE: This is the same as the input to coex_cluster.r or coex_cluster2.r, depending on what you selected for '--output_type'
+  -l CLUSTERMETHOD, --cluster_method CLUSTERMETHOD
+                        Method to cluster genes into co-expression modules. When method = 'hclust' or 'h',the function uses hierarchical clustering. When method = 'WGCNA' or 'W', the function uses WGCNA. If users want to use 'hclust', the original adjacent matrix without any cutcoff (e.g., -c -1.2) is recommended.
+  -z MINMODULESIZE, --min_module_size MINMODULESIZE
+                        Minimum size of modules when method is WGCNA.
+  -w DETECTCUTHEIGHT, --detect_cut_height DETECTCUTHEIGHT
+                        Maximum heights to join modules in clustering.
+  -o OUTPUTFILE, --output OUTPUTFILE
+                        Output file name that stores the clustering results. The first column includes gene names, and the second column includes their modules.
+  -x HCLUSTOUTPUT, --hclust_output HCLUSTOUTPUT
+                        Output file name that stores the clustering results from the hierarchial clustering method.
+  -y WGCNAOUTPUT, --wgcna_output WGCNAOUTPUT
+                        Output file name that stores the clustering results from the WGCNA method.
+
+EXAMPLES
+    $ ./coex_pipeline.py -d arabidopsis/cultured-protoplast-cell -i data.csv --filter_p 0.0001 --filter_method a --sample_index sample_id.csv --filter_output datafilter.csv --corr_threshold 0.8 --network_output coexpression_network_edge_list.csv --min_module_size 50 --max_median_k 2000 --hclust_output coex_module_h.csv --wgcna_output coex_module_w.csv
+    $ ./coex_pipeline.py -d arabidopsis/fruit -i data.csv --filter_p 0.05 --sample_index sample_id.csv --filter_output datafilter.csv --corr_threshold 0.8 --network_output coexpression_network_edge_list.csv --min_module_size 50 --max_power 100 --minRsq 0.75 --hclust_output coex_module_h.csv --skip_cluster2_wgcna
+    $ ./coex_pipeline.py -d poplar/xylem -i data.csv
+
+SEE ALSO
+    coex_filter.r
+    coex_net.r
+    coex_cluster.r
+    coex_cluster2.r
+
+AUTHORS
+    Eric Pan, Daifeng Wang, Gang Fang, Mark Gerstein, Yale University
+----------TEST plant_expression_service get_po_sampleidlist with -h option
+	okay
+
+    DESCRIPTION
+	Retrieve the list of expression samples (GSM#s) that corresponds to one or more of the plant tissue/organ type of interest. 
+ For example, if the input list of PO ids is:PO:0009049
+ then the output looks like:
+ PO:0009049      Arabidopsis thaliana    GSM133720
+ PO:0009049      Arabidopsis thaliana    GSM133722
+ PO:0009049      Arabidopsis thaliana    GSM133747
+ PO:0009049      Arabidopsis thaliana    GSM133748
+ PO:0009049      Populus trichocarpa     GSM327656
+ PO:0009049      Populus trichocarpa     GSM327657
+ PO:0009049      Populus trichocarpa     GSM327658
+ PO:0009049      Populus trichocarpa     GSM327659
+ PO:0009049      Populus trichocarpa     GSM327660
+ PO:0009049      Populus trichocarpa     GSM327661
+
+Usage: /kb/deployment/plbin/get_po_sampleidlist.pl [--url=http://kbase.us/services/plant_expression_service] < poIDs
+
+
+General options
+	--url=[http://kbase.us/services/plant_expression_service]		urlname of the server
+	--help		print help information
+	--version		print version information
+
+Examples: 
+
+echo PO:0009005 | get_po_sampleidlist  --species=Ara
+
+echo PO:0009005 | get_po_sampleidlist  --species=Pop
+
+echo PO:0009047 | /kb/deployment/plbin/get_po_sampleidlist.pl --url= 
+
+/kb/deployment/plbin/get_po_sampleidlist.pl --help	print out help
+
+/kb/deployment/plbin/get_po_sampleidlist.pl --version	print out version information
+
+Report bugs to Shinjae Yoo at sjyoo@bnl.gov
+----------TEST plant_expression_service get_po_sampleidlist with --help option
+	okay
+
+    DESCRIPTION
+	Retrieve the list of expression samples (GSM#s) that corresponds to one or more of the plant tissue/organ type of interest. 
+ For example, if the input list of PO ids is:PO:0009049
+ then the output looks like:
+ PO:0009049      Arabidopsis thaliana    GSM133720
+ PO:0009049      Arabidopsis thaliana    GSM133722
+ PO:0009049      Arabidopsis thaliana    GSM133747
+ PO:0009049      Arabidopsis thaliana    GSM133748
+ PO:0009049      Populus trichocarpa     GSM327656
+ PO:0009049      Populus trichocarpa     GSM327657
+ PO:0009049      Populus trichocarpa     GSM327658
+ PO:0009049      Populus trichocarpa     GSM327659
+ PO:0009049      Populus trichocarpa     GSM327660
+ PO:0009049      Populus trichocarpa     GSM327661
+
+Usage: /kb/deployment/plbin/get_po_sampleidlist.pl [--url=http://kbase.us/services/plant_expression_service] < poIDs
+
+
+General options
+	--url=[http://kbase.us/services/plant_expression_service]		urlname of the server
+	--help		print help information
+	--version		print version information
+
+Examples: 
+
+echo PO:0009005 | get_po_sampleidlist  --species=Ara
+
+echo PO:0009005 | get_po_sampleidlist  --species=Pop
+
+echo PO:0009047 | /kb/deployment/plbin/get_po_sampleidlist.pl --url= 
+
+/kb/deployment/plbin/get_po_sampleidlist.pl --help	print out help
+
+/kb/deployment/plbin/get_po_sampleidlist.pl --version	print out version information
+
+Report bugs to Shinjae Yoo at sjyoo@bnl.gov
+----------TEST plant_expression_service coex_cluster2 with -h option
+	okay
+
+Usage: 
+NAME
+
+	coex_cluster2 -- cluster genes inot co-expression modules from gene expression data matrix
+
+SYNOPSIS
+
+	/kb/deployment/rsbin/coex_cluster2.r [-inrkpcsdo]
+
+DESCRIPTION
+
+	Given the gene expression table, this function clusters genes into co-expression modules 
+using original hierarchical clustering or weighted gene co-expression network analysis (WGCNA, http://www.genetics.ucla.edu/labs/horvath/CoexpressionNetwork/Rpackages/WGCNA). 
+
+Input: a table of gene expression data matrix in .csv file
+
+Output: a table of genes and their co-expression modules in .csv file
+
+Options:
+	-i INPUT, --input=INPUT
+		REQUIRED: Input file name that stores the gene expression data matrix that users want to construct gene co-expression network and do clustering. Each row corresponds to a gene, and each column corresponds to a replicate. The column names are replicate names. The row names are gene names.
+
+	-a GENES1, --genes1=GENES1
+		The first set of the genes of interest.  Leaving this out means all of the genes will be used.
+
+	-b GENES2, --genes2=GENES2
+		The second set of the genes of interest.  Leaving this out means all of the genes will be used.
+
+	-n NET_METHOD, --net_method=NET_METHOD
+		Method to construct gene co-expression network. When net_method = ‘simple’ or ‘s’, the function constructs gene co-expression network using Pearson correlation matrix. When net_method = “WGCNA” or ‘w’, the function constructs gene co-expression network using Pearson correlations between genes, and “signed” network by WGCNA. [default "simple"]
+
+	-r MINRSQ, --minRsq=MINRSQ
+		Minimum threshold for R2 that measures the fitness of gene co-expression network to scale-free topology in WGCNA. See pickSoftThreshold() of WGCNA for details. [default 0.8]
+
+	-k MAXMEDIANK, --maxmediank=MAXMEDIANK
+		Maximum median connections for genes in network. See pickSoftThreshold() of WGCNA for details. [default 40]
+
+	-p MAXPOWER, --maxpower=MAXPOWER
+		Maximum power to decide the soft threshold. See pickSoftThreshold() of WGCNA for details. [default 50]
+
+	-c CLUST_METHOD, --clust_method=CLUST_METHOD
+		Method to cluster genes into co-expression modules. When clust_method = ‘hclust’ or ‘h’,the function uses hierarchical clustering. When clust_method = “WGCNA” or ‘w’, the function uses WGCNA. [default "WGCNA"]
+
+	-s MINMODULESIZE, --minModuleSize=MINMODULESIZE
+		Minimum size of modules when method is WGCNA. [default 50]
+
+	-d DETECTCUTHEIGHT, --detectCutHeight=DETECTCUTHEIGHT
+		Maximum heights to join modules in clustering. [default 0.99]
+
+	-o OUTPUT, --output=OUTPUT
+		Output file name that stores the clustering results. The first column includes gene names, and the second column includes their modules. [default "coex_modules.csv"]
+
+	-h, --help
+		Show this help message and exit
+
+
+EXAMPLES 
+
+	$coex_cluster2  -i data.csv -c WGCNA -n WGCNA –o coex_modules.csv
+
+	$coex_cluster2  -i data.csv -c hclust -n simple –o coex_modules.csv
+
+SEE ALSO 
+
+	coex_filter 
+
+	coex_net 
+
+	coex_cluster
+
+AUTHORS 
+
+	Daifeng Wang, Gang Fang, Mark Gerstein, Eric Pan, Yale University
+
+----------TEST plant_expression_service coex_cluster2 with --help option
+	okay
+
+Usage: 
+NAME
+
+	coex_cluster2 -- cluster genes inot co-expression modules from gene expression data matrix
+
+SYNOPSIS
+
+	/kb/deployment/rsbin/coex_cluster2.r [-inrkpcsdo]
+
+DESCRIPTION
+
+	Given the gene expression table, this function clusters genes into co-expression modules 
+using original hierarchical clustering or weighted gene co-expression network analysis (WGCNA, http://www.genetics.ucla.edu/labs/horvath/CoexpressionNetwork/Rpackages/WGCNA). 
+
+Input: a table of gene expression data matrix in .csv file
+
+Output: a table of genes and their co-expression modules in .csv file
+
+Options:
+	-i INPUT, --input=INPUT
+		REQUIRED: Input file name that stores the gene expression data matrix that users want to construct gene co-expression network and do clustering. Each row corresponds to a gene, and each column corresponds to a replicate. The column names are replicate names. The row names are gene names.
+
+	-a GENES1, --genes1=GENES1
+		The first set of the genes of interest.  Leaving this out means all of the genes will be used.
+
+	-b GENES2, --genes2=GENES2
+		The second set of the genes of interest.  Leaving this out means all of the genes will be used.
+
+	-n NET_METHOD, --net_method=NET_METHOD
+		Method to construct gene co-expression network. When net_method = ‘simple’ or ‘s’, the function constructs gene co-expression network using Pearson correlation matrix. When net_method = “WGCNA” or ‘w’, the function constructs gene co-expression network using Pearson correlations between genes, and “signed” network by WGCNA. [default "simple"]
+
+	-r MINRSQ, --minRsq=MINRSQ
+		Minimum threshold for R2 that measures the fitness of gene co-expression network to scale-free topology in WGCNA. See pickSoftThreshold() of WGCNA for details. [default 0.8]
+
+	-k MAXMEDIANK, --maxmediank=MAXMEDIANK
+		Maximum median connections for genes in network. See pickSoftThreshold() of WGCNA for details. [default 40]
+
+	-p MAXPOWER, --maxpower=MAXPOWER
+		Maximum power to decide the soft threshold. See pickSoftThreshold() of WGCNA for details. [default 50]
+
+	-c CLUST_METHOD, --clust_method=CLUST_METHOD
+		Method to cluster genes into co-expression modules. When clust_method = ‘hclust’ or ‘h’,the function uses hierarchical clustering. When clust_method = “WGCNA” or ‘w’, the function uses WGCNA. [default "WGCNA"]
+
+	-s MINMODULESIZE, --minModuleSize=MINMODULESIZE
+		Minimum size of modules when method is WGCNA. [default 50]
+
+	-d DETECTCUTHEIGHT, --detectCutHeight=DETECTCUTHEIGHT
+		Maximum heights to join modules in clustering. [default 0.99]
+
+	-o OUTPUT, --output=OUTPUT
+		Output file name that stores the clustering results. The first column includes gene names, and the second column includes their modules. [default "coex_modules.csv"]
+
+	-h, --help
+		Show this help message and exit
+
+
+EXAMPLES 
+
+	$coex_cluster2  -i data.csv -c WGCNA -n WGCNA –o coex_modules.csv
+
+	$coex_cluster2  -i data.csv -c hclust -n simple –o coex_modules.csv
+
+SEE ALSO 
+
+	coex_filter 
+
+	coex_net 
+
+	coex_cluster
+
+AUTHORS 
+
+	Daifeng Wang, Gang Fang, Mark Gerstein, Eric Pan, Yale University
+
+----------TEST plant_expression_service get_all_po with -h option
+	okay
+
+    DESCRIPTION
+	Retrieve the list of all plant ontology IDs (POIDs) currently available in the database.
+	For example, the output looks like:
+      PO:0000003	whole plant
+      PO:0000005	cultured cell
+      PO:0000006	cultured protoplast
+      PO:0009005	root
+      PO:0009006	shoot
+      PO:0009025	leaf
+      PO:0009046	flower
+      PO:0009049	Inflorescence
+      PO:0009001	fruit
+      PO:0009010	seed
+Usage: /kb/deployment/plbin/get_all_po.pl [--url=http://kbase.us/services/plant_expression_service]
+
+
+General options
+	--url=[http://kbase.us/services/plant_expression_service]		urlname of the server
+	--help		print help information
+	--version		print version information
+
+Examples: 
+/kb/deployment/plbin/get_all_po.pl --url=http://kbase.us/services/plant_expression_service 
+
+/kb/deployment/plbin/get_all_po.pl --help	print out help
+
+/kb/deployment/plbin/get_all_po.pl --version	print out version information
+
+Report bugs to Shinjae Yoo at sjyoo@bnl.gov
+----------TEST plant_expression_service get_all_po with --help option
+	okay
+
+    DESCRIPTION
+	Retrieve the list of all plant ontology IDs (POIDs) currently available in the database.
+	For example, the output looks like:
+      PO:0000003	whole plant
+      PO:0000005	cultured cell
+      PO:0000006	cultured protoplast
+      PO:0009005	root
+      PO:0009006	shoot
+      PO:0009025	leaf
+      PO:0009046	flower
+      PO:0009049	Inflorescence
+      PO:0009001	fruit
+      PO:0009010	seed
+Usage: /kb/deployment/plbin/get_all_po.pl [--url=http://kbase.us/services/plant_expression_service]
+
+
+General options
+	--url=[http://kbase.us/services/plant_expression_service]		urlname of the server
+	--help		print help information
+	--version		print version information
+
+Examples: 
+/kb/deployment/plbin/get_all_po.pl --url=http://kbase.us/services/plant_expression_service 
+
+/kb/deployment/plbin/get_all_po.pl --help	print out help
+
+/kb/deployment/plbin/get_all_po.pl --version	print out version information
+
+Report bugs to Shinjae Yoo at sjyoo@bnl.gov
+----------TEST plant_expression_service coex_filter with -h option
+	okay
+
+Usage: 
+NAME
+
+	coex_filter -- identify highly differeitially expressed genes
+
+SYNOPSIS
+
+	/kb/deployment/rsbin/coex_filter.r [-impnos]
+
+DESCRIPTION
+
+	This function identifies genes that are highly differentially expressed across samples using ANOVA (http://www.maths.bath.ac.uk/~jjf23/book/) 
+or Log-odd ratios (http://www.bioconductor.org/packages/2.12/bioc/html/limma.html).
+Users can identify the highly differentially expressed across samples either setting up a p-value threshold or choosing the top number.
+
+Input: a table of gene expression data matrix in .csv file
+
+Output: a table of highly differentially expressed genes along with expression value, i.e., mean of replicates per sample in .csv file
+
+Options:
+	-i INPUT, --input=INPUT
+		REQUIRED: Input file name that stores original gene expression data matrix. Each row corresponds to a gene, and each column corresponds to a replicate. The column names are replicate names. The row names are gene names.
+
+	-m METHOD, --method=METHOD
+		Method to identify highly differential expressed genes. Choices include anova and log-odd ratio (lor). [default "lor"]
+
+	-p P_THRESHOLD, --p_threshold=P_THRESHOLD
+		Maximum p-value up to which genes significantly highly differentially express [default 0.05]
+
+	-n TOPNUMBER, --topnumber=TOPNUMBER
+		Number of top genes that most highly differentially express [default 0]
+
+	-o OUTPUT, --output=OUTPUT
+		Output file name that stores gene expression data matrix including selected genes only [default "Gene_expression_data_filtered_for_clustering.csv"]
+
+	-s SAMPLE_INDEX, --sample_index=SAMPLE_INDEX
+		RECOMMENDED unless no replicates in data: The file that stores a numeric vector to indicate the sample indices that replicates correspond. For example, if sample_index is equal to c(1,1,2,2,3,3), the first two columns of data correspond to Sample 1, the third and fourth columns correspond to Sample 2, and the fifth and sixth columns correspond to Sample 3. Default is that every two columns correspond to a different sample.
+
+	-u HUMAN, --human=HUMAN
+		Accept human input regarding replicates? 'y' to allow, 'n' to automatically use defaults. [y/n]  (Default is 'n')
+
+	-r HAS_REPLICATES, --has_replicates=HAS_REPLICATES
+		Does your data have replicates (this helps avoid user input during program runtime)?  [y/n]  (Default is 'y')
+
+	-d DEFAULT_ACTION, --default_action=DEFAULT_ACTION
+		Use the default action when dealing with replicates?  [y/n]  (Default is 'y')
+
+	-h, --help
+		Show this help message and exit
+
+
+EXAMPLES 
+
+	$coex_filter -i data.csv –m lor -p 0.01 -s sample_id.csv -o datafilter.csv 
+
+	$coex_filter -i data.csv –m anova -n 200 -s sample_id.csv -o datafilter.csv
+
+SEE ALSO 
+
+	coex_net 
+
+	coex_cluster 
+
+	coex_cluster2
+
+AUTHORS 
+
+	Daifeng Wang, Gang Fang, Mark Gerstein, Eric Pan, Yale University
+
+----------TEST plant_expression_service coex_filter with --help option
+	okay
+
+Usage: 
+NAME
+
+	coex_filter -- identify highly differeitially expressed genes
+
+SYNOPSIS
+
+	/kb/deployment/rsbin/coex_filter.r [-impnos]
+
+DESCRIPTION
+
+	This function identifies genes that are highly differentially expressed across samples using ANOVA (http://www.maths.bath.ac.uk/~jjf23/book/) 
+or Log-odd ratios (http://www.bioconductor.org/packages/2.12/bioc/html/limma.html).
+Users can identify the highly differentially expressed across samples either setting up a p-value threshold or choosing the top number.
+
+Input: a table of gene expression data matrix in .csv file
+
+Output: a table of highly differentially expressed genes along with expression value, i.e., mean of replicates per sample in .csv file
+
+Options:
+	-i INPUT, --input=INPUT
+		REQUIRED: Input file name that stores original gene expression data matrix. Each row corresponds to a gene, and each column corresponds to a replicate. The column names are replicate names. The row names are gene names.
+
+	-m METHOD, --method=METHOD
+		Method to identify highly differential expressed genes. Choices include anova and log-odd ratio (lor). [default "lor"]
+
+	-p P_THRESHOLD, --p_threshold=P_THRESHOLD
+		Maximum p-value up to which genes significantly highly differentially express [default 0.05]
+
+	-n TOPNUMBER, --topnumber=TOPNUMBER
+		Number of top genes that most highly differentially express [default 0]
+
+	-o OUTPUT, --output=OUTPUT
+		Output file name that stores gene expression data matrix including selected genes only [default "Gene_expression_data_filtered_for_clustering.csv"]
+
+	-s SAMPLE_INDEX, --sample_index=SAMPLE_INDEX
+		RECOMMENDED unless no replicates in data: The file that stores a numeric vector to indicate the sample indices that replicates correspond. For example, if sample_index is equal to c(1,1,2,2,3,3), the first two columns of data correspond to Sample 1, the third and fourth columns correspond to Sample 2, and the fifth and sixth columns correspond to Sample 3. Default is that every two columns correspond to a different sample.
+
+	-u HUMAN, --human=HUMAN
+		Accept human input regarding replicates? 'y' to allow, 'n' to automatically use defaults. [y/n]  (Default is 'n')
+
+	-r HAS_REPLICATES, --has_replicates=HAS_REPLICATES
+		Does your data have replicates (this helps avoid user input during program runtime)?  [y/n]  (Default is 'y')
+
+	-d DEFAULT_ACTION, --default_action=DEFAULT_ACTION
+		Use the default action when dealing with replicates?  [y/n]  (Default is 'y')
+
+	-h, --help
+		Show this help message and exit
+
+
+EXAMPLES 
+
+	$coex_filter -i data.csv –m lor -p 0.01 -s sample_id.csv -o datafilter.csv 
+
+	$coex_filter -i data.csv –m anova -n 200 -s sample_id.csv -o datafilter.csv
+
+SEE ALSO 
+
+	coex_net 
+
+	coex_cluster 
+
+	coex_cluster2
+
+AUTHORS 
+
+	Daifeng Wang, Gang Fang, Mark Gerstein, Eric Pan, Yale University
+
+----------TEST plant_expression_service get_experiments_by_sampleid with -h option
+	okay
+
+    DESCRIPTION
+	This function provides the expression values  corresponding to each given experiment sample in the input list of sample ids (GSM#s).For each sample in the input list of samples, it extracts the expressed genes (kbase gene identifier) and their corresponding expression values. e.g.for samples:"GSM128731","GSM131686"
+ Output looks like this:
+ "","GSM128731","GSM131686"
+ "kb|g.3899.locus.23281",4.19051374151256,4.81544532287956
+ "kb|g.3899.locus.23342",8.0461118314498,7.75470811901751
+ "kb|g.3899.locus.23319",8.95008412287335,8.0937520447078
+ "kb|g.3899.locus.23295",6.70090411599666,7.42720023331292
+ "kb|g.3899.locus.23378",8.79308438662897,8.23643301305399
+
+Usage: /kb/deployment/plbin/get_experiments_by_sampleid.pl [--url=http://kbase.us/services/plant_expression_service] < sampleIDs
+
+
+General options
+	--url=[http://kbase.us/services/plant_expression_service]		urlname of the server
+	--help		print help information
+	--version		print version information
+
+Examples: 
+echo GSM128731,GSM131686,GSM131687 | get_experiments_by_sampleid
+
+/kb/deployment/plbin/get_experiments_by_sampleid.pl --help	print out help
+
+/kb/deployment/plbin/get_experiments_by_sampleid.pl --version	print out version information
+
+Report bugs to Shinjae Yoo at sjyoo@bnl.gov
+----------TEST plant_expression_service get_experiments_by_sampleid with --help option
+	okay
+
+    DESCRIPTION
+	This function provides the expression values  corresponding to each given experiment sample in the input list of sample ids (GSM#s).For each sample in the input list of samples, it extracts the expressed genes (kbase gene identifier) and their corresponding expression values. e.g.for samples:"GSM128731","GSM131686"
+ Output looks like this:
+ "","GSM128731","GSM131686"
+ "kb|g.3899.locus.23281",4.19051374151256,4.81544532287956
+ "kb|g.3899.locus.23342",8.0461118314498,7.75470811901751
+ "kb|g.3899.locus.23319",8.95008412287335,8.0937520447078
+ "kb|g.3899.locus.23295",6.70090411599666,7.42720023331292
+ "kb|g.3899.locus.23378",8.79308438662897,8.23643301305399
+
+Usage: /kb/deployment/plbin/get_experiments_by_sampleid.pl [--url=http://kbase.us/services/plant_expression_service] < sampleIDs
+
+
+General options
+	--url=[http://kbase.us/services/plant_expression_service]		urlname of the server
+	--help		print help information
+	--version		print version information
+
+Examples: 
+echo GSM128731,GSM131686,GSM131687 | get_experiments_by_sampleid
+
+/kb/deployment/plbin/get_experiments_by_sampleid.pl --help	print out help
+
+/kb/deployment/plbin/get_experiments_by_sampleid.pl --version	print out version information
+
+Report bugs to Shinjae Yoo at sjyoo@bnl.gov
+----------TEST plant_expression_service coex_cluster with -h option
+	okay
+
+Usage: 
+NAME
+
+	coex_cluster -- cluster genes inot co-expression modules from adjacency matrix of gene co-expressio network
+
+SYNOPSIS
+
+	/kb/deployment/rsbin/coex_cluster.r [-imsdo]
+
+DESCRIPTION
+
+	Given the adjacency matrix of gene co-expression network, this function clusters genes into co-expression modules 
+using original hierarchical clustering or weighted gene co-expression network analysis (WGCNA, http://www.genetics.ucla.edu/labs/horvath/CoexpressionNetwork/Rpackages/WGCNA). 
+
+Input: adjacency matrix of gene co-expression network in .csv file
+
+Output: a table of genes and their co-expression modules in .csv file
+
+Options:
+	-i INPUT, --input=INPUT
+		REQUIRED: Input file name that stores the adjacency matrix of constructed gene co-expression network for clustering. The row and column names of adjacency matrix correspond gene names.
+
+	-m METHOD, --method=METHOD
+		Method to cluster genes into co-expression modules. When method = ‘hclust’ or ‘h’,the function uses hierarchical clustering. When method = “WGCNA” or ‘W’, the function uses WGCNA. [default "WGCNA"] If users want to use “hclust”, the original adjacent matrix without any cutcoff (e.g., -c -1.2) is recommended.
+
+	-s MINMODULESIZE, --minModuleSize=MINMODULESIZE
+		Minimum size of modules when method is WGCNA. [default 50]
+
+	-d DETECTCUTHEIGHT, --detectCutHeight=DETECTCUTHEIGHT
+		Maximum heights to join modules in clustering. [default 0.99]
+
+	-o OUTPUT, --output=OUTPUT
+		Output file name that stores the clustering results. The first column includes gene names, and the second column includes their modules. [default "coex_modules.csv"]
+
+	-h, --help
+		Show this help message and exit
+
+
+EXAMPLES 
+
+	$coex_cluster  -i adjmat.csv -m WGCNA -s 30 -d 0.999 –o coex_modules.csv 
+
+SEE ALSO 
+
+	coex_filter 
+
+	coex_net 
+
+	coex_cluster2
+
+AUTHORS 
+
+	Daifeng Wang, Gang Fang, Mark Gerstein, Eric Pan, Yale University
+
+----------TEST plant_expression_service coex_cluster with --help option
+	okay
+
+Usage: 
+NAME
+
+	coex_cluster -- cluster genes inot co-expression modules from adjacency matrix of gene co-expressio network
+
+SYNOPSIS
+
+	/kb/deployment/rsbin/coex_cluster.r [-imsdo]
+
+DESCRIPTION
+
+	Given the adjacency matrix of gene co-expression network, this function clusters genes into co-expression modules 
+using original hierarchical clustering or weighted gene co-expression network analysis (WGCNA, http://www.genetics.ucla.edu/labs/horvath/CoexpressionNetwork/Rpackages/WGCNA). 
+
+Input: adjacency matrix of gene co-expression network in .csv file
+
+Output: a table of genes and their co-expression modules in .csv file
+
+Options:
+	-i INPUT, --input=INPUT
+		REQUIRED: Input file name that stores the adjacency matrix of constructed gene co-expression network for clustering. The row and column names of adjacency matrix correspond gene names.
+
+	-m METHOD, --method=METHOD
+		Method to cluster genes into co-expression modules. When method = ‘hclust’ or ‘h’,the function uses hierarchical clustering. When method = “WGCNA” or ‘W’, the function uses WGCNA. [default "WGCNA"] If users want to use “hclust”, the original adjacent matrix without any cutcoff (e.g., -c -1.2) is recommended.
+
+	-s MINMODULESIZE, --minModuleSize=MINMODULESIZE
+		Minimum size of modules when method is WGCNA. [default 50]
+
+	-d DETECTCUTHEIGHT, --detectCutHeight=DETECTCUTHEIGHT
+		Maximum heights to join modules in clustering. [default 0.99]
+
+	-o OUTPUT, --output=OUTPUT
+		Output file name that stores the clustering results. The first column includes gene names, and the second column includes their modules. [default "coex_modules.csv"]
+
+	-h, --help
+		Show this help message and exit
+
+
+EXAMPLES 
+
+	$coex_cluster  -i adjmat.csv -m WGCNA -s 30 -d 0.999 –o coex_modules.csv 
+
+SEE ALSO 
+
+	coex_filter 
+
+	coex_net 
+
+	coex_cluster2
+
+AUTHORS 
+
+	Daifeng Wang, Gang Fang, Mark Gerstein, Eric Pan, Yale University
+
+----------TEST plant_expression_service get_experiments_by_seriesid with -h option
+	okay
+
+    DESCRIPTION
+	This function provides the expression data for each experiment corresponding to the given list of series (GSE#s). It first retrieves the experiments sample ids (GSM#s) for each series and subsequently, it extracts the expressed genes and their corresponding expression values for each experiment. It then returns a table of data containing GSE#, GSM#, Expressed Gene ID, and Expression Value.*/
+Usage: /kb/deployment/plbin/get_experiments_by_seriesid.pl [--url=http://kbase.us/services/plant_expression_service] < seriesIDs
+
+
+General options
+	--url=[http://kbase.us/services/plant_expression_service]		urlname of the server
+	--help		print help information
+	--version		print version information
+
+Examples: 
+echo EO:0007049 | /kb/deployment/plbin/get_experiments_by_seriesid.pl --url=http://kbase.us/services/plant_expression_service 
+
+/kb/deployment/plbin/get_experiments_by_seriesid.pl --help	print out help
+
+/kb/deployment/plbin/get_experiments_by_seriesid.pl --version	print out version information
+
+Report bugs to Shinjae Yoo at sjyoo@bnl.gov
+----------TEST plant_expression_service get_experiments_by_seriesid with --help option
+	okay
+
+    DESCRIPTION
+	This function provides the expression data for each experiment corresponding to the given list of series (GSE#s). It first retrieves the experiments sample ids (GSM#s) for each series and subsequently, it extracts the expressed genes and their corresponding expression values for each experiment. It then returns a table of data containing GSE#, GSM#, Expressed Gene ID, and Expression Value.*/
+Usage: /kb/deployment/plbin/get_experiments_by_seriesid.pl [--url=http://kbase.us/services/plant_expression_service] < seriesIDs
+
+
+General options
+	--url=[http://kbase.us/services/plant_expression_service]		urlname of the server
+	--help		print help information
+	--version		print version information
+
+Examples: 
+echo EO:0007049 | /kb/deployment/plbin/get_experiments_by_seriesid.pl --url=http://kbase.us/services/plant_expression_service 
+
+/kb/deployment/plbin/get_experiments_by_seriesid.pl --help	print out help
+
+/kb/deployment/plbin/get_experiments_by_seriesid.pl --version	print out version information
+
+Report bugs to Shinjae Yoo at sjyoo@bnl.gov
+----------TEST plant_expression_service get_experiments_by_sampleid_geneid with -h option
+	okay
+
+    DESCRIPTION
+	Retrieve the expression values corresponding to each given sample in the input list of samples ((typically NCBI GEO series sample ids: GSM#s) for given list of genes (kbase identifier). Here is an example:
+ echo GSM128731,GSM131686 | get_experiments_by_sampleid_geneid --url=localhost:7063 "kb|g.3899.locus.23281,kb|g.3899.locus.23295,kb|g.3899.locus.23378"
+
+ Output looks like this: 
+ "","GSM128731","GSM131686"
+ "kb|g.3899.locus.23281",4.19051374151256,4.81544532287956
+ "kb|g.3899.locus.23295",6.70090411599666,7.42720023331292
+ "kb|g.3899.locus.23378",8.79308438662897,8.23643301305399
+									       
+Usage: /kb/deployment/plbin/get_experiments_by_sampleid_geneid.pl [--url=http://kbase.us/services/plant_expression_service] geneids < sampleIDs
+
+
+General options
+	--url=[http://kbase.us/services/plant_expression_service]		urlname of the server
+	--help		print help information
+	--version		print version information
+
+Examples: 
+
+echo GSM106833,GSM106827,GSM106908 | get_experiments_by_sampleid_geneid --url=localhost:7063 'kb|g.3899.locus.2366,kb|g.3899.locus.1892,kb|g.3899.locus.2354,kb|g.3899.locus.2549,kb|g.3899.locus.2420,kb|g.3899.locus.2253,kb|g.3899.locus.2229'
+
+/kb/deployment/plbin/get_experiments_by_sampleid_geneid.pl --help	print out help
+
+/kb/deployment/plbin/get_experiments_by_sampleid_geneid.pl --version	print out version information
+
+Report bugs to Shinjae Yoo at sjyoo@bnl.gov
+----------TEST plant_expression_service get_experiments_by_sampleid_geneid with --help option
+	okay
+
+    DESCRIPTION
+	Retrieve the expression values corresponding to each given sample in the input list of samples ((typically NCBI GEO series sample ids: GSM#s) for given list of genes (kbase identifier). Here is an example:
+ echo GSM128731,GSM131686 | get_experiments_by_sampleid_geneid --url=localhost:7063 "kb|g.3899.locus.23281,kb|g.3899.locus.23295,kb|g.3899.locus.23378"
+
+ Output looks like this: 
+ "","GSM128731","GSM131686"
+ "kb|g.3899.locus.23281",4.19051374151256,4.81544532287956
+ "kb|g.3899.locus.23295",6.70090411599666,7.42720023331292
+ "kb|g.3899.locus.23378",8.79308438662897,8.23643301305399
+									       
+Usage: /kb/deployment/plbin/get_experiments_by_sampleid_geneid.pl [--url=http://kbase.us/services/plant_expression_service] geneids < sampleIDs
+
+
+General options
+	--url=[http://kbase.us/services/plant_expression_service]		urlname of the server
+	--help		print help information
+	--version		print version information
+
+Examples: 
+
+echo GSM106833,GSM106827,GSM106908 | get_experiments_by_sampleid_geneid --url=localhost:7063 'kb|g.3899.locus.2366,kb|g.3899.locus.1892,kb|g.3899.locus.2354,kb|g.3899.locus.2549,kb|g.3899.locus.2420,kb|g.3899.locus.2253,kb|g.3899.locus.2229'
+
+/kb/deployment/plbin/get_experiments_by_sampleid_geneid.pl --help	print out help
+
+/kb/deployment/plbin/get_experiments_by_sampleid_geneid.pl --version	print out version information
+
+Report bugs to Shinjae Yoo at sjyoo@bnl.gov
+----------TEST plant_expression_service get_eo_descriptions with -h option
+	okay
+
+     DESCRIPTION
+	 Retrieve the list of selected plant environment ontology IDs (EOIDs) description corresponding to an input list of EOIDs.
+	 For example for an input list of EOIDs: EO:0007041,EO:0007049 the output is:
+         EO:0007041	antibiotic regimen
+         EO:0007049	soil environment
+Usage: /kb/deployment/plbin/get_eo_descriptions.pl [--url=http://kbase.us/services/plant_expression_service] < eoIDs
+
+
+General options
+	--url=[http://kbase.us/services/plant_expression_service]		urlname of the server
+	--help		print help information
+	--version		print version information
+
+Examples: 
+echo EO:0007049 | /kb/deployment/plbin/get_eo_descriptions.pl --url=http://kbase.us/services/plant_expression_service 
+
+/kb/deployment/plbin/get_eo_descriptions.pl --help	print out help
+
+/kb/deployment/plbin/get_eo_descriptions.pl --version	print out version information
+
+Report bugs to Shinjae Yoo at sjyoo@bnl.gov
+----------TEST plant_expression_service get_eo_descriptions with --help option
+	okay
+
+     DESCRIPTION
+	 Retrieve the list of selected plant environment ontology IDs (EOIDs) description corresponding to an input list of EOIDs.
+	 For example for an input list of EOIDs: EO:0007041,EO:0007049 the output is:
+         EO:0007041	antibiotic regimen
+         EO:0007049	soil environment
+Usage: /kb/deployment/plbin/get_eo_descriptions.pl [--url=http://kbase.us/services/plant_expression_service] < eoIDs
+
+
+General options
+	--url=[http://kbase.us/services/plant_expression_service]		urlname of the server
+	--help		print help information
+	--version		print version information
+
+Examples: 
+echo EO:0007049 | /kb/deployment/plbin/get_eo_descriptions.pl --url=http://kbase.us/services/plant_expression_service 
+
+/kb/deployment/plbin/get_eo_descriptions.pl --help	print out help
+
+/kb/deployment/plbin/get_eo_descriptions.pl --version	print out version information
+
+Report bugs to Shinjae Yoo at sjyoo@bnl.gov
+----------TEST plant_expression_service get_all_eo with -h option
+	okay
+
+    DESCRIPTION
+	Retrieve the list of all plant environment ontology IDs (EOIDs) currently available in the database.
+	For example:
+        EO:0007001	UV-B light regimen
+        EO:0007002	UV-A light regimen
+        EO:0007041	antibiotic regimen
+        EO:0007049	soil environment
+Usage: /kb/deployment/plbin/get_all_eo.pl [--url=http://kbase.us/services/plant_expression_service]
+
+
+General options
+	--url=[http://kbase.us/services/plant_expression_service]		urlname of the server
+	--help		print help information
+	--version		print version information
+
+Examples: 
+/kb/deployment/plbin/get_all_eo.pl --url=http://kbase.us/services/plant_expression_service 
+
+/kb/deployment/plbin/get_all_eo.pl --help	print out help
+
+/kb/deployment/plbin/get_all_eo.pl --version	print out version information
+
+Report bugs to Shinjae Yoo at sjyoo@bnl.gov
+----------TEST plant_expression_service get_all_eo with --help option
+	okay
+
+    DESCRIPTION
+	Retrieve the list of all plant environment ontology IDs (EOIDs) currently available in the database.
+	For example:
+        EO:0007001	UV-B light regimen
+        EO:0007002	UV-A light regimen
+        EO:0007041	antibiotic regimen
+        EO:0007049	soil environment
+Usage: /kb/deployment/plbin/get_all_eo.pl [--url=http://kbase.us/services/plant_expression_service]
+
+
+General options
+	--url=[http://kbase.us/services/plant_expression_service]		urlname of the server
+	--help		print help information
+	--version		print version information
+
+Examples: 
+/kb/deployment/plbin/get_all_eo.pl --url=http://kbase.us/services/plant_expression_service 
+
+/kb/deployment/plbin/get_all_eo.pl --help	print out help
+
+/kb/deployment/plbin/get_all_eo.pl --version	print out version information
+
+Report bugs to Shinjae Yoo at sjyoo@bnl.gov
+
+
+Error Summary:
+

@@ -1,0 +1,32 @@
+Usage: get_relationship_HasLevelsFrom [arguments] < ids > table.with.fields.added
+
+--show-fields
+    List the available fields.
+
+-c num        
+    Select the identifier from column num
+
+--from field-list
+    Choose a set of fields from the Feature
+    entity to return. Field-list is a comma-separated list of strings. The
+    following fields are available:
+        id
+        feature_type
+        source_id
+        sequence_length
+        function
+        alias
+
+--rel field-list
+    Choose a set of fields from the relationship to return. Field-list is a comma-separated list of 
+    strings. The following fields are available:
+        from_link
+        to_link
+        level_vector
+
+--to field-list
+    Choose a set of fields from the ProbeSet entity to 
+    return. Field-list is a comma-separated list of strings. The following fields are available:
+        id
+
+

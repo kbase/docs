@@ -1,0 +1,592 @@
+<h1>Using the Tree Services to Analyze Metagenomic Community Samples</h1>
+
+<h4>Purpose</h4>
+This tutorial provides a general introduction to the Tree service command line scripts, ultimately
+demonstrating how to view metagenomic abundance data within the context of isolate gene trees.
+
+<h4>Prerequisite Activities</h4>
+This tutorial assumes that you have basic familiarity with the command line and experience with
+the KBase Central Data Model (CDM) and Central Data Model API (CDMI).
+
+<h4>Related Tutorials</h4>
+none.
+
+
+
+<h2>Introduction</h3>
+<p>Phylogenetic trees of gene families are an essential tool for determining and understanding the functional
+role of sequenced genes.  The KBase Tree service provides a set of functions to find, manipulate, and visualize
+phylogenetic trees and the multiple sequence alignments that are used to construct phylogenetic trees.  Additionally,
+the service provides a growing library of methods for analyzing data from metagenomic samples in the context of
+isolate gene trees.</p>
+<p>Trees in KBase are stored by default in <a href="http://en.wikipedia.org/wiki/Newick_format">Newick format</a>, which
+is a succinct, text-based format for representing tree structures.  Richer meta data associated with particular
+trees or nodes is stored directly in the CDM so that it is more amenable to search.  Most phylogenetic trees are
+constructed from protein sequence alignments.  When associated alignment data is available, KBase will store the relationship
+between trees and their alignments in the relationship named 'IsUsedToBuildTree'. </p>
+<p>All of the tree service commands provide help and usage information if they are run with the '-h' or '--help'
+options, which may be useful throughout this tutorial.  You can also use the autocompletion feature of your command line
+enviornment to list the available tree commands.  On a Linux or Mac environment, simply type 'tree-' followed by a tab.
+In the IRIS environment, type 'tree-' followed by the right arrow key.</p>
+
+<h2>Finding Trees & Alignments</h2>
+<p> KBase has constructed a large library of precomputed protein sequece alignments and gene trees based on the genomic
+sequences stored in the CDM.  The trees and alignments range from large superfamilies with tens of thousands of sequences to
+small trees composed of a few related genes with conserved sequence but perhaps no known function.</p>
+<p>The first step, therefore, is to identifiy the set of trees and alignments that include your gene of interest.
+If you know the KBase feature ID of a particular gene, you can quickly identify trees that contain your gene of
+interest using the 'tree-find-tree-ids' command:</p>
+<pre>
+    > tree-find-tree-ids -f 'kb|g.1870.peg.3915'
+    kb|tree.11259
+    kb|tree.11314
+    kb|tree.1242
+    kb|tree.1639
+    kb|tree.1640
+    kb|tree.23396
+    kb|tree.28891
+    ....
+</pre>
+<p>Calling this command with the '-f' flag indicates that you want to find trees based on a KBase feature ID.  If any
+trees are found, then a list of the trees is displayed in the console.  Similarly, we can find the set of alignments
+that align this gene by calling the 'tree-find-alignment-ids' command:</p>
+<pre>
+    > tree-find-alignment-ids -f 'kb|g.1870.peg.3915'
+    kb|aln.11259
+    kb|aln.11314
+    kb|aln.1242
+    kb|aln.1639
+    kb|aln.1640
+    kb|aln.23396
+    kb|aln.28891
+    ....
+</pre>
+<p>Although in many cases the alignment id numbers appear to match up with the tree id numbers, as they do here,
+it is not always safe to make this assumption as multiple trees can be generated from the same alignment.</p>
+<p>You can also find trees directly from protein sequence MD5 identifiers, which are also in KBase as
+unique protein sequence IDs.  You can retrieve the protein sequence MD5 of any protein encoding feature in
+KBase with the 'fids_to_proteins' command.  With a protein sequence MD5, you can then find trees with the
+'tree-find-tree-ids' by using the '-p' flag:</p>
+<pre>
+    > echo 'kb|g.1870.peg.3915' | fids_to_proteins
+    kb|g.1870.peg.3915	ef341e0061e3f93c9c7468f6d9d09ba0
+    > tree-find-tree-ids -p 'ef341e0061e3f93c9c7468f6d9d09ba0'
+    kb|tree.11259
+    kb|tree.11314
+    kb|tree.1242
+    ....
+</pre>
+<p>Additionally, you can search for trees that are based on a particular gene family. A number of gene family models
+have been used to generate trees, including <a href="http://www.ncbi.nlm.nih.gov/COG/">COG</a> and
+<a href="http://pfam.sanger.ac.uk/">PFAM</a>. If a tree was explicitly built by selecting sequence which match a gene
+family model, then the ID of the gene family is stored in the 'source-id' field of the Tree entity.  You can perform
+a search on this field, for instance, to search for a specific gene family, by running the 'tree-find-tree-ids' with
+the '-s' options:</p>
+<pre>
+    > tree-find-tree-ids -s 'COG840'
+    kb|tree.991753	COG840
+</pre>
+<p>The '-s' option is fairly flexible because it supports the use of a two wildcard characters to help you search when
+you aren't entirely sure the exact gene family ID.  Using an '*' symbol matches any character any number of times. A '.'
+symbol matches any character exactly once. For instance, to find all trees from gene families with an ID that starts
+with 'COG' and ends with '840', search with the pattern 'COG*840':</p>
+<pre>
+    > tree-find-tree-ids -s 'COG*840'
+    kb|tree.987836	COG1840
+    kb|tree.988589	COG2840
+    kb|tree.989663	COG3840
+    kb|tree.990590	COG4840
+    kb|tree.991753	COG840
+</pre>
+
+
+
+<h2>Retrieving Tree & Alignment Meta Information</h2>
+<p>After you have identified a list of potential trees to work with, you can query KBase for additional information about
+each tree using the 'tree-get-tree' command.  The simplist usage of the method is to pass a single tree as an argument with the '-m' flag
+to indicate that meta data should be returned instead of the actual tree.</p>
+<pre>
+    > tree-get-tree 'kb|tree.991753' -m
+    [tree_id]: kb|tree.991753
+    [source_id]: COG840
+    [tree_contruction_method]: FastTree2
+    [source_db]: MOL:Tree
+    [status]: active
+    [tree_protocol]: MO Pipeline
+    [date_created]: 1359610815
+    [leaf_count]: 28931
+    [node_count]: 52017
+    [tree_construction_parameters]: -fastest
+    [alignment_id]: kb|aln.991753
+    [type]: sequence_alignment
+</pre>
+<p>Like many scripts in KBase, the 'tree-get-tree' command can also accept input through standard-in.  This behaviour
+allows you to chain together commands to construct more complex queries.  For instance, to get
+all meta-data about the trees that include our favorite KBase feature, string together the following commands using
+the pipe symbol ('|'), which redirects the output of one command to the input of another command:</p>
+<pre>
+    > tree-find-tree-ids -f 'kb|g.1870.peg.3915' | tree-get-tree -m
+    [tree_id]:	kb|tree.11259
+    [source_id]:	tree00011265
+    [tree_contruction_method]:	FastTree 2.1.2 SSE3
+    [source_db]:	SEED
+    [status]:	active
+    [tree_protocol]:	Sequences were identified with PSI-BLAST, trimmed to PSI-BLAST profile, aligned and treed
+    [date_created]:	1344486561
+    [leaf_count]:	9605
+    [node_count]:	18203
+    [tree_construction_parameters]:	--spr 4 -cat 20
+    [alignment_id]:	kb|aln.11259
+    [type]:	sequence_alignment
+    [tree_id]:	kb|tree.11314
+    [source_id]:	tree00011320
+    [tree_contruction_method]:	FastTree 2.1.2 SSE3
+    [source_db]:	SEED
+    [status]:	active
+    [tree_protocol]:	Sequences were identified with PSI-BLAST, trimmed to PSI-BLAST profile, aligned and treed
+    [date_created]:	1344486766
+    [leaf_count]:	12180
+    [node_count]:	23764
+    [tree_construction_parameters]:	--spr 4 -cat 20
+    [alignment_id]:	kb|aln.11314
+    [type]:	sequence_alignment
+    ....
+</pre>
+<p>Powerfully, this command can then be chained to standard command line tools like 'grep' to retrieve exactly the information
+you are interested in.  For instance, if you only care about how many leaf nodes are in the tree and the source database of
+the tree, you can execute a query with this command: </p>
+<pre>
+    > tree-find-tree-ids -f 'kb|g.1870.peg.3915' | tree-get-tree -m | grep 'tree_id\|leaf_count\|source_db'
+    [tree_id]:	kb|tree.11259
+    [source_db]:	SEED
+    [leaf_count]:	9605
+    ....
+    [source_db]:	MOL:Tree
+    [leaf_count]:	26227
+    [tree_id]:	kb|tree.993312
+    [source_db]:	MOL:Tree
+    [leaf_count]:	51082
+    ....
+</pre>
+<p>The same approach can be used to retrieve details about a set of alignments: </p>
+<pre>
+    > tree-find-alignment-ids -f 'kb|g.1870.peg.3915' | tree-get-alignment -m | \
+            grep 'alignment_id\|alignment_construction_method'
+    [alignment_id]:	kb|aln.11259
+    [alignment_construction_method]:	MAFFT v6.818b
+    [alignment_id]:	kb|aln.11314
+    [alignment_construction_method]:	MAFFT v6.818b
+    ....
+    [alignment_id]:	kb|aln.28891
+    [alignment_construction_method]:	RPS-BLAST
+    [alignment_id]:	kb|aln.30419
+    [alignment_construction_method]:	HMMER3
+    [alignment_id]:	kb|aln.30458
+    [alignment_construction_method]:	HMMER3
+    [alignment_id]:	kb|aln.32629
+    ....
+</pre>
+
+
+<h2>Retrieving Tree Structure and Alignment Data</h2>
+<p>With the same 'get-tree' and 'get-alignment' commands, you can retrieve the tree structure in
+<a href="http://en.wikipedia.org/wiki/FASTA_format">newick</a> format or an alignment in
+<a href="http://en.wikipedia.org/wiki/FASTA_format">fasta</a> format.  Run the same command, but
+omit the '-m' option:</p>
+<pre>
+    > tree-get-tree 'kb|tree.991753'
+    (((((20604894_1_491_700:0.6297,((17850078_1_500_699:0.05393,20109977_1_501_700:0.0718)0:0.03445,
+    (19471596_1_492_701:1.54275,20480750_1_492_701:0.00541)0.959:1.10426)1:0.83977)0.993:0.99986,(19
+    514631_1_3_290:1.12331,20800851_1_1_97:3.85784)0.733:1.55142)0.32:0.11495,6396335_1_23_358:2.704
+    04)0.854:0.32054,(((((8501581_1_263_414:0,20544729_1_221_372:0):1.31674,13411475_1_261_406:1.287
+    29)0.622:0.38827,((2636527_1_236_543:0,13325328_1_140_447:0,13333732_1_182_489:0):2.45305,((7281
+    613_1_33_184:0.00016,(3178202_1_194_390:0,13792085_1_179_375:0):0.60306)0.687:0.71617,((20720986
+    ....
+    > tree-get-alignment 'kb|aln.991753'
+    >100153_1_279_577
+    ------------------------------------------------------------------------------------VDAVNQIAQ ...
+    >100162_1_219_588
+    ---------AYMGRLAEGDYSQEPPMRERKDEVGEMAAAVSVFRAAAIERRQAVQLEKDR----EAAAREEAFVAAEAEARGRRSFVVDALDE ...
+    >10122599_1_5_300
+    --------------------------------------------------------------------------------------------- ...
+    >10122879_1_680_1064
+    --------------------------RKRQEAINAELEAINRRLEAEMRHAAEAEREKRRALEEAAEHDRRAREQLQQQQQEYLEQSVLRILE ...
+    >10124179_1_205_610
+    SVVRPVQELEAAAYRISEGDLETTVAVRTEDEVGKLARAFNQMVASMREALDA-----LQEEKAGAEQKVREAVAEIQAQQRYLAESVEHMLT ...
+    ....
+</pre>
+<p>Trees and alignments in KBase are stored with each leaf node or alignment row labeled by an ID that is
+unique only within the given tree or alignment.  This is necessary because some leaves in a tree may be mapped to
+different regions of a single protein sequence (so protein MD5s cannot uniquely identifiy leaves), while in other
+cases a single leaf may be representative of a set of concatenated protein sequences.  Therefore in general, the raw
+node labels will not directly map to protein or feature IDs in KBase.</p>
+<p>For gene trees built from protein sequence alignments that have only a single KBase protein sequence per alignment row,
+it is possible to retrieve a tree or an alignment with node labels replaced with KBase protein sequence identifiers.</p>
+<pre>
+    > tree-get-tree -p 'kb|tree.991753'
+    (((((32079382d2a3f6f5f2988f97233c92cd:0.6297,((edf756abf2c4186fc34a9c94de377d20:0.05393,5babb472e
+    d7ae9399f8f5103f51b91ee:0.0718)0:0.03445,(d6369e4d35cdbd6ddf1116d311fd7a59:1.54275,ef323273867b73
+    b39ab5fedae251f47f:0.00541)0.959:1.10426)1:0.83977)0.993:0.99986,(49cdbb61b099a7cae3b4fc46dd34f44
+    b:1.12331,98b5ce0f9772ff421f34d6d50bf92323:3.85784)0.733:1.55142)0.32:0.11495,caf6be0a8bf38e96b62
+    61d382413fb09:2.70404)0.854:0.32054,(((((049c37f0c44a9df0d16ff4bd76737dfd:0,7ac4a6cb10d15f1a2f468
+    2d89f10f340:0):1.31674,c419f8f2cd68d25ee71d4899e9fe535d:1.28729)0.622:0.38827,((f26b99054a24ecd26
+    c6d00e695dea3a:0,7527128b4098231d0a8ea0cd188d342e:0,4696ad83733c59849baf1d79cb6134e6:0):2.45305,(
+    ....
+    > tree-get-alignment -p 'kb|aln.991753'
+    >480553824a94dd69d05e2976c1727771
+    ------------------------------------------------------------------------------------VDAVNQIAQ ...
+    >8cd02ced30b18167e19d9202c58d492a
+    ---------AYMGRLAEGDYSQEPPMRERKDEVGEMAAAVSVFRAAAIERRQAVQLEKDR----EAAAREEAFVAAEAEARGRRSFVVDALDE ...
+    ....
+</pre>
+<p>There is not a strict one-to-one mapping between protein sequences and genomic features; some features may share identical protein
+sequences.  Therefore it is not always possible to map an alignment row or leaf node to a <i>single</i> KBase feature.
+For some trees, however, a cannonical KBase feature was used to identify the protein sequence to align.  For these
+trees, leaf labels can be replaced with feature-ids using the '-f' flag with the following command.</p>
+<pre>
+    > tree-get-tree -f 'kb|tree.991753'
+    (((((kb|g.3596.peg.2220:0.6297,((kb|g.2711.peg.128:0.05393,kb|g.3446.peg.2305:0.0718)0:0.03445,(k
+    b|g.3214.peg.1063:1.54275,kb|g.3557.peg.680:0.00541)0.959:1.10426)1:0.83977)0.993:0.99986,(kb|g.3
+    227.peg.1561:1.12331,kb|g.3666.peg.2259:3.85784)0.733:1.55142)0.32:0.11495,kb|g.2160.peg.2450:2.7
+    0404)0.854:0.32054,(((((:0,kb|g.3574.peg.1137:0):1.31674,kb|g.1155.peg.3402:1.28729)0.622:0.38827
+    ,((kb|g.21423.CDS.6883:0,kb|g.1143.peg.6798:0,kb|g.1144.peg.5065:0):2.45305,((kb|g.1465.peg.4094:
+    0.00016,(:0,kb|g.1297.peg.1348:0):0.60306)0.687:0.71617,((kb|g.3639.peg.5961:0,kb|g.22013.CDS.347
+    7:0):0.53728,((kb|g.2550.peg.2415:0,kb|g.2551.peg.2233:0):0.43479,(kb|g.2550.peg.1805:0,kb|g.2551
+    .peg.2376:0):0.32658)0.971:0.42267)0.976:0.59761)0.763:0.60071)0.441:0.14829)0.605:0.13015,(((((k
+    ....
+    > tree-get-alignment -f 'kb|aln.991753'
+    >
+    ------------------------------------------------------------------------------------VDAVNQIAQ ...
+    >kb|g.195.peg.2959
+    ---------AYMGRLAEGDYSQEPPMRERKDEVGEMAAAVSVFRAAAIERRQAVQLEKDR----EAAAREEAFVAAEAEARGRRSFVVDALDE ...
+    >kb|g.1913.peg.2473
+    --------------------------------------------------------------------------------------------- ...
+    ....
+</pre>
+<p>Note in the output above that if a given tree or alignment does not have a canonical feature ID, then
+that ID is left blank.  Keep in mind also that these feaures may not be the only features in KBase that map
+to a particular leaf!  Therefore you may have used the 'tree-find-tree-ids' method to identify a tree containing
+that feature's protein sequnce, but later find that the 'tree-get-tree' with the '-f' option returns a tree that
+does not include your specific feature id.  Therefore, it is often safer to work with protein sequence identifiers
+and only map to feature IDs for display.</p>
+
+
+<h2>Tree & Alignment Visualization and Manipulation</h2>
+<p>The Newick and FASTA representations are convenient for software programs to process, but they are of course difficult to read
+by eye.  Because these are standard formats, you can use one of the numerous tree and alignment visualization tools
+publicly available to better display your tree.  For simple displays, however, the Tree service provides a
+renderer which can diplay a tree or an alignment as an HTML file.  To simply view the structure
+of a tree, pipe the output of the 'tree-get-tree' script to the 'tree-to-html' script, and save the output to an html file
+named 'myFirstTree.html'. Instead of kb|tree.991753, let's work with kb|tree.994594 which still includes our gene, but has
+fewer leaf nodes.
+</p>
+<pre>
+    > tree-get-tree -p 'kb|tree.994594' | tree-to-html -raw > myFirstTree.html
+</pre>
+<p><img src="myFirstTree.png" /></p>
+<p><a href="myFirstTree.html">view full tree</a></p>
+
+<p>The -raw option states that we want to visualize the tree in its raw form, without any additional automatically generated
+links or annotations.  MD5s of course are difficult to read, so instead let's try to view the tree wth feature IDs.</p>
+<p>The tree renderer requires that every leaf node is labeled so that it can be identified. Therefore it is safe practice
+to include a call to 'tree-remove-nodes', which by default will remove any leaf nodes that are unlabled.  By doing this, we
+can view the same tree with feature IDs.  In the command below, we retrieive a tree, replace all IDs with cannonical feature
+IDs, remove any nodes that didn't have an associated feature ID, and render the tree, all in one line!</p>
+<pre>
+    > tree-get-tree -f 'kb|tree.994594' | tree-remove-nodes | tree-to-html > myFirstFeatureLabeledTree.html
+</pre>
+<p><img src="myFirstFeatureLabeledTree.png" /></p>
+<p><a href="myFirstFeatureLabeledTree.html">view full tree</a></p>
+<p>Although simple, the 'tree-to-html' renderer has several flexible options which allow you to customize how the tree
+is diplayed.  Let's work through a more complicated example to demonstrate how we can fetch a tree, retrieve more details
+about each node, and display a tree in a way that each leaf node links to a KBase Labs feature browser page.</p>
+<p>First, fetch the tree with feature IDs, remove nodes that can't be mapped, and save it to a file.</p>
+<pre>
+    > tree-get-tree -f 'kb|tree.994594' | tree-remove-nodes > my.tree
+</pre>
+<p>Next, get a list of all the leaf nodes, which will be a list of feature IDs, and save the list to a file.</p>
+<pre>
+    > tree-get-leaf-nodes -i my.tree > feature.list
+    > head feature.list
+    kb|g.963.peg.3789
+    kb|g.1715.peg.3392
+    kb|g.3140.peg.4489
+    kb|g.1798.peg.766
+    kb|g.1292.peg.1057
+    kb|g.689.peg.4354
+    kb|g.2139.peg.920
+    kb|g.2139.peg.259
+    kb|g.2986.peg.2975
+    kb|g.11.peg.2150
+</pre>
+
+<p>OPTIONAL - The tree is fairly large, so for the purposes of this tutorial it will be easier/faster to work with a much smaller
+tree.  This is easily accomplished.  In the following steps, you can list how many features you have in the tree, create a removal list of
+most of the features using a command named 'shuf' to randomly select the removal list (in IRIS you can also use 'head' or 'tail'),
+remove those nodes, then get the reduced list of features again.
+</p>
+<pre>
+    > cat feature.list | wc -l
+    4315
+    > mv my.tree my.tree.original
+    > shuf -n 4000 feature.list > feature.removal.list
+    > tree-remove-nodes -i my.tree.original -r feature.removal.list > my.tree
+    > cat my.tree | tree-get-leaf-nodes > feature.list
+    > cat feature.list | wc -l
+    315
+</pre>
+
+<p>Now that we have a list of features, we can use the CDMI scripts to get more information about each feature.  For instance,
+we use the relationship IsOwnedBy, which maps features to genome data, to extract the scientific name of each genome that
+each feature came from.</p>
+<pre>
+     > cat feature.list | get_relationship_IsOwnedBy --to scientific_name > feature.data
+</pre>
+<p>The results of this query are saved to a file named feature.data. </p>
+<pre>
+    > head feature.data
+    kb|g.11.peg.2150	Bacillus amyloliquefaciens LL3
+    kb|g.3896.peg.2579	Bacillus amyloliquefaciens TA208
+    kb|g.3768.peg.651	Bacillus subtilis BSn5
+    kb|g.3110.peg.2751	Bacillus atrophaeus Detrick-1
+    kb|g.19732.peg.3387	Bacillus subtilis subsp. subtilis str. SMY
+    kb|g.2873.peg.2120	Bacillus sp. BT1B_CT2
+    kb|g.3644.peg.2089	Bacillus subtilis gtP20b
+    kb|g.3768.peg.411	Bacillus subtilis BSn5
+    kb|g.3565.peg.2755	Bacillus atrophaeus str. Dugway
+    kb|g.2130.peg.554	Bacillus subtilis subsp. subtilis str. JH642
+</pre>
+
+<p>We can then use a Tree service command to construct URLs to all the feature pages.</p>
+<pre>
+    > cat feature.list | tree-create-url-map -u 'http://140.221.92.12/feature_info/feature.html?id=' > feature.links
+    > head feature.links
+    kb|g.11.peg.2150	http://140.221.92.12/feature_info/feature.html?id=kb|g.11.peg.2150
+    kb|g.3896.peg.2579	http://140.221.92.12/feature_info/feature.html?id=kb|g.3896.peg.2579
+    kb|g.3768.peg.651	http://140.221.92.12/feature_info/feature.html?id=kb|g.3768.peg.651
+    kb|g.3110.peg.2751	http://140.221.92.12/feature_info/feature.html?id=kb|g.3110.peg.2751
+    kb|g.19732.peg.3387	http://140.221.92.12/feature_info/feature.html?id=kb|g.19732.peg.3387
+    kb|g.2873.peg.2120	http://140.221.92.12/feature_info/feature.html?id=kb|g.2873.peg.2120
+    kb|g.3644.peg.2089	http://140.221.92.12/feature_info/feature.html?id=kb|g.3644.peg.2089
+    kb|g.3768.peg.411	http://140.221.92.12/feature_info/feature.html?id=kb|g.3768.peg.411
+    kb|g.3565.peg.2755	http://140.221.92.12/feature_info/feature.html?id=kb|g.3565.peg.2755
+    kb|g.2130.peg.554	http://140.221.92.12/feature_info/feature.html?id=kb|g.2130.peg.554
+</pre>
+<p>Finally, we can render the tree.</p>
+<pre>
+cat my.tree | tree-to-html -a feature.data -l feature.links > niceTreeWithLinks.html
+</pre>
+<p><img src="niceTreeWithLinks.png" /></p>
+<p><a href="niceTreeWithLinks.html">view full tree</a></p>
+     
+
+
+<h2>Retrieving and Visualizing Metagenomic Abundance Data</h2>
+<p>KBase is currently configured to work with metagenomic sample data from MG-RAST
+(<a href="http://metagenomics.anl.gov/">http://metagenomics.anl.gov/</a>).  Here we put several tree scripts
+together to demonstrate an example analysis of a metagenomic sample by mapping reads to an isolate gene tree and displaying
+the abundance results.</p>
+<p>First, determine the metagenomic sample ID you wish to work with from MG-RAST.  For this tutorial,
+we will be using a public dataset with ID
+<a href="http://metagenomics.anl.gov/metagenomics.cgi?page=MetagenomeOverview&metagenome=4502925.3">4502925.3</a>.</p>
+<p></p>
+<p>Next, identify a protein family to investigate.  Currently, this KBase method works with COG gene families.
+We will be using COG121 as an example.  First, let's find a tree for COG121.  We can do this with the tree-find-tree-ids
+command to search based on the source ID of the tree.  The source ID provides a mapping from the tree to gene
+families from which it was built.  The 'tree-find-tree-ids', as shown earlier in this tutorial, allows us to search
+source IDs with wildcard characters.  Let's search now for all trees with a source ID that ends in "121":</p>
+<pre>
+    > tree-find-tree-ids -s '*121'
+    kb|tree.10115	tree00010121
+    kb|tree.1030932	0036121
+    kb|tree.1031488	0037121
+    ...
+    kb|tree.987050	COG1121
+    kb|tree.987144	COG121
+    kb|tree.988147	COG2121
+    kb|tree.988888	COG3121
+    kb|tree.989941	COG4121
+    ...
+</pre>
+<p>The list includes several COG trees, including the specific tree we are looking for with KBase ID kb|tree.987144.</p>
+<p>Given a metagenomic sample, and an isolate tree built from a COG gene family, we can now query the Tree service
+to get a list of abundance values mapped to each leaf with the following command:
+</p>
+<pre>
+    > tree-compute-abundance-profile -t 'kb|tree.987144' -m '4502925.3' -f 'COG0121' -s 'COG'
+</pre>
+<p>Note that when specifying the COG gene family name, leading zeros are required so that the total character count
+is 7, as indicated above.  Behind the scenes, this method will fetch a set of reads from the indicated metagenomic
+sample from the KBase Communities service.  These reads will have been assigned to the specified gene family you specified.
+Next, the isolate sequences aligned to generate the isolate tree are retrieved.  Third,
+<a href="http://drive5.com/usearch/manual/uclust_algo.html">UCLUST</a> is used to map metagenomic
+reads to target sequences of the tree.  Finally, for each leaf in the tree, the number of hits matching the input search
+criteria is tabulated and returned. The output of the call above will look like this:</p>
+<pre>
+    2132374_1_1_248	10
+    2164913_1_1_219	2
+    20567034_1_1_244	8
+    3763543_1_1_278	1
+    16364954_1_1_267	1
+    19987080_1_3_210	2
+    5554676_1_1_251	2
+    14696990_1_8_277	2
+    ...
+    found 739 hits of 1889 metagenomic reads
+</pre>
+<p>A two column tab delimited list is returned with leaf IDs in the first column and number of reads mapped to that
+leaf in the second column.  Additionally, a message is printed to standard error that specifies the number of reads that
+were successfully mapped to the tree out of the total number of reads that were returned.  In this case, UCLUST found
+hits to 739 of the 1889 total reads assigned to COG121.  The tree-compute-abundance-profile also allows you to set a couple
+options to indicate the stringency of the matching criterea.  To specify the minimum percent identity to accept a hit, use
+the '-p' option (default=50%).  To set the minimum length of an accepted hit, use the '-l' option (default=20).  For instance,
+if the default options are not stringent enough, you can rerun the computation like so:
+</p>
+<pre>
+    > tree-compute-abundance-profile -t 'kb|tree.987144' -m '4502925.3' -f 'COG0121' -s 'COG' -p 75 -l 30
+    2132374_1_1_248	6
+    2164913_1_1_219	2
+    20567034_1_1_244	8
+    3763543_1_1_278	1
+    16364954_1_1_267	1
+    19987080_1_3_210	2
+    5554676_1_1_251	2
+    14696990_1_8_277	1
+    13610547_1_17_283	1
+    ...
+    found 506 hits of 1889 metagenomic reads
+</pre>
+<p>With the increased stringency, the method was only able to find matches for 506 of the 1889 sequences.</p>
+<p>Finally, if you have metagenomic sample data that is private, you can still use this method by passing an
+authentication key generated from MG-RAST.  After you have generated the key, you can use it
+to access private data using the '-a' flag:</p>
+<pre>
+    > tree-compute-abundance-profile -t 'kb|tree.987144' -m '4502925.3' -f 'COG0121' -s 'COG' -a 'ftcxb98i3nWdvsamGkKe7TsUn'
+</pre>
+<p>Here, ftcxb98i3nWdvsamGkKe7TsUn was the temporary authentication key provided by MG-RAST.</p>
+
+<p>Now that you've computed an abundance profile, you can visualize the results.  To do this, you need to actually save the abundance
+results to a file and retrieve the actual tree.  As before, use the 'get-tree' method to download the tree of interest, and save the tree to a file.  Then
+rerun the 'tree-compute-abundance-profile' method this time saving results to a file as well.</p>
+<pre>
+    > tree-get-tree 'kb|tree.987144' > myFullTree.newick
+    > tree-compute-abundance-profile -t 'kb|tree.987144' -m '4502925.3' -f 'COG0121' -s 'COG' > abundance.data
+    found 739 hits of 1889 metagenomic reads
+</pre>
+
+<p> The tree will likely include many leaf nodes that had zero hits to the set of metagenomic reads.  In some cases, you
+may not want to see the leaves that had zero hits, especially for large trees with tens of thousands of sequences.  So next,
+you will prune the tree so that all leaf nodes without any hits are removed.  This will require you to first extract a list
+of leaf nodes to save.  If the leaf label appeared in the abundanc result, we'll save it. Use the standard linux 'cut' command
+to extract the first column of data from the abundance results and save it to a file.  Then use the 'tre-remove-nodes' command
+to remove all but the specified nodes.  Save the pruned tree to a new file.</p>
+<pre>
+    > cat abundance.data | cut -f 1 > leavesToSave.list
+    > tree-remove-nodes -i myFullTree.newick -s leavesToSave.list > myPrunedTree.newick
+</pre>
+<p> A very simple way to look at the metagenomic sample data is to bin the results based on the number of reads that matched
+each leaf node.  The binned results will be easier to see in the rendered html file.  The tree service provides a method to
+bin the data for you named 'tree-filter-abundance-profile'.  This script can also normalize the read counts and remove leaves
+that do not have a minimum threshold of hits. For now though, let's just group the raw read counts into 5 bins:</p>
+<pre>
+    > tree-filter-abundance-profile -i abundance.data -g 5 > groupedAbundance.data
+</pre>
+
+<p>Although you now have everything you need to render the abundance results on a Tree, let us spend just a few more minutes
+to get a nicer tree visualization with scientific names and links to KBase features.</p>
+<p>First, create a mapping file that can provide the tree-to-html method with information to map each node label to
+a scientific name of its source genome, if that information exists.  We can do this by using the 'tree-get-leaf-id-mapping'
+method, which returns a two column list mapping internal node ids to KBase feature or protein ids.  Save the result of this
+method to a mapping file.</p>
+<pre>
+    > tree-get-leaf-id-mapping -f 'kb|tree.987144' > leafToFid.map
+    > cat leafToFid.map
+    10119_1_1_255	kb|g.484.peg.393
+    10156604_1_1_230	kb|g.21124.CDS.2168
+    10171200_1_1_253	kb|g.1266.peg.2784
+    10179626_1_5_293	
+    10183187_1_1_255	kb|g.1343.peg.2477
+    ...
+</pre>
+<p>Notice that like before, we may not get a mapping to a feature for every single sequence in the alignment. Now we can
+use the CDM command line scripts again to extract the scientific name of each genome that owns each feature in our list.
+Save this to a file named 'fidToSciName.map'.  This results in a three column table with leaf ids in the first column,
+feature ids in the second column, and scientific names in the last column.  The tree-to-html expects a mapping from the
+leaf id to a label, so you also need to again use the 'cut' command to extract just the first and third columns.</p>
+<pre>
+    > cat leafToFid.map | get_relationship_IsOwnedBy --to scientific_name > fidToSciName.map
+    > cat fidToSciName.map | cut -f 1,3 > leafToSciName.map
+</pre>
+<p> Another nice optional step is to link the nodes in the HTML page to the KBase Labs genome browser.  As before, we can do this simply
+by using the tree-create-url-map.  Pass in the second column of the 'leafToFid.map' you created earlier to feed in the feature
+ids.  Then save the result to a file named 'fidToUrl.map'.  You can accomplish these steps with the following command:</p>
+<pre>
+    > cut leafToFid.map -f 2 | tree-create-url-map -u http://140.221.92.12/feature_info/feature.html?id= > fidToUrl.map
+</pre>
+<p>There remains one last problem before we can visualize the tree with links.  We have a map from feature ids to URLs, but we actually
+need a map from leaf nodes to urls.  To do this, we need to use the 'paste' command which can concatenate text files together to
+create a new table of data.  First we create two new files with a list of leaf ids and a list of URLs in the same order.  Again, use
+the cut command to extract this data.  Then call the 'paste' command with the names of these two files, saving the results to the final
+map we need: leafToUrl.map. (Note: 'paste' was not available in IRIS at the time of this writing). </p>
+<pre>
+    > cut leafToFid.map -f 1 > leaf_list.txt
+    > cut fidToUrl.map -f 2 > url_list.txt
+    > paste leaf_list.txt url_list.txt > leafToUrl.map
+</pre>
+<p>And with that, we can actually view a relatively nice looking tree, where nodes are colored by thier abundance data.  Use the tree-to-html
+command to render both the full tree with the abundances colored, or the smaller pruned tree with abundances colored, using the following commands.
+As before, the '-raw' option is suggested so that no additional annotation information is displayed.  The '-a' option specifies the labels to
+display.  The '-l' option links the nodes to URLs that we provided.  Finally, the new '-c' option indicates that nodes should be colored
+by the binned abundance data hit counts.  In both cases, save the results</p>
+<pre>
+    > cat myPrunedTree.newick | tree-to-html -c groupedAbundance.data -a leafToSciName.map -l leafToUrl.map -raw > prunedTreeWithAbundanceData.html
+    > cat myFullTree.newick | tree-to-html -c groupedAbundance.data -a leafToSciName.map -l leafToUrl.map -raw > treeWithAbundanceData.html
+</pre>
+<p>The tree with abundance data should like this.  Note that a legend as shown is also generated and displayed at the bottom of the page.</p>
+
+<p><img src="abundance_tree.png" /></p>
+<p><img src="legend.png" /></p>
+
+
+
+<p><a href="treeWithAbundanceData.html">view full tree</a></p>
+<p><a href="prunedTreeWithAbundanceData.html">view pruned tree</a></p>
+<br><br><br><br>
+
+<p>For quick reference, here is an abreviated list of commands to reproduce the results presented in the last section of this tutorial.</p>
+<pre>
+    # figure out which kbase tree was created from COG121
+    tree-find-tree-ids -s 'COG121'
+    
+    # get abundance profile, save it to 'abundance.data'
+    tree-compute-abundance-profile -t 'kb|tree.987144' -m '4502925.3' -f 'COG0121' -s 'COG' > abundance.data
+    
+    # get the specified tree, save it to 'myFullTree.newick'
+    tree-get-tree 'kb|tree.987144' > myFullTree.newick
+    
+    # (optional) remove all nodes that were not get a hit by a read, save as 'myPrunedTree.newick'
+    cat abundance.data | cut -f 1 > leavesToSave.list
+    tree-remove-nodes -i myFullTree.newick -s leavesToSave.list > myPrunedTree.newick
+    
+    # group the results into 5 bins based on read counts
+    tree-filter-abundance-profile -i abundance.data -g 5 > groupedAbundance.data
+    
+    # create aliases for the leaves so that they can be labeled with scientific names (as a one liner!)
+    tree-get-leaf-id-mapping -f 'kb|tree.987144' | get_relationship_IsOwnedBy --to scientific_name | cut -f 1,3 > leafToSciName.map
+    
+    # (optional) create URLs so that each node can be a link to the kbase genome browser feature page
+    cut leafToFid.map -f 2 | tree-create-url-map -u http://140.221.92.12/feature_info/feature.html?id= > fidToUrl.map
+    cut leafToFid.map -f 1 > leaf_list.txt
+    cut fidToUrl.map -f 2 > url_list.txt
+    paste leaf_list.txt url_list.txt > leafToUrl.map
+    
+    # generate the HTML view of the tree
+    cat myPrunedTree.newick | tree-to-html -c groupedAbundance.data -a leafToSciName.map -l leafToUrl.map -raw > prunedTreeWithAbundanceData.html
+    cat myFullTree.newick | tree-to-html -c groupedAbundance.data -a leafToSciName.map -l leafToUrl.map -raw > treeWithAbundanceData.html
+</pre>
+
+<br><br><br><br>
+
+
+
+

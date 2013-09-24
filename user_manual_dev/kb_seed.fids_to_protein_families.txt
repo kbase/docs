@@ -1,0 +1,8 @@
+
+Usage: fids_to_protein_families [arguments] < input > output
+
+
+    -c num        Select the identifier from column num
+    -i filename   Use filename rather than stdin for input
+
+

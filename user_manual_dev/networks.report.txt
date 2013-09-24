@@ -1,0 +1,48 @@
+----------TEST networks net_network_type_to_datasets with -h option	okay
+
+----------TEST networks net_network_type_to_datasets with --help option	okay
+
+----------TEST networks net_get_all_dataset_sources with -h option	okay
+
+----------TEST networks net_get_all_dataset_sources with --help option	okay
+
+----------TEST networks net_dataset_source_to_datasets with -h option	okay
+
+----------TEST networks net_dataset_source_to_datasets with --help option	okay
+
+----------TEST networks net_build_internal_network_limited_by_strength with -h option	okay
+
+----------TEST networks net_build_internal_network_limited_by_strength with --help option	okay
+
+----------TEST networks net_taxon_to_datasets with -h option	okay
+
+----------TEST networks net_taxon_to_datasets with --help option	okay
+
+----------TEST networks net_get_all_datasets with -h option	okay
+
+----------TEST networks net_get_all_datasets with --help option	okay
+
+----------TEST networks net_build_internal_network with -h option	okay
+
+----------TEST networks net_build_internal_network with --help option	okay
+
+----------TEST networks net_build_first_neighbor_network with -h option	okay
+
+----------TEST networks net_build_first_neighbor_network with --help option	okay
+
+----------TEST networks net_entity_to_datasets with -h option	okay
+
+----------TEST networks net_entity_to_datasets with --help option	okay
+
+----------TEST networks net_get_all_network_types with -h option	okay
+
+----------TEST networks net_get_all_network_types with --help option	okay
+
+----------TEST networks net_build_first_neighbor_network_limited_by_strength with -h option	okay
+
+----------TEST networks net_build_first_neighbor_network_limited_by_strength with --help option	okay
+
+
+
+Error Summary:
+

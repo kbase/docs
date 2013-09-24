@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><title>R: Session Configuration Including Authentication</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="R.css">
+</head><body>
+
+<table width="100%" summary="page for msession {matR}"><tr><td>msession {matR}</td><td align="right">R Documentation</td></tr></table>
+
+<h2>Session Configuration Including Authentication</h2>
+
+<h3>Description</h3>
+
+<p>Accesses control details for the current session, including authentication, API server, and debugging info.</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Daniel T. Braithwaite</p>
+
+
+<h3>See Also</h3>
+
+<p><code><a href="render.html">Visualization</a></code>, <code><a href="asFile.html">asFile</a></code></p>
+
+
+<h3>Examples</h3>
+
+<pre>
+## Not run: 
+# set and show current authentication key
+msession$setAuth()
+msession$setAuth(file="mykey.txt")
+msession$getAuth()
+
+# show available and current servers, and set
+msession$servers()
+msession$server()
+msession$server("http://api.metagenomics.anl.gov")
+
+# show recent API calls for debugging
+msession$urls()
+
+## End(Not run)
+</pre>
+
+<hr><div align="center">[Package <em>matR</em> version 0.9.9 <a href="00Index.html">Index</a>]</div>
+</body></html>

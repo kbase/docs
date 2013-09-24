@@ -1,0 +1,35 @@
+TUTORIAL_2(1)         User Contributed Perl Documentation        TUTORIAL_2(1)
+
+
+
+CCoommmmuunniittiieess QQCC
+   TTuuttoorriiaallss
+       DRISEE
+         How good is the sequence quality of my WGS metagenome
+
+       K−mer
+       Nucleotide Profile
+
+   IInniittiiaalliizziinngg ddaattaa oobbjjeecctt
+       I order to get started a client object has to be initialzed.  First
+       define the service url and then create the client:
+
+        my $HOST='http://kbase.us/services/communities/';
+        my $client = Microbial_Communities_QCClient−>new($HOST);
+
+   CCoommppuuttee DDRRIISSEEEE ssccoorreess
+       For a metagenome in KBase Auxiliary Store compute the DRISEE scores.
+       Please substitue the ID with your data set ID
+
+        my $id = "kb|mg.1"
+        $client−>get_drisee_compute( { id => $id } )
+
+   RReettrriieevvee DDRRIISSEEEE ssccoorreess
+       For a metagenome in KBase Auxiliary Store retrieve the DRISEE scores.
+       Please substitue the ID with your data set ID.
+
+        my $drisee = $client−>get_drisee_instance( { id => $id } )
+
+
+
+perl v5.12.3                      2012‐11‐30                     TUTORIAL_2(1)

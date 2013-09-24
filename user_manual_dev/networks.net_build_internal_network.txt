@@ -1,0 +1,19 @@
+Usage: net_build_internal_network [--url=http://kbase.us/services/networks] dataset_ids edge_types < query_entity_ids
+
+
+General options
+	--url=[http://kbase.us/services/networks]		the service url
+	--help		print help information
+	--version		print version information
+	dataset_ids=[xxx,yyy,zzz,...]		dataset id list(comma separated)
+	edge_types=[xxx,yyy,zzz,...]		interested edge types(comma separated)
+
+Examples: 
+echo 'kb|g.3899.locus.10 kb|g.3899.locus.11' | net_build_internal_network 'kb|netdataset.plant.fn.25,kb|netdataset.plant.cn.6' 'GENE_GENE'
+
+net_build_internal_network --help	print out help
+
+net_build_internal_network --version	print out version information
+
+Report bugs to kbase-networks@lists.kbase.us
+

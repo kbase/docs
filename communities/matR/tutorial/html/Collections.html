@@ -1,0 +1,104 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><title>R: About Metagenome Collections</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="R.css">
+</head><body>
+
+<table width="100%" summary="page for Collections {matR}"><tr><td>Collections {matR}</td><td align="right">R Documentation</td></tr></table>
+
+<h2>About Metagenome Collections</h2>
+
+<h3>Description</h3>
+
+<p>The basic object of analysis in <code>matR</code> is a matrix, with columns labeled by metagenome ID and rows by annotation.
+There are various possibilities for the matrix content (constituting different <code>views</code>), and analyses may examine several such matrices 
+together.  A group of such matrices referring to the same metagenomes is called a <code>collection</code>.</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+collection (x, ...)
+samples (x, ...)
+groups (x, ...)
+groups (x) &lt;- value
+views (x, ...)
+viewnames (x, ...)
+viewnames (x) &lt;- value
+rownames (x, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>collection or metagenome IDs</p>
+</td></tr>
+<tr valign="top"><td><code>value</code></td>
+<td>
+<p>replacement value</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>currently unused</p>
+</td></tr>
+</table>
+
+
+<h3>Note</h3>
+
+<p>Private data requires an authentication key.</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Daniel T. Braithwaite</p>
+
+
+<h3>See Also</h3>
+
+
+<p><code><a href="msession.html">Authentication</a></code>, 
+<code><a href="default-views.html">default.views</a></code>, 
+<code><a href="collection-methods.html">collection-methods</a></code>,
+<code><a href="coerce-methods.html">coerce-methods</a></code></p>
+
+
+<h3>Examples</h3>
+
+<pre>
+# make collection from single string of IDs directly:
+cc &lt;- collection ("4441679.3 4441680.3 4441682.3 4441695.3 4441696.3 4440463.3 4440464.3")
+
+# or from a character vector:
+cc &lt;- collection (guts)
+
+# or with custom views:
+dd &lt;- collection (guts, fl1 = c (level = "level1"), fl2 = c (level = "level2"), fl3 = c (level = "level3"))
+
+# basic ways of looking at a collection:
+samples (dd)
+views (dd)
+viewnames (dd)
+rownames (dd)
+metadata (dd)
+
+# groups can be assigned and are used for various analyses:
+groups (dd) &lt;- c (1, 1, 1, 2, 2, 3, 3)
+
+# reuse views from one collection to make another:
+vl &lt;- views (dd)
+ee &lt;- collection (waters, as.list (vl))
+
+# make collection from file of IDs:
+t &lt;- tempfile ()
+write.table (guts, file = t)
+ff &lt;- collection (file = t)
+unlink (t)
+</pre>
+
+<hr><div align="center">[Package <em>matR</em> version 0.9.9 <a href="00Index.html">Index</a>]</div>
+</body></html>

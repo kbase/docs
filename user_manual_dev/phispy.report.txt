@@ -1,0 +1,12 @@
+----------TEST phispy find_prophages with -h option	okay
+
+----------TEST phispy find_prophages with --help option	okay
+
+----------TEST phispy get_all_training_sets with -h option	okay
+
+----------TEST phispy get_all_training_sets with --help option	okay
+
+
+
+Error Summary:
+

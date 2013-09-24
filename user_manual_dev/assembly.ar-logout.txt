@@ -1,0 +1,6 @@
+
+Usage: ar_logout  [-h] 
+
+Log out.
+
+

@@ -1,0 +1,5 @@
+kbws-clone <Destination workspace ID> <Destination workspace permission> [-?ehw] [long options...]
+	-w --workspace     ID for current workspace
+	-e --showerror     Show any errors in execution
+	-? -h --help       Print this usage information
+

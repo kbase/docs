@@ -1,0 +1,275 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD HTML 4.01//EN' 'http://www.w3.org/TR/html4/strict.dtd'>
+<html><head><title>KBase Networks API</title></head><body><b>  
+  </b>
+<h1>KBase Networks API</h1>
+
+<strong>Purpose: </strong>Learn how to use the KBase Networks API<b><br>
+Required Prerequisite Activities: </b> None
+<b><br>
+Suggested Prerequisite Activities: </b> Getting What You Need from the
+KBase Using Command-Line Scripts
+<b><br>
+Related Tutorials: </b> None
+<h2> Introduction </h2>
+
+<p>The KBase contains networks data pulled from a variety
+  of public databases. This tutorial will teach you:</p>
+<ul>
+  <li>How to obtain the general information on what networks types,
+    datasets, and dataset sources are currently available in the KBase. </li>
+  <li> How to access the KBase to extract specific subsets of
+    network data using the KBase Networks API.</li>
+</ul>
+<h2>Learning what network data
+are out there </h2>
+
+<h3> Classes of network nodes and edges </h3>
+
+KBase uses a very general definition of a network. We currently allow
+three classes of network nodes: <em>gene</em>, <em>protein</em>, and <em>cluster </em> (defined as a group of gene/proteins, e.g., those belonging to a multi-protein complex or a metabolic
+pathway). Network edges correspondingly come in five main classes:
+<em>gene-gene</em>,<em> protein-protein</em>, <em>gene-cluster</em>, <em>protein-cluster,</em> and
+<em>cluster-cluster</em>. In the future, we plan to expand the number of classes
+of networks nodes and edges in KBase by adding e.g., genome-genome
+nodes for ecosystems deduced from metagenomic data.
+<h3> Functional types of networks in KBase </h3>
+
+KBase network data currently come in four distinct types:
+<ul>
+
+  <li><em>FUNCTIONAL_ASSOCIATION </em> - an edge in this type of network
+indicates that
+two genes are functionally associated. Functional association is
+deduced by integrating various data types including but not limited to
+co-expression, co-occurrence and co-localization in sequenced genomes,
+and co-occurence in abstracts of published papers, etc. Among examples of
+this type of networks are AraNet (http://www.functionalnet.org/aranet/)
+for <em>Arabidopsis</em> and StringDB (http://string-db.org) for most sequenced
+microbial and plant genomes. </li>
+  <li><em>METABOLIC_SUBSYSTEM</em> - a directed gene-gene edge in this network
+indicates that two genes encoding enzymes are connected to each other
+via a metabolite: the direction of this edge is from the enzyme having
+this metabolite as a product to the one having it as one of its
+substrates. Edges of the type gene-cluster represent
+membership of a gene in a given metabolic subsystem (cluster) such as
+e.g. a KEGG or BioCyc metabolic pathway. </li>
+  <li><em>PROT_PROT_INTERACTION</em> - an undirected protein-protein edge in
+this
+network represents a physical interaction (specific binding) between a
+pair of proteins. Directed edges generally indicate interactions derived
+from experiments such as Tandem Affinity Purification, in which the edge
+is directed from the bait protien to the prey protein.
+Protein-cluster edges represent
+membership of a protein in a multi-protein complex (cluster). </li>
+  <li><em>REGULATORY_NETWORK</em> - a gene-gene edge represents a
+transcriptional
+regulatory interaction between two genes directed from a transcriptional
+regulator to its target. This edge can be positive or negative,
+representing activation and repression correspondingly. An alternative
+representation of a regulatory network uses gene-cluster edges
+representing a gene&#8217;s membership in a regulon (cluster). </li>
+
+</ul>
+
+To find the current list of network types in KBase you can use
+the command<code> net_get_all_network_types</code>
+<h3> Dataset sources for networks in KBase </h3>
+
+Network data in KBase comes from a variety of public sources. The
+current list includes:
+<ul>
+
+  <li><em>AGRIS</em> - Database of transcriptional regulation in <em>Arabidopsis</em> collected by the Grotewold lab at Ohio State University
+(http://Arabidopsis.med.ohio-state.edu). Their AtRegNet dataset
+currently contains 11,355 direct interactions between TFs and target
+genes. </li>
+  <li><em>ARANET </em>- Probabilistic functional association gene network in
+several plant species (currently <em>Arabidopsis</em> and Poplar) constructed by
+a modified Bayesian integration of 24 types of 'omics' data from
+multiple organisms, with each data type weighted according to how well
+it links genes that are known to function together. It is based on
+AraNet (http://www.functionalnet.org/aranet) and RiceNet
+(http://www.functionalnet.org/ricenet) developed by collaboration among the
+Lee Lab at Yonsei University, Korea; the Marcotte Lab at University of
+Texas at Austin, USA; the Rhee Lab at Carnegie Institution for Science,
+Stanford, USA; and the Ronald Lab at UC Davis. </li>
+  <li><em>ECOCYC</em> - EcoCyc is a scientific database for the bacterium
+  <em>Escherichia coli </em>K-12 MG1655 (http://www.ecocyc.org). </li>
+  <li><em>GEO</em> - Gene Expression Omnibus </li>
+  <li><em>INTACT</em> - Plants Protein-Protein Interactions
+(http://www.ebi.ac.uk/intact) </li>
+  <li><em>MAKv1.0</em> - Massive associative k-biclustering </li>
+  <li><em>Microbes Online</em> - A resource for browsing and comparing microbial genomes
+(http://www.microbesonline.org). </li>
+  <li><em>MODELSEED</em> - Metabolic subsystems and models (http://www.
+theseed.org/models). </li>
+  <li><em>PlantCyc</em> - PlantCyc is database of plant metabolic
+pathways. </li>
+  <li><em>PPI</em> - Other published Protein-Protein Interaction datasets.</li>
+  <li><em>REGPRECISE</em> - Curated database of transcriptional regulons
+reconstructed by the comparative genomic approach in a wide variety of
+prokaryotic genomes (http://regprecise.lbl.gov).</li>
+  <li><em>Metagenome-based networks of SEED subsystems</em> - Co-variation networks of subsystems among different metagenome samples.</li>
+
+
+</ul>
+
+To find the current list of dataset sources in KBase use the
+command <code>net_get_all_dataset_sources</code>
+
+<h3> Networks datasets in KBase</h3>
+
+Each dataset source listed by <code>net_get_all_dataset_sources</code> may contribute more
+than one network dataset to KBase. Examples include
+organism-specific networks extracted from IntAct, different plant
+species in PlantCyc, and different versions of biclusters.
+<p>
+
+To find the current list of datasets in KBase use the command
+<code>net_get_all_datasets</code>
+
+<h2> Learning how to extract specific subsets of network data </h2>
+
+
+
+The API command <code>net_build_first_neighbor_network</code> generates the network
+connecting a user-specified node to its first neighbors in a user-specified
+list of network datasets and network data types.
+To use it efficiently, you need to be familiar with how to find the
+genes and genomes you are interested in described in <a href='http://www.kbase.us/developer-zone/tutorials/command-line-scripts/accessing-central-store-data/getting-what-you-need-from-the-cs-using-command-line-scripts/'>Getting
+What You
+Need from the Using Command-Line Scripts</a> tutorial. <br>
+
+<br>
+
+For example, to find the KBase ID for the
+<i>Escherichia coli</i> K-12 MG1655 genome we use the command:
+<br>
+
+<br>
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; all_entities_Genome -f scientific_name |
+grep Escherichia <br>
+<br>
+and among all <i>E. coli</i> strains selected,
+the KBase ID for <i>Escherichia coli</i> K-12 MG1655 is 'kb|g.1870'. <br>
+
+
+<br>
+To find the list of protein encoding genes ('peg') in this genome we use: <br>
+<br>
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; echo 'kb|g.1870' |
+genomes_to_fids | grep 'peg' | fids_to_functions
+<br>
+
+<br>
+
+To find the gene encoding the RecA protein we added 'grep RecA' to the
+previous comand: <br>
+
+&nbsp;&nbsp;&nbsp;&nbsp; <br>
+
+&nbsp;&nbsp;&nbsp;&nbsp; echo 'kb|g.1870' | genomes_to_fids | grep 'peg' |
+fids_to_functions | grep RecA
+<br>
+
+
+
+<h3>Acquiring the first neighbor of a node</h3>
+
+To discover what network datasets of Arabidopsis, <i>Arabidopsis thaliana</i> (KBase ID: 'kb|g.3899') are stored in KBase, we run:
+<p>
+&nbsp;&nbsp;&nbsp;&nbsp; echo 'kb|g.3899' |  net_taxon_to_datasets
+<p>
+<p>
+The output of this command looks like:
+
+<pre>
+kb|netdataset.plant.cn.8        FUNCTIONAL_ASSOCIATION  GEO     Coexpression Network - Arabidopsis thaliana - seed      Coexpression Network for Arabidopsis thaliana on seed
+kb|netdataset.plant.cn.7        FUNCTIONAL_ASSOCIATION  GEO     Coexpression Network - Arabidopsis thaliana - root      Coexpression Network for Arabidopsis thaliana on root
+kb|netdataset.plant.fn.25       FUNCTIONAL_ASSOCIATION  ARANET  AraNet  Aranet : Functional Association Network for Arabidopsis thaliana
+kb|netdataset.plant.gp.1        METABOLIC_SUBSYSTEM     PLANTCYC        Gene to Pathway ID - Arabidopsis thaliana       Gene to Pathway ID for Arabidopsis thaliana
+kb|netdataset.plant.rn.1        REGULATORY_NETWORK      AGRIS   AGRIS   AGRIS: Regulartory Network fo Arabidopsis thaliana
+......
+</pre>
+
+
+
+
+
+We are interested in a gene 'kb|g.3899.locus.2366 ', which encodes Cytochrome c. To check which network dataset contains this gene, we can run:<br>
+
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; echo 'kb|g.3899.locus.10' | net_entity_to_datasets  <br>
+
+<p>
+The output of this command looks like:
+
+<pre>
+kb|netdataset.plant.cc.6        FUNCTIONAL_ASSOCIATION  GEO     Coexpression Cluster - Arabidopsis thaliana - leaf      Coexpression Cluster for Arabidopsis thaliana on leaf
+kb|netdataset.plant.cn.6        FUNCTIONAL_ASSOCIATION  GEO     Coexpression Network - Arabidopsis thaliana - leaf      Coexpression Network for Arabidopsis thaliana on leaf
+kb|netdataset.plant.fn.25       FUNCTIONAL_ASSOCIATION  ARANET  AraNet  Aranet : Functional Association Network for Arabidopsis thaliana
+</pre>
+
+
+<p>
+We can check the first neighbor in the network of 'kb|netdataset.plant.fn.25' by running:<br>
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; echo 'kb|g.3899.locus.2366'|net_build_first_neighbor_network 'kb|netdataset.plant.fn.25' 'GENE_GENE' <br>
+
+<p>
+The output of this command looks like:
+
+<pre>
+kb|g.3899.locus.2366    kb|g.3899.locus.30542   0.944832742214203       kb|netdataset.plant.fn.25       AT1G22450       AT5G43970       Interacting gene pair
+kb|g.3899.locus.2366    kb|g.3899.locus.19562   0.906808316707611       kb|netdataset.plant.fn.25       AT1G22450       AT3G51160       Interacting gene pair
+kb|g.3899.locus.1684    kb|g.3899.locus.2366    1.94978094100952        kb|netdataset.plant.fn.25       AT1G14320       AT1G22450       Interacting gene pair
+kb|g.3899.locus.2366    kb|g.3899.locus.14793   1.33847522735596        kb|netdataset.plant.fn.25       AT1G22450       AT3G08520       Interacting gene pair
+kb|g.3899.locus.2366    kb|g.3899.locus.4121    1.93127810955048        kb|netdataset.plant.fn.25       AT1G22450       AT1G41880       Interacting gene pair
+kb|g.3899.locus.2366    kb|g.3899.locus.15225   1.72984302043915        kb|netdataset.plant.fn.25       AT1G22450       AT3G13560       Interacting gene pair
+......
+</pre>
+
+A variant of this
+command, <code>net_build_first_neighbor_network_limited_by_strength</code>,
+ uses an additional
+'cutOff' parameter setting a lower threshold on the strength of edges to
+be considered. This cutoff is a part of some but not all network
+datasets such as e.g. functional association networks in AraNet, or
+co-expression networks.  The syntax for this command is:<br>
+<br>
+
+&nbsp;&nbsp;&nbsp;&nbsp; echo KBase_gene_ID|
+net_build_first_neighbor_network_limited_by_strength KBase_network_dataset_ID
+GENE_GENE cutOff
+
+<h3> Finding a subnetwork connecting a user-specified set of nodes </h3>
+
+The command <code>net_build_internal_network</code> returns the subnetwork connecting
+a user-specified list of nodes, and is constructed
+from edges in the user-specified list of network datasets. The format
+to use this command for 3 nodes and one
+network dataset is:
+<br>
+
+<br>
+
+&nbsp;&nbsp;&nbsp;&nbsp; echo KBase_gene_ID1 KBase_gene_ID2
+KBase_gene_ID3 | net_build_internal_network
+KBase_network_dataset_ID GENE_CLUSTER
+<br>
+
+<br>
+
+The command <code>net_build_internal_network_limited_by_strength</code> adds a numerical
+cutOff parameter setting the lower bound on the strength of edges to be
+considered.
+<br>
+
+It can be invoked by using:<br>
+
+<br>
+
+&nbsp;&nbsp;&nbsp; echo KBase_gene_ID1 KBase_gene_ID2 KBase_gene_ID3
+| net_build_internal_network_limited_by_strength KBase_network_dataset_ID
+GENE_CLUSTER cutOff
+</body></html>

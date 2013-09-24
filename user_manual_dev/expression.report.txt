@@ -1,0 +1,20 @@
+----------TEST expression get_expression_data_by_samples_and_features with -h option	okay
+
+----------TEST expression get_expression_data_by_samples_and_features with --help option	okay
+
+----------TEST expression get_expression_samples_data with -h option	okay
+
+----------TEST expression get_expression_samples_data with --help option	okay
+
+----------TEST expression get_expression_samples_data_by_genome_ids with -h option	okay
+
+----------TEST expression get_expression_samples_data_by_genome_ids with --help option	okay
+
+----------TEST expression get_expression_data_by_feature_ids with -h option	okay
+
+----------TEST expression get_expression_data_by_feature_ids with --help option	okay
+
+
+
+Error Summary:
+

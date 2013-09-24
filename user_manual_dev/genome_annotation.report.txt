@@ -1,0 +1,112 @@
+----------TEST genome_annotation call_CDSs with -h option	okay
+
+----------TEST genome_annotation call_CDSs with --help option	okay
+
+----------TEST genome_annotation reconstructionTO_to_roles with -h option	okay
+
+----------TEST genome_annotation reconstructionTO_to_roles with --help option	okay
+
+----------TEST genome_annotation rel2tabs with -h option	okay
+
+----------TEST genome_annotation rel2tabs with --help option	okay
+
+----------TEST genome_annotation assign_functions_to_CDSs with -h option	okay
+
+----------TEST genome_annotation assign_functions_to_CDSs with --help option	okay
+
+----------TEST genome_annotation genomeTO_to_feature_data with -h option	okay
+
+----------TEST genome_annotation genomeTO_to_feature_data with --help option	okay
+
+----------TEST genome_annotation merge_features with -h option	okay
+
+----------TEST genome_annotation merge_features with --help option	okay
+
+----------TEST genome_annotation file_to_spreadsheet with -h option	okay
+
+----------TEST genome_annotation file_to_spreadsheet with --help option	okay
+
+----------TEST genome_annotation call_RNAs with -h option	okay
+
+----------TEST genome_annotation call_RNAs with --help option	okay
+
+----------TEST genome_annotation annotate_genome with -h option	okay
+
+----------TEST genome_annotation annotate_genome with --help option	okay
+
+----------TEST genome_annotation sort_by_loc with -h option	okay
+
+----------TEST genome_annotation sort_by_loc with --help option	okay
+
+----------TEST genome_annotation tabs2rel with -h option	okay
+
+----------TEST genome_annotation tabs2rel with --help option	okay
+
+----------TEST genome_annotation genomeTO_to_reconstructionTO with -h option	okay
+
+----------TEST genome_annotation genomeTO_to_reconstructionTO with --help option	okay
+
+----------TEST genome_annotation a_and_b with -h option	okay
+
+----------TEST genome_annotation a_and_b with --help option	okay
+
+----------TEST genome_annotation genomeTO_strep_pneumo_repeats with -h option	okay
+
+----------TEST genome_annotation genomeTO_strep_pneumo_repeats with --help option	okay
+
+----------TEST genome_annotation sort_by_id with -h option	okay
+
+----------TEST genome_annotation sort_by_id with --help option	okay
+
+----------TEST genome_annotation call_pyrrolysoproteins with -h option	okay
+
+----------TEST genome_annotation call_pyrrolysoproteins with --help option	okay
+
+----------TEST genome_annotation a_not_b with -h option	okay
+
+----------TEST genome_annotation a_not_b with --help option	okay
+
+----------TEST genome_annotation fasta_to_genome with -h option	okay
+
+----------TEST genome_annotation fasta_to_genome with --help option	okay
+
+----------TEST genome_annotation call_CDSs_by_glimmer with -h option	okay
+
+----------TEST genome_annotation call_CDSs_by_glimmer with --help option	okay
+
+----------TEST genome_annotation genomeTO_to_coding_regions with -h option	okay
+
+----------TEST genome_annotation genomeTO_to_coding_regions with --help option	okay
+
+----------TEST genome_annotation regions_around with -h option	okay
+
+----------TEST genome_annotation regions_around with --help option	okay
+
+----------TEST genome_annotation call_selenoproteins with -h option	okay
+
+----------TEST genome_annotation call_selenoproteins with --help option	okay
+
+----------TEST genome_annotation cs_to_genome with -h option	okay
+
+----------TEST genome_annotation cs_to_genome with --help option	okay
+
+----------TEST genome_annotation cluster_objects with -h option	okay
+
+----------TEST genome_annotation cluster_objects with --help option	okay
+
+----------TEST genome_annotation genomeTO_strep_suis_repeats with -h option	okay
+
+----------TEST genome_annotation genomeTO_strep_suis_repeats with --help option	okay
+
+----------TEST genome_annotation genomeTO_to_html with -h option	okay
+
+----------TEST genome_annotation genomeTO_to_html with --help option	okay
+
+----------TEST genome_annotation reconstructionTO_to_subsystems with -h option	okay
+
+----------TEST genome_annotation reconstructionTO_to_subsystems with --help option	okay
+
+
+
+Error Summary:
+

@@ -1,0 +1,39 @@
+Usage: get_relationship_IsConfiguredBy [arguments] < ids > table.with.fields.added
+
+--show-fields
+    List the available fields.
+
+-c num        
+    Select the identifier from column num
+
+--from field-list
+    Choose a set of fields from the Genome
+    entity to return. Field-list is a comma-separated list of strings. The
+    following fields are available:
+        id
+        pegs
+        rnas
+        scientific_name
+        complete
+        prokaryotic
+        dna_size
+        contigs
+        domain
+        genetic_code
+        gc_content
+        phenotype
+        md5
+        source_id
+
+--rel field-list
+    Choose a set of fields from the relationship to return. Field-list is a comma-separated list of 
+    strings. The following fields are available:
+        from_link
+        to_link
+
+--to field-list
+    Choose a set of fields from the AtomicRegulon entity to 
+    return. Field-list is a comma-separated list of strings. The following fields are available:
+        id
+
+

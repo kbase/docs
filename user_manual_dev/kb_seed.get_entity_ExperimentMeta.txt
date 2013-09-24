@@ -1,0 +1,21 @@
+Usage: get_entity_ExperimentMeta [arguments] < ids > table.with.fields.added
+
+    -c num          Select the identifier from column num
+    -i filename     Use filename rather than stdin for input
+    --fields list   Choose a set of fields to return. List is a comma-separated list of strings.
+    -a		    Return all available fields.
+    --show-fields   List the available fields.
+
+The following fields are available:
+
+    title
+        Title of the experiment.
+    description
+        Description of the experiment including the experimental plan, general results, and conclusions, if possible.
+    source_id
+        The ID of the experiment used by the data source.
+    startDate
+        The date this experiment was started.
+    comments
+        Any data describing the experiment that is not covered by the description field.
+

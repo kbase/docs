@@ -1,0 +1,19 @@
+Usage: get_entity_Trait [arguments] < ids > table.with.fields.added
+
+    -c num          Select the identifier from column num
+    -i filename     Use filename rather than stdin for input
+    --fields list   Choose a set of fields to return. List is a comma-separated list of strings.
+    -a		    Return all available fields.
+    --show-fields   List the available fields.
+
+The following fields are available:
+
+    trait_name
+        Text name or description of the trait
+    unit_of_measure
+        The units of measure used when determining this trait.  If multiple units of measure are applicable, each has its own row in the database.  
+    TO_ID
+        Trait Ontology term ID (http://www.gramene.org/plant-ontology/)
+    protocol
+        A thorough description of how the trait was collected, and if a rating, the minimum and maximum values
+

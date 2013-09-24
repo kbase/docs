@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><title>R: Apply Function to Matrix Permutations for Randomization Tests</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="R.css">
+</head><body>
+
+<table width="100%" summary="page for randomize {matR}"><tr><td>randomize {matR}</td><td align="right">R Documentation</td></tr></table>
+
+<h2>Apply Function to Matrix Permutations for Randomization Tests</h2>
+
+<h3>Description</h3>
+
+
+<p>Applies given function repeatedly to random permutation of a given matrix, providing a general-purpose routine to facilitate randomization tests.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+randomize(x, ntimes = 1, method = c("sample", "dataset", "complete"), seed = NULL, FUN = identity, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+
+<table summary="R argblock">
+<tr valign="top"><td><code>x</code></td>
+<td>
+<p>matrix</p>
+</td></tr>
+<tr valign="top"><td><code>ntimes</code></td>
+<td>
+<p>how many permutations (numeric)</p>
+</td></tr>
+<tr valign="top"><td><code>method</code></td>
+<td>
+<p>type of permutation (character)</p>
+</td></tr>
+<tr valign="top"><td><code>seed</code></td>
+<td>
+<p>seed for random number generation (numeric)</p>
+</td></tr>
+<tr valign="top"><td><code>FUN</code></td>
+<td>
+<p>should accept single matrix argument and return summary value (function)</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>currently unused</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>The form of results depends on the return value of the supplied summarizing function.  By  default, the random permutation matrices themselves are returned as a list, but a function should be supplied in place of the identity.</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Kevin P. Keegan, Daniel T. Braithwaite</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+##
+</pre>
+
+<hr><div align="center">[Package <em>matR</em> version 0.9.9 <a href="00Index.html">Index</a>]</div>
+</body></html>

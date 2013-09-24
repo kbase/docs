@@ -1,0 +1,8 @@
+
+Usage: locations_to_dna_sequences [arguments] < input > output
+
+
+    -c num        Select the identifier from column num
+    -i filename   Use filename rather than stdin for input
+
+

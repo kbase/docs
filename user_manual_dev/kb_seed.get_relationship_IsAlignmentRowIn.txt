@@ -1,0 +1,44 @@
+Usage: get_relationship_IsAlignmentRowIn [arguments] < ids > table.with.fields.added
+
+--show-fields
+    List the available fields.
+
+-c num        
+    Select the identifier from column num
+
+--from field-list
+    Choose a set of fields from the AlignmentRow
+    entity to return. Field-list is a comma-separated list of strings. The
+    following fields are available:
+        id
+        row_number
+        row_id
+        row_description
+        n_components
+        beg_pos_aln
+        end_pos_aln
+        md5_of_ungapped_sequence
+        sequence
+
+--rel field-list
+    Choose a set of fields from the relationship to return. Field-list is a comma-separated list of 
+    strings. The following fields are available:
+        from_link
+        to_link
+
+--to field-list
+    Choose a set of fields from the Alignment entity to 
+    return. Field-list is a comma-separated list of strings. The following fields are available:
+        id
+        n_rows
+        n_cols
+        status
+        is_concatenation
+        sequence_type
+        timestamp
+        method
+        parameters
+        protocol
+        source_id
+
+

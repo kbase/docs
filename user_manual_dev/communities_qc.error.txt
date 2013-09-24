@@ -1,0 +1,20 @@
+----------TEST communities_qc qiime-uclust with -h option
+sh: /kb/deployment/bin/qiime-uclust: not found
+
+----------TEST communities_qc qiime-uclust with --help option
+sh: /kb/deployment/bin/qiime-uclust: not found
+
+----------TEST communities_qc run_find_steiner with -h option
+sh: /kb/deployment/bin/run_find_steiner: not found
+
+----------TEST communities_qc run_find_steiner with --help option
+sh: /kb/deployment/bin/run_find_steiner: not found
+
+
+
+Error Summary:
+qiime-uclust                             -h        32512 
+qiime-uclust                             --help    32512 
+run_find_steiner                         -h        32512 
+run_find_steiner                         --help    32512 
+

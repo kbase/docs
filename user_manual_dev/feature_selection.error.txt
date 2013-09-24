@@ -1,0 +1,20 @@
+----------TEST feature_selection kb_fizzy2 with -h option
+sh: /kb/deployment/bin/kb_fizzy2: not found
+
+----------TEST feature_selection kb_fizzy2 with --help option
+sh: /kb/deployment/bin/kb_fizzy2: not found
+
+----------TEST feature_selection kb_fizzy with -h option
+sh: /kb/deployment/bin/kb_fizzy: not found
+
+----------TEST feature_selection kb_fizzy with --help option
+sh: /kb/deployment/bin/kb_fizzy: not found
+
+
+
+Error Summary:
+kb_fizzy2                                -h        32512 
+kb_fizzy2                                --help    32512 
+kb_fizzy                                 -h        32512 
+kb_fizzy                                 --help    32512 
+

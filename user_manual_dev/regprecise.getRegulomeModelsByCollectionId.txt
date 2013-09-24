@@ -1,0 +1,1 @@
+usage: getRegulomeModelsByCollectionId [-c column] < input > output

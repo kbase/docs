@@ -1,0 +1,187 @@
+NAME
+  exp_find_growmatch_data - find and store data suitable for input into 
+                            growmatch.
+
+SYNOPSIS
+usage: exp_find_growmatch_data [-h] -g GENOME -w WORKSPACE -o OBJECT_ID
+                               [--max-knockouts MAXKNOCKOUTS]
+                               [--only-wildtype] [--all-strains]
+                               [--experimentMetaIDs ID [ID ...]]
+                               [--exclude-groups ID [ID ...]]
+                               [--only-groups ID [ID ...]] [--growth-boolean]
+                               [--exclude-medias ID [ID ...]]
+                               [--only-medias ID [ID ...]]
+                               [--exclude-compounds ID [ID ...]]
+                               [--drop-compounds ID [ID ...]]
+                               [--exclude-solid] [--exclude-undefined]
+                               [--temperature-range LOWER_LIMIT UPPER_LIMIT]
+                               [--oxygen-range LOWER_LIMIT UPPER_LIMIT]
+                               [--pH-range LOWER_LIMIT UPPER_LIMIT]
+                               [--agg-method {min,max,none}]
+                               [--oxygen-cutoff OXYGENCUTOFF] [--all-values]
+                               [--merge-compounds] [--parent-compounds]
+                               [-u USER] [-p PASSWORD] [--url URL]
+                               [--timeout TIMEOUT] [-v]
+
+DESCRIPTION
+  Given a number of input parameters, returns data for input into
+  a growmatch FBA algorithm. Fundamentally the data consists of a mapping
+  of an environment, consisting of a list of compounds, and a set of gene
+  knockouts to a fitness value or a growth boolean. By default, the data 
+  is processed such that data rows (where a row is an environment, set of 
+  knockouts, and a fitness value) with identical compounds and knockouts 
+  are merged into a single row by taking the maximum of the identical 
+  rows.
+  
+  The return value consists of a mapping of ExperimentalUnitGroup IDs to a
+  structure containing several pieces of data about the group: 1) the list 
+  of compounds in the environment of the group, 2) some summary statistics
+  about the entire group (e.g. including all rows, not just the returned
+  merged rows), 3) the ID of the environment of the group, 4) if 
+  requested, a list of all fitness values in the group for the purposes of
+  thresholding and finally, 5) the list of data rows containing, by 
+  default, the knockout list, an empty compound list, and the fitness 
+  value (see options below regarding the compound list).
+
+  The fitness value entry can consist of either a continuous fitness value
+  (see measurement description IDs kb|measdesc.0 and 1) or a growth
+  boolean (see kb|measdesc.5). Groups, in this case, will typically be 
+  microarrays or RNAseq experiments. Data that is not associated with any
+  group is mapped from an empty string ('') instead of a KBase 
+  experimental unit group ID. For this 'group' statistics are not provided
+  and the compounds and environment ID are provided on a per row basis 
+  rather than once for the entire group. No time series  data is ever 
+  returned.
+  
+  The data is stored in a structure with two fields: 'params' and 'gmdata'. 
+  The input parameters are  stored in the first field while the grow match data
+  is stored in the second. The object type is 'Growmatch data'.
+  
+  Inputs: none
+  
+  Ouputs: none
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -g GENOME, --genome GENOME
+                        the KBase ID of the genome to pull data from
+                        (required)
+  -w WORKSPACE, --workspace WORKSPACE
+                        the ID of the workspace in which to store the data
+                        (required).
+  -o OBJECT_ID, --object-id OBJECT_ID
+                        the ID where the data should be stored in the
+                        workspace (required)
+  --max-knockouts MAXKNOCKOUTS
+                        the maximum number of knockouts allowed for any strain
+                        in the return data (defaults to no limit)
+  --only-wildtype       only strains marked as wildtype will be returned
+                        (default false)
+  --all-strains         Returns data from all strains, not only strains
+                        representing aggregate data, the default behavior.
+  --experimentMetaIDs ID [ID ...]
+                        the KBase IDs of the experimentMeta entities from
+                        which to return data (default all)
+  --exclude-groups ID [ID ...]
+                        the data related to the ExperimentalUnitGroup KBase
+                        IDs in this list will be excluded from the results.
+  --only-groups ID [ID ...]
+                        only the data related to the ExperimentalUnitGroup
+                        KBase IDs in this list will be included in the
+                        results. exclude-groups will be ignored. An empty list
+                        results in no restrictions (default) except those in
+                        excludeGroups.
+  --growth-boolean      if true, returns data consisting of a growth boolean
+                        (1 for grows, 0 for doesn't grow) rather than fitness
+                        values. Defaults to returning fitness values. There is
+                        no guarantee that a particular strain/environment
+                        combination with growth boolean data has fitness value
+                        data as well and vice versa.
+  --exclude-medias ID [ID ...]
+                        data using the media specified by the KBase media IDs
+                        in this list will not be returned.
+  --only-medias ID [ID ...]
+                        only data using the medias in this list will be
+                        returned. If this list is not empty exclude-medias and
+                        exclude-compounds are ignored. If all three lists are
+                        empty no restrictions are placed on the medias
+                        allowed.
+  --exclude-compounds ID [ID ...]
+                        any data using medias or environments containing these
+                        compounds or any of their parent compounds will not be
+                        returned.
+  --drop-compounds ID [ID ...]
+                        these compounds will be silently removed from the data
+                        before it is returned. Typically used to remove
+                        compounds such as VitB12 which can interfere with FBA
+                        results. Does not prevent using medias or environments
+                        containing the compound. Only an exact match will be
+                        removed from the returned data - children and parent
+                        compounds will remain in the data.
+  --exclude-solid       exclude any data using solid medias.
+  --exclude-undefined   exclude any data using undefined medias.
+  --temperature-range LOWER_LIMIT UPPER_LIMIT
+                        any data outside the given temperature range in K will
+                        be excluded from the results. Defaults to no limits.
+  --oxygen-range LOWER_LIMIT UPPER_LIMIT
+                        any data outside the given oxygen range (in molar)
+                        will be excluded from the results. Defaults to no
+                        limits. Recall that -1 signifies the presence of an
+                        unknown but substantial quantity of oxygen (as in an
+                        unmonitored shake flask, for example).
+  --pH-range LOWER_LIMIT UPPER_LIMIT
+                        any data outside the given pH range will be excluded
+                        from the results. Defaults to no limits. If a range is
+                        given, data without pH data will not be returned.
+  --agg-method {min,max,none}
+                        the method by which to aggregate data rows with
+                        identical compound lists and knockouts. The choices
+                        are 'max' or 'min', which return the maximum or
+                        minimum growth / fitness value, or 'none', which
+                        performs no aggregation. The default is max, which is
+                        appropriate for nutrient compounds, but less so for
+                        inhibitors. Vice versa for min.
+  --oxygen-cutoff OXYGENCUTOFF
+                        environments with a greater oxygen concentration than
+                        this value will have oxygen added to the compound list
+                        if it doesn't already exist. Defaults to 0.000002. If
+                        the oxygen value is < 0 oxygen is always added to the
+                        compound list.
+  --all-values          returns a list of all fitness values in each group for
+                        the purposes of statistical thresholding. By default
+                        an empty list is returned.
+  --merge-compounds     rather than returning one list of compounds per group,
+                        each row of the data contains the compounds list. In
+                        this case the group level list of compounds will be
+                        empty. Note that the transfer and storage costs for
+                        the data will probably go up significantly if this
+                        option is enabled.
+  --parent-compounds    by default, the compounds returned are the ultimate
+                        subcompounds of the media and environment compound
+                        lists. If this parameter is set to True, the compounds
+                        returned are not resolved to subcompounds.
+  -u USER, --user USER  user ID. You must also provide a password. I will
+                        attempt to get authorization from the .authrc file if
+                        not included
+  -p PASSWORD, --password PASSWORD
+                        password. You must also provide a userID. I will
+                        attempt to get authorization from the .authrc file if
+                        not included
+  --url URL             url of the Experiment service, default
+                        http://kbase.us/services/experiment
+  --timeout TIMEOUT     server timeout in seconds, default 1800
+  -v, --verbose         print entire error message
+
+EXAMPLES
+
+  exp_find_growmatch_data -g 'kb|g.20848' -w 'my_workspace' -o 'my_gm_input' 
+          --experimentMetaIDs 'kb|expm.7'
+
+SEE ALSO
+  ws-workspace
+  ws-listobj
+  ws-get
+
+AUTHORS
+  Gavin Price
+

@@ -1,0 +1,2 @@
+fs -put_pe_i <reads.fq> <output.pe>
+

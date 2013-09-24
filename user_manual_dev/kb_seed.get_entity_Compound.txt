@@ -1,0 +1,31 @@
+Usage: get_entity_Compound [arguments] < ids > table.with.fields.added
+
+    -c num          Select the identifier from column num
+    -i filename     Use filename rather than stdin for input
+    --fields list   Choose a set of fields to return. List is a comma-separated list of strings.
+    -a		    Return all available fields.
+    --show-fields   List the available fields.
+
+The following fields are available:
+
+    label
+        primary name of the compound, for use in displaying reactions
+    abbr
+        shortened abbreviation for the compound name
+    source_id
+        common modeling ID of this compound
+    ubiquitous
+        TRUE if this compound is found in most reactions, else FALSE
+    mod_date
+        date and time of the last modification to the compound definition
+    mass
+        pH-neutral atomic mass of the compound
+    formula
+        a pH-neutral formula for the compound
+    charge
+        computed charge of the compound in a pH-neutral solution
+    deltaG
+        the pH 7 reference Gibbs free-energy of formation for this compound as calculated by the group contribution method (units are kcal/mol)
+    deltaG_error
+        the uncertainty in the [b]deltaG[/b] value (units are kcal/mol)
+

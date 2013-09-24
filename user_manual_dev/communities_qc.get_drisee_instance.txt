@@ -1,0 +1,22 @@
+get_drisee
+
+retrieve a drisee from the communities API
+
+Parameters
+
+	id - the is of the drisee to be retrieved from the API
+
+Options
+
+	help - display this message
+
+	user - username to authenticate against the API, requires a password to be set as well
+
+	pass - password to authenticate against the API, requires a username to be set as well
+
+	token - Globus Online authentication token
+
+	webkey - MG-RAST webkey to synch with the passed Globus Online authentication
+
+
+

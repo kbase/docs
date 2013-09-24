@@ -1,0 +1,17 @@
+Usage: net_dataset_source_to_datasets [--url=http://kbase.us/services/networks] < datasource_id
+
+
+General options
+	--url=[http://kbase.us/services/networks/]		the url of the service
+	--help		print help information
+	--version		print version information
+
+Examples: 
+echo 'INTACT' | net_dataset_source_to_datasets
+
+net_dataset_source_to_datasets --help	print out help
+
+net_dataset_source_to_datasets --version	print out version information
+
+Report bugs to kbase-networks@lists.kbase.us
+

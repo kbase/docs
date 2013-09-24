@@ -1,0 +1,19 @@
+    DESCRIPTION
+	Extract GO term description for a given list of GO identifiers. This function expects an input list of GO-ids (white space or comman separated) and returns a table of three columns, first column being the GO ids,  the second column is the GO description and third column is GO domain (biological process, molecular function, cellular component).  
+Usage: /kb/deployment/plbin/get_go_description.pl [--url=http://kbase.us/services/ontology_service] < GO_IDs
+
+
+General options
+	--url=[http://kbase.us/services/ontology_service]		url of the server
+	--help		print help information
+	--version		print version information
+
+Examples: 
+echo GO:0006979 | /kb/deployment/plbin/get_go_description.pl --url=http://kbase.us/services/ontology_service 
+
+/kb/deployment/plbin/get_go_description.pl --help	print out help
+
+/kb/deployment/plbin/get_go_description.pl --version	print out version information
+
+Report bugs to Shinjae Yoo at sjyoo@bnl.gov
+

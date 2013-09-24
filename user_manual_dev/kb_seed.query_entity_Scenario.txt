@@ -1,0 +1,36 @@
+query_entity_Scenario [arguments] > records
+
+--is field,value
+    Limit the results to entities where the given field has the given value.
+
+--like field,value
+    Limit the results to entities where the given field is LIKE (in the sql sense) the given value.
+
+--op operator,field,value
+    Limit the results to entities where the given field is related to
+    the given value based on the given operator.
+
+    The operators supported are as follows. We provide text based
+    alternatives to the comparison operators so that extra quoting is
+    not required to keep the command-line shell from confusing them
+    with shell I/O redirection operators.
+
+        < or lt
+        > or gt
+        <=  or le
+        >= or ge
+        =
+        LIKE
+
+-a
+    Return all fields.
+
+--show-fields
+    Display a list of the fields available for use.
+
+--fields field-list
+    Choose a set of fields to return. Field-list is a comma-separated list of 
+    strings. The following fields are available:
+
+        common_name
+

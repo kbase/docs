@@ -1,0 +1,682 @@
+<?xml version="1.0" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>fbaModelData::Client</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<link rev="made" href="mailto:root@ubuntu.chicago.kbase.us" />
+</head>
+
+<body style="background-color: white">
+
+
+
+<h1 id="NAME">FBA Model Data Client</h1>
+
+<p>Bio::KBase::fbaModelData::Client</p>
+
+<h1 id="DESCRIPTION">DESCRIPTION</h1>
+
+<h1 id="fbaModelData">fbaModelData</h1>
+
+<p>Data access library for fbaModel services. This API is meant for interanl use only. Do not distribute or expose publically.</p>
+
+<h2 id="has_data">has_data</h2>
+
+<pre><code>  $existence = $obj-&gt;has_data($ref)</code></pre>
+
+<dl>
+
+<dt id="Parameter-and-return-types">Parameter and return types</dt>
+<dd>
+
+
+
+<pre>
+$ref is a Ref
+$existence is a Bool
+Ref is a string
+Bool is an int</pre>
+
+</dd>
+<dt id="Description">Description</dt>
+<dd>
+
+</dd>
+</dl>
+
+<h2 id="get_data">get_data</h2>
+
+<pre><code>  $data = $obj-&gt;get_data($ref)</code></pre>
+
+<dl>
+
+<dt id="Parameter-and-return-types1">Parameter and return types</dt>
+<dd>
+
+
+
+<pre>
+$ref is a Ref
+$data is a Data
+Ref is a string
+Data is a string</pre>
+
+</dd>
+<dt id="Description1">Description</dt>
+<dd>
+
+</dd>
+</dl>
+
+<h2 id="save_data">save_data</h2>
+
+<pre><code>  $success = $obj-&gt;save_data($ref, $data, $config)</code></pre>
+
+<dl>
+
+<dt id="Parameter-and-return-types2">Parameter and return types</dt>
+<dd>
+
+
+
+<pre>
+$ref is a Ref
+$data is a Data
+$config is a SaveConf
+$success is a Bool
+Ref is a string
+Data is a string
+SaveConf is a reference to a hash where the following keys are defined:
+	is_merge has a value which is a Bool
+	schema_update has a value which is a Bool
+Bool is an int</pre>
+
+</dd>
+<dt id="Description2">Description</dt>
+<dd>
+
+</dd>
+</dl>
+
+<h2 id="get_aliases">get_aliases</h2>
+
+<pre><code>  $aliases = $obj-&gt;get_aliases($query)</code></pre>
+
+<dl>
+
+<dt id="Parameter-and-return-types3">Parameter and return types</dt>
+<dd>
+
+
+
+<pre>
+$query is an Alias
+$aliases is an Aliases
+Alias is a reference to a hash where the following keys are defined:
+	uuid has a value which is an UUID
+	owner has a value which is a Username
+	type has a value which is a string
+	alias has a value which is a string
+UUID is a string
+Username is a string
+Aliases is a reference to a list where each element is an Alias</pre>
+
+</dd>
+<dt id="Description3">Description</dt>
+<dd>
+
+</dd>
+</dl>
+
+<h2 id="update_alias">update_alias</h2>
+
+<pre><code>  $success = $obj-&gt;update_alias($ref, $uuid)</code></pre>
+
+<dl>
+
+<dt id="Parameter-and-return-types4">Parameter and return types</dt>
+<dd>
+
+
+
+<pre>
+$ref is a Ref
+$uuid is an UUID
+$success is a Bool
+Ref is a string
+UUID is a string
+Bool is an int</pre>
+
+</dd>
+<dt id="Description4">Description</dt>
+<dd>
+
+</dd>
+</dl>
+
+<h2 id="add_viewer">add_viewer</h2>
+
+<pre><code>  $success = $obj-&gt;add_viewer($ref, $viewer)</code></pre>
+
+<dl>
+
+<dt id="Parameter-and-return-types5">Parameter and return types</dt>
+<dd>
+
+
+
+<pre>
+$ref is a Ref
+$viewer is a Username
+$success is a Bool
+Ref is a string
+Username is a string
+Bool is an int</pre>
+
+</dd>
+<dt id="Description5">Description</dt>
+<dd>
+
+</dd>
+</dl>
+
+<h2 id="remove_viewer">remove_viewer</h2>
+
+<pre><code>  $success = $obj-&gt;remove_viewer($ref, $viewer)</code></pre>
+
+<dl>
+
+<dt id="Parameter-and-return-types6">Parameter and return types</dt>
+<dd>
+
+
+
+<pre>
+$ref is a Ref
+$viewer is a Username
+$success is a Bool
+Ref is a string
+Username is a string
+Bool is an int</pre>
+
+</dd>
+<dt id="Description6">Description</dt>
+<dd>
+
+</dd>
+</dl>
+
+<h2 id="set_public">set_public</h2>
+
+<pre><code>  $success = $obj-&gt;set_public($ref, $public)</code></pre>
+
+<dl>
+
+<dt id="Parameter-and-return-types7">Parameter and return types</dt>
+<dd>
+
+
+
+<pre>
+$ref is a Ref
+$public is a Bool
+$success is a Bool
+Ref is a string
+Bool is an int</pre>
+
+</dd>
+<dt id="Description7">Description</dt>
+<dd>
+
+</dd>
+</dl>
+
+<h2 id="alias_owner">alias_owner</h2>
+
+<pre><code>  $owner = $obj-&gt;alias_owner($ref)</code></pre>
+
+<dl>
+
+<dt id="Parameter-and-return-types8">Parameter and return types</dt>
+<dd>
+
+
+
+<pre>
+$ref is a Ref
+$owner is a Username
+Ref is a string
+Username is a string</pre>
+
+</dd>
+<dt id="Description8">Description</dt>
+<dd>
+
+</dd>
+</dl>
+
+<h2 id="alias_public">alias_public</h2>
+
+<pre><code>  $public = $obj-&gt;alias_public($ref)</code></pre>
+
+<dl>
+
+<dt id="Parameter-and-return-types9">Parameter and return types</dt>
+<dd>
+
+
+
+<pre>
+$ref is a Ref
+$public is a Bool
+Ref is a string
+Bool is an int</pre>
+
+</dd>
+<dt id="Description9">Description</dt>
+<dd>
+
+</dd>
+</dl>
+
+<h2 id="alias_viewers">alias_viewers</h2>
+
+<pre><code>  $viewers = $obj-&gt;alias_viewers($ref)</code></pre>
+
+<dl>
+
+<dt id="Parameter-and-return-types10">Parameter and return types</dt>
+<dd>
+
+
+
+<pre>
+$ref is a Ref
+$viewers is a Usernames
+Ref is a string
+Usernames is a reference to a list where each element is a Username
+Username is a string</pre>
+
+</dd>
+<dt id="Description10">Description</dt>
+<dd>
+
+</dd>
+</dl>
+
+<h2 id="ancestors">ancestors</h2>
+
+<pre><code>  $ancestors = $obj-&gt;ancestors($ref)</code></pre>
+
+<dl>
+
+<dt id="Parameter-and-return-types11">Parameter and return types</dt>
+<dd>
+
+
+
+<pre>
+$ref is a Ref
+$ancestors is an UUIDs
+Ref is a string
+UUIDs is a reference to a list where each element is an UUID
+UUID is a string</pre>
+
+</dd>
+<dt id="Description11">Description</dt>
+<dd>
+
+</dd>
+</dl>
+
+<h2 id="ancestor_graph">ancestor_graph</h2>
+
+<pre><code>  $graph = $obj-&gt;ancestor_graph($ref)</code></pre>
+
+<dl>
+
+<dt id="Parameter-and-return-types12">Parameter and return types</dt>
+<dd>
+
+
+
+<pre>
+$ref is a Ref
+$graph is an AncestorGraph
+Ref is a string
+AncestorGraph is a reference to a hash where the following keys are defined:
+	object has a value which is an UUIDs
+	objectParents has a value which is a reference to a list where each element is an UUIDs
+UUIDs is a reference to a list where each element is an UUID
+UUID is a string</pre>
+
+</dd>
+<dt id="Description12">Description</dt>
+<dd>
+
+</dd>
+</dl>
+
+<h2 id="descendants">descendants</h2>
+
+<pre><code>  $descendants = $obj-&gt;descendants($ref)</code></pre>
+
+<dl>
+
+<dt id="Parameter-and-return-types13">Parameter and return types</dt>
+<dd>
+
+
+
+<pre>
+$ref is a Ref
+$descendants is an UUIDs
+Ref is a string
+UUIDs is a reference to a list where each element is an UUID
+UUID is a string</pre>
+
+</dd>
+<dt id="Description13">Description</dt>
+<dd>
+
+</dd>
+</dl>
+
+<h2 id="descendant_graph">descendant_graph</h2>
+
+<pre><code>  $graph = $obj-&gt;descendant_graph($ref)</code></pre>
+
+<dl>
+
+<dt id="Parameter-and-return-types14">Parameter and return types</dt>
+<dd>
+
+
+
+<pre>
+$ref is a Ref
+$graph is a DescendantGraph
+Ref is a string
+DescendantGraph is a reference to a hash where the following keys are defined:
+	object has a value which is an UUIDs
+	objectChildren has a value which is a reference to a list where each element is an UUIDs
+UUIDs is a reference to a list where each element is an UUID
+UUID is a string</pre>
+
+</dd>
+<dt id="Description14">Description</dt>
+<dd>
+
+</dd>
+</dl>
+
+<h2 id="init_database">init_database</h2>
+
+<pre><code>  $success = $obj-&gt;init_database()</code></pre>
+
+<dl>
+
+<dt id="Parameter-and-return-types15">Parameter and return types</dt>
+<dd>
+
+
+
+<pre>
+$success is a Bool
+Bool is an int</pre>
+
+</dd>
+<dt id="Description15">Description</dt>
+<dd>
+
+</dd>
+</dl>
+
+<h2 id="delete_database">delete_database</h2>
+
+<pre><code>  $success = $obj-&gt;delete_database($config)</code></pre>
+
+<dl>
+
+<dt id="Parameter-and-return-types16">Parameter and return types</dt>
+<dd>
+
+
+
+<pre>
+$config is a DeleteConf
+$success is a Bool
+DeleteConf is a reference to a hash where the following keys are defined:
+	keep_data has a value which is a Bool
+Bool is an int</pre>
+
+</dd>
+<dt id="Description16">Description</dt>
+<dd>
+
+</dd>
+</dl>
+
+<h1 id="TYPES">TYPES</h1>
+
+<h2 id="Bool">Bool</h2>
+
+<dl>
+
+<dt id="Definition">Definition</dt>
+<dd>
+
+
+
+<pre>
+an int
+</pre>
+
+</dd>
+</dl>
+
+<h2 id="Ref">Ref</h2>
+
+<dl>
+
+<dt id="Definition1">Definition</dt>
+<dd>
+
+
+
+<pre>
+a string
+</pre>
+
+</dd>
+</dl>
+
+<h2 id="Username">Username</h2>
+
+<dl>
+
+<dt id="Definition2">Definition</dt>
+<dd>
+
+
+
+<pre>
+a string
+</pre>
+
+</dd>
+</dl>
+
+<h2 id="UUID">UUID</h2>
+
+<dl>
+
+<dt id="Definition3">Definition</dt>
+<dd>
+
+
+
+<pre>
+a string
+</pre>
+
+</dd>
+</dl>
+
+<h2 id="Data">Data</h2>
+
+<dl>
+
+<dt id="Definition4">Definition</dt>
+<dd>
+
+
+
+<pre>
+a string
+</pre>
+
+</dd>
+</dl>
+
+<h2 id="UUIDs">UUIDs</h2>
+
+<dl>
+
+<dt id="Definition5">Definition</dt>
+<dd>
+
+
+
+<pre>
+a reference to a list where each element is an UUID
+</pre>
+
+</dd>
+</dl>
+
+<h2 id="Usernames">Usernames</h2>
+
+<dl>
+
+<dt id="Definition6">Definition</dt>
+<dd>
+
+
+
+<pre>
+a reference to a list where each element is a Username
+</pre>
+
+</dd>
+</dl>
+
+<h2 id="Alias">Alias</h2>
+
+<dl>
+
+<dt id="Definition7">Definition</dt>
+<dd>
+
+
+
+<pre>
+a reference to a hash where the following keys are defined:
+uuid has a value which is an UUID
+owner has a value which is a Username
+type has a value which is a string
+alias has a value which is a string</pre>
+
+</dd>
+</dl>
+
+<h2 id="Aliases">Aliases</h2>
+
+<dl>
+
+<dt id="Definition8">Definition</dt>
+<dd>
+
+
+
+<pre>
+a reference to a list where each element is an Alias
+</pre>
+
+</dd>
+</dl>
+
+<h2 id="AncestorGraph">AncestorGraph</h2>
+
+<dl>
+
+<dt id="Definition9">Definition</dt>
+<dd>
+
+
+
+<pre>
+a reference to a hash where the following keys are defined:
+object has a value which is an UUIDs
+objectParents has a value which is a reference to a list where each element is an UUIDs</pre>
+
+</dd>
+</dl>
+
+<h2 id="DescendantGraph">DescendantGraph</h2>
+
+<dl>
+
+<dt id="Definition10">Definition</dt>
+<dd>
+
+
+
+<pre>
+a reference to a hash where the following keys are defined:
+object has a value which is an UUIDs
+objectChildren has a value which is a reference to a list where each element is an UUIDs</pre>
+
+</dd>
+</dl>
+
+<h2 id="SaveConf">SaveConf</h2>
+
+<dl>
+
+<dt id="Definition11">Definition</dt>
+<dd>
+
+
+
+<pre>
+a reference to a hash where the following keys are defined:
+is_merge has a value which is a Bool
+schema_update has a value which is a Bool</pre>
+
+</dd>
+</dl>
+
+<h2 id="DeleteConf">DeleteConf</h2>
+
+<dl>
+
+<dt id="Definition12">Definition</dt>
+<dd>
+
+
+
+<pre>
+a reference to a hash where the following keys are defined:
+keep_data has a value which is a Bool</pre>
+
+</dd>
+</dl>
+
+
+</body>
+
+</html>
+
+

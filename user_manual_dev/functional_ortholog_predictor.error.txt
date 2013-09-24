@@ -1,0 +1,12 @@
+----------TEST functional_ortholog_predictor rank_pgenes with -h option
+rank_pgenes --wgene 'kb|g.3899.locus.6994' --pgenes 'kb|g.3907.locus.19887,kb|g.3907.locus.24709'
+
+----------TEST functional_ortholog_predictor rank_pgenes with --help option
+rank_pgenes --wgene 'kb|g.3899.locus.6994' --pgenes 'kb|g.3907.locus.19887,kb|g.3907.locus.24709'
+
+
+
+Error Summary:
+rank_pgenes                              -h        65280 
+rank_pgenes                              --help    65280 
+

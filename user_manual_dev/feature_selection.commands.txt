@@ -1,0 +1,4 @@
+----------TEST feature_selection kb_fizzy2 with --help option	fail
+
+----------TEST feature_selection kb_fizzy with --help option	fail
+

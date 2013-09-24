@@ -1,0 +1,676 @@
+----------TEST prom_service prom-load-expression-data with -h option
+	okay
+
+
+NAME
+      prom-load-expression-data -- load expression data to a workspace
+
+SYNOPSIS
+      prom-load-expression-data [OPTIONS]
+
+DESCRIPTION
+      Load gene expression data to a workspace from the CDS.  In the future,
+      this method will also support loading data from a file.  Data is saved
+      as a set of on/off calls.  See the API specification of the Prom service
+      for more details on the format of the expression data.  This method prints
+      out the ID of the expression data collection that is created, or 'FAILURE'
+      if the data could not be loaded, followed by an error message.  The error
+      code is zero if successful, one otherwise. Note that depending on the
+      amount of data available in the CDS, this method may take 5 or more minutes
+      to complete.  Use the CDM API to determine how much expression data for
+      the given genome exists.
+      
+      -g [GENOME_ID], --genome [GENOME_ID]
+                        indicate the genome id of the CDS expression data
+                        to load into the current workspace
+        
+      -w [WORKSPACE_ID], --workspace [WORKSPACE_ID]
+                        specify the workspace to use.  If left blank, the default
+                        workspace that is configured by the workspace service
+                        scripts is used
+                        
+      -v, --verbose
+                        in addition to the expression data collection ID, which
+                        will be on the last line, status messages are displayed; more
+                        verbose errors are also displayed, which may be useful for
+                        debugging
+                        
+      -h, --help
+                        diplay this help message, ignore all arguments
+                        
+                        
+
+EXAMPLES
+      Load expression data for E.coli genome kb|g.0:
+      > prom-load-expression-data -g 'kb|g.0'
+      E9C193DC-6B03-11E2-8DAE-9375BC200E61
+      
+      
+AUTHORS
+      Michael Sneddon (mwsneddon@lbl.gov)
+      
+----------TEST prom_service prom-load-expression-data with --help option
+	okay
+
+
+NAME
+      prom-load-expression-data -- load expression data to a workspace
+
+SYNOPSIS
+      prom-load-expression-data [OPTIONS]
+
+DESCRIPTION
+      Load gene expression data to a workspace from the CDS.  In the future,
+      this method will also support loading data from a file.  Data is saved
+      as a set of on/off calls.  See the API specification of the Prom service
+      for more details on the format of the expression data.  This method prints
+      out the ID of the expression data collection that is created, or 'FAILURE'
+      if the data could not be loaded, followed by an error message.  The error
+      code is zero if successful, one otherwise. Note that depending on the
+      amount of data available in the CDS, this method may take 5 or more minutes
+      to complete.  Use the CDM API to determine how much expression data for
+      the given genome exists.
+      
+      -g [GENOME_ID], --genome [GENOME_ID]
+                        indicate the genome id of the CDS expression data
+                        to load into the current workspace
+        
+      -w [WORKSPACE_ID], --workspace [WORKSPACE_ID]
+                        specify the workspace to use.  If left blank, the default
+                        workspace that is configured by the workspace service
+                        scripts is used
+                        
+      -v, --verbose
+                        in addition to the expression data collection ID, which
+                        will be on the last line, status messages are displayed; more
+                        verbose errors are also displayed, which may be useful for
+                        debugging
+                        
+      -h, --help
+                        diplay this help message, ignore all arguments
+                        
+                        
+
+EXAMPLES
+      Load expression data for E.coli genome kb|g.0:
+      > prom-load-expression-data -g 'kb|g.0'
+      E9C193DC-6B03-11E2-8DAE-9375BC200E61
+      
+      
+AUTHORS
+      Michael Sneddon (mwsneddon@lbl.gov)
+      
+----------TEST prom_service prom-change-regulatory-network-namespace with -h option
+	okay
+
+
+NAME
+      prom-change-regulatory-network-namespace -- change gene names in a reg. network
+
+SYNOPSIS
+      prom-change-regulatory-network-namespace [OPTIONS]
+
+DESCRIPTION
+      Given a regulatory network saved to a workspace, this script will update
+      the gene names in the regulatory network, and save the results as a new
+      regulatory network.  It will exit with zero if the method was successful, or
+      one if something failed.  The method will return to standard out the new
+      ID of the regulatory network that was created in the new namespace.  Run
+      with the verbose option to get a log and status message of how many genes
+      were mapped and which genes could not be mapped.
+      
+      -r [REG_NET_ID], --regulatory-network [REG_NET_ID]
+                        indicate the id of the regulatory network with which to
+                        operate on in the workspace
+        
+      -m [FILE], --map [FILE]
+                        indicate the name of the file that contains the mapping
+                        information.  The format of the file should be a two
+                        column, tab-delimited ASCII text file without a header
+                        line where the original gene names are listed in the left
+                        column and the cooresponding gene name replacements are
+                        listed in the right column.
+        
+      -w [WORKSPACE_ID], --workspace [WORKSPACE_ID]
+                        specify the workspace to use.  If left blank, the default
+                        workspace that is configured by the workspace service
+                        scripts is used
+                        
+      -v, --verbose
+                        in addition to the expression data collection ID, which
+                        will be on the last line, status messages are displayed; more
+                        verbose errors are also displayed, which may be useful for
+                        debugging
+                        
+      -h, --help
+                        diplay this help message, ignore all arguments
+
+EXAMPLES
+      Change the regulatory namespace of a network given the map file 'map.txt'
+      > head -n5 map.txt
+      kb|g.20848.CDS.0	kb|g.371.peg.4031
+      kb|g.20848.CDS.1	kb|g.371.peg.2814
+      kb|g.20848.CDS.10	kb|g.371.peg.200
+      kb|g.20848.CDS.1000	kb|g.371.peg.756
+      kb|g.20848.CDS.1001	kb|g.371.peg.861
+      > prom-change-regulatory-network-namespace -m 'map.txt' -r 'AF74A066-6B03-11E2-8DAE-9375BC200E61'
+      7AD26AD0-6B0A-11E2-8DAE-9375BC200E61
+
+SEE ALSO
+      prom-load-regulatory-network
+
+AUTHORS
+      Michael Sneddon (mwsneddon@lbl.gov)
+      
+----------TEST prom_service prom-change-regulatory-network-namespace with --help option
+	okay
+
+
+NAME
+      prom-change-regulatory-network-namespace -- change gene names in a reg. network
+
+SYNOPSIS
+      prom-change-regulatory-network-namespace [OPTIONS]
+
+DESCRIPTION
+      Given a regulatory network saved to a workspace, this script will update
+      the gene names in the regulatory network, and save the results as a new
+      regulatory network.  It will exit with zero if the method was successful, or
+      one if something failed.  The method will return to standard out the new
+      ID of the regulatory network that was created in the new namespace.  Run
+      with the verbose option to get a log and status message of how many genes
+      were mapped and which genes could not be mapped.
+      
+      -r [REG_NET_ID], --regulatory-network [REG_NET_ID]
+                        indicate the id of the regulatory network with which to
+                        operate on in the workspace
+        
+      -m [FILE], --map [FILE]
+                        indicate the name of the file that contains the mapping
+                        information.  The format of the file should be a two
+                        column, tab-delimited ASCII text file without a header
+                        line where the original gene names are listed in the left
+                        column and the cooresponding gene name replacements are
+                        listed in the right column.
+        
+      -w [WORKSPACE_ID], --workspace [WORKSPACE_ID]
+                        specify the workspace to use.  If left blank, the default
+                        workspace that is configured by the workspace service
+                        scripts is used
+                        
+      -v, --verbose
+                        in addition to the expression data collection ID, which
+                        will be on the last line, status messages are displayed; more
+                        verbose errors are also displayed, which may be useful for
+                        debugging
+                        
+      -h, --help
+                        diplay this help message, ignore all arguments
+
+EXAMPLES
+      Change the regulatory namespace of a network given the map file 'map.txt'
+      > head -n5 map.txt
+      kb|g.20848.CDS.0	kb|g.371.peg.4031
+      kb|g.20848.CDS.1	kb|g.371.peg.2814
+      kb|g.20848.CDS.10	kb|g.371.peg.200
+      kb|g.20848.CDS.1000	kb|g.371.peg.756
+      kb|g.20848.CDS.1001	kb|g.371.peg.861
+      > prom-change-regulatory-network-namespace -m 'map.txt' -r 'AF74A066-6B03-11E2-8DAE-9375BC200E61'
+      7AD26AD0-6B0A-11E2-8DAE-9375BC200E61
+
+SEE ALSO
+      prom-load-regulatory-network
+
+AUTHORS
+      Michael Sneddon (mwsneddon@lbl.gov)
+      
+----------TEST prom_service prom-url with -h option
+	okay
+
+
+NAME
+      prom-url -- update/view url of the prom service endpoint
+
+SYNOPSIS
+      prom-url [OPTIONS] [NEW_URL]
+
+DESCRIPTION
+      Display or set the URL endpoint for the prom service.  If run with no
+      arguments or options, then the current URL is displayed. If run with
+      a single argument, the current URL will be switched to the specified
+      URL.  If the specified URL is named default, then the URL is reset to
+      the default production URL
+      
+      -h, --help         diplay this help message, ignore all arguments
+
+EXAMPLES
+      Display the current URL:
+      > prom-url
+      http://kbase.us/services/PROM
+      
+      Reset to the default URL:
+      > prom-url default
+      changed to: http://kbase.us/services/PROM
+      
+      Use a new URL:
+      > prom-url http://localhost:8080/PROM
+      changed to: http://localhost:8080/PROM
+      
+AUTHORS
+      Michael Sneddon (mwsneddon@lbl.gov)
+      
+----------TEST prom_service prom-url with --help option
+	okay
+
+
+NAME
+      prom-url -- update/view url of the prom service endpoint
+
+SYNOPSIS
+      prom-url [OPTIONS] [NEW_URL]
+
+DESCRIPTION
+      Display or set the URL endpoint for the prom service.  If run with no
+      arguments or options, then the current URL is displayed. If run with
+      a single argument, the current URL will be switched to the specified
+      URL.  If the specified URL is named default, then the URL is reset to
+      the default production URL
+      
+      -h, --help         diplay this help message, ignore all arguments
+
+EXAMPLES
+      Display the current URL:
+      > prom-url
+      http://kbase.us/services/PROM
+      
+      Reset to the default URL:
+      > prom-url default
+      changed to: http://kbase.us/services/PROM
+      
+      Use a new URL:
+      > prom-url http://localhost:8080/PROM
+      changed to: http://localhost:8080/PROM
+      
+AUTHORS
+      Michael Sneddon (mwsneddon@lbl.gov)
+      
+----------TEST prom_service prom-change-expression-data-namespace with -h option
+	okay
+
+
+NAME
+      prom-change-expression-data-namespace -- change gene names in an exp. data
+
+SYNOPSIS
+      prom-change-expression-data-namespace [OPTIONS]
+
+DESCRIPTION
+      Given an expression data collection saved to a workspace, this script will
+      update the gene names in the expression data sets.  Note that unlike
+      prom-change-regulatory-network-namespace, this method makes changes in
+      place, so that no workspace IDs for the expression data or expression data
+      collection will change.  In order to undo the change, the data object
+      would need to be reverted.  Also note that if a gene name is not found in
+      the mapping, it is ignored and the original name is left in place (thus,
+      expression data matricies will retain the same row/col size).  This also
+      means that the updated expression data may then have genes in two different
+      namespaces if not all genes could be mapped.  Importantly, a side effect is
+      that if nothing could be updated, the method will still look like it was
+      successful.  Be sure to run with the verbose option to get a log message
+      of how many genes could be mapped in each expression data set. This method
+      will exit with zero if the method was successful, or one if something failed.
+      Run with the verbose option to get a log and status message of how many
+      genes were mapped.
+      
+      -e [EXP_ID], --expression-data [EXP_ID]
+                        indicate the id of the expression data collection with
+                        which to operate on in the workspace
+        
+      -m [FILE], --map [FILE]
+                        indicate the name of the file that contains the mapping
+                        information.  The format of the file should be a two
+                        column, tab-delimited ASCII text file without a header
+                        line where the original gene names are listed in the left
+                        column and the cooresponding gene name replacements are
+                        listed in the right column.
+        
+      -w [WORKSPACE_ID], --workspace [WORKSPACE_ID]
+                        specify the workspace to use.  If left blank, the default
+                        workspace that is configured by the workspace service
+                        scripts is used
+                        
+      -v, --verbose
+                        in addition to the expression data collection ID, which
+                        will be on the last line, status messages are displayed;
+                        more verbose errors are also displayed, which may be useful
+                        for debugging
+                        
+      -h, --help
+                        diplay this help message, ignore all arguments
+                        
+                        
+
+EXAMPLES
+      Change the regulatory namespace of a network given the map file 'map.txt'
+      > head -n5 map.txt
+      kb|g.20848.CDS.0	kb|g.371.peg.4031
+      kb|g.20848.CDS.1	kb|g.371.peg.2814
+      kb|g.20848.CDS.10	kb|g.371.peg.200
+      kb|g.20848.CDS.1000	kb|g.371.peg.756
+      kb|g.20848.CDS.1001	kb|g.371.peg.861
+      > prom-change-expression-data-namespace -m 'map.txt' -e '7FECB606-6B0F-11E2-970A-1C7ABC200E61'
+      7AD26AD0-6B0A-11E2-8DAE-9375BC200E61
+
+SEE ALSO
+      prom-load-expression-data
+
+AUTHORS
+      Michael Sneddon (mwsneddon@lbl.gov)
+      
+----------TEST prom_service prom-change-expression-data-namespace with --help option
+	okay
+
+
+NAME
+      prom-change-expression-data-namespace -- change gene names in an exp. data
+
+SYNOPSIS
+      prom-change-expression-data-namespace [OPTIONS]
+
+DESCRIPTION
+      Given an expression data collection saved to a workspace, this script will
+      update the gene names in the expression data sets.  Note that unlike
+      prom-change-regulatory-network-namespace, this method makes changes in
+      place, so that no workspace IDs for the expression data or expression data
+      collection will change.  In order to undo the change, the data object
+      would need to be reverted.  Also note that if a gene name is not found in
+      the mapping, it is ignored and the original name is left in place (thus,
+      expression data matricies will retain the same row/col size).  This also
+      means that the updated expression data may then have genes in two different
+      namespaces if not all genes could be mapped.  Importantly, a side effect is
+      that if nothing could be updated, the method will still look like it was
+      successful.  Be sure to run with the verbose option to get a log message
+      of how many genes could be mapped in each expression data set. This method
+      will exit with zero if the method was successful, or one if something failed.
+      Run with the verbose option to get a log and status message of how many
+      genes were mapped.
+      
+      -e [EXP_ID], --expression-data [EXP_ID]
+                        indicate the id of the expression data collection with
+                        which to operate on in the workspace
+        
+      -m [FILE], --map [FILE]
+                        indicate the name of the file that contains the mapping
+                        information.  The format of the file should be a two
+                        column, tab-delimited ASCII text file without a header
+                        line where the original gene names are listed in the left
+                        column and the cooresponding gene name replacements are
+                        listed in the right column.
+        
+      -w [WORKSPACE_ID], --workspace [WORKSPACE_ID]
+                        specify the workspace to use.  If left blank, the default
+                        workspace that is configured by the workspace service
+                        scripts is used
+                        
+      -v, --verbose
+                        in addition to the expression data collection ID, which
+                        will be on the last line, status messages are displayed;
+                        more verbose errors are also displayed, which may be useful
+                        for debugging
+                        
+      -h, --help
+                        diplay this help message, ignore all arguments
+                        
+                        
+
+EXAMPLES
+      Change the regulatory namespace of a network given the map file 'map.txt'
+      > head -n5 map.txt
+      kb|g.20848.CDS.0	kb|g.371.peg.4031
+      kb|g.20848.CDS.1	kb|g.371.peg.2814
+      kb|g.20848.CDS.10	kb|g.371.peg.200
+      kb|g.20848.CDS.1000	kb|g.371.peg.756
+      kb|g.20848.CDS.1001	kb|g.371.peg.861
+      > prom-change-expression-data-namespace -m 'map.txt' -e '7FECB606-6B0F-11E2-970A-1C7ABC200E61'
+      7AD26AD0-6B0A-11E2-8DAE-9375BC200E61
+
+SEE ALSO
+      prom-load-expression-data
+
+AUTHORS
+      Michael Sneddon (mwsneddon@lbl.gov)
+      
+----------TEST prom_service prom-load-regulatory-network with -h option
+	okay
+
+
+NAME
+      prom-load-regulatory-network -- load a regulatory network to a workspace
+
+SYNOPSIS
+      prom-load-regulatory-network [OPTIONS]
+
+DESCRIPTION
+      Load a regulatory network to a workspace from the CDS.  In the future,
+      this method will also support loading data from a file. See the API
+      specification of the Prom service for more details on the format of the
+      regulatory network.  This method prints out the ID of the regulatory
+      network object that is created, or 'FAILURE' if the data could not be
+      loaded, followed by an error message.  The error code is zero if successful,
+      one otherwise.  Use the regulation service to determine how much expression
+      data for the given genome exists.
+      
+      -g [GENOME_ID], --genome [GENOME_ID]
+                        indicate the genome id of the regulatory network
+                        to load into the current workspace
+        
+      -w [WORKSPACE_ID], --workspace [WORKSPACE_ID]
+                        specify the workspace to use.  If left blank, the default
+                        workspace that is configured by the workspace service
+                        scripts is used
+                        
+      -v, --verbose
+                        in addition to the workspace regulatory network ID, which
+                        will be on the last line, status messages are displayed; more
+                        verbose errors are also displayed, which may be useful for
+                        debugging
+                        
+      -h, --help
+                        diplay this help message, ignore all arguments
+                        
+                        
+
+EXAMPLES
+      Load a regulatory network for genome kb|g.20848:
+      > prom-load-regulatory-network -g 'kb|g.20848'
+      AF74A066-6B03-11E2-8DAE-9375BC200E61
+
+SEE ALSO
+      prom-change-regulatory-network-namespace
+      
+AUTHORS
+      Michael Sneddon (mwsneddon@lbl.gov)
+      
+----------TEST prom_service prom-load-regulatory-network with --help option
+	okay
+
+
+NAME
+      prom-load-regulatory-network -- load a regulatory network to a workspace
+
+SYNOPSIS
+      prom-load-regulatory-network [OPTIONS]
+
+DESCRIPTION
+      Load a regulatory network to a workspace from the CDS.  In the future,
+      this method will also support loading data from a file. See the API
+      specification of the Prom service for more details on the format of the
+      regulatory network.  This method prints out the ID of the regulatory
+      network object that is created, or 'FAILURE' if the data could not be
+      loaded, followed by an error message.  The error code is zero if successful,
+      one otherwise.  Use the regulation service to determine how much expression
+      data for the given genome exists.
+      
+      -g [GENOME_ID], --genome [GENOME_ID]
+                        indicate the genome id of the regulatory network
+                        to load into the current workspace
+        
+      -w [WORKSPACE_ID], --workspace [WORKSPACE_ID]
+                        specify the workspace to use.  If left blank, the default
+                        workspace that is configured by the workspace service
+                        scripts is used
+                        
+      -v, --verbose
+                        in addition to the workspace regulatory network ID, which
+                        will be on the last line, status messages are displayed; more
+                        verbose errors are also displayed, which may be useful for
+                        debugging
+                        
+      -h, --help
+                        diplay this help message, ignore all arguments
+                        
+                        
+
+EXAMPLES
+      Load a regulatory network for genome kb|g.20848:
+      > prom-load-regulatory-network -g 'kb|g.20848'
+      AF74A066-6B03-11E2-8DAE-9375BC200E61
+
+SEE ALSO
+      prom-change-regulatory-network-namespace
+      
+AUTHORS
+      Michael Sneddon (mwsneddon@lbl.gov)
+      
+----------TEST prom_service prom-create-constraints with -h option
+	okay
+
+
+NAME
+      prom-create-constraints -- create fba constraints from data
+
+SYNOPSIS
+      prom-create-constraints [OPTIONS]
+
+DESCRIPTION
+      With a genome object in the workspace, gene expression data in the
+      same namespace as the genome, and a regulatory network in the same
+      namespace as a genome, you can create a set of FBA model constraints
+      that can be used to predict transcription factor knockouts using the
+      PROM method (see Chandrasekarana and Price, 2010 PNAS).  This method
+      will return the ID of the new PROM model constraints object if
+      successful, or an error message if something failed.  This method
+      will exit with zero if the method was successful, or one if something
+      failed.  Run with the verbose option to get a log and status message
+      of the steps involved in the constraints construction.
+      
+      -g [GENOME_ID], --genome [GENOME_ID]
+                        indicate the genome object id of a genome in the
+                        workspace to link the constraints to; a genome object
+                        can be created with the kbfba-loadgenome script.
+
+      -e [EXP_ID], --expression-data [EXP_ID]
+                        indicate the id of the expression data collection with
+                        which to use
+
+      -r [REG_NET_ID], --regulatory-network [REG_NET_ID]
+                        indicate the id of the regulatory network with which
+                        to use
+        
+      -w [WORKSPACE_ID], --workspace [WORKSPACE_ID]
+                        specify the workspace to use.  If left blank, the default
+                        workspace that is configured by the workspace service
+                        scripts is used
+
+      -v, --verbose
+                        in addition to the workspace regulatory network ID, which
+                        will be on the last line, status messages are displayed; more
+                        verbose errors are also displayed, which may be useful for
+                        debugging
+
+      -h, --help
+                        diplay this help message, ignore all arguments
+
+EXAMPLES
+      Create a PROM model constraints object:
+      > prom-create-constraints -g 'kb|g.20848'
+
+SEE ALSO
+      prom-load-expression-data
+      prom-load-regulatory-network
+      kbfba-loadgenome
+      
+AUTHORS
+      Michael Sneddon (mwsneddon@lbl.gov)
+      Matt DeJongh (dejongh@hope.edu)
+      Shinnosuke Kondo (shinnosuke.kondo@hope.edu)
+      Christopher Henry (chenry@mcs.anl.gov)
+      with help from Sriram Chandrasekaran
+----------TEST prom_service prom-create-constraints with --help option
+	okay
+
+
+NAME
+      prom-create-constraints -- create fba constraints from data
+
+SYNOPSIS
+      prom-create-constraints [OPTIONS]
+
+DESCRIPTION
+      With a genome object in the workspace, gene expression data in the
+      same namespace as the genome, and a regulatory network in the same
+      namespace as a genome, you can create a set of FBA model constraints
+      that can be used to predict transcription factor knockouts using the
+      PROM method (see Chandrasekarana and Price, 2010 PNAS).  This method
+      will return the ID of the new PROM model constraints object if
+      successful, or an error message if something failed.  This method
+      will exit with zero if the method was successful, or one if something
+      failed.  Run with the verbose option to get a log and status message
+      of the steps involved in the constraints construction.
+      
+      -g [GENOME_ID], --genome [GENOME_ID]
+                        indicate the genome object id of a genome in the
+                        workspace to link the constraints to; a genome object
+                        can be created with the kbfba-loadgenome script.
+
+      -e [EXP_ID], --expression-data [EXP_ID]
+                        indicate the id of the expression data collection with
+                        which to use
+
+      -r [REG_NET_ID], --regulatory-network [REG_NET_ID]
+                        indicate the id of the regulatory network with which
+                        to use
+        
+      -w [WORKSPACE_ID], --workspace [WORKSPACE_ID]
+                        specify the workspace to use.  If left blank, the default
+                        workspace that is configured by the workspace service
+                        scripts is used
+
+      -v, --verbose
+                        in addition to the workspace regulatory network ID, which
+                        will be on the last line, status messages are displayed; more
+                        verbose errors are also displayed, which may be useful for
+                        debugging
+
+      -h, --help
+                        diplay this help message, ignore all arguments
+
+EXAMPLES
+      Create a PROM model constraints object:
+      > prom-create-constraints -g 'kb|g.20848'
+
+SEE ALSO
+      prom-load-expression-data
+      prom-load-regulatory-network
+      kbfba-loadgenome
+      
+AUTHORS
+      Michael Sneddon (mwsneddon@lbl.gov)
+      Matt DeJongh (dejongh@hope.edu)
+      Shinnosuke Kondo (shinnosuke.kondo@hope.edu)
+      Christopher Henry (chenry@mcs.anl.gov)
+      with help from Sriram Chandrasekaran
+
+
+Error Summary:
+

@@ -1,0 +1,33 @@
+NAME
+SYNOPSIS
+DESCRIPTION
+COMMAND-LINE OPTIONS
+    *
+
+AUTHORS
+Thomas Brettin
+NAME:
+        register_service
+
+SYNOPSIS:
+        register_service.pl --hostname localhost           \
+                            --port 22                      \
+                            --service_name ServiceRegistry \
+
+DESCRIPTION
+    The register_service command is used to register information about a
+    service. This should be used at deploy time or when a service is
+    started.
+
+Command-line Options:
+    -h, --help, --man This documentation
+    --hostname The host on which the service is running
+    --port The port assigned to the service
+    --service_name The name of the running service. This is the name of the
+    service as declared in the module declaration of the service's interface
+    description document. This is optional right now.
+
+AUTHORS
+    Tom Brettin
+
+

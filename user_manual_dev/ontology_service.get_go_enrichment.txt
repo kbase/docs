@@ -1,0 +1,26 @@
+    DESCRIPTION
+         For a given list of kbase gene ids from a particular genome (for example "Athaliana" ) find out the significantly enriched GO terms in your gene set. This function accepts four parameters: A list of kbase gene-identifiers, a list of ontology domains (e.g."biological process", "molecular function", "cellular component"), a list of evidence codes (e.g."IEA","IDA","IEP" etc.), and test type (e.g. "hypergeometric"). The list of kbase gene identifiers cannot be empty; however the list of ontology domains and the list of evidence codes can be empty. If any of these two lists is not empty then the gene-id and the go-id pairs retrieved from KBase are further filtered by using the desired ontology domains and/or evidence codes supplied as input. So, if you don't want to filter the initial results then it is recommended to provide empty domain and evidence code lists. Final filtered list of the kbase gene-id to go-ids mapping is used to calculate GO enrichment using hypergeometric test and provides pvalues.The default pvalue cutoff is used as 0.05. Also, if input species is not provided then by default Arabidopsis thaliana is considered the input species.
+Usage: /kb/deployment/plbin/get_go_enrichment.pl [--url=http://kbase.us/services/ontology_service] [--domain_list=biological_process] [--evidence_code_list=IEA]  [--test_type=hypergeometric] [--p_value=XXX]< geneIDs  
+
+
+General options
+	--url=[http://kbase.us/services/ontology_service]		url of the server
+	--domain_list=[biological_process,molecular_function,cellular_component]		domain list (comma separated)
+	--evidence_code_list=[XXX,YYY,ZZZ,...]		GO evidence code list (comma separated)
+	--test_type=[hypergeometric|chisq]		the types of test
+	--help		print help information
+	--version		print version information
+
+Examples: 
+echo 'kb|g.3899.locus.2366' | /kb/deployment/plbin/get_go_enrichment.pl
+
+
+ echo  'kb|g.3899.locus.2366,kb|g.3899.locus.1892,kb|g.3899.locus.2354,kb|g.3899.locus.2549,kb|g.3899.locus.2420,kb|g.3899.locus.2253,kb|g.3899.locus.2229'| get_go_enrichment
+
+
+/kb/deployment/plbin/get_go_enrichment.pl --help	print out help
+
+/kb/deployment/plbin/get_go_enrichment.pl --version	print out version information
+
+Report bugs to Shinjae Yoo at sjyoo@bnl.gov
+

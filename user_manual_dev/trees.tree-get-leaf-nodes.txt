@@ -1,0 +1,34 @@
+
+NAME
+      tree-get-leaf-nodes -- get a list of the names of leaf nodes
+
+SYNOPSIS
+      tree-get-leaf-nodes [OPTIONS] [NEWICK_TREE]
+
+DESCRIPTION
+      Given a tree in newick format, produce a list of the names of the leaf nodes.  If no
+      no tree is provided as an argument on the commandline, then standard-in is parsed to
+      read the tree.
+
+      -i, --input
+                        specify an input file to read from; if provided, any other arguments
+                        and standard-in are ignored
+      -h, --help
+                        diplay this help message, ignore all other arguments
+                        
+                        
+EXAMPLES
+      Retrieve all the leaf nodes of a given newick tree
+      > tree-get-leaf-nodes '(l1,((l2,l3)n2,(l4,l5)n3)n1)root;'
+      l1
+      l2
+      l3
+      l4
+      l5
+
+AUTHORS
+      Matt Henderson (mhenderson@lbl.gov)
+      Michael Sneddon (mwsneddon@lbl.gov)
+
+      
+

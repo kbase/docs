@@ -1,0 +1,75 @@
+Usage: 
+NAME
+
+	coex_cluster2 -- cluster genes inot co-expression modules from gene expression data matrix
+
+SYNOPSIS
+
+	/kb/deployment/rsbin/coex_cluster2.r [-inrkpcsdo]
+
+DESCRIPTION
+
+	Given the gene expression table, this function clusters genes into co-expression modules 
+using original hierarchical clustering or weighted gene co-expression network analysis (WGCNA, http://www.genetics.ucla.edu/labs/horvath/CoexpressionNetwork/Rpackages/WGCNA). 
+
+Input: a table of gene expression data matrix in .csv file
+
+Output: a table of genes and their co-expression modules in .csv file
+
+Options:
+	-i INPUT, --input=INPUT
+		REQUIRED: Input file name that stores the gene expression data matrix that users want to construct gene co-expression network and do clustering. Each row corresponds to a gene, and each column corresponds to a replicate. The column names are replicate names. The row names are gene names.
+
+	-a GENES1, --genes1=GENES1
+		The first set of the genes of interest.  Leaving this out means all of the genes will be used.
+
+	-b GENES2, --genes2=GENES2
+		The second set of the genes of interest.  Leaving this out means all of the genes will be used.
+
+	-n NET_METHOD, --net_method=NET_METHOD
+		Method to construct gene co-expression network. When net_method = ‘simple’ or ‘s’, the function constructs gene co-expression network using Pearson correlation matrix. When net_method = “WGCNA” or ‘w’, the function constructs gene co-expression network using Pearson correlations between genes, and “signed” network by WGCNA. [default "simple"]
+
+	-r MINRSQ, --minRsq=MINRSQ
+		Minimum threshold for R2 that measures the fitness of gene co-expression network to scale-free topology in WGCNA. See pickSoftThreshold() of WGCNA for details. [default 0.8]
+
+	-k MAXMEDIANK, --maxmediank=MAXMEDIANK
+		Maximum median connections for genes in network. See pickSoftThreshold() of WGCNA for details. [default 40]
+
+	-p MAXPOWER, --maxpower=MAXPOWER
+		Maximum power to decide the soft threshold. See pickSoftThreshold() of WGCNA for details. [default 50]
+
+	-c CLUST_METHOD, --clust_method=CLUST_METHOD
+		Method to cluster genes into co-expression modules. When clust_method = ‘hclust’ or ‘h’,the function uses hierarchical clustering. When clust_method = “WGCNA” or ‘w’, the function uses WGCNA. [default "WGCNA"]
+
+	-s MINMODULESIZE, --minModuleSize=MINMODULESIZE
+		Minimum size of modules when method is WGCNA. [default 50]
+
+	-d DETECTCUTHEIGHT, --detectCutHeight=DETECTCUTHEIGHT
+		Maximum heights to join modules in clustering. [default 0.99]
+
+	-o OUTPUT, --output=OUTPUT
+		Output file name that stores the clustering results. The first column includes gene names, and the second column includes their modules. [default "coex_modules.csv"]
+
+	-h, --help
+		Show this help message and exit
+
+
+EXAMPLES 
+
+	$coex_cluster2  -i data.csv -c WGCNA -n WGCNA –o coex_modules.csv
+
+	$coex_cluster2  -i data.csv -c hclust -n simple –o coex_modules.csv
+
+SEE ALSO 
+
+	coex_filter 
+
+	coex_net 
+
+	coex_cluster
+
+AUTHORS 
+
+	Daifeng Wang, Gang Fang, Mark Gerstein, Eric Pan, Yale University
+
+

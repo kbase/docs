@@ -1,0 +1,10 @@
+----------TEST functional_ortholog_predictor rank_pgenes with -h option	fail
+
+----------TEST functional_ortholog_predictor rank_pgenes with --help option	fail
+
+
+
+Error Summary:
+rank_pgenes                              -h        65280 
+rank_pgenes                              --help    65280 
+

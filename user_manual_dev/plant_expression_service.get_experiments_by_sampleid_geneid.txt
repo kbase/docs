@@ -1,0 +1,28 @@
+    DESCRIPTION
+	Retrieve the expression values corresponding to each given sample in the input list of samples ((typically NCBI GEO series sample ids: GSM#s) for given list of genes (kbase identifier). Here is an example:
+ echo GSM128731,GSM131686 | get_experiments_by_sampleid_geneid --url=localhost:7063 "kb|g.3899.locus.23281,kb|g.3899.locus.23295,kb|g.3899.locus.23378"
+
+ Output looks like this: 
+ "","GSM128731","GSM131686"
+ "kb|g.3899.locus.23281",4.19051374151256,4.81544532287956
+ "kb|g.3899.locus.23295",6.70090411599666,7.42720023331292
+ "kb|g.3899.locus.23378",8.79308438662897,8.23643301305399
+									       
+Usage: /kb/deployment/plbin/get_experiments_by_sampleid_geneid.pl [--url=http://kbase.us/services/plant_expression_service] geneids < sampleIDs
+
+
+General options
+	--url=[http://kbase.us/services/plant_expression_service]		urlname of the server
+	--help		print help information
+	--version		print version information
+
+Examples: 
+
+echo GSM106833,GSM106827,GSM106908 | get_experiments_by_sampleid_geneid --url=localhost:7063 'kb|g.3899.locus.2366,kb|g.3899.locus.1892,kb|g.3899.locus.2354,kb|g.3899.locus.2549,kb|g.3899.locus.2420,kb|g.3899.locus.2253,kb|g.3899.locus.2229'
+
+/kb/deployment/plbin/get_experiments_by_sampleid_geneid.pl --help	print out help
+
+/kb/deployment/plbin/get_experiments_by_sampleid_geneid.pl --version	print out version information
+
+Report bugs to Shinjae Yoo at sjyoo@bnl.gov
+

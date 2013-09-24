@@ -1,0 +1,3 @@
+usage: traits_to_variations <--kb_trait_id kbase trait identifier, type:string, (required);> <--pvalue_cutoff pvalue cutoff, type:float, (required);> [--help print this usage] [--url host]
+
+

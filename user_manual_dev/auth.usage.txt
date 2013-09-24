@@ -1,0 +1,26 @@
+----------TEST auth kbase-logout with -h option
+	okay
+
+Logged in as:
+public
+----------TEST auth kbase-logout with --help option
+	okay
+
+Logged in as:
+public
+----------TEST auth kbase-login with -h option
+	okay
+
+/kb/deployment/plbin/kbase-login.pl <Username> [-?hp] [long options...]
+	-p --password     User password
+	-? -h --help      Print this usage information
+----------TEST auth kbase-login with --help option
+	okay
+
+/kb/deployment/plbin/kbase-login.pl <Username> [-?hp] [long options...]
+	-p --password     User password
+	-? -h --help      Print this usage information
+
+
+Error Summary:
+

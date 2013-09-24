@@ -1,0 +1,37 @@
+Usage: get_relationship_PerformedExperiment [arguments] < ids > table.with.fields.added
+
+--show-fields
+    List the available fields.
+
+-c num        
+    Select the identifier from column num
+
+--from field-list
+    Choose a set of fields from the Person
+    entity to return. Field-list is a comma-separated list of strings. The
+    following fields are available:
+        id
+        firstName
+        lastName
+        contactEmail
+        institution
+        source_id
+
+--rel field-list
+    Choose a set of fields from the relationship to return. Field-list is a comma-separated list of 
+    strings. The following fields are available:
+        from_link
+        to_link
+        role
+
+--to field-list
+    Choose a set of fields from the ExperimentMeta entity to 
+    return. Field-list is a comma-separated list of strings. The following fields are available:
+        id
+        title
+        description
+        source_id
+        startDate
+        comments
+
+

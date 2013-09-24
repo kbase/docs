@@ -1,0 +1,1307 @@
+<html>
+<head>
+<style type="text/css">
+/**
+ * HTML5 ✰ Boilerplate
+ *
+ * style.css contains a reset, font normalization and some base styles.
+ *
+ * Credit is left where credit is due.
+ * Much inspiration was taken from these projects:
+ * - yui.yahooapis.com/2.8.1/build/base/base.css
+ * - camendesign.com/design/
+ * - praegnanz.de/weblog/htmlcssjs-kickstart
+ */
+
+
+/**
+ * html5doctor.com Reset Stylesheet (Eric Meyer's Reset Reloaded + HTML5 baseline)
+ * v1.6.1 2010-09-17 | Authors: Eric Meyer & Richard Clark
+ * html5doctor.com/html-5-reset-stylesheet/
+ */
+
+html, body, div, span, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+abbr, address, cite, code, del, dfn, em, img, ins, kbd, q, samp,
+small, strong, sub, sup, var, b, i, dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+sup { vertical-align: super; }
+sub { vertical-align: sub; }
+
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+
+blockquote, q { quotes: none; }
+
+blockquote:before, blockquote:after,
+q:before, q:after { content: ""; content: none; }
+
+ins { background-color: #ff9; color: #000; text-decoration: none; }
+
+mark { background-color: #ff9; color: #000; font-style: italic; font-weight: bold; }
+
+del { text-decoration: line-through; }
+
+abbr[title], dfn[title] { border-bottom: 1px dotted; cursor: help; }
+
+table { border-collapse: collapse; border-spacing: 0; }
+
+hr { display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0; }
+
+input, select { vertical-align: middle; }
+
+
+/**
+ * Font normalization inspired by YUI Library's fonts.css: developer.yahoo.com/yui/
+ */
+
+body { font:13px/1.231 sans-serif; *font-size:small; } /* Hack retained to preserve specificity */
+select, input, textarea, button { font:99% sans-serif; }
+
+/* Normalize monospace sizing:
+   en.wikipedia.org/wiki/MediaWiki_talk:Common.css/Archive_11#Teletype_style_fix_for_Chrome */
+pre, code, kbd, samp { font-family: monospace, sans-serif; }
+
+em,i { font-style: italic; }
+b,strong { font-weight: bold; }
+
+</style>
+<style type="text/css">
+
+/* Flexible box model classes */
+/* Taken from Alex Russell http://infrequently.org/2009/08/css-3-progress/ */
+ 
+.hbox {
+	display: -webkit-box;
+	-webkit-box-orient: horizontal;
+	-webkit-box-align: stretch;
+ 
+	display: -moz-box;
+	-moz-box-orient: horizontal;
+	-moz-box-align: stretch;
+ 
+	display: box;
+	box-orient: horizontal;
+	box-align: stretch;
+}
+ 
+.hbox > * {
+	-webkit-box-flex: 0;
+	-moz-box-flex: 0;
+	box-flex: 0;
+}
+ 
+.vbox {
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	-webkit-box-align: stretch;
+ 
+	display: -moz-box;
+	-moz-box-orient: vertical;
+	-moz-box-align: stretch;
+ 
+	display: box;
+	box-orient: vertical;
+	box-align: stretch;
+}
+ 
+.vbox > * {
+	-webkit-box-flex: 0;
+	-moz-box-flex: 0;
+	box-flex: 0;
+}
+  
+.reverse {
+	-webkit-box-direction: reverse;
+	-moz-box-direction: reverse;
+	box-direction: reverse;
+}
+ 
+.box-flex0 {
+	-webkit-box-flex: 0;
+	-moz-box-flex: 0;
+	box-flex: 0;
+}
+ 
+.box-flex1, .box-flex {
+	-webkit-box-flex: 1;
+	-moz-box-flex: 1;
+	box-flex: 1;
+}
+ 
+.box-flex2 {
+	-webkit-box-flex: 2;
+	-moz-box-flex: 2;
+	box-flex: 2;
+}
+ 
+.box-group1 {
+	-webkit-box-flex-group: 1;
+	-moz-box-flex-group: 1;
+	box-flex-group: 1;
+}
+ 
+.box-group2 {
+	-webkit-box-flex-group: 2;
+	-moz-box-flex-group: 2;
+	box-flex-group: 2;
+}
+ 
+.start {
+	-webkit-box-pack: start;
+	-moz-box-pack: start;
+	box-pack: start;
+}
+ 
+.end {
+	-webkit-box-pack: end;
+	-moz-box-pack: end;
+	box-pack: end;
+}
+ 
+.center {
+	-webkit-box-pack: center;
+	-moz-box-pack: center;
+	box-pack: center;
+}
+
+</style>
+<style type="text/css">
+/**
+ * Primary styles
+ *
+ * Author: IPython Development Team
+ */
+
+
+body {
+    overflow: hidden;
+}
+
+span#save_widget {
+    padding: 5px;
+    margin: 0px 0px 0px 300px;
+    display:inline-block;
+}
+
+span#notebook_name {
+    height: 1em;
+    line-height: 1em;
+    padding: 3px;
+    border: none;
+    font-size: 146.5%;
+}
+
+.ui-menubar-item .ui-button .ui-button-text {
+    padding: 0.4em 1.0em;
+    font-size: 100%;
+}
+
+.ui-menu {
+  -moz-box-shadow:    0px 6px 10px -1px #adadad;
+  -webkit-box-shadow: 0px 6px 10px -1px #adadad;
+  box-shadow:         0px 6px 10px -1px #adadad;
+}
+
+.ui-menu .ui-menu-item a {
+    border: 1px solid transparent;
+    padding: 2px 1.6em;
+}
+
+.ui-menu .ui-menu-item a.ui-state-focus {
+    margin: 0;
+}
+
+.ui-menu hr {
+    margin: 0.3em 0;
+}
+
+#menubar_container {
+    position: relative;
+}
+
+#notification {
+    position: absolute;
+    right: 3px;
+    top: 3px;
+    height: 25px;
+    padding: 3px 6px;
+    z-index: 10;
+}
+
+#toolbar {
+    padding: 3px 15px;
+}
+
+#cell_type {
+    font-size: 85%;
+}
+
+
+div#main_app {
+    width: 100%;
+    position: relative;
+}
+
+span#quick_help_area {
+    position: static;
+    padding: 5px 0px;
+    margin: 0px 0px 0px 0px;
+}
+
+.help_string {
+    float: right;
+    width: 170px;
+    padding: 0px 5px;
+    text-align: left;
+    font-size: 85%;
+}
+
+.help_string_label {
+    float: right;
+    font-size: 85%;
+}
+
+div#notebook_panel {
+    margin: 0px 0px 0px 0px;
+    padding: 0px;
+}
+
+div#notebook {
+    overflow-y: scroll;
+    overflow-x: auto;
+    width: 100%;
+    /* This spaces the cell away from the edge of the notebook area */
+    padding: 5px 5px 15px 5px;
+    margin: 0px;
+    background-color: white;
+}
+
+div#pager_splitter {
+    height: 8px;
+}
+
+div#pager {
+    padding: 15px;
+    overflow: auto;
+    display: none;
+}
+
+div.ui-widget-content {
+    border: 1px solid #aaa;
+    outline: none;
+}
+
+.cell {
+    border: 1px solid transparent;
+}
+
+div.cell {
+    width: 100%;
+    padding: 5px 5px 5px 0px;
+    /* This acts as a spacer between cells, that is outside the border */
+    margin: 2px 0px 2px 0px;
+}
+
+div.code_cell {
+    background-color: white;
+}
+
+/* any special styling for code cells that are currently running goes here */
+div.code_cell.running {
+}
+
+div.prompt {
+    /* This needs to be wide enough for 3 digit prompt numbers: In[100]: */
+    width: 11ex;
+    /* This 0.4em is tuned to match the padding on the CodeMirror editor. */
+    padding: 0.4em;
+    margin: 0px;
+    font-family: monospace;
+    text-align:right;
+}
+
+div.input {
+    page-break-inside: avoid;
+}
+
+/* input_area and input_prompt must match in top border and margin for alignment */
+div.input_area {
+    color: black;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    background: #f7f7f7;
+}
+
+div.input_prompt {
+    color: navy;
+    border-top: 1px solid transparent;
+}
+
+div.output_wrapper {
+    /* This is a spacer between the input and output of each cell */
+    margin-top: 5px;
+    margin-left: 5px;
+    /* FF needs explicit width to stretch */
+    width: 100%;
+    /* this position must be relative to enable descendents to be absolute within it */
+    position: relative;
+}
+
+/* class for the output area when it should be height-limited */
+div.output_scroll {
+  /* ideally, this would be max-height, but FF barfs all over that */
+  height: 24em;
+  /* FF needs this *and the wrapper* to specify full width, or it will shrinkwrap */
+  width: 100%;
+  
+  overflow: auto;
+  border-radius: 3px;
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, .8);
+}
+
+/* output div while it is collapsed */
+div.output_collapsed {
+  margin-right: 5px;
+}
+
+div.out_prompt_overlay {
+  height: 100%;
+  padding: 0px;
+  position: absolute;
+  border-radius: 3px;
+}
+
+div.out_prompt_overlay:hover {
+  /* use inner shadow to get border that is computed the same on WebKit/FF */
+  box-shadow: inset 0 0 1px #000;
+  background: rgba(240, 240, 240, 0.5);
+}
+
+div.output_prompt {
+    color: darkred;
+    /* 5px right shift to account for margin in parent container */
+    margin: 0 5px 0 -5px;
+}
+
+/* This class is the outer container of all output sections. */
+div.output_area {
+    padding: 0px;
+    page-break-inside: avoid;
+}
+
+/* This class is for the output subarea inside the output_area and after
+   the prompt div. */
+div.output_subarea {
+    padding: 0.4em 0.4em 0.4em 0.4em;
+}
+
+/* The rest of the output_* classes are for special styling of the different
+   output types */
+
+/* all text output has this class: */
+div.output_text {
+    text-align: left;
+    color: black;
+    font-family: monospace;
+}
+
+/* stdout/stderr are 'text' as well as 'stream', but pyout/pyerr are *not* streams */
+div.output_stream {
+    padding-top: 0.0em;
+    padding-bottom: 0.0em;
+}
+div.output_stdout {
+}
+div.output_stderr {
+    background: #fdd; /* very light red background for stderr */
+}
+
+div.output_latex {
+    text-align: left;
+    color: black;
+}
+
+div.output_html {
+}
+
+div.output_png {
+}
+
+div.output_jpeg {
+}
+
+div.text_cell {
+    background-color: white;
+    padding: 5px 5px 5px 5px;
+}
+
+div.text_cell_input {
+    color: black;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    background: #f7f7f7;
+}
+
+div.text_cell_render {
+    font-family: "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+    outline: none;
+    resize: none;
+    width:  inherit;
+    border-style: none;
+    padding: 5px;
+    color: black;
+}
+
+/* The following gets added to the <head> if it is detected that the user has a
+ * monospace font with inconsistent normal/bold/italic height.  See
+ * notebookmain.js.  Such fonts will have keywords vertically offset with
+ * respect to the rest of the text.  The user should select a better font. 
+ * See: https://github.com/ipython/ipython/issues/1503
+ *
+ * .CodeMirror span {
+ *      vertical-align: bottom;
+ * }
+ */
+
+.CodeMirror {
+    line-height: 1.231;  /* Changed from 1em to our global default */
+}
+
+.CodeMirror-scroll {
+    height: auto;     /* Changed to auto to autogrow */
+    /*  The CodeMirror docs are a bit fuzzy on if overflow-y should be hidden or visible.*/
+    /*  We have found that if it is visible, vertical scrollbars appear with font size changes.*/
+    overflow-y: hidden;
+    overflow-x: auto; /* Changed from auto to remove scrollbar */
+}
+
+/* CSS font colors for translated ANSI colors. */
+
+
+.ansiblack {color: black;}
+.ansired {color: darkred;}
+.ansigreen {color: darkgreen;}
+.ansiyellow {color: brown;}
+.ansiblue {color: darkblue;}
+.ansipurple {color: darkviolet;}
+.ansicyan {color: steelblue;}
+.ansigrey {color: grey;}
+.ansibold {font-weight: bold;}
+
+.completions {
+    position: absolute;
+    z-index: 10;
+    overflow: hidden;
+    border: 1px solid grey;
+}
+
+.completions select {
+    background: white;
+    outline: none;
+    border: none;
+    padding: 0px;
+    margin: 0px;
+    overflow: auto;
+    font-family: monospace;
+}
+
+option.context {
+  background-color: #DEF7FF;
+}
+option.introspection {
+  background-color: #EBF4EB;
+}
+
+/*fixed part of the completion*/
+.completions p b {
+    font-weight:bold;
+}
+
+.completions p {
+    background: #DDF;
+    /*outline: none;
+    padding: 0px;*/
+    border-bottom: black solid 1px;
+    padding: 1px;
+    font-family: monospace;
+}
+
+pre.dialog {
+    background-color: #f7f7f7;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    padding: 0.4em;
+    padding-left: 2em;
+}
+
+p.dialog {
+    padding : 0.2em;
+}
+
+.shortcut_key {
+    display: inline-block;
+    width: 15ex;
+    text-align: right;
+    font-family: monospace;
+}
+
+.shortcut_descr {
+}
+
+/* Word-wrap output correctly.  This is the CSS3 spelling, though Firefox seems
+   to not honor it correctly.  Webkit browsers (Chrome, rekonq, Safari) do.
+ */
+pre, code, kbd, samp { white-space: pre-wrap; }
+
+#fonttest {
+    font-family: monospace;
+}
+
+</style>
+<style type="text/css">
+.rendered_html {color: black;}
+.rendered_html em {font-style: italic;}
+.rendered_html strong {font-weight: bold;}
+.rendered_html u {text-decoration: underline;}
+.rendered_html :link { text-decoration: underline }
+.rendered_html :visited { text-decoration: underline }
+.rendered_html h1 {font-size: 197%; margin: .65em 0; font-weight: bold;}
+.rendered_html h2 {font-size: 153.9%; margin: .75em 0; font-weight: bold;}
+.rendered_html h3 {font-size: 123.1%; margin: .85em 0; font-weight: bold;}
+.rendered_html h4 {font-size: 100% margin: 0.95em 0; font-weight: bold;}
+.rendered_html h5 {font-size: 85%; margin: 1.5em 0; font-weight: bold;}
+.rendered_html h6 {font-size: 77%; margin: 1.65em 0; font-weight: bold;}
+.rendered_html ul {list-style:disc; margin: 1em 2em;}
+.rendered_html ul ul {list-style:square; margin: 0em 2em;}
+.rendered_html ul ul ul {list-style:circle; margin-left: 0em 2em;}
+.rendered_html ol {list-style:upper-roman; margin: 1em 2em;}
+.rendered_html ol ol {list-style:upper-alpha; margin: 0em 2em;}
+.rendered_html ol ol ol {list-style:decimal; margin: 0em 2em;}
+.rendered_html ol ol ol ol {list-style:lower-alpha; margin 0em 2em;}
+.rendered_html ol ol ol ol ol {list-style:lower-roman; 0em 2em;}
+
+.rendered_html hr {
+    color: black;
+    background-color: black;
+}
+
+.rendered_html pre {
+    margin: 1em 2em;
+}
+
+.rendered_html blockquote {
+    margin: 1em 2em;
+}
+
+.rendered_html table {
+    border: 1px solid black;
+    border-collapse: collapse;
+    margin: 1em 2em;
+}
+
+.rendered_html td {
+    border: 1px solid black;
+    text-align: left;
+    vertical-align: middle;
+    padding: 4px;
+}
+
+.rendered_html th {
+    border: 1px solid black;
+    text-align: left;
+    vertical-align: middle;
+    padding: 4px;
+    font-weight: bold;
+}
+
+.rendered_html tr {
+    border: 1px solid black;
+}    
+
+.rendered_html p + p {
+    margin-top: 1em;
+}
+
+
+</style>
+<style type="text/css">
+/* Overrides of notebook CSS for static HTML export
+
+*/
+body {
+  overflow: visible;
+  padding: 8px;
+}
+.input_area {
+  padding: 0.4em;
+}
+
+</style>
+<style type="text/css">
+.highlight .hll { background-color: #ffffcc }
+.highlight  { background: #f8f8f8; }
+.highlight .c { color: #408080; font-style: italic } /* Comment */
+.highlight .err { border: 1px solid #FF0000 } /* Error */
+.highlight .k { color: #008000; font-weight: bold } /* Keyword */
+.highlight .o { color: #666666 } /* Operator */
+.highlight .cm { color: #408080; font-style: italic } /* Comment.Multiline */
+.highlight .cp { color: #BC7A00 } /* Comment.Preproc */
+.highlight .c1 { color: #408080; font-style: italic } /* Comment.Single */
+.highlight .cs { color: #408080; font-style: italic } /* Comment.Special */
+.highlight .gd { color: #A00000 } /* Generic.Deleted */
+.highlight .ge { font-style: italic } /* Generic.Emph */
+.highlight .gr { color: #FF0000 } /* Generic.Error */
+.highlight .gh { color: #000080; font-weight: bold } /* Generic.Heading */
+.highlight .gi { color: #00A000 } /* Generic.Inserted */
+.highlight .go { color: #808080 } /* Generic.Output */
+.highlight .gp { color: #000080; font-weight: bold } /* Generic.Prompt */
+.highlight .gs { font-weight: bold } /* Generic.Strong */
+.highlight .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+.highlight .gt { color: #0040D0 } /* Generic.Traceback */
+.highlight .kc { color: #008000; font-weight: bold } /* Keyword.Constant */
+.highlight .kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
+.highlight .kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
+.highlight .kp { color: #008000 } /* Keyword.Pseudo */
+.highlight .kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
+.highlight .kt { color: #B00040 } /* Keyword.Type */
+.highlight .m { color: #666666 } /* Literal.Number */
+.highlight .s { color: #BA2121 } /* Literal.String */
+.highlight .na { color: #7D9029 } /* Name.Attribute */
+.highlight .nb { color: #008000 } /* Name.Builtin */
+.highlight .nc { color: #0000FF; font-weight: bold } /* Name.Class */
+.highlight .no { color: #880000 } /* Name.Constant */
+.highlight .nd { color: #AA22FF } /* Name.Decorator */
+.highlight .ni { color: #999999; font-weight: bold } /* Name.Entity */
+.highlight .ne { color: #D2413A; font-weight: bold } /* Name.Exception */
+.highlight .nf { color: #0000FF } /* Name.Function */
+.highlight .nl { color: #A0A000 } /* Name.Label */
+.highlight .nn { color: #0000FF; font-weight: bold } /* Name.Namespace */
+.highlight .nt { color: #008000; font-weight: bold } /* Name.Tag */
+.highlight .nv { color: #19177C } /* Name.Variable */
+.highlight .ow { color: #AA22FF; font-weight: bold } /* Operator.Word */
+.highlight .w { color: #bbbbbb } /* Text.Whitespace */
+.highlight .mf { color: #666666 } /* Literal.Number.Float */
+.highlight .mh { color: #666666 } /* Literal.Number.Hex */
+.highlight .mi { color: #666666 } /* Literal.Number.Integer */
+.highlight .mo { color: #666666 } /* Literal.Number.Oct */
+.highlight .sb { color: #BA2121 } /* Literal.String.Backtick */
+.highlight .sc { color: #BA2121 } /* Literal.String.Char */
+.highlight .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
+.highlight .s2 { color: #BA2121 } /* Literal.String.Double */
+.highlight .se { color: #BB6622; font-weight: bold } /* Literal.String.Escape */
+.highlight .sh { color: #BA2121 } /* Literal.String.Heredoc */
+.highlight .si { color: #BB6688; font-weight: bold } /* Literal.String.Interpol */
+.highlight .sx { color: #008000 } /* Literal.String.Other */
+.highlight .sr { color: #BB6688 } /* Literal.String.Regex */
+.highlight .s1 { color: #BA2121 } /* Literal.String.Single */
+.highlight .ss { color: #19177C } /* Literal.String.Symbol */
+.highlight .bp { color: #008000 } /* Name.Builtin.Pseudo */
+.highlight .vc { color: #19177C } /* Name.Variable.Class */
+.highlight .vg { color: #19177C } /* Name.Variable.Global */
+.highlight .vi { color: #19177C } /* Name.Variable.Instance */
+.highlight .il { color: #666666 } /* Literal.Number.Integer.Long */
+</style>
+<script type="text/javascript"src="https://c328740.ssl.cf1.rackcdn.com/mathjax/latest/MathJax.js?config=TeX-AMS_HTML">
+
+</script>
+<script type="text/javascript">
+init_mathjax = function() {
+    if (window.MathJax) {
+        // MathJax loaded
+        MathJax.Hub.Config({
+            tex2jax: {
+                inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+                displayMath: [ ['$$','$$'], ["\\[","\\]"] ]
+            },
+            displayAlign: 'left', // Change this to 'center' to center equations.
+            "HTML-CSS": {
+                styles: {'.MathJax_Display': {"margin": 0}}
+            }
+        });
+        MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
+    }
+}
+init_mathjax();
+</script>
+</head>
+<body>
+<div style="position:absolute; right:1em; top:1em; padding:0.4em; border:1px dashed black;">
+  <a href="https://raw.github.com/teharrison/ipy-mkmq/master/ipynb/KBase_Annotating_a_Genome.ipynb">Download notebook</a>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3>IPython implementaion of KBase tutorial: <i>Annotating a Genome Using KBase Tools</i></h3>
+
+<p>http://kbase.us/developer-zone/tutorials/getting-started/annotating-a-genome-using-kbase-tools/</p>
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3>Using An IPython Notebook
+    <a style='cursor:pointer;clear:both;font-size:small;color:blue;padding-left:10px;' onclick='
+  if (this.innerHTML=="show") {
+    this.innerHTML = "hide";
+    document.getElementById("ipy_nb_doc").style.display = "";
+  } else {
+    document.getElementById("ipy_nb_doc").style.display = "none";
+    this.innerHTML = "show";
+}'>show</a></h3>
+
+<div id='ipy_nb_doc' style='display:none;'>
+<p>An <a href='http://ipython.org/ipython-doc/rel-0.13/overview.html' target='_blank'><font color='blue'>IPython notebook</font></a> is a web based python shell interface with ability to use other shells (bash, perl, R, ruby, etc.). Allows execution of code blocks (called cells) and display of the results as plain text or images or markup (html / javascript).</p>
+The notebook page is composed of 2 parts.
+<ol>
+    <li>A top control bar with drop-down menus</li>
+    <li>An interactive notebook space below, composed of âcellsâ with input and output areas</li>
+</ol>
+<p>The control menus allow manipulation of cells (add, delete, merge, split, move, execute, change type), ouput (expand, collapse, clear), and the kernel that is running the notebook code (interrupt, restart).</p>
+<p>Work within the notebook is done by entering commands into a cell, this can be done with one or more lines. To execute the commands in the cell use shift-return. Cells are numbered by execution order and may be re-ran in any order. The results (if any) are displayed in the space below that cell. Result types may be: plain text, JSON or serialized python objects, html, javascript, math equations (latex), images (png, jpg, pdf, etc.)</p>
+</div>
+
+<h3>Using KBase in IPython
+    <a style='cursor:pointer;clear:both;font-size:small;color:blue;padding-left:10px;' onclick='
+  if (this.innerHTML=="show") {
+    this.innerHTML = "hide";
+    document.getElementById("kbase_nb_doc").style.display = "";
+  } else {
+    document.getElementById("kbase_nb_doc").style.display = "none";
+    this.innerHTML = "show";
+  }'>show</a></h3>
+
+<div id='kbase_nb_doc'  style='display:none;'>
+<h4>KBase Command Line Scripts</h4>
+<p>To list available all available KBase command line scripts, run <font color='red'>print Ipy.KBASE_CMDS</font>. To view the documentation for a given KBase shell command run <font color='red'>! kb_command_name -h</font> You can also start typing a command in a cell and use the 'tab' key to get a list of available commands or to auto-complete the name. To run a KBase shell command, prepend <font color='red'>!</font> to the front of the command to execute it through the bash shell.</p><br>
+<h4>KBase Python Tools</h4>
+<p>To view the available KBase python classes and functions execute <font color='red'>print Ipy.KBASE_IPY</font>. To view the documentation for a given class or function run <font color='red'>help(class_or_func_name)</font>.</p>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell vbox">
+<div class="input hbox">
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="input_area box-flex1">
+<div class="highlight"><pre><span class="c"># Select a genome</span>
+<span class="o">!</span> all_entities_Genome -f scientific_name | grep Geobacter
+</pre></div>
+
+</div>
+</div>
+<div class="vbox output_wrapper">
+<div class="output vbox">
+<div class="hbox output_area">
+<div class="prompt output_prompt"></div>
+<div class="box-flex1 output_subarea output_stream output_stdout">
+<pre>kb|g.1495	Geobacter sp. M18
+kb|g.1494	Geobacter sp. M18
+kb|g.1278	Geobacter lovleyi SZ
+kb|g.483	Geobacter sulfurreducens PCA
+kb|g.1029	Geobacter uraniireducens Rf4
+kb|g.1314	Geobacter bemidjiensis Bem
+kb|g.1496	Geobacter sp. M21
+kb|g.2860	Geobacter sulfurreducens KN400
+kb|g.835	Geobacter sp. FRC-32
+kb|g.589	Geobacter metallireducens GS-15
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell vbox">
+<div class="input hbox">
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="input_area box-flex1">
+<div class="highlight"><pre><span class="c"># Create project subdirectory</span>
+<span class="o">!</span> mkdir g.2860
+</pre></div>
+
+</div>
+</div>
+<div class="vbox output_wrapper">
+<div class="output vbox">
+<div class="hbox output_area">
+<div class="prompt output_prompt"></div>
+<div class="box-flex1 output_subarea output_stream output_stdout">
+<pre>mkdir: cannot create directory &#96;g.2860&apos;: File exists
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell vbox">
+<div class="input hbox">
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="input_area box-flex1">
+<div class="highlight"><pre><span class="c"># Get a FASTA file of contigs from the KBase Central Store</span>
+<span class="o">!</span> <span class="nb">echo</span> <span class="s1">&#39;kb|g.2860&#39;</span> | genomes_to_contigs | contigs_to_sequences &gt; g.2860/g.2860.contigs
+</pre></div>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell vbox">
+<div class="input hbox">
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="input_area box-flex1">
+<div class="highlight"><pre><span class="o">!</span> head -1 g.2860/g.2860.contigs
+</pre></div>
+
+</div>
+</div>
+<div class="vbox output_wrapper">
+<div class="output vbox">
+<div class="hbox output_area">
+<div class="prompt output_prompt"></div>
+<div class="box-flex1 output_subarea output_stream output_stdout">
+<pre>&gt;kb|g.2860.c.0
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell vbox">
+<div class="input hbox">
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="input_area box-flex1">
+<div class="highlight"><pre><span class="c"># Create a genome object to annotate</span>
+<span class="o">!</span> fasta_to_genome <span class="s1">&#39;Geobacter sulfurreducens KN400&#39;</span> Bacteria 11 &lt; g.2860/g.2860.contigs &gt; g.2860/genome
+</pre></div>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell vbox">
+<div class="input hbox">
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="input_area box-flex1">
+<div class="highlight"><pre><span class="n">genome_obj</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="s">&#39;g.2860/genome&#39;</span><span class="p">,</span> <span class="s">&#39;r&#39;</span><span class="p">))</span>
+<span class="k">print</span> <span class="n">genome_obj</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+<span class="k">print</span> <span class="s">&#39;---------------&#39;</span>
+<span class="k">print</span> <span class="n">genome_obj</span><span class="p">[</span><span class="s">&#39;id&#39;</span><span class="p">],</span> <span class="n">genome_obj</span><span class="p">[</span><span class="s">&#39;scientific_name&#39;</span><span class="p">]</span>
+</pre></div>
+
+</div>
+</div>
+<div class="vbox output_wrapper">
+<div class="output vbox">
+<div class="hbox output_area">
+<div class="prompt output_prompt"></div>
+<div class="box-flex1 output_subarea output_stream output_stdout">
+<pre>[u&apos;contigs&apos;, u&apos;domain&apos;, u&apos;features&apos;, u&apos;scientific_name&apos;, u&apos;genetic_code&apos;, u&apos;id&apos;]
+---------------
+kb|g.22779 Geobacter sulfurreducens KN400
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell vbox">
+<div class="input hbox">
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="input_area box-flex1">
+<div class="highlight"><pre><span class="c"># Annotate a genome object</span>
+<span class="o">!</span> annotate_genome &lt; g.2860/genome &gt; g.2860/annotated.genome
+<span class="o">!</span> genomeTO_to_feature_data &lt; g.2860/annotated.genome &gt; g.2860/features.txt
+</pre></div>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell vbox">
+<div class="input hbox">
+<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="input_area box-flex1">
+<div class="highlight"><pre><span class="n">ann_obj</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="s">&#39;g.2860/annotated.genome&#39;</span><span class="p">,</span> <span class="s">&#39;r&#39;</span><span class="p">))</span>
+<span class="k">print</span> <span class="n">ann_obj</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+<span class="k">print</span> <span class="s">&#39;---------------&#39;</span>
+<span class="k">print</span> <span class="n">ann_obj</span><span class="p">[</span><span class="s">&#39;id&#39;</span><span class="p">],</span> <span class="n">ann_obj</span><span class="p">[</span><span class="s">&#39;scientific_name&#39;</span><span class="p">]</span>
+<span class="k">print</span> <span class="s">&#39;---------------&#39;</span>
+<span class="o">!</span> head g.2860/features.txt
+</pre></div>
+
+</div>
+</div>
+<div class="vbox output_wrapper">
+<div class="output vbox">
+<div class="hbox output_area">
+<div class="prompt output_prompt"></div>
+<div class="box-flex1 output_subarea output_stream output_stdout">
+<pre>[u&apos;contigs&apos;, u&apos;domain&apos;, u&apos;features&apos;, u&apos;scientific_name&apos;, u&apos;genetic_code&apos;, u&apos;id&apos;]
+---------------
+kb|g.22779 Geobacter sulfurreducens KN400
+---------------
+kb|g.22779.CDS.0	kb|g.2860.c.0_30+1338	CDS	Chromosomal replication initiator protein DnaA		fd800fdc1c8cb7b1d3bbc7fa621dc80c
+kb|g.22779.CDS.1	kb|g.2860.c.0_1594+1119	CDS	DNA polymerase III beta subunit (EC 2.7.7.7)		a23070961b4ffffaec9f84c62d936600
+kb|g.22779.CDS.2	kb|g.2860.c.0_2766+1125	CDS	DNA recombination and repair protein RecF		421a0c2e538648e3ae0fd2ef13077d38
+kb|g.22779.CDS.3	kb|g.2860.c.0_3901+2388	CDS	DNA gyrase subunit B (EC 5.99.1.3)		f0e5e514f0048ca0aae6ab89ba1b52df
+kb|g.22779.CDS.4	kb|g.2860.c.0_6416+2574	CDS	DNA gyrase subunit A (EC 5.99.1.3)		82312a13dcdda4510cbd47bf2c7203ed
+kb|g.22779.CDS.5	kb|g.2860.c.0_9060+1569	CDS	FIG00675799: hypothetical protein		845e74d146f530de71fcce27c99ff126
+kb|g.22779.CDS.6	kb|g.2860.c.0_10673+1008	CDS	Glycerol-3-phosphate dehydrogenase [NAD(P)+] (EC 1.1.1.94)		c767c87b99e71df32c6473bb24713b1b
+kb|g.22779.CDS.7	kb|g.2860.c.0_11778+2289	CDS	Two-component sensor kinase SA14-24		67d879ffd27ec5ae5462ccc066b19b58
+kb|g.22779.CDS.8	kb|g.2860.c.0_14063+1551	CDS	sensory box histidine kinase/response regulator		f6f6cc428ca191dbcf9e86d668cf1f8a
+kb|g.22779.CDS.9	kb|g.2860.c.0_15618+1500	CDS	PAS/PAC sensor signal transduction histidine kinase		94616224ed8e4197a231aad7b8403efa
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell vbox">
+<div class="input hbox">
+<div class="prompt input_prompt">In&nbsp;[9]:</div>
+<div class="input_area box-flex1">
+<div class="highlight"><pre><span class="c"># Build a metabolic reconstruction from an annotated genome</span>
+<span class="o">!</span> genomeTO_to_reconstructionTO &lt; g.2860/annotated.genome &gt; g.2860/reconstruction
+<span class="o">!</span> reconstructionTO_to_roles &lt; g.2860/reconstruction &gt; g.2860/roles
+<span class="o">!</span> reconstructionTO_to_subsystems &lt; g.2860/reconstruction &gt; g.2860/subsystems
+</pre></div>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell vbox">
+<div class="input hbox">
+<div class="prompt input_prompt">In&nbsp;[10]:</div>
+<div class="input_area box-flex1">
+<div class="highlight"><pre><span class="n">rec_obj</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="s">&#39;g.2860/reconstruction&#39;</span><span class="p">,</span> <span class="s">&#39;r&#39;</span><span class="p">))</span>
+<span class="k">print</span> <span class="n">rec_obj</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+<span class="k">print</span> <span class="s">&#39;---------------&#39;</span>
+<span class="k">print</span> <span class="n">rec_obj</span><span class="p">[</span><span class="s">&#39;bindings&#39;</span><span class="p">][:</span><span class="mi">5</span><span class="p">]</span>
+<span class="k">print</span> <span class="s">&#39;---------------&#39;</span>
+<span class="k">print</span> <span class="n">rec_obj</span><span class="p">[</span><span class="s">&#39;subsystems&#39;</span><span class="p">][:</span><span class="mi">5</span><span class="p">]</span>
+<span class="k">print</span> <span class="s">&#39;---------------&#39;</span>
+<span class="o">!</span> head g.2860/roles
+<span class="k">print</span> <span class="s">&#39;---------------&#39;</span>
+<span class="o">!</span> head g.2860/subsystems
+</pre></div>
+
+</div>
+</div>
+<div class="vbox output_wrapper">
+<div class="output vbox">
+<div class="hbox output_area">
+<div class="prompt output_prompt"></div>
+<div class="box-flex1 output_subarea output_stream output_stdout">
+<pre>[u&apos;assignments&apos;, u&apos;bindings&apos;, u&apos;subsystems&apos;]
+---------------
+[[u&apos;kb|g.22779.CDS.3037&apos;, u&apos;Flagellar hook-associated protein FlgK&apos;], [u&apos;kb|g.22779.CDS.3006&apos;, u&apos;Flagellin protein FlaG&apos;], [u&apos;kb|g.22779.CDS.3453&apos;, u&apos;Glutamate synthase [NADPH] large chain (EC 1.4.1.13)&apos;], [u&apos;kb|g.22779.CDS.1236&apos;, u&apos;Glutamate synthase [NADPH] large chain (EC 1.4.1.13)&apos;], [u&apos;kb|g.22779.CDS.1233&apos;, u&apos;Glutamate synthase [NADPH] large chain (EC 1.4.1.13)&apos;]]
+---------------
+[[u&apos;Two cell division clusters relating to chromosome partitioning&apos;, u&apos;missing&apos;], [u&apos;tRNA processing&apos;, u&apos;1&apos;], [u&apos;Thioredoxin-disulfide reductase&apos;, u&apos;2&apos;], [u&apos;Proline Synthesis&apos;, u&apos;1&apos;], [u&apos;CBSS-138119.3.peg.2719&apos;, u&apos;9&apos;]]
+---------------
+(3R)-hydroxymyristoyl-[acyl carrier protein] dehydratase (EC 4.2.1.-)
+(R)-citramalate synthase (EC 2.3.1.182)
+(S)-2-hydroxy-acid oxidase (EC 1.1.3.15)
+1-acyl-sn-glycerol-3-phosphate acyltransferase (EC 2.3.1.51)
+1-deoxy-D-xylulose 5-phosphate reductoisomerase (EC 1.1.1.267)
+1-deoxy-D-xylulose 5-phosphate synthase (EC 2.2.1.7)
+1-hydroxy-2-methyl-2-(E)-butenyl 4-diphosphate synthase (EC 1.17.7.1)
+16S rRNA processing protein RimM
+2&apos;-5&apos; RNA ligase
+2,3-bisphosphoglycerate-independent phosphoglycerate mutase (EC 5.4.2.1)
+---------------
+Two cell division clusters relating to chromosome partitioning	missing
+tRNA processing	1
+Thioredoxin-disulfide reductase	2
+Proline Synthesis	1
+CBSS-138119.3.peg.2719	9
+ABC transporter oligopeptide (TC 3.A.1.5.1)	2
+Periplasmic disulfide interchange	1
+Housecleaning nucleoside triphosphate pyrophosphatases	1
+DNA gyrase subunits	1
+Terminal cytochrome C oxidases	3
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell vbox">
+<div class="input hbox">
+<div class="prompt input_prompt">In&nbsp;[11]:</div>
+<div class="input_area box-flex1">
+<div class="highlight"><pre><span class="c"># Find roles that might impact metabolic models</span>
+<span class="o">!</span> all_roles_used_in_models &gt; g.2860/all.roles
+<span class="o">!</span> a_and_b g.2860/roles g.2860/all.roles &gt; g.2860/roles.for.models
+</pre></div>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell vbox">
+<div class="input hbox">
+<div class="prompt input_prompt">In&nbsp;[12]:</div>
+<div class="input_area box-flex1">
+<div class="highlight"><pre><span class="o">!</span> head g.2860/all.roles
+<span class="k">print</span> <span class="s">&#39;---------------&#39;</span>
+<span class="o">!</span> head g.2860/roles.for.models
+</pre></div>
+
+</div>
+</div>
+<div class="vbox output_wrapper">
+<div class="output vbox">
+<div class="hbox output_area">
+<div class="prompt output_prompt"></div>
+<div class="box-flex1 output_subarea output_stream output_stdout">
+<pre>(3R)-hydroxymyristoyl-[acyl carrier protein] dehydratase (EC 4.2.1.-)
+1,2-dihydroxy-3-keto-5-methylthiopentene dioxygenase (EC 1.13.11.54)
+1,2-dihydroxycyclohexa-3,5-diene-1-carboxylate dehydrogenase (EC 1.3.1.25)
+1,3-propanediol dehydrogenase (EC 1.1.1.202)
+1,4-alpha-glucan (glycogen) branching enzyme (EC 2.4.1.18)
+1,4-dihydroxy-2-naphthoate octaprenyltransferase (EC 2.5.1.74)
+1-acyl-sn-glycerol-3-phosphate acyltransferase (EC 2.3.1.51)
+1-deoxy-D-xylulose 5-phosphate reductoisomerase (EC 1.1.1.267)
+1-deoxy-D-xylulose 5-phosphate synthase (EC 2.2.1.7)
+1-hydroxy-2-methyl-2-(E)-butenyl 4-diphosphate synthase (EC 1.17.4.3)
+---------------
+(3R)-hydroxymyristoyl-[acyl carrier protein] dehydratase (EC 4.2.1.-)
+1-acyl-sn-glycerol-3-phosphate acyltransferase (EC 2.3.1.51)
+1-deoxy-D-xylulose 5-phosphate reductoisomerase (EC 1.1.1.267)
+1-deoxy-D-xylulose 5-phosphate synthase (EC 2.2.1.7)
+2,3-bisphosphoglycerate-independent phosphoglycerate mutase (EC 5.4.2.1)
+2-C-methyl-D-erythritol 2,4-cyclodiphosphate synthase (EC 4.6.1.12)
+2-C-methyl-D-erythritol 4-phosphate cytidylyltransferase (EC 2.7.7.60)
+2-Keto-3-deoxy-D-manno-octulosonate-8-phosphate synthase (EC 2.5.1.55)
+2-dehydropantoate 2-reductase (EC 1.1.1.169)
+2-isopropylmalate synthase (EC 2.3.3.13)
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell vbox">
+<div class="input hbox">
+<div class="prompt input_prompt">In&nbsp;[13]:</div>
+<div class="input_area box-flex1">
+<div class="highlight"><pre><span class="c"># Compare roles with those found in another strain</span>
+<span class="o">!</span> <span class="nb">echo</span> <span class="s1">&#39;kb|g.1029&#39;</span> | genomes_to_fids CDS | fids_to_roles 2&gt; /dev/null | cut -f 3 &gt; g.2860/roles.in.g.1029
+<span class="o">!</span> a_and_b g.2860/roles.in.g.1029 g.2860/all.roles &gt; g.2860/roles.for.models.g.1029
+<span class="o">!</span> a_not_b g.2860/roles.for.models g.2860/roles.for.models.g.1029 &gt; g.2860/roles.to.search.for
+</pre></div>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell vbox">
+<div class="input hbox">
+<div class="prompt input_prompt">In&nbsp;[14]:</div>
+<div class="input_area box-flex1">
+<div class="highlight"><pre><span class="o">!</span> head g.2860/roles.in.g.1029
+<span class="o">!</span> <span class="nb">echo</span> <span class="s1">&#39;---------------&#39;</span>
+<span class="o">!</span> head g.2860/roles.for.models.g.1029
+<span class="o">!</span> <span class="nb">echo</span> <span class="s1">&#39;---------------&#39;</span>
+<span class="o">!</span> head g.2860/roles.to.search.for
+</pre></div>
+
+</div>
+</div>
+<div class="vbox output_wrapper">
+<div class="output vbox">
+<div class="hbox output_area">
+<div class="prompt output_prompt"></div>
+<div class="box-flex1 output_subarea output_stream output_stdout">
+<pre>HAD-superfamily hydrolase, subfamily IA, variant 1
+Sigma-54 dependent DNA-binding response regulator
+Lipoprotein signal peptidase (EC 3.4.23.36)
+hypothetical protein
+FIG004454: RNA binding protein
+ABC-type antimicrobial peptide transport system, ATPase component
+Putative membrane protein of ExoQ family, involved in exopolysaccharide production
+Prolipoprotein diacylglyceryl transferase (EC 2.4.99.-)
+FIG00680829: hypothetical protein
+Mammalian cell entry related
+---------------
+(3R)-hydroxymyristoyl-[acyl carrier protein] dehydratase (EC 4.2.1.-)
+1-acyl-sn-glycerol-3-phosphate acyltransferase (EC 2.3.1.51)
+1-deoxy-D-xylulose 5-phosphate reductoisomerase (EC 1.1.1.267)
+1-deoxy-D-xylulose 5-phosphate synthase (EC 2.2.1.7)
+2,3-bisphosphoglycerate-independent phosphoglycerate mutase (EC 5.4.2.1)
+2-C-methyl-D-erythritol 2,4-cyclodiphosphate synthase (EC 4.6.1.12)
+2-C-methyl-D-erythritol 4-phosphate cytidylyltransferase (EC 2.7.7.60)
+2-Keto-3-deoxy-D-manno-octulosonate-8-phosphate synthase (EC 2.5.1.55)
+2-amino-4-hydroxy-6-hydroxymethyldihydropteridine pyrophosphokinase (EC 2.7.6.3)
+2-dehydropantoate 2-reductase (EC 1.1.1.169)
+---------------
+Acyl carrier protein phosphodiesterase (EC 3.1.4.14)
+Aldehyde dehydrogenase (EC 1.2.1.3)
+Alpha,alpha-trehalose-phosphate synthase [UDP-forming] (EC 2.4.1.15)
+Carbamate kinase (EC 2.7.2.2)
+Catalase (EC 1.11.1.6)
+Cobalt-precorrin-3b C17-methyltransferase
+Cobyric acid synthase
+Cysteine synthase B (EC 2.5.1.47)
+Cytochrome c oxidase polypeptide II (EC 1.9.3.1)
+DNA gyrase subunit A (EC 5.99.1.3)
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell vbox">
+<div class="input hbox">
+<div class="prompt input_prompt">In&nbsp;[15]:</div>
+<div class="input_area box-flex1">
+<div class="highlight"><pre><span class="c"># Create an initial metabolic model</span>
+<span class="o">!</span> genome_to_fbamodel &lt; g.2860/annotated.genome &gt; g.2860/initial.model
+<span class="c"># View the model</span>
+<span class="o">!</span> fbamodel_to_html &lt; g.2860/initial.model &gt; g.2860/initial.model.html
+</pre></div>
+
+</div>
+</div>
+<div class="vbox output_wrapper">
+<div class="output vbox">
+<div class="hbox output_area">
+<div class="prompt output_prompt"></div>
+<div class="box-flex1 output_subarea output_stream output_stdout">
+<pre>/bin/sh: genome_to_fbamodel: not found
+/bin/sh: fbamodel_to_html: not found
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell vbox">
+<div class="input hbox">
+<div class="prompt input_prompt">In&nbsp;[16]:</div>
+<div class="input_area box-flex1">
+<div class="highlight"><pre><span class="c"># Run flux balance analysis on the metabolic model</span>
+<span class="o">!</span> runfba &lt; g.2860/initial.model &gt; g.2860/solution.html
+</pre></div>
+
+</div>
+</div>
+<div class="vbox output_wrapper">
+<div class="output vbox">
+<div class="hbox output_area">
+<div class="prompt output_prompt"></div>
+<div class="box-flex1 output_subarea output_stream output_stdout">
+<pre>/bin/sh: runfba: not found
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell vbox">
+<div class="input hbox">
+<div class="prompt input_prompt">In&nbsp;[17]:</div>
+<div class="input_area box-flex1">
+<div class="highlight"><pre><span class="c"># Gapfill the model</span>
+<span class="o">!</span> gapfill_fbamodel &lt; initial.model &gt; gapfilled.model
+</pre></div>
+
+</div>
+</div>
+<div class="vbox output_wrapper">
+<div class="output vbox">
+<div class="hbox output_area">
+<div class="prompt output_prompt"></div>
+<div class="box-flex1 output_subarea output_stream output_stdout">
+<pre>/bin/sh: cannot open initial.model: No such file
+/bin/sh: gapfill_fbamodel: not found
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell vbox">
+<div class="input hbox">
+<div class="prompt input_prompt">In&nbsp;[18]:</div>
+<div class="input_area box-flex1">
+<div class="highlight"><pre><span class="c"># Run flux balance analysis on the gapfilled model</span>
+<span class="o">!</span> runfba &lt; gapfilled.model &gt; solution.html
+</pre></div>
+
+</div>
+</div>
+<div class="vbox output_wrapper">
+<div class="output vbox">
+<div class="hbox output_area">
+<div class="prompt output_prompt"></div>
+<div class="box-flex1 output_subarea output_stream output_stdout">
+<pre>/bin/sh: cannot open gapfilled.model: No such file
+/bin/sh: runfba: not found
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell vbox">
+<div class="input hbox">
+<div class="prompt input_prompt">In&nbsp;[23]:</div>
+<div class="input_area box-flex1">
+<div class="highlight"><pre><span class="o">!</span> kbfba-loadgenome -h
+</pre></div>
+
+</div>
+</div>
+<div class="vbox output_wrapper">
+<div class="output vbox">
+<div class="hbox output_area">
+<div class="prompt output_prompt"></div>
+<div class="box-flex1 output_subarea output_stream output_stdout">
+<pre>kbfba-loadgenome &lt;Genome file | Genome ID&gt; [-?efhloprsvw] [long options...]
+	-f --fromfile      Load genome object from file
+	-s --seed          Load genome from SEED
+	-r --rast          Load genome from RAST
+	-l --login         Login for genome source (e.g. RAST)
+	-p --password      Password for genome source (e.g. RAST)
+	-w --workspace     Workspace to load genome into
+	-o --overwrite     Overwrite existing genome with same name
+	-e --showerror     Set as 1 to show any errors in execution
+	-v --verbose       Print verbose messages
+	-? -h --help       Print this usage information
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell vbox">
+<div class="input hbox">
+<div class="prompt input_prompt">In&nbsp;[22]:</div>
+<div class="input_area box-flex1">
+<div class="highlight"><pre><span class="o">!</span> kbfba-exportfbamodel -h
+</pre></div>
+
+</div>
+</div>
+<div class="vbox output_wrapper">
+<div class="output vbox">
+<div class="hbox output_area">
+<div class="prompt output_prompt"></div>
+<div class="box-flex1 output_subarea output_stream output_stdout">
+<pre>kbfba-exportfbamodel &lt;FBAModel ID&gt; &lt;Format (html,sbml,json,cytoseed,readable)&gt; [-?ehvw] [long options...]
+	-w --workspace     Workspace with model
+	-e --showerror     Set as 1 to show any errors in execution
+	-v --verbose       Print verbose messages
+	-? -h --help       Print this usage information
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+</body>
+</html>

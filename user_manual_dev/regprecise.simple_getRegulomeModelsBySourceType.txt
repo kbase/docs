@@ -1,0 +1,3 @@
+Unknown option: help
+Usage: getRegulomeModelsBySourceType [--port port] [--url url] regulomeSource
+

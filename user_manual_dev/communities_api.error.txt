@@ -1,0 +1,50 @@
+----------TEST communities_api get_metagenome_analysis with --help option
+Unknown option: help
+
+ERROR, missing the required field 'awe_job_url'.
+
+Script for viewing list of and optionally downloading output files from an analyzed metagenome in AWE
+Command name: check_metagenome.pl
+Parameters:
+     -awe_job_url=<url for AWE job, required>
+     -download <option variable to download output files>
+     -conf=<configuration file (default='awe.ini')>
+
+
+----------TEST communities_api check_metagenome with --help option
+Unknown option: help
+
+ERROR, missing the required field 'awe_job_url'.
+
+Script for checking status of metagenome in AWE
+Command name: check_metagenome.pl
+Parameters:
+     -awe_job_url=<url for AWE job, required>
+     -task_status <option variable to include status of individual tasks>
+     -conf=<configuration file (default='awe.ini')>
+
+
+----------TEST communities_api analyze_metagenome with --help option
+Unknown option: help
+
+ERROR, the following required fields are missing:
+shocknode
+md_shocknode
+jobname
+
+Script for submitting metagenome to AWE
+Command name: analyze_metagenome.pl
+Parameters:
+     -metagenome_name=<metagenome/file name for sequence file in datastore, must match any metagenome name in metadata file, required>
+     -metagenome_datastore_id=<sequence/read file ID in datastore, required>
+     -metadata_datastore_id=<metadata file ID in datastore, required>
+     -conf=<configuration file, (default='awe.ini')>
+
+
+
+
+Error Summary:
+get_metagenome_analysis                  --help      256 
+check_metagenome                         --help      256 
+analyze_metagenome                       --help      256 
+

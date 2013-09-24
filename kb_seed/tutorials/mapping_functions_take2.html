@@ -1,0 +1,175 @@
+
+<h1>Mapping Functions Between Sources of Annotations: Take 2</h1>
+<p><strong>Purpose: </strong> More information on mapping between
+sources of annotations using Perl to invoke KBase command-line tools.</p>
+<p><strong>Required Prerequisite Activities: </strong> <a href="http://www.kbase.us/developer-zone/tutorials/getting-started/getting-started-with-kbase/">Getting
+Started with KBase</a> </p>
+<p> <strong>Suggested Prerequisite Activities: </strong> <a href="http://www.kbase.us/developer-zone/tutorials/getting-started/some-basic-exercises-using-kbase/">Some
+Basic Exercises Using KBase</a> </p>
+<p><strong>Related Tutorials:</strong> <a href="http://www.kbase.us/developer-zone/tutorials/command-line-scripts/command-line-applications/processing-identical-genomes/">Processing
+Identical Genomes </a> and other
+Command Line tutorials. </p>
+<h2>Introduction</h2>
+In another tutorial, we outlined an approach to <a href="http://kbase.us/index.php/developers/tutorials/towards-a-controlled-vocabulary-of-function/" name="annotations633" target="_blank">establishing exchangeable
+annotations based on exemplars</a>. The approach we illustrate here
+involves a set of Perl programs that
+invoke KBase command-line tools (rather than using the KBase <a name="API634">API</a> directly). In our view this is a convenient
+paradigm for problems for which performance is not the big issue.
+<h2>"Clean md5s," "Matched Assertions," and Building a Mapping</h2>
+Suppose that we have two sources of <a name="annotations635">annotations</a>:
+the <a name="SEED636">SEED</a> and another source of KBase genomes
+-- say, <a name="MicrobesOnLine637">MicrobesOnLine</a> (MOL). The
+strategy we illustrate here involves four steps:
+<ol>
+  <li> First, for the <a name="SEED638">SEED</a> we compute a set of
+two-tuples containing:
+    <ol type="a">
+      <li>an <a name="md5639">md5</a> hash value, which acts as the ID
+of a <a name="ProteinSequence640">ProteinSequence</a> that may connect
+to a set of Features which have been assigned functions, and </li>
+      <li> a function that is guaranteed to have been assigned to a
+majority of the Features with the single <a name="ProteinSequence641">ProteinSequence</a>.
+      </li>
+    </ol>
+    <br>
+You would think that all Features sharing a common protein sequence
+would have identical functions, but a substantial amount of
+inconsistency exists in all of the annotation collections (including
+the <a name="SEED642">SEED</a>). By computing these 2-tuples, we have
+accumulated a set of <a name="SEED643">SEED</a> assertions that pass a
+minimal consistency test. We call these 2-tuples (<a name="md5644">md5</a>,function)
+    <i>clean <a name="md5645">md5</a> assertions</i> and think of them
+as the <i>atomic assertions of function</i>. We will accumulate them
+for two distinct sources of annotation, and then we will be prepared to
+reconcile the two sets. <br>
+    <br>
+Our main goal in forming these mappings between distinct sources of <a name="annotations646">annotations</a> relates to the construction of <a name="metabolic647">metabolic</a> and regulatory models. Hence, we
+will restrict ourselves to accumulating assertions that relate to
+functional roles used in construction of models. Our hope is that, by
+seeking consistency and accuracy for <a name="annotations648">annotations</a>
+relating to these roles, we will lay the foundation for improving the
+rapidly growing collection of models (especially those derived
+automatically <a name="annotations649">annotations</a>). By
+restricting the set of functional roles we will focus on, we will be
+limiting the discussion to 2000-2500 functional roles, and this will
+allow us to manually evaluate and correct our progress. <br>
+  </li>
+  <li> So, the second step will be to accumulate clean <a name="md5650">md5</a>
+assertions for a second source -- in this case, MOL. <br>
+    <br>
+  </li>
+  <li>The third set is to take the two sets of clean <a name="md5651">md5</a>
+assertions, one from the <a name="SEED652">SEED</a> and one from MOL,
+and compute what is essentially the "join." We build 3-tuples
+containing <br>
+    <br>
+    <ol type="a">
+      <li>a seed-function, </li>
+      <li>an <a name="md5653">md5</a> value for which (seed-function,<a name="md5654">md5</a>) is a clean <a name="md5655">md5</a> assertion
+from the <a name="SEED656">SEED</a> collection, and </li>
+      <li>an MOL function for which (MOL-function,<a name="md5657">md5</a>)
+is a clean <a name="md5658">md5</a> assertion from MOL. </li>
+    </ol>
+    <br>
+Each of these 3-tuples represent cases in which the two annotation
+sources have provided <a name="annotations659">annotations</a> for a
+common sequence (or set of more-or-less consistently annotated
+instances of the same sequence). Call such a 3-tuple a <i>matched
+assertion</i>. Matched assertions become the raw input to a process of
+creating mapping between function <a name="annotations660">annotations</a>
+in one vocabulary to assertions in a second vocabulary. <br>
+  </li>
+  <li> Finally, we need an approach to integrate the matched assertions
+into a coherent mapping of function. Consider the case in which you
+have a set of matched assertions that have a common first member (i.e.,
+all of the 3-tuples have a common <a name="SEED661">SEED</a>
+function). Then, the set of third members give the different MOL
+functions that correspond to these <a name="SEED662">SEED</a>
+functions. In the best case, all of the MOL functions are identical.
+Then a simple rule for translating the <a name="SEED663">SEED</a>
+function to an MOL function can be formulated.</li>
+</ol>
+<br>
+Now, we can consider an example implementation of the four steps.
+<h3>Computing <i>Clean <a name="md5664">md5</a> Assertions</i> for
+the SEED</h3>
+The program to compute <a name="SEED665">SEED</a> clean <a name="md5666">md5</a> assertions can be simply cast in Perl. In this
+case, we choose a technology in which <a name="CS-API667">CS-API</a>
+commands are invoked using the Perl <i>system</i> command: <br>
+<pre>system("<a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#all_roles_used_in_models" target="_blank">all_roles_used_in_models</a> | <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#roles_to_proteins" target="_blank">roles_to_proteins</a> 2&gt; /dev/null &gt; role.md5.$$";<br>system("<a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#proteins_to_fids" target="_blank">proteins_to_fids</a> &lt; role.md5.$$  2&gt; /dev/null | \<br>        <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#fids_to_genomes" target="_blank">fids_to_genomes</a> | \<br>        <a href="http://kbase.us/developer-zone/api-documentation/cdm-entity-relationship-command-scripts/#get_relationship_WasSubmittedBy" target="_blank">get_relationship_WasSubmittedBy</a> -to id | \<br>        grep \"SEED\$\" | \<br>        <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#fids_to_functions" target="_blank">fids_to_functions</a> -c 3 &gt; role.md5.fid.genome.SEED.function.$$";<br><br>my @role_md5_funcs = sort { $a-&gt;[1] cmp $b-&gt;[1] }<br>                     map { chomp; my @tmp = split(/\t/,$_); [@tmp[0,1,5]] }<br>                     `cat role.md5.fid.genome.SEED.function.$$`;<br>&amp;make_clean_md5s(\@role_md5_funcs);<br>unlink("role.md5.$$","role.md5.fid.genome.SEED.function.$$");<br><br>sub make_clean_md5s {<br>    my($role_md5_funcs) = @_;<br><br>    while (@$role_md5_funcs &gt; 0)<br>    {<br>        my $same     = 0;<br>        my $not_same = 0;<br>        my $role = $role_md5_funcs-&gt;[0]-&gt;[0];<br>        my $md5  = $role_md5_funcs-&gt;[0]-&gt;[1];<br>        while ((@$role_md5_funcs &gt; 0) &amp;&amp; ($md5 eq $role_md5_funcs-&gt;[0]-&gt;[1]))<br>        {<br>            if ($role_md5_funcs-&gt;[0]-&gt;[0] eq $role_md5_funcs-&gt;[0]-&gt;[2])<br>            {<br>                $same++;<br>            }<br>            else<br>            {<br>                $not_same++;<br>            }<br>            shift @$role_md5_funcs;<br>        }<br><br>        if ($same &gt; $not_same)<br>        {<br>            print join("\t",($md5,$role)),"\n";<br>        }<br>    }<br>}<br><br><br></pre>
+We discuss this program briefly. The program begins by getting the
+roles used in constructing models: <br>
+<pre>system("<a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#all_roles_used_in_models" target="_blank">all_roles_used_in_models</a> | <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#roles_to_proteins" target="_blank">roles_to_proteins</a> 2&gt; /dev/null &gt; role.md5.$$");<br><br></pre>
+The vocabulary we use for constructing models is based on the <a name="SEED668">SEED</a> vocabulary, so we consider only assertions in <a name="SEED669">SEED</a> genomes that match this restricted set of
+roles. Here we use a very simple <a name="pipeline670">pipeline</a> to
+get 6-tuples (<i><a name="Role671">Role</a>,MD5,Fid,<a name="Genome672">Genome</a>,<a name="SEED673">SEED</a>,Function</i>
+). The 5th column represents the source of the assertions, and for this
+exercise, we use the Unix <i><a name="grep674">grep</a></i> command to
+restrict the source of tuples to just '<a name="SEED675">SEED</a>
+': <br>
+<pre>system("<a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#proteins_to_fids" target="_blank">proteins_to_fids</a> &lt; role.md5.$$  2&gt; /dev/null | \<br>        <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#fids_to_genomes" target="_blank">fids_to_genomes</a> | \<br>        <a href="http://kbase.us/developer-zone/api-documentation/cdm-entity-relationship-command-scripts/#get_relationship_WasSubmittedBy" target="_blank">get_relationship_WasSubmittedBy</a> -to id | \<br>        grep \"SEED\$\" | \<br>        <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#fids_to_functions" target="_blank">fids_to_functions</a> -c 3 &gt; role.md5.fid.genome.SEED.function.$$";<br><br><br></pre>
+Now, we <a name="sort676">sort</a> the results on the <i><a name="md5677">md5</a></i> field. This groups the set of tuples that
+make assertions about the same protein sequence. <br>
+<pre>my @role_md5_funcs = sort { $a-&gt;[1] cmp $b-&gt;[1] }<br>                     map { chomp; my @tmp = split(/\t/,$_); [@tmp[0,1,5]] }<br>                     `cat role.md5.fid.genome.SEED.function.$$`;<br><br></pre>
+Finally, we need to process the groups, and for those in which a
+majority are for the same function (and it matches one of the roles we
+are interested in) we print out a clean <a name="md5678">md5</a>
+assertion: <br>
+<pre>&amp;make_clean_md5s(\@role_md5_funcs);<br><br>sub make_clean_md5s {<br>    my($role_md5_funcs) = @_;<br><br>    while (@$role_md5_funcs &gt; 0)<br>    {<br>        my $same     = 0;<br>        my $not_same = 0;<br>        my $role = $role_md5_funcs-&gt;[0]-&gt;[0];<br>        my $md5  = $role_md5_funcs-&gt;[0]-&gt;[1];<br>        while ((@$role_md5_funcs &gt; 0) &amp;&amp; ($md5 eq $role_md5_funcs-&gt;[0]-&gt;[1]))<br>        {<br>            if ($role_md5_funcs-&gt;[0]-&gt;[0] eq $role_md5_funcs-&gt;[0]-&gt;[2])<br>            {<br>                $same++;<br>            }<br>            else<br>            {<br>                $not_same++;<br>            }<br>            shift @$role_md5_funcs;<br>        }<br><br>        if ($same &gt; $not_same)<br>        {<br>            print join("\t",($md5,$role)),"\n";<br>        }<br>    }<br>}<br><br></pre>
+<h3> Computing <i>Clean <a name="md5679">md5</a> Assertions</i> for
+MOL</h3>
+We provide another simple Perl script that can be used to compute the
+clean <a name="md5680">md5</a> assertions provided by MOL. The program
+we provide illustrates the use of a <a name="CS-API681">CS-API</a> <a name="pipeline682">pipeline</a> invoked in an <i>open</i>. This can
+be a useful way to gain access to the output of a <a name="pipeline683">pipeline</a>
+without having to generate an
+intermediate file, access it, and then remove it. <br>
+<br>
+We suppose that the ouput of the previous program (which generated <a name="SEED684">SEED</a> clean <a name="md5685">md5</a> assertions)
+has been placed in the file <i><a name="SEED686">SEED</a>-<a name="md5687">md5</a>.func</i>. <br>
+<pre>open(TMP,"cut -f 1 $seed_md5_func | \<br>          <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#proteins_to_fids" target="_blank">proteins_to_fids</a> 2&gt; /dev/null | \<br>          <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#fids_to_genomes" target="_blank">fids_to_genomes</a> | \<br>          <a href="http://kbase.us/developer-zone/api-documentation/cdm-entity-relationship-command-scripts/#get_relationship_WasSubmittedBy" target="_blank">get_relationship_WasSubmittedBy</a> -to id | \<br>          grep \"MOL\$\" | \<br>          <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#fids_to_functions" target="_blank">fids_to_functions</a> -c 2 2&gt; /dev/null | \<br>          sort -k 1 | \<br>          cut -f 1,5 |")<br>    || die "could not set up the temporary pipe";<br><br>my $x = ;<br>while ($x &amp;&amp; ($x =~ /^(\S+)/))<br>{   <br>    my $md5 = $1;<br>    my %funcs;<br>    while ($x &amp;&amp; ($x =~ /^(\S+)\t(.*)/) &amp;&amp; ($1 eq $md5))<br>    {<br>        if ($2)<br>        {   <br>            $funcs{$2}++;<br>        }<br>        $x = ;<br>    }<br>    my @poss = sort { $funcs{$b} &lt;=&gt; $funcs{$a} } keys(%funcs);<br>    if ((@poss == 1) || ($funcs{$poss[0]} &gt; $funcs{$poss[1]}))<br>    {<br>        print join("\t",($md5,$poss[0])),"\n";<br>    }<br>}<br>close(TMP);<br><br><br></pre>
+The program begins by "opening" a small <a name="pipeline688">pipeline</a>.
+The output of this <a name="pipeline689">pipeline</a> is accessed
+via the filehandle <b>TMP</b>. <br>
+<pre>open(TMP,"cut -f 1 $seed_md5_func |<br>          <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#proteins_to_fids" target="_blank">proteins_to_fids</a> 2&gt; /dev/null | \<br>          <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#fids_to_genomes" target="_blank">fids_to_genomes</a> | \<br>          <a href="http://kbase.us/developer-zone/api-documentation/cdm-entity-relationship-command-scripts/#get_relationship_WasSubmittedBy" target="_blank">get_relationship_WasSubmittedBy</a> -to id | \<br>          grep \"MOL\$\" | \<br>          <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#fids_to_functions" target="_blank">fids_to_functions</a> -c 2 2&gt; /dev/null | \<br>          sort -k 1 | \<br>          cut -f 1,5 |")<br>    || die "could not set up the temporary pipe";<br><br><br></pre>
+Note that the lines provided by <b>TMP</b> each contain an <a name="md5690">md5</a> value and an associated function, and the lines
+are sorted on the <a name="md5691">md5</a> values. This allows a
+simple loop that accumulates function counts for a set of lines sharing
+a common <a name="md5692">md5</a> value. If a group has a single
+common function, or if there is a single function that is more common
+than any others, the loop will print out a line containing the <a name="md5693">md5</a> and the most commonly occuring function. <br>
+<pre>my $x = ;<br>while ($x &amp;&amp; ($x =~ /^(\S+)/))<br>{   <br>    my $md5 = $1;<br>    my %funcs;<br>    while ($x &amp;&amp; ($x =~ /^(\S+)\t(.*)/) &amp;&amp; ($1 eq $md5))<br>    {<br>        if ($2)<br>        {   <br>            $funcs{$2}++;<br>        }<br>        $x = ;<br>    }<br>    my @poss = sort { $funcs{$b} &lt;=&gt; $funcs{$a} } keys(%funcs);<br>    if ((@poss == 1) || ($funcs{$poss[0]} &gt; $funcs{$poss[1]}))<br>    {<br>        print join("\t",($md5,$poss[0])),"\n";<br>    }<br>}<br><br></pre>
+Suppose that the output is placed in the file MOL-<a name="md5694">md5</a>
+.function. At this point, we have (<a name="md5695">md5</a>
+,function) tuples for both <a name="SEED696">SEED</a> <a name="annotations697">annotations</a> (restricted to functions
+corresponding to roles used in models) and MOL (here they are
+restricted to <a name="md5698">md5</a> values that occur in the <a name="SEED699">SEED</a> tuples). In the next step, we will merge these
+into matched assertions from which we can build correspondences.
+<h3> Computing <i>Matched Assertions</i> from the SEED and MOL Clean
+MD5 Assertions</h3>
+We now have two files: one containing (<a name="md5700">md5</a>
+,function) 2-tuples for <a name="SEED701">SEED</a> assertions, and a
+second containing (<a name="md5702">md5</a>
+,function) 2-tuples for MOL assertions. The following simple perl
+program produces the <i>matched assertions</i> as 3-tuples containing <br>
+<pre>  (SEED-function,md5,MOL-function):<br><br><br>my %SEED = map { ($_ =~ /^(\S+)\t(.*)$/) ? ($1 =&gt; $2) : () } `cat SEED-md5.function`;<br>my %MOL  = map { ($_ =~ /^(\S+)\t(.*)$/) ? ($1 =&gt; $2) : () } `cat MOL-md5.function`;<br><br>foreach my $md5 (sort keys(%SEED))<br>{<br>    if (defined($MOL{$md5}))<br>    {<br>        print join("\t",($SEED{$md5},$md5,$MOL{$md5})),"\n";<br>    }<br>}<br><br></pre>
+<h3> Integrating the Matched Assertions: an Initial Simple Approach</h3>
+The 3-tuples that make up the set of matched assertions are the raw
+data from which meaningful correspondences can be computed. If we <a name="sort703">sort</a> the 3-tuples on <a name="md5704">md5</a>
+value, then we can programmatically determine which translations should
+be generated by implementing whatever rules seem appropriate. We
+suggest looking at the output of <br>
+<pre>my %SEED2MOL;<br>my %MOL2SEED;<br><br>foreach $_ ()<br>{<br>    chomp;<br>    my($SEEDF,$md5,$MOLF) = split(/\t/,$_);<br>    $SEED2MOL{$SEEDF}-&gt;{$MOLF}++;<br>    $MOL2SEED{$MOLF}-&gt;{$SEEDF}++;<br>}<br><br>my @tots;<br>foreach my $SEEDF (keys(%SEED2MOL))<br>{<br>    my $x = $SEED2MOL{$SEEDF};<br>    my @funcs = sort { $b-&gt;[1] &lt;=&gt; $a-&gt;[1] } map { [$_,$x-&gt;{$_}] } keys(%$x);<br>    my $t = 0;<br>    foreach $_ (@funcs) { $t += $_-&gt;[1] }<br>    push(@tots,[$t,\@funcs,$SEEDF]);<br>}<br>@tots = sort { $b-&gt;[0] &lt;=&gt; $a-&gt;[0] } @tots;<br>foreach $_ (@tots)<br>{<br>    my($cnt,$funcs,$SEEDF) = @$_;<br>    print "$cnt: $SEEDF\n",join("\n",map { join("\t",reverse @$_)} @$funcs),"\n";<br>    print "//\n";<br>}<br><br></pre>
+This will produce output like <br>
+<pre>898: DNA polymerase III alpha subunit (EC 2.7.7.7)<br>307     DNA polymerase III, alpha subunit<br>125     DNA polymerase III subunit alpha<br>92      DNA polymerase III alpha subunit<br>.<br>.<br>.<br>//<br>883: Dihydrodipicolinate synthase (EC 4.2.1.52)<br>480     dihydrodipicolinate synthase<br>105     dihydrodipicolinate synthetase<br>80      hypothetical protein<br>45      putative dihydrodipicolinate synthase<br>.<br>.<br>.<br>//<br><br><br></pre>
+Each group begins with the <a name="SEED705">SEED</a> functional role.
+The line displaying it includes the count of the number of matched
+asssertions for the role. Subsequent lines give counts and functions
+for the corresponding MOL entries.
+<p> As you can see, with a minimal amount of effort, the appropriate
+data to support translations can be extracted from data in the CS.
+Actually constructing well-defined mappings will inevitably require at
+least a limited amount of manual effort. Arriving at consistent <a name="annotations706">annotations</a> in multiple vocabularies is an
+achievable goal, especially if we focus on the constrained set of
+functional roles used in <a name="metabolic707">metabolic</a> and
+regulatory models. </p>

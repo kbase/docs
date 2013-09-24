@@ -1,0 +1,13 @@
+
+Usage: representative_sequences [arguments] < input > output
+
+
+    --e string
+    --o string
+    -c num        Select the identifier from column num
+    --d string
+    --f string
+    --m integer
+    --s value
+
+

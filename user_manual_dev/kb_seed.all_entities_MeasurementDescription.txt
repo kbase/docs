@@ -1,0 +1,19 @@
+Usage: all_entities_MeasurementDescription [arguments] > entity.data
+
+    --fields list   Choose a set of fields to return. List is a comma-separated list of strings.
+    -a		    Return all available fields.
+    --show-fields   List the available fields.
+
+The following fields are available:
+
+    name
+        The name of the measurement.
+    description
+        The description of the measurement, how it is measured, and what the measurement statistics mean.
+    unitOfMeasure
+        The units of the measurement.
+    category
+        The category the measurement fits into, for example phenotype, experimental input, environment.
+    source_id
+        The ID of the measurement description used by the data source.
+

@@ -1,0 +1,7 @@
+kbws-copy <Object type> <Original object ID> <New object ID> [-?ehins] [long options...]
+	-n --newworkspace     ID for new workspace
+	-i --instance         Instance ID
+	-s --workspace        ID for source workspace
+	-e --showerror        Set as 1 to show any errors in execution
+	-? -h --help          Print this usage information
+

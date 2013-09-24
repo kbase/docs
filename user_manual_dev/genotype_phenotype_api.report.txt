@@ -1,0 +1,40 @@
+----------TEST genotype_phenotype_api get_experiments with -h option	okay
+
+----------TEST genotype_phenotype_api get_experiments with --help option	okay
+
+----------TEST genotype_phenotype_api chromosome_position_from_variation_details with -h option	okay
+
+----------TEST genotype_phenotype_api chromosome_position_from_variation_details with --help option	okay
+
+----------TEST genotype_phenotype_api find_common_snps with -h option	okay
+
+----------TEST genotype_phenotype_api find_common_snps with --help option	okay
+
+----------TEST genotype_phenotype_api genomes_with_trait with -h option	okay
+
+----------TEST genotype_phenotype_api genomes_with_trait with --help option	okay
+
+----------TEST genotype_phenotype_api variations_to_genes with -h option	okay
+
+----------TEST genotype_phenotype_api variations_to_genes with --help option	okay
+
+----------TEST genotype_phenotype_api get_traits with -h option	okay
+
+----------TEST genotype_phenotype_api get_traits with --help option	okay
+
+----------TEST genotype_phenotype_api selected_locations_to_genes with -h option	okay
+
+----------TEST genotype_phenotype_api selected_locations_to_genes with --help option	okay
+
+----------TEST genotype_phenotype_api traits_to_genes with -h option	okay
+
+----------TEST genotype_phenotype_api traits_to_genes with --help option	okay
+
+----------TEST genotype_phenotype_api traits_to_variations with -h option	okay
+
+----------TEST genotype_phenotype_api traits_to_variations with --help option	okay
+
+
+
+Error Summary:
+

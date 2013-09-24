@@ -1,0 +1,8 @@
+kbws-load <Object type> <Object ID> <Filename, data, or URL> [-?cehmsw] [long options...]
+	-w --workspace     ID for workspace
+	-m --metadata      Filename with metadata to associate with object
+	-s --stringdata    Data is a simple string
+	-c --compressed    Uploaded data will be compressed
+	-e --showerror     Set as 1 to show any errors in execution
+	-? -h --help       Print this usage information
+

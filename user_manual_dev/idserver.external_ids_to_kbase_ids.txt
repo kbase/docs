@@ -1,0 +1,3 @@
+Unknown option: help
+usage: external_ids_to_kbase_ids [-c column] DB-name < input > output
+

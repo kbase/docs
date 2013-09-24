@@ -1,0 +1,9 @@
+
+Usage: genomeTO_to_html  < genome-file  > html-file
+Usage: genomeTO_to_html  --input genome-file --output html-file
+
+    --input  --- Option to read input from named file instead of from STDIN
+    
+    --output --- Option to write output from named file instead of to STDOUT
+
+

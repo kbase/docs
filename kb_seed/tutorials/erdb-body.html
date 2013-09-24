@@ -1,0 +1,4095 @@
+<a name='___top' class='dummyTopAnchor' ></a>
+
+<h2><a class='u' href='#___top' title='click to go to top of document'
+name="Entity-Relationship_Database_Package"
+>Entity-Relationship Database Package</a></h2>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Introduction"
+>Introduction</a></h3>
+
+<p>The Entity-Relationship Database Package allows the client to create an easily-configurable database of Entities connected by Relationships.
+Each entity is represented by one or more relations in an underlying SQL database.
+Each relationship is represented by a single relation that connects two entities.
+Entities and relationships are collectively referred to in the documentation as <i>objects</i>.</p>
+
+<p>Although this package is designed for general use,
+most examples are derived from the world of bioinformatics,
+which is where this technology was first deployed.</p>
+
+<p>Each entity has at least one relation,
+the <i>primary relation</i>,
+that has the same name as the entity.
+The primary relation contains a field named <code>id</code> that contains the unique identifier of each entity instance.
+An entity may have additional relations that contain fields which are optional or can occur more than once.
+For example,
+the <code>Feature</code> entity has a <b>feature-type</b> attribute that occurs exactly once for each feature.
+This attribute is implemented by a <code>feature_type</code> column in the primary relation <code>Feature</code>.
+In addition,
+however,
+a feature may have zero or more aliases.
+These are implemented using a <code>FeatureAlias</code> relation that contains two fields-- the feature ID (<code>id</code>) and the alias name (<code>alias</code>).
+The <code>Feature</code> entity also contains an optional virulence number.
+This is implemented as a separate relation <code>FeatureVirulence</code> which contains an ID (<code>id</code>) and a virulence number (<code>virulence</code>).
+If the virulence of a feature <i>ABC</i> is known to be 6,
+there will be one row in the <code>FeatureVirulence</code> relation possessing the value <i>ABC</i> as its ID and 6 as its virulence number.
+If the virulence of <i>ABC</i> is not known,
+there will not be any rows for it in <code>FeatureVirulence</code>.</p>
+
+<p>Entities are connected by binary relationships implemented using single relations possessing the same name as the relationship itself and that has an 1-to-many (<code>1M</code>) or many-to-many (<code>MM</code>).
+Each relationship&#39;s relation contains a <code>from-link</code> field that contains the ID of the source entity and a <code>to-link</code> field that contains the ID of the target entity.
+The name of the relationship is generally a verb phrase with the source entity as the subject and the target entity as the object.
+So,
+for example,
+the <b>ComesFrom</b> relationship connects the <code>Genome</code> and <code>Source</code> entities,
+and indicates that a particular source organization participated in the mapping of the genome.
+A source organization frequently participates in the mapping of many genomes,
+and many source organizations can cooperate in the mapping of a single genome,
+so this relationship has an arity of many-to-many (<code>MM</code>).
+The relation that implements the <code>ComesFrom</code> relationship is called <code>ComesFrom</code> and contains two fields-- <code>from-link</code>,
+which contains a genome ID,
+and <code>to-link</code>,
+which contains a source ID.</p>
+
+<p>A relationship may itself have attributes.
+These attributes,
+known as <i>intersection data attributes</i>,
+are implemented as additional fields in the relationship&#39;s relation.
+So,
+for example,
+the <b>IsMadeUpOf</b> relationship connects the <b>Contig</b> entity to the <b>Sequence</b> entity,
+and is used to determine which sequences make up a contig.
+The relationship has as an attribute the <b>start-position</b>,
+which indicates where in the contig that the sequence begins.
+This attribute is implemented as the <code>start_position</code> field in the <code>IsMadeUpOf</code> relation.</p>
+
+<p>The database itself is described by an XML file.
+In addition to all the data required to define the entities,
+relationships,
+and attributes,
+the schema provides space for notes describing the data and what it means and information about how to display a diagram of the database.
+These are used to create web pages describing the data.</p>
+
+<p>Special support is provided for text searching.
+An entity field can be marked as <i>searchable</i>,
+in which case it will be used to generate a text search index in which the user searches for words in the field instead of a particular field value.</p>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Loading"
+>Loading</a></h3>
+
+<p>Considerable support is provided for loading a database from flat files.
+The flat files are in the standard format expected by the MySQL <code>LOAD DATA INFILE</code> command.
+This command expects each line to represent a database record and each record to have all the fields specified,
+in order,
+with tab characters separating the fields.</p>
+
+<p>The <a href="http://search.cpan.org/perldoc?ERDBLoadGroup" class="podlinkpod"
+>ERDBLoadGroup</a> object can be subclassed and used to create load files that can then be loaded using the <a href="http://search.cpan.org/perldoc?ERDBLoader.pl" class="podlinkpod"
+>ERDBLoader.pl</a> command; however,
+there is no requirement that this be done.</p>
+
+<h4><a class='u' href='#___top' title='click to go to top of document'
+name="Constructors"
+>Constructors</a></h4>
+
+<p>In order to use the load facility,
+the constructor for the database object must be able to function with no parameters or with the parameters construed as a hash.
+The following options are used by the ERDB load facility.
+It is not necessary to support them all.</p>
+
+<dl>
+<dt><a name="DBD"
+>DBD</a></dt>
+
+<dd>
+<p>XML database definition file.</p>
+
+<dt><a name="dbName"
+>dbName</a></dt>
+
+<dd>
+<p>Name of the database to use.</p>
+
+<dt><a name="sock"
+>sock</a></dt>
+
+<dd>
+<p>Socket for accessing the database.</p>
+
+<dt><a name="userData"
+>userData</a></dt>
+
+<dd>
+<p>Name and password used to log on to the database,
+separated by a slash.</p>
+
+<dt><a name="dbhost"
+>dbhost</a></dt>
+
+<dd>
+<p>Database host name.</p>
+</dd>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Data_Types,_Queries_and_Filtering"
+>Data Types,
+Queries and Filtering</a></h3>
+
+<h4><a class='u' href='#___top' title='click to go to top of document'
+name="Data_Types"
+>Data Types</a></h4>
+
+<p>The ERDB system supports many different data types.
+It is possible to configure additional user-defined types by adding PERL modules to the code.
+Each new type must be a subclass of <a href="http://search.cpan.org/perldoc?ERDBType" class="podlinkpod"
+>ERDBType</a>.
+Standard types are listed in the compile-time STANDARD_TYPES constant.
+Custom types should be listed in the <code>$ERDBExtras::customERDBtypes</code> variable of the configuration file.
+The variable must be a list reference containing the names of the ERDBType subclasses for the custom types.</p>
+
+<p>To get complete documentation of all the types,
+use the <a href="#ShowDataTypes" class="podlinkpod"
+>&#34;ShowDataTypes&#34;</a> method.
+The most common types are</p>
+
+<dl>
+<dt><a name="int"
+>int</a></dt>
+
+<dd>
+<p>Signed whole number with a range of roughly negative 2 billion to positive 2 billion.
+Integers are stored in the database as a 32-bit binary number.</p>
+
+<dt><a name="string"
+>string</a></dt>
+
+<dd>
+<p>Variable-length string,
+up to around 250 characters.
+Strings are stored in the database as variable-length ASCII with some escaping.</p>
+
+<dt><a name="text"
+>text</a></dt>
+
+<dd>
+<p>Variable-length string,
+up to around 65000 characters.
+Text is stored in the database as variable-length ASCII with some escaping.
+Only the first 250 characters can be indexed.</p>
+
+<dt><a name="float"
+>float</a></dt>
+
+<dd>
+<p>Double-precision floating-point number,
+ranging from roughly -10^-300 to 10^-300,
+with around 14 significant digits.
+Floating-point numbers are stored in the database in IEEE 8-byte floating-point format.</p>
+
+<dt><a name="date"
+>date</a></dt>
+
+<dd>
+<p>Date/time value,
+in whole seconds.
+Dates are stored as a number of seconds from the beginning of the Unix epoch (January 1,
+1970) in Universal Coordinated Time.
+This makes it identical to a date or time number in PERL,
+Unix,
+or Windows.</p>
+</dd>
+</dl>
+
+<p>All data fields are converted when stored or retrieved using the <a href="#EncodeField" class="podlinkpod"
+>&#34;EncodeField&#34;</a> and <a href="#DecodeField" class="podlinkpod"
+>&#34;DecodeField&#34;</a> methods.
+This allows us to store very exotic data values such as string lists,
+images,
+and PERL objects.
+The conversion is not,
+however,
+completely transparent because no conversion is performed on the parameter values for the various <a href="#Get" class="podlinkpod"
+>&#34;Get&#34;</a>-based queries.
+There is a good reason for this: you can specify general SQL expressions as filters,
+and it&#39;s extremely difficult for ERDB to determine the data type of a particular parameter.
+This topic is dealt with in more detail below.</p>
+
+<h4><a class='u' href='#___top' title='click to go to top of document'
+name="Standard_Field_Name_Format"
+>Standard Field Name Format</a></h4>
+
+<p>There are several places in which field names are specified by the caller.
+The standard field name format is the name of the entity or relationship followed by the field name in parentheses.
+In some cases there a particular entity or relationship is considered the default.
+Fields in the default object can be specified as an unmodified field name.
+For example,</p>
+
+<pre>    Feature(species-name)</pre>
+
+<p>would specify the species name field for the <code>Feature</code> entity. If the <code>Feature</code> table were the default, it could be specified as</p>
+
+<pre>    species-name</pre>
+
+<p>without the object name. You may also use underscores in place of hyphens, which can be syntactically more convenient in PERL programs.</p>
+
+<pre>    species_name</pre>
+
+<p>In some cases, the object name may not be the actual name of an object in the database. It could be an alias assigned by a query, or the converse name of a relationship. Alias names and converse names are generally specified in the object name list of a query method. The alias or converse name used in the query method will be carried over in all parameters to the method and any data value structures returned by the query. In most cases, once you decide on a name for something in a query, the name will stick for all data returned by the query.</p>
+
+<h4><a class='u' href='#___top' title='click to go to top of document'
+name="Queries"
+>Queries</a></h4>
+
+<p>Queries against the database are performed by variations of the <a href="#Get" class="podlinkpod"
+>&#34;Get&#34;</a> method. This method has three parameters: the <i>object name list</i>, the <i>filter clause</i>, and the <i>parameter list</i>. There is a certain complexity involved in queries that has evolved over a period of many years in which the needs of the applications were balanced against a need for simplicity. In most cases, you just list the objects used in the query, code a standard SQL filter clause with field names in the <a href="#Standard_Field_Name_Format" class="podlinkpod"
+>&#34;Standard Field Name Format&#34;</a>, and specify a list of parameters to plug in to the parameter marks. The use of the special field name format and the list of object names spare you the pain of writing a <code>FROM</code> clause and worrying about joins. For example, here&#39;s a simple query to look up all Features for a particular genome.</p>
+
+<pre>    my $query = $erdb-&#62;Get(&#39;Genome HasFeature Feature&#39;, &#39;Genome(id) = ?&#39;, [$genomeID]);</pre>
+
+<p>For more complicated queries, see the rest of this section.</p>
+
+<h5><a class='u' href='#___top' title='click to go to top of document'
+name="Object_Name_List"
+>Object Name List</a></h5>
+
+<p>The <i>object name list</i> specifies the names of the entities and relationships that participate in the query. This includes every object used to filter the query as well as every object from which data is expected. The ERDB engine will automatically generate the join clauses required to make the query work, which greatly simplifies the coding of the query. You can specify the object name list using a list reference or a space-delimited string. The following two calls are equivalent.</p>
+
+<pre>    my $query = $erdb-&#62;Get([&#39;Genome&#39;, &#39;UsesImage&#39;, &#39;Image&#39;], $filter, \@parms);
+
+    my $query = $erdb-&#62;Get(&#39;Genome UsesImage Image&#39;, $filter, \@parms);</pre>
+
+<p>If you specify a string, you have a few more options.</p>
+
+<ul>
+<li>You can use the keyword <code>AND</code> to start a new join chain with an object further back in the list.</li>
+
+<li>You can specify an object name more than once. If it is intended to be a different instance of the same object, simply put a number at the end. Each distinct number indicates a distinct instance.</li>
+
+<li>You can use the converse name of a relationship to make the object name list read more like regular English.</li>
+</ul>
+
+<p>These requirements do not come up very often, but they can make a big differance.</p>
+
+<p>For example, let us say you are looking for a feature that has a role in a particular subsystem and also belongs to a particular genome. You can&#39;t use</p>
+
+<pre>    my $query = $erdb-&#62;Get([&#39;Feature&#39;, &#39;HasRoleInSubsystem&#39;, &#39;Subsystem&#39;, &#39;HasFeature&#39;, &#39;Genome&#39;], $filter, \@parms);</pre>
+
+<p>because you don&#39;t want to join the <code>HasFeature</code> table to the subsystem table. Instead, you use</p>
+
+<pre>    my $query = $erdb-&#62;Get(&#34;Feature HasRoleInSubsystem Subsystem AND Feature HasFeature Genome&#34;, $filter, \@parms);</pre>
+
+<p>Now consider a taxonomy hierarchy using the entity <code>Class</code> and the relationship <code>BelongsTo</code> and say you want to find all subclasses of a particular class. If you code</p>
+
+<pre>    my $query = $erdb-&#62;Get(&#34;Class BelongsTo Class&#34;, &#39;Class(id) = ?&#39;, [$class])</pre>
+
+<p>Then the query will only return the particular class, and only if it belongs to itself. The following query finds every class that belongs to a particular class.</p>
+
+<pre>    my $query = $erdb-&#62;Get(&#34;Class BelongsTo Class2&#34;, &#39;Class2(id) = ?&#39;, [$class]);</pre>
+
+<p>This query does the converse. It finds every class belonging to a particular class.</p>
+
+<pre>    my $query = $erdb-&#62;Get(&#34;Class BelongsTo Class2&#34;, &#39;Class(id) = ?&#39;, [$class]);</pre>
+
+<p>The difference is indicated by the field name used in the filter clause. Because the first occurrence of <code>Class</code> is specified in the filter rather than the second occurrence (<code>Class2</code>), the query is anchored on the from-side of the relationship.</p>
+
+<h5><a class='u' href='#___top' title='click to go to top of document'
+name="Filter_Clause"
+>Filter Clause</a></h5>
+
+<p>The filter clause is an SQL WHERE clause (without the WHERE) to be used to filter and sort the query. The WHERE clause can be parameterized with parameter markers (<code>?</code>). Each field used in the WHERE clause must be specified in <a href="#Standard_Field_Name_Format" class="podlinkpod"
+>&#34;Standard Field Name Format&#34;</a>. Any parameters specified in the filter clause should be added to the parameter list as additional parameters. The fields in a filter clause can come from primary entity relations, relationship relations, or secondary entity relations; however, all of the entities and relationships involved must be included in the list of object names on the query. There is never a default object name for filter clause fields.</p>
+
+<p>The filter clause can also specify a sort order. To do this, simply follow the filter string with an ORDER BY clause. For example, the following filter string gets all genomes for a particular genus and sorts them by species name.</p>
+
+<pre>    &#34;Genome(genus) = ? ORDER BY Genome(species)&#34;</pre>
+
+<p>Note that the case is important. Only an uppercase &#34;ORDER BY&#34; with a single space will be processed. The idea is to make it less likely to find the verb by accident.</p>
+
+<p>The rules for field references in a sort order are the same as those for field references in the filter clause in general; however, unpredictable things may happen if a sort field is from an entity&#39;s secondary relation.</p>
+
+<p>Finally, you can limit the number of rows returned by adding a LIMIT clause. The LIMIT must be the last thing in the filter clause, and it contains only the word &#34;LIMIT&#34; followed by a positive number. So, for example</p>
+
+<pre>    &#34;Genome(genus) = ? ORDER BY Genome(species) LIMIT 10&#34;</pre>
+
+<p>will only return the first ten genomes for the specified genus. The ORDER BY clause is not required. For example, to just get the first 10 genomes in the <b>Genome</b> table, you could use</p>
+
+<pre>    &#34;LIMIT 10&#34;</pre>
+
+<p>as your filter clause.</p>
+
+<h5><a class='u' href='#___top' title='click to go to top of document'
+name="Parameter_List"
+>Parameter List</a></h5>
+
+<p>The parameter list is a reference to a list of parameter values. The parameter values are substituted for the parameter marks in the filter clause in strict left-to-right order.</p>
+
+<p>In the parameter list for a filter clause, you must be aware of the proper data types and perform any necessary conversions manually. This is not normally a problem. Most of the time, you only query against simple numeric or string fields, and you only need to convert a string if there&#39;s a possibility it has exotic characters like tabs or new-lines in it. Sometimes, however, this is not enough.</p>
+
+<p>When you are writing programs to query ERDB databases, you can call <a href="#EncodeField" class="podlinkpod"
+>&#34;EncodeField&#34;</a> directly, specifying a field name in the <a href="#Standard_Field_Name_Format" class="podlinkpod"
+>&#34;Standard Field Name Format&#34;</a>. The value will be converted as if it was being stored into a field of the specified type. Alternatively, you can call <a href="#encode" class="podlinkpod"
+>&#34;encode&#34;</a>, specifying a data type name. Both of these techniques are shown in the example below.</p>
+
+<pre>    my $query = $erdb-&#62;Get(&#34;Genome UsesImage Image&#34;,
+                           &#34;Image(png) = ? AND Genome(description) = ?&#34;,
+                           [$erdb-&#62;EncodeFIeld(&#39;Image(png)&#39;, $myImage),
+                            ERDB::encode(text =&#62; $myDescription)]);</pre>
+
+<p>You can export the <a href="#encode" class="podlinkpod"
+>&#34;encode&#34;</a> method if you expect to be doing this a lot and don&#39;t want to bother with the package name on the call.</p>
+
+<pre>    use ERDB qw(encode);
+
+    # ... much later ...
+
+    my $query = $erdb-&#62;Get(&#34;Genome UsesImage Image&#34;,
+                           &#34;Image(png) = ? AND Genome(description) = ?&#34;,
+                           [$erdb-&#62;EncodeField(&#39;Image(png)&#39;, $myImage),
+                            encode(text =&#62; $myDescription)]);</pre>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="XML_Database_Description"
+>XML Database Description</a></h3>
+
+<h4><a class='u' href='#___top' title='click to go to top of document'
+name="Global_Tags"
+>Global Tags</a></h4>
+
+<p>The entire database definition must be inside a <b>Database</b> tag. The display name of the database is given by the text associated with the <b>Title</b> tag. The display name is only used in the automated documentation. The entities and relationships are listed inside the <b>Entities</b> and <b>Relationships</b> tags, respectively. There is also a <code>Shapes</code> tag that contains additional shapes to display on the database diagram, and an <code>Issues</code> tag that describes general things that need to be remembered. These last two are completely optional.</p>
+
+<pre>    &#60;Database&#62;
+        &#60;Title&#62;... display title here...&#60;/Title&#62;
+        &#60;Issues&#62;
+            ... comments here ...
+        &#60;/Issues&#62;
+        &#60;Regions&#62;
+            ... region definitions here ...
+        &#60;/Regions&#62;
+        &#60;Entities&#62;
+            ... entity definitions here ...
+        &#60;/Entities&#62;
+        &#60;Relationships&#62;
+            ... relationship definitions here ...
+        &#60;/Relationships&#62;
+        &#60;Shapes&#62;
+           ... shape definitions here ...
+        &#60;/Shapes&#62;
+    &#60;/Database&#62;</pre>
+
+<h4><a class='u' href='#___top' title='click to go to top of document'
+name="Notes_and_Asides"
+>Notes and Asides</a></h4>
+
+<p>Entities, relationships, shapes, indexes, and fields all allow text tags called <b>Notes</b> and <b>Asides</b>. Both these tags contain comments that appear when the database documentation is generated. In addition, the text inside the <b>Notes</b> tag will be shown as a tooltip when mousing over the diagram.</p>
+
+<p>The following special codes allow a limited rich text capability in Notes and Asides.</p>
+
+<p>[b]...[/b]: Bold text</p>
+
+<p>[i]...[/i]: Italics</p>
+
+<p>[p]...[/p]: Paragraph</p>
+
+<p>[link <i>href</i>]...[/link]: Hyperlink to the URL <i>href</i></p>
+
+<p>[list]...[*]...[*]...[/list]: Bullet list, with <b>[*]</b> separating list elements.</p>
+
+<h4><a class='u' href='#___top' title='click to go to top of document'
+name="Fields"
+>Fields</a></h4>
+
+<p>Both entities and relationships have fields described by <b>Field</b> tags. A <b>Field</b> tag can have <b>Notes</b> associated with it. The complete set of <b>Field</b> tags for an object mus be inside <b>Fields</b> tags.</p>
+
+<pre>    &#60;Entity ... &#62;
+        &#60;Fields&#62;
+            ... Field tags ...
+        &#60;/Fields&#62;
+    &#60;/Entity&#62;</pre>
+
+<p>The attributes for the <b>Field</b> tag are as follows.</p>
+
+<dl>
+<dt><a name="name"
+>name</a></dt>
+
+<dd>
+<p>Name of the field. The field name should contain only letters, digits, and hyphens (<code>-</code>), and the first character should be a letter. Most underlying databases are case-insensitive with the respect to field names, so a best practice is to use lower-case letters only. Finally, the name <code>search-relevance</code> has special meaning for full-text searches and should not be used as a field name.</p>
+
+<dt><a name="type"
+>type</a></dt>
+
+<dd>
+<p>Data type of the field.</p>
+
+<dt><a name="relation"
+>relation</a></dt>
+
+<dd>
+<p>Name of the relation containing the field. This should only be specified for entity fields. The ERDB system does not support optional fields or multi-occurring fields in the primary relation of an entity. Instead, they are put into secondary relations. So, for example, in the <code>Genome</code> entity, the <code>group-name</code> field indicates a special grouping used to select a subset of the genomes. A given genome may not be in any groups or may be in multiple groups. Therefore, <code>group-name</code> specifies a relation value. The relation name specified must be a valid table name. By convention, it is usually the entity name followed by a qualifying word (e.g. <code>GenomeGroup</code>). In an entity, the fields without a relation attribute are said to belong to the <i>primary relation</i>. This relation has the same name as the entity itself.</p>
+
+<dt><a name="searchable"
+>searchable</a></dt>
+
+<dd>
+<p>If specified, then the field is a candidate for full-text searching. A single full-text index will be created for each relation with at least one searchable field in it. For best results, this option should only be used for string or text fields.</p>
+
+<dt><a name="special"
+>special</a></dt>
+
+<dd>
+<p>This attribute allows the subclass to assign special meaning for certain fields. The interpretation is up to the subclass itself. Currently, only entity fields can have this attribute.</p>
+
+<dt><a name="default"
+>default</a></dt>
+
+<dd>
+<p>This attribute specifies the default field value to be used while loading. The default value is used if no value is specified in an <a href="#InsertObject" class="podlinkpod"
+>&#34;InsertObject&#34;</a> call or in the <a href="http://search.cpan.org/perldoc?ERDBLoadGroup#Put" class="podlinkpod"
+>&#34;Put&#34; in ERDBLoadGroup</a> call that generates the load file. If no default is specified, then the field is required and must have a value specified in the call.</p>
+
+<p>The default value is specified as a string, so it must be in an encoded form.</p>
+</dd>
+</dl>
+
+<h4><a class='u' href='#___top' title='click to go to top of document'
+name="Indexes"
+>Indexes</a></h4>
+
+<p>An entity can have multiple alternate indexes associated with it. The fields in an index must all be from the same relation. The alternate indexes assist in searching on fields other than the entity ID. A relationship has at least two indexes-- a <i>to-index</i> and a <i>from-index</i> that order the results when crossing the relationship. For example, in the relationship <code>HasContig</code> from <code>Genome</code> to <code>Contig</code>, the from-index would order the contigs of a ganome, and the to-index would order the genomes of a contig. In addition, it can have zero or more alternate indexes. A relationship&#39;s index can only specify fields in the relationship.</p>
+
+<p>The alternate indexes for an entity or relationship are listed inside the <b>Indexes</b> tag. The from-index of a relationship is specified using the <b>FromIndex</b> tag; the to-index is specified using the <b>ToIndex</b> tag.</p>
+
+<p>Be aware of the fact that in MySQL, the maximum size of an index key is 1000 bytes. This means at most four normal-sized strings.</p>
+
+<p>Each index can contain a <b>Notes</b> tag. In addition, it will have an <b>IndexFields</b> tag containing the <b>IndexField</b> tags. The <b>IndexField</b> tags specify, in order, the fields used in the index. The attributes of an <b>IndexField</b> tag are as follows.</p>
+
+<dl>
+<dt><a name="name"
+>name</a></dt>
+
+<dd>
+<p>Name of the field.</p>
+
+<dt><a name="order"
+>order</a></dt>
+
+<dd>
+<p>Sort order of the field-- <code>ascending</code> or <code>descending</code>.</p>
+</dd>
+</dl>
+
+<p>The <b>FromIndex</b>, and <b>ToIndex</b> tags have no attributes. The <b>Index</b> tag can have a <b>Unique</b> attribute. If specified, the index will be generated as a unique index.</p>
+
+<h4><a class='u' href='#___top' title='click to go to top of document'
+name="Regions"
+>Regions</a></h4>
+
+<p>A large database may be too big to fit comfortably on a single page. When this happens, you have the option of dividing the diagram into regions that are shown one at a time. When regions are present, a combo box will appear on the diagram allowing the user to select which region to show. Each entity, relationship, or shape can have multiple <b>RegionInfo</b> tags describing how it should be displayed when a particular region is selected. The regions themselves are described by a <b>Region</b> tag with a single attribute-- <b>name</b>-- that indicates the region name. The tag can be empty, or can contain <code>Notes</code> elements that provide useful documentation.</p>
+
+<dl>
+<dt><a name="name"
+>name</a></dt>
+
+<dd>
+<p>Name of the region.</p>
+</dd>
+</dl>
+
+<h4><a class='u' href='#___top' title='click to go to top of document'
+name="Diagram"
+>Diagram</a></h4>
+
+<p>The diagram tag allows you to specify options for generating a diagram. If the tag is present, then it will be used to configure diagram display in the documentation widget (see <a href="http://search.cpan.org/perldoc?ERDBPDocPage" class="podlinkpod"
+>ERDBPDocPage</a>). the tag has the following attributes. It should not have any content; that is, it is not a container tag.</p>
+
+<dl>
+<dt><a name="width"
+>width</a></dt>
+
+<dd>
+<p>Width for the diagram, in pixels. The default is 750.</p>
+
+<dt><a name="height"
+>height</a></dt>
+
+<dd>
+<p>Height for the diagram, in pixels. The default is 800.</p>
+
+<dt><a name="ratio"
+>ratio</a></dt>
+
+<dd>
+<p>Ratio of shape height to width. The default is 0.62.</p>
+
+<dt><a name="size"
+>size</a></dt>
+
+<dd>
+<p>Width in pixels for each shape.</p>
+
+<dt><a name="nonoise"
+>nonoise</a></dt>
+
+<dd>
+<p>If set to 1, there will be a white background instead of an NMPDR noise background.</p>
+
+<dt><a name="editable"
+>editable</a></dt>
+
+<dd>
+<p>If set to 1, a dropdown box and buttons will appear that allow you to edit the diagram, download your changes, and make it pretty for printing.</p>
+
+<dt><a name="fontSize"
+>fontSize</a></dt>
+
+<dd>
+<p>Maximum font size to use, in points. The default is 16.</p>
+
+<dt><a name="download"
+>download</a></dt>
+
+<dd>
+<p>URL of the CGI script that downloads the diagram XML to the user&#39;s computer. The XML text will be sent via the <code>data</code> parameter and the default file name via the <code>name</code> parameter.</p>
+
+<dt><a name="margin"
+>margin</a></dt>
+
+<dd>
+<p>Margin between adjacent shapes, in pixels. The default is 10.</p>
+</dd>
+</dl>
+
+<h4><a class='u' href='#___top' title='click to go to top of document'
+name="DisplayInfo"
+>DisplayInfo</a></h4>
+
+<p>The <b>DisplayInfo</b> tag is used to describe how an entity, relationship, or shape should be displayed when the XML file is used to generate an interactive diagram. A <b>DisplayInfo</b> can have no elements, or it can have multiple <b>Region</b> elements inside. The permissible attributes are as follows.</p>
+
+<dl>
+<dt><a name="link"
+>link</a></dt>
+
+<dd>
+<p>URL to which the user should be sent when clicking on the shape. For entities and relationships, this defaults to the most likely location for the object description in the generated documentation.</p>
+
+<dt><a name="theme"
+>theme</a></dt>
+
+<dd>
+<p>The themes are <code>black</code>, <code>blue</code>, <code>brown</code>, <code>cyan</code>, <code>gray</code>, <code>green</code>, <code>ivory</code>, <code>navy</code>, <code>purple</code>, <code>red</code>, and <code>violet</code>. These indicate the color to be used for the displayed object. The default is <code>gray</code>.</p>
+
+<dt><a name="col"
+>col</a></dt>
+
+<dd>
+<p>The number of the column in which the object should be displayed. Fractional column numbers are legal, though it&#39;s best to round to a multiple of 0.5. Thus, a column of <code>4.5</code> would be centered between columns 4 and 5.</p>
+
+<dt><a name="row"
+>row</a></dt>
+
+<dd>
+<p>The number of the row in which the object should be displayed. Fractional row numbers are allowed in the same manner as for columns.</p>
+
+<dt><a name="connected"
+>connected</a></dt>
+
+<dd>
+<p>If <code>1</code>, the object is visibly connected by lines to the other objects identified in the <code>from</code> and <code>to</code> attributes. This value is ignored for entities, which never have <code>from</code> or <code>to</code>.</p>
+
+<dt><a name="caption"
+>caption</a></dt>
+
+<dd>
+<p>Caption to be displayed on the object. If omitted, it defaults to the object&#39;s name. You may use spaces and <code>\n</code> codes to make the caption prettier.</p>
+
+<dt><a name="fixed"
+>fixed</a></dt>
+
+<dd>
+<p>If <code>1</code>, then the <code>row</code> and <code>col</code> attributes are used to position the object, even if it has <code>from</code> and <code>to</code> attributes. Otherwise, the object is placed in the midpoint between the <code>from</code> and <code>to</code> shapes.</p>
+</dd>
+</dl>
+
+<h4><a class='u' href='#___top' title='click to go to top of document'
+name="RegionInfo"
+>RegionInfo</a></h4>
+
+<p>For large diagrams, the <b>DisplayInfo</b> tag may have one or more <b>RegionInfo</b> elements inside, each belonging to one or more named regions. (The named regions are desribed by the <b>Region</b> tag.) The diagrammer will create a drop-down box that can be used to choose which region should be displayed. Each region tag has a <code>name</code> attribute indicating the region to which it belongs, plus any of the attributes allowed on the <b>DisplayInfo</b> tag. The name indicates the name of a region in which the parent object should be displayed. The other attributes override the corresponding attributes in the <b>DisplayInfo</b> parent. An object with no Region tags present will be displayed in all regions. There is a default region with no name that consists only of objects displayed in all regions. An object with no <b>DisplayInfo</b> tag at all will not be displayed in any region.</p>
+
+<h4><a class='u' href='#___top' title='click to go to top of document'
+name="Object_and_Field_Names"
+>Object and Field Names</a></h4>
+
+<p>By convention entity and relationship names use capital casing (e.g. <code>Genome</code> or <code>HasRegionsIn</code>. Most underlying databases, however, are aggressively case-insensitive with respect to relation names, converting them internally to all-upper case or all-lower case.</p>
+
+<p>If syntax or parsing errors occur when you try to load or use an ERDB database, the most likely reason is that one of your objects has an SQL reserved word as its name. The list of SQL reserved words keeps increasing; however, most are unlikely to show up as a noun or declarative verb phrase. The exceptions are <code>Group</code>, <code>User</code>, <code>Table</code>, <code>Index</code>, <code>Object</code>, <code>Date</code>, <code>Number</code>, <code>Update</code>, <code>Time</code>, <code>Percent</code>, <code>Memo</code>, <code>Order</code>, and <code>Sum</code>. This problem can crop up in field names as well.</p>
+
+<p>Every entity has a field called <code>id</code> that acts as its primary key. Every relationship has fields called <code>from-link</code> and <code>to-link</code> that contain copies of the relevant entity IDs. These are essentially ERDB&#39;s reserved words, and should not be used for user-defined field names.</p>
+
+<h4><a class='u' href='#___top' title='click to go to top of document'
+name="Issues"
+>Issues</a></h4>
+
+<p>Issues are comments displayed at the top of the database documentation. They have no effect on the database or the diagram. The <code>Issue</code> tag is a text tag with no attributes.</p>
+
+<h4><a class='u' href='#___top' title='click to go to top of document'
+name="Entities"
+>Entities</a></h4>
+
+<p>An entity is described by the <b>Entity</b> tag. The entity can contain <b>Notes</b> and <b>Asides</b>, an optional <b>DisplayInfo</b> tag, an <b>Indexes</b> tag containing one or more secondary indexes, and a <b>Fields</b> tag containing one or more fields. The attributes of the <b>Entity</b> tag are as follows.</p>
+
+<dl>
+<dt><a name="name"
+>name</a></dt>
+
+<dd>
+<p>Name of the entity. The entity name, by convention, uses capital casing (e.g. <code>Genome</code> or <code>GroupBlock</code>) and should be a noun or noun phrase.</p>
+
+<dt><a name="keyType"
+>keyType</a></dt>
+
+<dd>
+<p>Data type of the primary key. The primary key is always named <code>id</code>.</p>
+
+<dt><a name="autonumber"
+>autonumber</a></dt>
+
+<dd>
+<p>A value of <code>1</code> means that after the entity&#39;s primary relation is loaded, the ID field will be set to autonumber, so that new records inserted will have automatic keys generated. Use this option with care. Once the relation is loaded, it cannot be reloaded unless the table is first dropped and re-created. In addition, the key must be an integer type.</p>
+</dd>
+</dl>
+
+<h4><a class='u' href='#___top' title='click to go to top of document'
+name="Relationships"
+>Relationships</a></h4>
+
+<p>A relationship is described by the <b>Relationship</b> tag. Within a relationship, there can be <b>DisplayInfo</b>, <b>Notes</b> and <b>Asides</b> tags, a <b>Fields</b> tag containing the intersection data fields, a <b>FromIndex</b> tag containing the index used to cross the relationship in the forward direction, a <b>ToIndex</b> tag containing the index used to cross the relationship in reverse, and an <code>Indexes</code> tag containing the alternate indexes.</p>
+
+<p>The <b>Relationship</b> tag has the following attributes.</p>
+
+<dl>
+<dt><a name="name"
+>name</a></dt>
+
+<dd>
+<p>Name of the relationship. The relationship name, by convention, uses capital casing (e.g. <code>ContainsRegionIn</code> or <code>HasContig</code>), and should be a declarative verb phrase, designed to fit between the from-entity and the to-entity (e.g. Block <code>ContainsRegionIn</code> Genome).</p>
+
+<dt><a name="from"
+>from</a></dt>
+
+<dd>
+<p>Name of the entity from which the relationship starts.</p>
+
+<dt><a name="to"
+>to</a></dt>
+
+<dd>
+<p>Name of the entity to which the relationship proceeds.</p>
+
+<dt><a name="arity"
+>arity</a></dt>
+
+<dd>
+<p>Relationship type: <code>1M</code> for one-to-many and <code>MM</code> for many-to-many.</p>
+
+<dt><a name="converse"
+>converse</a></dt>
+
+<dd>
+<p>A name to be used when travelling backward through the relationship. This value can be used in place of the real relationship name to make queries more readable.</p>
+</dd>
+</dl>
+
+<h4><a class='u' href='#___top' title='click to go to top of document'
+name="Shapes"
+>Shapes</a></h4>
+
+<p>Shapes are objects drawn on the database diagram that do not physically exist in the database. Entities are always drawn as rectangles and relationships are always drawn as diamonds, but a shape can be either of those, an arrow, a bidirectional arrow, or an oval. The <b>Shape</b> tag can contain <b>Notes</b>, <b>Asides</b>, and <b>DisplayInfo</b> tags, and has the following attributes.</p>
+
+<dl>
+<dt><a name="type"
+>type</a></dt>
+
+<dd>
+<p>Type of shape: <code>arrow</code> for an arrow, <code>biarrow</code> for a bidirectional arrow, <code>oval</code> for an ellipse, <code>diamond</code> for a diamond, and <code>rectangle</code> for a rectangle.</p>
+
+<dt><a name="from"
+>from</a></dt>
+
+<dd>
+<p>Object from which this object is oriented. If the shape is an arrow, it will point toward the from-object.</p>
+
+<dt><a name="to"
+>to</a></dt>
+
+<dd>
+<p>Object toward which this object is oriented. If the shape is an arrow, it will point away from the to-object.</p>
+
+<dt><a name="name"
+>name</a></dt>
+
+<dd>
+<p>Name of the shape. This is used by other shapes to identify it in <code>from</code> and <code>to</code> directives.</p>
+</dd>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Special_Methods"
+>Special Methods</a></h3>
+
+<h4><a class='u' href='#___top' title='click to go to top of document'
+name="new"
+>new</a></h4>
+
+<pre>    my $database = ERDB-&#62;new($dbh, $metaFileName, %options);</pre>
+
+<p>Create a new ERDB object.</p>
+
+<dl>
+<dt><a name="dbh"
+>dbh</a></dt>
+
+<dd>
+<p><a href="http://search.cpan.org/perldoc?DBKernel" class="podlinkpod"
+>DBKernel</a> database object for the target database.</p>
+
+<dt><a name="metaFileName"
+>metaFileName</a></dt>
+
+<dd>
+<p>Name of the XML file containing the metadata.</p>
+
+<dt><a name="options"
+>options</a></dt>
+
+<dd>
+<p>Hash of configuration options.</p>
+</dd>
+</dl>
+
+<p>The supported configuration options are as follows. Options not in this list will be presumed to be relevant to the subclass and will be ignored.</p>
+
+<dl>
+<dt><a name="demandDriven"
+>demandDriven</a></dt>
+
+<dd>
+<p>If TRUE, the database will be configured for a <i>forward-only cursor</i>. Instead of caching the query results, the query results will be provided at the rate in which they are demanded by the client application. This is less stressful on memory and disk space, but means you cannot have more than one query active at the same time.</p>
+</dd>
+</dl>
+
+<h4><a class='u' href='#___top' title='click to go to top of document'
+name="SplitKeywords"
+>SplitKeywords</a></h4>
+
+<pre>    my @keywords = ERDB::SplitKeywords($keywordString);</pre>
+
+<p>This method returns a list of the positive keywords in the specified keyword string. All of the operators will have been stripped off, and if the keyword is preceded by a minus operator (<code>-</code>), it will not be in the list returned. The idea here is to get a list of the keywords the user wants to see. The list will be processed to remove duplicates.</p>
+
+<p>It is possible to create a string that confuses this method. For example</p>
+
+<pre>    frog toad -frog</pre>
+
+<p>would return both <code>frog</code> and <code>toad</code>. If this is a problem we can deal with it later.</p>
+
+<dl>
+<dt><a name="keywordString"
+>keywordString</a></dt>
+
+<dd>
+<p>The keyword string to be parsed.</p>
+
+<dt><a name="RETURN"
+>RETURN</a></dt>
+
+<dd>
+<p>Returns a list of the words in the keyword string the user wants to see.</p>
+</dd>
+</dl>
+
+<h4><a class='u' href='#___top' title='click to go to top of document'
+name="GetDatabase"
+>GetDatabase</a></h4>
+
+<pre>    my $erdb = ERDB::GetDatabase($name, $dbd, %parms);</pre>
+
+<p>Return an ERDB object for the named database. It is assumed that the database name is also the name of a class for connecting to it.</p>
+
+<dl>
+<dt><a name="name"
+>name</a></dt>
+
+<dd>
+<p>Name of the desired database.</p>
+
+<dt><a name="dbd"
+>dbd</a></dt>
+
+<dd>
+<p>Alternate DBD file to use when processing the database definition.</p>
+
+<dt><a name="parms"
+>parms</a></dt>
+
+<dd>
+<p>Additional command-line parameters.</p>
+
+<dt><a name="RETURN"
+>RETURN</a></dt>
+
+<dd>
+<p>Returns an ERDB object for the named database.</p>
+</dd>
+</dl>
+
+<h4><a class='u' href='#___top' title='click to go to top of document'
+name="ParseFieldName"
+>ParseFieldName</a></h4>
+
+<pre>    my ($tableName, $fieldName) = ERDB::ParseFieldName($string, $defaultName);</pre>
+
+<p>or</p>
+
+<pre>    my $normalizedName = ERDB::ParseFieldName($string, $defaultName);</pre>
+
+<p>Analyze a standard field name to separate the object name part from the field part.</p>
+
+<dl>
+<dt><a name="string"
+>string</a></dt>
+
+<dd>
+<p>Standard field name string to be parsed.</p>
+
+<dt><a name="defaultName_(optional)"
+>defaultName (optional)</a></dt>
+
+<dd>
+<p>Default object name to be used if the object name is not specified in the input string.</p>
+
+<dt><a name="RETURN"
+>RETURN</a></dt>
+
+<dd>
+<p>In list context, returns the table name followed by the base field name. In scalar context, returns the field name in a normalized <a href="#Standard_Field_Name_Format" class="podlinkpod"
+>&#34;Standard Field Name Format&#34;</a>, with underscores converted to hyphens and an object name present. If the parse fails, will return an undefined value.</p>
+</dd>
+</dl>
+
+<h4><a class='u' href='#___top' title='click to go to top of document'
+name="CountParameterMarks"
+>CountParameterMarks</a></h4>
+
+<pre>    my $count = ERDB::CountParameterMarks($filterString);</pre>
+
+<p>Return the number of parameter marks in the specified filter string.</p>
+
+<dl>
+<dt><a name="filterString"
+>filterString</a></dt>
+
+<dd>
+<p>ERDB filter clause to examine.</p>
+
+<dt><a name="RETURN"
+>RETURN</a></dt>
+
+<dd>
+<p>Returns the number of parameter marks in the specified filter clause.</p>
+</dd>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Query_Methods"
+>Query Methods</a></h3>
+
+<h4><a class='u' href='#___top' title='click to go to top of document'
+name="GetEntity"
+>GetEntity</a></h4>
+
+<pre>    my $entityObject = $erdb-&#62;GetEntity($entityType, $ID);</pre>
+
+<p>Return an object describing the entity instance with a specified ID.</p>
+
+<dl>
+<dt><a name="entityType"
+>entityType</a></dt>
+
+<dd>
+<p>Entity type name.</p>
+
+<dt><a name="ID"
+>ID</a></dt>
+
+<dd>
+<p>ID of the desired entity.</p>
+
+<dt><a name="RETURN"
+>RETURN</a></dt>
+
+<dd>
+<p>Returns a <a href="http://search.cpan.org/perldoc?ERDBObject" class="podlinkpod"
+>ERDBObject</a> object representing the desired entity instance, or an undefined value if no instance is found with the specified key.</p>
+</dd>
+</dl>
+
+<h4><a class='u' href='#___top' title='click to go to top of document'
+name="GetChoices"
+>GetChoices</a></h4>
+
+<pre>    my @values = $erdb-&#62;GetChoices($entityName, $fieldName);</pre>
+
+<p>Return a list of all the values for the specified field that are represented in the specified entity.</p>
+
+<p>Note that if the field is not indexed, then this will be a very slow operation.</p>
+
+<dl>
+<dt><a name="entityName"
+>entityName</a></dt>
+
+<dd>
+<p>Name of an entity in the database.</p>
+
+<dt><a name="fieldName"
+>fieldName</a></dt>
+
+<dd>
+<p>Name of a field belonging to the entity in <a href="#Standard_Field_Name_Format" class="podlinkpod"
+>&#34;Standard Field Name Format&#34;</a>.</p>
+
+<dt><a name="RETURN"
+>RETURN</a></dt>
+
+<dd>
+<p>Returns a list of the distinct values for the specified field in the database.</p>
+</dd>
+</dl>
+
+<h4><a class='u' href='#___top' title='click to go to top of document'
+name="GetEntityValues"
+>GetEntityValues</a></h4>
+
+<pre>    my @values = $erdb-&#62;GetEntityValues($entityType, $ID, \@fields);</pre>
+
+<p>Return a list of values from a specified entity instance. If the entity instance does not exist, an empty list is returned.</p>
+
+<dl>
+<dt><a name="entityType"
+>entityType</a></dt>
+
+<dd>
+<p>Entity type name.</p>
+
+<dt><a name="ID"
+>ID</a></dt>
+
+<dd>
+<p>ID of the desired entity.</p>
+
+<dt><a name="fields"
+>fields</a></dt>
+
+<dd>
+<p>List of field names in <a href="#Standard_Field_Name_Format" class="podlinkpod"
+>&#34;Standard_Field_Name_Format&#34;</a>.</p>
+
+<dt><a name="RETURN"
+>RETURN</a></dt>
+
+<dd>
+<p>Returns a flattened list of the values of the specified fields for the specified entity.</p>
+</dd>
+</dl>
+
+<h4><a class='u' href='#___top' title='click to go to top of document'
+name="GetAll"
+>GetAll</a></h4>
+
+<pre>    my @list = $erdb-&#62;GetAll(\@objectNames, $filterClause, \@parameters, \@fields, $count);</pre>
+
+<p>Return a list of values taken from the objects returned by a query. The first three parameters correspond to the parameters of the <a href="#Get" class="podlinkpod"
+>&#34;Get&#34;</a> method. The final parameter is a list of the fields desired from each record found by the query in <a href="#Standard_Field_Name_Format" class="podlinkpod"
+>&#34;Standard Field Name Format&#34;</a>. The default object name is the first one in the object name list.</p>
+
+<p>The list returned will be a list of lists. Each element of the list will contain the values returned for the fields specified in the fourth parameter. If one of the fields specified returns multiple values, they are flattened in with the rest. For example, the following call will return a list of the features in a particular spreadsheet cell, and each feature will be represented by a list containing the feature ID followed by all of its essentiality determinations.</p>
+
+<pre>    @query = $erdb-&#62;Get(&#39;ContainsFeature Feature&#39;], &#34;ContainsFeature(from-link) = ?&#34;,
+                        [$ssCellID], [&#39;Feature(id)&#39;, &#39;Feature(essential)&#39;]);</pre>
+
+<dl>
+<dt><a name="objectNames"
+>objectNames</a></dt>
+
+<dd>
+<p>List containing the names of the entity and relationship objects to be retrieved. See <a href="#Object_Name_List" class="podlinkpod"
+>&#34;Object Name List&#34;</a>.</p>
+
+<dt><a name="filterClause"
+>filterClause</a></dt>
+
+<dd>
+<p>WHERE/ORDER BY clause (without the WHERE) to be used to filter and sort the query. See <a href="#Filter_Clause" class="podlinkpod"
+>&#34;Filter Clause&#34;</a>.</p>
+
+<dt><a name="parameterList"
+>parameterList</a></dt>
+
+<dd>
+<p>List of the parameters to be substituted in for the parameters marks in the filter clause. See <a href="#Parameter_List" class="podlinkpod"
+>&#34;Parameter List&#34;</a>.</p>
+
+<dt><a name="fields"
+>fields</a></dt>
+
+<dd>
+<p>List of the fields to be returned in each element of the list returned, or a string containing a space-delimited list of field names. The field names should be in <a href="#Standard_Field_Name_Format" class="podlinkpod"
+>&#34;Standard Field Name Format&#34;</a>.</p>
+
+<dt><a name="count"
+>count</a></dt>
+
+<dd>
+<p>Maximum number of records to return. If omitted or 0, all available records will be returned.</p>
+
+<dt><a name="RETURN"
+>RETURN</a></dt>
+
+<dd>
+<p>Returns a list of list references. Each element of the return list contains the values for the fields specified in the <b>fields</b> parameter.</p>
+</dd>
+</dl>
+
+<h4><a class='u' href='#___top' title='click to go to top of document'
+name="Exists"
+>Exists</a></h4>
+
+<pre>    my $found = $erdb-&#62;Exists($entityName, $entityID);</pre>
+
+<p>Return TRUE if an entity exists, else FALSE.</p>
+
+<dl>
+<dt><a name="entityName"
+>entityName</a></dt>
+
+<dd>
+<p>Name of the entity type (e.g. <code>Feature</code>) relevant to the existence check.</p>
+
+<dt><a name="entityID"
+>entityID</a></dt>
+
+<dd>
+<p>ID of the entity instance whose existence is to be checked.</p>
+
+<dt><a name="RETURN"
+>RETURN</a></dt>
+
+<dd>
+<p>Returns TRUE if the entity instance exists, else FALSE.</p>
+</dd>
+</dl>
+
+<h4><a class='u' href='#___top' title='click to go to top of document'
+name="GetCount"
+>GetCount</a></h4>
+
+<pre>    my $count = $erdb-&#62;GetCount(\@objectNames, $filter, \@params);</pre>
+
+<p>Return the number of rows found by a specified query. This method would normally be used to count the records in a single table. For example,</p>
+
+<pre>    my $count = $erdb-&#62;GetCount(&#39;Genome&#39;, &#39;Genome(genus-species) LIKE ?&#39;,
+                                [&#39;homo %&#39;]);</pre>
+
+<p>would return the number of genomes for the genus <i>homo</i>. It is conceivable, however, to use it to return records based on a join. For example,</p>
+
+<pre>    my $count = $erdb-&#62;GetCount(&#39;HasFeature Genome&#39;, &#39;Genome(genus-species) LIKE ?&#39;,
+                                [&#39;homo %&#39;]);</pre>
+
+<p>would return the number of features for genomes in the genus <i>homo</i>. Note that only the rows from the first table are counted. If the above command were</p>
+
+<pre>    my $count = $erdb-&#62;GetCount(&#39;Genome HasFeature&#39;, &#39;Genome(genus-species) LIKE ?&#39;,
+                                [&#39;homo %&#39;]);</pre>
+
+<p>it would return the number of genomes, not the number of genome/feature pairs.</p>
+
+<dl>
+<dt><a name="objectNames"
+>objectNames</a></dt>
+
+<dd>
+<p>Reference to a list of the objects (entities and relationships) included in the query, or a string containing a space-delimited list of object names. See <a href="#ObjectNames" class="podlinkpod"
+>&#34;ObjectNames&#34;</a>.</p>
+
+<dt><a name="filter"
+>filter</a></dt>
+
+<dd>
+<p>A filter clause for restricting the query. See <a href="#Filter_Clause" class="podlinkpod"
+>&#34;Filter Clause&#34;</a>.</p>
+
+<dt><a name="params"
+>params</a></dt>
+
+<dd>
+<p>Reference to a list of the parameter values to be substituted for the parameter marks in the filter. See <a href="#Parameter_List" class="podlinkpod"
+>&#34;Parameter List&#34;</a>.</p>
+
+<dt><a name="RETURN"
+>RETURN</a></dt>
+
+<dd>
+<p>Returns a count of the number of records in the first table that would satisfy the query.</p>
+</dd>
+</dl>
+
+<h4><a class='u' href='#___top' title='click to go to top of document'
+name="GetList"
+>GetList</a></h4>
+
+<pre>    my @dbObjects = $erdb-&#62;GetList(\@objectNames, $filterClause, \@params);</pre>
+
+<p>Return a list of <a href="http://search.cpan.org/perldoc?ERDBObject" class="podlinkpod"
+>ERDBObject</a> objects for the specified query.</p>
+
+<p>This method is essentially the same as <a href="#Get" class="podlinkpod"
+>&#34;Get&#34;</a> except it returns a list of objects rather than a query object that can be used to get the results one record at a time. This is almost always preferable to <a href="#Get" class="podlinkpod"
+>&#34;Get&#34;</a> when the result list is a manageable size.</p>
+
+<dl>
+<dt><a name="objectNames"
+>objectNames</a></dt>
+
+<dd>
+<p>Reference to a list containing the names of the entity and relationship objects to be retrieved, or a string containing a space-delimited list of object names. See <a href="#Object_Name_List" class="podlinkpod"
+>&#34;Object Name List&#34;</a>.</p>
+
+<dt><a name="filterClause"
+>filterClause</a></dt>
+
+<dd>
+<p>WHERE clause (without the WHERE) to be used to filter and sort the query. See <a href="#Filter_Clause" class="podlinkpod"
+>&#34;Filter Clause&#34;</a>.</p>
+
+<dt><a name="params"
+>params</a></dt>
+
+<dd>
+<p>Reference to a list of parameter values to be substituted into the filter clause. See <a href="#Parameter_List" class="podlinkpod"
+>&#34;Parameter List&#34;</a>.</p>
+
+<dt><a name="RETURN"
+>RETURN</a></dt>
+
+<dd>
+<p>Returns a list of <a href="http://search.cpan.org/perldoc?ERDBObject" class="podlinkpod"
+>ERDBObject</a> objects that satisfy the query conditions.</p>
+</dd>
+</dl>
+
+<h4><a class='u' href='#___top' title='click to go to top of document'
+name="Get"
+>Get</a></h4>
+
+<pre>    my $query = $erdb-&#62;Get(\@objectNames, $filterClause, \@params);</pre>
+
+<p>This method returns a query object for entities of a specified type using a specified filter.</p>
+
+<dl>
+<dt><a name="objectNames"
+>objectNames</a></dt>
+
+<dd>
+<p>List containing the names of the entity and relationship objects to be retrieved, or a string containing a space-delimited list of names. See <a href="#Object_Name_List" class="podlinkpod"
+>&#34;Object Name List&#34;</a>.</p>
+
+<dt><a name="filterClause"
+>filterClause</a></dt>
+
+<dd>
+<p>WHERE clause (without the WHERE) to be used to filter and sort the query. See <a href="#Filter_Clause" class="podlinkpod"
+>&#34;Filter Clause&#34;</a>.</p>
+
+<dt><a name="params"
+>params</a></dt>
+
+<dd>
+<p>Reference to a list of parameter values to be substituted into the filter clause. See <a href="#Parameter_List" class="podlinkpod"
+>&#34;Parameter List&#34;</a>.</p>
+
+<dt><a name="RETURN"
+>RETURN</a></dt>
+
+<dd>
+<p>Returns an <a href="#ERDBQuery" class="podlinkpod"
+>&#34;ERDBQuery&#34;</a> object that can be used to iterate through all of the results.</p>
+</dd>
+</dl>
+
+<h4><a class='u' href='#___top' title='click to go to top of document'
+name="Prepare"
+>Prepare</a></h4>
+
+<pre>    my $query = $erdb-&#62;Prepare($objects, $filterString, $parms);</pre>
+
+<p>Prepare a query for execution but do not create a statement handle. This is useful if you have a query that you want to validate but you do not yet want to acquire the resources to run it.</p>
+
+<dl>
+<dt><a name="objects"
+>objects</a></dt>
+
+<dd>
+<p>List containing the names of the entity and relationship objects to be retrieved, or a string containing a space-delimited list of names. See <a href="#Object_Name_List" class="podlinkpod"
+>&#34;Object Name List&#34;</a>.</p>
+
+<dt><a name="filterString"
+>filterString</a></dt>
+
+<dd>
+<p>WHERE clause (without the WHERE) to be used to filter and sort the query. See <a href="#Filter_Clause" class="podlinkpod"
+>&#34;Filter Clause&#34;</a>.</p>
+
+<dt><a name="parms"
+>parms</a></dt>
+
+<dd>
+<p>Reference to a list of parameter values to be substituted into the filter clause. See <a href="#Parameter_List" class="podlinkpod"
+>&#34;Parameter List&#34;</a>.</p>
+
+<dt><a name="RETURN"
+>RETURN</a></dt>
+
+<dd>
+<p>Returns an <a href="http://search.cpan.org/perldoc?ERDBQuery" class="podlinkpod"
+>ERDBQuery</a> object that can be used to check field names or that can be populated with artificial data.</p>
+</dd>
+</dl>
+
+<h4><a class='u' href='#___top' title='click to go to top of document'
+name="Search"
+>Search</a></h4>
+
+<pre>    my $query = $erdb-&#62;Search($searchExpression, $idx, \@objectNames, $filterClause, \@params);</pre>
+
+<p>Perform a full text search with filtering. The search will be against a specified object in the object name list. That object will get an extra field containing the search relevance. Note that except for the search expression, the parameters of this method are the same as those for <a href="#Get" class="podlinkpod"
+>&#34;Get&#34;</a> and follow the same rules.</p>
+
+<dl>
+<dt><a name="searchExpression"
+>searchExpression</a></dt>
+
+<dd>
+<p>Boolean search expression for the text fields of the target object. The default mode for a Boolean search expression is OR, but we want the default to be AND, so we will add a <code>+</code> operator to each word with no other operator before it.</p>
+
+<dt><a name="idx"
+>idx</a></dt>
+
+<dd>
+<p>Name of the object to be searched in full-text mode. If the object name list is a list reference, you can also specify the index into the list.</p>
+
+<dt><a name="objectNames"
+>objectNames</a></dt>
+
+<dd>
+<p>List containing the names of the entity and relationship objects to be retrieved, or a string containing a space-delimited list of names. See <a href="#Object_Name_List" class="podlinkpod"
+>&#34;Object Name List&#34;</a>.</p>
+
+<dt><a name="filterClause"
+>filterClause</a></dt>
+
+<dd>
+<p>WHERE clause (without the WHERE) to be used to filter and sort the query. See <a href="#Filter_Clause" class="podlinkpod"
+>&#34;Filter Clause&#34;</a>.</p>
+
+<dt><a name="params"
+>params</a></dt>
+
+<dd>
+<p>Reference to a list of parameter values to be substituted into the filter clause. See <a href="#Parameter_List" class="podlinkpod"
+>&#34;Parameter List&#34;</a>.</p>
+
+<dt><a name="RETURN"
+>RETURN</a></dt>
+
+<dd>
+<p>Returns an <a href="http://search.cpan.org/perldoc?ERDBQuery" class="podlinkpod"
+>ERDBQuery</a> object for the specified search.</p>
+</dd>
+</dl>
+
+<h4><a class='u' href='#___top' title='click to go to top of document'
+name="GetFlat"
+>GetFlat</a></h4>
+
+<pre>    my @list = $erdb-&#62;GetFlat(\@objectNames, $filterClause, \@parameterList, $field);</pre>
+
+<p>This is a variation of <a href="#GetAll" class="podlinkpod"
+>&#34;GetAll&#34;</a> that asks for only a single field per record and returns a single flattened list.</p>
+
+<dl>
+<dt><a name="objectNames"
+>objectNames</a></dt>
+
+<dd>
+<p>List containing the names of the entity and relationship objects to be retrieved, or a string containing a space-delimited list of names. See <a href="#Object_Name_List" class="podlinkpod"
+>&#34;Object_Name_List&#34;</a>.</p>
+
+<dt><a name="filterClause"
+>filterClause</a></dt>
+
+<dd>
+<p>WHERE clause (without the WHERE) to be used to filter and sort the query. See <a href="#Filter_Clause" class="podlinkpod"
+>&#34;Filter Clause&#34;</a>.</p>
+
+<dt><a name="params"
+>params</a></dt>
+
+<dd>
+<p>Reference to a list of parameter values to be substituted into the filter clause. See <a href="#Parameter_List" class="podlinkpod"
+>&#34;Parameter List&#34;</a>.</p>
+
+<dt><a name="field"
+>field</a></dt>
+
+<dd>
+<p>Name of the field to be used to get the elements of the list returned. The default object name for this context is the first object name specified.</p>
+
+<dt><a name="RETURN"
+>RETURN</a></dt>
+
+<dd>
+<p>Returns a list of values.</p>
+</dd>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Documentation_and_Metadata_Methods"
+>Documentation and Metadata Methods</a></h3>
+
+<h4><a class='u' href='#___top' title='click to go to top of document'
+name="ComputeFieldTable"
+>ComputeFieldTable</a></h4>
+
+<pre>    my ($header, $rows) = ERDB::ComputeFieldTable($wiki, $name, $fieldData);</pre>
+
+<p>Generate the header and rows of a field table for an entity or relationship. The field table describes each field in the specified object.</p>
+
+<dl>
+<dt><a name="wiki"
+>wiki</a></dt>
+
+<dd>
+<p><a href="http://search.cpan.org/perldoc?WikiTools" class="podlinkpod"
+>WikiTools</a> object (or equivalent) for rendering HTML or markup.</p>
+
+<dt><a name="name"
+>name</a></dt>
+
+<dd>
+<p>Name of the object whose field table is being generated.</p>
+
+<dt><a name="fieldData"
+>fieldData</a></dt>
+
+<dd>
+<p>Field structure of the specified entity or relationship.</p>
+
+<dt><a name="RETURN"
+>RETURN</a></dt>
+
+<dd>
+<p>Returns a reference to a list of the labels for the header row and a reference to a list of lists representing the table cells.</p>
+</dd>
+</dl>
+
+<h4><a class='u' href='#___top' title='click to go to top of document'
+name="FindEntity"
+>FindEntity</a></h4>
+
+<pre>    my $objectData = $erdb-&#62;FindEntity($name);</pre>
+
+<p>Return the structural descriptor of the specified entity, or an undefined value if the entity does not exist.</p>
+
+<dl>
+<dt><a name="name"
+>name</a></dt>
+
+<dd>
+<p>Name of the desired entity.</p>
+
+<dt><a name="RETURN"
+>RETURN</a></dt>
+
+<dd>
+<p>Returns the definition structure for the specified entity, or <code>undef</code> if the named entity does not exist.</p>
+</dd>
+</dl>
+
+<h4><a class='u' href='#___top' title='click to go to top of document'
+name="FindRelationship"
+>FindRelationship</a></h4>
+
+<pre>    my $objectData = $erdb-&#62;FindRelationship($name);</pre>
+
+<p>Return the structural descriptor of the specified relationship, or an undefined value if the relationship does not exist.</p>
+
+<dl>
+<dt><a name="name"
+>name</a></dt>
+
+<dd>
+<p>Name of the desired relationship.</p>
+
+<dt><a name="RETURN"
+>RETURN</a></dt>
+
+<dd>
+<p>Returns the definition structure for the specified relationship, or <code>undef</code> if the named relationship does not exist.</p>
+</dd>
+</dl>
+
+<h4><a class='u' href='#___top' title='click to go to top of document'
+name="ComputeTargetEntity"
+>ComputeTargetEntity</a></h4>
+
+<pre>    my $targetEntity = $erdb-&#62;ComputeTargetEntity($relationshipName);</pre>
+
+<p>Return the target entity of a relationship. If the relationship&#39;s true name is specified, this is the source (from) entity. If its converse name is specified, this is the target (to) entity. The returned name is the one expected to follow the relationship name in an object name string.</p>
+
+<dl>
+<dt><a name="relationshipName"
+>relationshipName</a></dt>
+
+<dd>
+<p>The name of the relationship to be used to identify the target entity.</p>
+
+<dt><a name="RETURN"
+>RETURN</a></dt>
+
+<dd>
+<p>Returns the name of the entity that would be found after crossing the relationship in the direction indicated by the chosen relationship name. If the relationship name is invalid, an undefined value will be returned.</p>
+</dd>
+</dl>
+
+<h4><a class='u' href='#___top' title='click to go to top of document'
+name="FindShape"
+>FindShape</a></h4>
+
+<pre>    my $objectData = $erdb-&#62;FindShape($name);</pre>
+
+<p>Return the structural descriptor of the specified shape, or an undefined value if the shape does not exist.</p>
+
+<dl>
+<dt><a name="name"
+>name</a></dt>
+
+<dd>
+<p>Name of the desired shape.</p>
+
+<dt><a name="RETURN"
+>RETURN</a></dt>
+
+<dd>
+<p>Returns the definition structure for the specified shape, or <code>undef</code> if the named shape does not exist.</p>
+</dd>
+</dl>
+
+<h4><a class='u' href='#___top' title='click to go to top of document'
+name="GetObjectsTable"
+>GetObjectsTable</a></h4>
+
+<pre>    my $objectHash = $erdb-&#62;GetObjectsTable($type);</pre>
+
+<p>Return the metadata hash of objects of the specified type-- entity, relationship, or shape.</p>
+
+<dl>
+<dt><a name="type"
+>type</a></dt>
+
+<dd>
+<p>Type of object desired-- <code>entity</code>, <code>relationship</code>, or <code>shape</code>.</p>
+
+<dt><a name="RETURN"
+>RETURN</a></dt>
+
+<dd>
+<p>Returns a reference to a hash containing all metadata for database objects of the specified type. The hash maps object names to object descriptors. The descriptors represent a cleaned and normalized version of the definition XML. Specifically, all of the implied defaults are filled in.</p>
+</dd>
+</dl>
+
+<h4><a class='u' href='#___top' title='click to go to top of document'
+name="Plurals"
+>Plurals</a></h4>
+
+<pre>    my $plural = ERDB::Plurals($singular);</pre>
+
+<p>Return the plural form of the specified object type (entity, relationship, or shape). This is extremely useful in generating documentation.</p>
+
+<dl>
+<dt><a name="singular"
+>singular</a></dt>
+
+<dd>
+<p>Singular form of the specified object type.</p>
+
+<dt><a name="RETURN"
+>RETURN</a></dt>
+
+<dd>
+<p>Plural form of the specified object type, in capital case.</p>
+</dd>
+</dl>
+
+<h4><a class='u' href='#___top' title='click to go to top of document'
+name="ReadMetaXML"
+>ReadMetaXML</a></h4>
+
+<pre>    my $rawMetaData = ERDB::ReadDBD($fileName);</pre>
+
+<p>This method reads a raw database definition XML file and returns it. Normally, the metadata used by the ERDB system has been processed and modified to make it easier to load and retrieve the data; however, this method can be used to get the data in its raw form.</p>
+
+<dl>
+<dt><a name="fileName"
+>fileName</a></dt>
+
+<dd>
+<p>Name of the XML file to read.</p>
+
+<dt><a name="RETURN"
+>RETURN</a></dt>
+
+<dd>
+<p>Returns a hash reference containing the raw XML data from the specified file.</p>
+</dd>
+</dl>
+
+<h4><a class='u' href='#___top' title='click to go to top of document'
+name="FieldType"
+>FieldType</a></h4>
+
+<pre>    my $type = $erdb-&#62;FieldType($string, $defaultName);</pre>
+
+<p>Return the <a href="http://search.cpan.org/perldoc?ERDBType" class="podlinkpod"
+>ERDBType</a> object for the specified field.</p>
+
+<dl>
+<dt><a name="string"
+>string</a></dt>
+
+<dd>
+<p>Field name string to be parsed. See <a href="#Standard_Field_Name_Format" class="podlinkpod"
+>&#34;Standard Field Name Format&#34;</a>.</p>
+
+<dt><a name="defaultName_(optional)"
+>defaultName (optional)</a></dt>
+
+<dd>
+<p>Default object name to be used if the object name is not specified in the input string.</p>
+
+<dt><a name="RETURN"
+>RETURN</a></dt>
+
+<dd>
+<p>Return the type object for the field&#39;s type.</p>
+</dd>
+</dl>
+
+<h4><a class='u' href='#___top' title='click to go to top of document'
+name="IsSecondary"
+>IsSecondary</a></h4>
+
+<pre>    my $type = $erdb-&#62;IsSecondary($string, $defaultName);</pre>
+
+<p>Return TRUE if the specified field is in a secondary relation, else FALSE.</p>
+
+<dl>
+<dt><a name="string"
+>string</a></dt>
+
+<dd>
+<p>Field name string to be parsed. See <a href="#Standard_Field_Name_Format" class="podlinkpod"
+>&#34;Standard Field Name Format&#34;</a>.</p>
+
+<dt><a name="defaultName_(optional)"
+>defaultName (optional)</a></dt>
+
+<dd>
+<p>Default object name to be used if the object name is not specified in the input string.</p>
+
+<dt><a name="RETURN"
+>RETURN</a></dt>
+
+<dd>
+<p>Returns TRUE if the specified field is in a secondary relation, else FALSE.</p>
+</dd>
+</dl>
+
+<h4><a class='u' href='#___top' title='click to go to top of document'
+name="FindRelation"
+>FindRelation</a></h4>
+
+<pre>    my $relData = $erdb-&#62;FindRelation($relationName);</pre>
+
+<p>Return the descriptor for the specified relation.</p>
+
+<dl>
+<dt><a name="relationName"
+>relationName</a></dt>
+
+<dd>
+<p>Name of the relation whose descriptor is to be returned.</p>
+
+<dt><a name="RETURN"
+>RETURN</a></dt>
+
+<dd>
+<p>Returns the object that describes the relation&#39;s indexes and fields.</p>
+</dd>
+</dl>
+
+<h4><a class='u' href='#___top' title='click to go to top of document'
+name="GetRelationshipEntities"
+>GetRelationshipEntities</a></h4>
+
+<pre>    my ($fromEntity, $toEntity) = $erdb-&#62;GetRelationshipEntities($relationshipName);</pre>
+
+<p>Return the names of the source and target entities for a relationship. If the specified name is not a relationship, an empty list is returned.</p>
+
+<dl>
+<dt><a name="relationshipName"
+>relationshipName</a></dt>
+
+<dd>
+<p>Name of the relevant relationship.</p>
+
+<dt><a name="RETURN"
+>RETURN</a></dt>
+
+<dd>
+<p>Returns a two-element list. The first element is the name of the relationship&#39;s from-entity, and the second is the name of the to-entity. If the specified name is not for a relationship, both elements are undefined.</p>
+</dd>
+</dl>
+
+<h4><a class='u' href='#___top' title='click to go to top of document'
+name="ValidateFieldName"
+>ValidateFieldName</a></h4>
+
+<pre>    my $okFlag = ERDB::ValidateFieldName($fieldName);</pre>
+
+<p>Return TRUE if the specified field name is valid, else FALSE. Valid field names must be hyphenated words subject to certain restrictions.</p>
+
+<dl>
+<dt><a name="fieldName"
+>fieldName</a></dt>
+
+<dd>
+<p>Field name to be validated.</p>
+
+<dt><a name="RETURN"
+>RETURN</a></dt>
+
+<dd>
+<p>Returns TRUE if the field name is valid, else FALSE.</p>
+</dd>
+</dl>
+
+<h4><a class='u' href='#___top' title='click to go to top of document'
+name="GetFieldTable"
+>GetFieldTable</a></h4>
+
+<pre>    my $fieldHash = $self-&#62;GetFieldTable($objectnName);</pre>
+
+<p>Get the field structure for a specified entity or relationship.</p>
+
+<dl>
+<dt><a name="objectName"
+>objectName</a></dt>
+
+<dd>
+<p>Name of the desired entity or relationship.</p>
+
+<dt><a name="RETURN"
+>RETURN</a></dt>
+
+<dd>
+<p>The table containing the field descriptors for the specified object.</p>
+</dd>
+</dl>
+
+<h4><a class='u' href='#___top' title='click to go to top of document'
+name="EstimateRowSize"
+>EstimateRowSize</a></h4>
+
+<pre>    my $rowSize = $erdb-&#62;EstimateRowSize($relName);</pre>
+
+<p>Estimate the row size of the specified relation. The estimated row size is computed by adding up the average length for each data type.</p>
+
+<dl>
+<dt><a name="relName"
+>relName</a></dt>
+
+<dd>
+<p>Name of the relation whose estimated row size is desired.</p>
+
+<dt><a name="RETURN"
+>RETURN</a></dt>
+
+<dd>
+<p>Returns an estimate of the row size for the specified relation.</p>
+</dd>
+</dl>
+
+<h4><a class='u' href='#___top' title='click to go to top of document'
+name="SortNeeded"
+>SortNeeded</a></h4>
+
+<pre>    my $parms = $erdb-&#62;SortNeeded($relationName);</pre>
+
+<p>Return the pipe command for the sort that should be applied to the specified relation when creating the load file.</p>
+
+<p>For example, if the load file should be sorted ascending by the first field, this method would return</p>
+
+<pre>    sort -k1 -t&#34;\t&#34;</pre>
+
+<p>If the first field is numeric, the method would return</p>
+
+<pre>    sort -k1n -t&#34;\t&#34;</pre>
+
+<dl>
+<dt><a name="relationName"
+>relationName</a></dt>
+
+<dd>
+<p>Name of the relation to be examined. This could be an entity name, a relationship name, or the name of a secondary entity relation.</p>
+
+<dt><a name="_"
+></a></dt>
+
+<dd>
+<p>Returns the sort command to use for sorting the relation, suitable for piping.</p>
+</dd>
+</dl>
+
+<h4><a class='u' href='#___top' title='click to go to top of document'
+name="SpecialFields"
+>SpecialFields</a></h4>
+
+<pre>    my %specials = $erdb-&#62;SpecialFields($entityName);</pre>
+
+<p>Return a hash mapping special fields in the specified entity to the value of their <code>special</code> attribute. This enables the subclass to get access to the special field attributes without needed to plumb the internal ERDB data structures.</p>
+
+<dl>
+<dt><a name="entityName"
+>entityName</a></dt>
+
+<dd>
+<p>Name of the entity whose special fields are desired.</p>
+
+<dt><a name="RETURN"
+>RETURN</a></dt>
+
+<dd>
+<p>Returns a hash. The keys of the hash are the special field names, and the values are the values from each special field&#39;s <code>special</code> attribute.</p>
+</dd>
+</dl>
+
+<h4><a class='u' href='#___top' title='click to go to top of document'
+name="GetTableNames"
+>GetTableNames</a></h4>
+
+<pre>    my @names = $erdb-&#62;GetTableNames;</pre>
+
+<p>Return a list of the relations required to implement this database.</p>
+
+<h4><a class='u' href='#___top' title='click to go to top of document'
+name="GetEntityTypes"
+>GetEntityTypes</a></h4>
+
+<pre>    my @names = $erdb-&#62;GetEntityTypes;</pre>
+
+<p>Return a list of the entity type names.</p>
+
+<h4><a class='u' href='#___top' title='click to go to top of document'
+name="GetConnectingRelationships"
+>GetConnectingRelationships</a></h4>
+
+<pre>    my @list = $erdb-&#62;GetConnectingRelationships($entityName);</pre>
+
+<p>Return a list of the relationships connected to the specified entity.</p>
+
+<dl>
+<dt><a name="entityName"
+>entityName</a></dt>
+
+<dd>
+<p>Entity whose connected relationships are desired.</p>
+
+<dt><a name="RETURN"
+>RETURN</a></dt>
+
+<dd>
+<p>Returns a list of the relationships that originate from the entity. If the entity is on the <i>from</i> end, it will return the relationship name. If the entity is on the <i>to</i> end it will return the converse of the relationship name.</p>
+</dd>
+</dl>
+
+<h4><a class='u' href='#___top' title='click to go to top of document'
+name="GetConnectingRelationshipData"
+>GetConnectingRelationshipData</a></h4>
+
+<pre>    my ($froms, $tos) = $erdb-&#62;GetConnectingRelationshipData($entityName);</pre>
+
+<p>Return the relationship data for the specified entity. The return will be a two-element list, each element of the list a reference to a hash that maps relationship names to structures. The first hash will be relationships originating from the entity, and the second element a reference to a hash of relationships pointing to the entity.</p>
+
+<dl>
+<dt><a name="entityName"
+>entityName</a></dt>
+
+<dd>
+<p>Name of the entity of interest.</p>
+
+<dt><a name="RETURN"
+>RETURN</a></dt>
+
+<dd>
+<p>Returns a two-element list, each list being a map of relationship names to relationship metadata structures. The first element lists relationships originating from the entity, and the second element lists relationships that point to the entity.</p>
+</dd>
+</dl>
+
+<h4><a class='u' href='#___top' title='click to go to top of document'
+name="GetDataTypes"
+>GetDataTypes</a></h4>
+
+<pre>    my $types = ERDB::GetDataTypes();</pre>
+
+<p>Return a table of ERDB data types. The table returned is a hash of <a href="#ERDBType" class="podlinkpod"
+>&#34;ERDBType&#34;</a> objects keyed by type name.</p>
+
+<h4><a class='u' href='#___top' title='click to go to top of document'
+name="ShowDataTypes"
+>ShowDataTypes</a></h4>
+
+<pre>    my $markup = ERDB::ShowDataTypes($wiki, $erdb);</pre>
+
+<p>Display a table of all the valid data types for this installation.</p>
+
+<dl>
+<dt><a name="wiki"
+>wiki</a></dt>
+
+<dd>
+<p>An object used to render the table, similar to <a href="#WikiTools" class="podlinkpod"
+>&#34;WikiTools&#34;</a>.</p>
+
+<dt><a name="erdb_(optional)"
+>erdb (optional)</a></dt>
+
+<dd>
+<p>If specified, an ERDB object for a specific database. Only types used by the database will be put in the table. If omitted, all types are returned.</p>
+</dd>
+</dl>
+
+<h4><a class='u' href='#___top' title='click to go to top of document'
+name="IsEntity"
+>IsEntity</a></h4>
+
+<pre>    my $flag = $erdb-&#62;IsEntity($entityName);</pre>
+
+<p>Return TRUE if the parameter is an entity name, else FALSE.</p>
+
+<dl>
+<dt><a name="entityName"
+>entityName</a></dt>
+
+<dd>
+<p>Object name to be tested.</p>
+
+<dt><a name="RETURN"
+>RETURN</a></dt>
+
+<dd>
+<p>Returns TRUE if the specified string is an entity name, else FALSE.</p>
+</dd>
+</dl>
+
+<h4><a class='u' href='#___top' title='click to go to top of document'
+name="GetSecondaryFields"
+>GetSecondaryFields</a></h4>
+
+<pre>    my %fieldTuples = $erdb-&#62;GetSecondaryFields($entityName);</pre>
+
+<p>This method will return a list of the name and type of each of the secondary fields for a specified entity. Secondary fields are stored in two-column tables separate from the primary entity table. This enables the field to have no value or to have multiple values.</p>
+
+<dl>
+<dt><a name="entityName"
+>entityName</a></dt>
+
+<dd>
+<p>Name of the entity whose secondary fields are desired.</p>
+
+<dt><a name="RETURN"
+>RETURN</a></dt>
+
+<dd>
+<p>Returns a hash mapping the field names to their field types.</p>
+</dd>
+</dl>
+
+<h4><a class='u' href='#___top' title='click to go to top of document'
+name="GetFieldRelationName"
+>GetFieldRelationName</a></h4>
+
+<pre>    my $name = $erdb-&#62;GetFieldRelationName($objectName, $fieldName);</pre>
+
+<p>Return the name of the relation containing a specified field.</p>
+
+<dl>
+<dt><a name="objectName"
+>objectName</a></dt>
+
+<dd>
+<p>Name of the entity or relationship containing the field.</p>
+
+<dt><a name="fieldName"
+>fieldName</a></dt>
+
+<dd>
+<p>Name of the relevant field in that entity or relationship.</p>
+
+<dt><a name="RETURN"
+>RETURN</a></dt>
+
+<dd>
+<p>Returns the name of the database relation containing the field, or <code>undef</code> if the field does not exist.</p>
+</dd>
+</dl>
+
+<h4><a class='u' href='#___top' title='click to go to top of document'
+name="DumpMetaData"
+>DumpMetaData</a></h4>
+
+<pre>    $erdb-&#62;DumpMetaData();</pre>
+
+<p>Return a dump of the metadata structure.</p>
+
+<h4><a class='u' href='#___top' title='click to go to top of document'
+name="GenerateWikiData"
+>GenerateWikiData</a></h4>
+
+<pre>    my @wikiLines = $erdb-&#62;GenerateWikiData($wiki);</pre>
+
+<p>Build a description of the database for a wiki. The database will be organized into a single page, with sections for each entity and relationship. The return value is a list of text lines.</p>
+
+<p>The parameter must be an object that mimics the object-based interface of the <a href="#WikiTools" class="podlinkpod"
+>&#34;WikiTools&#34;</a> object. If it is omitted, <a href="#WikiTools" class="podlinkpod"
+>&#34;WikiTools&#34;</a> is used.</p>
+
+<h4><a class='u' href='#___top' title='click to go to top of document'
+name="ObjectNotes"
+>ObjectNotes</a></h4>
+
+<pre>    my @noteParagraphs = ERDB::ObjectNotes($objectData, $wiki);</pre>
+
+<p>Return a list of the notes and asides for an entity or relationship in Wiki format.</p>
+
+<dl>
+<dt><a name="objectData"
+>objectData</a></dt>
+
+<dd>
+<p>The metadata for the desired entity or relationship.</p>
+
+<dt><a name="wiki"
+>wiki</a></dt>
+
+<dd>
+<p>Wiki object used to render text.</p>
+
+<dt><a name="RETURN"
+>RETURN</a></dt>
+
+<dd>
+<p>Returns a list of text paragraphs in Wiki markup form.</p>
+</dd>
+</dl>
+
+<h4><a class='u' href='#___top' title='click to go to top of document'
+name="CheckObjectNames"
+>CheckObjectNames</a></h4>
+
+<pre>    my @errors = $erdb-&#62;CheckObjectNames($objectNameString);</pre>
+
+<p>Check an object name string for errors. The return value will be a list of error messages. If no error is found, an empty list will be returned. This process does not guarantee a correct object name list, but it catches the most obvious errors without the need for invoking a full-blown <a href="#Get" class="podlinkpod"
+>&#34;Get&#34;</a> method.</p>
+
+<dl>
+<dt><a name="objectNameString"
+>objectNameString</a></dt>
+
+<dd>
+<p>An object name string, consisting of a space-delimited list of entity and relationship names.</p>
+
+<dt><a name="RETURN"
+>RETURN</a></dt>
+
+<dd>
+<p>Returns an empty list if successful, and a list of error messages if the list is invalid.</p>
+</dd>
+</dl>
+
+<h4><a class='u' href='#___top' title='click to go to top of document'
+name="GetTitle"
+>GetTitle</a></h4>
+
+<pre>    my $text = $erdb-&#62;GetTitle();</pre>
+
+<p>Return the title for this database.</p>
+
+<h4><a class='u' href='#___top' title='click to go to top of document'
+name="GetDiagramOptions"
+>GetDiagramOptions</a></h4>
+
+<pre>    my $hash = $erdb-&#62;GetDiagramOptions();</pre>
+
+<p>Return the diagram options structure for this database. The diagram options are used by the ERDB documentation widget to configure the database diagram. If the options are not present, an undefined value will be returned.</p>
+
+<h4><a class='u' href='#___top' title='click to go to top of document'
+name="GetMetaFileName"
+>GetMetaFileName</a></h4>
+
+<pre>    my $fileName = $erdb-&#62;GetMetaFileName();</pre>
+
+<p>Return the name of the database definition file for this database.</p>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Database_Administration_and_Loading_Methods"
+>Database Administration and Loading Methods</a></h3>
+
+<h4><a class='u' href='#___top' title='click to go to top of document'
+name="LoadTable"
+>LoadTable</a></h4>
+
+<pre>    my $results = $erdb-&#62;LoadTable($fileName, $relationName, %options);</pre>
+
+<p>Load data from a tab-delimited file into a specified table, optionally re-creating the table first.</p>
+
+<dl>
+<dt><a name="fileName"
+>fileName</a></dt>
+
+<dd>
+<p>Name of the file from which the table data should be loaded.</p>
+
+<dt><a name="relationName"
+>relationName</a></dt>
+
+<dd>
+<p>Name of the relation to be loaded. This is the same as the table name.</p>
+
+<dt><a name="options"
+>options</a></dt>
+
+<dd>
+<p>A hash of load options.</p>
+
+<dt><a name="RETURN"
+>RETURN</a></dt>
+
+<dd>
+<p>Returns a statistical object containing a list of the error messages.</p>
+</dd>
+</dl>
+
+<p>The permissible options are as follows.</p>
+
+<dl>
+<dt><a name="truncate"
+>truncate</a></dt>
+
+<dd>
+<p>If TRUE, then the table will be erased before loading.</p>
+
+<dt><a name="mode"
+>mode</a></dt>
+
+<dd>
+<p>Mode in which the load should operate, either <code>low_priority</code> or <code>concurrent</code>. This option is only applicable to a MySQL database.</p>
+
+<dt><a name="partial"
+>partial</a></dt>
+
+<dd>
+<p>If TRUE, then it is assumed that this is a partial load, and the table will not be analyzed and compacted at the end.</p>
+
+<dt><a name="failOnError"
+>failOnError</a></dt>
+
+<dd>
+<p>If TRUE, then when an error occurs, the process will be killed; otherwise, the process will stay alive, but a message will be put into the statistics object.</p>
+</dd>
+</dl>
+
+<h4><a class='u' href='#___top' title='click to go to top of document'
+name="InsertNew"
+>InsertNew</a></h4>
+
+<pre>    my $newID = $erdb-&#62;InsertNew($entityName, %fields);</pre>
+
+<p>Insert a new entity into a table that uses sequential integer IDs. A new, unique ID will be computed automatically and returned to the caller.</p>
+
+<dl>
+<dt><a name="entityName"
+>entityName</a></dt>
+
+<dd>
+<p>Type of the entity being inserted. The entity must have an integer ID.</p>
+
+<dt><a name="fields"
+>fields</a></dt>
+
+<dd>
+<p>Hash of field names to field values. Every field in the entity&#39;s primary relation should be specified.</p>
+
+<dt><a name="RETURN"
+>RETURN</a></dt>
+
+<dd>
+<p>Returns the ID of the inserted entity.</p>
+</dd>
+</dl>
+
+<h4><a class='u' href='#___top' title='click to go to top of document'
+name="Analyze"
+>Analyze</a></h4>
+
+<pre>    $erdb-&#62;Analyze($tableName);</pre>
+
+<p>Analyze and compact a table in the database. This is useful after a load to improve the performance of the indexes.</p>
+
+<dl>
+<dt><a name="tableName"
+>tableName</a></dt>
+
+<dd>
+<p>Name of the table to be analyzed and compacted.</p>
+</dd>
+</dl>
+
+<h4><a class='u' href='#___top' title='click to go to top of document'
+name="TruncateTable"
+>TruncateTable</a></h4>
+
+<pre>    $erdb-&#62;TruncateTable($table);</pre>
+
+<p>Delete all rows from a table quickly. This uses the built-in SQL <code>TRUNCATE</code> statement, which effectively drops and re-creates a table with all its settings intact.</p>
+
+<dl>
+<dt><a name="table"
+>table</a></dt>
+
+<dd>
+<p>Name of the table to be cleared.</p>
+</dd>
+</dl>
+
+<h4><a class='u' href='#___top' title='click to go to top of document'
+name="VerifyTable"
+>VerifyTable</a></h4>
+
+<pre>    my $newFlag = $erdb-&#62;VerifyTable($table, $indexFlag, $estimatedRows);</pre>
+
+<p>If the specified table does not exist, create it. This method will return TRUE if the table is created, else FALSE.</p>
+
+<dl>
+<dt><a name="table"
+>table</a></dt>
+
+<dd>
+<p>Name of the table to verify.</p>
+
+<dt><a name="indexFlag"
+>indexFlag</a></dt>
+
+<dd>
+<p>TRUE if the indexes for the relation should be created, else FALSE. If FALSE, <a href="#CreateIndexes" class="podlinkpod"
+>&#34;CreateIndexes&#34;</a> must be called later to bring the indexes into existence.</p>
+
+<dt><a name="estimatedRows_(optional)"
+>estimatedRows (optional)</a></dt>
+
+<dd>
+<p>If specified, the estimated maximum number of rows for the relation. This information allows the creation of tables using storage engines that are faster but require size estimates, such as MyISAM.</p>
+
+<dt><a name="RETURN"
+>RETURN</a></dt>
+
+<dd>
+<p>Returns TRUE if the table was created, FALSE if it already existed in the database.</p>
+</dd>
+</dl>
+
+<h4><a class='u' href='#___top' title='click to go to top of document'
+name="CreateSearchIndex"
+>CreateSearchIndex</a></h4>
+
+<pre>    $erdb-&#62;CreateSearchIndex($objectName);</pre>
+
+<p>Check for a full-text search index on the specified entity or relationship object, and if one is required, rebuild it.</p>
+
+<dl>
+<dt><a name="objectName"
+>objectName</a></dt>
+
+<dd>
+<p>Name of the entity or relationship to be indexed.</p>
+</dd>
+</dl>
+
+<h4><a class='u' href='#___top' title='click to go to top of document'
+name="DropRelation"
+>DropRelation</a></h4>
+
+<pre>    $erdb-&#62;DropRelation($relationName);</pre>
+
+<p>Physically drop a relation from the database.</p>
+
+<dl>
+<dt><a name="relationName"
+>relationName</a></dt>
+
+<dd>
+<p>Name of the relation to drop. If it does not exist, this method will have no effect.</p>
+</dd>
+</dl>
+
+<h4><a class='u' href='#___top' title='click to go to top of document'
+name="DumpRelations"
+>DumpRelations</a></h4>
+
+<pre>    $erdb-&#62;DumpRelations($outputDirectory);</pre>
+
+<p>Write the contents of all the relations to tab-delimited files in the specified directory. Each file will have the same name as the relation dumped, with an extension of DTX.</p>
+
+<dl>
+<dt><a name="outputDirectory"
+>outputDirectory</a></dt>
+
+<dd>
+<p>Name of the directory into which the relation files should be dumped.</p>
+</dd>
+</dl>
+
+<h4><a class='u' href='#___top' title='click to go to top of document'
+name="DumpTable"
+>DumpTable</a></h4>
+
+<pre>    my $count = $erdb-&#62;DumpTable($tableName, $directory);</pre>
+
+<p>Dump the specified table to the named directory. This will create a load file having the same name as the relation with an extension of DTX. This file can then be used to reload the table at a later date. If the table does not exist, no action will be taken.</p>
+
+<dl>
+<dt><a name="tableName"
+>tableName</a></dt>
+
+<dd>
+<p>Name of the table to dump.</p>
+
+<dt><a name="directory"
+>directory</a></dt>
+
+<dd>
+<p>Name of the directory in which the dump file should be placed.</p>
+
+<dt><a name="RETURN"
+>RETURN</a></dt>
+
+<dd>
+<p>Returns the number of records written.</p>
+</dd>
+</dl>
+
+<h4><a class='u' href='#___top' title='click to go to top of document'
+name="TypeDefault"
+>TypeDefault</a></h4>
+
+<pre>    my $value = ERDB::TypeDefault($type);</pre>
+
+<p>Return the default value for fields of the specified type.</p>
+
+<dl>
+<dt><a name="type"
+>type</a></dt>
+
+<dd>
+<p>Relevant type name.</p>
+
+<dt><a name="RETURN"
+>RETURN</a></dt>
+
+<dd>
+<p>Returns a default value suitable for fields of the specified type.</p>
+</dd>
+</dl>
+
+<h4><a class='u' href='#___top' title='click to go to top of document'
+name="LoadTables"
+>LoadTables</a></h4>
+
+<pre>    my $stats = $erdb-&#62;LoadTables($directoryName, $rebuild);</pre>
+
+<p>This method will load the database tables from a directory. The tables must already have been created in the database. (This can be done by calling <a href="#CreateTables" class="podlinkpod"
+>&#34;CreateTables&#34;</a>.) The caller passes in a directory name; all of the relations to be loaded must have a file in the directory with the same name as the relation with a suffix of <code>.dtx</code>. Each file must be a tab-delimited table of encoded field values. Each line of the file will be loaded as a row of the target relation table.</p>
+
+<dl>
+<dt><a name="directoryName"
+>directoryName</a></dt>
+
+<dd>
+<p>Name of the directory containing the relation files to be loaded.</p>
+
+<dt><a name="rebuild"
+>rebuild</a></dt>
+
+<dd>
+<p>TRUE if the tables should be dropped and rebuilt, else FALSE.</p>
+
+<dt><a name="RETURN"
+>RETURN</a></dt>
+
+<dd>
+<p>Returns a <a href="#Stats" class="podlinkpod"
+>&#34;Stats&#34;</a> object describing the number of records read and a list of the error messages.</p>
+</dd>
+</dl>
+
+<h4><a class='u' href='#___top' title='click to go to top of document'
+name="CreateTables"
+>CreateTables</a></h4>
+
+<pre>    $erdb-&#62;CreateTables();</pre>
+
+<p>This method creates the tables for the database from the metadata structure loaded by the constructor. It is expected this function will only be used on rare occasions, when the user needs to start with an empty database. Otherwise, the <a href="#LoadTables" class="podlinkpod"
+>&#34;LoadTables&#34;</a> method can be used by itself with the truncate flag turned on.</p>
+
+<h4><a class='u' href='#___top' title='click to go to top of document'
+name="CreateTable"
+>CreateTable</a></h4>
+
+<pre>    $erdb-&#62;CreateTable($tableName, $indexFlag, $estimatedRows);</pre>
+
+<p>Create the table for a relation and optionally create its indexes.</p>
+
+<dl>
+<dt><a name="relationName"
+>relationName</a></dt>
+
+<dd>
+<p>Name of the relation (which will also be the table name).</p>
+
+<dt><a name="indexFlag"
+>indexFlag</a></dt>
+
+<dd>
+<p>TRUE if the indexes for the relation should be created, else FALSE. If FALSE, <a href="#CreateIndexes" class="podlinkpod"
+>&#34;CreateIndexes&#34;</a> must be called later to bring the indexes into existence.</p>
+
+<dt><a name="estimatedRows_(optional)"
+>estimatedRows (optional)</a></dt>
+
+<dd>
+<p>If specified, the estimated maximum number of rows for the relation. This information allows the creation of tables using storage engines that are faster but require size estimates, such as MyISAM.</p>
+</dd>
+</dl>
+
+<h4><a class='u' href='#___top' title='click to go to top of document'
+name="VerifyFields"
+>VerifyFields</a></h4>
+
+<pre>    $erdb-&#62;VerifyFields($relName, \@fieldList);</pre>
+
+<p>Run through the list of proposed field values, insuring that all of them are valid.</p>
+
+<dl>
+<dt><a name="relName"
+>relName</a></dt>
+
+<dd>
+<p>Name of the relation for which the specified fields are destined.</p>
+
+<dt><a name="fieldList"
+>fieldList</a></dt>
+
+<dd>
+<p>Reference to a list, in order, of the fields to be put into the relation.</p>
+</dd>
+</dl>
+
+<h4><a class='u' href='#___top' title='click to go to top of document'
+name="DigestFields"
+>DigestFields</a></h4>
+
+<pre>    $erdb-&#62;DigestFields($relName, $fieldList);</pre>
+
+<p>Prepare the fields of a relation for output to a load file.</p>
+
+<dl>
+<dt><a name="relName"
+>relName</a></dt>
+
+<dd>
+<p>Name of the relation to which the fields belong.</p>
+
+<dt><a name="fieldList"
+>fieldList</a></dt>
+
+<dd>
+<p>List of field contents to be loaded into the relation.</p>
+</dd>
+</dl>
+
+<h4><a class='u' href='#___top' title='click to go to top of document'
+name="EncodeField"
+>EncodeField</a></h4>
+
+<pre>    my $coding = $erdb-&#62;EncodeField($fieldName, $value);</pre>
+
+<p>Convert the specified value to the proper format for storing in the specified database field. The field name should be specified in the standard <i>object(field)</i> format, e.g. <code>Feature(id)</code> for the <code>id</code> field of the <code>Feature</code> table.</p>
+
+<dl>
+<dt><a name="fieldName"
+>fieldName</a></dt>
+
+<dd>
+<p>Name of the field, specified in as an object name with the field name in parentheses.</p>
+
+<dt><a name="value"
+>value</a></dt>
+
+<dd>
+<p>Value to encode for placement in the field.</p>
+
+<dt><a name="RETURN"
+>RETURN</a></dt>
+
+<dd>
+<p>Coded value ready to put in the database. In most cases, this will be identical to the original input.</p>
+</dd>
+</dl>
+
+<h4><a class='u' href='#___top' title='click to go to top of document'
+name="encode"
+>encode</a></h4>
+
+<pre>    my $coding = ERDB::encode($type, $value);</pre>
+
+<p>Encode a value of the specified type for storage in the database or for use as a query parameter. Encoding is automatic for all ERDB methods except when loading a table from a user-supplied load file or when processing the parameters for a query filter string. This method can be used in those situations to remedy the lack.</p>
+
+<dl>
+<dt><a name="type"
+>type</a></dt>
+
+<dd>
+<p>Name of the incoming value&#39;s data type.</p>
+
+<dt><a name="value"
+>value</a></dt>
+
+<dd>
+<p>Value to encode into a string.</p>
+
+<dt><a name="RETURN"
+>RETURN</a></dt>
+
+<dd>
+<p>Returns the encoded value.</p>
+</dd>
+</dl>
+
+<h4><a class='u' href='#___top' title='click to go to top of document'
+name="DecodeField"
+>DecodeField</a></h4>
+
+<pre>    my $value = $erdb-&#62;DecodeField($fieldName, $coding);</pre>
+
+<p>Convert the stored coding of the specified field to the proper format for use by the client program. This is essentially the inverse of <a href="#EncodeField" class="podlinkpod"
+>&#34;EncodeField&#34;</a>.</p>
+
+<dl>
+<dt><a name="fieldName"
+>fieldName</a></dt>
+
+<dd>
+<p>Name of the field, specified as an object name with the field name in parentheses.</p>
+
+<dt><a name="coding"
+>coding</a></dt>
+
+<dd>
+<p>Coded data from the database.</p>
+
+<dt><a name="RETURN"
+>RETURN</a></dt>
+
+<dd>
+<p>Returns the original form of the coded data.</p>
+</dd>
+</dl>
+
+<h4><a class='u' href='#___top' title='click to go to top of document'
+name="DigestKey"
+>DigestKey</a></h4>
+
+<pre>    my $digested = ERDB::DigestKey($longString);</pre>
+
+<p>Return the digested value of a string. The digested value is a fixed length (22 characters) MD5 checksum. It can be used as a more convenient version of a symbolic key.</p>
+
+<dl>
+<dt><a name="longString"
+>longString</a></dt>
+
+<dd>
+<p>String to digest.</p>
+
+<dt><a name="RETURN"
+>RETURN</a></dt>
+
+<dd>
+<p>Digested value of the string.</p>
+</dd>
+</dl>
+
+<h4><a class='u' href='#___top' title='click to go to top of document'
+name="CreateIndex"
+>CreateIndex</a></h4>
+
+<pre>    $erdb-&#62;CreateIndex($relationName);</pre>
+
+<p>Create the indexes for a relation. If a table is being loaded from a large source file (as is the case in <a href="#LoadTable" class="podlinkpod"
+>&#34;LoadTable&#34;</a>), it is sometimes best to create the indexes after the load. If that is the case, then <a href="#CreateTable" class="podlinkpod"
+>&#34;CreateTable&#34;</a> should be called with the index flag set to FALSE, and this method used after the load to create the indexes for the table.</p>
+
+<h4><a class='u' href='#___top' title='click to go to top of document'
+name="SetTestEnvironment"
+>SetTestEnvironment</a></h4>
+
+<pre>    $erdb-&#62;SetTestEnvironment();</pre>
+
+<p>Denote that this is a test environment. Certain performance-enhancing features may be disabled in a test environment.</p>
+
+<h4><a class='u' href='#___top' title='click to go to top of document'
+name="dbName"
+>dbName</a></h4>
+
+<pre>    my $dbName = $erdb-&#62;dbName();</pre>
+
+<p>Return the physical name of the database currently attached to this object.</p>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Database_Update_Methods"
+>Database Update Methods</a></h3>
+
+<h4><a class='u' href='#___top' title='click to go to top of document'
+name="BeginTran"
+>BeginTran</a></h4>
+
+<pre>    $erdb-&#62;BeginTran();</pre>
+
+<p>Start a database transaction.</p>
+
+<h4><a class='u' href='#___top' title='click to go to top of document'
+name="CommitTran"
+>CommitTran</a></h4>
+
+<pre>    $erdb-&#62;CommitTran();</pre>
+
+<p>Commit an active database transaction.</p>
+
+<h4><a class='u' href='#___top' title='click to go to top of document'
+name="RollbackTran"
+>RollbackTran</a></h4>
+
+<pre>    $erdb-&#62;RollbackTran();</pre>
+
+<p>Roll back an active database transaction.</p>
+
+<h4><a class='u' href='#___top' title='click to go to top of document'
+name="UpdateField"
+>UpdateField</a></h4>
+
+<pre>    my $count = $erdb-&#62;UpdateField($fieldName, $oldValue, $newValue, $filter, $parms);</pre>
+
+<p>Update all occurrences of a specific field value to a new value. The number of rows changed will be returned.</p>
+
+<dl>
+<dt><a name="fieldName"
+>fieldName</a></dt>
+
+<dd>
+<p>Name of the field in <a href="#Standard_Field_Name_Format" class="podlinkpod"
+>&#34;Standard Field Name Format&#34;</a>.</p>
+
+<dt><a name="oldValue"
+>oldValue</a></dt>
+
+<dd>
+<p>Value to be modified. All occurrences of this value in the named field will be replaced by the new value.</p>
+
+<dt><a name="newValue"
+>newValue</a></dt>
+
+<dd>
+<p>New value to be substituted for the old value when it&#39;s found.</p>
+
+<dt><a name="filter"
+>filter</a></dt>
+
+<dd>
+<p>A standard ERDB filter clause. See <a href="#Filter_Clause" class="podlinkpod"
+>&#34;Filter Clause&#34;</a>. The filter will be applied before any substitutions take place. Note that the filter clause in this case must only specify fields in the table containing fields.</p>
+
+<dt><a name="parms"
+>parms</a></dt>
+
+<dd>
+<p>Reference to a list of parameter values in the filter. See <a href="#Parameter_List" class="podlinkpod"
+>&#34;Parameter List&#34;</a>.</p>
+
+<dt><a name="RETURN"
+>RETURN</a></dt>
+
+<dd>
+<p>Returns the number of rows modified.</p>
+</dd>
+</dl>
+
+<h4><a class='u' href='#___top' title='click to go to top of document'
+name="InsertValue"
+>InsertValue</a></h4>
+
+<pre>    $erdb-&#62;InsertValue($entityID, $fieldName, $value);</pre>
+
+<p>This method will insert a new value into the database. The value must be one associated with a secondary relation, since primary values cannot be inserted: they occur exactly once. Secondary values, on the other hand, can be missing or multiply-occurring.</p>
+
+<dl>
+<dt><a name="entityID"
+>entityID</a></dt>
+
+<dd>
+<p>ID of the object that is to receive the new value.</p>
+
+<dt><a name="fieldName"
+>fieldName</a></dt>
+
+<dd>
+<p>Field name for the new value in <a href="#Standard_Field_Name_Format" class="podlinkpod"
+>&#34;Standard Field Name Format&#34;</a>. This specifies the entity name and the field name in a single string.</p>
+
+<dt><a name="value"
+>value</a></dt>
+
+<dd>
+<p>New value to be put in the field.</p>
+</dd>
+</dl>
+
+<h4><a class='u' href='#___top' title='click to go to top of document'
+name="InsertObject"
+>InsertObject</a></h4>
+
+<pre>    $erdb-&#62;InsertObject($objectType, %fieldHash);</pre>
+
+<p>Insert an object into the database. The object is defined by a type name and then a hash of field names to values. All field values should be represented by scalars. (Note that for relationships, the primary relation is the <b>only</b> relation.) Field values for the other relations comprising the entity are always list references. For example, the following line inserts an inactive PEG feature named <code>fig|188.1.peg.1</code> with aliases <code>ZP_00210270.1</code> and <code>gi|46206278</code>.</p>
+
+<pre>    $erdb-&#62;InsertObject(&#39;Feature&#39;, id =&#62; &#39;fig|188.1.peg.1&#39;, active =&#62; 0,
+                        feature-type =&#62; &#39;peg&#39;, alias =&#62; [&#39;ZP_00210270.1&#39;,
+                        &#39;gi|46206278&#39;]);</pre>
+
+<p>The next statement inserts a <code>HasProperty</code> relationship between feature <code>fig|158879.1.peg.1</code> and property <code>4</code> with an evidence URL of <code>http://seedu.uchicago.edu/query.cgi?article_id=142</code>.</p>
+
+<pre>    $erdb-&#62;InsertObject(&#39;HasProperty&#39;, &#39;from-link&#39; =&#62; &#39;fig|158879.1.peg.1&#39;,
+                        &#39;to-link&#39; =&#62; 4,
+                        evidence =&#62; &#39;http://seedu.uchicago.edu/query.cgi?article_id=142&#39;);</pre>
+
+<dl>
+<dt><a name="newObjectType"
+>newObjectType</a></dt>
+
+<dd>
+<p>Type name of the object to insert.</p>
+
+<dt><a name="fieldHash"
+>fieldHash</a></dt>
+
+<dd>
+<p>Hash of field names to values. The field names should be specified in <a href="#Standard_Field_Name_Format" class="podlinkpod"
+>&#34;Standard Field Name Format&#34;</a>. The default object name is the name of the object being inserted. The values will be encoded for storage by this method. Note that this can be an inline hash (for backward compatibility) or a hash reference.</p>
+</dd>
+</dl>
+
+<h4><a class='u' href='#___top' title='click to go to top of document'
+name="UpdateEntity"
+>UpdateEntity</a></h4>
+
+<pre>    $erdb-&#62;UpdateEntity($entityName, $id, %fields);</pre>
+
+<p>Update the values of an entity. This is an unprotected update, so it should only be done if the database resides on a database server.</p>
+
+<dl>
+<dt><a name="entityName"
+>entityName</a></dt>
+
+<dd>
+<p>Name of the entity to update. (This is the entity type.)</p>
+
+<dt><a name="id"
+>id</a></dt>
+
+<dd>
+<p>ID of the entity to update. If no entity exists with this ID, an error will be thrown.</p>
+
+<dt><a name="fields"
+>fields</a></dt>
+
+<dd>
+<p>Hash mapping field names to their new values. All of the fields named must be in the entity&#39;s primary relation, and they cannot any of them be the ID field. Field names should be in the <a href="#Standard_Field_Name_Format" class="podlinkpod"
+>&#34;Standard Field Name Format&#34;</a>. The default object name in this case is the entity name. For backward compatability, this can also be a hash reference.</p>
+</dd>
+</dl>
+
+<h4><a class='u' href='#___top' title='click to go to top of document'
+name="Delete"
+>Delete</a></h4>
+
+<pre>    my $stats = $erdb-&#62;Delete($entityName, $objectID, %options);</pre>
+
+<p>Delete an entity instance from the database. The instance is deleted along with all entity and relationship instances dependent on it. The definition of <i>dependence</i> is recursive.</p>
+
+<p>An object is always dependent on itself. An object is dependent if it is a 1-to-many or many-to-many relationship connected to a dependent entity or if it is the &#34;to&#34; entity connected to a 1-to-many dependent relationship.</p>
+
+<p>The idea here is to delete an entity and everything related to it. Because this is so dangerous, and option is provided to simply trace the resulting delete calls so you can verify the action before performing the delete.</p>
+
+<dl>
+<dt><a name="entityName"
+>entityName</a></dt>
+
+<dd>
+<p>Name of the entity type for the instance being deleted.</p>
+
+<dt><a name="objectID"
+>objectID</a></dt>
+
+<dd>
+<p>ID of the entity instance to be deleted.</p>
+
+<dt><a name="options"
+>options</a></dt>
+
+<dd>
+<p>A hash detailing the options for this delete operation.</p>
+
+<dt><a name="RETURN"
+>RETURN</a></dt>
+
+<dd>
+<p>Returns a statistics object indicating how many records of each particular table were deleted.</p>
+</dd>
+</dl>
+
+<p>The permissible options for this method are as follows.</p>
+
+<dl>
+<dt><a name="testMode"
+>testMode</a></dt>
+
+<dd>
+<p>If TRUE, then the delete statements will be traced, but no changes will be made to the database.</p>
+
+<dt><a name="keepRoot"
+>keepRoot</a></dt>
+
+<dd>
+<p>If TRUE, then the entity instances will not be deleted, only the dependent records.</p>
+</dd>
+</dl>
+
+<h4><a class='u' href='#___top' title='click to go to top of document'
+name="Disconnect"
+>Disconnect</a></h4>
+
+<pre>    my $count = $erdb-&#62;Disconnect($relationshipName, $originEntityName, $originEntityID);</pre>
+
+<p>Disconnect an entity instance from all the objects to which it is related via a specific relationship. This will delete each relationship instance that connects to the specified entity.</p>
+
+<dl>
+<dt><a name="relationshipName"
+>relationshipName</a></dt>
+
+<dd>
+<p>Name of the relationship whose instances are to be deleted.</p>
+
+<dt><a name="originEntityName"
+>originEntityName</a></dt>
+
+<dd>
+<p>Name of the entity that is to be disconnected.</p>
+
+<dt><a name="originEntityID"
+>originEntityID</a></dt>
+
+<dd>
+<p>ID of the entity that is to be disconnected.</p>
+
+<dt><a name="RETURN"
+>RETURN</a></dt>
+
+<dd>
+<p>Returns the number of rows deleted.</p>
+</dd>
+</dl>
+
+<h4><a class='u' href='#___top' title='click to go to top of document'
+name="DeleteRow"
+>DeleteRow</a></h4>
+
+<pre>    $erdb-&#62;DeleteRow($relationshipName, $fromLink, $toLink, \%values);</pre>
+
+<p>Delete a row from a relationship. In most cases, only the from-link and to-link are needed; however, for relationships with intersection data values can be specified for the other fields using a hash.</p>
+
+<dl>
+<dt><a name="relationshipName"
+>relationshipName</a></dt>
+
+<dd>
+<p>Name of the relationship from which the row is to be deleted.</p>
+
+<dt><a name="fromLink"
+>fromLink</a></dt>
+
+<dd>
+<p>ID of the entity instance in the From direction.</p>
+
+<dt><a name="toLink"
+>toLink</a></dt>
+
+<dd>
+<p>ID of the entity instance in the To direction.</p>
+
+<dt><a name="values"
+>values</a></dt>
+
+<dd>
+<p>Reference to a hash of other values to be used for filtering the delete.</p>
+</dd>
+</dl>
+
+<h4><a class='u' href='#___top' title='click to go to top of document'
+name="DeleteLike"
+>DeleteLike</a></h4>
+
+<pre>    my $deleteCount = $erdb-&#62;DeleteLike($relName, $filter, \@parms);</pre>
+
+<p>Delete all the relationship rows that satisfy a particular filter condition. Unlike a normal filter, only fields from the relationship itself can be used.</p>
+
+<dl>
+<dt><a name="relName"
+>relName</a></dt>
+
+<dd>
+<p>Name of the relationship whose records are to be deleted.</p>
+
+<dt><a name="filter"
+>filter</a></dt>
+
+<dd>
+<p>A filter clause for the delete query. See <a href="#Filter_Clause" class="podlinkpod"
+>&#34;Filter Clause&#34;</a>.</p>
+
+<dt><a name="parms"
+>parms</a></dt>
+
+<dd>
+<p>Reference to a list of parameters for the filter clause. See <a href="#Parameter_List" class="podlinkpod"
+>&#34;Parameter List&#34;</a>.</p>
+
+<dt><a name="RETURN"
+>RETURN</a></dt>
+
+<dd>
+<p>Returns a count of the number of rows deleted.</p>
+</dd>
+</dl>
+
+<h4><a class='u' href='#___top' title='click to go to top of document'
+name="DeleteValue"
+>DeleteValue</a></h4>
+
+<pre>    my $numDeleted = $erdb-&#62;DeleteValue($entityName, $id, $fieldName, $fieldValue);</pre>
+
+<p>Delete secondary field values from the database. This method can be used to delete all values of a specified field for a particular entity instance, or only a single value.</p>
+
+<p>Secondary fields are stored in two-column relations separate from an entity&#39;s primary table, and as a result a secondary field can legitimately have no value or multiple values. Therefore, it makes sense to talk about deleting secondary fields where it would not make sense for primary fields.</p>
+
+<dl>
+<dt><a name="id"
+>id</a></dt>
+
+<dd>
+<p>ID of the entity instance to be processed. If the instance is not found, this method will have no effect. If <code>undef</code> is specified, all values for all of the entity instances will be deleted.</p>
+
+<dt><a name="fieldName"
+>fieldName</a></dt>
+
+<dd>
+<p>Name of the field whose values are to be deleted, in <a href="#Standard_Field_Name_Format" class="podlinkpod"
+>&#34;Standard Field Name Format&#34;</a>.</p>
+
+<dt><a name="fieldValue_(optional)"
+>fieldValue (optional)</a></dt>
+
+<dd>
+<p>Value to be deleted. If not specified, then all values of the specified field will be deleted for the entity instance. If specified, then only the values which match this parameter will be deleted.</p>
+
+<dt><a name="RETURN"
+>RETURN</a></dt>
+
+<dd>
+<p>Returns the number of rows deleted.</p>
+</dd>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Data_Mining_Methods"
+>Data Mining Methods</a></h3>
+
+<h4><a class='u' href='#___top' title='click to go to top of document'
+name="GetUsefulCrossValues"
+>GetUsefulCrossValues</a></h4>
+
+<pre>    my @attrNames = $sprout-&#62;GetUsefulCrossValues($sourceEntity, $relationship);</pre>
+
+<p>Return a list of the useful attributes that would be returned by a <b>Cross</b> call from an entity of the source entity type through the specified relationship. This means it will return the fields of the target entity type and the intersection data fields in the relationship. Only primary table fields are returned. In other words, the field names returned will be for fields where there is always one and only one value.</p>
+
+<dl>
+<dt><a name="sourceEntity"
+>sourceEntity</a></dt>
+
+<dd>
+<p>Name of the entity from which the relationship crossing will start.</p>
+
+<dt><a name="relationship"
+>relationship</a></dt>
+
+<dd>
+<p>Name of the relationship being crossed.</p>
+
+<dt><a name="RETURN"
+>RETURN</a></dt>
+
+<dd>
+<p>Returns a list of field names in <a href="#Standard_Field_Name_Format" class="podlinkpod"
+>&#34;Standard Field Name Format&#34;</a>.</p>
+</dd>
+</dl>
+
+<h4><a class='u' href='#___top' title='click to go to top of document'
+name="FindColumn"
+>FindColumn</a></h4>
+
+<pre>    my $colIndex = ERDB::FindColumn($headerLine, $columnIdentifier);</pre>
+
+<p>Return the location a desired column in a data mining header line. The data mining header line is a tab-separated list of column names. The column identifier is either the numerical index of a column or the actual column name.</p>
+
+<dl>
+<dt><a name="headerLine"
+>headerLine</a></dt>
+
+<dd>
+<p>The header line from a data mining command, which consists of a tab-separated list of column names.</p>
+
+<dt><a name="columnIdentifier"
+>columnIdentifier</a></dt>
+
+<dd>
+<p>Either the ordinal number of the desired column (1-based), or the name of the desired column.</p>
+
+<dt><a name="RETURN"
+>RETURN</a></dt>
+
+<dd>
+<p>Returns the array index (0-based) of the desired column.</p>
+</dd>
+</dl>
+
+<h4><a class='u' href='#___top' title='click to go to top of document'
+name="ParseColumns"
+>ParseColumns</a></h4>
+
+<pre>    my @columns = ERDB::ParseColumns($line);</pre>
+
+<p>Convert the specified data line to a list of columns.</p>
+
+<dl>
+<dt><a name="line"
+>line</a></dt>
+
+<dd>
+<p>A data mining input, consisting of a tab-separated list of columns terminated by a new-line.</p>
+
+<dt><a name="RETURN"
+>RETURN</a></dt>
+
+<dd>
+<p>Returns a list consisting of the column values.</p>
+</dd>
+</dl>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Virtual_Methods"
+>Virtual Methods</a></h3>
+
+<h4><a class='u' href='#___top' title='click to go to top of document'
+name="CleanKeywords"
+>CleanKeywords</a></h4>
+
+<pre>    my $cleanedString = $erdb-&#62;CleanKeywords($searchExpression);</pre>
+
+<p>Clean up a search expression or keyword list. This is a virtual method that may be overridden by the subclass. The base-class method removes extra spaces and converts everything to lower case.</p>
+
+<dl>
+<dt><a name="searchExpression"
+>searchExpression</a></dt>
+
+<dd>
+<p>Search expression or keyword list to clean. Note that a search expression may contain boolean operators which need to be preserved. This includes leading minus signs.</p>
+
+<dt><a name="RETURN"
+>RETURN</a></dt>
+
+<dd>
+<p>Cleaned expression or keyword list.</p>
+</dd>
+</dl>
+
+<h4><a class='u' href='#___top' title='click to go to top of document'
+name="GetSourceObject"
+>GetSourceObject</a></h4>
+
+<pre>    my $source = $erdb-&#62;GetSourceObject();</pre>
+
+<p>Return the object to be used in creating load files for this database. This is only the default source object. Loaders have the option of overriding the chosen source object when constructing the <a href="#ERDBLoadGroup" class="podlinkpod"
+>&#34;ERDBLoadGroup&#34;</a> objects.</p>
+
+<h4><a class='u' href='#___top' title='click to go to top of document'
+name="SectionList"
+>SectionList</a></h4>
+
+<pre>    my @sections = $erdb-&#62;SectionList();</pre>
+
+<p>Return a list of the names for the different data sections used when loading this database. The default is a single string, in which case there is only one section representing the entire database.</p>
+
+<h4><a class='u' href='#___top' title='click to go to top of document'
+name="GlobalSection"
+>GlobalSection</a></h4>
+
+<pre>    my $flag = $sap-&#62;GlobalSection($name);</pre>
+
+<p>Return TRUE if the specified section name is the global section, FALSE otherwise.</p>
+
+<dl>
+<dt><a name="name"
+>name</a></dt>
+
+<dd>
+<p>Section name to test.</p>
+
+<dt><a name="RETURN"
+>RETURN</a></dt>
+
+<dd>
+<p>Returns TRUE if the parameter is the string <code>Global</code>, else FALSE.</p>
+</dd>
+</dl>
+
+<h4><a class='u' href='#___top' title='click to go to top of document'
+name="PreferredName"
+>PreferredName</a></h4>
+
+<pre>    my $name = $erdb-&#62;PreferredName();</pre>
+
+<p>Return the variable name to use for this database when generating code. The default is <code>erdb</code>.</p>
+
+<h4><a class='u' href='#___top' title='click to go to top of document'
+name="Loader"
+>Loader</a></h4>
+
+<pre>    my $groupLoader = $erdb-&#62;Loader($groupName, $options);</pre>
+
+<p>Return an <a href="#ERDBLoadGroup" class="podlinkpod"
+>&#34;ERDBLoadGroup&#34;</a> object for the specified load group. This method is used by <a href="http://search.cpan.org/perldoc?ERDBGenerator.pl" class="podlinkpod"
+>ERDBGenerator.pl</a> to create the load group objects. If you are not using <a href="http://search.cpan.org/perldoc?ERDBGenerator.pl" class="podlinkpod"
+>ERDBGenerator.pl</a>, you don&#39;t need to override this method.</p>
+
+<dl>
+<dt><a name="groupName"
+>groupName</a></dt>
+
+<dd>
+<p>Name of the load group whose object is to be returned. The group name is guaranteed to be a single word with only the first letter capitalized.</p>
+
+<dt><a name="options"
+>options</a></dt>
+
+<dd>
+<p>Reference to a hash of command-line options.</p>
+
+<dt><a name="RETURN"
+>RETURN</a></dt>
+
+<dd>
+<p>Returns an <a href="#ERDBLoadGroup" class="podlinkpod"
+>&#34;ERDBLoadGroup&#34;</a> object that can be used to process the specified load group for this database.</p>
+</dd>
+</dl>
+
+<h4><a class='u' href='#___top' title='click to go to top of document'
+name="LoadGroupList"
+>LoadGroupList</a></h4>
+
+<pre>    my @groups = $erdb-&#62;LoadGroupList();</pre>
+
+<p>Returns a list of the names for this database&#39;s load groups. This method is used by <a href="http://search.cpan.org/perldoc?ERDBGenerator.pl" class="podlinkpod"
+>ERDBGenerator.pl</a> when the user wishes to load all table groups. The default is a single group called &#39;All&#39; that loads everything.</p>
+
+<h4><a class='u' href='#___top' title='click to go to top of document'
+name="LoadDirectory"
+>LoadDirectory</a></h4>
+
+<pre>    my $dirName = $erdb-&#62;LoadDirectory();</pre>
+
+<p>Return the name of the directory in which load files are kept. The default is the FIG temporary directory, which is a really bad choice, but it&#39;s always there.</p>
+
+<h4><a class='u' href='#___top' title='click to go to top of document'
+name="Cleanup"
+>Cleanup</a></h4>
+
+<pre>    $erdb-&#62;Cleanup();</pre>
+
+<p>Clean up data structures. This method is called at the end of each section when loading the database. The subclass can use it to free up memory that may have accumulated due to caching or accumulation of hash structures. The default method does nothing.</p>
+
+<h4><a class='u' href='#___top' title='click to go to top of document'
+name="UseInternalDBD"
+>UseInternalDBD</a></h4>
+
+<pre>    my $flag = $erdb-&#62;UseInternalDBD();</pre>
+
+<p>Return TRUE if this database should be allowed to use an internal DBD. The internal DBD is stored in the <code>_metadata</code> table, which is created when the database is loaded. The default is TRUE.</p>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Internal_Utility_Methods"
+>Internal Utility Methods</a></h3>
+
+<h4><a class='u' href='#___top' title='click to go to top of document'
+name="_FieldString"
+>_FieldString</a></h4>
+
+<pre>    my $fieldString = $erdb-&#62;_FieldString($descriptor);</pre>
+
+<p>Compute the definition string for a particular field from its descriptor in the relation table.</p>
+
+<dl>
+<dt><a name="descriptor"
+>descriptor</a></dt>
+
+<dd>
+<p>Field descriptor containing the field&#39;s name and type.</p>
+
+<dt><a name="RETURN"
+>RETURN</a></dt>
+
+<dd>
+<p>Returns the SQL declaration string for the field.</p>
+</dd>
+</dl>
+
+<h4><a class='u' href='#___top' title='click to go to top of document'
+name="_Default"
+>_Default</a></h4>
+
+<pre>    my $defaultValue = $self-&#62;_Default($objectName, $fieldName);</pre>
+
+<p>Return the default value for the specified field in the specified object. If no default value is specified, an undefined value will be returned.</p>
+
+<dl>
+<dt><a name="objectName"
+>objectName</a></dt>
+
+<dd>
+<p>Name of the object containing the field.</p>
+
+<dt><a name="fieldName"
+>fieldName</a></dt>
+
+<dd>
+<p>Name of the field whose default value is desired.</p>
+
+<dt><a name="RETURN"
+>RETURN</a></dt>
+
+<dd>
+<p>Returns the default value for the specified field, or an undefined value if no default is available.</p>
+</dd>
+</dl>
+
+<h4><a class='u' href='#___top' title='click to go to top of document'
+name="_SingleTableHash"
+>_SingleTableHash</a></h4>
+
+<pre>    my %fixedHash = $self-&#62;_SingleTableHash($fieldHash, $objectName);</pre>
+
+<p>Convert a hash of field names in <a href="#Standard_Field_Name_Format" class="podlinkpod"
+>&#34;Standard Field Name Format&#34;</a> to field values into a hash of simple field names to encoded values. This is a common utility function performed by most update-related methods.</p>
+
+<dl>
+<dt><a name="fieldHash"
+>fieldHash</a></dt>
+
+<dd>
+<p>A hash mapping field names to values. The field names must be in <a href="#Standard_Field_Name_Format" class="podlinkpod"
+>&#34;Standard Field Name Format&#34;</a>.</p>
+
+<dt><a name="objectName"
+>objectName</a></dt>
+
+<dd>
+<p>The default object name to be used when no object name is specified for the field.</p>
+
+<dt><a name="RETURN"
+>RETURN</a></dt>
+
+<dd>
+<p>Returns a hash of simple field names to encoded values for those fields.</p>
+</dd>
+</dl>
+
+<h4><a class='u' href='#___top' title='click to go to top of document'
+name="_FindField"
+>_FindField</a></h4>
+
+<pre>    my $fieldData = $erdb-&#62;_FindField($string, $defaultName);</pre>
+
+<p>Return the descriptor for the named field. If the field does not exist or the name is invalid, an error will occur.</p>
+
+<dl>
+<dt><a name="string"
+>string</a></dt>
+
+<dd>
+<p>Field name string to be parsed. See <a href="#Standard_Field_Name_Format" class="podlinkpod"
+>&#34;Standard Field Name Format&#34;</a>.</p>
+
+<dt><a name="defaultName_(optional)"
+>defaultName (optional)</a></dt>
+
+<dd>
+<p>Default object name to be used if the object name is not specified in the input string.</p>
+
+<dt><a name="RETURN"
+>RETURN</a></dt>
+
+<dd>
+<p>Returns the descriptor for the specified field.</p>
+</dd>
+</dl>
+
+<h4><a class='u' href='#___top' title='click to go to top of document'
+name="_CheckField"
+>_CheckField</a></h4>
+
+<pre>    my $descriptor = $erdb-&#62;_CheckField($objectName, $fieldName);</pre>
+
+<p>Return the descriptor for the specified field in the specified entity or relationship, or an undefined value if the field does not exist.</p>
+
+<dl>
+<dt><a name="objectName"
+>objectName</a></dt>
+
+<dd>
+<p>Name of the relevant entity or relationship. If the object does not exist, an error will be thrown.</p>
+
+<dt><a name="fieldName"
+>fieldName</a></dt>
+
+<dd>
+<p>Name of the relevant field.</p>
+
+<dt><a name="RETURN"
+>RETURN</a></dt>
+
+<dd>
+<p>Returns the field descriptor from the metadata, or <code>undef</code> if the field does not exist.</p>
+</dd>
+</dl>
+
+<h4><a class='u' href='#___top' title='click to go to top of document'
+name="_RelationMap"
+>_RelationMap</a></h4>
+
+<pre>    my @relationMap = _RelationMap($mappedNameHashRef, $mappedNameListRef);</pre>
+
+<p>Create the relation map for an SQL query. The relation map is used by <a href="#ERDBObject" class="podlinkpod"
+>&#34;ERDBObject&#34;</a> to determine how to interpret the results of the query.</p>
+
+<dl>
+<dt><a name="mappedNameHashRef"
+>mappedNameHashRef</a></dt>
+
+<dd>
+<p>Reference to a hash that maps object name aliases to real object names.</p>
+
+<dt><a name="mappedNameListRef"
+>mappedNameListRef</a></dt>
+
+<dd>
+<p>Reference to a list of object name aliases in the order they appear in the SELECT list.</p>
+
+<dt><a name="RETURN"
+>RETURN</a></dt>
+
+<dd>
+<p>Returns a list of 3-tuples. Each tuple consists of an object name alias followed by the actual name of that object and a flag that is TRUE if the alias is a converse. This enables the <a href="#ERDBObject" class="podlinkpod"
+>&#34;ERDBObject&#34;</a> to determine the order of the tables in the query and which object name belongs to each object alias name. Most of the time the object name and the alias name are the same; however, if an object occurs multiple times in the object name list, the second and subsequent occurrences may be given a numeric suffix to indicate it&#39;s a different instance. In addition, some relationship names may be specified using their converse name.</p>
+</dd>
+</dl>
+
+<h4><a class='u' href='#___top' title='click to go to top of document'
+name="_SetupSQL"
+>_SetupSQL</a></h4>
+
+<pre>    my ($suffix, $nameList, $nameHash) = $erdb-&#62;_SetupSQL($objectNames, $filterClause, $matchClause);</pre>
+
+<p>Process a list of object names and a filter clause so that they can be used to build an SQL statement. This method takes in an object name list and a filter clause. It will return a corrected filter clause, a list of mapped names and the mapped name hash.</p>
+
+<p>This is an instance method.</p>
+
+<dl>
+<dt><a name="objectNames"
+>objectNames</a></dt>
+
+<dd>
+<p>Object name list from a query. See <a href="#Object_Name_List" class="podlinkpod"
+>&#34;Object Name List&#34;</a>.</p>
+
+<dt><a name="filterClause"
+>filterClause</a></dt>
+
+<dd>
+<p>A string containing the WHERE clause for the query (without the <code>WHERE</code>) and also optionally the <code>ORDER BY</code> and <code>LIMIT</code> clauses. See <a href="#Filter_Clause" class="podlinkpod"
+>&#34;Filter Clause&#34;</a>.</p>
+
+<dt><a name="matchClause"
+>matchClause</a></dt>
+
+<dd>
+<p>An optional full-text search clause. If specified, it will be inserted at the front of the WHERE clause. It should already be SQL-formatted; that is, the field names should be in the form <i>table</i><code>.</code><i>fieldName</i>.</p>
+
+<dt><a name="RETURN"
+>RETURN</a></dt>
+
+<dd>
+<p>Returns a three-element list. The first element is the SQL statement suffix, beginning with the FROM clause. The second element is a reference to a list of the names to be used in retrieving the fields. The third element is a hash mapping the names to 2-tuples consisting of the real name of the object and a flag indicating whether or not the mapping is via a converse relationship name.</p>
+</dd>
+</dl>
+
+<h4><a class='u' href='#___top' title='click to go to top of document'
+name="_GetStatementHandle"
+>_GetStatementHandle</a></h4>
+
+<pre>    my $sth = $erdb-&#62;_GetStatementHandle($command, $params);</pre>
+
+<p>This method will prepare and execute an SQL query, returning the statement handle. The main reason for doing this here is so that everybody who does SQL queries gets the benefit of tracing.</p>
+
+<dl>
+<dt><a name="command"
+>command</a></dt>
+
+<dd>
+<p>Command to prepare and execute.</p>
+
+<dt><a name="params"
+>params</a></dt>
+
+<dd>
+<p>Reference to a list of the values to be substituted in for the parameter marks.</p>
+
+<dt><a name="RETURN"
+>RETURN</a></dt>
+
+<dd>
+<p>Returns a prepared and executed statement handle from which the caller can extract results.</p>
+</dd>
+</dl>
+
+<h4><a class='u' href='#___top' title='click to go to top of document'
+name="_GetLoadStats"
+>_GetLoadStats</a></h4>
+
+<pre>    my $stats = ERDB::_GetLoadStats();</pre>
+
+<p>Return a blank statistics object for use by the load methods.</p>
+
+<h4><a class='u' href='#___top' title='click to go to top of document'
+name="_DumpRelation"
+>_DumpRelation</a></h4>
+
+<pre>    my $count = $erdb-&#62;_DumpRelation($outputDirectory, $relationName);</pre>
+
+<p>Dump the specified relation to the specified output file in tab-delimited format.</p>
+
+<dl>
+<dt><a name="outputDirectory"
+>outputDirectory</a></dt>
+
+<dd>
+<p>Directory to contain the output file.</p>
+
+<dt><a name="relationName"
+>relationName</a></dt>
+
+<dd>
+<p>Name of the relation to dump.</p>
+
+<dt><a name="RETURN"
+>RETURN</a></dt>
+
+<dd>
+<p>Returns the number of records dumped.</p>
+</dd>
+</dl>
+
+<h4><a class='u' href='#___top' title='click to go to top of document'
+name="_GetStructure"
+>_GetStructure</a></h4>
+
+<pre>    my $objectData = $self-&#62;_GetStructure($objectName);</pre>
+
+<p>Get the data structure for a specified entity or relationship.</p>
+
+<dl>
+<dt><a name="objectName"
+>objectName</a></dt>
+
+<dd>
+<p>Name of the desired entity or relationship.</p>
+
+<dt><a name="RETURN"
+>RETURN</a></dt>
+
+<dd>
+<p>The descriptor for the specified object.</p>
+</dd>
+</dl>
+
+<h4><a class='u' href='#___top' title='click to go to top of document'
+name="_GetRelationTable"
+>_GetRelationTable</a></h4>
+
+<pre>    my $relHash = $erdb-&#62;_GetRelationTable($objectName);</pre>
+
+<p>Get the list of relations for a specified entity or relationship.</p>
+
+<dl>
+<dt><a name="objectName"
+>objectName</a></dt>
+
+<dd>
+<p>Name of the desired entity or relationship.</p>
+
+<dt><a name="RETURN"
+>RETURN</a></dt>
+
+<dd>
+<p>A table containing the relations for the specified object.</p>
+</dd>
+</dl>
+
+<h4><a class='u' href='#___top' title='click to go to top of document'
+name="_ValidateFieldNames"
+>_ValidateFieldNames</a></h4>
+
+<pre>    $erdb-&#62;ValidateFieldNames($metadata);</pre>
+
+<p>Determine whether or not the field names in the specified metadata structure are valid. If there is an error, this method will abort.</p>
+
+<dl>
+<dt><a name="metadata"
+>metadata</a></dt>
+
+<dd>
+<p>Metadata structure loaded from the XML data definition.</p>
+</dd>
+</dl>
+
+<h4><a class='u' href='#___top' title='click to go to top of document'
+name="_LoadRelation"
+>_LoadRelation</a></h4>
+
+<pre>    my $stats = $erdb-&#62;_LoadRelation($directoryName, $relationName, $rebuild);</pre>
+
+<p>Load a relation from the data in a tab-delimited disk file. The load will only take place if a disk file with the same name as the relation exists in the specified directory.</p>
+
+<dl>
+<dt><a name="dbh"
+>dbh</a></dt>
+
+<dd>
+<p>DBKernel object for accessing the database.</p>
+
+<dt><a name="directoryName"
+>directoryName</a></dt>
+
+<dd>
+<p>Name of the directory containing the tab-delimited data files.</p>
+
+<dt><a name="relationName"
+>relationName</a></dt>
+
+<dd>
+<p>Name of the relation to load.</p>
+
+<dt><a name="rebuild"
+>rebuild</a></dt>
+
+<dd>
+<p>TRUE if the table should be dropped and re-created before loading.</p>
+
+<dt><a name="RETURN"
+>RETURN</a></dt>
+
+<dd>
+<p>Returns a statistical object describing the number of records read and a list of error messages.</p>
+</dd>
+</dl>
+
+<h4><a class='u' href='#___top' title='click to go to top of document'
+name="_LoadMetaData"
+>_LoadMetaData</a></h4>
+
+<pre>    my $metadata = ERDB::_LoadMetaData($self, $filename, $external);</pre>
+
+<p>This method loads the data describing this database from an XML file into a metadata structure. The resulting structure is a set of nested hash tables containing all the information needed to load or use the database. The schema for the XML file is <em>ERDatabase.xml</em>.</p>
+
+<dl>
+<dt><a name="self"
+>self</a></dt>
+
+<dd>
+<p>Blessed ERDB object.</p>
+
+<dt><a name="filename"
+>filename</a></dt>
+
+<dd>
+<p>Name of the file containing the database definition.</p>
+
+<dt><a name="external_(optional)"
+>external (optional)</a></dt>
+
+<dd>
+<p>If TRUE, then the internal DBD stored in the database (if any) will be bypassed. This option is usually used by the load-related command-line utilities.</p>
+
+<dt><a name="RETURN"
+>RETURN</a></dt>
+
+<dd>
+<p>Returns a structure describing the database.</p>
+</dd>
+</dl>
+
+<h4><a class='u' href='#___top' title='click to go to top of document'
+name="_CreateRelationshipIndex"
+>_CreateRelationshipIndex</a></h4>
+
+<pre>    ERDB::_CreateRelationshipIndex($indexKey, $relationshipName, $relationshipStructure);</pre>
+
+<p>Create an index for a relationship&#39;s relation.</p>
+
+<dl>
+<dt><a name="indexKey"
+>indexKey</a></dt>
+
+<dd>
+<p>Type of index: either <code>&#34;From&#34;</code> or <code>&#34;To&#34;</code>.</p>
+
+<dt><a name="relationshipName"
+>relationshipName</a></dt>
+
+<dd>
+<p>Name of the relationship.</p>
+
+<dt><a name="relationshipStructure"
+>relationshipStructure</a></dt>
+
+<dd>
+<p>Structure describing the relationship that the index will sort.</p>
+</dd>
+</dl>
+
+<h4><a class='u' href='#___top' title='click to go to top of document'
+name="_ProcessIndexes"
+>_ProcessIndexes</a></h4>
+
+<pre>    ERDB::_ProcessIndexes($indexList, $relation);</pre>
+
+<p>Build the data structures for the specified indexes in the specified relation.</p>
+
+<dl>
+<dt><a name="indexList"
+>indexList</a></dt>
+
+<dd>
+<p>Reference to a list of indexes. Each index is a hash reference containing an optional <code>Notes</code> value that describes the index and an <code>IndexFields</code> value that is a reference to a list of index field structures. An index field structure, in turn, is a reference to a hash that contains a <code>name</code> attribute for the field name and an <code>order</code> attribute that specifies either <code>ascending</code> or <code>descending</code>. In this sense the index list encapsulates the XML <code>Indexes</code> structure in the database definition.</p>
+
+<dt><a name="relation"
+>relation</a></dt>
+
+<dd>
+<p>The structure that describes the current relation. The new index descriptors will be stored in the structure&#39;s <code>Indexes</code> member. Any previous data in the structure will be lost.</p>
+</dd>
+</dl>
+
+<h4><a class='u' href='#___top' title='click to go to top of document'
+name="_AddIndex"
+>_AddIndex</a></h4>
+
+<pre>    ERDB::_AddIndex($indexName, $relationStructure);</pre>
+
+<p>Add an index to a relation structure.</p>
+
+<p>This is a static method.</p>
+
+<dl>
+<dt><a name="indexName"
+>indexName</a></dt>
+
+<dd>
+<p>Name to give to the new index.</p>
+
+<dt><a name="relationStructure"
+>relationStructure</a></dt>
+
+<dd>
+<p>Relation structure to which the new index should be added.</p>
+
+<dt><a name="newIndex"
+>newIndex</a></dt>
+
+<dd>
+<p>New index to add.</p>
+</dd>
+</dl>
+
+<h4><a class='u' href='#___top' title='click to go to top of document'
+name="_FixupFields"
+>_FixupFields</a></h4>
+
+<pre>    ERDB::_FixupFields($structure, $defaultRelationName);</pre>
+
+<p>This method fixes the field list for the metadata of an entity or relationship. It will add the caller-specified relation name to fields that do not have a name and set the <code>PrettySort</code> values.</p>
+
+<dl>
+<dt><a name="structure"
+>structure</a></dt>
+
+<dd>
+<p>Entity or relationship structure to be fixed up.</p>
+
+<dt><a name="defaultRelationName"
+>defaultRelationName</a></dt>
+
+<dd>
+<p>Default relation name to be added to the fields.</p>
+</dd>
+</dl>
+
+<h4><a class='u' href='#___top' title='click to go to top of document'
+name="_FixName"
+>_FixName</a></h4>
+
+<pre>    my $fixedName = ERDB::_FixName($fieldName, $converse);</pre>
+
+<p>Fix the incoming field name so that it is a legal SQL column name.</p>
+
+<dl>
+<dt><a name="fieldName"
+>fieldName</a></dt>
+
+<dd>
+<p>Field name to fix.</p>
+
+<dt><a name="converse"
+>converse</a></dt>
+
+<dd>
+<p>If TRUE, then &#34;from&#34; and &#34;to&#34; will be exchanged.</p>
+
+<dt><a name="RETURN"
+>RETURN</a></dt>
+
+<dd>
+<p>Returns the fixed-up field name.</p>
+</dd>
+</dl>
+
+<h4><a class='u' href='#___top' title='click to go to top of document'
+name="_FixNames"
+>_FixNames</a></h4>
+
+<pre>    my @fixedNames = ERDB::_FixNames(@fields);</pre>
+
+<p>Fix all the field names in a list. This is essentially a batch call to <a href="#_FixName" class="podlinkpod"
+>&#34;_FixName&#34;</a>.</p>
+
+<dl>
+<dt><a name="fields"
+>fields</a></dt>
+
+<dd>
+<p>List of field names to fix.</p>
+
+<dt><a name="RETURN"
+>RETURN</a></dt>
+
+<dd>
+<p>Returns a list of fixed-up versions of the incoming field names.</p>
+</dd>
+</dl>
+
+<h4><a class='u' href='#___top' title='click to go to top of document'
+name="_AddField"
+>_AddField</a></h4>
+
+<pre>    ERDB::_AddField($structure, $fieldName, $fieldData);</pre>
+
+<p>Add a field to a field list.</p>
+
+<dl>
+<dt><a name="structure"
+>structure</a></dt>
+
+<dd>
+<p>Structure (usually an entity or relationship) that is to contain the field.</p>
+
+<dt><a name="fieldName"
+>fieldName</a></dt>
+
+<dd>
+<p>Name of the new field.</p>
+
+<dt><a name="fieldData"
+>fieldData</a></dt>
+
+<dd>
+<p>Structure containing the data to put in the field.</p>
+</dd>
+</dl>
+
+<h4><a class='u' href='#___top' title='click to go to top of document'
+name="_ReOrderRelationTable"
+>_ReOrderRelationTable</a></h4>
+
+<pre>    my \@fieldList = ERDB::_ReOrderRelationTable(\%relationTable);</pre>
+
+<p>This method will take a relation table and re-sort it according to the implicit ordering of the <code>PrettySort</code> property. Instead of a hash based on field names, it will return a list of fields. This requires creating a new hash that contains the field name in the <code>name</code> property but doesn&#39;t have the <code>PrettySort</code> property, and then inserting that new hash into the field list.</p>
+
+<p>This is a static method.</p>
+
+<dl>
+<dt><a name="relationTable"
+>relationTable</a></dt>
+
+<dd>
+<p>Relation hash to be reformatted into a list.</p>
+
+<dt><a name="RETURN"
+>RETURN</a></dt>
+
+<dd>
+<p>A list of field hashes.</p>
+</dd>
+</dl>
+
+<h4><a class='u' href='#___top' title='click to go to top of document'
+name="_IsPrimary"
+>_IsPrimary</a></h4>
+
+<pre>    my $flag = $erdb-&#62;_IsPrimary($relationName);</pre>
+
+<p>Return TRUE if a specified relation is a primary relation, else FALSE. A relation is primary if it has the same name as an entity or relationship.</p>
+
+<dl>
+<dt><a name="relationName"
+>relationName</a></dt>
+
+<dd>
+<p>Name of the relevant relation.</p>
+
+<dt><a name="RETURN"
+>RETURN</a></dt>
+
+<dd>
+<p>Returns TRUE for a primary relation, else FALSE.</p>
+</dd>
+</dl>
+
+<h4><a class='u' href='#___top' title='click to go to top of document'
+name="_JoinClause"
+>_JoinClause</a></h4>
+
+<pre>    my $joinClause = $erdb-&#62;_JoinClause($source, $target);</pre>
+
+<p>Create a join clause that connects the source object to the target object. If we are crossing from an entity to a relationship, we key off the relationship&#39;s from-link. If we are crossing from a relationship to an entity, we key off of it&#39;s to-link. It is also possible to cross from relationship to relationship if the two have an entity in common. Finally, we must be aware of converse names for relationships, and for nonrecursive relationships we allow crossing via the wrong link.</p>
+
+<dl>
+<dt><a name="source"
+>source</a></dt>
+
+<dd>
+<p>Name of the object from which we are starting.</p>
+
+<dt><a name="target"
+>target</a></dt>
+
+<dd>
+<p>Name of the object to which we are proceeding.</p>
+
+<dt><a name="RETURN"
+>RETURN</a></dt>
+
+<dd>
+<p>Returns a string that may be used in an SQL WHERE in order to connect the two objects. If no connection is possible, an undefined value will be returned.</p>
+</dd>
+</dl>
+
+<h4><a class='u' href='#___top' title='click to go to top of document'
+name="_BuildJoin"
+>_BuildJoin</a></h4>
+
+<pre>    my $joinString = $erdb-&#62;_BuildJoin($fld1 =&#62; $source, $sourceData,
+                                       $fld2 =&#62; $target, $targetData);</pre>
+
+<p>Create a join string between the two objects. The second object must be a relationship; the first can be an entity or a relationship. The fields indicators specify the nature of the connection: <code>id</code> for an entity connection, <code>from</code> for the front of a relationship, and <code>to</code> for the back of a relationship. The theory is that if everything is compatible, you just connect the indicated fields in the two objects. This may not be possible if the second relationship does not match the first object in the proper manner. If that is the case, attempts will be made to find a workable connection.</p>
+
+<dl>
+<dt><a name="fld1"
+>fld1</a></dt>
+
+<dd>
+<p>Join direction for the first object: <code>id</code> if it&#39;s an entity, <code>from</code> if it&#39;s a relationship and we&#39;re coming out the front, or <code>to</code> if it&#39;s a relationship and we&#39;re coming out the end.</p>
+
+<dt><a name="source"
+>source</a></dt>
+
+<dd>
+<p>Name to use for the first object in constructing the field reference.</p>
+
+<dt><a name="sourceData"
+>sourceData</a></dt>
+
+<dd>
+<p>Entity or relationship descriptor for the first object.</p>
+
+<dt><a name="fld2"
+>fld2</a></dt>
+
+<dd>
+<p>Join direction for the second object: <code>from</code> if it&#39;s a relationship and we&#39;re going in the front, or <code>to</code> if it&#39;s a relationship and we&#39;re going in the end.</p>
+
+<dt><a name="target"
+>target</a></dt>
+
+<dd>
+<p>Name to use for the second object in constructing the field reference.</p>
+
+<dt><a name="targetData"
+>targetData</a></dt>
+
+<dd>
+<p>Relationship descriptor for the second object.</p>
+
+<dt><a name="RETURN"
+>RETURN</a></dt>
+
+<dd>
+<p>Returns a string that can be used in an SQL WHERE clause to connect the two objects, or <code>undef</code> if no connection is possible.</p>
+</dd>
+</dl>
+
+<h4><a class='u' href='#___top' title='click to go to top of document'
+name="_Resolve"
+>_Resolve</a></h4>
+
+<pre>    my $realName = $erdb-&#62;_Resolve($objectName);</pre>
+
+<p>Determine the real object name for a name from an object name list. Trailing numbers are peeled off, and the alias table is checked. If the incoming name is invalid, the return value will be undefined.</p>
+
+<dl>
+<dt><a name="objectName"
+>objectName</a></dt>
+
+<dd>
+<p>Incoming object name to parse.</p>
+
+<dt><a name="RETURN"
+>RETURN</a></dt>
+
+<dd>
+<p>Returns the object&#39;s real name, or <code>undef</code> if the name is invalid.</p>
+</dd>
+</dl>
+
+<h4><a class='u' href='#___top' title='click to go to top of document'
+name="InternalizeDBD"
+>InternalizeDBD</a></h4>
+
+<pre>    $erdb-&#62;InternalizeDBD();</pre>
+
+<p>Save the DBD metadata into the database so that it can be retrieved in the future.</p>
+
+<h3><a class='u' href='#___top' title='click to go to top of document'
+name="Internal_Documentation-Related_Methods"
+>Internal Documentation-Related Methods</a></h3>
+
+<h4><a class='u' href='#___top' title='click to go to top of document'
+name="_FindObject"
+>_FindObject</a></h4>
+
+<pre>    my $objectData = $erdb-&#62;_FindObject($list =&#62; $name);</pre>
+
+<p>Return the structural descriptor of the specified object (entity, relationship, or shape), or an undefined value if the object does not exist.</p>
+
+<dl>
+<dt><a name="list"
+>list</a></dt>
+
+<dd>
+<p>Name of the list containing the desired type of object (<code>Entities</code>, <code>Relationships</code>, or <code>Shapes</code>).</p>
+
+<dt><a name="name"
+>name</a></dt>
+
+<dd>
+<p>Name of the desired object.</p>
+
+<dt><a name="RETURN"
+>RETURN</a></dt>
+
+<dd>
+<p>Returns the object descriptor if found, or <code>undef</code> if the object does not exist or is not of the proper type.</p>
+</dd>
+</dl>
+
+<h4><a class='u' href='#___top' title='click to go to top of document'
+name="_WikiNote"
+>_WikiNote</a></h4>
+
+<pre>    my $wikiText = ERDB::_WikiNote($dataString, $wiki);</pre>
+
+<p>Convert a note or comment to Wiki text by replacing some bulletin-board codes with HTML. The codes supported are <code>[b]</code> for <b>bold</b>, <code>[i]</code> for <i>italics</i>, <code>[link]</code> for links, <code>[list]</code> for bullet lists. and <code>[p]</code> for a new paragraph. All the codes are closed by slash-codes. So, for example, <code>[b]Feature[/b]</code> displays the string <code>Feature</code> in boldface.</p>
+
+<dl>
+<dt><a name="dataString"
+>dataString</a></dt>
+
+<dd>
+<p>String to convert to Wiki text.</p>
+
+<dt><a name="wiki"
+>wiki</a></dt>
+
+<dd>
+<p>Wiki object used to format the text.</p>
+
+<dt><a name="RETURN"
+>RETURN</a></dt>
+
+<dd>
+<p>An Wiki text string derived from the input string.</p>
+</dd>
+</dl>
+
+<h4><a class='u' href='#___top' title='click to go to top of document'
+name="_ComputeRelationshipSentence"
+>_ComputeRelationshipSentence</a></h4>
+
+<pre>    my $text = ERDB::_ComputeRelationshipSentence($wiki, $relationshipName, $relationshipStructure, $dir);</pre>
+
+<p>The relationship sentence consists of the relationship name between the names of the two related entities and an arity indicator.</p>
+
+<dl>
+<dt><a name="wiki"
+>wiki</a></dt>
+
+<dd>
+<p><a href="http://search.cpan.org/perldoc?WikiTools" class="podlinkpod"
+>WikiTools</a> object for rendering links. If this parameter is undefined, no link will be put in place.</p>
+
+<dt><a name="relationshipName"
+>relationshipName</a></dt>
+
+<dd>
+<p>Name of the relationship.</p>
+
+<dt><a name="relationshipStructure"
+>relationshipStructure</a></dt>
+
+<dd>
+<p>Relationship structure containing the relationship&#39;s description and properties.</p>
+
+<dt><a name="dir_(optional)"
+>dir (optional)</a></dt>
+
+<dd>
+<p>Starting point of the relationship: <code>from</code> (default) or <code>to</code>.</p>
+
+<dt><a name="RETURN"
+>RETURN</a></dt>
+
+<dd>
+<p>Returns a string containing the entity names on either side of the relationship name and an indicator of the arity.</p>
+</dd>
+</dl>
+
+<h4><a class='u' href='#___top' title='click to go to top of document'
+name="_WikiObjectTable"
+>_WikiObjectTable</a></h4>
+
+<pre>    my $tableMarkup = _WikiObjectTable($name, $fieldStructure, $wiki);</pre>
+
+<p>Generate the field table for the named entity or relationship.</p>
+
+<dl>
+<dt><a name="name"
+>name</a></dt>
+
+<dd>
+<p>Name of the object whose field table is being generated.</p>
+
+<dt><a name="fieldStructure"
+>fieldStructure</a></dt>
+
+<dd>
+<p>Field structure for the object. This is a hash mapping field names to field data.</p>
+
+<dt><a name="wiki"
+>wiki</a></dt>
+
+<dd>
+<p><a href="http://search.cpan.org/perldoc?WikiTools" class="podlinkpod"
+>WikiTools</a> object (or equivalent) for rendering HTML.</p>
+
+<dt><a name="RETURN"
+>RETURN</a></dt>
+
+<dd>
+<p>Returns the markup for a table of field information.</p>
+</dd>
+</dl>

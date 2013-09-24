@@ -1,0 +1,1970 @@
+----------TEST trees tree-get-tree with -h option
+	okay
+
+
+NAME
+      tree-get-tree -- retrieve tree or tree meta data from the CDS
+
+SYNOPSIS
+      tree-get-tree [OPTIONS] [TREE_ID]
+
+DESCRIPTION
+      Retrieve the specified tree or meta information associated with the tree.  The
+      raw tree is returned in newick format by default with leaf node labels in an
+      arbitrary internal id that is unique only within the given tree.  By default, the
+      raw tree stored in KBase is returned.  To return the tree with node labels replaced
+      with KBase protein sequence IDs or cannonical feature IDs, use the options below.  To
+      provide a list of tree IDs, pipe in the list through standard-in or specify an input
+      file to read.  In either case, each tree id should appear on a separate line.  In the
+      case of a list, results are returned in the same order they were provided as input.
+      
+      -p, --protein-sequence
+                        set this flag to return the tree with node labels replaced with
+                        protein sequence IDs
+                        
+      -f, --feature
+                        set this flag to return the tree with node labels replaced with KBase
+                        feature IDs.  Note that some trees may not have assigned cannonical
+                        feature IDs for each node, in which case blank labels will be returned.
+                        
+      -e, --best-feature
+                        set this flag to return the tree with node labels replaced with KBase
+                        feature IDs, where one feature ID is selected for each leaf. Note that
+                        in most cases, MANY feature IDs will map to one leaf, and this method
+                        will just select one.  You should not assume that the same feature ID
+                        will be selected over multiple runs as the metric for selecting the
+                        best feature may change, or new features may be added to KBase!
+                        
+      -g, --best-genome
+                        set this flag to return the tree with node labels replaced with KBase
+                        genome IDs, where one genome ID is selected for each leaf. Note that
+                        in most cases, MANY feature IDs (from many genomes) will map to one
+                        leaf, and this method will just select one.  You should not assume
+                        that the same genome ID will be selected over multiple runs as the
+                        metric for selecting the best feature may change, or new features may
+                        be added to KBase!
+                        
+      -b, --bootstrap-remove
+                        set this flag to return the tree with bootstrap values removed
+                        
+      -d, --distance-remove
+                        set this flag to return the tree without distance values removed
+                        
+      -m, --meta
+                        set this flag to return meta data instead of the tree itself
+                        
+      -i, --input [FILENAME]
+                        set this flag to specify the input file to read
+                        
+      -h, --help
+                        diplay this help message, ignore all arguments
+                        
+                        
+
+EXAMPLES
+      Retrieve the raw tree newick string
+      > tree-get-tree 'kb|tree.25'
+      
+      Retrieve meta data about a tree
+      > tree-get-tree -m 'kb|tree.25'
+      
+      
+
+SEE ALSO
+      tree-find-tree-ids
+      
+AUTHORS
+      Michael Sneddon (mwsneddon@lbl.gov)
+      
+----------TEST trees tree-get-tree with --help option
+	okay
+
+
+NAME
+      tree-get-tree -- retrieve tree or tree meta data from the CDS
+
+SYNOPSIS
+      tree-get-tree [OPTIONS] [TREE_ID]
+
+DESCRIPTION
+      Retrieve the specified tree or meta information associated with the tree.  The
+      raw tree is returned in newick format by default with leaf node labels in an
+      arbitrary internal id that is unique only within the given tree.  By default, the
+      raw tree stored in KBase is returned.  To return the tree with node labels replaced
+      with KBase protein sequence IDs or cannonical feature IDs, use the options below.  To
+      provide a list of tree IDs, pipe in the list through standard-in or specify an input
+      file to read.  In either case, each tree id should appear on a separate line.  In the
+      case of a list, results are returned in the same order they were provided as input.
+      
+      -p, --protein-sequence
+                        set this flag to return the tree with node labels replaced with
+                        protein sequence IDs
+                        
+      -f, --feature
+                        set this flag to return the tree with node labels replaced with KBase
+                        feature IDs.  Note that some trees may not have assigned cannonical
+                        feature IDs for each node, in which case blank labels will be returned.
+                        
+      -e, --best-feature
+                        set this flag to return the tree with node labels replaced with KBase
+                        feature IDs, where one feature ID is selected for each leaf. Note that
+                        in most cases, MANY feature IDs will map to one leaf, and this method
+                        will just select one.  You should not assume that the same feature ID
+                        will be selected over multiple runs as the metric for selecting the
+                        best feature may change, or new features may be added to KBase!
+                        
+      -g, --best-genome
+                        set this flag to return the tree with node labels replaced with KBase
+                        genome IDs, where one genome ID is selected for each leaf. Note that
+                        in most cases, MANY feature IDs (from many genomes) will map to one
+                        leaf, and this method will just select one.  You should not assume
+                        that the same genome ID will be selected over multiple runs as the
+                        metric for selecting the best feature may change, or new features may
+                        be added to KBase!
+                        
+      -b, --bootstrap-remove
+                        set this flag to return the tree with bootstrap values removed
+                        
+      -d, --distance-remove
+                        set this flag to return the tree without distance values removed
+                        
+      -m, --meta
+                        set this flag to return meta data instead of the tree itself
+                        
+      -i, --input [FILENAME]
+                        set this flag to specify the input file to read
+                        
+      -h, --help
+                        diplay this help message, ignore all arguments
+                        
+                        
+
+EXAMPLES
+      Retrieve the raw tree newick string
+      > tree-get-tree 'kb|tree.25'
+      
+      Retrieve meta data about a tree
+      > tree-get-tree -m 'kb|tree.25'
+      
+      
+
+SEE ALSO
+      tree-find-tree-ids
+      
+AUTHORS
+      Michael Sneddon (mwsneddon@lbl.gov)
+      
+----------TEST trees tree-create-url-map with -h option
+	okay
+
+
+NAME
+      tree-create-url-map -- given a list of ids, return URLs to feature pages
+
+SYNOPSIS
+      tree-create-url-map [OPTIONS]
+
+DESCRIPTION
+      Given an input file that is a list of IDs, where each ID is on a separate
+      line, output a two column tab-delimited list of IDs in the first
+      column and URLs on the second column with each ID appended to the end for
+      use with the tree-to-html script.  If a list of IDs file is not specified,
+      this method accepts the list through standard-in.
+      
+      -i, --input        specify an input file to read the list of ids
+      -u, --url          specify the base url
+      -h, --help         diplay this help message, ignore all arguments
+
+EXAMPLES
+      Get a list of KBase URLs for a feature list
+      > head -n5 features.list 
+      kb|g.19905.peg.13323
+      kb|g.3282.peg.1481
+      kb|g.3159.peg.1680
+      kb|g.1181.peg.2601
+      kb|g.341.peg.1961
+      > tree-create-url-map -i features.list -u 'http://140.221.92.12/feature_info/feature.html?id='
+      kb|g.19905.peg.13323	http://140.221.92.12/feature_info/feature.html?id=kb|g.19905.peg.13323
+      kb|g.3282.peg.1481	http://140.221.92.12/feature_info/feature.html?id=kb|g.3282.peg.1481
+      kb|g.3159.peg.1680	http://140.221.92.12/feature_info/feature.html?id=kb|g.3159.peg.1680
+      kb|g.1181.peg.2601	http://140.221.92.12/feature_info/feature.html?id=kb|g.1181.peg.2601
+      kb|g.341.peg.1961	http://140.221.92.12/feature_info/feature.html?id=kb|g.341.peg.1961
+      ...
+      
+AUTHORS
+      Michael Sneddon (mwsneddon@lbl.gov)
+      
+----------TEST trees tree-create-url-map with --help option
+	okay
+
+
+NAME
+      tree-create-url-map -- given a list of ids, return URLs to feature pages
+
+SYNOPSIS
+      tree-create-url-map [OPTIONS]
+
+DESCRIPTION
+      Given an input file that is a list of IDs, where each ID is on a separate
+      line, output a two column tab-delimited list of IDs in the first
+      column and URLs on the second column with each ID appended to the end for
+      use with the tree-to-html script.  If a list of IDs file is not specified,
+      this method accepts the list through standard-in.
+      
+      -i, --input        specify an input file to read the list of ids
+      -u, --url          specify the base url
+      -h, --help         diplay this help message, ignore all arguments
+
+EXAMPLES
+      Get a list of KBase URLs for a feature list
+      > head -n5 features.list 
+      kb|g.19905.peg.13323
+      kb|g.3282.peg.1481
+      kb|g.3159.peg.1680
+      kb|g.1181.peg.2601
+      kb|g.341.peg.1961
+      > tree-create-url-map -i features.list -u 'http://140.221.92.12/feature_info/feature.html?id='
+      kb|g.19905.peg.13323	http://140.221.92.12/feature_info/feature.html?id=kb|g.19905.peg.13323
+      kb|g.3282.peg.1481	http://140.221.92.12/feature_info/feature.html?id=kb|g.3282.peg.1481
+      kb|g.3159.peg.1680	http://140.221.92.12/feature_info/feature.html?id=kb|g.3159.peg.1680
+      kb|g.1181.peg.2601	http://140.221.92.12/feature_info/feature.html?id=kb|g.1181.peg.2601
+      kb|g.341.peg.1961	http://140.221.92.12/feature_info/feature.html?id=kb|g.341.peg.1961
+      ...
+      
+AUTHORS
+      Michael Sneddon (mwsneddon@lbl.gov)
+      
+----------TEST trees tree-find-tree-ids with -h option
+	okay
+
+
+NAME
+      tree-find-tree-ids -- search KBase for the tree IDs that match the input options
+
+SYNOPSIS
+      tree-find-tree-ids [OPTIONS] [FEATURE_ID|PROTEIN_ID|SOURCE_ID_PATTERN]
+
+DESCRIPTION
+      This method retrieves a list of trees that match the provided options.  If a feature ID
+      is provided, all trees that are built from protein sequences of the feature are returned.
+      If a protein ID is provided, then all trees that are built from the exact sequence is
+      returned.  If a source id pattern is provided, then all trees with a source ID that match
+      the pattern is returned.  Note that source IDs are generally defined by the gene family
+      model which was used to identifiy the sequences to be included in the tree.  Therefore,
+      matching a source ID is a convenient way to find trees for a specific set of gene
+      families.
+      
+      By default, if the type of argument is not specified with one of the options below, then
+      this method assumes that the input is feature IDs.  If an ID is to be passed in as an
+      argument, then only a single ID or pattern can be used.  If you wish to call this method
+      on multiple feature/sequence IDs, then you must pass in the list through standard-in or
+      a text file, with one ID per line.
+                        
+      -f, --feature
+                        indicate that the IDs provided are feature IDs; matches of feature
+                        IDs are exact
+                        
+      -p, --protein-sequence
+                        indicate that the IDs provided are protein_sequence_ids (MD5s); matches
+                        of protein sequence IDs are exact
+                        
+      -s, --source-id-pattern
+                        Indicate that the input is a pattern used to match the source-id field
+                        of the Tree entity.  The pattern is very simple and includes only two
+                        special characters, wildcard character, '*', and a match-once character,
+                        '.'  The wildcard character matches any number (including 0) of any
+                        character, the '.' matches exactly one of any character.  These special
+                        characters can be escaped with a backslash.  To match a blackslash
+                        literally, you must also escape it.  When the source-id-pattern option
+                        is provided, then this method returns a two column list, where the first
+                        column is the tree ID, and the second column is the source-id that was
+                        matched. Note that source IDs are generally defined by the gene family
+                        model which was used to identifiy the sequences to be included in the
+                        tree.  Therefore, matching a source ID is a convenient way to find trees
+                        for a specific set of gene families.
+
+      -i, --input
+                        specify input file to read from;  each id or pattern must
+                        be on a separate line in this file
+      -h, --help
+                        diplay this help message, ignore all arguments
+                        
+EXAMPLES
+      Retrieve tree ids based on a feature id
+      > tree-find-tree-ids -f 'kb|g.0.peg.2173'
+      
+      Retrieve tree ids based on a set of protein_sequence_ids piped through standard in
+      > echo cf9e9e74e06748fb161d07c8420e1097 | tree-find-tree-ids -p
+      
+      Retrieve tree ids based on a pattern used to match the source-id field
+      > tree-find-tree-ids -s '*COG.11'
+      
+      Get the number of leaf nodes for trees with a source id field in the range COG10-COG11.
+      First, we find tree ids, extract out only the tree IDs using 'cut', then pipe the results
+      to 'tree-get-tree' to get meta information about each tree, and grep to extract the
+      results we want.
+      >  tree-find-tree-ids -s 'COG1.' | cut -f 1 | 
+             tree-get-tree -m | grep 'tree_id|source_id|leaf_count'
+
+AUTHORS
+      Michael Sneddon (mwsneddon@lbl.gov)
+      Matt Henderson (mhenderson@lbl.gov)
+      
+----------TEST trees tree-find-tree-ids with --help option
+	okay
+
+
+NAME
+      tree-find-tree-ids -- search KBase for the tree IDs that match the input options
+
+SYNOPSIS
+      tree-find-tree-ids [OPTIONS] [FEATURE_ID|PROTEIN_ID|SOURCE_ID_PATTERN]
+
+DESCRIPTION
+      This method retrieves a list of trees that match the provided options.  If a feature ID
+      is provided, all trees that are built from protein sequences of the feature are returned.
+      If a protein ID is provided, then all trees that are built from the exact sequence is
+      returned.  If a source id pattern is provided, then all trees with a source ID that match
+      the pattern is returned.  Note that source IDs are generally defined by the gene family
+      model which was used to identifiy the sequences to be included in the tree.  Therefore,
+      matching a source ID is a convenient way to find trees for a specific set of gene
+      families.
+      
+      By default, if the type of argument is not specified with one of the options below, then
+      this method assumes that the input is feature IDs.  If an ID is to be passed in as an
+      argument, then only a single ID or pattern can be used.  If you wish to call this method
+      on multiple feature/sequence IDs, then you must pass in the list through standard-in or
+      a text file, with one ID per line.
+                        
+      -f, --feature
+                        indicate that the IDs provided are feature IDs; matches of feature
+                        IDs are exact
+                        
+      -p, --protein-sequence
+                        indicate that the IDs provided are protein_sequence_ids (MD5s); matches
+                        of protein sequence IDs are exact
+                        
+      -s, --source-id-pattern
+                        Indicate that the input is a pattern used to match the source-id field
+                        of the Tree entity.  The pattern is very simple and includes only two
+                        special characters, wildcard character, '*', and a match-once character,
+                        '.'  The wildcard character matches any number (including 0) of any
+                        character, the '.' matches exactly one of any character.  These special
+                        characters can be escaped with a backslash.  To match a blackslash
+                        literally, you must also escape it.  When the source-id-pattern option
+                        is provided, then this method returns a two column list, where the first
+                        column is the tree ID, and the second column is the source-id that was
+                        matched. Note that source IDs are generally defined by the gene family
+                        model which was used to identifiy the sequences to be included in the
+                        tree.  Therefore, matching a source ID is a convenient way to find trees
+                        for a specific set of gene families.
+
+      -i, --input
+                        specify input file to read from;  each id or pattern must
+                        be on a separate line in this file
+      -h, --help
+                        diplay this help message, ignore all arguments
+                        
+EXAMPLES
+      Retrieve tree ids based on a feature id
+      > tree-find-tree-ids -f 'kb|g.0.peg.2173'
+      
+      Retrieve tree ids based on a set of protein_sequence_ids piped through standard in
+      > echo cf9e9e74e06748fb161d07c8420e1097 | tree-find-tree-ids -p
+      
+      Retrieve tree ids based on a pattern used to match the source-id field
+      > tree-find-tree-ids -s '*COG.11'
+      
+      Get the number of leaf nodes for trees with a source id field in the range COG10-COG11.
+      First, we find tree ids, extract out only the tree IDs using 'cut', then pipe the results
+      to 'tree-get-tree' to get meta information about each tree, and grep to extract the
+      results we want.
+      >  tree-find-tree-ids -s 'COG1.' | cut -f 1 | 
+             tree-get-tree -m | grep 'tree_id|source_id|leaf_count'
+
+AUTHORS
+      Michael Sneddon (mwsneddon@lbl.gov)
+      Matt Henderson (mhenderson@lbl.gov)
+      
+----------TEST trees tree-get-leaf-nodes with -h option
+	okay
+
+
+NAME
+      tree-get-leaf-nodes -- get a list of the names of leaf nodes
+
+SYNOPSIS
+      tree-get-leaf-nodes [OPTIONS] [NEWICK_TREE]
+
+DESCRIPTION
+      Given a tree in newick format, produce a list of the names of the leaf nodes.  If no
+      no tree is provided as an argument on the commandline, then standard-in is parsed to
+      read the tree.
+
+      -i, --input
+                        specify an input file to read from; if provided, any other arguments
+                        and standard-in are ignored
+      -h, --help
+                        diplay this help message, ignore all other arguments
+                        
+                        
+EXAMPLES
+      Retrieve all the leaf nodes of a given newick tree
+      > tree-get-leaf-nodes '(l1,((l2,l3)n2,(l4,l5)n3)n1)root;'
+      l1
+      l2
+      l3
+      l4
+      l5
+
+AUTHORS
+      Matt Henderson (mhenderson@lbl.gov)
+      Michael Sneddon (mwsneddon@lbl.gov)
+
+      
+----------TEST trees tree-get-leaf-nodes with --help option
+	okay
+
+
+NAME
+      tree-get-leaf-nodes -- get a list of the names of leaf nodes
+
+SYNOPSIS
+      tree-get-leaf-nodes [OPTIONS] [NEWICK_TREE]
+
+DESCRIPTION
+      Given a tree in newick format, produce a list of the names of the leaf nodes.  If no
+      no tree is provided as an argument on the commandline, then standard-in is parsed to
+      read the tree.
+
+      -i, --input
+                        specify an input file to read from; if provided, any other arguments
+                        and standard-in are ignored
+      -h, --help
+                        diplay this help message, ignore all other arguments
+                        
+                        
+EXAMPLES
+      Retrieve all the leaf nodes of a given newick tree
+      > tree-get-leaf-nodes '(l1,((l2,l3)n2,(l4,l5)n3)n1)root;'
+      l1
+      l2
+      l3
+      l4
+      l5
+
+AUTHORS
+      Matt Henderson (mhenderson@lbl.gov)
+      Michael Sneddon (mwsneddon@lbl.gov)
+
+      
+----------TEST trees tree-html-relabel-leaves with -h option
+	okay
+
+
+NAME
+      tree-html-relabel-leaves -- replace leaf ids with other labels
+
+SYNOPSIS
+      tree-html-relabel-leaves [OPTIONS]
+
+DESCRIPTION
+      Modify html tree to replace leaf ids with any label. Html tree input is taken as 
+      STDIN or as a command line arg. Modified tree is STDOUT.
+
+      -l, --label-file
+                        Required. Give the path to the leaf label file. Only one value 
+                        per leaf is considered. Data file format is tab-delimited, one 
+                        row per leaf with the leaf ID as the first column and the label
+                         as the second column.
+
+      -t, --tree-html-file
+                        Optional. Give the path to the html tree file, or provide as 
+                        STDIN.
+
+      -h, --help
+                        display this help message, ignore all arguments
+                        
+EXAMPLES
+      Add the labels file 'leaf_labels.txt' to html tree file 'tree1.html'
+      > cat tree1.html | tree-html-relabel-leaves -l leaf_labels.txt > tree1_with_labels.html
+      
+      Same action as above, but with tree-html-file argument
+      > tree-html-relabel-leaves -l leaf_labels.txt -t tree1.html > tree1_with_labels.html
+      
+SEE ALSO
+      tree-to-html
+      tree-html-relabel-leaves
+
+AUTHORS
+      Dylan Chivian (dcchivian@lbl.gov)
+      
+----------TEST trees tree-html-relabel-leaves with --help option
+	okay
+
+
+NAME
+      tree-html-relabel-leaves -- replace leaf ids with other labels
+
+SYNOPSIS
+      tree-html-relabel-leaves [OPTIONS]
+
+DESCRIPTION
+      Modify html tree to replace leaf ids with any label. Html tree input is taken as 
+      STDIN or as a command line arg. Modified tree is STDOUT.
+
+      -l, --label-file
+                        Required. Give the path to the leaf label file. Only one value 
+                        per leaf is considered. Data file format is tab-delimited, one 
+                        row per leaf with the leaf ID as the first column and the label
+                         as the second column.
+
+      -t, --tree-html-file
+                        Optional. Give the path to the html tree file, or provide as 
+                        STDIN.
+
+      -h, --help
+                        display this help message, ignore all arguments
+                        
+EXAMPLES
+      Add the labels file 'leaf_labels.txt' to html tree file 'tree1.html'
+      > cat tree1.html | tree-html-relabel-leaves -l leaf_labels.txt > tree1_with_labels.html
+      
+      Same action as above, but with tree-html-file argument
+      > tree-html-relabel-leaves -l leaf_labels.txt -t tree1.html > tree1_with_labels.html
+      
+SEE ALSO
+      tree-to-html
+      tree-html-relabel-leaves
+
+AUTHORS
+      Dylan Chivian (dcchivian@lbl.gov)
+      
+----------TEST trees tree-to-html with -h option
+	okay
+
+
+NAME
+      tree-to-html -- render a tree as in a static HTML file
+
+SYNOPSIS
+      tree-to-html [OPTIONS] [NEWICK_TREE]
+
+DESCRIPTION
+     Given a tree in newick format, render the tree as a static HTML file with
+     the options defined below.  The tree must be passed in through standard-in,
+     and the HTML output is returned through standard out. For options where a
+     file is specified, column names are as indicated and columns should be tab
+     delimited.
+      
+       -a   alias_file    - relabel leaf nodes using aliases  # file: [id alias]
+       -b                 - show bootstrap/branch support values
+       -bar               - show scale bar
+       -c   tax|role|file - color leaves by taxonomy, roles,
+                            or groups specified in a file     # file: [id group]
+       -d   desc_file     - add description to each tip       # file: [id description]
+       -f   focus_list    - highlight a list of tips          # file: [id]
+       -k   keep_list     - keep only the taxa listed         # table: [id]
+       -l   link_file     - add URL to each tip               # file: [id URL]
+       -lt  link_w_text   - add additional linked text        # file: [id text URL]
+       -m   popup_file    - add simple mouseover to each tip  # file: [id popup]
+       -nc  n_colors      - number of colors to use (D = 10)
+       -p   g|s|file      - collapse trees by genus, species,
+                            or groups specified in a file     # file: [id group]
+       -s   show_list     - preferred tips to show when collapsing subtrees
+                            (D = Woese' list of 69 common organisms)
+       -t   title         - title for html page               
+       -units label       - units label for scale bar; implies -bar
+       -va  fa1[,fa2,..]  - vector annotation files    
+       -x   min_dx        - minimum horizontal space between consecutive nodes (D = 1)
+       -y   dy            - vertical separation of consecutive leaves (D = 1)
+       -anno              - use the annotator's SEED for URLs
+       -gray n            - gray out name from the n-th word  # default: 2
+       -pseed             - use PSEED
+       -ppseed            - use PUBSEED
+       -raw               - do not color or collapse the tree,
+                            may be superseded by -c and -p
+
+EXAMPLES
+      Render a tree with species name labels and links to KBase labs feature pages:
+      > tree-get-tree 'kb|tree.1000000' -f > my.tree
+      > tree-get-leaf-nodes -i my.tree > feature.list
+      > cat features.list | get_relationship_IsOwnedBy -a > feature.data
+      > cat feature.data | cut -f 1,13 > species.name.map
+      > cat features.list | tree-create-url-map -u 'http://140.221.92.12/feature_info/feature.html?id=' > feature.links
+      > cat my.tree | tree-to-html -a species.name.map -l feature.links > out.html
+
+AUTHORS
+      Fangfang Xia, ANL (fangfang.xia@gmail.com)
+      Michael Sneddon (mwsneddon@lbl.gov)
+      Matt Henderson (mhenderson@lbl.gov)
+      
+----------TEST trees tree-to-html with --help option
+	okay
+
+
+NAME
+      tree-to-html -- render a tree as in a static HTML file
+
+SYNOPSIS
+      tree-to-html [OPTIONS] [NEWICK_TREE]
+
+DESCRIPTION
+     Given a tree in newick format, render the tree as a static HTML file with
+     the options defined below.  The tree must be passed in through standard-in,
+     and the HTML output is returned through standard out. For options where a
+     file is specified, column names are as indicated and columns should be tab
+     delimited.
+      
+       -a   alias_file    - relabel leaf nodes using aliases  # file: [id alias]
+       -b                 - show bootstrap/branch support values
+       -bar               - show scale bar
+       -c   tax|role|file - color leaves by taxonomy, roles,
+                            or groups specified in a file     # file: [id group]
+       -d   desc_file     - add description to each tip       # file: [id description]
+       -f   focus_list    - highlight a list of tips          # file: [id]
+       -k   keep_list     - keep only the taxa listed         # table: [id]
+       -l   link_file     - add URL to each tip               # file: [id URL]
+       -lt  link_w_text   - add additional linked text        # file: [id text URL]
+       -m   popup_file    - add simple mouseover to each tip  # file: [id popup]
+       -nc  n_colors      - number of colors to use (D = 10)
+       -p   g|s|file      - collapse trees by genus, species,
+                            or groups specified in a file     # file: [id group]
+       -s   show_list     - preferred tips to show when collapsing subtrees
+                            (D = Woese' list of 69 common organisms)
+       -t   title         - title for html page               
+       -units label       - units label for scale bar; implies -bar
+       -va  fa1[,fa2,..]  - vector annotation files    
+       -x   min_dx        - minimum horizontal space between consecutive nodes (D = 1)
+       -y   dy            - vertical separation of consecutive leaves (D = 1)
+       -anno              - use the annotator's SEED for URLs
+       -gray n            - gray out name from the n-th word  # default: 2
+       -pseed             - use PSEED
+       -ppseed            - use PUBSEED
+       -raw               - do not color or collapse the tree,
+                            may be superseded by -c and -p
+
+EXAMPLES
+      Render a tree with species name labels and links to KBase labs feature pages:
+      > tree-get-tree 'kb|tree.1000000' -f > my.tree
+      > tree-get-leaf-nodes -i my.tree > feature.list
+      > cat features.list | get_relationship_IsOwnedBy -a > feature.data
+      > cat feature.data | cut -f 1,13 > species.name.map
+      > cat features.list | tree-create-url-map -u 'http://140.221.92.12/feature_info/feature.html?id=' > feature.links
+      > cat my.tree | tree-to-html -a species.name.map -l feature.links > out.html
+
+AUTHORS
+      Fangfang Xia, ANL (fangfang.xia@gmail.com)
+      Michael Sneddon (mwsneddon@lbl.gov)
+      Matt Henderson (mhenderson@lbl.gov)
+      
+----------TEST trees tree-remove-nodes with -h option
+	okay
+
+
+NAME
+      tree-remove-nodes -- remove nodes by label in a tree and simplify the tree
+
+SYNOPSIS
+      tree-remove-nodes [OPTIONS] [NEWICK_TREE]
+
+DESCRIPTION
+     Given a tree in newick format, remove the nodes with the given names indicated
+     in the list, and simplify the tree.  Simplifying a tree involves removing unnamed
+     internal nodes that have only one child, and removing unnamed leaf nodes.  During
+     the removal process, edge lengths (if they exist) are conserved so that the summed
+     end to end distance between any two nodes left in the tree will remain the same.
+     If the tree is not provided as an argument and no input file is specified,
+     the tree is read in from standard-in.
+      
+      -r [FILE_NAME], --removal-list [FILE_NAME]
+                        specify the file name of the list of nodes to remove; this file should
+                        be a one column file where each line contains the name of the node to
+                        remove; if multiple nodes have a identical labels, they are all
+                        removed
+                        
+      -s [FILE_NAME], --save-list [FILE_NAME]
+                        instead of specifying the set set of nodes to remove, this flag indicates
+                        that the list includes the list of nodes to save; if a node label is
+                        on this list it is saved, otherwise it is removed
+                        
+      -z, --merge-zero-distance-leaves
+                        after other removal operations have been performed, setting this flags
+                        specifies that all leaves with distance zero are merged into a single
+                        leaf, and an arbitrary leaf is kept.
+                        
+      -i [FILE_NAME], --input [FILE_NAME]
+                        specify an input file to read the tree from
+                        
+      -h, --help
+                        diplay this help message, ignore all arguments
+                        
+                        
+EXAMPLES
+      Replace node names based on the file mapping.txt
+      > cat removal_list.txt
+      mr_tree
+      > tree-remove-nodes -r removal_list.txt '(l1,mr_tree,l3,l4)root;'
+      (l1,l3,l4)root;
+
+AUTHORS
+      Michael Sneddon (mwsneddon@lbl.gov)
+      Matt Henderson (mhenderson@lbl.gov)
+
+----------TEST trees tree-remove-nodes with --help option
+	okay
+
+
+NAME
+      tree-remove-nodes -- remove nodes by label in a tree and simplify the tree
+
+SYNOPSIS
+      tree-remove-nodes [OPTIONS] [NEWICK_TREE]
+
+DESCRIPTION
+     Given a tree in newick format, remove the nodes with the given names indicated
+     in the list, and simplify the tree.  Simplifying a tree involves removing unnamed
+     internal nodes that have only one child, and removing unnamed leaf nodes.  During
+     the removal process, edge lengths (if they exist) are conserved so that the summed
+     end to end distance between any two nodes left in the tree will remain the same.
+     If the tree is not provided as an argument and no input file is specified,
+     the tree is read in from standard-in.
+      
+      -r [FILE_NAME], --removal-list [FILE_NAME]
+                        specify the file name of the list of nodes to remove; this file should
+                        be a one column file where each line contains the name of the node to
+                        remove; if multiple nodes have a identical labels, they are all
+                        removed
+                        
+      -s [FILE_NAME], --save-list [FILE_NAME]
+                        instead of specifying the set set of nodes to remove, this flag indicates
+                        that the list includes the list of nodes to save; if a node label is
+                        on this list it is saved, otherwise it is removed
+                        
+      -z, --merge-zero-distance-leaves
+                        after other removal operations have been performed, setting this flags
+                        specifies that all leaves with distance zero are merged into a single
+                        leaf, and an arbitrary leaf is kept.
+                        
+      -i [FILE_NAME], --input [FILE_NAME]
+                        specify an input file to read the tree from
+                        
+      -h, --help
+                        diplay this help message, ignore all arguments
+                        
+                        
+EXAMPLES
+      Replace node names based on the file mapping.txt
+      > cat removal_list.txt
+      mr_tree
+      > tree-remove-nodes -r removal_list.txt '(l1,mr_tree,l3,l4)root;'
+      (l1,l3,l4)root;
+
+AUTHORS
+      Michael Sneddon (mwsneddon@lbl.gov)
+      Matt Henderson (mhenderson@lbl.gov)
+
+----------TEST trees tree-create-group-file with -h option
+	okay
+
+
+NAME
+      tree-create-group-file -- creates a group file for the tree-to-html command
+
+SYNOPSIS
+      tree-create-group-file [OPTIONS]
+
+DESCRIPTION
+      Given a list of leaf ids (one on each line) from standard in, prints to
+      standard out a two column, tab delimited file with the IDs in the first
+      column and the group name in the second column.  This group file places
+      all nodes in the same group.  The group file can be used as input to
+      tree-to-html.
+      
+      -g [GROUP_NAME], --group [GROUP_NAME]
+                        specify the name of the group
+      -h, --help
+                        diplay this help message, ignore all arguments
+
+EXAMPLES
+      Display the current URL:
+      > cat id.list | tree-create-group-file -g group1 > group.list
+      
+AUTHORS
+      Michael Sneddon (mwsneddon@lbl.gov)
+      
+----------TEST trees tree-create-group-file with --help option
+	okay
+
+
+NAME
+      tree-create-group-file -- creates a group file for the tree-to-html command
+
+SYNOPSIS
+      tree-create-group-file [OPTIONS]
+
+DESCRIPTION
+      Given a list of leaf ids (one on each line) from standard in, prints to
+      standard out a two column, tab delimited file with the IDs in the first
+      column and the group name in the second column.  This group file places
+      all nodes in the same group.  The group file can be used as input to
+      tree-to-html.
+      
+      -g [GROUP_NAME], --group [GROUP_NAME]
+                        specify the name of the group
+      -h, --help
+                        diplay this help message, ignore all arguments
+
+EXAMPLES
+      Display the current URL:
+      > cat id.list | tree-create-group-file -g group1 > group.list
+      
+AUTHORS
+      Michael Sneddon (mwsneddon@lbl.gov)
+      
+----------TEST trees tree-html-add-boxes with -h option
+	okay
+
+
+NAME
+      tree-html-add-boxes -- add data values to tree leaves
+
+SYNOPSIS
+      tree-html-add-boxes [OPTIONS]
+
+DESCRIPTION
+      Modify html tree to include data values for each leaf as a heatmap.  Labels are 
+      justified if not already aligned.  Html tree input is taken as STDIN or as a 
+      command line arg. Modified tree is STDOUT.
+
+      -d, --data-file
+                        Required. Give the path to the data associated with each leaf.  
+                        Data file format is tab-delimited, one row per leaf with the 
+                        leaf ID as the first column and the data value(s) as the 
+                        remaining columns.  Header first line is permitted, but must
+                        have '#' in first column, and if present, will be used as 
+                        as a key in the legend.  May rerun method with new
+                        data file and additional column(s) will be appended.
+
+      -t, --tree-html-file
+                        Optional. Give the path to the html tree file, or provide 
+                        as STDIN.
+
+      -c, --color-scheme
+                        Optional. Configure the color scheme for the heatmap. May 
+                        be 'YB' for blue-black-yellow spectrum or 'RYB' for 
+                        blue-yellow-red spectrum.
+                        
+      -h, --help
+                        display this help message, ignore all arguments
+                        
+EXAMPLES
+      Add the data from data file 'leaf_data_set1.txt' to html tree file 'tree1.html' using default RYB color scheme
+      > cat tree1.html | tree-html-add-boxes -d leaf_data_set1.txt > tree1_with_data1.html
+      
+      Add the data from data file 'leaf_data_set2.txt' to previous output with color scheme 'YB'
+      > tree-html-add_boxes -d leaf_data_set2.txt -t tree1_with_with_data1.html -c YB > tree1_with_data1+2.html
+      
+SEE ALSO
+      tree-to-html
+      tree-html-relabel-leaves
+
+AUTHORS
+      Dylan Chivian (dcchivian@lbl.gov)
+      
+----------TEST trees tree-html-add-boxes with --help option
+	okay
+
+
+NAME
+      tree-html-add-boxes -- add data values to tree leaves
+
+SYNOPSIS
+      tree-html-add-boxes [OPTIONS]
+
+DESCRIPTION
+      Modify html tree to include data values for each leaf as a heatmap.  Labels are 
+      justified if not already aligned.  Html tree input is taken as STDIN or as a 
+      command line arg. Modified tree is STDOUT.
+
+      -d, --data-file
+                        Required. Give the path to the data associated with each leaf.  
+                        Data file format is tab-delimited, one row per leaf with the 
+                        leaf ID as the first column and the data value(s) as the 
+                        remaining columns.  Header first line is permitted, but must
+                        have '#' in first column, and if present, will be used as 
+                        as a key in the legend.  May rerun method with new
+                        data file and additional column(s) will be appended.
+
+      -t, --tree-html-file
+                        Optional. Give the path to the html tree file, or provide 
+                        as STDIN.
+
+      -c, --color-scheme
+                        Optional. Configure the color scheme for the heatmap. May 
+                        be 'YB' for blue-black-yellow spectrum or 'RYB' for 
+                        blue-yellow-red spectrum.
+                        
+      -h, --help
+                        display this help message, ignore all arguments
+                        
+EXAMPLES
+      Add the data from data file 'leaf_data_set1.txt' to html tree file 'tree1.html' using default RYB color scheme
+      > cat tree1.html | tree-html-add-boxes -d leaf_data_set1.txt > tree1_with_data1.html
+      
+      Add the data from data file 'leaf_data_set2.txt' to previous output with color scheme 'YB'
+      > tree-html-add_boxes -d leaf_data_set2.txt -t tree1_with_with_data1.html -c YB > tree1_with_data1+2.html
+      
+SEE ALSO
+      tree-to-html
+      tree-html-relabel-leaves
+
+AUTHORS
+      Dylan Chivian (dcchivian@lbl.gov)
+      
+----------TEST trees tree-url with -h option
+	okay
+
+
+NAME
+      tree-url -- update/view url of the tree service endpoint
+
+SYNOPSIS
+      tree-url [OPTIONS] [NEW_URL]
+
+DESCRIPTION
+      Display or set the URL endpoint for the tree service.  If run with no
+      arguments or options, then the current URL is displayed. If run with
+      a single argument, the current URL will be switched to the specified
+      URL.  If the specified URL is named default, then the URL is reset to
+      the default production URL
+      
+      -h, --help         diplay this help message, ignore all arguments
+
+EXAMPLES
+      Display the current URL:
+      > tree-url
+      http://kbase.us/services/trees
+      
+      Reset to the default URL:
+      > tree-url default
+      changed to: http://kbase.us/services/trees
+      
+      Use a new URL:
+      > tree-url http://localhost:8080/trees
+      changed to: http://localhost:8080/trees
+      
+AUTHORS
+      Michael Sneddon (mwsneddon@lbl.gov)
+      
+----------TEST trees tree-url with --help option
+	okay
+
+
+NAME
+      tree-url -- update/view url of the tree service endpoint
+
+SYNOPSIS
+      tree-url [OPTIONS] [NEW_URL]
+
+DESCRIPTION
+      Display or set the URL endpoint for the tree service.  If run with no
+      arguments or options, then the current URL is displayed. If run with
+      a single argument, the current URL will be switched to the specified
+      URL.  If the specified URL is named default, then the URL is reset to
+      the default production URL
+      
+      -h, --help         diplay this help message, ignore all arguments
+
+EXAMPLES
+      Display the current URL:
+      > tree-url
+      http://kbase.us/services/trees
+      
+      Reset to the default URL:
+      > tree-url default
+      changed to: http://kbase.us/services/trees
+      
+      Use a new URL:
+      > tree-url http://localhost:8080/trees
+      changed to: http://localhost:8080/trees
+      
+AUTHORS
+      Michael Sneddon (mwsneddon@lbl.gov)
+      
+----------TEST trees tree-aln-to-html with -h option
+	okay
+
+
+NAME
+      tree-aln-to-html -- render a sequence alignment as in a static HTML file
+
+SYNOPSIS
+      tree-aln-to-html [OPTIONS] [FASTA_ALIGNMENT]
+
+DESCRIPTION
+     Given an alignment in FASTA, render the alignment as a static HTML file with
+     the options defined below.  The alignment must be passed in through standard-in,
+     and the HTML output is returned through standard out.
+      
+	-c          #  specify color scheme [conservation|conservation2|residue|none]
+	-d          #  Omit pop-up sequence definitions
+	-j          #  Omit JavaScript (only valid with -t)
+	-l          #  Omit legend
+	-n          #  Treat residues as nucleotides 
+	-p          #  Treat residues as amino acids 
+	-s seqfile  #  Add unaligned residues to the ends of the alignment
+	-t          #  Write html table (Default is write a self-contained page)
+
+EXAMPLES
+      Render a tree with species name labels and links to KBase labs feature pages:
+      > tree-get-tree 'kb|tree.1000000' -f > my.tree
+      > tree-get-leaf-nodes -i my.tree > feature.list
+      > cat feature.data | cut -f 1,13 > species.name.map
+      > cat features.list | tree-create-url-map -u 'http://140.221.92.12/feature_info/feature.html?id=' > feature.links
+      > cat my.tree | tree-to-html -a species.name.map -l feature.links > out.html
+
+AUTHORS
+      Fangfang Xia, ANL (fangfang.xia@gmail.com)
+      Michael Sneddon (mwsneddon@lbl.gov)
+
+----------TEST trees tree-aln-to-html with --help option
+	okay
+
+
+NAME
+      tree-aln-to-html -- render a sequence alignment as in a static HTML file
+
+SYNOPSIS
+      tree-aln-to-html [OPTIONS] [FASTA_ALIGNMENT]
+
+DESCRIPTION
+     Given an alignment in FASTA, render the alignment as a static HTML file with
+     the options defined below.  The alignment must be passed in through standard-in,
+     and the HTML output is returned through standard out.
+      
+	-c          #  specify color scheme [conservation|conservation2|residue|none]
+	-d          #  Omit pop-up sequence definitions
+	-j          #  Omit JavaScript (only valid with -t)
+	-l          #  Omit legend
+	-n          #  Treat residues as nucleotides 
+	-p          #  Treat residues as amino acids 
+	-s seqfile  #  Add unaligned residues to the ends of the alignment
+	-t          #  Write html table (Default is write a self-contained page)
+
+EXAMPLES
+      Render a tree with species name labels and links to KBase labs feature pages:
+      > tree-get-tree 'kb|tree.1000000' -f > my.tree
+      > tree-get-leaf-nodes -i my.tree > feature.list
+      > cat feature.data | cut -f 1,13 > species.name.map
+      > cat features.list | tree-create-url-map -u 'http://140.221.92.12/feature_info/feature.html?id=' > feature.links
+      > cat my.tree | tree-to-html -a species.name.map -l feature.links > out.html
+
+AUTHORS
+      Fangfang Xia, ANL (fangfang.xia@gmail.com)
+      Michael Sneddon (mwsneddon@lbl.gov)
+
+----------TEST trees tree-compute-abundance-profile with -h option
+	okay
+
+
+NAME
+      tree-compute-abundance-profile -- maps reads from a metagenomic sample to abundance counts on a tree
+
+SYNOPSIS
+      tree-compute-abundance-profile [OPTIONS]
+
+DESCRIPTION
+      This method retrieves the set of metagenomic reads from a metagenomic sample that have been assigned
+      to the specified gene family.  Each read is mapped to a best hit protein sequence that corresponds to
+      a leaf in the specified KBase tree using uclust.  The result is printed to standard out as a tab
+      delimited file, and status messages on progress and results are printed to standard error.
+      
+      -t [ID], --tree-id [ID]
+                        set this flag to specify the KBase ID of the tree to compute
+                        abundances for; the tree is used to identify the set of sequences
+                        that were aligned to build the tree; each leaf node of a tree built
+                        from an alignment willbe mapped to a sequence; this script assumes
+                        that trees are built from protein sequences
+                        
+      -m [ID1;ID2;ID3;...IDN;], --metagenomic-sample-id [ID1;ID2;ID3;...IDN;]
+                        set this flag to specify the IDs of the metagenomic samples to lookup;
+                        if there are multiple samples to lookup, pass a list of IDs without
+                        spaces delimited by a semicolon; see the KBase communities service to
+                        identifiy metagenomic sample ids, and the example below for 
+                        
+      -a [KEY], --auth [KEY]
+                        set this flag to specify the authentication key that you generated with
+                        MG Rast to access private datasets; public data sets do not require
+                        this flag
+                        
+      -s [SOURCE], --source-family [SOURCE]
+                        set this flag to specify the name of the source of the protein family;
+                        currently supported protein families are: 'COG';
+                        default value is set to 'COG'
+                        
+      -f [NAME], --family-name [NAME]
+                        set this flag to specify the name of the protein family used to pull
+                        a small set of reads from a metagenomic sample; currently only COG
+                        families are supported
+                        
+      -p [VALUE], --percent-identity-threshold [VALUE]
+                        set this flag to specify the minimum acceptable percent identity for
+                        hits, provided as a percentage and not a fraction (i.e. set to 87.5
+                        for 87.5%); default value is set to 50%
+                        
+      -l [VALUE], --length-threshold [VALUE]
+                        set this flag to specify the minimum acceptable length of a match to
+                        consider a hit; default value is set to 20
+                        
+      -h, --help
+                        display this help message, ignore all arguments
+                        
+                        
+
+EXAMPLES
+      Map reads to a tree and get an abundance profile for two metagenomic samples
+      > tree-compute-abundance-profile -t 'kb|tree.991335' -f COG0556 -s COG -m '4502923.3;4502924.3'
+
+SEE ALSO
+     tree-normalize-abundance-profile
+      
+AUTHORS
+      Michael Sneddon (mwsneddon@lbl.gov)
+      Keith Keller (kkeller@lbl.gov)
+      
+----------TEST trees tree-compute-abundance-profile with --help option
+	okay
+
+
+NAME
+      tree-compute-abundance-profile -- maps reads from a metagenomic sample to abundance counts on a tree
+
+SYNOPSIS
+      tree-compute-abundance-profile [OPTIONS]
+
+DESCRIPTION
+      This method retrieves the set of metagenomic reads from a metagenomic sample that have been assigned
+      to the specified gene family.  Each read is mapped to a best hit protein sequence that corresponds to
+      a leaf in the specified KBase tree using uclust.  The result is printed to standard out as a tab
+      delimited file, and status messages on progress and results are printed to standard error.
+      
+      -t [ID], --tree-id [ID]
+                        set this flag to specify the KBase ID of the tree to compute
+                        abundances for; the tree is used to identify the set of sequences
+                        that were aligned to build the tree; each leaf node of a tree built
+                        from an alignment willbe mapped to a sequence; this script assumes
+                        that trees are built from protein sequences
+                        
+      -m [ID1;ID2;ID3;...IDN;], --metagenomic-sample-id [ID1;ID2;ID3;...IDN;]
+                        set this flag to specify the IDs of the metagenomic samples to lookup;
+                        if there are multiple samples to lookup, pass a list of IDs without
+                        spaces delimited by a semicolon; see the KBase communities service to
+                        identifiy metagenomic sample ids, and the example below for 
+                        
+      -a [KEY], --auth [KEY]
+                        set this flag to specify the authentication key that you generated with
+                        MG Rast to access private datasets; public data sets do not require
+                        this flag
+                        
+      -s [SOURCE], --source-family [SOURCE]
+                        set this flag to specify the name of the source of the protein family;
+                        currently supported protein families are: 'COG';
+                        default value is set to 'COG'
+                        
+      -f [NAME], --family-name [NAME]
+                        set this flag to specify the name of the protein family used to pull
+                        a small set of reads from a metagenomic sample; currently only COG
+                        families are supported
+                        
+      -p [VALUE], --percent-identity-threshold [VALUE]
+                        set this flag to specify the minimum acceptable percent identity for
+                        hits, provided as a percentage and not a fraction (i.e. set to 87.5
+                        for 87.5%); default value is set to 50%
+                        
+      -l [VALUE], --length-threshold [VALUE]
+                        set this flag to specify the minimum acceptable length of a match to
+                        consider a hit; default value is set to 20
+                        
+      -h, --help
+                        display this help message, ignore all arguments
+                        
+                        
+
+EXAMPLES
+      Map reads to a tree and get an abundance profile for two metagenomic samples
+      > tree-compute-abundance-profile -t 'kb|tree.991335' -f COG0556 -s COG -m '4502923.3;4502924.3'
+
+SEE ALSO
+     tree-normalize-abundance-profile
+      
+AUTHORS
+      Michael Sneddon (mwsneddon@lbl.gov)
+      Keith Keller (kkeller@lbl.gov)
+      
+----------TEST trees tree-get-alignment with -h option
+	okay
+
+
+NAME
+      tree-get-alignment -- retrieve alignment or alignment meta data from the CDS
+
+SYNOPSIS
+      tree-get-alignment  [OPTIONS] [TREE_ID]
+
+DESCRIPTION
+      Retrieve the specified alignment or meta information associated with the alignment.
+      The alignment is returned in FASTA format by default with sequence labels in an
+      arbitrary internal id that is unique only within the given alignment. To return the
+      alignment with node labels replaced with KBase protein sequence IDs or cannonical
+      feature IDs, use the options below.  To provide a list of IDs, pipe in the list
+      through standard-in or specify an input file to read.  In either case, each alignment
+      id should appear on a separate line.  In the case of a list, results are returned
+      in the same order they were provided as input.
+      
+      -p, --protein-sequence
+                        set this flag to return the alignment with sequence labels replaced with
+                        protein sequence IDs
+                        
+      -f, --feature
+                        set this flag to return the alignment with sequence labels replaced with KBase
+                        feature IDs.  Note that some alignments may not have assigned cannonical
+                        feature IDs for each node, in which case blank labels will be returned.
+                        
+      -m, --meta
+                        set this flag to return meta data instead of the tree itself
+                        
+      -i, --input [FILENAME]
+                        set this flag to specify the input file to read
+                        
+      -h, --help
+                        diplay this help message, ignore all arguments
+                        
+                        
+
+EXAMPLES
+      Retrieve the raw alignment in FASTA
+      > tree-get-alignment 'kb|aln.25'
+      
+      Retrieve meta data about an alignment
+      > tree-get-alignment -m 'kb|aln.25'
+      
+SEE ALSO
+      tree-find-alignment-ids
+      
+AUTHORS
+      Michael Sneddon (mwsneddon@lbl.gov)
+      
+----------TEST trees tree-get-alignment with --help option
+	okay
+
+
+NAME
+      tree-get-alignment -- retrieve alignment or alignment meta data from the CDS
+
+SYNOPSIS
+      tree-get-alignment  [OPTIONS] [TREE_ID]
+
+DESCRIPTION
+      Retrieve the specified alignment or meta information associated with the alignment.
+      The alignment is returned in FASTA format by default with sequence labels in an
+      arbitrary internal id that is unique only within the given alignment. To return the
+      alignment with node labels replaced with KBase protein sequence IDs or cannonical
+      feature IDs, use the options below.  To provide a list of IDs, pipe in the list
+      through standard-in or specify an input file to read.  In either case, each alignment
+      id should appear on a separate line.  In the case of a list, results are returned
+      in the same order they were provided as input.
+      
+      -p, --protein-sequence
+                        set this flag to return the alignment with sequence labels replaced with
+                        protein sequence IDs
+                        
+      -f, --feature
+                        set this flag to return the alignment with sequence labels replaced with KBase
+                        feature IDs.  Note that some alignments may not have assigned cannonical
+                        feature IDs for each node, in which case blank labels will be returned.
+                        
+      -m, --meta
+                        set this flag to return meta data instead of the tree itself
+                        
+      -i, --input [FILENAME]
+                        set this flag to specify the input file to read
+                        
+      -h, --help
+                        diplay this help message, ignore all arguments
+                        
+                        
+
+EXAMPLES
+      Retrieve the raw alignment in FASTA
+      > tree-get-alignment 'kb|aln.25'
+      
+      Retrieve meta data about an alignment
+      > tree-get-alignment -m 'kb|aln.25'
+      
+SEE ALSO
+      tree-find-alignment-ids
+      
+AUTHORS
+      Michael Sneddon (mwsneddon@lbl.gov)
+      
+----------TEST trees tree-relabel-node-names with -h option
+	okay
+
+
+NAME
+      tree-relabel-node-names -- allows you to relabel node names in a newick tree
+
+SYNOPSIS
+      tree-relabel-node-names [OPTIONS] [NEWICK_TREE]
+
+DESCRIPTION
+     Given a tree in newick format, relabel the specified nodes with replacement names found in
+     a mappingfile.  If the tree is not provided as an argument and no input file is specified,
+     the tree is read in from standard-in.
+      
+      -r, --replacement-file
+                        specify the file name of the replacement mappings; this file should
+                        be a two column file, with columns delimited by tabs, where the first
+                        column indicates names to search for in the tree, and the second column
+                        indicates the replacement string; the replacement string can be blank;
+                        
+      -i, --input
+                        specify an input file to read the tree from
+                        
+      -h, --help
+                        diplay this help message, ignore all arguments
+                        
+                        
+EXAMPLES
+      Replace node names based on the file mapping.txt
+      > cat mapping.txt
+      l1	r1
+      l2	mr_tree
+      l3	
+      > tree-relabel-node-names -r mapping.txt '(l1,l2,l3,l4)root;'
+      (r1,mr_tree,,l4)root;
+
+AUTHORS
+      Michael Sneddon (mwsneddon@lbl.gov)
+      Matt Henderson (mhenderson@lbl.gov)
+
+----------TEST trees tree-relabel-node-names with --help option
+	okay
+
+
+NAME
+      tree-relabel-node-names -- allows you to relabel node names in a newick tree
+
+SYNOPSIS
+      tree-relabel-node-names [OPTIONS] [NEWICK_TREE]
+
+DESCRIPTION
+     Given a tree in newick format, relabel the specified nodes with replacement names found in
+     a mappingfile.  If the tree is not provided as an argument and no input file is specified,
+     the tree is read in from standard-in.
+      
+      -r, --replacement-file
+                        specify the file name of the replacement mappings; this file should
+                        be a two column file, with columns delimited by tabs, where the first
+                        column indicates names to search for in the tree, and the second column
+                        indicates the replacement string; the replacement string can be blank;
+                        
+      -i, --input
+                        specify an input file to read the tree from
+                        
+      -h, --help
+                        diplay this help message, ignore all arguments
+                        
+                        
+EXAMPLES
+      Replace node names based on the file mapping.txt
+      > cat mapping.txt
+      l1	r1
+      l2	mr_tree
+      l3	
+      > tree-relabel-node-names -r mapping.txt '(l1,l2,l3,l4)root;'
+      (r1,mr_tree,,l4)root;
+
+AUTHORS
+      Michael Sneddon (mwsneddon@lbl.gov)
+      Matt Henderson (mhenderson@lbl.gov)
+
+----------TEST trees tree-normalize-abundance-profile with -h option
+	okay
+
+
+NAME
+      tree-normalize-abundance-profile -- normalize and filter metagenomic sample abundance data
+
+SYNOPSIS
+      tree-normalize-abundance-profile [OPTIONS]
+
+DESCRIPTION
+      Normalize metagenomic abundance read counts by sum, mean, min, or max of a column or globally,
+      take the log of the values, and threshold the data by providing a cutoff value.  These steps always
+      occur in this order, but all processing steps are optional, so executing this command multiple times
+      on the same data can
+      
+      The expected input is a tab-delimited file with tree node labels in the first column, sample names in
+      the first row, and abundance values in the remaining data matrix.  Note that this is the same format
+      as the output produced from tree-compute-abundance-profile.  The output format is identical to the input
+      format.  Missing values are acceptable and will not be used in calculations.
+      
+      Input can be piped to standard in or specified with the -i option.  Output is written to standard out.
+      
+      -s [SCOPE], --normalization-type [SCOPE]
+                        specify the scope of normalization; normalization can either be performed per column
+                        (e.g. mean is computed per column) or globally across all the data points; available
+                        options are: 'per_column', 'global'; the default option is 'per_column'
+      -t [TYPE], --normalization-type [TYPE]
+                        specify the method of normalization (ie the normalization factor); available
+                        options are 'none', 'total', 'mean', 'max', 'min'; the default value if no
+                        value is given is 'none', which performes no normalization
+      -p [OPERATION], --normalization-post-process [OPERATION]
+                        specify an operation to perform on each data element after values have been
+                        normalized; available options are 'none', 'log10', 'log2', 'ln'; the default
+                        value is 'none'
+      -v [VALUE], --cutoff-value [VALUE]
+                        specify a cutoff value to threshold the data AFTER it has been normalized and
+                        any specified post-normalization operation has been performed; the cutoff value
+                        is a floating-point number; if this option is not provided, then no thresholding
+                        is applied
+      -r [INTEGER], --cutoff-num-records [INTEGER]
+                        specify the maximum number of values to include per column, selecting those N
+                        elements in each column that are highest; note that the normalization scope
+                        parameter is completely ignored for this operation; the cutoff number must be
+                        an integer value; if this option is not provided, all records are preserved
+      -i [FILE_NAME], --input [FILE_NAME]  
+                        specify an input file to read from; if provided standard-in is ignored
+      -h, --help
+                        display this help message, ignore all arguments
+                                                
+EXAMPLES
+    
+AUTHORS
+      Michael Sneddon (mwsneddon@lbl.gov)
+      
+----------TEST trees tree-normalize-abundance-profile with --help option
+	okay
+
+
+NAME
+      tree-normalize-abundance-profile -- normalize and filter metagenomic sample abundance data
+
+SYNOPSIS
+      tree-normalize-abundance-profile [OPTIONS]
+
+DESCRIPTION
+      Normalize metagenomic abundance read counts by sum, mean, min, or max of a column or globally,
+      take the log of the values, and threshold the data by providing a cutoff value.  These steps always
+      occur in this order, but all processing steps are optional, so executing this command multiple times
+      on the same data can
+      
+      The expected input is a tab-delimited file with tree node labels in the first column, sample names in
+      the first row, and abundance values in the remaining data matrix.  Note that this is the same format
+      as the output produced from tree-compute-abundance-profile.  The output format is identical to the input
+      format.  Missing values are acceptable and will not be used in calculations.
+      
+      Input can be piped to standard in or specified with the -i option.  Output is written to standard out.
+      
+      -s [SCOPE], --normalization-type [SCOPE]
+                        specify the scope of normalization; normalization can either be performed per column
+                        (e.g. mean is computed per column) or globally across all the data points; available
+                        options are: 'per_column', 'global'; the default option is 'per_column'
+      -t [TYPE], --normalization-type [TYPE]
+                        specify the method of normalization (ie the normalization factor); available
+                        options are 'none', 'total', 'mean', 'max', 'min'; the default value if no
+                        value is given is 'none', which performes no normalization
+      -p [OPERATION], --normalization-post-process [OPERATION]
+                        specify an operation to perform on each data element after values have been
+                        normalized; available options are 'none', 'log10', 'log2', 'ln'; the default
+                        value is 'none'
+      -v [VALUE], --cutoff-value [VALUE]
+                        specify a cutoff value to threshold the data AFTER it has been normalized and
+                        any specified post-normalization operation has been performed; the cutoff value
+                        is a floating-point number; if this option is not provided, then no thresholding
+                        is applied
+      -r [INTEGER], --cutoff-num-records [INTEGER]
+                        specify the maximum number of values to include per column, selecting those N
+                        elements in each column that are highest; note that the normalization scope
+                        parameter is completely ignored for this operation; the cutoff number must be
+                        an integer value; if this option is not provided, all records are preserved
+      -i [FILE_NAME], --input [FILE_NAME]  
+                        specify an input file to read from; if provided standard-in is ignored
+      -h, --help
+                        display this help message, ignore all arguments
+                                                
+EXAMPLES
+    
+AUTHORS
+      Michael Sneddon (mwsneddon@lbl.gov)
+      
+----------TEST trees tree-get-leaf-id-mapping with -h option
+	okay
+
+
+NAME
+      tree-get-leaf-id-mapping -- get a mapping from the leaf ids to protein/feature ids
+
+SYNOPSIS
+      tree-find-tree-ids [OPTIONS] [TREE_ID]
+
+DESCRIPTION
+      Given a tree, this script returns a two column mapping file of internal leaf ids to
+      protein sequence or KBase feature IDs.  If the leaf was based on a concatenated sequence,
+      this method currently only returns the first sequence ID.  If no canonical feature id
+      exists, then none is returned. If a tree ID is not passed in as an argument, then it
+      will be read from standard in or an input file.  This method currently only handles one
+      tree at a time.  If a list is provided, only the first tree id in the list will be used
+                        
+      -f, --feature
+                        indicate that the IDs should be mapped to feature IDs
+                        
+      -p, --protein-sequence
+                        indicate that the IDs should be mapped to protein sequence IDs
+
+      -i, --input
+                        specify input file to read from;  each tree id must
+                        be on a separate line in this file
+      -h, --help
+                        diplay this help message, ignore all arguments
+                        
+EXAMPLES
+      Retrieve a mapping from raw leaf node ids to feature ids
+      > tree-get-leaf-id-mapping -f 'kb|tree.1000000' 
+      
+
+AUTHORS
+      Michael Sneddon (mwsneddon@lbl.gov)
+      Matt Henderson (mhenderson@lbl.gov)
+      
+----------TEST trees tree-get-leaf-id-mapping with --help option
+	okay
+
+
+NAME
+      tree-get-leaf-id-mapping -- get a mapping from the leaf ids to protein/feature ids
+
+SYNOPSIS
+      tree-find-tree-ids [OPTIONS] [TREE_ID]
+
+DESCRIPTION
+      Given a tree, this script returns a two column mapping file of internal leaf ids to
+      protein sequence or KBase feature IDs.  If the leaf was based on a concatenated sequence,
+      this method currently only returns the first sequence ID.  If no canonical feature id
+      exists, then none is returned. If a tree ID is not passed in as an argument, then it
+      will be read from standard in or an input file.  This method currently only handles one
+      tree at a time.  If a list is provided, only the first tree id in the list will be used
+                        
+      -f, --feature
+                        indicate that the IDs should be mapped to feature IDs
+                        
+      -p, --protein-sequence
+                        indicate that the IDs should be mapped to protein sequence IDs
+
+      -i, --input
+                        specify input file to read from;  each tree id must
+                        be on a separate line in this file
+      -h, --help
+                        diplay this help message, ignore all arguments
+                        
+EXAMPLES
+      Retrieve a mapping from raw leaf node ids to feature ids
+      > tree-get-leaf-id-mapping -f 'kb|tree.1000000' 
+      
+
+AUTHORS
+      Michael Sneddon (mwsneddon@lbl.gov)
+      Matt Henderson (mhenderson@lbl.gov)
+      
+----------TEST trees tree-filter-abundance-profile-column with -h option
+	okay
+
+
+NAME
+      tree-filter-abundance-profile-column -- filter metagenomic samples to abundance count tree mapping
+
+SYNOPSIS
+      tree-filter-abundance-profile [OPTIONS]
+
+DESCRIPTION
+      Filter the mapping of metagenomic sample reads to tree abundance counts.  
+
+      The expected input is a two column tab delimited string with tree node labels in the first column
+      and abundance counts in the second column.
+
+      The -g, -t, -n options can all be supplied in a single call, or can be acheived using multiple script calls.
+      If you supply multiple options (-g,-t,-n), the order they will be applied is minimum thresholding, 
+      normalization, and then grouping.
+
+      -g, --groups
+                        specify a number of evenly spaced groups to divide the data into,
+                        which will bin the data into groups of size (max - min + 1)/number_of_groups,
+                        where data is in a group if (data >= group_min and data < next_group_min)
+      -t, --threshold
+                        specify a global minimum threshold to filter the input counts with,
+                        which will remove all nodes with counts strictly less than the threshold
+      -n, --normalize
+                        normalize the data by a constant factor (i.e. divide by some factor)
+      -i, --input                                                                                           
+                        specify an input file to read from; if provided, any other arguments
+                        and standard-in are ignored
+      -h, --help
+                        diplay this help message, ignore all arguments
+                                                
+EXAMPLES
+      Based on the following input:
+      > tree-compute-abundance-profile -t 'kb|tree.991753' -m '4447970.3' -f 'COG0840' -s 'COG' > abundance.out
+
+      > cat abundance.out
+
+      17606074_1_288_654	3
+      19516952_1_320_727	1
+      17606382_1_255_669	8
+      17606439_1_391_753	1
+      17607137_1_230_698	5
+      19516485_1_166_586	1
+      5651980_1_431_830	2
+      17605787_1_300_519	1
+      21808959_1_279_638	2
+      574651_1_1_374	3
+      21809103_1_178_646	1
+      17605081_1_306_684	5
+      20604468_1_1_174	1
+      17605489_1_233_664	2
+      17388525_1_288_664	2
+      17605141_1_286_700	7
+      17606343_1_253_679	2
+      17606919_1_239_676	3
+      18877351_1_281_660	4
+      17605775_1_113_541	9
+      574486_1_281_660	1
+      17390038_1_141_554	1
+      17606609_1_283_661	7
+      574925_1_289_696	3
+
+      Normalize values by a reducing factor of 5.0
+      > tree-filter-abundance-profile-column -i abundance.out -n 5.0
+      OR
+      > tree-filter-abundance-profile-column -i abundance.out --normalize 5.0
+
+      19516952_1_320_727	0.2
+      17606074_1_288_654	0.6
+      17606382_1_255_669	1.6
+      17607137_1_230_698	1
+      17606439_1_391_753	0.2
+      19516485_1_166_586	0.2
+      5651980_1_431_830	0.4
+      17605787_1_300_519	0.2
+      21808959_1_279_638	0.4
+      574651_1_1_374	0.6
+      17605081_1_306_684	1
+      21809103_1_178_646	0.2
+      20604468_1_1_174	0.2
+      17605489_1_233_664	0.4
+      17388525_1_288_664	0.4
+      17605141_1_286_700	1.4
+      17606343_1_253_679	0.4
+      17606919_1_239_676	0.6
+      18877351_1_281_660	0.8
+      17390038_1_141_554	0.2
+      574486_1_281_660	0.2
+      17605775_1_113_541	1.8
+      574925_1_289_696	0.6
+      17606609_1_283_661	1.4
+
+
+      Group the nodes into a set of 6 groups with evenly spaced range values      
+      > tree-filter-abundance-profile-column -i abundance.out -g 6
+      OR
+      > tree-filter-abundance-profile-column -i abundance.out --groups 6
+
+      19516952_1_320_727	0_range_1.00-2.50
+      17606074_1_288_654	1_range_2.50-4.00
+      17606382_1_255_669	4_range_7.00-8.50
+      17607137_1_230_698	2_range_4.00-5.50
+      17606439_1_391_753	0_range_1.00-2.50
+      19516485_1_166_586	0_range_1.00-2.50
+      5651980_1_431_830	0_range_1.00-2.50
+      17605787_1_300_519	0_range_1.00-2.50
+      21808959_1_279_638	0_range_1.00-2.50
+      574651_1_1_374	1_range_2.50-4.00
+      17605081_1_306_684	2_range_4.00-5.50
+      21809103_1_178_646	0_range_1.00-2.50
+      20604468_1_1_174	0_range_1.00-2.50
+      17605489_1_233_664	0_range_1.00-2.50
+      17388525_1_288_664	0_range_1.00-2.50
+      17605141_1_286_700	4_range_7.00-8.50
+      17606343_1_253_679	0_range_1.00-2.50
+      17606919_1_239_676	1_range_2.50-4.00
+      18877351_1_281_660	2_range_4.00-5.50
+      17390038_1_141_554	0_range_1.00-2.50
+      574486_1_281_660	0_range_1.00-2.50
+      17605775_1_113_541	5_range_8.50-10.00
+      574925_1_289_696	1_range_2.50-4.00
+      17606609_1_283_661	4_range_7.00-8.50
+
+
+      Apply a minimum threshold of 2.0 to the abundance counts, which will remove all counts less than 2.0
+      > tree-filter-abundance-profile-column -i abundance.out -t 2.0 
+      OR
+      > tree-filter-abundance-profile-column -i abundance.out --threshold 2.0 
+
+      17606074_1_288_654	3
+      17606382_1_255_669	8
+      17607137_1_230_698	5
+      5651980_1_431_830	2
+      21808959_1_279_638	2
+      574651_1_1_374	3
+      17605081_1_306_684	5
+      17605489_1_233_664	2
+      17388525_1_288_664	2
+      17605141_1_286_700	7
+      17606343_1_253_679	2
+      17606919_1_239_676	3
+      18877351_1_281_660	4
+      17605775_1_113_541	9
+      574925_1_289_696	3
+      17606609_1_283_661	7
+
+      
+AUTHORS
+      Matt Henderson (mhenderson@lbl.gov)
+      
+----------TEST trees tree-filter-abundance-profile-column with --help option
+	okay
+
+
+NAME
+      tree-filter-abundance-profile-column -- filter metagenomic samples to abundance count tree mapping
+
+SYNOPSIS
+      tree-filter-abundance-profile [OPTIONS]
+
+DESCRIPTION
+      Filter the mapping of metagenomic sample reads to tree abundance counts.  
+
+      The expected input is a two column tab delimited string with tree node labels in the first column
+      and abundance counts in the second column.
+
+      The -g, -t, -n options can all be supplied in a single call, or can be acheived using multiple script calls.
+      If you supply multiple options (-g,-t,-n), the order they will be applied is minimum thresholding, 
+      normalization, and then grouping.
+
+      -g, --groups
+                        specify a number of evenly spaced groups to divide the data into,
+                        which will bin the data into groups of size (max - min + 1)/number_of_groups,
+                        where data is in a group if (data >= group_min and data < next_group_min)
+      -t, --threshold
+                        specify a global minimum threshold to filter the input counts with,
+                        which will remove all nodes with counts strictly less than the threshold
+      -n, --normalize
+                        normalize the data by a constant factor (i.e. divide by some factor)
+      -i, --input                                                                                           
+                        specify an input file to read from; if provided, any other arguments
+                        and standard-in are ignored
+      -h, --help
+                        diplay this help message, ignore all arguments
+                                                
+EXAMPLES
+      Based on the following input:
+      > tree-compute-abundance-profile -t 'kb|tree.991753' -m '4447970.3' -f 'COG0840' -s 'COG' > abundance.out
+
+      > cat abundance.out
+
+      17606074_1_288_654	3
+      19516952_1_320_727	1
+      17606382_1_255_669	8
+      17606439_1_391_753	1
+      17607137_1_230_698	5
+      19516485_1_166_586	1
+      5651980_1_431_830	2
+      17605787_1_300_519	1
+      21808959_1_279_638	2
+      574651_1_1_374	3
+      21809103_1_178_646	1
+      17605081_1_306_684	5
+      20604468_1_1_174	1
+      17605489_1_233_664	2
+      17388525_1_288_664	2
+      17605141_1_286_700	7
+      17606343_1_253_679	2
+      17606919_1_239_676	3
+      18877351_1_281_660	4
+      17605775_1_113_541	9
+      574486_1_281_660	1
+      17390038_1_141_554	1
+      17606609_1_283_661	7
+      574925_1_289_696	3
+
+      Normalize values by a reducing factor of 5.0
+      > tree-filter-abundance-profile-column -i abundance.out -n 5.0
+      OR
+      > tree-filter-abundance-profile-column -i abundance.out --normalize 5.0
+
+      19516952_1_320_727	0.2
+      17606074_1_288_654	0.6
+      17606382_1_255_669	1.6
+      17607137_1_230_698	1
+      17606439_1_391_753	0.2
+      19516485_1_166_586	0.2
+      5651980_1_431_830	0.4
+      17605787_1_300_519	0.2
+      21808959_1_279_638	0.4
+      574651_1_1_374	0.6
+      17605081_1_306_684	1
+      21809103_1_178_646	0.2
+      20604468_1_1_174	0.2
+      17605489_1_233_664	0.4
+      17388525_1_288_664	0.4
+      17605141_1_286_700	1.4
+      17606343_1_253_679	0.4
+      17606919_1_239_676	0.6
+      18877351_1_281_660	0.8
+      17390038_1_141_554	0.2
+      574486_1_281_660	0.2
+      17605775_1_113_541	1.8
+      574925_1_289_696	0.6
+      17606609_1_283_661	1.4
+
+
+      Group the nodes into a set of 6 groups with evenly spaced range values      
+      > tree-filter-abundance-profile-column -i abundance.out -g 6
+      OR
+      > tree-filter-abundance-profile-column -i abundance.out --groups 6
+
+      19516952_1_320_727	0_range_1.00-2.50
+      17606074_1_288_654	1_range_2.50-4.00
+      17606382_1_255_669	4_range_7.00-8.50
+      17607137_1_230_698	2_range_4.00-5.50
+      17606439_1_391_753	0_range_1.00-2.50
+      19516485_1_166_586	0_range_1.00-2.50
+      5651980_1_431_830	0_range_1.00-2.50
+      17605787_1_300_519	0_range_1.00-2.50
+      21808959_1_279_638	0_range_1.00-2.50
+      574651_1_1_374	1_range_2.50-4.00
+      17605081_1_306_684	2_range_4.00-5.50
+      21809103_1_178_646	0_range_1.00-2.50
+      20604468_1_1_174	0_range_1.00-2.50
+      17605489_1_233_664	0_range_1.00-2.50
+      17388525_1_288_664	0_range_1.00-2.50
+      17605141_1_286_700	4_range_7.00-8.50
+      17606343_1_253_679	0_range_1.00-2.50
+      17606919_1_239_676	1_range_2.50-4.00
+      18877351_1_281_660	2_range_4.00-5.50
+      17390038_1_141_554	0_range_1.00-2.50
+      574486_1_281_660	0_range_1.00-2.50
+      17605775_1_113_541	5_range_8.50-10.00
+      574925_1_289_696	1_range_2.50-4.00
+      17606609_1_283_661	4_range_7.00-8.50
+
+
+      Apply a minimum threshold of 2.0 to the abundance counts, which will remove all counts less than 2.0
+      > tree-filter-abundance-profile-column -i abundance.out -t 2.0 
+      OR
+      > tree-filter-abundance-profile-column -i abundance.out --threshold 2.0 
+
+      17606074_1_288_654	3
+      17606382_1_255_669	8
+      17607137_1_230_698	5
+      5651980_1_431_830	2
+      21808959_1_279_638	2
+      574651_1_1_374	3
+      17605081_1_306_684	5
+      17605489_1_233_664	2
+      17388525_1_288_664	2
+      17605141_1_286_700	7
+      17606343_1_253_679	2
+      17606919_1_239_676	3
+      18877351_1_281_660	4
+      17605775_1_113_541	9
+      574925_1_289_696	3
+      17606609_1_283_661	7
+
+      
+AUTHORS
+      Matt Henderson (mhenderson@lbl.gov)
+      
+----------TEST trees tree-find-alignment-ids with -h option
+	okay
+
+
+NAME
+      tree-find-alignment-ids -- returns the alignment IDs that align the specified sequence or feature
+
+SYNOPSIS
+      tree-find-alignment-ids [OPTIONS] [ID]
+
+DESCRIPTION
+      Given a KBase feature or sequence ID, retrieve the set of alignments that align the
+      given feature/sequence.  By default, if the type of ID is not specified with one of the
+      options below, then this method assumes that IDs are feature IDs.  If an ID is to be
+      passed in as an argument, then only a single ID can be used.  If you wish to call this
+      method on multiple feature/sequence IDs, then you must pass in the list through standard-in
+      or a text file, with one ID per line.
+                        
+      -f, --feature
+                        indicate that the IDs provided are feature IDs
+      -p, --protein-sequence
+                        indicate that the IDs provided are protein_sequence_ids (MD5s)                        
+      -i, --input
+                        specify input file to read from;  each feature/sequence id must
+                        be on a separate line in this file
+      -h, --help
+                        diplay this help message, ignore all arguments
+                        
+EXAMPLES
+      Retrieve alignment ids based on a feature id
+      > tree-find-alignment-ids -f 'kb|g.0.peg.2173'
+      
+      Retrieve alignment ids based on a set of protein_sequence_ids piped through standard in
+      > echo cf9e9e74e06748fb161d07c8420e1097 | tree-find-alignment-ids -p
+
+AUTHORS
+      Matt Henderson (mhenderson@lbl.gov)
+      Michael Sneddon (mwsneddon@lbl.gov)
+      
+----------TEST trees tree-find-alignment-ids with --help option
+	okay
+
+
+NAME
+      tree-find-alignment-ids -- returns the alignment IDs that align the specified sequence or feature
+
+SYNOPSIS
+      tree-find-alignment-ids [OPTIONS] [ID]
+
+DESCRIPTION
+      Given a KBase feature or sequence ID, retrieve the set of alignments that align the
+      given feature/sequence.  By default, if the type of ID is not specified with one of the
+      options below, then this method assumes that IDs are feature IDs.  If an ID is to be
+      passed in as an argument, then only a single ID can be used.  If you wish to call this
+      method on multiple feature/sequence IDs, then you must pass in the list through standard-in
+      or a text file, with one ID per line.
+                        
+      -f, --feature
+                        indicate that the IDs provided are feature IDs
+      -p, --protein-sequence
+                        indicate that the IDs provided are protein_sequence_ids (MD5s)                        
+      -i, --input
+                        specify input file to read from;  each feature/sequence id must
+                        be on a separate line in this file
+      -h, --help
+                        diplay this help message, ignore all arguments
+                        
+EXAMPLES
+      Retrieve alignment ids based on a feature id
+      > tree-find-alignment-ids -f 'kb|g.0.peg.2173'
+      
+      Retrieve alignment ids based on a set of protein_sequence_ids piped through standard in
+      > echo cf9e9e74e06748fb161d07c8420e1097 | tree-find-alignment-ids -p
+
+AUTHORS
+      Matt Henderson (mhenderson@lbl.gov)
+      Michael Sneddon (mwsneddon@lbl.gov)
+      
+
+
+Error Summary:
+

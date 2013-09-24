@@ -1,0 +1,73 @@
+<div>
+<h1>Workspace Command Line Script User Manual</h1>
+<a href="Overview.html" target="_blank">Return to Workspace overview</a>
+<h2>Viewing object history and reverting objects</h2>
+<p>Now that you can create and manage the objects in your workspace, you will want to 
+learn about the workspace features that support object provenance. When an object in a 
+workspace is overwritten, the old version of the is not lost. It is conserved, and a 
+history of previous versions of all workspace objects is maintained. At any time, you can
+retrieve any previous version of an object, and you can revert the current instance of an
+object to any of its previous versions. There are three commands in the workspace that
+provide support for object history:</p>
+<ol>
+<li><a href="#STEP1"><code title = "iris-tutorials">kbws-history</code>: retrieves the metadata for all previous versions of an object</a></li>
+<li><a href="#STEP2"><code title = "iris-tutorials">kbws-revert</code>: reverts the current instance of an object to a previous version</a></li>
+<li><a href="#STEP3"><code title = "iris-tutorials">kbws-get</code>: enables the user to retrieve the current and all previous versions of an object</a></li>
+</ol>
+<a name="STEP1"></div><div><h3>1. kbws-history</h3></a>
+<p></p>
+<pre><code><i>
+	kbws-history <Object type> <Object ID> [-?ehw] [long options...]
+		-w --workspace     ID for workspace
+		-e --showerror     Set as 1 to show any errors in execution
+		-? -h --help       Print this usage information
+</i></pre></code>
+<p></p>
+<pre><code><i>
+	$ kbws-setglobalperm w
+		Global permissions reset!
+</i></pre></code>
+<p></p>
+<a name="STEP2"></div><div><h3>2. kbws-revert</h3></a>
+<p></p>
+<pre><code><i>
+	kbws-revert <Object type> <Object ID> [-?ehiw] [long options...]
+		-w --workspace     ID for workspace
+		-i --instance      Instance ID
+		-e --showerror     Set as 1 to show any errors in execution
+		-? -h --help       Print this usage information
+</i></pre></code>
+<p></p>
+<pre><code><i>
+	$ kbws-revert Genome "kb|g.0" -i 0
+		...
+</i></pre></code>
+<p></p>
+<a name="STEP3"></div><div><h3>3. kbws-get</h3></a>
+<p></p>
+<pre><code><i>
+	kbws-get <Object type> <Object ID> [-?ehipw] [long options...]
+		-w --workspace     ID for workspace
+		-i --instance      Instance ID
+		-p --pretty        Pretty print JSON object
+		-e --showerror     Set as 1 to show any errors in execution
+		-? -h --help       Print this usage information
+</i></pre></code>
+<p>Let's see an example of this command in action. ....</p>
+<pre><code><i>
+	$ kbws-get Genome "kb|g.0"
+		{
+			"source":null,
+			"source_id":"83333.1",
+			"features":[
+				{
+					"location":[["kb|g.0.c.1","4104879","+","187"]],
+					"function":"FruR retarded region at pfkA gene",
+					"aliases":[],
+					"id":"kb|g.0.opr.0",
+					"annotations":[]
+				},....         
+</i></pre></code>
+<p>The output of this command indicates...</p>
+
+</div>

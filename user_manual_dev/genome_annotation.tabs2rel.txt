@@ -1,0 +1,3 @@
+
+Usage: tabs2rel [InitialN] < tab-sep-sets > relation                                                                                                               
+

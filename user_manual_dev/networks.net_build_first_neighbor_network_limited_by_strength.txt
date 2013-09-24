@@ -1,0 +1,20 @@
+Usage: net_build_first_neighbor_network_limited_by_strength [--url=http://kbase.us/services/networks] dataset_ids edge_types cut_off < query_entity_ids
+
+
+General options
+	--url=[http://kbase.us/services/networks]		the service url
+	--help		print help information
+	--version		print version information
+	dataset_ids=[xxx,yyy,zzz,...]		dataset id list(comma separated)
+	edge_types=[xxx,yyy,zzz,...]		interested edge types(comma separated)
+	cut_off=xx.yy		edge strength cut off threshold
+
+Examples: 
+echo 'kb|g.3899.locus.10 kb|g.3899.locus.11' | net_build_first_neighbor_network_limited_by_strength 'kb|netdataset.plant.fn.25,kb|netdataset.plant.cn.6' 'GENE_GENE' 0.8
+
+net_build_first_neighbor_network_limited_by_strength --help	print out help
+
+net_build_first_neighbor_network_limited_by_strength --version	print out version information
+
+Report bugs to kbase-networks@lists.kbase.us
+

@@ -1,0 +1,2 @@
+fs -put_pe <reads.1.fq> <reads.2.fq> <output.pe>
+
