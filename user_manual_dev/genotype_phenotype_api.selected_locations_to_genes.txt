@@ -1,3 +1,0 @@
-usage: selected_locations_to_genes <--locations_file three column tab delimited chomosomal locations file with complete path, column1 is kb_chromosome_id, column2 is start, column3 is end, (required)> <--distance distance in bp, distance around a SNP to look for genes, (required)> <--pmin minimum pvalue, (required)> <--pmax maximum pvalue, (required)> <--kb_trait_id kbase trait id, (required)> [--help print this usage] [--url host]
-
-

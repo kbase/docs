@@ -1,3 +1,0 @@
-Unknown option: help
-Usage: getRegulomeModelsByGenomeId [--port port] [--url url] genomeId
-

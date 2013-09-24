@@ -1,2 +1,0 @@
--get <hdfs_file> [local_destination_name]
-

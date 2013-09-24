@@ -1,3 +1,0 @@
-
-Usage: rel2tabs < 2-column-table > multi-column.version                                                                                                               
-

@@ -1,8 +1,0 @@
-
-Usage: md5s_to_genomes [arguments] < input > output
-
-
-    -c num        Select the identifier from column num
-    -i filename   Use filename rather than stdin for input
-
-

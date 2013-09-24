@@ -1,3 +1,0 @@
-
-Usage: genomeTO_to_feature_data [--input genome-file] [--output genome-file] [--url service-url] [< genome-file] [> reconstruction-file]                                                                                                               
-

@@ -1,7 +1,0 @@
-kbws-get <Object type> <Object ID> [-?ehipw] [long options...]
-	-w --workspace     ID for workspace
-	-i --instance      Instance ID
-	-p --pretty        Pretty print JSON object
-	-e --showerror     Set as 1 to show any errors in execution
-	-? -h --help       Print this usage information
-

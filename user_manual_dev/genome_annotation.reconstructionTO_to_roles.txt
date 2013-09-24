@@ -1,3 +1,0 @@
-
-Usage: reconstructionTO_to_roles [--input genome-file] [--output genome-file] [--url service-url] [< genome-file] [> roles-file]                                                                                                               
-

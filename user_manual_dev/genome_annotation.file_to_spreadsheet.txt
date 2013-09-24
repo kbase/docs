@@ -1,8 +1,0 @@
-
-Usage: file_to_spreadsheet -f test.xls [-u http://pubseed.theseed.org/?page=Annotation&feature=PEG] < test.txt
-
-    -f --- The filename for the output xls format spreadsheet.
-
-    -u --- An optional hyperlink template; PEG will be replaced by any FIG-IDs in the input file
-
-

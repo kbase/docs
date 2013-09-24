@@ -1,3 +1,0 @@
-kbws-workspace <New workspace> [-?h] [long options...]
-	-? -h --help  Print this usage information
-

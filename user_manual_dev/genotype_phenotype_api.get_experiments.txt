@@ -1,3 +1,0 @@
-usage: get_experiments [--help print this usage] [--kbgenome_id kbase genome identifier] [--url host]
-
-

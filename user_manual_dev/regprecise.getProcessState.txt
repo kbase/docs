@@ -1,1 +1,0 @@
-usage: getProcessState [-c column] < input > output

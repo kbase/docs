@@ -1,1 +1,0 @@
-usage: getRegulomeModelsBySourceType [-c column] < input > output

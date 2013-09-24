@@ -1,9 +1,0 @@
-
-Usage: text_search [arguments] < input > output
-
-
-    --start string
-    --count string
-    --entity string
-
-

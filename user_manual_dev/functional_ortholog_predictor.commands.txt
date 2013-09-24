@@ -1,2 +1,0 @@
-----------TEST functional_ortholog_predictor rank_pgenes with --help option	fail
-

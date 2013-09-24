@@ -1,3 +1,0 @@
-usage: chromosome_position_from_variation_details <--variations_file tab delimited input file (along with complete path), with four columns: kb_chromosome, position, pvalue, chromosome, (required)>  [--help print this usage] [--url host]
-
-

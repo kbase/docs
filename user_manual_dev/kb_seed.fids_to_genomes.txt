@@ -1,6 +1,0 @@
-
-Usage: fids_to_genomes [arguments] < input > output
-
-
-
-

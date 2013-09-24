@@ -1,1 +1,0 @@
-usage: getRegulonModelStats [-c column] < input > output

@@ -1,8 +1,0 @@
-
-Usage: protein_families_to_functions [arguments] < input > output
-
-
-    -c num        Select the identifier from column num
-    -i filename   Use filename rather than stdin for input
-
-

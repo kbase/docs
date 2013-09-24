@@ -1,1 +1,0 @@
-usage: getRegulomeModelCollection [-c column] < input > output

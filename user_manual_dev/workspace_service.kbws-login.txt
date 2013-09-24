@@ -1,4 +1,0 @@
-kbws-login <Username> [-?hp] [long options...]
-	-p --password     User password
-	-? -h --help      Print this usage information
-

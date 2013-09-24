@@ -1,4 +1,0 @@
-----------TEST idserver external_ids_to_kbase_ids with --help option	fail
-
-----------TEST idserver kbase_ids_to_external_ids with --help option	fail
-

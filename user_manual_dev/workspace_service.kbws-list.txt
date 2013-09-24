@@ -1,4 +1,0 @@
-kbws-list [-?eh] [long options...]
-	-e --showerror   Show any errors in execution
-	-? -h --help     Print this usage information
-

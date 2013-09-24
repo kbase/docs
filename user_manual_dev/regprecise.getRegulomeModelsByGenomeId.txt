@@ -1,1 +1,0 @@
-usage: getRegulomeModelsByGenomeId [-c column] < input > output

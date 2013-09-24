@@ -1,4 +1,0 @@
-Parameters:
--a	List all Genomes
--kb	List KBase Genomes
-

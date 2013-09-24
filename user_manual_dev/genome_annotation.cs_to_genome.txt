@@ -1,2 +1,0 @@
-Usage: cs_to_genome [--output output-file] KBase-genome-id > genome-object                                                                                                               
-

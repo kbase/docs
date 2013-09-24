@@ -1,4 +1,0 @@
-
-Usage: all_roles_used_in_models > output
-
-

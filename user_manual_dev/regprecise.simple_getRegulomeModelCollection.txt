@@ -1,3 +1,0 @@
-Unknown option: help
-Usage: getRegulomeModelCollection [--port port] [--url url] collectionId
-

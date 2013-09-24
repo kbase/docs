@@ -1,1 +1,0 @@
-tutorials go in this directory.

@@ -1,9 +1,0 @@
-
-Usage: region_to_alleles [-c Column] [-d regionSize] < input > output
-Usage: region_to_alleles [-c Column] [-d regionSize] -i input > output
-
-    -d Distance   Width of region in base-pairs on either side of feature (Default=5000)
-    -c num        Select the identifier from column num
-    -i filename   Use filename rather than stdin for input
-
-

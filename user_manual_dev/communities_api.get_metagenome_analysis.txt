@@ -1,9 +1,0 @@
-
-Script for viewing list of and optionally downloading output files from an analyzed metagenome in AWE
-Command name: check_metagenome.pl
-Parameters:
-     -awe_job_url=<url for AWE job, required>
-     -download <option variable to download output files>
-     -conf=<configuration file (default='awe.ini')>
-
-

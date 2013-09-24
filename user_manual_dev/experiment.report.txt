@@ -1,8 +1,0 @@
-----------TEST experiment exp_find_growmatch_data with -h option	okay
-
-----------TEST experiment exp_find_growmatch_data with --help option	okay
-
-
-
-Error Summary:
-
