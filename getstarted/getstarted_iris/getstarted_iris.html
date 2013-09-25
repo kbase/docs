@@ -8,16 +8,16 @@ Video tutorial and seminar for using IRIS and the Workspace Browser: <a href="ht
 
 </div><div><h2>Introduction</h2>
 <p>The KBase IRIS interface allows one to run all of the KBase command line scripts and some useful UNIX tools from a web-based interface without downloading any software. The interface keeps track of who you are and stores your results and history on our KBase IRIS server. The prototype version of the IRIS interface is located <a href="/services/docs/invocation/Iris">here</a>.</p>
-</div><div><h2>Using the IRIS Interface</h2> 
+</div><div><h2>Using the IRIS Interface</h2>
 <p>The initial page looks like this: <br />
       <br />
 <img src="/docs/getstarted/getstarted_iris/iris_welcomescreen.png" style="width: 100%;" alt="IRIS welcome" /></p>
 <p>Your first action should be to log in. Click &quot;Sign In,&quot; which is located in the upper right corner of the interface. In the popup box that appears, log in using the KBase username and password selected when you signed up for your user account. After successfully logging in, you should see the text:</p>
-<pre>Set session to username</pre>
+<pre>Authenticated as <i>username</i></pre>
 <p>When you are ready to log out at the end of your session, simply type <strong>logout </strong>in the command entry box.<br />
   <br>
-Along the left side, you will notice a list of available script and command categories that you can use. Click on a command category to expand it and view the scripts and commands. Double-click on a command to easily place it into the command entry box.</p>
-<p>To learn more about each, enter the script or command followed by a<strong> -h</strong>. For example, if you enter the Workspace script <strong>kbws-addtype -h</strong>, you should see the output:</p>
+Along the left side, you will notice a list of available script and command categories that you can use. Click on a command category to expand it and view the scripts and commands. Click on a command to easily place it into the command entry box.</p>
+<p>To learn more about each, click on the ? button next to the command name. Alternatively, enter the script or command followed by a<strong> -h</strong>. For example, if you enter the Workspace script <strong>kbws-addtype -h</strong>, you should see the output:</p>
 <pre>kbws-addtype &lt;Object type&gt; [-?eh] [long options...]
  -e --showerror   Set as 1 to show any errors in execution
  -? -h --help     Print this usage information</pre>
@@ -27,7 +27,7 @@ When entering commands, a few shortcuts are available. Use the up and down arrow
 </div><div><h2>UNIX Commands Available in IRIS</h2>
 In IRIS, you can also use the following commands which are simply run in a UNIX shell on the server and use the full semantics of the UNIX commands:<br />
                     <br />
-        <a name="sort62" id="sort62"><strong>sort</strong></a><strong> , <a name="grep63" id="grep63">grep</a> , <a name="cut64" id="cut64">cut</a> , cat, head, tail, date, echo, <a name="wc65" id="wc65">wc</a> <br />
+        <a name="sort62" id="sort62"><strong>sort</strong></a><strong> , <a name="grep63" id="grep63">grep</a> , <a name="cut64" id="cut64">cut</a> , cat, head, tail, date, echo, <a name="wc65" id="wc65">wc</a>, tr <br />
 </strong><br />
 File system commands are also available, but are re-implemented on the server as very limited version of the originals.<br />
 <br />
@@ -68,8 +68,8 @@ The <a href="/developer-zone/api-documentation/cdm-entity-relationship-command-s
 <br />
 This 2-column table is fed into a UNIX command called <a name="grep55" id="grep55">grep</a>, which keeps lines that match its argument. In this case, the <a name="grep56" id="grep56">grep</a> extracts rows in the table that match the string &quot;Streptococcus pneumoniae.&quot; Thus, we get as a result a 2-column table in which each row contains &quot;Streptococcus pneumoniae.&quot; </p>
 <pre>
-       
-   kb|g.3478 Streptococcus pneumoniae SPN034183  
+      
+   kb|g.3478 Streptococcus pneumoniae SPN034183
    kb|g.3264 Streptococcus pneumoniae GA47901
    kb|g.162 Streptococcus pneumoniae R6
    kb|g.3483 Streptococcus pneumoniae SPN032672
