@@ -1,0 +1,9 @@
+OVERVIEW
+------------------------------------------
+Fizzy Feature Selection Service - The Fizzy service provides Chi-squared feature
+selection on metagenomic data samples.
+
+
+VERSION: 1.0.0 (Released February 2013)
+------------------------------------------
+- first public release
