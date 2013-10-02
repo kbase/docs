@@ -1,0 +1,100 @@
+<h1>Finding Functional Annotations for a Protein</h1>
+<!--tutorial author:John-Marc Chandonia on 30Nov2012, tutorial validator:Marcin-->
+<p>
+<strong>Purpose:</strong> Learn how to use the Protein Info service to find functional annotations for a protein.
+
+<p>
+<strong>Required Prerequisites:</strong> <a href="http://kbase.us/developer-zone/tutorials/getting-started/getting-started-with-kbase/">Getting Started with KBase</a>
+
+<p>
+<strong>Suggested Prerequisites:</strong> None
+
+<p>
+<strong>Related Tutorials:</strong> Finding Domains for a Protein, Finding Orthologs for a Protein
+
+<p>
+<h2>Introduction</h2>
+
+<p>
+This tutorial is intended to teach developers how to use the Protein
+Info service to get information on the functional annotations for a protein.
+
+<p>
+Currently, the API does not look up proteins by their protein identifier
+(i.e., the MD5 sum), but rather by the KBase Feature Identifier (fid)
+of the gene that encodes the protein.
+
+<p>
+The Protein Info service can return three kinds of functional
+annotations for proteins: Enzyme Commission (EC) numbers for enzymes,
+Gene Ontology (GO) annotations, and InterPro domains.  The corresponding
+function calls are fids_to_ec, fids_to_go, and fids_to_ipr, respectively.
+
+<p>
+<h2>Sample Program to look up Functional Annotations for a Protein</h2>
+
+<pre>
+#!/usr/bin/perl
+
+use strict;
+use Data::Dumper;
+use Bio::KBase::ProteinInfoService::Client;
+
+my $client=Bio::KBase::ProteinInfoService::Client->new("http://localhost:7057");
+
+my $annot=$client->fids_to_ec(["kb|g.21765.CDS.3010"]);
+warn Dumper($annot);
+
+$annot=$client->fids_to_go(["kb|g.21765.CDS.3010"]);
+warn Dumper($annot);
+
+$annot=$client->fids_to_ipr(["kb|g.21765.CDS.3010"]);
+warn Dumper($annot);
+</pre>
+
+<p>
+The above program assumes that you're running the service locally; if not,
+replace "localhost" with the IP address of the machine running the
+service.
+
+<p>
+This program is supposed to look up functional annotations for the
+protein encoded by the fid kb|g.21765.CDS.3010.  This is the tufA
+(elongation factor EF-Tu) gene from <i>E. coli</i>.  This program
+should print out three hashes, in which the keys are the query fids,
+and the values are an array of identifiers of annotations of each
+particular type.  Here's sample output:
+
+<pre>
+$VAR1 = {
+          'kb|g.21765.CDS.3010' => [
+                                     '3.6.5.3'
+                                   ]
+        };
+$VAR1 = {
+          'kb|g.21765.CDS.3010' => [
+                                     'GO:0003746',
+                                     'GO:0003924',
+                                     'GO:0005525',
+                                     'GO:0005622',
+                                     'GO:0006414',
+                                     'GO:0008547'
+                                   ]
+        };
+$VAR1 = {
+          'kb|g.21765.CDS.3010' => [
+                                     'IPR000795',
+                                     'IPR004160',
+                                     'IPR004161',
+                                     'IPR004541',
+                                     'IPR005225',
+                                     'IPR009000',
+                                     'IPR009001'
+                                   ]
+        };
+</pre>
+
+<p>
+In the above example, the protein encoded by "kb|g.21765.CDS.3010" has
+one EC number (the first hash), six GO annotations (the 2nd hash),
+and seven InterPro domains annotated (the 3rd hash).
