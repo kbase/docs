@@ -1,7 +1,7 @@
 <h1>Extracting Genomes, Features, and Sequences from the KBase CS</h1>
  Students and researchers working in bioinformatics often need to extract raw data to set up an environment to develop and test new tools. In this short tutorial we discuss some basic techniques for accessing genomes and features from the KBase <a name="Central Store348">Central Store</a>
  (CS). There are alternative mechanisms for accessing KBase commands, and this discussion will not introduce you to those alternatives; however, we do recommend the <a http://kbase.us/developer-zone/tutorials/iris/some-basic-exercises-using-the-doe-kbase-iris-interface/="http://kbase.us/developer-zone/tutorials/iris/some-basic-exercises-using-the-doe-kbase-iris-interface/">tutorial</a>
- to get started using the <i>IRIS</i>
+ to get started using the <i>Iris</i>
  interface. <h2>Exploring the Collection of Genomes in the CS</h2>
  You can easily find out which genomes exist in the CS using <pre>
       <a href="http://kbase.us/developer-zone/api-documentation/cdm-entity-relationship-command-scripts/#all_entities_Genome" target='_blank'>all_entities_Genome</a> -f scientific_name,dna_size,contigs
@@ -19,7 +19,7 @@
       echo &#39;kb|g.3285&#39; | <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#genomes_to_contigs" target='_blank'>genomes_to_contigs</a> | <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#contigs_to_sequences" target='_blank'>contigs_to_sequences</a> &gt; contigs
 </pre>
  which would write the FASTA formatted file <i>contigs</i>
-. If you are working in IRIS, you would use the <b>ls</b>
+. If you are working in Iris, you would use the <b>ls</b>
  command to see a list of your files, click on <i>contigs</i>
  and use your browser to download the file to your local machine. <h2>Getting the Features for a Genome</h2>
  You can easily get feature data corresponding to a given genome using something like <pre>
