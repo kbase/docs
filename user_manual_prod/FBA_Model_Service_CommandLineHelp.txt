@@ -1,0 +1,1097 @@
+FBA Modeling Service 
+
+DESCRIPTION
+This KBase service supports the reconstruction, optimization, and analysis of genome-scale metabolic models.
+
+COMMANDS 
+   kbfba-gapgen  
+   kbfba-integratesolution  
+   kbfba-getmodels  
+   kbfba-getfbas  
+   kbfba-runjob  
+   kbfba-getgapgens  
+   kbfba-exportphenosim  
+   kbfba-exportgenome  
+   kbfba-adjustmodel  
+   kbfba-addmedia  
+   kbfba-addaliases  
+   kbfba-exportmedia  
+   kbfba-importprobanno  
+   kbfba-gapfill  
+   kbfba-buildfbamodel  
+   kbfba-importtemplate  
+   kbfba-exportfba  
+   kbfba-importfbamodel  
+   kbfba-getreactions  
+   kbfba-getbio  
+   kbfba-adjustbiomass  
+   kbfba-loadgenome  
+   kbfba-runfba  
+   kbfba-getcompounds  
+   kbfba-exportfbamodel  
+   kbfba-simpheno  
+   kbfba-exportobject  
+   kbfba-getmedia  
+   kbfba-url  
+   kbfba-importpheno  
+   kbfba-queuefba  
+   kbfba-importtranslation  
+   kbfba-url
+   kbfba-jobdone  
+   kbfba-getgapfills
+
+NAME
+kbfba-gapgen  -- This command . 
+
+VERSION
+1.0
+
+SYNOPSIS
+kbfba-gapgen <Model> [-?cehmorvw][--addlcpd][--allrev ][--bounds][--constraints][--defaultmaxflux]         
+[--defaultminuptake][--defaultmaxuptake][--geneko][--help][--intsol] [--maximize][--media][--mediaws] 
+[--minthermoerror][--modelout][--notes][--nothermoerror][--nomediahyp][--nobiomasshyp][--nogprhyp]           
+[--nopathwayhyp][--numsol][--objfraction][--objterms][--overwrite][--refmedia][--refmediaws][--rxnko]
+[--showerror][--simplethermo][--solver][--timepersol][--timelimit][--thermoconst][--uptakelim]           
+[--verbose][--workspace]                               
+
+
+DESCRIPTION
+INPUT:
+
+OUTPUT:
+
+PARAMETERS:
+
+Model			                       , required. 
+-c --addlcpd            Additional compounds (; delimiter).
+--allrev                Treat all reactions as reversible.
+--bounds                Custom bounds.
+--constraints           Custom constraints.
+--defaultmaxflux        Default maximum reaction flux.
+--defaultminuptake      Default minimum nutrient uptake.
+--defaultmaxuptake      Default maximum nutrient uptake.
+-? -h --help            Print this usage information.
+--geneko                List of gene KO (; delimiter).
+--intsol                Automatically integrate solution.
+--maximize              Maximize objective.
+-m --media              Media formulation for FBA.
+--mediaws               Workspace with media formulation.
+--minthermoerror        Minimize uncertainty in thermodynamic constraints.
+--modelout              ID for output model in workspace.
+--nomediahyp            Do not search for media hypotheses.
+--nobiomasshyp          Do not search for biomass hypotheses.
+--nogprhyp              Do not search for gpr hypotheses.
+--nopathwayhyp          Do not search for pathway hypotheses.
+--notes                 Notes for flux balance analysis.
+--nothermoerror         No uncertainty in thermodynamic constraints.
+--numsol                Number of solutions desired.
+--objfraction           Fraction of objective for follow on analysis.
+--objterms              Objective terms (; delimiter).
+-o --overwrite          Overwrite any existing FBA with same name.
+-r --refmedia           Media formulation for FBA.
+--refmediaws            Workspace with media formulation.
+--rxnko                 List of reaction KO (; delimiter).
+-e --showerror          Set as 1 to show any errors in execution.
+--simplethermo          Use simple thermodynamic constraints.
+--solver                Solver to use for gapgen.
+--thermoconst           Use full thermodynamic constraints.
+--timepersol            Maximum time spent per solution.
+--timelimit             Maximum total time.
+--uptakelim             Atom uptake limits.
+-v --verbose            Print verbose messages.
+-w --workspace          Workspace to save FBA results.
+
+
+
+NAME
+kbfba-integratesolution -- This command . 
+
+VERSION
+1.0
+
+SYNOPSIS
+kbfba-integratesolution <Model ID> [-?efghiovw][--help][--gapfillsols][--gapgensols][--modelws][--outmodel][--overwrite][--showerror][--verbose][--workspace]
+
+DESCRIPTION
+INPUT:     This command requires the input of a Model ID. 
+OUTPUT:
+
+PARAMETERS:
+
+Model ID              Model ID(s) (; delimiter), required.
+-f --gapfillsols      IDs of gapfilling solutions to integrate (; delimiter).
+-g --gapgensols       IDs of gapgen solutions to integrate (; delimiter).
+-? -h --help          Print this usage information
+-i --outmodel         ID to save new model as.
+--modelws             Workspace for input FBA model.
+-o --overwrite        Overwrite any existing model with same name.
+-e --showerror        Set as 1 to show any errors in execution.
+-v --verbose          Print verbose messages.
+
+-w --workspace        Reference default workspace.
+
+
+
+NAME
+kbfba-getmodels
+
+VERSION
+1.0
+
+SYNOPSIS
+kbfba-getmodels <Model IDs> <Model workspaces> [-?ehipv] [--idtype][--pretty][--showerror][--verbose][--help]
+
+
+DESCRIPTION
+INPUT:     This command requires the input of a Model ID and Model workspaces. 
+OUTPUT:
+
+PARAMETERS:
+
+Model IDs           Model ID(s) (; delimiter), required.
+Model workspaces    Model workspaces (; delimiter), required.
+-i --idtype         Type of ID.
+-p --pretty         Pretty print output.
+-e --showerror      Set as 1 to show any errors in execution.
+-v --verbose        Print verbose messages.
+-? -h --help        Print this usage information.
+
+
+NAME
+kbfba-getfbas -- This command .
+
+VERSION
+1.0
+
+SYNOPSIS
+kbfba-getfbas <FBA IDs> <FBA workspaces> [-?ehipv] [--idtype][--pretty][--showerror][--verbose][--help]
+
+
+DESCRIPTION
+INPUT:
+OUTPUT:
+
+PARAMETERS:
+
+FBA IDs              FBA Identifiers (; delimiter), required.
+FBA workspaces                       (; delimiter), required.
+-i --idtype          Type of ID.
+-p --pretty          Pretty print output.
+-e --showerror       Set as 1 to show any errors in execution.
+-v --verbose         Print verbose messages.
+-? -h --help         Print this usage information.
+
+
+NAME
+kbfba-runjob -- This command runs a FBA job. 
+
+VERSION
+1.0
+
+SYNOPSIS
+kbfba-runjob <Job ID> [-?ehv] [--showerror][--verbose][--help]
+
+DESCRIPTION
+INPUT:
+OUTPUT:
+
+PARAMETERS:
+
+-e --showerror   Set as 1 to show any errors in execution
+-v --verbose     Print verbose messages
+-? -h --help     Print this usage information
+
+NAME
+kbfba-getgapgens
+
+VERSION
+1.0
+
+SYNOPSIS
+kbfba-getgapgens <Gapgen IDs> <Gapgen workspaces> [-?ehipv][--idtype][--pretty][--showerror][--verbose][--help]
+
+
+DESCRIPTION
+INPUT:
+OUTPUT:
+
+PARAMETERS:
+Gapgen IDs          Gapgen IDs (; delimiter), required.
+Gapgen workspaces   Gapgen workspaces(; delimiter), required.
+-i --idtype         Type of ID
+-p --pretty         Pretty print output
+-e --showerror      Set as 1 to show any errors in execution
+-v --verbose        Print verbose messages
+-? -h --help        Print this usage information
+
+
+
+NAME
+kbfba-exportphenosim -- This command will export the phenotype simulation information. 
+
+
+VERSION
+1.0
+
+SYNOPSIS
+kbfba-exportphenosim <Phenotype simulation ID> <Format (html)> [-?ehvw] [--workspace][--showerror][--verbose][--help]
+
+
+DESCRIPTION
+INPUT:
+OUTPUT:
+
+PARAMETERS:
+ 
+Phenotype simulation ID   ID of the phenotype simulation, required.
+Format                    Format (html), required. 
+-w --workspace            Workspace with phenotype simulation set.
+-e --showerror            Set as 1 to show any errors in execution.
+-v --verbose              Print verbose messages.
+-? -h --help              Print this usage information.
+ 
+
+
+NAME
+kbfba-exportgenome -- This command will export the genome information.
+VERSION
+1.0
+
+SYNOPSIS
+kbfba-exportgenome <Genome ID> <Format (html,json,readable)> [-?ehvw] [--workspace][--showerror][--verbose][--help]
+
+DESCRIPTION
+INPUT:
+OUTPUT:
+
+PARAMETERS:
+
+Genome ID          ID of the genome, required. 
+Format             Format (options: html,json,readable), readable.
+
+-w --workspace     Workspace with genome
+-e --showerror     Set as 1 to show any errors in execution
+-v --verbose       Print verbose messages
+-? -h --help       Print this usage information
+ 
+
+
+NAME
+kbfba-adjustmodel -- This command .
+
+VERSION
+1.0
+
+SYNOPSIS
+kbfba-adjustmodel <Model ID> <Reaction IDs> [-?acdeghioruvw] [--direction][--compartment][--compindex][--gpr][--removerxn]
+                                            [--addrxn][--workspace][--overwrite][--outputid][--showerror][--verbose][--help]
+
+DESCRIPTION
+INPUT:
+OUTPUT:
+
+PARAMETERS:
+
+Model ID             ID of the FBA model, required. 
+Reaction IDs         Reaction IDs (; delimiter), required.
+ 
+-d --direction       Directionality for reaction (;-separated if multiple)
+-c --compartment     Compartment for reaction (;-separated if multiple)
+-i --compindex       Index of compartment for reaction (;-separated if multiple)
+-g --gpr             GPR for reaction (;-separated if multiple)
+-r --removerxn       Remove reaction(s)
+-a --addrxn          Add reaction(s)
+-w --workspace       Workspace to save FBA results
+-o --overwrite       Overwrite any existing FBA with same name
+-u --outputid        Output ID for adjusted reaction (by default, creates a new version of the same model)
+-e --showerror       Set as 1 to show any errors in execution
+-v --verbose         Print verbose messages
+-? -h --help         Print this usage information
+
+
+NAME
+kbfba-addmedia
+
+VERSION
+1.0
+
+SYNOPSIS
+kbfba-addmedia <Media ID> <Compound IDs> [-?dehmtvw] [--name][--concentrations][--minflux][--maxflux][--type][--defined]
+                                                     [--minimal][--workspace][--showerror][--verbose][--help]
+
+DESCRIPTION
+INPUT:
+OUTPUT:
+
+PARAMETERS:
+Media ID              Media ID, required.
+Compound IDs          Compound IDs (; delimiter), required.
+
+--name                Media name.
+--concentrations      Compound concentrations (; delimiter).
+--minflux             Compound minimum fluxes (; delimiter).
+--maxflux             Compound maximum fluxes (; delimiter).
+-t --type             Type of media.
+-d --defined          Media is defined.
+-m --minimal          Media is minimal.
+-w --workspace        Workspace with model.
+-e --showerror        Set as 1 to show any errors in execution.
+-v --verbose          Print verbose messages.
+-? -h --help          Print this usage information.
+
+
+
+NAME
+kbfba-addaliases
+
+VERSION
+1.0
+
+SYNOPSIS
+kbfba-addaliases <Genome ID> <Filename> <ID type> [-?ehovw] [--workspace][--overwrite][--showerror][--verbose][--help]
+
+DESCRIPTION
+INPUT:
+OUTPUT:
+
+PARAMETERS:
+
+Genome ID          Genome ID, required.
+Filename           Filename, required. 
+ID type            ID type, required.
+
+-w --workspace     Reference default workspace.
+-o --overwrite     Overwrite any existing model with same name.
+-e --showerror     Set as 1 to show any errors in execution.
+-v --verbose       Print verbose messages.
+-? -h --help       Print this usage information.
+
+NAME
+kbfba-exportmedia
+
+VERSION
+1.0
+
+SYNOPSIS
+kbfba-exportmedia <Media ID> <Format> [-?ehvw] [--workspace][--showerror][--verbose][--help]
+
+DESCRIPTION
+INPUT:
+OUTPUT:
+
+PARAMETERS:
+Media ID           Media ID, required.
+Format             Format (options:html,json,readable), required.
+
+-w --workspace     Workspace with media.
+-e --showerror     Set as 1 to show any errors in execution.
+-v --verbose       Print verbose messages.
+-? -h --help       Print this usage information.
+
+
+
+NAME
+kbfba-importprobanno
+
+VERSION
+1.0
+
+SYNOPSIS
+kbfba-importprobanno <Genome ID> <Probanno filename> [-?ehiovw] [--probannoid][--genomews][--ignoreerrors]
+                                                     [--workspace][--overwrite][--showerror][--verbose][--help]
+
+DESCRIPTION
+INPUT:
+OUTPUT:
+
+PARAMETERS:
+
+Genome ID           Genome ID, required. 
+Probanno filename   Probanno filename, required. 
+
+--probannoid        ID for phenotype set in workspace.
+--genomews          Workspace with genome object.
+-i --ignoreerrors   Ignore errors encountered during load.
+-w --workspace      Workspace to save phenotypes in.
+-o --overwrite      Overwrite any existing phenotypes with same name.
+-e --showerror      Set as 1 to show any errors in execution.
+-v --verbose        Print verbose messages.
+-? -h --help        Print this usage information.
+
+NAME
+kbfba-gapfill
+
+VERSION
+1.0
+
+SYNOPSIS
+kbfba-gapfill <Model> [-?cehmotvw] [long options...]
+
+DESCRIPTION
+INPUT:
+OUTPUT:
+
+PARAMETERS:
+
+Model                   Model, required. 
+--modelout              ID for output model in workspace.
+--intsol                Automatically integrate solution.
+-t --iterativegf        Gapfill all inactive reactions.
+--timepersol            Maximum time spent per solution.
+--timelimit             Maximum total time.
+-m --media              Media formulation for FBA.
+--mediaws               Workspace with media formulation
+-c --addlcpd            Additional compounds (; delimiter).
+--numsol                Number of solutions desired.
+--nomediahyp            Do not search for media hypotheses.
+--nobiomasshyp          Do not search for biomass hypotheses.
+--nogprhyp              Do not search for gpr hypotheses.
+--nopathwayhyp          Do not search for pathway hypotheses.
+--allowunbalanced       Allow unbalanced reactions in solutions.
+--activitybonus         Bonus for activating reactions.
+--drainpen              Penalty for drain reactions.
+--directionpen          Penalty for reactions operating in wrong direction.
+--nostructpen           Penalty for reactions with missing structures.
+--unfavorablepen        Penalty for unfavorable reactions.
+--nodeltagpen           Penalty for reactions with no delta G.
+--biomasstranspen       Penalty for biomass transport reactions.
+--singletranspen        Penalty for single transport reactions.
+--transpen              Penalty for transport reactions.
+--probrxn               ID of probabilistic reactions.
+--probanno              ID of probabilistic annotation.
+--probannows            Workspace with probabilistic annotation.
+--blacklist             List of blacklisted reactions (; delimiter).
+--gauranteed            List of guaranteed reactions (; delimiter).
+--allowedcmp            List of allowed compartments (; delimiter).
+--maximize              Maximize objective.
+--objterms              Objective terms (; delimiter).
+--geneko                List of gene KO (; delimiter).
+--rxnko                 List of reaction KO (; delimiter).
+--bounds                Custom bounds.
+--constraints           Custom constraints.
+--defaultmaxflux        Default maximum reaction flux.
+--defaultminuptake      Default minimum nutrient uptake.
+--defaultmaxuptake      Default maximum nutrient uptake.
+--uptakelim             Atom uptake limits.
+--simplethermo          Use simple thermodynamic constraints.
+--thermoconst           Use full thermodynamic constraints.
+--nothermoerror         No uncertainty in thermodynamic constraints.
+--minthermoerror        Minimize uncertainty in thermodynamic constraints.
+--allrev                Treat all reactions as reversible.
+--objfraction           Fraction of objective for follow on analysis.
+--notes                 Notes for flux balance analysis.
+--solver                Solver to use for gapfilling.
+-w --workspace          Workspace to save FBA results.
+-o --overwrite          Overwrite any existing FBA with same name.
+-e --showerror          Set as 1 to show any errors in execution.
+-v --verbose            Print verbose messages.
+-? -h --help            Print this usage information.
+
+
+NAME
+kbfba-buildfbamodel
+
+VERSION
+1.0
+
+SYNOPSIS
+kbfba-buildfbamodel <Genome> [-?ehmovw] [long options...]
+
+
+DESCRIPTION
+INPUT:
+OUTPUT:
+
+PARAMETERS:
+
+Genome             Genome, required. 
+-m --model         Name to be provided for output model.
+--genomews         Workspace where genome is located.
+--templateid       ID of template model to use.
+--templatews       Workspace with template model.
+--core             Build core model.
+-w --workspace     Reference default workspace.
+-o --overwrite     Overwrite any existing model with same name.
+-e --showerror     Set as 1 to show any errors in execution.
+-v --verbose       Print verbose messages.
+-? -h --help       Print this usage information.
+
+
+NAME
+kbfba-importtemplate
+
+VERSION
+1.0
+
+SYNOPSIS
+kbfba-importtemplate <Reaction file> <Biomass file> <Biomass components file> [-?dehinotvw] [long options...]
+
+DESCRIPTION
+INPUT:     The input for commands requires the Reaction file, the Biomass file and the Biomass components file.
+OUTPUT:
+
+PARAMETERS: 
+
+Reaction file              Reaction file, required. 
+Biomass file               Biomass file, required.
+Biomass components file    Biomass components file, required.
+
+-n --name           Name for imported template model
+-d --domain         Domain of life for template model
+-t --type           Type of model produced by template
+--templateid        ID for imported template in workspace
+--mapping           Mapping to which the template should be linked
+--mappingws         Workspace with mapping to which the template should be linked
+-i --ignoreerrors   Ignore errors encountered during load
+-w --workspace      Workspace to save imported template
+-o --overwrite      Overwrite any existing phenotypes with same name
+-e --showerror      Set as 1 to show any errors in execution
+-v --verbose        Print verbose messages
+-? -h --help        Print this usage information
+
+
+
+NAME
+kbfba-exportfba 
+
+VERSION
+1.0
+
+SYNOPSIS
+kbfba-exportfba <FBA ID> <Format (html,json,readable)> [-?ehvw] [long options...]
+
+
+DESCRIPTION
+INPUT:     The FBA ID and Format are required as inputs for this command. 
+OUTPUT:
+
+PARAMETERS:
+
+FBA ID             The FBA ID, required. 
+Format             Format (options: html,json,readable), required.
+-w --workspace     Workspace with FBA.
+-e --showerror     Set as 1 to show any errors in execution.
+-v --verbose       Print verbose messages.
+-? -h --help       Print this usage information.
+
+
+NAME
+kbfba-importfbamodel
+
+VERSION
+1.0
+
+SYNOPSIS
+kbfba-importfbamodel <Genome ID> <Model file> <Biomass equation> [-?ehimovw] [long options...]
+
+DESCRIPTION
+INPUT: The input for commands requires the Genome ID, the Model file, the Biomass equation.
+OUTPUT:
+
+PARAMETERS:
+
+Genome ID           Genome ID, required.
+Model file          Model file, required.
+Biomass equation    Biomass equation, required.
+
+-m --modelid        ID for imported model in workspace
+--genomews          Workspace with genome object
+-i --ignoreerrors   Ignore errors encountered during load
+-w --workspace      Workspace to save imported model in
+-o --overwrite      Overwrite any existing phenotypes with same name
+-e --showerror      Set as 1 to show any errors in execution
+-v --verbose        Print verbose messages
+-? -h --help        Print this usage information
+
+
+
+NAME
+kbfba-getreactions
+VERSION
+1.0
+
+SYNOPSIS
+kbfba-getreactions <Reaction IDs> [-?ehipv] [long options...]
+
+DESCRIPTION
+INPUT:
+OUTPUT:
+
+PARAMETERS:
+
+Reaction IDs     Reaction IDs (; delimiter), required.
+-i --idtype      Type of ID
+-p --pretty      Pretty print output
+-e --showerror   Set as 1 to show any errors in execution
+-v --verbose     Print verbose messages
+-? -h --help     Print this usage information
+
+
+
+NAME
+kbfba-getbio
+
+VERSION
+1.0
+
+SYNOPSIS
+kbfba-getbio [-?behipv] [long options...]
+
+
+DESCRIPTION
+INPUT:
+OUTPUT:
+
+PARAMETERS:
+ 
+-b --biochem     ID of biochemistry to be printed.
+--biochemws      Workspace for biochemistry.
+-i --idtype      Type of ID.
+-p --pretty      Pretty print output.
+-e --showerror   Set as 1 to show any errors in execution.
+-v --verbose     Print verbose messages.
+-? -h --help     Print this usage information.
+
+
+NAME
+kbfba-adjustbiomass
+
+VERSION
+1.0
+
+SYNOPSIS
+kbfba-adjustbiomass <Model ID> <Compound ID> <Coefficient> [-?bcehiopvw] [long options...]
+
+DESCRIPTION
+INPUT:
+OUTPUT:
+
+PARAMETERS:
+
+Model ID             Model ID, required.
+Compound ID          Compound ID, required.
+Coefficient          Coefficient, required. 
+
+-b --biomass         ID of biomass to be modified.
+-p --product         Product compound.
+-c --compartment     Compartment of target compound.
+-i --compindex       Index of compartment for target compound.
+-w --workspace       Workspace to save FBA results.
+-o --overwrite       Overwrite any existing FBA with same name.
+-e --showerror       Set as 1 to show any errors in execution.
+-v --verbose         Print verbose messages.
+-? -h --help         Print this usage information.
+
+
+
+NAME
+kbfba-loadgenome
+
+VERSION
+1.0
+
+SYNOPSIS
+kbfba-loadgenome <Genome file | Genome ID> [-?efhlmoprsvw] [long options...]
+
+DESCRIPTION
+INPUT:    This command requires the input of either the Genome file or the Genome ID. 
+OUTPUT:
+
+PARAMETERS:
+
+Genome file        Genome file, required.
+Genome ID          Genome ID, required.
+
+-f --fromfile      Load genome object from file
+-s --seed          Load genome from SEED
+-r --rast          Load genome from RAST
+-l --login         Login for genome source (e.g. RAST)
+-p --password      Password for genome source (e.g. RAST)
+-m --mapping       Mapping to be used with loaded genome
+--mappingws        Workspace of mapping to be used with loaded genome
+-w --workspace     Workspace to load genome into
+-o --overwrite     Overwrite existing genome with same name
+-e --showerror     Set as 1 to show any errors in execution
+-v --verbose       Print verbose messages
+-? -h --help       Print this usage information
+
+
+NAME
+kbfba-runfba
+
+VERSION
+1.0
+
+SYNOPSIS
+kbfba-runfba <Model> [-?cehmopvw] [long options...]
+
+DESCRIPTION
+INPUT:
+OUTPUT:
+
+PARAMETERS:
+
+Model			Model, required. 
+--fbaid                 ID for FBA in workspace
+-m --media              Media formulation for FBA
+--mediaws               Workspace with media formulation
+--modelws               Workspace with model
+-c --addlcpd            Additional compounds (; delimiter)
+--maximize              Maximize objective
+--objterms              Objective terms
+--geneko                List of gene KO (; delimiter)
+--rxnko                 List of reaction KO (; delimiter)
+--bounds                Custom bounds
+--constraints           Custom constraints
+-p --prommodel          ID of PROMModel
+--prommodelws           Workspace with PROMModel
+--defaultmaxflux        Default maximum reaction flux
+--defaultminuptake      Default minimum nutrient uptake
+--defaultmaxuptake      Default maximum nutrient uptake
+--uptakelim             Atom uptake limits
+--simplethermo          Use simple thermodynamic constraints
+--thermoconst           Use full thermodynamic constraints
+--nothermoerror         No uncertainty in thermodynamic constraints
+--minthermoerror        Minimize uncertainty in thermodynamic constraints
+--allrev                Treat all reactions as reversible
+--objfraction           Fraction of objective for follow on analysis
+--fva                   Run flux variability analysis
+--simko                 Simulate singel gene KO
+--minfluxes             Minimize fluxes from FBA
+--findminmedia          Find minimal media
+--addtomodel            Add FBA to model
+--notes                 Notes for flux balance analysis
+-w --workspace          Workspace to save FBA results
+-o --overwrite          Overwrite any existing FBA with same name
+-e --showerror          Set as 1 to show any errors in execution
+-v --verbose            Print verbose messages
+-? -h --help            Print this usage information
+
+
+NAME
+kbfba-getcompounds
+VERSION
+1.0
+
+SYNOPSIS
+kbfba-getcompounds <Compound IDs> [-?ehipv] [long options...]
+
+
+DESCRIPTION
+INPUT:
+OUTPUT:
+
+PARAMETERS:
+
+Compound IDs     Compound IDs (; delimiter), required.
+-i --idtype      Type of ID (default is to search all alias sets)
+-p --pretty      Pretty print output
+-e --showerror   Set as 1 to show any errors in execution
+-v --verbose     Print verbose messages
+-? -h --help     Print this usage information
+
+
+NAME
+kbfba-exportfbamodel
+
+VERSION
+1.0
+
+SYNOPSIS
+kbfba-exportfbamodel <FBAModel ID> <Format (html,sbml,json,cytoseed,readable)> [-?ehvw] [long options...]
+
+DESCRIPTION
+INPUT:
+OUTPUT:
+
+PARAMETERS:
+
+FBAModel ID        The FBA Model ID, required.
+Format             Format (options: html,sbml,json,cytoseed,readable), required.
+-w --workspace     Workspace with model
+-e --showerror     Set as 1 to show any errors in execution
+-v --verbose       Print verbose messages
+-? -h --help       Print this usage information
+
+
+NAME
+kbfba-simpheno
+
+VERSION
+1.0
+
+SYNOPSIS
+kbfba-simpheno <Model ID> <Phenotype set> [-?ehopvw] [long options...]
+
+DESCRIPTION
+INPUT:
+OUTPUT:
+
+PARAMETERS:
+
+Model ID                Model ID, required.
+Phenotype set           Phenotype set, required.
+
+--phenosimid            ID for phenotype simulation in workspace
+--phenows               Workspace with phenotype data object
+--modelws               Workspace with model object
+--maximize              Maximize objective
+--objterms              Objective terms
+--geneko                List of gene KO (; delimiter)
+--rxnko                 List of reaction KO (; delimiter)
+--bounds                Custom bounds
+--constraints           Custom constraints
+-p --prommodel          ID of PROMModel
+--prommodelws           Workspace with PROMModel
+--defaultmaxflux        Default maximum reaction flux
+--defaultminuptake      Default minimum nutrient uptake
+--defaultmaxuptake      Default maximum nutrient uptake
+--uptakelim             Atom uptake limits
+--simplethermo          Use simple thermodynamic constraints
+--thermoconst           Use full thermodynamic constraints
+--nothermoerror         No uncertainty in thermodynamic constraints
+--minthermoerror        Minimize uncertainty in thermodynamic constraints
+--allrev                Treat all reactions as reversible
+--objfraction           Fraction of objective for follow on analysis
+--notes                 Notes for flux balance analysis
+-w --workspace          Workspace to save FBA results
+-o --overwrite          Overwrite any existing FBA with same name
+-e --showerror          Set as 1 to show any errors in execution
+-v --verbose            Print verbose messages
+-? -h --help            Print this usage information
+
+
+NAME
+kbfba-exportobject
+
+VERSION
+1.0
+
+SYNOPSIS
+kbfba-exportobject <Object type> <Object ID> [-?efhvw] [long options...]
+
+DESCRIPTION
+INPUT:
+OUTPUT:
+
+PARAMETERS:
+Object type       Object type, required.
+Object ID         Object ID, required. 
+
+-f --format        Format for export (html,json,readable)
+-w --workspace     Workspace with FBA
+-e --showerror     Set as 1 to show any errors in execution
+-v --verbose       Print verbose messages
+-? -h --help       Print this usage information
+
+
+NAME
+kbfba-getmedia
+
+VERSION
+1.0
+
+SYNOPSIS
+kbfba-getmedia <Media IDs> <Workspace IDs> [-?ehlpv] [long options...]
+
+DESCRIPTION
+INPUT:
+OUTPUT:
+
+PARAMETERS:
+
+Media IDs        Media IDs (; delimiter), required.
+Workspace IDs    Workspace IDs (; delimiter), required.
+
+-p --pretty      Pretty print output
+-l --long        Long format output
+-e --showerror   Set as 1 to show any errors in execution
+-v --verbose     Print verbose messages
+-? -h --help     Print this usage information
+ 
+
+
+NAME
+kbfba-url -- This command changes the URL of the server. 
+             The current URL is: http://kbase.us/services/fbaServices/
+
+
+VERSION
+1.0
+
+SYNOPSIS
+kbfba-url <New server URL> [-?h] 
+
+DESCRIPTION
+INPUT:
+OUTPUT:
+
+PARAMETERS:
+
+New server URL        New server URL, required. 
+
+-? -h --help  Print this usage information
+-e
+-l
+-p 
+
+
+
+
+NAME
+kbfba-importpheno
+
+VERSION
+1.0
+
+SYNOPSIS
+kbfba-importpheno <Genome ID> <Phenotype filename> [-?ehovw] [long options...]
+
+DESCRIPTION
+INPUT:
+OUTPUT:
+
+PARAMETERS:
+
+Genome ID            Genome ID, required.
+Phenotype filename   Phenotype filename, required.
+
+--phenoid          ID for phenotype set in workspace
+--genomews         Workspace with genome object
+--ignoreerrors     Ignore errors encountered during load
+-w --workspace     Workspace to save phenotypes in
+-o --overwrite     Overwrite any existing phenotypes with same name
+-e --showerror     Set as 1 to show any errors in execution
+-v --verbose       Print verbose messages
+-? -h --help       Print this usage information
+
+
+
+NAME
+kbfba-queuefba
+VERSION
+1.0
+
+SYNOPSIS
+kbfba-queuefba <Model> [-?cehmopvw] [long options...]
+
+
+DESCRIPTION
+INPUT:
+OUTPUT:
+
+PARAMETERS:
+ 
+Model                   Model, required.
+--fbaid                 ID for FBA in workspace
+-m --media              Media formulation for FBA
+--mediaws               Workspace with media formulation
+-c --addlcpd            Additional compounds (; delimiter)
+--maximize              Maximize objective
+--objterms              Objective terms
+--geneko                List of gene KO (; delimiter)
+--rxnko                 List of reaction KO (; delimiter)
+--bounds                Custom bounds
+--constraints           Custom constraints
+-p --prommodel          ID of PROM Model
+--prommodelws           Workspace with PROM Model
+--defaultmaxflux        Default maximum reaction flux
+--defaultminuptake      Default minimum nutrient uptake
+--defaultmaxuptake      Default maximum nutrient uptake
+--uptakelim             Atom uptake limits
+--simplethermo          Use simple thermodynamic constraints
+--thermoconst           Use full thermodynamic constraints
+--nothermoerror         No uncertainty in thermodynamic constraints
+--minthermoerror        Minimize uncertainty in thermodynamic constraints
+--allrev                Treat all reactions as reversible
+--objfraction           Fraction of objective for follow on analysis
+--fva                   Run flux variability analysis
+--simko                 Simulate singel gene KO
+--minfluxes             Minimize fluxes from FBA
+--findminmedia          Find minimal media
+--addtomodel            Add FBA to model
+--notes                 Notes for flux balance analysis
+-w --workspace          Workspace to save FBA results
+-o --overwrite          Overwrite any existing FBA with same name
+-e --showerror          Set as 1 to show any errors in execution
+-v --verbose            Print verbose messages
+-? -h --help            Print this usage information
+
+
+NAME
+kbfba-importtranslation
+
+VERSION
+1.0
+
+SYNOPSIS
+kbfba-importtranslation <Genome ID> <Translation file> <ID type> [-?ehovw] [long options...]
+
+DESCRIPTION
+INPUT:
+OUTPUT:
+
+PARAMETERS:
+ 
+Genome ID          Genome ID, required.
+Translation file   Translation file, required.
+ID type            ID type, required.
+
+--genomews         Workspace with genome object
+-w --workspace     Workspace to save imported model in
+-o --overwrite     Overwrite any existing phenotypes with same name
+-e --showerror     Set as 1 to show any errors in execution
+-v --verbose       Print verbose messages
+-? -h --help       Print this usage information
+ 
+
+NAME
+kbfba-jobdone
+
+VERSION
+1.0
+
+SYNOPSIS
+kbfba-jobdone <Job ID> [-?ehv] [long options...]
+
+DESCRIPTION
+INPUT:
+OUTPUT:
+
+PARAMETERS:
+
+JOB ID           JOB ID, required. 
+-e --showerror   Set as 1 to show any errors in execution
+-v --verbose     Print verbose messages
+-? -h --help     Print this usage information
+
+
+NAME
+kbfba-getgapfills
+
+VERSION
+1.0
+
+SYNOPSIS
+kbfba-getgapfills <Gapfill IDs> <Gapfill workspaces> [-?ehipv] [long options...]
+
+DESCRIPTION
+INPUT:
+OUTPUT:
+
+PARAMETERS:
+
+Gapfill IDs          Gapfill IDs (; delimiter), required.
+Gapfill workspaces   Gapfill workspaces (; delimiter), required.
+
+-i --idtype      Type of ID
+-p --pretty      Pretty print output
+-e --showerror   Set as 1 to show any errors in execution
+-v --verbose     Print verbose messages
+-? -h --help     Print this usage information
+
+
+
+
+
+
