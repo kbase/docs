@@ -44,7 +44,7 @@ These are: <br />
 </div><div><h3>File Browser</h3>
 <p>Iris maintains a file system for your use. You can upload your own data files (using the up-arrow button in th lower right corner of the File Browser box), or create your own via output redirection using the &gt; redirection symbol. Let's say you wanted to create a file of Streptococcus genomes; you would type <br />
   <br />
-      <a href="/developer-zone/api-documentation/cdm-entity-relationship-command-scripts/#all_entities_Genome" target="_blank"><strong>all_entities_Genome</strong></a><strong> -f scientific_name | <a name="grep61" id="grep61">grep</a> &quot;Streptococcus pneumonia&quot;  &gt; all_strep</strong><br />
+      <a href="/developer-zone/documentation/cdm-entity-relationship-command-scripts/#all_entities_Genome" target="_blank"><strong>all_entities_Genome</strong></a><strong> -f scientific_name | <a name="grep61" id="grep61">grep</a> &quot;Streptococcus pneumonia&quot;  &gt; all_strep</strong><br />
   <br />
   This creates a file with the name <strong>all_strep</strong> in your Iris user space. You should see this filename appear in your File Browser section of the interface. You can also see your stored files by using the ls command. Stored files persist from session to session.</p>
 <p><img src="/docs/getstarted/getstarted_iris/filebrowser.png" width="185" height="122" alt="File Browser" /><br />
@@ -60,7 +60,7 @@ These are: <br />
 </div><div><h2>Understanding KBase Commands and Output</h2>
 <p>Most of the KBase command-line tools take in a file containing a tab-separated table and output a modified table. The most common modification is the addition of one of more columns. We create &quot;pipelines&quot; of these tools to implement fairly complex transformations leading to the final table containing the desired output. For example, consider the following little <a name="pipeline53" id="pipeline53">pipeline</a>: <br />
   <br />
-           <a href="/developer-zone/api-documentation/cdm-entity-relationship-command-scripts/#all_entities_Genome" target="_blank"><strong>all_entities_Genome</strong></a><strong> -f scientific_name | <a name="grep54" id="grep54">grep</a> &quot;Streptococcus pneumoniae&quot;<br />
+           <a href="/developer-zone/documentation/cdm-entity-relationship-command-scripts/#all_entities_Genome" target="_blank"><strong>all_entities_Genome</strong></a><strong> -f scientific_name | <a name="grep54" id="grep54">grep</a> &quot;Streptococcus pneumoniae&quot;<br />
 </strong><br />
 The <a href="/developer-zone/api-documentation/cdm-entity-relationship-command-scripts/#all_entities_Genome" target="_blank"><strong>all_entities_Genome</strong></a> command is thought of as producing a table in which the first column (by default) is the genome ID, and any extra columns come from the arguments of the command. In this case, we get a 2-column table:<br />
 <br />
