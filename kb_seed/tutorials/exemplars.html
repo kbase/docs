@@ -2,12 +2,12 @@
 <h1>Towards a Controlled Vocabulary Part 1: Defining Exemplars</h1>
 <p><strong>Purpose: </strong> An explanation of KBase's technique and
 strategy to unify varying vocabularies for protein function.</p>
-<p><strong>Required Prerequisite Activities: </strong> <a href="http://www.kbase.us/developer-zone/tutorials/getting-started/getting-started-with-kbase/">Getting
+<p><strong>Required Prerequisite Activities: </strong> <a href="/developer-zone/tutorials/getting-started/getting-started-with-kbase/">Getting
 Started with KBase</a> </p>
-<p> <strong>Suggested Prerequisite Activities: </strong> <a href="http://www.kbase.us/developer-zone/tutorials/iris/some-basic-exercises-using-the-kbase-iris-interface/">Some
+<p> <strong>Suggested Prerequisite Activities: </strong> <a href="/developer-zone/tutorials/iris/some-basic-exercises-using-the-kbase-iris-interface/">Some
 Basic Exercises using the KBase Iris Interface </a> and other Iris
 tutorials. </p>
-<p><strong>Related Tutorials:</strong> <a href="http://www.kbase.us/developer-zone/tutorials/command-line-scripts/command-line-applications/towards-a-controlled-vocabulary-part-2-mapping-to-exemplars/">Towards
+<p><strong>Related Tutorials:</strong> <a href="/developer-zone/tutorials/command-line-scripts/command-line-applications/towards-a-controlled-vocabulary-part-2-mapping-to-exemplars/">Towards
 a Controlled Vocabulary Part 2: Mapping to Exemplars </a> and other
 Command Line tutorials. </p>
 <h2>Introduction</h2>
@@ -46,7 +46,7 @@ regulatory models, and eventually all functional roles that occur in
 living organisms, but for now let us confine ourselves to the set of
 functional roles needed to support <a name="metabolic433">metabolic</a>
 modeling. You can just use the command <br>
-<pre>    <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#all_roles_used_in_models" target="_blank">all_roles_used_in_models</a> <br><br></pre>
+<pre>    <a href="/documentation/cdm-command-line-scripts/#all_roles_used_in_models" target="_blank">all_roles_used_in_models</a> <br><br></pre>
 to get the current list of functional roles used in <a name="metabolic434">metabolic</a> models. Currently, there are about
 2000-2500. This is a manageable number.
 <h2>The Concept of <i>Exemplars</i></h2>
@@ -62,7 +62,7 @@ conjecture that they believe their functions to be reliable due to the <a name="
 </ul>
 Let's begin with connecting the roles used in models to <a name="literature437">literature</a>. A simple, but somewhat slow, way
 to do this is using <br>
-<pre>         <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#all_roles_used_in_models" target="_blank">all_roles_used_in_models</a> | <br>	 <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#roles_to_fids" target="_blank">roles_to_fids</a> 2&gt; roles.without.fids | <br>	 <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#fids_to_literature" target="_blank">fids_to_literature</a> 2&gt; roles.fids.no.literature &gt; role.fid.pubmed <br><br></pre>
+<pre>         <a href="/documentation/cdm-command-line-scripts/#all_roles_used_in_models" target="_blank">all_roles_used_in_models</a> | <br>	 <a href="/documentation/cdm-command-line-scripts/#roles_to_fids" target="_blank">roles_to_fids</a> 2&gt; roles.without.fids | <br>	 <a href="/documentation/cdm-command-line-scripts/#fids_to_literature" target="_blank">fids_to_literature</a> 2&gt; roles.fids.no.literature &gt; role.fid.pubmed <br><br></pre>
 This requires some explanation. First, many of the command-line scripts
 that cross from one entity type to another write input lines that could
 not be matched up to <i>stderr</i>.
@@ -76,19 +76,19 @@ genes. They represent a set of issues that need to be processed
 manually. When I last ran this command, I found 148 such roles. <br>
 <br>
 If we now run, <br>
-<pre>      cut -f1,2 role.fid.pubmed | <a href="http://kbase.us/developer-zone/api-documentation/cdm-entity-relationship-command-scripts/#get_relationship_Produces" target="_blank">get_relationship_Produces</a> -to id | sort -u &gt; role.fid.md5<br><br></pre>
+<pre>      cut -f1,2 role.fid.pubmed | <a href="/documentation/cdm-entity-relationship-command-scripts/#get_relationship_Produces" target="_blank">get_relationship_Produces</a> -to id | sort -u &gt; role.fid.md5<br><br></pre>
 we get a table showing roles and fids, where each of the fids connnects
 to a least one pubmed reference. The <i><a name="cut440">cut</a></i>
 picks up the first two fields (<i>role</i> and <i>fid</i>
 , dropping the <i>pubmed id</i>
 ). Then the <br>
-<pre>        <a href="http://kbase.us/developer-zone/api-documentation/cdm-entity-relationship-command-scripts/#get_relationship_Produces" target="_blank">get_relationship_Produces</a> -to id<br><br></pre>
+<pre>        <a href="/documentation/cdm-entity-relationship-command-scripts/#get_relationship_Produces" target="_blank">get_relationship_Produces</a> -to id<br><br></pre>
 is used to pick up the <a name="md5441">md5</a> value of the <a name="ProteinSequence442">ProteinSequence</a> corresponding to a fid.
 To understand how this works, you need to know that the relationship <i>Produces</i>
 connects <i><a name="Feature443">Feature</a></i> entities to <i><a name="ProteinSequence444">ProteinSequence</a></i> entities, and that
 the <a name="md5445">md5</a> hash values are used as IDs for the <i><a name="ProteinSequence446">ProteinSequence</a></i> entities. To see how
 this works, you might try running <br>
-<pre>        echo 'kb|g.0.peg.2659' | <a href="http://kbase.us/developer-zone/api-documentation/cdm-entity-relationship-command-scripts/#get_relationship_Produces" target="_blank">get_relationship_Produces</a> -to id<br><br></pre>
+<pre>        echo 'kb|g.0.peg.2659' | <a href="/documentation/cdm-entity-relationship-command-scripts/#get_relationship_Produces" target="_blank">get_relationship_Produces</a> -to id<br><br></pre>
 and study what comes out. Now, let us look at a portion of the table
 representing fids that can be connected to a critical enzyme of
 glycolysis: <br>
@@ -121,7 +121,7 @@ subtilis</i> features when possible. We consider these to be relatively
 stable. We begin by just getting a 3-column table <br>
 <pre>           [role,fid,genome-name]<br><br></pre>
 using <br>
-<pre> <br>           cut -f1,2 role.fid.md5 | <br>	   <a href="http://kbase.us/developer-zone/api-documentation/cdm-entity-relationship-command-scripts/#get_relationship_IsOwnedBy" target="_blank">get_relationship_IsOwnedBy</a> -to scientific_name | <br>	   <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#fids_to_functions" target="_blank">fids_to_functions</a> -c 2 |<br>	   sort &gt; role.fid.genome.function<br><br></pre>
+<pre> <br>           cut -f1,2 role.fid.md5 | <br>	   <a href="/documentation/cdm-entity-relationship-command-scripts/#get_relationship_IsOwnedBy" target="_blank">get_relationship_IsOwnedBy</a> -to scientific_name | <br>	   <a href="/documentation/cdm-command-line-scripts/#fids_to_functions" target="_blank">fids_to_functions</a> -c 2 |<br>	   sort &gt; role.fid.genome.function<br><br></pre>
 We have tacked on the function of each fid because we wish to eliminate
 the use of multifunctional fids as exemplars. We do this by only
 looking at fids with functions that exactly match the role in the
@@ -147,13 +147,13 @@ file all roles for which exemplars have been chosen, and then select
 exemplars from those that are left. We can make fairly arbitrary
 choices to get initial exemplars. Perhaps the easiest way to make an
 initial choice is to just use <br>
-<pre>                perl delete_roles_with_exemplars.pl exemplars.with.literature &lt; roles.fids.no.literature | <br>                <a href="http://kbase.us/developer-zone/api-documentation/cdm-entity-relationship-command-scripts/#get_relationship_IsOwnedBy" target="_blank">get_relationship_IsOwnedBy</a> -to scientific_name |<br>                <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#fids_to_functions" target="_blank">fids_to_functions</a> -c 2 | <br>                sort | <br>                perl choose_exemplars.pl &gt; exemplars.for.no.lit.roles<br><br></pre>
+<pre>                perl delete_roles_with_exemplars.pl exemplars.with.literature &lt; roles.fids.no.literature | <br>                <a href="/documentation/cdm-entity-relationship-command-scripts/#get_relationship_IsOwnedBy" target="_blank">get_relationship_IsOwnedBy</a> -to scientific_name |<br>                <a href="/documentation/cdm-command-line-scripts/#fids_to_functions" target="_blank">fids_to_functions</a> -c 2 | <br>                sort | <br>                perl choose_exemplars.pl &gt; exemplars.for.no.lit.roles<br><br></pre>
 Here the simple perl program to filter out roles that already have
 exemplars is just <br>
 <pre># delete_roles_with_exemplars.pl<br>#<br>my %roles_with_exemplars = map { $_ =~ /^([^\t\n]*)/; ($1 =&gt; 1) } `cat $ARGV[0]`;<br>while ($_ = )<br>{<br>    if (($_ =~ /^([^\t\n]+)/) &amp;&amp; (! $roles_with_exemplars{$1}))<br>    {<br>	print $_;<br>    }<br>}<br><br></pre>
 To get a list of the roles for which no exemplars could be chosen, we
 can use <br>
-<pre>    cat exemplars.with.literature exemplars.for.no.lit.roles &gt; exemplars<br>    <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#all_roles_used_in_models" target="_blank">all_roles_used_in_models</a> | perl delete_roles_with_exemplars.pl exemplars &gt; roles.without.exemplars<br><br></pre>
+<pre>    cat exemplars.with.literature exemplars.for.no.lit.roles &gt; exemplars<br>    <a href="/documentation/cdm-command-line-scripts/#all_roles_used_in_models" target="_blank">all_roles_used_in_models</a> | perl delete_roles_with_exemplars.pl exemplars &gt; roles.without.exemplars<br><br></pre>
 Out of the 2000-2500 roles used in the curent collection of models,
 there are often a small number for which no attachment to a sequence
 exists. These require manual curation and need to be continuously
