@@ -3,18 +3,18 @@
 <p><strong>Purpose: </strong> Use KBase to translate/map protein
 information from
 various sources into a common language of exemplars. </p>
-<p><strong>Required Prerequisite Activities: </strong> <a href="http://www.kbase.us/developer-zone/tutorials/getting-started/getting-started-with-kbase/">Getting
+<p><strong>Required Prerequisite Activities: </strong> <a href="/developer-zone/tutorials/getting-started/some-basic-exercises-using-kbase/">Getting
 Started with KBase</a> </p>
-<p> <strong>Suggested Prerequisite Activities: </strong> <a href="http://www.kbase.us/developer-zone/tutorials/iris/some-basic-exercises-using-the-kbase-iris-interface/">Some
+<p> <strong>Suggested Prerequisite Activities: </strong> <a href="/developer-zone/tutorials/iris/some-basic-exercises-using-the-kbase-iris-interface/">Some
 Basic Exercises using the KBase Iris Interface </a> and other Iris
 tutorials. </p>
-<p><strong>Related Tutorials:</strong> <a href="http://www.kbase.us/developer-zone/tutorials/command-line-scripts/command-line-applications/towards-a-controlled-vocabulary-part-3-making-the-mol-translation-to-the-abstract-function-vocabulary/">Towards
+<p><strong>Related Tutorials:</strong> <a href="/developer-zone/tutorials/command-line-scripts/command-line-applications/towards-a-controlled-vocabulary-part-3-making-the-mol-translation-to-the-abstract-function-vocabulary/">Towards
 a Controlled Vocabulary Part 3: Making the MOL Translation to the
 Abstract Function Vocabulary </a> and other
 Command Line tutorials. </p>
 <h1><strong>Introduction</strong></h1>
 In the first tutorial relating to creating and maintaining a controlled
-vocabulary of function (<a href="http://kbase.us/developer-zone/tutorials/command-line-scripts/command-line-applications/towards-a-controlled-vocabulary-part-1-defining-exemplars/" name="Exemplars458">Part 1: Defining Exemplars</a>) we discussed the
+vocabulary of function (<a href="/developer-zone/tutorials/command-line-scripts/command-line-applications/towards-a-controlled-vocabulary-part-1-defining-exemplars/" name="Exemplars458">Part 1: Defining Exemplars</a>) we discussed the
 creation of a set of exemplars. These exemplars
 allowed us to make statements like
 <blockquote><i>The function of protein X is the same as that of
@@ -64,7 +64,7 @@ exemplar (<i><a name="SEED473">SEED</a>.inconsistencies.1</i>), and a
 set of clear inconsistencies that need to be resolved (<i><a name="SEED474">SEED</a>.inconsistencies.2</i>). <br>
 <br>
 Here is how we implement this strategy: <br>
-<pre>            cat exemplars.with.literature exemplars.for.no.lit.roles &gt; exemplars<br><br>            cut -f1,2 exemplars |<br>            <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#roles_to_fids" target="_blank">roles_to_fids</a> -c 1 |<br>            <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#fids_to_genomes" target="_blank">fids_to_genomes</a> | <a href="http://kbase.us/developer-zone/api-documentation/cdm-entity-relationship-command-scripts/#get_relationship_WasSubmittedBy" target="_blank">get_relationship_WasSubmittedBy</a> -to id | grep "SEED$" | cut -f1,2,3 |<br>            <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#fids_to_proteins" target="_blank">fids_to_proteins</a> |<br>            <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#fids_to_functions" target="_blank">fids_to_functions</a> -c 3 |<br>            <a href="http://kbase.us/developer-zone/api-documentation/cdm-entity-relationship-command-scripts/#get_entity_Feature" target="_blank">get_entity_Feature</a> -c 3 -f source_id &gt; role.exemplar.fid.md5.function.source_id<br><br>            export TAB=`echo -e "\t"`<br>            sort -t "$TAB" -k 4 role.exemplar.fid.md5.function.source_id |<br>            perl make_seed_translation.pl &gt; seed.translation.table<br><br></pre>
+<pre>            cat exemplars.with.literature exemplars.for.no.lit.roles &gt; exemplars<br><br>            cut -f1,2 exemplars |<br>            <a href="/developer-zone/documentation/cdm-command-line-scripts/#roles_to_fids" target="_blank">roles_to_fids</a> -c 1 |<br>            <a href="/developer-zone/documentation/cdm-command-line-scripts/#fids_to_genomes" target="_blank">fids_to_genomes</a> | <a href="/developer-zone/documentation/cdm-entity-relationship-command-scripts/#get_relationship_WasSubmittedBy" target="_blank">get_relationship_WasSubmittedBy</a> -to id | grep "SEED$" | cut -f1,2,3 |<br>            <a href="/developer-zone/documentation/cdm-command-line-scripts/#fids_to_proteins" target="_blank">fids_to_proteins</a> |<br>            <a href="/developer-zone/documentation/cdm-command-line-scripts/#fids_to_functions" target="_blank">fids_to_functions</a> -c 3 |<br>            <a href="/developer-zone/documentation/cdm-entity-relationship-command-scripts/#get_entity_Feature" target="_blank">get_entity_Feature</a> -c 3 -f source_id &gt; role.exemplar.fid.md5.function.source_id<br><br>            export TAB=`echo -e "\t"`<br>            sort -t "$TAB" -k 4 role.exemplar.fid.md5.function.source_id |<br>            perl make_seed_translation.pl &gt; seed.translation.table<br><br></pre>
 where <i>make_seed_translation.pl</i> program is given below. Let us
 go through this somewhat complex set of commands one step at a time. <br>
 <pre>            cat exemplars.with.literature exemplars.for.no.lit.roles &gt; exemplars<br><br></pre>
@@ -73,7 +73,7 @@ lines in this <i>exemplars</i> file contain <br>
 <pre>            [role,exemplar-fid,genome_name]<br><br></pre>
 These 3-tuples define our "abstract vocabulary of function". Then, look
 at <br>
-<pre>            cut -f1,2 exemplars |<br>            <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#roles_to_fids" target="_blank">roles_to_fids</a> -c 1 |<br>            <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#fids_to_genomes" target="_blank">fids_to_genomes</a> | <a href="http://kbase.us/developer-zone/api-documentation/cdm-entity-relationship-command-scripts/#get_relationship_WasSubmittedBy" target="_blank">get_relationship_WasSubmittedBy</a> -to id | grep "SEED$" | cut -f1,2,3 |<br><br></pre>
+<pre>            cut -f1,2 exemplars |<br>            <a href="/developer-zone/documentation/cdm-command-line-scripts/#roles_to_fids" target="_blank">roles_to_fids</a> -c 1 |<br>            <a href="/developer-zone/documentation/cdm-command-line-scripts/#fids_to_genomes" target="_blank">fids_to_genomes</a> | <a href="/developer-zone/documentation/cdm-entity-relationship-command-scripts/#get_relationship_WasSubmittedBy" target="_blank">get_relationship_WasSubmittedBy</a> -to id | grep "SEED$" | cut -f1,2,3 |<br><br></pre>
 These three lines take the first two fields of the 3-tuples (dropping
 the <i>genome_name</i>
 ), extend the table with fids that are believed to implement the role,
@@ -86,7 +86,7 @@ Then, we add columns for the <a name="md5476">md5</a> of the <a name="SEED477">S
 -fid, and the <a name="SEED479">SEED</a>
 -id of the <a name="SEED480">SEED</a>
 -fid. <br>
-<pre>            <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#fids_to_proteins" target="_blank">fids_to_proteins</a> |<br>            <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#fids_to_functions" target="_blank">fids_to_functions</a> -c 3 |<br>            <a href="http://kbase.us/developer-zone/api-documentation/cdm-entity-relationship-command-scripts/#get_entity_Feature" target="_blank">get_entity_Feature</a> -c 3 -f source_id &gt; role.exemplar.fid.md5.function.source_id<br><br></pre>
+<pre>            <a href="/developer-zone/documentation/cdm-command-line-scripts/#fids_to_proteins" target="_blank">fids_to_proteins</a> |<br>            <a href="/developer-zone/documentation/cdm-command-line-scripts/#fids_to_functions" target="_blank">fids_to_functions</a> -c 3 |<br>            <a href="/developer-zone/documentation/cdm-entity-relationship-command-scripts/#get_entity_Feature" target="_blank">get_entity_Feature</a> -c 3 -f source_id &gt; role.exemplar.fid.md5.function.source_id<br><br></pre>
 This gives <br>
 <pre>            [role,exemplar-fid,<br>	     KBase-id-of-SEED-fid,<br>	     md5-SEED-fid,<br>	     function-SEED-fid,<br>	     SEED-id]<br><br></pre>
 <h2>Generating the SEED Translations</h2>
