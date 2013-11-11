@@ -4,19 +4,19 @@ to the Abstract Function Vocabulary</h1>
 <p><strong>Purpose: </strong> Use KBase to map MicrobesOnLine (MOL)
 features to
 the abstract vocabulary. </p>
-<p><strong>Required Prerequisite Activities: </strong> <a href="http://www.kbase.us/developer-zone/tutorials/getting-started/getting-started-with-kbase/">Getting
+<p><strong>Required Prerequisite Activities: </strong> <a href="/developer-zone/tutorials/getting-started/getting-started-with-kbase/">Getting
 Started with KBase</a> </p>
-<p> <strong>Suggested Prerequisite Activities: </strong> <a href="http://www.kbase.us/developer-zone/tutorials/iris/some-basic-exercises-using-the-kbase-iris-interface/">Some
+<p> <strong>Suggested Prerequisite Activities: </strong> <a href="/developer-zone/tutorials/iris/some-basic-exercises-using-the-kbase-iris-interface/">Some
 Basic Exercises using the KBase Iris Interface </a> and other Iris
 tutorials. </p>
-<p><strong>Related Tutorials:</strong> <a href="http://www.kbase.us/developer-zone/tutorials/command-line-scripts/command-line-applications/mapping-functions-between-sources-of-annotations-take-2/">Mapping
+<p><strong>Related Tutorials:</strong> <a href="/developer-zone/tutorials/command-line-scripts/command-line-applications/mapping-functions-between-sources-of-annotations-take-2/">Mapping
 Functions Between Sources of Annotations: Take 2 </a> and other
 Command Line tutorials. </p>
 <h1><strong>Introduction</strong></h1>
 <p>We have described how to define an abstract vocabulary of function
-using exemplars in <a href="http://kbase.us/developer-zone/tutorials/command-line-scripts/command-line-applications/towards-a-controlled-vocabulary-part-1-defining-exemplars/" l="l" name="Exemplars492">Part 1: Defining Exemplars</a>. Next, we
+using exemplars in <a href="/developer-zone/tutorials/command-line-scripts/command-line-applications/towards-a-controlled-vocabulary-part-1-defining-exemplars/" l="l" name="Exemplars492">Part 1: Defining Exemplars</a>. Next, we
 described how to generate the <a name="SEED493">SEED</a> mapping from <a name="SEED494">SEED</a> IDs to the abstract vocabulary imposed by
-exemplars <a href="http://kbase.us/developer-zone/tutorials/command-line-scripts/command-line-applications/towards-a-controlled-vocabulary-part-2-mapping-to-exemplars/" name="Exemplars495">Part 2: Mapping to Exemplars</a>. We complete this
+exemplars <a href="/developer-zone/tutorials/command-line-scripts/command-line-applications/towards-a-controlled-vocabulary-part-2-mapping-to-exemplars/" name="Exemplars495">Part 2: Mapping to Exemplars</a>. We complete this
 discussion of how to reach consistent <a name="annotations496">annotations</a>
 in an abstract vocabulary by discussing how one might map <a name="MicrobesOnLine497">MicrobesOnLine</a> (MOL) features to the
 abstract vocabulary. <br>
@@ -32,14 +32,14 @@ as 4-tuples of the form <br>
 where the <i>source</i> is <i><a name="SEED499">SEED</a></i>. Here,
 the <i>fid</i> field is the KBase ID of the <a name="SEED500">SEED</a>
 <i>source_id</i>. We begin by adding a column containing the <a name="md5501">md5</a> values using <br>
-<pre>           <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#fids_to_proteins" target="_blank">fids_to_proteins</a> -c 3 &lt; seed.translation.table &gt; seed.translation.with.md5<br><br><br><br>  </pre>
+<pre>           <a href="/developer-zone/documentation/cdm-command-line-scripts/#fids_to_proteins" target="_blank">fids_to_proteins</a> -c 3 &lt; seed.translation.table &gt; seed.translation.with.md5<br><br><br><br>  </pre>
 and we <a name="sort502">sort</a> them on the <a name="md5503">md5</a>
 value using <br>
 <pre>            sort -u -k 5 seed.translation.with.md5 &gt; sorted.seed.with.md5<br><br> </pre>
 <h2>Create a Table of Data Relating to the MOL Genomes</h2>
 <p>Then, we create a table of data relating to the MOL genomes using <br>
 </p>
-<pre>            echo MOL | <br>	    <a href="http://kbase.us/developer-zone/api-documentation/cdm-entity-relationship-command-scripts/#get_relationship_Submitted" target="_blank">get_relationship_Submitted</a> -to id | <br>	    <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#genomes_to_fids" target="_blank">genomes_to_fids</a> peg | <br>	    cut -f 3 | <br>	    <a href="http://kbase.us/developer-zone/api-documentation/cdm-entity-relationship-command-scripts/#get_entity_Feature" target="_blank">get_entity_Feature</a> -f source_id |<br>	    <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#fids_to_proteins" target="_blank">fids_to_proteins</a> -c 1 2&gt; /dev/null | <br>	    <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#fids_to_functions" target="_blank">fids_to_functions</a> -c 1 |<br>	    sort -k 3 &gt; MOL.fid.source_id.md5.function<br><br></pre>
+<pre>            echo MOL | <br>	    <a href="/documentation/cdm-entity-relationship-command-scripts/#get_relationship_Submitted" target="_blank">get_relationship_Submitted</a> -to id | <br>	    <a href="/developer-zone/documentation/cdm-command-line-scripts/#genomes_to_fids" target="_blank">genomes_to_fids</a> peg | <br>	    cut -f 3 | <br>	    <a href="/developer-zone/documentation/cdm-entity-relationship-command-scripts/#get_entity_Feature" target="_blank">get_entity_Feature</a> -f source_id |<br>	    <a href="/developer-zone/documentation/cdm-command-line-scripts/#fids_to_proteins" target="_blank">fids_to_proteins</a> -c 1 2&gt; /dev/null | <br>	    <a href="/developer-zone/documentation/cdm-command-line-scripts/#fids_to_functions" target="_blank">fids_to_functions</a> -c 1 |<br>	    sort -k 3 &gt; MOL.fid.source_id.md5.function<br><br></pre>
 <p>Now, we have two fairly large files, <i>seed.translation.with.<a name="md5504">md5</a></i> and <i>MOL.fid.<a name="md5505">md5</a>.function</i>,
 both sorted on <a name="md5506">md5</a> values. We can now make a
 single pass through the two files, compiling the data we will need to
