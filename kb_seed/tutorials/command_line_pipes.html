@@ -7,14 +7,14 @@
 <p><strong>Related Tutorials:</strong> <a href="/developer-zone/tutorials/command-line-scripts/accessing-central-store-data/extending-the-cs-commands-with-operators/">Extending
   the CS Commands with Operators</a> </p>
 <h2>Introduction</h2>
-The <a name="Central Store224">Central Store</a> (<b>CS</b> ) is the KBase integration of the data needed to support the creation
+The <a name="Central Store224">Central Store</a> (<b>CS</b>) is the KBase integration of the data needed to support the creation
 and validation of <a name="metabolic225">metabolic</a> and regulatory
 models. It will certainly be used for many other purposes, but its
 creation is being driven by the needs of the modelling community. <br>
 <br>
 We have described many details of how to access the contents of the CS
 via command-line tools already in <a href="/developer-zone/tutorials/getting-started/some-basic-exercises-using-kbase/">Some
-Basic Exercises Using KBase</a> . This document is designed to complement that tutorial. We hope to
+Basic Exercises Using KBase</a>. This document is designed to complement that tutorial. We hope to
 explain an overview of the approach of piping KBase tools together on
 the command-line, as well as some very minimal notes relating to a
 subset of the Unix tools. <br>
@@ -22,7 +22,7 @@ subset of the Unix tools. <br>
 To understand the contents of either tutorial you really do need to be
 able to bring up the entity-relationship model describing the contents
 of the CS and understand the contents of that model, which is often
-called the <a name="Central Data Model226">Central Data Model</a> (<b><a name="CDM227">CDM</a></b> ). See the start of the companion tutorial to get an overview of the <a name="CDM228">CDM</a> and how to get started. <br>
+called the <a name="Central Data Model226">Central Data Model</a> (<b><a name="CDM227">CDM</a></b>). See the start of the companion tutorial to get an overview of the <a name="CDM228">CDM</a> and how to get started. <br>
 <br>
 We realize that most users will utlimately use user interfaces that
 obviate the need to do anything at the command-line. We look forward to
@@ -88,8 +88,7 @@ Here, some extra comments are necessary.
 </ol>
 <h2> A Short Exercise</h2>
 Now, as an exercise, try to show the IDs and functions of all fids that
-have precisely the same function as <i>kb|g.9772.<a name="peg234">peg</a>.2175</i> , You should spend a few minutes, if necessary, and try to solve this
-yourself before looking at our approach. <br>
+have precisely the same function as <i>kb|g.9772.<a name="peg234">peg</a>.2175</i>. <br>
 <br>
 We would likely use the following <a name="pipeline235">pipeline</a> : <br>
 <pre>  echo 'kb|g.9772.peg.2175' | <a href="/developer-zone/documentation/cdm-command-line-scripts/#fids_to_proteins" target="_blank">fids_to_proteins</a> | <a href="/developer-zone/documentation/cdm-command-line-scripts/#proteins_to_fids" target="_blank">proteins_to_fids</a> | <a href="/developer-zone/documentation/cdm-command-line-scripts/#fids_to_functions" target="_blank">fids_to_functions</a>
