@@ -1,0 +1,54 @@
+OVERVIEW
+-----------------------------------------
+Compression-based distance (CBD) is a simple, rapid, and accurate method to
+efficiently assess differences in microbiota samples [1].  CBD characterizes
+the similarities between microbial communities via the amount of repetition
+or overlap in order to determine microbial community distance.  CBD relies on
+the fact that more repetitive data is the more it can be compressed.  By
+combining 16S rRNA hypervariable tag data from different samples and assessing
+the relative amounts of compression, there is a proxy for the similarities
+between the communities.  The amount of compression is converted to a distance
+by taking compression gained by combining the datasets over the total
+compressed size of the individual datasets.  The distance has a value with a
+minimum of 0 meaning the communities are the same and a maximum of 1 meaning
+the communities are completely different. 
+
+[1] Fang Yang, Nicholas Chia, Bryan A White and Lawrence B Schook.
+Compression-based distance (CBD): a simple, rapid, and accurate method for
+microbiota composition comparison. BMC Bioinformatics 2013, 14:136.
+
+VERSION: 1.2.0 (Released 11/18/2013)
+------------------------------------------
+NEW FEATURES:
+-Added cbd-plotmatrix command script to generate figures and plots from a
+ distance matrix.
+
+UPDATED FEATURES / MAJOR BUG FIXES:
+-Switched to user and job state service for job management.
+
+ANTICIPATED FUTURE DEVELOPMENTS:
+-Add more output options for cbd-plotmatrix.
+
+VERSION: 1.1.0 (Released 10/28/2013)
+------------------------------------------
+NEW FEATURES:
+-Added cbd-filtermatrix command script to filter matrix by groups.
+-Added group list field to file with list of input sequence files.
+
+UPDATED FEATURES / MAJOR BUG FIXES:
+-Fixed using cbd-url from an IRIS terminal.
+
+ANTICIPATED FUTURE DEVELOPMENTS:
+-Ability to generate figures and plots from distance matrix.
+
+VERSION: 1.0.0 (Released 09/04/2013)
+------------------------------------------
+NEW FEATURES:
+-This is the first public release of the Compression Based Distance service.
+-Added method and command scripts to build a distance matrix.
+
+UPDATED FEATURES / MAJOR BUG FIXES:
+-None.
+
+ANTICIPATED FUTURE DEVELOPMENTS:
+-Ability to assign samples to a group and compare groups.
