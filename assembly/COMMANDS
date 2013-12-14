@@ -1,2 +1,0 @@
-#group-name	arast	Assembly-RAST scripts
-#command-set	scripts/(ar-.*).pl	arast
