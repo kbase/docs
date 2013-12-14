@@ -1,2 +1,0 @@
-#group-name	phispy	Phispy commands
-#command-set	scripts/(.*).pl	phispy
