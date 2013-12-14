@@ -19,7 +19,7 @@
    DESCRIPTION
   </h1>
   <p>
-   The CDMI_API defines the component of the Kbase API that supports interaction with instances of the CDM (Central Data Model). A basic familiarity with these routines will allow the user to extract data from the CS (Central Store). We anticipate supporting numerous sparse CDMIs in the PS (Persistent Store).
+   The CDMI_API defines the component of the KBase API that supports interaction with instances of the CDM (Central Data Model). A basic familiarity with these routines will allow the user to extract data from the CS (Central Store). We anticipate supporting numerous sparse CDMIs in the PS (Persistent Store).
   </p>
   <h2 id="Basic-Themes">
    Basic Themes
@@ -185,7 +185,7 @@ protein_family is a string</pre>
    </dt>
    <dd>
     <p>
-     Kbase supports the creation and maintence of protein families. Each family is intended to contain a set of isofunctional homologs. Currently, the families are collections of translations of features, rather than of just protein sequences (represented by md5s, for example). fids_to_protein_families supports access to the features that have been grouped into a family. Ideally, each feature in a family would have the same assigned function. This is not always true, but probably should be.
+     KBase supports the creation and maintence of protein families. Each family is intended to contain a set of isofunctional homologs. Currently, the families are collections of translations of features, rather than of just protein sequences (represented by md5s, for example). fids_to_protein_families supports access to the features that have been grouped into a family. Ideally, each feature in a family would have the same assigned function. This is not always true, but probably should be.
     </p>
    </dd>
   </dl>
@@ -265,7 +265,7 @@ scored_fid is a reference to a list containing 2 items:
    </dt>
    <dd>
     <p>
-     One of the most powerful clues to function relates to conserved clusters of genes on the chromosome (in prokaryotic genomes). We have attempted to record pairs of genes that tend to occur close to one another on the chromosome. To meaningfully do this, we need to construct similarity-based mappings between genes in distinct genomes. We have constructed such mappings for many (but not all) genomes maintained in the Kbase CS. The prokaryotic geneomes in the CS are grouped into OTUs by ribosomal RNA (genomes within a single OTU have SSU rRNA that is greater than 97% identical). If two genes occur close to one another (i.e., corresponding genes occur close to one another), then we assign a score, which is the number of distinct OTUs in which such clustering is detected. This allows one to normalize for situations in which hundreds of corresponding genes are detected, but they all come from very closely related genomes.
+     One of the most powerful clues to function relates to conserved clusters of genes on the chromosome (in prokaryotic genomes). We have attempted to record pairs of genes that tend to occur close to one another on the chromosome. To meaningfully do this, we need to construct similarity-based mappings between genes in distinct genomes. We have constructed such mappings for many (but not all) genomes maintained in the KBase CS. The prokaryotic geneomes in the CS are grouped into OTUs by ribosomal RNA (genomes within a single OTU have SSU rRNA that is greater than 97% identical). If two genes occur close to one another (i.e., corresponding genes occur close to one another), then we assign a score, which is the number of distinct OTUs in which such clustering is detected. This allows one to normalize for situations in which hundreds of corresponding genes are detected, but they all come from very closely related genomes.
     </p>
     <p>
      The significance of the score relates to the number of genomes in the database. We recommend that you take the time to look at a set of scored pairs and determine approximately what percentage appear to be actually related for a few cutoff values.
@@ -1151,7 +1151,7 @@ taxonomic_group is a string</pre>
    </dt>
    <dd>
     <p>
-     The routine genomes_to_taxonomies can be used to retrieve taxonomic information for each of a list of input genomes. For each genome in the input list of genomes, a list of taxonomic groups is returned. Kbase will use the groups maintained by NCBI. For an NCBI taxonomic string like
+     The routine genomes_to_taxonomies can be used to retrieve taxonomic information for each of a list of input genomes. For each genome in the input list of genomes, a list of taxonomic groups is returned. KBase will use the groups maintained by NCBI. For an NCBI taxonomic string like
     </p>
     <pre><code>     cellular organisms;
      Bacteria;
@@ -2984,7 +2984,7 @@ a string
    </dt>
    <dd>
     <p>
-     The Kbase stores annotations relating to features. Each annotation is a 3-tuple:
+     The KBase stores annotations relating to features. Each annotation is a 3-tuple:
     </p>
     <pre><code>     the text of the annotation (often a record of assertion of function)
 
@@ -3012,7 +3012,7 @@ a reference to a list containing 3 items:
    </dt>
    <dd>
     <p>
-     The Kbase will include a growing body of literature supporting protein functions, asserted phenotypes, etc. References are encoded as 3-tuples:
+     The KBase will include a growing body of literature supporting protein functions, asserted phenotypes, etc. References are encoded as 3-tuples:
     </p>
     <pre><code>     an id (often a PubMed ID)
 
