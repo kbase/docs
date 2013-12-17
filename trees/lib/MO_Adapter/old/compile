@@ -1,5 +1,0 @@
-javac LocusLookup.java
-javac IdLookup.java
-javac -classpath "../KBTree_cpp_lib/lib/java_interface":"." MOTreeDataExchanger.java
-javac -classpath "../KBTree_cpp_lib/lib/java_interface":"." MOTreeDataGrabber.java
-javac -classpath "../KBTree_cpp_lib/lib/java_interface":"." MOTreeLocalExchanger.java

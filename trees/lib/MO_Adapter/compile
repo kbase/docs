@@ -1,1 +1,0 @@
-javac -classpath "../KBTree_cpp_lib/lib/java_interface":"." MOTreeInMemoryExchanger.java
