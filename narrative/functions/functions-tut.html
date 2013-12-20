@@ -1,0 +1,384 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Building Narrative Functions Tutorial &mdash; KBase Narrative Service API</title>
+    
+    <link rel="stylesheet" href="_static/cloud.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Noticia+Text|Open+Sans|Droid+Sans+Mono" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/jquery.cookie.js"></script>
+    <script type="text/javascript" src="_static/cloud.js"></script>
+    <link rel="shortcut icon" href="_static/KBase_favicon.ico"/>
+    <link rel="top" title="KBase Narrative Service API" href="index.html" />
+    <link rel="next" title="KBase “Services” API Quickstart" href="functions-quick.html" />
+    <link rel="prev" title="Welcome to KBase’s documentation!" href="index.html" /> 
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
+  <body>
+    <div class="relbar-top">
+        
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="functions-quick.html" title="KBase “Services” API Quickstart"
+             accesskey="N">next</a> &nbsp; &nbsp;</li>
+        <li class="right" >
+          <a href="index.html" title="Welcome to KBase’s documentation!"
+             accesskey="P">previous</a> &nbsp; &nbsp;</li>
+    <li><a href="index.html">KBase Narrative Service</a> &raquo;</li>
+ 
+      </ul>
+    </div>
+    </div>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="building-narrative-functions-tutorial">
+<h1>Building Narrative Functions Tutorial<a class="headerlink" href="#building-narrative-functions-tutorial" title="Permalink to this headline">¶</a></h1>
+<dl class="docutils">
+<dt>What this document is</dt>
+<dd>This document gives a brief tutorial on how to wrap a function or script into the narrative,
+and link it to interactive visualization widgets.
+For an even briefer summary, see the <a class="reference internal" href="functions-quick.html"><em>Quickstart</em></a>, and for API details
+consult the <a class="reference internal" href="functions.html"><em>API reference</em></a>.</dd>
+<dt>What this document is <strong>not</strong></dt>
+<dd>A tutorial on how to make widgets or use the KBase API. This assumes that you’re at least passably familiar with the KBase widget API and the Python version of the KBase service API. This also isn’t a tutorial on how to get the Narrative working. Steve&#8217;s slides and the Readme in the root of the Narrative repo should help with that.</dd>
+</dl>
+<p><strong>Contents</strong></p>
+<ul class="simple">
+<li><a class="reference internal" href="#overview"><em>Overview</em></a></li>
+<li><a class="reference internal" href="#services"><em>Narrative “Services”</em></a></li>
+<li><a class="reference internal" href="#wrapping-functions"><em>Wrapping Functions</em></a></li>
+<li><a class="reference internal" href="#output-widgets"><em>Linking to Output Widgets</em></a></li>
+<li><a class="reference internal" href="#locations"><em>Where to put your stuff</em></a></li>
+</ul>
+<dl class="docutils">
+<dt>A little background</dt>
+<dd><p class="first">The KBase Narrative is built on the <a class="reference external" href="http://ipython.org/notebook.html">IPython notebook</a> technology. To quote that page:</p>
+<blockquote>
+<div>The IPython Notebook is a web-based interactive computational environment
+where you can combine code execution, text, mathematics, plots and rich media into a single document.</div></blockquote>
+<p class="last">So, the Narrative is that, plus point-and-click access to KBase functions and data, integrated
+with KBase search and social functions. With a cherry on top!</p>
+</dd>
+</dl>
+<div class="section" id="overview">
+<span id="id1"></span><h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>The general idea is this - the developer wraps their Narrative functions into a Python-based service using a few simple templates. This wrapping includes providing the name of the (default) widget for visualizing the output, and possibly a custom widget for input. Finally, the wrapper needs to return the data object that the output widget expects to see. Everything else gets populated automatically.</p>
+</div>
+<div class="section" id="narrative-services">
+<span id="services"></span><h2>Narrative “Services”<a class="headerlink" href="#narrative-services" title="Permalink to this headline">¶</a></h2>
+<p>Narrative functions are packaged together into service modules, of presumably related functions. See, for example, service_skeleton.py in</p>
+<blockquote>
+<div>&lt;narrative_root&gt;/src/biokbase/narrative/common</div></blockquote>
+<p>The top chunk of the file describes components of the service. Each of the imported modules and the <tt class="docutils literal"><span class="pre">init_service()</span></tt> statement are required for the service to function and be registered with the IPython Kernel.</p>
+<p>They all end with a <tt class="docutils literal"><span class="pre">finalize_service()</span></tt> statement.</p>
+<p>Once finalized, they all get registered as part of the biokbase.narrative.common.service apparatus, and automatically made visible to the user in the narrative UI.</p>
+<p>Note that for your service to be loaded, it must be stored with a unique name in the</p>
+<blockquote>
+<div>&lt;narrative_root&gt;/src/biokbase/narrative/services</div></blockquote>
+<p>directory.</p>
+<p>Each Narrative service requires most of the pieces in service_skeleton.py. It should start with a docstring describing the service, (__author__ and __date__ are optional). It should import, at the minimum, biokbase.narrative.common.service and biokbase.narrative.common.kbtypes. And it should define a global VERSION variable (with three numerical elements to represent Semantic Versioning), and NAME variable.</p>
+</div>
+<div class="section" id="wrapping-functions">
+<span id="id2"></span><h2>Wrapping Functions<a class="headerlink" href="#wrapping-functions" title="Permalink to this headline">¶</a></h2>
+<p>Each service is composed of at least one method, that gets registered through a combination of a Python decorator,
+and some special formatting in the method’s docstring. The terms &#8220;function&#8221; and &#8220;method&#8221; are a little conflated here.
+&#8220;Function&#8221; refers to what a user would interact with on the Narrative side, and &#8220;method&#8221; is the actual bit of Python
+code (Python calls ‘em methods) in the service.</p>
+<p>We might need to normalize our vocabulary a bit, but the differences really only matter while wrapping your function call.</p>
+<div class="section" id="decorator">
+<h3>Decorator<a class="headerlink" href="#decorator" title="Permalink to this headline">¶</a></h3>
+<p>The decorator for each method has the following format:
+&#64;method(name=”My Function”)
+This declares the following method as a narrative function, and registers your given name into a function; the user will see the name you give as the clickable element in the interface.</p>
+</div>
+<div class="section" id="building-a-function">
+<h3>Building a function<a class="headerlink" href="#building-a-function" title="Permalink to this headline">¶</a></h3>
+<p>When declaring your function, you can give it any number of parameters, but the first is the ServiceMethod object representing the method itself. Yes, this is a little meta, but it’ll make sense below.</p>
+<p>For example, the <tt class="docutils literal"><span class="pre">my_service_function</span></tt> method in <em>service_skeleton.py</em> has three variables: meth, param1, param2. The meth parameter allows for some useful features, while the proceeding parameters are what you’ll be basing your functions calls on.</p>
+<p>Specifically, while your function is running, you can use meth to update the user interface along the way. First, set the number of steps your function will do with:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">meth</span><span class="o">.</span><span class="n">stages</span> <span class="o">=</span> <span class="n">N</span>  <span class="c"># (N is an integer &gt; 0)</span>
+</pre></div>
+</div>
+<p>As you proceed to different stages, you can communicate to the user what’s happening with:</p>
+<div class="highlight-python"><pre>meth.advance(“About to do the next step!”)</pre>
+</div>
+<p>...or whatever string makes sense there.</p>
+</div>
+<div class="section" id="useful-functions-and-variables">
+<h3>Useful functions and variables<a class="headerlink" href="#useful-functions-and-variables" title="Permalink to this headline">¶</a></h3>
+<p>Auth Tokens and Workspace IDs:
+You can fetch the current authorization token
+and the current workspace from the <tt class="docutils literal"><span class="pre">method</span></tt> passed as the first
+argument to your wrapped function:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">token</span><span class="p">,</span> <span class="n">workspace_id</span> <span class="o">=</span> <span class="n">meth</span><span class="o">.</span><span class="n">token</span><span class="p">,</span> <span class="n">meth</span><span class="o">.</span><span class="n">workspace_id</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="docstring-formatting">
+<h3>Docstring formatting<a class="headerlink" href="#docstring-formatting" title="Permalink to this headline">¶</a></h3>
+<p>The docstring at the head of your method will contain all the information about your method that needs to get passed to the user interface. This includes:</p>
+<ul class="simple">
+<li>Parameter <a class="reference internal" href="#p-desc"><em>names and descriptions</em></a></li>
+<li>Parameter <a class="reference internal" href="#p-type"><em>types</em></a> (typed object vs. string, etc.)</li>
+<li>Return object <a class="reference internal" href="#r-desc"><em>description</em></a> and <a class="reference internal" href="#r-type"><em>type</em></a></li>
+<li>Type of returned object</li>
+<li>Which KBase widget to use for visualization</li>
+</ul>
+<p>These use the following format:</p>
+<div class="section" id="parameters">
+<h4>Parameters<a class="headerlink" href="#parameters" title="Permalink to this headline">¶</a></h4>
+<dl class="docutils" id="p-desc">
+<dt>Description</dt>
+<dd><p class="first"><tt class="docutils literal"><span class="pre">:param</span> <span class="pre">param1:</span> <span class="pre">Description</span> <span class="pre">of</span> <span class="pre">parameter</span></tt></p>
+<p class="last">The first line declares a new parameter and should appear before saying anything else about it.
+<tt class="docutils literal"><span class="pre">param1</span></tt> should match one of the parameters in your Python method.
+The parameters description should not include any line breaks.</p>
+</dd>
+</dl>
+<dl class="docutils" id="p-type">
+<dt>Type</dt>
+<dd><p class="first"><tt class="docutils literal"><span class="pre">:type</span> <span class="pre">param1:</span> <span class="pre">kbtypes.&lt;Type&gt;</span></tt></p>
+<p>The type line declares the type of parameter you have. These are all in</p>
+<blockquote>
+<div><em>&lt;narrative_root&gt;</em>/src/biokbase/narrative/common/services/kbtypes.py</div></blockquote>
+<p>For just a plain string, use <tt class="docutils literal"><span class="pre">kbtypes.Unicode</span></tt>.</p>
+<div class="last admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The list of KBase types in the <tt class="docutils literal"><span class="pre">kbtypes</span></tt> module will be continuously updated as time goes on, especially as the new Workspace and Typed Objects services approach deployment.</p>
+</div>
+</dd>
+</dl>
+<dl class="docutils" id="p-ui">
+<dt>UI Name</dt>
+<dd><p class="first"><tt class="docutils literal"><span class="pre">:ui_name</span> <span class="pre">param1:</span> <span class="pre">Param</span> <span class="pre">1</span></tt></p>
+<p class="last">This line declares how the parameter is labeled. While the description above might be a
+little more, er, descriptive, this is intended to be a brief label. Like, <em>Genome ID</em> or <em>FASTQ file name</em></p>
+</dd>
+</dl>
+<div class="admonition important">
+<p class="first admonition-title">Important</p>
+<p class="last">Each parameter you want the user to be able to input should be detailed using the above format, otherwise it won’t appear in the interface.</p>
+</div>
+</div>
+<div class="section" id="outputs">
+<h4>Outputs<a class="headerlink" href="#outputs" title="Permalink to this headline">¶</a></h4>
+<dl class="docutils" id="r-desc">
+<dt>Description</dt>
+<dd><p class="first"><tt class="docutils literal"><span class="pre">:return:</span> <span class="pre">Something</span> <span class="pre">being</span> <span class="pre">returned</span></tt></p>
+<p class="last">This is just a description for what the returned object is.</p>
+</dd>
+</dl>
+<dl class="docutils" id="r-type">
+<dt>Type</dt>
+<dd><p class="first"><tt class="docutils literal"><span class="pre">:rtype:</span> <span class="pre">kbtypes.&lt;Type&gt;</span></tt></p>
+<p class="last">As above, this is the type of object that gets returned by the service</p>
+</dd>
+<dt>Widget</dt>
+<dd><p class="first"><tt class="docutils literal"><span class="pre">:output_widget:</span> <span class="pre">&lt;WidgetName&gt;</span></tt></p>
+<p>This is the name of the widget you want your generated output to be fed in to. Note that this is the same name as the widget is invoked via Javascript, NOT its file name (in most cases they should be the same). E.g., if you make a call like <tt class="docutils literal"><span class="pre">$(“#myTarget”).kbaseOutputWidget()</span></tt>, then <tt class="docutils literal"><span class="pre">kbaseOutputWidget</span></tt> should go here.</p>
+<p class="last">Alternately, there is a default output widget that just prints the output on the screen in a formatted JSON pretty-print kind of way,
+and might be useful for debugging your method before getting into the details of widget development.</p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="section" id="function-output">
+<h3>Function Output<a class="headerlink" href="#function-output" title="Permalink to this headline">¶</a></h3>
+<p>Your function links its output directly into a widget. That is, whatever format your widget requires should be the format of your returned data, wrapped into JSON.</p>
+<p>All widgets are expected to consume a JSON object as input. Consider how you instantiate a widget. It looks something like this, right?</p>
+<div class="highlight-javascript"><pre>$(“#myTarget”).kbaseOutputWidget(
+    {
+        objectId: “myObjectId”,
+        otherInputs : {...}
+    }
+);</pre>
+</div>
+<p>The return line from your function, then, should look like this:
+<strong>[Python code]</strong>:</p>
+<div class="highlight-python"><pre>result = { “objectID” : “myObjectId”, “otherInputs” : {...} }
+return json.dumps(result)</pre>
+</div>
+<p>This will then send to your output widget the inputs that you expect to see.</p>
+</div>
+</div>
+<div class="section" id="linking-to-output-widgets">
+<span id="output-widgets"></span><h2>Linking to Output Widgets<a class="headerlink" href="#linking-to-output-widgets" title="Permalink to this headline">¶</a></h2>
+<p>As detailed above, you need to do three things to link your function to an output widget.</p>
+<ul class="simple">
+<li>Put your widget’s name in the <tt class="docutils literal"><span class="pre">:output_widget:</span></tt> docstring tag.</li>
+<li>Format your function’s output to be a stringified JSON dump.</li>
+<li>Plug your widget’s declaration into notebook.html</li>
+</ul>
+<p>For that third step, until we get the <cite>require.js</cite> handles and a CDN for the widget code in place, just copy your output widget code (ugh, I know…) to</p>
+<blockquote>
+<div><em>&lt;narrative_root&gt;</em>/src/notebook/ipython_profiles/profile_narrative/kbase_templates/static/kbase/js/widgets/function_output</div></blockquote>
+<p>and link them to the narrative with the following templated HTML script tag:</p>
+<div class="highlight-html+jinja"><pre>&lt;script src=”{{ static_url(“kbase/js/widgets/function_output/YOUR_WIDGET_HERE.js”) }}”
+        type=”text/javascript” charset=”utf-8”&gt;&lt;/script&gt;</pre>
+</div>
+<p>The static_url() command just routes the page to</p>
+<blockquote>
+<div><em>&lt;narrative_root&gt;</em>/src/notebook/ipython_profiles/profile_narrative/kbase_templates/static</div></blockquote>
+<p>And that’s it! The output from your new function should load up in the narrative.</p>
+</div>
+<div class="section" id="loading-into-your-narrative-instance">
+<span id="loading-narrative"></span><h2>Loading into your narrative instance<a class="headerlink" href="#loading-into-your-narrative-instance" title="Permalink to this headline">¶</a></h2>
+<p>If you’re developing locally in some branch of the narrative repo (you probably are), you’ll need to update your virtual environment with any backend changes and restart the narrative before any changes will become active. To update your instance, do the following.</p>
+<ol class="arabic simple">
+<li>If you haven&#8217;t &#8216;activated&#8217; the virtual environment, do so from a prompt:
+$ source ./&lt;venv-root&gt;/bin/activate</li>
+<li>From <em>&lt;narrative_root&gt;</em>/src, run the following to update:
+$ python setup.py install || abort</li>
+<li>Restart your narrative as usual:
+$ run_notebook.sh notebook</li>
+</ol>
+</div>
+<div class="section" id="where-to-put-your-stuff">
+<span id="locations"></span><h2>Where to put your stuff<a class="headerlink" href="#where-to-put-your-stuff" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Narrative services and related:</li>
+</ul>
+<p>&lt;narrative_root&gt;/src/biokbase/narrative/common/services/your_service.py</p>
+<ul class="simple">
+<li>Output widgets:</li>
+</ul>
+<p>&lt;narrative_root&gt;/src/notebook/ipython_profiles/profile_narrative/kbase_templates/static/kbase/js/widgets/function_output</p>
+<ul class="simple">
+<li>Linking into the narrative:</li>
+</ul>
+<p>&lt;narrative_root&gt;/src/notebook/ipython_profiles/profile_narrative/kbase_templates/notebook.html</p>
+<p>Under the comment <tt class="docutils literal"><span class="pre">&lt;!--</span> <span class="pre">function</span> <span class="pre">output</span> <span class="pre">JS</span> <span class="pre">widgets</span> <span class="pre">--&gt;</span></tt></p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This will soon <a class="footnote-reference" href="#f1" id="id3">[1]</a> be replaced by require.js - this document will be updated when it is.</p>
+</div>
+<table class="docutils footnote" frame="void" id="f1" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id3">[1]</a></td><td>for vague values of &#8220;soon&#8221;. Hopefully next week.</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+        <p class="logo"><a href="index.html">
+          <img class="logo" src="_static/kbase_logo.png" alt="Logo"/>
+        </a></p>
+  <div class="sphinxlocaltoc">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Building Narrative Functions Tutorial</a><ul>
+<li><a class="reference internal" href="#overview">Overview</a></li>
+<li><a class="reference internal" href="#narrative-services">Narrative “Services”</a></li>
+<li><a class="reference internal" href="#wrapping-functions">Wrapping Functions</a><ul>
+<li><a class="reference internal" href="#decorator">Decorator</a></li>
+<li><a class="reference internal" href="#building-a-function">Building a function</a></li>
+<li><a class="reference internal" href="#useful-functions-and-variables">Useful functions and variables</a></li>
+<li><a class="reference internal" href="#docstring-formatting">Docstring formatting</a><ul>
+<li><a class="reference internal" href="#parameters">Parameters</a></li>
+<li><a class="reference internal" href="#outputs">Outputs</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#function-output">Function Output</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#linking-to-output-widgets">Linking to Output Widgets</a></li>
+<li><a class="reference internal" href="#loading-into-your-narrative-instance">Loading into your narrative instance</a></li>
+<li><a class="reference internal" href="#where-to-put-your-stuff">Where to put your stuff</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">Welcome to KBase&#8217;s documentation!</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="functions-quick.html"
+                        title="next chapter">KBase &#8220;Services&#8221; API Quickstart</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/functions-tut.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="relbar-bottom">
+        
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="functions-quick.html" title="KBase “Services” API Quickstart"
+             >next</a> &nbsp; &nbsp;</li>
+        <li class="right" >
+          <a href="index.html" title="Welcome to KBase’s documentation!"
+             >previous</a> &nbsp; &nbsp;</li>
+    <li><a href="index.html">KBase Narrative Service</a> &raquo;</li>
+ 
+      </ul>
+    </div>
+    </div>
+
+    <div class="footer">
+        &copy; Copyright 2013, DOE Biology Knowledge Base (KBase).
+      Last updated on Dec 19, 2013.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2b3.
+    </div>
+    <!-- cloud_sptheme 1.4 -->
+  </body>
+</html>
