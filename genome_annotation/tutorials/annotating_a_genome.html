@@ -39,7 +39,7 @@ To see which <i>Geobacter</i> genomes are in the <a name="Central Store316">Cent
 Rather than leave dead hyperlinks, I've changed the hyperlinks to the command-line documentation to be name rather than href, so they won't do anything visible to the user but are still here in this tutorial in case the anchors ever get fixed. -->
 
 <pre>
-<a name="http://kbase.us/developer-zone/api-documentation/cdm-entity-relationship-command-scripts/#all_entities_Genome" target="_blank"><code title = "iris-tutorials">all_entities_Genome</code></a> -f scientific_name | grep Geobacter
+<a name="/developer-zone/documentation/cdm-entity-relationship-command-scripts/#all_entities_Genome" target="_blank"><code title = "iris-tutorials">all_entities_Genome</code></a> -f scientific_name | grep Geobacter
 </pre>
 
 <p>
@@ -86,7 +86,7 @@ using the command:
 </p>
 
 <pre>
-echo 'kb|g.2860' | <a name="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#genomes_to_contigs" target="_blank"><code title = "iris-tutorials">genomes_to_contigs</code></a> | <a name="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#contigs_to_sequences" target="_blank"><code title = "iris-tutorials">contigs_to_sequences</code></a> &gt; g.2860.contigs
+echo 'kb|g.2860' | <a name="/developer-zone/documentation/cdm-command-line-scripts/#genomes_to_contigs" target="_blank"><code title = "iris-tutorials">genomes_to_contigs</code></a> | <a name="/developer-zone/documentation/cdm-command-line-scripts/#contigs_to_sequences" target="_blank"><code title = "iris-tutorials">contigs_to_sequences</code></a> &gt; g.2860.contigs
 </pre>
 
 <p>
@@ -274,7 +274,7 @@ the <a name="metabolic324">metabolic</a> models in KBase:
 </p>
 
 <pre>
-<a name="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#all_roles_used_in_models" target="_blank"><code title = "iris-tutorials">all_roles_used_in_models</code></a> &gt; all.roles
+<a name="/developer-zone/documentation/cdm-command-line-scripts/#all_roles_used_in_models" target="_blank"><code title = "iris-tutorials">all_roles_used_in_models</code></a> &gt; all.roles
 <!-- needs links to API doc: -->
 <code title = "iris-tutorials"> a_and_b</code> roles all.roles &gt; roles.for.models
 </pre>
@@ -307,12 +307,12 @@ species, <i>Geobacter metallireducens</i> GS-15 (KBase ID
 </p>
 
 <pre>
-echo 'kb|g.589' | <a name="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#genomes_to_fids" target="_blank">genomes_to_fids</a> CDS | <a name="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#fids_to_roles" target="_blank">fids_to_roles</a> 2&gt; /dev/null | cut -f 3 &gt; roles.in.g.589
+echo 'kb|g.589' | <a name="/developer-zone/documentation/cdm-command-line-scripts/#genomes_to_fids" target="_blank">genomes_to_fids</a> CDS | <a name="/developer-zone/documentation/cdm-command-line-scripts/#fids_to_roles" target="_blank">fids_to_roles</a> 2&gt; /dev/null | cut -f 3 &gt; roles.in.g.589
 </pre>
 
 <p>
 Note that the
-command <b><a name="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#fids_to_roles"
+command <b><a name="/developer-zone/documentation/cdm-command-line-scripts/#fids_to_roles"
 target="_blank"><code title = "iris-tutorials">fids_to_roles</code></a></b> writes error messages when it
 cannot match a fid to any roles, so the commands above redirect all
 warning messages to /dev/null so they don't clutter up the output.
