@@ -1,0 +1,209 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>KBase “Services” API Quickstart &mdash; KBase Narrative Service API</title>
+    
+    <link rel="stylesheet" href="_static/cloud.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Noticia+Text|Open+Sans|Droid+Sans+Mono" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/jquery.cookie.js"></script>
+    <script type="text/javascript" src="_static/cloud.js"></script>
+    <link rel="shortcut icon" href="_static/KBase_favicon.ico"/>
+    <link rel="top" title="KBase Narrative Service API" href="index.html" />
+    <link rel="next" title="KBase Services Python API" href="functions.html" />
+    <link rel="prev" title="Building Narrative Functions Tutorial" href="functions-tut.html" /> 
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
+  <body>
+    <div class="relbar-top">
+        
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="functions.html" title="KBase Services Python API"
+             accesskey="N">next</a> &nbsp; &nbsp;</li>
+        <li class="right" >
+          <a href="functions-tut.html" title="Building Narrative Functions Tutorial"
+             accesskey="P">previous</a> &nbsp; &nbsp;</li>
+    <li><a href="index.html">KBase Narrative Service</a> &raquo;</li>
+ 
+      </ul>
+    </div>
+    </div>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="kbase-services-api-quickstart">
+<h1>KBase &#8220;Services&#8221; API Quickstart<a class="headerlink" href="#kbase-services-api-quickstart" title="Permalink to this headline">¶</a></h1>
+<dl class="docutils">
+<dt>What this document is</dt>
+<dd>This document provides a quick and dirty summary of how to add a new
+function to a KBase Narrative service.
+For more information, consult the <a class="reference internal" href="functions-tut.html"><em>Tutorial</em></a> and <a class="reference internal" href="functions.html"><em>API Reference</em></a>.</dd>
+</dl>
+<div class="section" id="steps">
+<h2>Steps<a class="headerlink" href="#steps" title="Permalink to this headline">¶</a></h2>
+<p>Wrapping your existing functions
+in a KBase Narrative service that can be used by the Narrative will normally involve only
+the following steps (for existing Python scripts):</p>
+<ol class="arabic">
+<li><p class="first">Start a new Python module, which here we will call <cite>my_service.py</cite>, using the skeleton in <cite>narrative/common/service_skeleton.py</cite> as a starting point:</p>
+<div class="highlight-python"><pre>$ mkdir narrative/
+$ cp narrative/common/service_skeleton.py narrative/services/my_service.py</pre>
+</div>
+</li>
+<li><p class="first">Modify the NAME and VERSION lines in the skeleton, and the description in <tt class="docutils literal"><span class="pre">init</span></tt>,
+to create a Service object:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">biokbase.narrative.common.service</span> <span class="kn">import</span> <span class="n">init_service</span><span class="p">,</span> <span class="n">method</span><span class="p">,</span> <span class="n">finalize_service</span>
+<span class="kn">from</span> <span class="nn">biokbase.narrative.common</span> <span class="kn">import</span> <span class="n">kbtypes</span>
+
+<span class="n">VERSION</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">NAME</span> <span class="o">=</span> <span class="s">&quot;MyExampleService&quot;</span>
+
+<span class="n">init_service</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">NAME</span><span class="p">,</span> <span class="n">desc</span><span class="o">=</span><span class="s">&quot;This is an example&quot;</span><span class="p">,</span> <span class="n">version</span><span class="o">=</span><span class="n">VERSION</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">For each function, wrap the function implementation with a <tt class="docutils literal"><span class="pre">&#64;method</span></tt> decorator, as shown
+in the example function.
+Add a first argument to each function, which will be passed a method object:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="nd">@method</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&quot;MyExampleFunction&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">_my_service_function</span><span class="p">(</span><span class="n">meth</span><span class="p">,</span> <span class="n">param1</span><span class="p">,</span> <span class="n">param2</span><span class="p">):</span>
+    <span class="o">...</span><span class="n">function</span> <span class="n">body</span> <span class="n">goes</span> <span class="n">here</span><span class="o">...</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Add to the function a docstring (standard Python top-of-function comment) that
+contains a specific form of reStructured text markup indicating parameter types and return types:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="nd">@method</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">&quot;MyExampleFunction&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">_my_service_function</span><span class="p">(</span><span class="n">meth</span><span class="p">,</span> <span class="n">param1</span><span class="p">,</span> <span class="n">param2</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;This is an example function.</span>
+
+<span class="sd">    :param param1: Input Genome</span>
+<span class="sd">    :type param1: kbtypes.Genome</span>
+<span class="sd">    :param param2: Some text</span>
+<span class="sd">    :type param2: kbtypes.Unicode</span>
+<span class="sd">    :return: Workspace object ID</span>
+<span class="sd">    :rtype: kbtypes.Unicode</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">meth</span><span class="o">.</span><span class="n">stages</span> <span class="o">=</span> <span class="mi">1</span>  <span class="c"># for reporting progress</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="bp">None</span>
+    <span class="n">meth</span><span class="o">.</span><span class="n">advance</span><span class="p">(</span><span class="s">&quot;Only this one stage&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="s">&quot;result&quot;</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">At the bottom of the file, 1 line of code to finalize the Service, which registers it
+for the Narrative to discover it:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">finalize_service</span><span class="p">()</span>
+</pre></div>
+</div>
+</li>
+</ol>
+<p>That&#8217;s it! Steps 3-4 are repeated for each function in the service.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+        <p class="logo"><a href="index.html">
+          <img class="logo" src="_static/kbase_logo.png" alt="Logo"/>
+        </a></p>
+  <div class="sphinxlocaltoc">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">KBase &#8220;Services&#8221; API Quickstart</a><ul>
+<li><a class="reference internal" href="#steps">Steps</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="functions-tut.html"
+                        title="previous chapter">Building Narrative Functions Tutorial</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="functions.html"
+                        title="next chapter">KBase Services Python API</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/functions-quick.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="relbar-bottom">
+        
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="functions.html" title="KBase Services Python API"
+             >next</a> &nbsp; &nbsp;</li>
+        <li class="right" >
+          <a href="functions-tut.html" title="Building Narrative Functions Tutorial"
+             >previous</a> &nbsp; &nbsp;</li>
+    <li><a href="index.html">KBase Narrative Service</a> &raquo;</li>
+ 
+      </ul>
+    </div>
+    </div>
+
+    <div class="footer">
+        &copy; Copyright 2013, DOE Biology Knowledge Base (KBase).
+      Last updated on Dec 19, 2013.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2b3.
+    </div>
+    <!-- cloud_sptheme 1.4 -->
+  </body>
+</html>
