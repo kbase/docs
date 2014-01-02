@@ -35,8 +35,11 @@ tools and the KBase software installed. This can be achieved by installing the D
 
 To see which <i>Geobacter</i> genomes are in the <a name="Central Store316">Central Store</a> of KBase, use the command:
 
+<!-- NOTE: all the hyperlinks to the command-line documentation are currently broken. One problem was that the URL of the documentation changed--that I was able to fix. However, the name anchors in cdm-entity-relationship-command-scripts are also broken and I'm not sure how to fix those.
+Rather than leave dead hyperlinks, I've changed the hyperlinks to the command-line documentation to be name rather than href, so they won't do anything visible to the user but are still here in this tutorial in case the anchors ever get fixed. -->
+
 <pre>
-<a href="http://kbase.us/developer-zone/api-documentation/cdm-entity-relationship-command-scripts/#all_entities_Genome" target="_blank"><code title = "iris-tutorials">all_entities_Genome</code></a> -f scientific_name | grep Geobacter
+<a name="http://kbase.us/developer-zone/api-documentation/cdm-entity-relationship-command-scripts/#all_entities_Genome" target="_blank"><code title = "iris-tutorials">all_entities_Genome</code></a> -f scientific_name | grep Geobacter
 </pre>
 
 <p>
@@ -50,7 +53,6 @@ different genome sequences.
 </p>
 
 <pre class = 'example'>
-
 The output from the above command (on the day this tutorial was created):
 
 kb|g.1495	Geobacter sp. M18
@@ -84,7 +86,7 @@ using the command:
 </p>
 
 <pre>
-echo 'kb|g.2860' | <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#genomes_to_contigs" target="_blank"><code title = "iris-tutorials">genomes_to_contigs</code></a> | <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#contigs_to_sequences" target="_blank"><code title = "iris-tutorials">contigs_to_sequences</code></a> &gt; g.2860.contigs
+echo 'kb|g.2860' | <a name="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#genomes_to_contigs" target="_blank"><code title = "iris-tutorials">genomes_to_contigs</code></a> | <a name="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#contigs_to_sequences" target="_blank"><code title = "iris-tutorials">contigs_to_sequences</code></a> &gt; g.2860.contigs
 </pre>
 
 <p>
@@ -272,7 +274,7 @@ the <a name="metabolic324">metabolic</a> models in KBase:
 </p>
 
 <pre>
-<a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#all_roles_used_in_models" target="_blank"><code title = "iris-tutorials">all_roles_used_in_models</code></a> &gt; all.roles
+<a name="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#all_roles_used_in_models" target="_blank"><code title = "iris-tutorials">all_roles_used_in_models</code></a> &gt; all.roles
 <!-- needs links to API doc: -->
 <code title = "iris-tutorials"> a_and_b</code> roles all.roles &gt; roles.for.models
 </pre>
@@ -305,12 +307,12 @@ species, <i>Geobacter metallireducens</i> GS-15 (KBase ID
 </p>
 
 <pre>
-echo 'kb|g.589' | <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#genomes_to_fids" target="_blank">genomes_to_fids</a> CDS | <a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#fids_to_roles" target="_blank">fids_to_roles</a> 2&gt; /dev/null | cut -f 3 &gt; roles.in.g.589
+echo 'kb|g.589' | <a name="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#genomes_to_fids" target="_blank">genomes_to_fids</a> CDS | <a name="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#fids_to_roles" target="_blank">fids_to_roles</a> 2&gt; /dev/null | cut -f 3 &gt; roles.in.g.589
 </pre>
 
 <p>
 Note that the
-command <b><a href="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#fids_to_roles"
+command <b><a name="http://kbase.us/developer-zone/api-documentation/cdm-command-line-scripts/#fids_to_roles"
 target="_blank"><code title = "iris-tutorials">fids_to_roles</code></a></b> writes error messages when it
 cannot match a fid to any roles, so the commands above redirect all
 warning messages to /dev/null so they don't clutter up the output.
@@ -348,10 +350,17 @@ real differences in the biology of the two microbes.
 
 <p>
 Now we would like to introduce the online collaborative workspaces for
-KBase. KBase workspaces provide an online location from which you can
+KBase.
+                                                   
+                          KBase workspaces provide an online location from which you can
 store, view, and share your data. Typed objects such as Genomes, Models
-FBA studies, and experimental data sets are stored in the workspace. All
-workspaces and workspace contents may be viewed from the <a href="http://140.221.84.142/browse.html">workspace browser</a>.
+FBA studies, and experimental data sets are stored in workspaces. All
+workspaces and workspace contents may be viewed from the Workspace Browser.
+ <a href="/for-users/get-started/#workspace">This
+                          tutorial</a> explains how you can use the Workspace
+                          Browser and commands in Iris to create and access
+                          workspaces.
+</p><p>                          
 Now, let's select a workspace to work in. For this tutorial, we will work
 in a special, publicly writable workspace called "tutorial":
 </p>
@@ -360,14 +369,20 @@ in a special, publicly writable workspace called "tutorial":
 <pre>
 <code title = "iris-tutorials">kbws-workspace tutorial</code>
 </pre>
-
+<p>
+(Note that the kbws-workspace command allows you to set a pre-existing
+workspace to be your current workspace. If you want to create your own
+workspace for storing your data, you can use the <a
+href="/for-users/get-started/#workspace">Workspace Browser</a>
+or the kbws-createws command in Iris.)
+</p>
 <p>
 In a few seconds, a message should appear stating that your work current
-workspace is "tutorial". Note, if you ever forget which workspace you
+workspace is "tutorial".  If you ever forget which workspace you
 are currently operating in, just run the "kbws-workspace" command again
 with no arguments. You can find a complete list of all workspaces accessible
 to you, see workspace contents, create workspaces, and manage workspaces
-using the <a href="http://140.221.84.142/browse.html">workspace browser</a> gui.
+using the <a href="http://140.221.84.142/">Workspace Browser</a> gui.
 </p>
 </div>
 
