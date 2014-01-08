@@ -1,0 +1,45 @@
+OVERVIEW - Variation Service 
+-------------------------------------------------------------------------------
+
+The main functionality of the variation service is to identify genome variations
+in a genome resequening project. This includes support for ingesting large
+quantities of sequencing reads into the HDFS, mapping those reads to a reference
+genome (using Bowtie2 or BWA), scanning the alignments for variants (using
+SAMTools), and then exporting the variants in VCF format. The backend of the
+service is implemented on Hadoop for high scalability and parallelism.
+
+VERSION 0.0.2 (Released May 31, 2013)
+-------------------------------------
+
+NEW FEATUES:
+
+- Added jk_* script generator for IRIS compatibility
+
+- User Account information retrieved from IRIS Environment, integration with GlobusOnline
+
+- Improved commandline help, added longer descriptions that are useful
+
+- Internal enhancements for batch processing and logging
+
+RNASeq Service
+-------------------------------------------------------------------------------
+
+RNASeq service is built on the variation service and extends capabilties to identify
+new genes and perform comprehensive expression analysis of the RNASeq data. This service 
+includes a splice junction mapper, Tophat to align the RNASeq reads to a reference genome 
+and Cufflinks, a software package to assemble transcripts and identity differential expression
+The service backend includes HDFS data store and grid engine for scheduling parallel jobs.
+
+VERSION 0.4 (Released Nov 22, 2013)
+-------------------------------------
+
+NEW FEATURES:
+
+-Integrated Tophat and Cufflinks tools to the jnomics package
+ 
+-Added functionality to schedule jobs on the grid engine
+
+-Retrieve job status from grid engine and copying log files to hdfs
+
+-Copy data between Shock and HDFS
+ 
