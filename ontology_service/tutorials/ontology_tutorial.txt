@@ -18,8 +18,9 @@
 <br>
 
 <br>
-<strong>Required Prerequisite Activities:</strong> Getting Started with KBase<br>
-<strong>Suggested Prerequesite Activities: </strong>Basic Exercises Using KBase<br>
+<p><strong>Required Prerequisite Activities: </strong> <a href="/for-users/get-started/">Getting
+Started with KBase</a> </p>
+<p> <strong>Suggested Prerequisite Activities: </strong> <a href="/for-users/tutorials/retrieving-data/basics-in-retrieving-data-from-kbase/">Basics in Retrieving Data from KBase</a> </p>
 <strong>Related Tutorials: </strong>
 <br>
 <h3>Extract Ontology Terms and Find Statistically Enriched Genes of Interest</h3>
