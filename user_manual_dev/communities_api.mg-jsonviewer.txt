@@ -1,0 +1,41 @@
+
+NAME
+    jsonviewer
+
+VERSION
+    1
+
+SYNOPSIS
+    jsonviewer [ --help, --info, --json, --keys, --value <key or index>, --find <key name> ]
+
+DESCRIPTION
+    View data in JSON structure.
+
+Options:
+  -h, --help     show this help message and exit
+  --info         give format and depth of JSON structure
+  --json         pretty print of JSON structure
+  --keys         list of keys if hash, number of elements if array
+  --value=VALUE  value for a given key name or array index, use dot (.) to
+                 indicate multiple levels
+  --find=FIND    value(s) for a given key name at any depth
+
+Input
+    Valid JSON structure
+
+Output
+    Varies based on option used
+    1. default is list of tab-deliminated key-value pairs if hash, elements if array
+    2. option to ourpur JSON structure
+    3. option to list hash keys or number of array elements
+
+EXAMPLES
+    echo '{"a": {"b": {"c": [1, 2, 3, 4, 5]}}, "x": ["y", "z"], "foo": "bar"}' | jsonviewer
+    echo '{"a": {"b": {"c": [1, 2, 3, 4, 5]}}, "x": ["y", "z"], "foo": "bar"}' | jsonviewer --value 'a.b.c' --json
+
+SEE ALSO
+    -
+
+AUTHORS
+    Travis Harrison
+

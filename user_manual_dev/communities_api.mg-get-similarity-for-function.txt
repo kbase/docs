@@ -1,0 +1,42 @@
+
+NAME
+    mg-get-similarity-for-function
+
+VERSION
+    1
+
+SYNOPSIS
+    mg-get-similarity-for-function [ --help, --user <user>, --passwd <password>, --token <oAuth token>, --id <metagenome id>, --name <function name>, --level <function level>, --source <datasource>, --evalue <evalue negative exponent>, --identity <percent identity>, --length <alignment length> ]
+
+DESCRIPTION
+    Retrieve taxa annotated similarity for a metagenome filtered by taxon containing inputted name.
+
+Options:
+  -h, --help           show this help message and exit
+  --id=ID              KBase Metagenome ID
+  --url=URL            communities API url
+  --user=USER          OAuth username
+  --passwd=PASSWD      OAuth password
+  --token=TOKEN        OAuth token
+  --name=NAME          function name to filter by
+  --level=LEVEL        function level to filter by
+  --source=SOURCE      datasource to filter results by, default is Subsystems
+  --evalue=EVALUE      negative exponent value for maximum e-value cutoff,
+                       default is 5
+  --identity=IDENTITY  percent value for minimum % identity cutoff, default is
+                       60
+  --length=LENGTH      value for minimum alignment length cutoff, default is
+                       15
+
+Output
+    BLAST m8 format - tab-delimited list of: query sequence id, hit m5nr id, percentage identity, alignment length,	number of mismatches, number of gap openings, query start, query end, hit start, hit end, e-value, bit score, semicolon seperated list of annotations
+
+EXAMPLES
+    mg-get-similarity-for-function --id "kb|mg.287" --name "Central carbohydrate metabolism" --level level2 --source Subsystems --evalue 10
+
+SEE ALSO
+    -
+
+AUTHORS
+    Jared Bischof, Travis Harrison, Folker Meyer, Tobias Paczian, Andreas Wilke
+

@@ -1,0 +1,49 @@
+
+NAME
+    mg-compare-functions
+
+VERSION
+    1
+
+SYNOPSIS
+    mg-compare-functions [ --help, --user <user>, --passwd <password>, --token <oAuth token>, --ids <metagenome ids>, --level <functional level>, --source <datasource>, --filter_name <function name>, --filter_level <function level>, --evalue <evalue negative exponent>, --identity <percent identity>, --length <alignment length>, --format <cv: 'text' or 'biom'> ]
+
+DESCRIPTION
+    Retrieve matrix of functional abundance profiles for multiple metagenomes.
+
+Options:
+  -h, --help            show this help message and exit
+  --ids=IDS             comma seperated list of KBase Metagenome IDs
+  --url=URL             communities API url
+  --user=USER           OAuth username
+  --passwd=PASSWD       OAuth password
+  --token=TOKEN         OAuth token
+  --level=LEVEL         functional level to retrieve abundances for, default
+                        is function
+  --source=SOURCE       datasource to filter results by, default is Subsystems
+  --filter_name=FILTER_NAME
+                        function name to filter by
+  --filter_level=FILTER_LEVEL
+                        function level to filter by
+  --format=FORMAT       output format: 'text' for tabbed table, 'biom' for
+                        BIOM format, default is text
+  --evalue=EVALUE       negative exponent value for maximum e-value cutoff,
+                        default is 5
+  --identity=IDENTITY   percent value for minimum % identity cutoff, default
+                        is 60
+  --length=LENGTH       value for minimum alignment length cutoff, default is
+                        15
+
+Output
+    1. Tab-delimited table of functional abundance profiles, metagenomes in columns and functions in rows.
+    2. BIOM format of functional abundance profiles.
+
+EXAMPLES
+    mg-compare-functions --ids "kb|mg.286,kb|mg.287,kb|mg.288,kb|mg.289" --level level2 --source KO --format text --evalue 8
+
+SEE ALSO
+    -
+
+AUTHORS
+    Jared Bischof, Travis Harrison, Folker Meyer, Tobias Paczian, Andreas Wilke
+

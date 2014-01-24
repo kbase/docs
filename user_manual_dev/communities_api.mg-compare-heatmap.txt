@@ -1,0 +1,43 @@
+
+NAME
+    mg-compare-heatmap
+
+VERSION
+    1
+
+SYNOPSIS
+    mg-compare-heatmap [ --help, --input <input file or stdin>, --format <cv: 'text' or 'biom'>, --cluster <cv: ward, single, complete, mcquitty, median, centroid>, --distance <cv: bray-curtis, euclidean, maximum, manhattan, canberra, minkowski, difference>, --normalize <boolean> ]
+
+DESCRIPTION
+    Retrieve Dendogram Heatmap from abundance profiles for multiple metagenomes.
+
+Options:
+  -h, --help           show this help message and exit
+  --url=URL            communities API url
+  --input=INPUT        input: filename or stdin (-), default is stdin
+  --format=FORMAT      input format: 'text' for tabbed table, 'biom' for BIOM
+                       format, default is text
+  --cluster=CLUSTER    cluster function, one of: ward, single, complete,
+                       mcquitty, median, centroid, default is ward
+  --distance=DISTANCE  distance function, one of: bray-curtis, euclidean,
+                       maximum, manhattan, canberra, minkowski, difference,
+                       default is bray-curtis
+  --normalize          normalize the input data, default is off
+
+Input
+    Tab-delimited table of abundance profiles, metagenomes in columns and annotation in rows.
+    OR
+    BIOM format of abundance profiles.
+
+Output
+    JSON struct containing ordered distances for metagenomes and annotations, along with dendogram data.
+
+EXAMPLES
+    mg-compare-taxa --ids "kb|mg.286,kb|mg.287,kb|mg.288,kb|mg.289" --level class --source RefSeq --format text | mg-compare-heatmap --input - --format text --cluster median --distance manhattan
+
+SEE ALSO
+    -
+
+AUTHORS
+    Jared Bischof, Travis Harrison, Folker Meyer, Tobias Paczian, Andreas Wilke
+

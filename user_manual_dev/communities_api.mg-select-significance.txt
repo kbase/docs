@@ -1,0 +1,41 @@
+
+NAME
+    mg-select-significance
+
+VERSION
+    1
+
+SYNOPSIS
+    mg-select-significance [ --help, --input <input file or stdin>, --order <column number>, --direction <cv: 'asc', 'desc'>, --cols <number of columns>, --rows <number of rows> ]
+
+DESCRIPTION
+    Tool to order and subselect grouped metagenomic abundace profiles with significance statistics.
+
+Options:
+  -h, --help            show this help message and exit
+  --input=INPUT         input: filename or stdin (-), default is stdin
+  --order=ORDER         column number to order output by (0 for last column),
+                        default is no ordering
+  --direction=DIRECTION
+                        direction of order. 'asc' for ascending order, 'desc'
+                        for descending order, default is desc
+  --cols=COLS           number of columns from the left to return from input
+                        table, default is all
+  --rows=ROWS           number of rows from the top to return from input
+                        table, default is all
+
+Input
+    Tab-delimited table of abundance profiles with significance statistics
+
+Output
+    Altered tab-delimited table based on input and options.
+
+EXAMPLES
+    mg-compare-taxa --ids 'mgm4441679.3,mgm4441680.3,mgm4441681.3,mgm4441682.3' --level class --source RefSeq --format text | mg-group-significance --input - --format text --groups '{"group1":["mgm4441679.3","mgm4441680.3"],"group2":["mgm4441681.3","mgm4441682.3"]}' --stat_test Kruskal-Wallis | mg-select-significance --input - --cols 4 --rows 10
+
+SEE ALSO
+    -
+
+AUTHORS
+    Jared Bischof, Travis Harrison, Folker Meyer, Tobias Paczian, Andreas Wilke
+

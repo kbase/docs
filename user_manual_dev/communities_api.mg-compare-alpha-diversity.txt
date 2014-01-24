@@ -1,0 +1,35 @@
+
+NAME
+    mg-compare-alpha-diversity
+
+VERSION
+    1
+
+SYNOPSIS
+    mg-compare-alpha-diversity [ --help, --user <user>, --passwd <password>, --token <oAuth token>, --ids <metagenome ids>, --level <taxon level>, --source <datasource> ]
+
+DESCRIPTION
+    Calculate alpha diversity for multiple metagenomes.
+
+Options:
+  -h, --help       show this help message and exit
+  --ids=IDS        comma seperated list of KBase Metagenome IDs
+  --url=URL        communities API url
+  --user=USER      OAuth username
+  --passwd=PASSWD  OAuth password
+  --token=TOKEN    OAuth token
+  --level=LEVEL    taxon level to retrieve abundances for, default is species
+  --source=SOURCE  datasource to filter results by, default is SEED
+
+Output
+    Tab-delimited list of metagenome IDs and their alpha diversity scores.
+
+EXAMPLES
+    mg-compare-alpha-diversity --ids "kb|mg.286,kb|mg.287,kb|mg.288,kb|mg.289" --level class --source RefSeq
+
+SEE ALSO
+    -
+
+AUTHORS
+    Jared Bischof, Travis Harrison, Folker Meyer, Tobias Paczian, Andreas Wilke
+

@@ -1,0 +1,32 @@
+	
+NAME
+    mg-picrust-predict -- wrapper for picrust-normalize
+	
+VERSION
+    1
+	
+SYNOPSIS
+    mg-picrust-predict -i <input> -o <output>
+	
+DESCRIPTION
+    some description
+	
+    Parameters:
+     --input|i=s   QIIME OTU file in BIOM format
+     --output|o=s  PICRUST functional prediction in BIOM format
+     --nowait|n    asynchronous call
+
+
+    Output:
+    some output
+	
+EXAMPLES
+    ls
+	
+SEE ALSO
+    -
+	
+AUTHORS
+    Wolfgang Gerlach
+	
+

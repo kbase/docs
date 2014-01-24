@@ -1,0 +1,72 @@
+
+DOCUMENTATION:
+
+NAME
+    mg-annotate-metagenome -- submit a metagenome to be annotated by the
+    microbial communities pipeline
+
+VERSION
+    1
+
+SYNOPSIS
+    mg-annotate-metagenome [-h] [-b bowtie] [-d dereplicate] [-m
+    metadata_file_id] [-p KB_password] [-u KB_user] -f sequence_file_id -n
+    metagenome_name
+
+DESCRIPTION
+    Submit a metagenome to be annotated by the microbial communities
+    pipeline. If you are working in IRIS and are authenticated, you do not
+    need to enter your KB_user and KB_password.
+
+    NOTE: Currently all submissions are created as public workflows with
+    publically viewable data objects. We're currently working to provide an
+    authenticated workflow for the submission of private datasets and to
+    provide a way for annotations to be loaded into MG-RAST.
+
+    Parameters:
+
+    -f sequence_file_id
+            sequence/read file ID in datastore
+
+    -n metagenome_name
+            metagenome/file name for sequence file in datastore, must match
+            any metagenome name in metadata file
+
+    Options:
+
+    -h      display this help message
+
+    -b bowtie
+            switch to declare whether bowtie should be run to screen for
+            human sequences (1 or 0, default 1)
+
+    -d dereplicate
+            switch to declare whether dereplication should be run (1 or 0,
+            default 1)
+
+    -m metadata_file_id
+            metadata file ID in datastore
+
+    -p KB_password
+            KBase password to authenticate against the API, requires a
+            username to be set as well
+
+    -u KB_user
+            KBase username to authenticate against the API, requires a
+            password to be set as well
+
+    Output:
+
+    KBase ID for your metagenome annotation.
+
+EXAMPLES
+    -
+
+SEE ALSO
+    -
+
+AUTHORS
+    Jared Bischof, Travis Harrison, Folker Meyer, Tobias Paczian, Andreas
+    Wilke
+
+

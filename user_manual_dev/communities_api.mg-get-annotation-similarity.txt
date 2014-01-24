@@ -1,0 +1,42 @@
+
+NAME
+    mg-get-annotation-similarity -- tab deliminted blast m8 with annotation for the specified metagenome
+
+VERSION
+    2
+
+SYNOPSIS
+    mg-get-annotation-similarity [ --help, --user <user>, --pass <password>, --token <oAuth token>, --webkey <communities webkey>, --verbosity <verbosity level>, --id <metagenome id>, --source <annotation source>, --length <alignment length>, --identity <percent identity>, --evalue <evalue exponent>, --filter <annotation>, --type <annotation type>]
+
+DESCRIPTION
+    tab deliminted blast m8 with annotation for the specified metagenome
+
+  Options
+    help - display this message
+    user - username to authenticate against the API, requires a password to be set as well
+    pass - password to authenticate against the API, requires a username to be set as well
+    token - Globus Online authentication token
+    webkey - MG-RAST webkey to synch with the passed Globus Online authentication
+    verbosity - verbosity of the result data, can be one of [ 'minimal', 'verbose', 'full' ], default is minimal
+    	id - id of the metagenome
+	source - annotation source, i.e. SEED or KEGG, default for ontology is Subsystems, default for organism is RefSeq
+	length - minimum alignment length, default is 15
+	identity - minimum percent identity, default is 60
+	evalue - maximum evalue exponent, default is 5
+	filter - return only results whose annotations contain this string
+	type - organism, ontology, function or feature, default is organism
+
+
+  Output
+    JSON structure that contains the result data
+
+EXAMPLES
+    mg-get-annotation-similarity --id "kb|mg.287" --source SEED --evalue 15
+
+SEE ALSO
+    -
+
+AUTHORS
+    Jared Bischof, Travis Harrison, Folker Meyer, Tobias Paczian, Andreas Wilke
+
+

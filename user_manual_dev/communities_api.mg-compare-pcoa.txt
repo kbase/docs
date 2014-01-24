@@ -1,0 +1,43 @@
+
+NAME
+    mg-compare-pcoa
+
+VERSION
+    1
+
+SYNOPSIS
+    mg-compare-pcoa [ --help, --input <input file or stdin>, --format <cv: 'text' or 'biom'>, --distance <cv: bray-curtis, euclidean, maximum, manhattan, canberra, minkowski, difference>, --normalize <boolean>, --output <cv: 'text' or 'json'> ]
+
+DESCRIPTION
+    Retrieve PCoA (Principal Coordinate Analysis) from abundance profiles for multiple metagenomes.
+
+Options:
+  -h, --help           show this help message and exit
+  --url=URL            communities API url
+  --input=INPUT        input: filename or stdin (-), default is stdin
+  --format=FORMAT      input format: 'text' for tabbed table, 'biom' for BIOM
+                       format, default is text
+  --output=OUTPUT      output format: 'text' for tabbed table, 'json' for JSON
+                       format, default is text
+  --distance=DISTANCE  distance function, one of: bray-curtis, euclidean,
+                       maximum, manhattan, canberra, minkowski, difference,
+                       default is bray-curtis
+  --normalize          normalize the input data, default is off
+
+Input
+    Tab-delimited table of abundance profiles, metagenomes in columns and annotation in rows.
+    OR
+    BIOM format of abundance profiles.
+
+Output
+    Tab-delimited table of first 4 principal components for each metagenome.
+
+EXAMPLES
+    mg-compare-taxa --ids "kb|mg.286,kb|mg.287,kb|mg.288,kb|mg.289" --level class --source RefSeq --format text | mg-compare-pcoa --input - --format text --distance manhattan
+
+SEE ALSO
+    -
+
+AUTHORS
+    Jared Bischof, Travis Harrison, Folker Meyer, Tobias Paczian, Andreas Wilke
+

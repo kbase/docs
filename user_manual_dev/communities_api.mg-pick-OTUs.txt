@@ -1,0 +1,32 @@
+	
+NAME
+    mg-pick-OTUs -- wrapper for picrust-normalize
+	
+VERSION
+    1
+	
+SYNOPSIS
+    mg-pick-OTUs -i <input> -o <output>
+	
+DESCRIPTION
+    some description
+	
+    Parameters:
+     --input|i=s   16S sequences in FASTA format
+     --output|o=s  QIIME OTUs in BIOM format
+     --nowait|n    asynchronous call
+
+
+    Output:
+    some output
+	
+EXAMPLES
+    ls
+	
+SEE ALSO
+    -
+	
+AUTHORS
+    Wolfgang Gerlach
+	
+

@@ -1,0 +1,47 @@
+
+NAME
+    mg-abundant-functions
+
+VERSION
+    1
+
+SYNOPSIS
+    mg-abundant-functions [ --help, --user <user>, --passwd <password>, --token <oAuth token>, --id <metagenome id>, --level <functional level>, --source <datasource>, --filter_name <function name>, --filter_level <function level>, --top <N lines to return>, --evalue <evalue negative exponent>, --identity <percent identity>, --length <alignment length> ]
+
+DESCRIPTION
+    Retrieve top abundant functions for metagenome.
+
+Options:
+  -h, --help            show this help message and exit
+  --id=ID               KBase Metagenome ID
+  --url=URL             communities API url
+  --user=USER           OAuth username
+  --passwd=PASSWD       OAuth password
+  --token=TOKEN         OAuth token
+  --level=LEVEL         functional level to retrieve abundances for, default
+                        is function
+  --source=SOURCE       datasource to filter results by, default is Subsystems
+  --filter_name=FILTER_NAME
+                        function name to filter by
+  --filter_level=FILTER_LEVEL
+                        function level to filter by
+  --top=TOP             display only the top N taxa, default is 10
+  --evalue=EVALUE       negative exponent value for maximum e-value cutoff,
+                        default is 5
+  --identity=IDENTITY   percent value for minimum % identity cutoff, default
+                        is 60
+  --length=LENGTH       value for minimum alignment length cutoff, default is
+                        15
+
+Output
+    Tab-delimited list of function and abundance sorted by abundance (largest first). 'top' option controls number of rows returned.
+
+EXAMPLES
+    mg-abundant-functions --id "kb|mg.287" --level level3 --source Subsystems --top 20 --evalue 8
+
+SEE ALSO
+    -
+
+AUTHORS
+    Jared Bischof, Travis Harrison, Folker Meyer, Tobias Paczian, Andreas Wilke
+

@@ -1,0 +1,75 @@
+
+NAME
+    mg-search-metagenomes
+
+VERSION
+    1
+
+SYNOPSIS
+    mg-search-metagenomes [ --help, --user <user>, --passwd <password>, --token <oAuth token>, --order <field name> --direction <cv: 'asc', 'desc'> --match <cv: 'all, 'any'> --status <cv: 'both', 'public', 'private'> --verbosity <cv: 'minimal', 'full'> --function <query text> --organism <query text> --md5 <query text> --name <query text> --biome <query text> --feature <query text> --material <query text> --country <query text> --location <query text> --longitude <query text> --latitude <query text> --created <query text> --env_package_type <query text> --project_id <query text> --project_name <query text> --PI_firstname <query text> --PI_lastname <query text> --sequence_type <query text> --seq_method <query text> --collection_date <query text> ]
+
+DESCRIPTION
+    Retrieve list of metagenomes based on search criteria.
+
+Options:
+  -h, --help            show this help message and exit
+  --url=URL             communities API url
+  --user=USER           OAuth username
+  --passwd=PASSWD       OAuth password
+  --token=TOKEN         OAuth token
+  --order=ORDER         field metagenomes are ordered by, default is name
+  --direction=DIRECTION
+                        direction of order. 'asc' for ascending order, 'desc'
+                        for descending order, default is asc
+  --match=MATCH         search logic. 'all' for metagenomes that match all
+                        search parameters, 'any' for metagenomes that match
+                        any search parameters, default is all
+  --status=STATUS       types of metagenomes to return. 'both' for all data
+                        (public and private), 'public' for public data,
+                        'private' for users private data, default is public
+  --verbosity=VERBOSITY
+                        amount of information to display. use keyword
+                        'minimal' for id and name, use keyword 'full' for MIxS
+                        GSC metadata, default is minimal
+  --function=FUNCTION   search parameter: query string for function
+  --organism=ORGANISM   search parameter: query string for organism
+  --md5=MD5             search parameter: query string for md5
+  --name=NAME           search parameter: query string for name
+  --biome=BIOME         search parameter: query string for biome
+  --feature=FEATURE     search parameter: query string for feature
+  --material=MATERIAL   search parameter: query string for material
+  --country=COUNTRY     search parameter: query string for country
+  --location=LOCATION   search parameter: query string for location
+  --longitude=LONGITUDE
+                        search parameter: query string for longitude
+  --latitude=LATITUDE   search parameter: query string for latitude
+  --created=CREATED     search parameter: query string for created
+  --env_package_type=ENV_PACKAGE_TYPE
+                        search parameter: query string for env_package_type
+  --project_id=PROJECT_ID
+                        search parameter: query string for project_id
+  --project_name=PROJECT_NAME
+                        search parameter: query string for project_name
+  --PI_firstname=PI_FIRSTNAME
+                        search parameter: query string for PI_firstname
+  --PI_lastname=PI_LASTNAME
+                        search parameter: query string for PI_lastname
+  --sequence_type=SEQUENCE_TYPE
+                        search parameter: query string for sequence_type
+  --seq_method=SEQ_METHOD
+                        search parameter: query string for seq_method
+  --collection_date=COLLECTION_DATE
+                        search parameter: query string for collection_date
+
+Output
+    List of metagenomes.
+
+EXAMPLES
+    mg-search-metagenomes
+
+SEE ALSO
+    -
+
+AUTHORS
+    Jared Bischof, Travis Harrison, Folker Meyer, Tobias Paczian, Andreas Wilke
+

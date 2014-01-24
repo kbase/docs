@@ -1,0 +1,42 @@
+
+NAME
+    mg-compare-boxplot-plot
+
+VERSION
+    1
+
+SYNOPSIS
+    mg-compare-boxplot-plot [ --help, --input <input file or stdin>, --format <cv: 'text' or 'biom'>, --plot <filename for png>, --rlib <R lib path>, --height <image height in inches> --width <image width in inches> --dpi <image DPI> --label <boolean> ]
+
+DESCRIPTION
+    Tool to generate boxplot vizualizations from metagenome abundance profiles.
+
+Options:
+  -h, --help       show this help message and exit
+  --input=INPUT    input: filename or stdin (-), default is stdin
+  --format=FORMAT  input format: 'text' for tabbed table, 'biom' for BIOM
+                   format, default is text
+  --plot=PLOT      filename for output plot
+  --rlib=RLIB      R lib path
+  --height=HEIGHT  image height in inches, default is 4
+  --width=WIDTH    image width in inches, default is 5
+  --dpi=DPI        image DPI, default is 300
+  --label          label image rows, default is off
+
+Input
+    Tab-delimited table of abundance profiles, metagenomes in columns and annotation in rows.
+    OR
+    BIOM format of abundance profiles.
+
+Output
+    PNG file of boxplot.
+
+EXAMPLES
+    mg-compare-taxa --ids 'mgm4441679.3,mgm4441680.3,mgm4441681.3,mgm4441682.3' --level class --source RefSeq --format text | mg-compare-boxplot-plot --input - --format text --plot my_heatmap --height 4 --width 5 --dpi 200 --label
+
+SEE ALSO
+    -
+
+AUTHORS
+    Jared Bischof, Travis Harrison, Folker Meyer, Tobias Paczian, Andreas Wilke
+

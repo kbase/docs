@@ -1,0 +1,38 @@
+
+NAME
+    mg-display-statistics
+
+VERSION
+    1
+
+SYNOPSIS
+    mg-display-statistics [ --help, --user <user>, --passwd <password>, --token <oAuth token>, --id <metagenome id>, --stat <cv: 'sequence', 'bp_profile', 'drisee', 'kmer', 'rarefaction', taxa_level> ]
+
+DESCRIPTION
+    Retrieve statistical overview data for a metagenome.
+
+Options:
+  -h, --help       show this help message and exit
+  --id=ID          KBase Metagenome ID
+  --url=URL        communities API url
+  --user=USER      OAuth username
+  --passwd=PASSWD  OAuth password
+  --token=TOKEN    OAuth token
+  --plot           display plot in ASCII art instead of table of numbers for:
+                   bp_profile, drisee, kmer, rarefaction, or taxa level
+  --stat=STAT      type of stat to display, use keyword: 'sequence',
+                   'bp_profile', 'drisee', 'kmer', 'rarefaction', or taxa
+                   level name, default is sequence
+
+Output
+    Tab-delimited table of numbers (with text header). Output varies based on type of statistic requested.
+
+EXAMPLES
+    mg-display-statistics --id "kb|mg.287" --stat sequence
+
+SEE ALSO
+    -
+
+AUTHORS
+    Jared Bischof, Travis Harrison, Folker Meyer, Tobias Paczian, Andreas Wilke
+

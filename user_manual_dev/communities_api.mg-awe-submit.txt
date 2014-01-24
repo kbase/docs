@@ -1,0 +1,44 @@
+	
+NAME
+    mg-awe-submit
+	
+VERSION
+    1
+	
+SYNOPSIS
+    mg-awe-submit --status
+	
+DESCRIPTION
+    some description
+	
+    Parameters:
+    
+    Actions:
+     --status                    show job states on AWE server
+     --cmd=s                     command to execute
+     --check_jobs=s               
+     --download_jobs=s           download specified jobs if state==completed
+     --wait_and_download_jobs=s  wait for completion and download specified jobs
+     --delete_jobs=s             deletes jobs and temporary shock nodes, unless keep_nodes used
+     --shock_clean               delete all temporary nodes from SHOCK server
+     --shock_query=s             query SHOCK node
+    
+    Options:
+     --keep_nodes                use with --delete_jobs
+     --wait_completed            wait until any job is in state completed
+     --output_files=s            specify extra output files for --cmd
+
+
+    Output:
+    some output
+	
+EXAMPLES
+    ls
+	
+SEE ALSO
+    -
+	
+AUTHORS
+    Wolfgang Gerlach
+	
+

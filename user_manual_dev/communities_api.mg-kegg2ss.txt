@@ -1,0 +1,35 @@
+
+NAME
+    mg-kegg2ss
+
+VERSION
+    1
+
+SYNOPSIS
+    mg-kegg2ss [ --help, --input <input file or stdin>, --output <cv: 'text' or 'biom'> ]
+
+DESCRIPTION
+    Output metagenome annotations 
+
+Options:
+  -h, --help       show this help message and exit
+  --id=ID          KBase Metagenome ID, required
+  --url=URL        communities API url
+  --input=INPUT    input: filename or stdin (-), default is stdin
+  --output=OUTPUT  output format: 'text' for tabbed table, 'biom' for BIOM
+                   format, default is text
+
+Output
+    BIOM format of subsystems
+    OR
+    Tab-delimited list of annotations: feature list, subsystem function, abundance for function, avg evalue for function, organism
+
+EXAMPLES
+    mg-kegg2ss --input - --output text
+
+SEE ALSO
+    -
+
+AUTHORS
+    Jared Bischof, Travis Harrison, Folker Meyer, Tobias Paczian, Andreas Wilke
+

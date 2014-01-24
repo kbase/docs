@@ -1,0 +1,37 @@
+
+NAME
+    mg-get-project-list -- retrieve a list of projects from the communities API
+
+VERSION
+    2
+
+SYNOPSIS
+    mg-get-project-list [ --help, --user <user>, --pass <password>, --token <oAuth token>, --webkey <communities webkey>, --verbosity <verbosity level>, --offset <first dataset>, --limit <maximum datasets>]
+
+DESCRIPTION
+    retrieve a list of projects from the communities API
+
+  Options
+    help - display this message
+    user - username to authenticate against the API, requires a password to be set as well
+    pass - password to authenticate against the API, requires a username to be set as well
+    token - Globus Online authentication token
+    webkey - MG-RAST webkey to synch with the passed Globus Online authentication
+    verbosity - verbosity of the result data, can be one of [ 'minimal', 'verbose', 'full' ], default is minimal
+    	offset - index of the first dataset returned
+	limit - maximum number of datasets returned
+
+
+  Output
+    JSON structure that contains the result data
+
+EXAMPLES
+    mg-get-project-list --offset 10 --limit 20
+
+SEE ALSO
+    -
+
+AUTHORS
+    Jared Bischof, Travis Harrison, Folker Meyer, Tobias Paczian, Andreas Wilke
+
+

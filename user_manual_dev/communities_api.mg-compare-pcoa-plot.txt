@@ -1,0 +1,51 @@
+
+NAME
+    mg-compare-pcoa-plot
+
+VERSION
+    1
+
+SYNOPSIS
+    mg-compare-pcoa-plot [ --help, --input <input file or stdin>, --format <cv: 'text' or 'biom'>, --plot <filename for png>, --metadata <metadata field>, --color_group <json string or filepath>, --color_pos <integer>, --color_auto <boolean>, --rlib <R lib path>, --height <image height in inches>, --width <image width in inches>, --dpi <image DPI>, --three <boolean>, --label <boolean> ]
+
+DESCRIPTION
+    Tool to generate PCoA vizualizations from metagenome abundance profiles.
+
+Options:
+  -h, --help            show this help message and exit
+  --input=INPUT         input: filename or stdin (-), default is stdin
+  --format=FORMAT       input format: 'text' for tabbed table, 'biom' for BIOM
+                        format, default is text
+  --plot=PLOT           filename for output plot
+  --metadata=METADATA   metadata field to color by, only for 'biom' input
+  --color_group=COLOR_GROUP
+                        list of color groups in JSON or tabbed format - either
+                        as input string or filename
+  --color_pos=COLOR_POS
+                        position of color group to use, default is 1 (first)
+  --color_auto          auto-create colors based on like group names, default
+                        is use group name as color
+  --rlib=RLIB           R lib path
+  --height=HEIGHT       image height in inches, default is 6
+  --width=WIDTH         image width in inches, default is 6
+  --dpi=DPI             image DPI, default is 300
+  --three               create 3-D PCoA, default is 2-D
+  --label               label image rows, default is off
+
+Input
+    Tab-delimited table of abundance profiles, metagenomes in columns and annotation in rows.
+    OR
+    BIOM format of abundance profiles.
+
+Output
+    PNG file of PCoA.
+
+EXAMPLES
+    mg-compare-taxa --ids 'mgm4441619.3,mgm4441656.4,mgm4441679.3,mgm4441680.3,mgm4441681.3,mgm4441682.3' --level class --source RefSeq --format biom | mg-compare-pcoa-plot --input - --format biom --plot my_pcoa --metadata feature --height 5 --width 4 --dpi 200 --three --label
+
+SEE ALSO
+    -
+
+AUTHORS
+    Jared Bischof, Travis Harrison, Folker Meyer, Tobias Paczian, Andreas Wilke
+

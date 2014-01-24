@@ -1,0 +1,32 @@
+	
+NAME
+    mg-picrust-normalize-16s-copy -- wrapper for picrust-normalize
+	
+VERSION
+    1
+	
+SYNOPSIS
+    mg-picrust-normalize-16s-copy -i <input> -o <output>
+	
+DESCRIPTION
+    some description
+	
+    Parameters:
+     --input|i=s   QIIME OTU file in BIOM format
+     --output|o=s  QIIME OTU file in BIOM format (normalized by 16S copy number)
+     --nowait|n    asynchronous call
+
+
+    Output:
+    some output
+	
+EXAMPLES
+    ls
+	
+SEE ALSO
+    -
+	
+AUTHORS
+    Wolfgang Gerlach
+	
+

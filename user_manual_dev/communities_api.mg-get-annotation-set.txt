@@ -1,0 +1,45 @@
+
+NAME
+    mg-get-annotation-set
+
+VERSION
+    1
+
+SYNOPSIS
+    mg-get-annotation-set [ --help, --user <user>, --passwd <password>, --token <oAuth token>, --id <metagenome id>, --level <taxon level>, --top <top N abundant organsims>, --rest, --source <datasource>, --evalue <evalue negative exponent>, --identity <percent identity>, --length <alignment length> ]
+
+DESCRIPTION
+    Retrieve functional annotations for given metagenome and organism.
+
+Options:
+  -h, --help           show this help message and exit
+  --id=ID              KBase Metagenome ID, required
+  --url=URL            communities API url
+  --user=USER          OAuth username
+  --passwd=PASSWD      OAuth password
+  --token=TOKEN        OAuth token
+  --level=LEVEL        taxon level to group annotations by, default is species
+  --top=TOP            produce annotations for top N abundant organisms,
+                       default is 10
+  --rest               lump together remaining organisms after top N, default
+                       is off
+  --source=SOURCE      datasource to filter results by, default is SEED
+  --evalue=EVALUE      negative exponent value for maximum e-value cutoff,
+                       default is 5
+  --identity=IDENTITY  percent value for minimum % identity cutoff, default is
+                       60
+  --length=LENGTH      value for minimum alignment length cutoff, default is
+                       15
+
+Output
+    Tab-delimited list of annotations: feature list, function, abundance for function, avg evalue for function, organism
+
+EXAMPLES
+    mg-get-annotation-set --id "kb|mg.287" --top 5 --level genus --source SEED
+
+SEE ALSO
+    -
+
+AUTHORS
+    Jared Bischof, Travis Harrison, Folker Meyer, Tobias Paczian, Andreas Wilke
+

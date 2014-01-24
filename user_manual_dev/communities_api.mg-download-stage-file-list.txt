@@ -1,0 +1,37 @@
+
+NAME
+    mg-download-stage-file-list -- download a communities API pipeline result file
+
+VERSION
+    2
+
+SYNOPSIS
+    mg-download-stage-file-list [ --help, --user <user>, --pass <password>, --token <oAuth token>, --webkey <communities webkey>, --verbosity <verbosity level>, --id <metagenome id>, --stage <stage id>]
+
+DESCRIPTION
+    download the list of intermediate and resulting file produced by a specified stage of the communities API analysis pipeline for a specified metagenome
+
+  Options
+    help - display this message
+    user - username to authenticate against the API, requires a password to be set as well
+    pass - password to authenticate against the API, requires a username to be set as well
+    token - Globus Online authentication token
+    webkey - MG-RAST webkey to synch with the passed Globus Online authentication
+    verbosity - verbosity of the result data, can be one of [ 'minimal', 'verbose', 'full' ], default is minimal
+    	id - id of the metagenome
+	stage - id of the stage
+
+
+  Output
+    JSON structure that contains the result data
+
+EXAMPLES
+    mg-download-stage-file-list --id "kb|mg.287" --stage 350
+
+SEE ALSO
+    -
+
+AUTHORS
+    Jared Bischof, Travis Harrison, Folker Meyer, Tobias Paczian, Andreas Wilke
+
+

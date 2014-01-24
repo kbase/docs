@@ -1,0 +1,37 @@
+
+NAME
+    mg-display-metadata
+
+VERSION
+    1
+
+SYNOPSIS
+    mg-display-metadata [ --help, --user <user>, --passwd <password>, --token <oAuth token>, --id <metagenome id>, --verbosity <cv: 'mixs', 'full'> ]
+
+DESCRIPTION
+    Retrieve metadata for a metagenome.
+
+Options:
+  -h, --help            show this help message and exit
+  --id=ID               KBase Metagenome ID
+  --url=URL             communities API url
+  --user=USER           OAuth username
+  --passwd=PASSWD       OAuth password
+  --token=TOKEN         OAuth token
+  --verbosity=VERBOSITY
+                        amount of metadata to display. use keyword 'mixs' for
+                        GSC MIxS metadata, use keyword 'full' for all GSC
+                        metadata, default is mixs
+
+Output
+    Tab-delimited table of metadata key-value pairs, either minimal or full metadata.
+
+EXAMPLES
+    mg-display-metadata --id "kb|mg.287" --verbosity full
+
+SEE ALSO
+    -
+
+AUTHORS
+    Jared Bischof, Travis Harrison, Folker Meyer, Tobias Paczian, Andreas Wilke
+
