@@ -1,0 +1,44 @@
+NAME
+      cbd-plotmatrix -- generate a plot of a distance matrix 
+
+SYNOPSIS      
+      usage: cbd_filtermatrix [-h] [--type TYPE] sourcePath destPath
+
+DESCRIPTION
+      Generate a plot to visualize the relationship between entries in a
+      distance matrix.
+
+      The sourcePath positional argument is the path to the source distance
+      matrix created by cbd-buildmatrix and saved by cbd-getmatrix.
+
+      The destPath positional argument is the path to the output file
+      containing the plot.
+
+      The --type optional argument specifies the type of the plot.  Valid
+      types are 'upgma' to generate a tree using the unweighted pair group
+      method with arithmetic mean algorithm, or 'nj' to generate a tree using
+      the neighbor joining algorithm.
+
+positional arguments:
+  sourcePath   path to source distance matrix file
+  destPath     path to destination distance matrix file
+
+optional arguments:
+  -h, --help   show this help message and exit
+  --type TYPE  type of plot to generate
+
+EXAMPLES
+      Generate a plot using the upgma algorithm:
+      > cbd-plotmatrix mystudy.csv mystudy.txt
+
+      Generate a plot using the nj algorithm:
+      > cbd-plotmatrix --type nj mystudy.csv mystudy.txt
+
+SEE ALSO
+      cbd-buildmatrix
+      cbd-getmatrix
+      cbd-filtermatrix
+
+AUTHORS
+      Mike Mundy 
+

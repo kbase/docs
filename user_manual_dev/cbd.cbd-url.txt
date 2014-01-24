@@ -1,0 +1,36 @@
+NAME
+      cbd-url -- update or view url of the compression based distance service endpoint
+
+SYNOPSIS      
+      usage: cbd_url [-h] [-?] [newurl]
+
+DESCRIPTION
+      Display or set the URL endpoint for the compression based distance service.
+      If run with no arguments or options, then the current URL is displayed.
+      If run with a single argument, the current URL will be switched to the
+      specified URL.  If the specified URL is named default, then the URL is
+      reset to the default production URL.
+
+positional arguments:
+  newurl       New URL endpoint
+
+optional arguments:
+  -h, --help   show this help message and exit
+  -?, --usage  show usage information
+
+EXAMPLES
+      Display the current URL:
+      > cbd-url
+      Current URL: http://kbase.us/services/cbd/
+
+      Use a new URL:
+      > cbd-url http://localhost:7102
+      New URL set to: http://localhost:7102
+
+      Reset to the default URL:
+      > cbd-url default
+      New URL set to: http://kbase.us/services/cbd/
+
+AUTHORS
+      Mike Mundy
+

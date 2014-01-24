@@ -1,0 +1,41 @@
+NAME
+      cbd-getmatrix -- get distance matrix from a completed job
+
+SYNOPSIS      
+      usage: cbd_buildmatrix [-h] [--ujs-url UJSURL] jobID outputPath
+
+DESCRIPTION
+      Get a distance matrix from a completed job and save to a file.
+
+      The jobID positional argument is the identifier of the job submitted by
+      cbd-buildmatrix to build a distance matrix from a set of sequence files.
+
+      The outputPath positional argument is the path to the output file where
+      the distance matrix is stored.  The output file is in csv format with a
+      row and column for each input sequence file.  The value of each cell in
+      the table is the distance between two microbial communities.  A value of
+      0 means the two communities are identical and a value of 1 means the two
+      communities are completely different.
+
+      The ujs-url optional argument specifies an alternate URL for the user and
+      job state service.
+
+positional arguments:
+  jobID             path to file with list of input sequence files
+  outputPath        path to output csv file
+
+optional arguments:
+  -h, --help        show this help message and exit
+  --ujs-url UJSURL  url for user and job state service
+
+EXAMPLES
+      Get a distance matrix and save to a file:
+      > cbd-getmatrix 5285059be4b0ef8357331c34 mystudy.csv
+
+SEE ALSO
+      cbd-buildmatrix
+      cbd-filtermatrix
+
+AUTHORS
+      Mike Mundy 
+
