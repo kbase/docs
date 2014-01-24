@@ -1,14 +1,17 @@
 
-Usage: ar_get [-h] -j JOB_ID [-a [ASSEMBLERS [ASSEMBLERS ...]]] [-s server_addr]
+Usage: ar-get [-h] -j JOB_ID [-a [ASSEMBLY]] [--stdout] [-s server_addr]
 
 Download result data
 
-optional arguments:
-  -h, --help            show this help message and exit
+Mandatory arguments:
   -j JOB_ID, --job JOB_ID
                         specify which job data to get
-  -a [ASSEMBLERS [ASSEMBLERS ...]], --assemblers [ASSEMBLERS [ASSEMBLERS ...]]
-                        specify which assembly data to get
+
+Optional arguments:
+  -h, --help            show this help message and exit
+  -a [ASSEMBLY], --assembly [ASSEMBLY]
+                        get contigs for the i-th assembly only
   -s server_addr        specify ARAST server address
+  --stdout              print assembled contigs in FASTA to stdout
 
 

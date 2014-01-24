@@ -1,2 +1,0 @@
-kbase-logout  
-kbase-login  

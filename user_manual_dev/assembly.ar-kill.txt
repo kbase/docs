@@ -1,0 +1,10 @@
+
+usage: arast kill [-h] [-j JOB] [-a]
+
+Send a kill signal to jobs
+
+optional arguments:
+  -h, --help         show this help message and exit
+  -j JOB, --job JOB  kill specific job
+
+
