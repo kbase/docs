@@ -1,0 +1,19 @@
+
+Cuffdiff
+identify differentially Expressed genes and transcripts .
+Organism can be specified with the -ref flag. Input and 
+Output must reside on the Cluster's filesystem. 
+Optional additonal arguments may be supplied to 
+cuffdiff. These options are passed as a string to cuffdiff and should include hyphens(-)
+if necessary.
+
+-h                                                                                                   
+-in,--input                                        Multiple transcript files (comma seperated)       
+-out,--output                                      output (directory)                                
+-ref,--ref_genome                                  reference genome                                  
+-assembly_opts,--assembly_options                  options to pass to Cuffdiff (optional)            
+-condn_labels,--condition_labels                   transcripts conditional labels (comma seperated;required)
+-merged_gtf,--merged_gtf                           Merged gtf file for Cuffdiff                      
+-working_dir,--working_dir                         workingdir (optional)                             
+
+

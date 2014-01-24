@@ -1,0 +1,15 @@
+
+Cuffcompare Compare transcript Assemblies
+Compare each assembly with the transcriptome 
+Reference gtf can be specified with the -ref_gtf flag. Input and Output must reside on the Cluster's filesystem. 
+Optional additonal arguments may be supplied to 
+cuffcompare. These options are passed as a string to cuffcompare and should include hyphens(-) if necessary.
+
+-h                                                                                                   
+-in,--input                                        input (Multiple transcript files(.gtf),comma seperated)
+-out,--output                                      output (directory)                                
+-ref_gtf,--ref_gtf                                 reference gtf                                     
+-assembly_opts,--assembly_options                  options to Cuffcompare (optional)                 
+-working_dir,--working_dir                         workingdir (optional)                             
+
+

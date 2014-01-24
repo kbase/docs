@@ -1,0 +1,2 @@
+stage_shock -shock_id=<id> -dest=<dest>
+

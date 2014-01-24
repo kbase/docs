@@ -1,0 +1,17 @@
+
+Tophat Aligner
+Align Short reads to an organism's reference genome.
+Organism can be specified with the -ref flag. Input and 
+Output must reside on the Cluster's filesystem. 
+Optional additonal arguments may be supplied Tophat. 
+For paired end alignment give the files as comma seperated arguments to the -in argument. These options are passed as a string to Tophat and should include hyphens(-) if necessary.
+
+-h                                                                                                   
+-ref,--reference genome                            reference genome(.fa)                             
+-in,--input                                        input(files comma seperated )                     
+-out,--output                                      output (directory)                                
+-align_opts,--alignment_options                    options to pass to Tophat (optional)              
+-gtf_opts,--GTF file                               Gene model annotation file(.gtf) (optional)       
+-working_dir,--working_dir                         workingdir (optional)                             
+
+

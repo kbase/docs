@@ -1,0 +1,16 @@
+
+Cufflinks Transcript Assembler
+Assembles transcripts for each sample.
+Input and Output must reside on the Cluster's filesystem. 
+Optional additonal arguments may be supplied to 
+cufflinks. These options are passed as a string to cufflinks and should include hyphens(-)
+if necessary.
+
+-h                                                                                                   
+-in,--input                                        input (bam file)                                  
+-out,--output                                      output (directory)                                
+-ref_gtf,--reference_gtf                           reference gtf(.gtf)                               
+-assembly_opts,--assembly_options                  options to pass to Cufflinks (optional)           
+-working_dir,--working_dir                         workingdir (optional)                             
+
+

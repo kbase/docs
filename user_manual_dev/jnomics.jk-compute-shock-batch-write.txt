@@ -1,0 +1,7 @@
+shock_batch_write -hdfs_files=<Name1,Name2,Name3,Name4> -hdfs_Output=<hdfs Output>
+
+-h                                                                                                   
+-hdfs_files,--hdfsFilenames                        HDFS Filenames                                    
+-hdfs_Output,--hdfsOutput                          HDFS Output path                                  
+
+
