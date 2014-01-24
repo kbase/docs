@@ -1,0 +1,36 @@
+NAME
+      pa-checkjob -- check status of probabilistic annotation jobs
+
+SYNOPSIS      
+      usage: pa_checkjob [-h] [-j JOBID] [--ujs-url UJSURL]
+
+DESCRIPTION
+      Check status of probabilistic annotation jobs submitted by the user.  For
+      each job, information about the job is displayed.  A job that has completed
+      is then deleted from the system.
+
+      The --jobID optional argument is the identifier of a specific job to
+      check.
+
+      The ujs-url optional argument specifies an alternate URL for the user and
+      job state service.
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -j JOBID, --jobID JOBID
+                        job ID
+  --ujs-url UJSURL      url for user and job state service
+
+EXAMPLES
+      Check all jobs:
+      > pa-checkjob
+      
+      Check a specific job:
+      > pa-checkjob --jobID 52b317cbe4b0ef8357331c59
+
+SEE ALSO
+      pa-annotate
+
+AUTHORS
+      Matt Benedict, Mike Mundy 
+

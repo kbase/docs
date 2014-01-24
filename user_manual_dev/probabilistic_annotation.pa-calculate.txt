@@ -22,12 +22,11 @@ DESCRIPTION
       Options:
       -e, --showerror       Show any errors in execution
       -h, --help            Display this help message, ignore all arguments
-      -o, --overwrite       Overwrite existing RxnProbs object with same name
-      --probannows          ID of workspace where ProbAnno object is stored
-      -t, --templateid      ID of ModelTemplate object
+      -w, --probannows      ID of workspace where ProbAnno object is stored (default is the current workspace)
+      -t, --templateid      ID of ModelTemplate object (default is to use all reactions in the biochemistry)
       -m, --templatews      ID of workspace where ModelTemplate object is stored
       -v, --verbose         Print verbose messages
-      -w, --rxnprobsws      ID of workspace where RxnProbs object is saved
+      -r, --rxnprobsws      ID of workspace where RxnProbs object is to be saved (default is the current workspace)
 
 EXAMPLES
       Calculate reaction likelihoods from probabilistic annotation of E. coli

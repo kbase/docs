@@ -1,0 +1,32 @@
+
+NAME
+      pa-getprobanno -- Get a table of probabilistic annotations
+
+SYNOPSIS
+      pa-getprobanno [ProbAnno ID] [Workspace]
+
+DESCRIPTION
+      Get a table of annotation probabilities from a ProbAnno object.
+      Each gene-annotation pair is given its own row in the table. An annotation is
+      a set of roles delimited by '///'.
+      
+      If -r is specified, gets gene-role pairs instead (the probability of the
+      role is computed as the sum of the probabilities of annotations containing it).
+
+      Options:
+      -h, --help         display this help message, ignore all arguments
+      -r, --roles
+
+EXAMPLES
+      > pa-getprobanno 'kb|g.0.probanno'
+      gene    annotation   likelihood
+
+      > pa-getprobanno 'kb|g.0.probanno' -r
+      gene    role    likelihood
+
+SEE ALSO
+      pa-annotate
+     
+AUTHORS
+      Matt Benedict, Mike Mundy
+
