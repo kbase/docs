@@ -1,0 +1,11 @@
+
+NAME
+  ws-deletews -- delete/undelete a workspace and all contained objects
+
+SYNOPSIS
+  ws-deletews <Workspace Name> [-?eh] [long options...]
+	--restore        Restore the specified workspace
+	-e --showerror   Show full stack trace of any errors in execution
+	-? -h --help     Print this usage information
+
+

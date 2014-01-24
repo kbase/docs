@@ -1,0 +1,16 @@
+
+NAME
+  ws-listobj -- list the objects in a workspace
+
+SYNOPSIS
+  ws-listobj [-?aehstvw] [long options...]
+	-w --workspace      Name of the workspace to search
+	-t --type           Specify that only objects of the given type
+	                    should be listed
+	-v --showversions   Include all versions of the objects
+	-a --showhidden     Include hidden objects
+	-s --showdeleted    Include objects that have been deleted
+	-e --showerror      Show full stack trace of any errors in execution
+	-? -h --help        Print this usage information
+
+

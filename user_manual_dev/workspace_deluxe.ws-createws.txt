@@ -1,0 +1,12 @@
+
+NAME
+  ws-createws -- create a new workspace
+
+SYNOPSIS
+  ws-createws <Workspace Name> [-?degh] [long options...]
+	-d --description     Workspace description (1000 characters max)
+	-g --globalread      Set global read permissions (r=read,n=none)
+	-e --showerror       Show full stack trace of any errors in execution
+	-? -h --help         Print this usage information
+
+

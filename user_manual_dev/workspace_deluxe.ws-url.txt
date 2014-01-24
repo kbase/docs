@@ -1,0 +1,14 @@
+
+NAME
+  ws-url -- view/set the URL of the workspace service used by WS commands
+
+SYNOPSIS
+  ws-url <New server URL> [-?h] [long options...]
+	-? -h --help  Print this usage information
+
+DESCRIPTION
+    The Workspace commands connect to a remote Workspace service.  This command sets the
+    URL endpoint used by the other Workspace commands.  To reset to the default production
+    url, run the command: "ws-url default"
+
+

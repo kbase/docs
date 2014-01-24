@@ -1,0 +1,20 @@
+
+NAME
+  ws-load -- load an object in JSON to a workspace
+
+SYNOPSIS
+  ws-load <Object type> <Object Name> <Filename or data> [-?ehmw] [long options...]
+	-w --workspace     Name of workspace
+	-m --metadata      Filename with meta data to associate with the
+	                   object
+	-e --showerror     Show full stack trace of any errors in execution
+	-? -h --help       Print this usage information
+
+DESCRIPTION
+    Load data in JSON format to a workspace.  If data is in a file, the filename
+    should be provided.  Otherwise, data in JSON format can be entered directly into
+    the command line.  If you want to set user meta data, the meta data should also
+    be provided in JSON format as an object with string keys and string values. The
+    meta data can be in a file or specified directly via the command line.
+
+

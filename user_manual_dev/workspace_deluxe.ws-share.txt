@@ -1,0 +1,21 @@
+
+NAME
+  ws-share -- view/manage permissions to a workspace
+
+SYNOPSIS
+  ws-share [-?eghpuw] [long options...]
+	-w --workspace      Name of workspace
+	-g --globalread     Set global read permissions (r=read,n=none)
+	-u --users          Set permissions for these users (';' delimited)
+	-p --perm           The permission to set for the given users,
+	                    default if not set is read only
+	                    (a=admin,w=write/read,r=read,n=none)
+	-e --showerror      Show full stack trace of any errors in execution
+	-? -h --help        Print this usage information
+
+DESCRIPTION
+    Run without options, this command displays permissions for a workspace.
+    With options, you can share a workspace or change permissions if you have
+    administrator rights to that workspace.
+
+

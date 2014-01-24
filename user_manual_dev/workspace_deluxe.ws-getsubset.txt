@@ -1,0 +1,30 @@
+
+NAME
+  ws-getsubset -- get a subset of a data object
+
+SYNOPSIS
+  ws-getsubset <Object ID or Name> <Subset path> [-?ehpvw] [long options...]
+	-w --workspace     Workspace name or ID
+	-v --version       Get object with this version number
+	-p --pretty        Pretty print the JSON object
+	-e --showerror     Show full stack trace of any errors in execution
+	-? -h --help       Print this usage information
+
+DESCRIPTION
+  Get an object with only a subset of the object populated.  The subset is
+  specified by providing the path in the object to the sub data requested.
+
+  Syntax of subset path:
+    Identify a sub portion of an object by providing the path, delimited by
+    a slash (/), to that portion of the object. Thus the path may not have
+    slashes in the structure or mapping keys. For this command only, multple
+    paths may be given if delimited by a semicolon (;). Examples:
+       /foo/bar/3 - specifies the bar key of the foo mapping and the 3rd
+                    entry of the array if bar maps to an array or the value mapped to
+                    the string "3" if bar maps to a map.
+      /foo/bar/[*]/baz - specifies the baz field of all the objects in the
+                         list mapped by the bar key in the map foo.
+      /foo/*/baz - specifies the baz field of all the objects in the
+                   values of the foo mapping.
+
+

@@ -1,0 +1,20 @@
+
+NAME
+  ws-copy -- copy an object
+
+SYNOPSIS
+  ws-copy <Original object ID> <New object ID> [-?ehnsv] [long options...]
+	-s --workspace        ID or Name of workspace to copy from
+	-n --newworkspace     ID or Name of workspace to copy to
+	-v --version          Version of the object to copy
+	-e --showerror        Show full stack trace of any errors in execution
+	-? -h --help          Print this usage information
+
+DESCRIPTION
+    Create a copy of an existing object. If you do not specify a version 
+    and the object is copied to a new name, the entire version history of 
+    the object is copied. If the version is specified, or if an object by 
+    the new name already exists, only the version specified (or the latest 
+    version) is copied.
+
+

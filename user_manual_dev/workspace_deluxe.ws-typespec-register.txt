@@ -1,0 +1,54 @@
+
+NAME
+      ws-typespec-register -- register type specifications in KIDL and release them for use
+
+SYNOPSIS
+      ws-typespec-register [OPTIONS]
+
+DESCRIPTION
+      
+      Register and release modules and associated types with the workspace. Use 'ws-url' to
+      set the workspace url.
+      
+      -t [FileName], --typespec [FileName]
+               specify the name of the typespec file to register
+               
+      --add '[Type1];[Type2];' ...
+               specify the set of new types defined in the typespec for registration; enclose
+               the list in quotes
+      
+      --remove '[Type1];[Type2];' ...
+               specify the set of types to remove from registration; enclose the list in quotes
+     
+      -j, --jsonschema
+               if set, when printing results of a registration the new json schema representation
+               of the updated objects is also printed out
+     
+      --commit
+               if not set, then registration will only indicate what would have been registered; to
+               actually register the typespec (which cannot be undone) you must set this flag.
+      
+      --release [ModuleName]
+               release the specified module, this takes precedence over any other option except
+               for --help and --request
+     
+      --request [ModuleName]
+               request ownership of the specified module; the request must be approved before you
+               are granted ownership; currently you must notify the workspace team if you need
+               a request to be approved
+     
+      -u [UserName], --user  [UserName]
+               the user name (optional, if not given will default to logged in user)
+      
+      -p [Password], --password [Password]
+               user password; (optional, if not given, you will be prompted to provide it if you
+               are not logged in)
+      
+      -h, --help
+               display this help message, ignore all arguments
+
+AUTHOR
+     Michael Sneddon (LBL)
+     Roman Sutormin (LBL)
+     Gavin Price (LBL)
+

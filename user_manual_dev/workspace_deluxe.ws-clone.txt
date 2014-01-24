@@ -1,0 +1,13 @@
+
+NAME
+  ws-clone -- create an exact cloned copy of an existing workspace
+
+SYNOPSIS
+  ws-clone <Destination workspace name> [-?deghw] [long options...]
+	-w --workspace       Name of the workspace to clone
+	-d --description     New workspace description (1000 characters max)
+	-g --globalread      Set global read permissions (r=read,n=none)
+	-e --showerror       Show full stack trace of any errors in execution
+	-? -h --help         Print this usage information
+
+

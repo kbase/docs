@@ -1,0 +1,11 @@
+
+NAME
+  ws-history -- list the version history of an object
+
+SYNOPSIS
+  ws-history <Object ID or Name> [-?ehw] [long options...]
+	-w --workspace     ID or Name of the workspace to use
+	-e --showerror     Show full stack trace of any errors in execution
+	-? -h --help       Print this usage information
+
+

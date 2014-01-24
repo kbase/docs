@@ -1,0 +1,14 @@
+
+NAME
+  ws-workspace -- view/set the default workspace used by WS commands
+
+SYNOPSIS
+  ws-workspace <Workspace Name> [-?h] [long options...]
+	-? -h --help  Print this usage information
+
+DESCRIPTION
+    Workspace commands will attempt to perform operations in the Workspace with the name
+    set by this command.  Most Workspace commands allow you to override this default by
+    setting a "--workspace" flag.
+
+

@@ -1,0 +1,12 @@
+
+NAME
+  ws-delete -- delete/undelete an object
+
+SYNOPSIS
+  ws-delete <Object ID or Name> [-?ehw] [long options...]
+	-w --workspace     ID or Name of workspace
+	--restore          Restore the specified deleted object
+	-e --showerror     Show full stack trace of any errors in execution
+	-? -h --help       Print this usage information
+
+

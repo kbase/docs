@@ -1,0 +1,11 @@
+
+NAME
+  ws-rename -- rename an object
+
+SYNOPSIS
+  ws-rename <Original Object ID or Name> <New Name> [-?ehs] [long options...]
+	-s --workspace     ID or Name of workspace containing object to rename
+	-e --showerror     Show full stack trace of any errors in execution
+	-? -h --help       Print this usage information
+
+

@@ -1,0 +1,36 @@
+
+NAME
+      ws-typespec-list -- list available modules and types
+
+SYNOPSIS
+      ws-typespec-list [OPTIONS] [MODULE/TYPE NAME]
+
+DESCRIPTION
+      
+      List modules or types registered with the workspace.  Use 'ws-url' to set the workspace url.
+      
+      If no module/type name is given, this will list the set of available modules.
+      
+      If a module name is given,this will list the set of released types of that
+      module with the latested version of each type.
+      
+      If a type name is given, the full type name and version is provided with a description
+      of the type if a description exists. The type name must be fully qualified as:
+        ModuleName.TypeName
+      
+      
+      -s, --spec         if set and a module/type name is given, the registered typespec
+                         for the module/type is returned
+                         
+      -j, --jsonschema   if set and a type name is given, the json schema representation
+                         of the type is given
+      
+      -v, --versions     if set, list all versions of the given module or type instead
+      
+      -h, --help         display this help message, ignore all arguments
+
+AUTHOR
+     Michael Sneddon (LBL)
+     Roman Sutormin (LBL)
+     Gavin Price (LBL)
+

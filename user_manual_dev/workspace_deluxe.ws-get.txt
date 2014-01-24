@@ -1,0 +1,16 @@
+
+NAME
+  ws-get -- get an object or its provenance/meta info
+
+SYNOPSIS
+  ws-get <Object ID or Name> [-?ehmpvw] [long options...]
+	-w --workspace     Workspace name or ID
+	-v --version       Get object with this version number
+	-p --pretty        Pretty print the JSON object
+	--prov             Only output provenance data instead (also given as
+	                   a JSON object)
+	-m --meta          Get object meta data instead of actual data
+	-e --showerror     Show full stack trace of any errors in execution
+	-? -h --help       Print this usage information
+
+

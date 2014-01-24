@@ -1,0 +1,11 @@
+
+NAME
+  ws-revert -- revert an object to an old version
+
+SYNOPSIS
+  ws-revert <Object ID or Name> <Version to revert to> [-?ehw] [long options...]
+	-w --workspace     Workspace name or ID
+	-e --showerror     Show full stack trace of any errors in execution
+	-? -h --help       Print this usage information
+
+

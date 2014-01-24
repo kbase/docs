@@ -1,0 +1,12 @@
+
+NAME
+  ws-list -- list the workspaces to which you have access
+
+SYNOPSIS
+  ws-list [-?degh] [long options...]
+	-d --deleted     Include deleted workspaces
+	-g --global      Include globally readable workspaces
+	-e --showerror   Show full stack trace of any errors in execution
+	-? -h --help     Print this usage information
+
+
