@@ -1,0 +1,38 @@
+
+NAME
+    m5nr-get-ontology -- retrieve ontology from m5nr
+
+VERSION
+    2
+
+SYNOPSIS
+    m5nr-get-ontology [ --help, --user <user>, --pass <password>, --token <oAuth token>, --webkey <communities webkey>, --source <source name>, --min_level <ontology level>, --filter_level <ontology level>, --filter <text>]
+
+DESCRIPTION
+    retrieve ontology of inputed source from m5nr
+
+  Options
+    help - display this message
+  user - username to authenticate against the API, requires a password to be set as well
+   pass - password to authenticate against the API, requires a username to be set as well
+   token - Globus Online authentication token
+   webkey - MG-RAST webkey to synch with the passed Globus Online authentication
+    	source - source of ontology to retrieve
+	min_level - lowest ontology level to retrieve
+	filter_level - ontology level to apply filter text to
+	filter - text to filter results by
+
+
+  Output
+    JSON structure that contains the result data
+
+EXAMPLES
+    m5nr-get-ontology --source Subsystems --min_level level3
+
+SEE ALSO
+    -
+
+AUTHORS
+    Jared Bischof, Travis Harrison, Folker Meyer, Tobias Paczian, Andreas Wilke
+
+
