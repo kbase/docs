@@ -1,0 +1,42 @@
+
+NAME
+    get_expression_data_by_feature_ids.pl
+
+DESCRIPTION
+    given a list of feature ids it returns a featureSampleMeasurementMapping {featureID}->{sampleID => value}}. 
+
+    Arguments : 
+        -featureID : kbase feature ids.  If have multiple feature ids do the following : " -featureID='kb|g.20848.CDS.1800' -featureID='kb|g.20848.CDS.1687'  "
+           (If no featureIDs entered, then all features with measurment values will be returned.)
+        -sampleType : the type of sample type to limit results to.  Acceptable values (case ignored): 'microarray', 'RNA-Seq', 'qPCR' or 'proteomics'.
+            Any other passed value will be evaluated to no filter on sample type, thus including all sample types.    
+        -wildTypeOnly : wildTypeOnly is a flag.  If equal to '1','Y' or 'TRUE' then only strains that are wild type will be included in the results. 
+
+        -h, --help Displays this message and ignores all other arguments   
+        -help, --help Displays this message and ignores all other arguments 
+        -man, --help Displays this message and ignores all other arguments  
+    
+    Returns : a featureSampleMeasurementMapping
+
+    featureSampleMeasurementMapping = obj->get_expression_data_by_feature_ids(featureIDs, sampleType, wildTypeOnly)
+
+    Details : 
+        featureIDs is a FeatureIDs
+        sampleType is a SampleType
+        wildTypeOnly is a WildTypeOnly
+        featureSampleMeasurementMapping is a FeatureSampleMeasurementMapping
+        FeatureIDs is a reference to a list where each element is a FeatureID
+        FeatureID is a string
+        SampleType is a string
+        WildTypeOnly is an string ('Y','TRUE','1','N','FALSE','0')
+        FeatureSampleMeasurementMapping is a reference to a hash where the key is a FeatureID and the value is a SampleMeasurementMapping
+        SampleMeasurementMapping is a reference to a hash where the key is a SampleID and the value is a Measurement
+        SampleID is a string
+        Measurement is a float
+
+EXAMPLES
+    perl expr-get-expression-data-by-feature-ids.pl -featureID='kb|g.20848.CDS.1800' -featureID='kb|g.20848.CDS.1687' -sampleType='microarray' -wildTypeOnly='Y'
+
+AUTHORS
+    Jason Baumohl (jkbaumohl@lbl.gov)
+
