@@ -1,0 +1,44 @@
+SYNOPSIS
+     .fba-buildfbamodel <Genome> [-?ehmovw] [long options...]
+	-m --model         Name to be provided for output model
+	--genomews         Workspace where genome is located
+	--templateid       ID of template model to use
+	--templatews       Workspace with template model
+	--core             Build core model
+	-w --workspace     Reference default workspace
+	-o --overwrite     Overwrite any existing model with same name
+	-e --showerror     Set as 1 to show any errors in execution
+	-v --verbose       Print verbose messages
+	-? -h --help       Print this usage information
+
+NAME
+     .fba-buildfbamodel - Build a draft FBA model from an annotated genome
+
+DESCRIPTION
+      This function builds a draft metabolic model from an annotated genome.
+      To do this, it calls the ModelSEED library. To define reaction-role linkages
+      it uses either the entire biochemistry in the KBase or (optionally) a template 
+      biochemistry defining the functions that are likely to be present in the group 
+      of organisms to which the genome belongs (e.g. bacteria and archaea can be given 
+      their own templates according to metabolic functions only found in one or the other).
+
+      Note that the model produced by this fucntion most likely will not grow and you 
+      will need to run Gapfill on it to perform simulations. See.fba-gapfill for details.
+
+      Description of positional arguments:
+
+      Genome: A Genome object in a workspace
+
+EXAMPLES
+      Build a draft model for E. coli, save results to 'kb|g.0.model'
+      >.fba-buildfbamodel 'kb|g.0' --model 'kb|g.0.model'
+
+SEE ALSO
+     .fba-loadgenome
+     .fba-runfba
+     .fba-gapfill
+     .fba-adjusttemprxn
+
+AUTHORS
+      Christopher Henry
+

@@ -1,0 +1,16 @@
+fba-integratesolution <Model ID> [-?efghiorvwx] [long options...]
+	-f --gapfillsols      IDs of gapfilling solutions to integrate (;
+	                      delimiter)
+	-g --gapgensols       IDs of gapgen solutions to integrate (;
+	                      delimiter)
+	-i --outmodel         ID to save new model as
+	-w --workspace        Reference default workspace
+	--modelws             Workspace for input FBA model
+	-o --overwrite        Overwrite any existing model with same name
+	-r --rxnprobs         ID for a rxnprobs object to use to assign GPRs
+	                      to gapfilled reactions
+	-x --rxnprobsws       Workspace for rxnprobs object
+	-e --showerror        Set as 1 to show any errors in execution
+	-v --verbose          Print verbose messages
+	-? -h --help          Print this usage information
+

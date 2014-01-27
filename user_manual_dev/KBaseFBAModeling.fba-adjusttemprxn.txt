@@ -1,0 +1,15 @@
+fba-adjusttemprxn <Template ID> <Reaction ID> [-?cehvw] [long options...]
+	-c --compartment         Compartment of template reaction
+	--direction              Direction of template reaction
+	--type                   Type of template reaction
+	--new                    Create new biomass reaction
+	--delete                 Delete specified biomass reaction
+	--clearcomplexes         Clear all complexes mapped to reaction
+	--complexestoadd         Complexes to add to reaction (; delimited)
+	--complexestoremove      Complexes to remove from reaction (;
+	                         delimited)
+	-w --workspace           Workspace to save FBA results
+	-e --showerror           Set as 1 to show any errors in execution
+	-v --verbose             Print verbose messages
+	-? -h --help             Print this usage information
+

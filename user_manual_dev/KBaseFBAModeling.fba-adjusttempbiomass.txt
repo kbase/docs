@@ -1,0 +1,63 @@
+SYNOPSIS
+     .fba-adjusttempbiomass <Template ID> <Biomass ID> [-?ehvw] [long options...]
+	--name                     Name of template biomass reaction
+	--protein                  Fraction of protein in  biomass
+	--dna                      Fraction of DNA in  biomass
+	--rna                      Fraction of RNA in  biomass
+	--cofactor                 Fraction of cofactors in  biomass
+	--cellwall                 Fraction of cellwall in  biomass
+	--lipid                    Fraction of lipid in  biomass
+	--energy                   Number of ATP required for a gram of
+	                           biomass
+	--type                     Type of template biomass reaction
+	--new                      Create new biomass reaction
+	--delete                   Delete specified biomass reaction
+	--clearbiomasscompounds    Clear all biomass compounds
+	--compoundstoremove        Compounds to remove from reaction (;
+	                           delimited)
+	-w --workspace             Workspace with template model
+	-e --showerror             Set as 1 to show any errors in execution
+	-v --verbose               Print verbose messages
+	-? -h --help               Print this usage information
+
+NAME
+     .fba-adjusttempbiomass -- adjust biomass reaction in a model template
+
+DESCRIPTION
+      Adjust biomass reaction in a ModelTemplate object.
+
+      The 'Template ID' positional argument is the ID of a ModelTemplate object.
+      The 'Biomass ID' positional argument is the name or UUID of a biomass
+      entity in the ModelTemplate object.
+
+      The --workspace optional argument is the ID of the workspace containing
+      the ModelTemplate object.
+
+      The --protein, --dna, --rna, --cofactor, --cellwall, and --lipid optional
+      arguments specify the fraction of the item in the biomass.  The --energy
+      optional argument specifies the number of ATP required for a gram of
+      biomass.
+
+      The --name optional argument specifies the name of the biomass reaction.
+      The --new optional argument indicates that a new biomass reaction is
+      added to the ModelTemplate object.  You must specify all of the optional
+      arguments for a new biomass reaction.
+
+      The --delete optional argument indicates that the biomass reaction is
+      deleted from the ModelTemplate object.  The --clearbiomasscompounds
+      optional argument indicates that all compounds are cleared from the
+      biomass reaction.  The --compoundstoremove optional argument specifies a
+      semicolon delimited list of compounds to remove from the biomass reaction.
+
+EXAMPLES
+      Add a new compound to the biomass:
+      >.fba-adjusttempbiomass
+
+SEE ALSO
+     .fba-adjusttempbiocpd
+     .fba-gettemplate
+     .fba-importtemplate
+
+AUTHORS
+      Christopher Henry
+

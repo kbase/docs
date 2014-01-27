@@ -1,0 +1,6 @@
+ga-compare-genomes <Genome IDs (; delimiter)> <Genome workspaces (; delimiter)> [-?ehpv] [long options...]
+	-p --pretty      Pretty print output
+	-e --showerror   Set as 1 to show any errors in execution
+	-v --verbose     Print verbose messages
+	-? -h --help     Print this usage information
+

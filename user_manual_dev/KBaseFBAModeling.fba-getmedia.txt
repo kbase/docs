@@ -1,0 +1,7 @@
+fba-getmedia <Media IDs (; delimiter)> <Workspace IDs (; delimiter)> [-?ehlpv] [long options...]
+	-p --pretty      Pretty print output
+	-l --long        Long format output
+	-e --showerror   Set as 1 to show any errors in execution
+	-v --verbose     Print verbose messages
+	-? -h --help     Print this usage information
+

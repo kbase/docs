@@ -1,0 +1,6 @@
+fba-exportphenosim <Phenotype simulation ID> <Format (html)> [-?ehvw] [long options...]
+	-w --workspace     Workspace with phenotype simulation set
+	-e --showerror     Set as 1 to show any errors in execution
+	-v --verbose       Print verbose messages
+	-? -h --help       Print this usage information
+

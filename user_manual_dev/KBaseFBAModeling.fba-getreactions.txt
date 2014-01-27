@@ -1,0 +1,35 @@
+SYNOPSIS
+     .fba-getreactions <Reaction IDs (; delimiter)> [-?ehipv] [long options...]
+	-i --idtype      Type of ID
+	-p --pretty      Pretty print output
+	-e --showerror   Set as 1 to show any errors in execution
+	-v --verbose     Print verbose messages
+	-? -h --help     Print this usage information
+
+NAME
+     .fba-getreactions - Get reaction information by ID
+
+DESCRIPTION
+      This function will get information on one or a list of reactions.
+      By default, the list of reactions should be SEED IDs. However,
+      KEGG, Name, and other types are accessible by specifying the
+      approriate type with --idtype.
+
+      Provided information includes reversibility, estimated Gibbs energy
+      of reaction, equation in ModelSEED and human-readable format, and EC numbers.
+
+      Use.fba-getaliassets to get a list of valid ID types.
+
+EXAMPLES
+      Get information on 'rxn00001' and pretty-print the results
+      >.fba-getreactions -p rxn00001
+      
+      Get information on reacton 'inorganic diphosphatase' (same reaction as rxn00001)
+      >.fba-getreactions -p --idtype name 'inorganic diphosphatase'
+
+SEE ALSO
+     .fba-getaliassets
+
+AUTHORS
+      Christopher Henry
+

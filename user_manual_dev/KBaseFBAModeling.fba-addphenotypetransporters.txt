@@ -1,0 +1,15 @@
+fba-addphenotypetransporters <Model ID> <PhenotypeSet ID> <Output model ID> [-?aehopvw] [long options...]
+	-w --workspace              Workspace to save the modified model
+	--modelws                   Workspace in which the original model is
+	                            found
+	--phenotypews               Workspace in which the PhenotypeSet is
+	                            found
+	-o --overwrite              Overwrite any existing FBA with same name
+	-a --alltransporters        Add transporters for ALL media in the
+	                            phenotype set
+	-p --positivetransporters   Add transporters ONLY for media in the
+	                            phenotype set with non-zero growth rates
+	-e --showerror              Set as 1 to show any errors in execution
+	-v --verbose                Print verbose messages
+	-? -h --help                Print this usage information
+

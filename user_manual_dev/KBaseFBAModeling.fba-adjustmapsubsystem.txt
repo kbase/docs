@@ -1,0 +1,14 @@
+fba-adjustmapsubsystem <Map ID> <Subsystem ID> [-?ehvw] [long options...]
+	--name                Name of subsystem
+	--type                Type of subsystem
+	--class               Class of subsystem
+	--subclass            Subclass of subsystem
+	--new                 Create new subsystem
+	--delete              Delete specified subsystem
+	--rolestoadd          Roles to add to subsystem (; delimited)
+	--rolestoremove       Roles to remove from subsystem (; delimited)
+	-w --workspace        Workspace with mapping to be adjusted
+	-e --showerror        Set as 1 to show any errors in execution
+	-v --verbose          Print verbose messages
+	-? -h --help          Print this usage information
+

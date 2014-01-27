@@ -1,0 +1,12 @@
+fba-findpaths <Reaction synonyms ID> <Media ID> <Input Model ID> <Output Model ID> [-?behiovw] [long options...]
+	-i --iterations    number of times to run FBA to find paths
+	-w --workspace     ID of workspace containing reaction synonyms and
+	                   model objects
+	--mediaws          ID of workspace containing media object
+	-b --biochem       ID of the biochemistry database
+	--biochemws        ID of workspace containing biochemistry database
+	-o --overwrite     Set as 1 to overwrite existing output model object
+	-e --showerror     Set as 1 to show any errors in execution
+	-v --verbose       Print verbose messages
+	-? -h --help       Print this usage information
+

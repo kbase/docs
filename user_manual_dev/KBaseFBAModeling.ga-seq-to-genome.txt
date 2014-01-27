@@ -1,0 +1,13 @@
+ga-seq-to-genome <Sequence ID> [-?cdehpstvw] [long options...]
+	--genomeid              ID for created genome in workspace
+	--seqws                 Workspace with sequence object
+	-t --transcripts        Transcript sequence object
+	-p --proteins           Protein sequence object
+	-s --scientificname     Scientific name of genome
+	-d --domain             Domain of genome
+	-c --code               Genetic code of genome
+	-w --workspace          Workspace to save FBA results
+	-e --showerror          Set as 1 to show any errors in execution
+	-v --verbose            Print verbose messages
+	-? -h --help            Print this usage information
+

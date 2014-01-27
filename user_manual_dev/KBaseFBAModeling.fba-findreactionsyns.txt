@@ -1,0 +1,11 @@
+fba-findreactionsyns <Reaction synonyms ID> [-?behovw] [long options...]
+	-w --workspace     ID of workspace for storing reaction synonyms
+	                   object
+	-b --biochem       ID of the biochemistry database
+	--biochemws        ID of workspace containing biochemistry database
+	-o --overwrite     Set as 1 to overwrite existing reaction synonyms
+	                   object
+	-e --showerror     Set as 1 to show any errors in execution
+	-v --verbose       Print verbose messages
+	-? -h --help       Print this usage information
+

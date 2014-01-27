@@ -1,0 +1,13 @@
+fba-import-meta-anno <Annotation filename> [-?cehinostuvw] [long options...]
+	-u --newuid        ID for metagenome annotation in workspace
+	-n --name          Name for metagenome annotation
+	-i --sourceid      Source ID for metagenome annotation
+	-s --source        Source for metagenome annotation
+	-t --type          Type of metagenome annotation
+	-c --conftype      Confidence type for hits in metagenome annotation
+	-w --workspace     Workspace to save phenotypes in
+	-o --overwrite     Overwrite any existing phenotypes with same name
+	-e --showerror     Set as 1 to show any errors in execution
+	-v --verbose       Print verbose messages
+	-? -h --help       Print this usage information
+

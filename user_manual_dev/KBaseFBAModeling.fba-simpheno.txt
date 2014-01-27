@@ -1,0 +1,36 @@
+fba-simpheno <Model ID> <Phenotype set> [-?ehopvw] [long options...]
+	--phenosimid              ID for phenotype simulation in workspace
+	--phenows                 Workspace with phenotype data object
+	--modelws                 Workspace with model object
+	--maximize                Maximize objective
+	--objterms                Objective terms
+	--geneko                  List of gene KO (; delimiter)
+	--rxnko                   List of reaction KO (; delimiter)
+	--bounds                  Custom bounds
+	--constraints             Custom constraints
+	-p --prommodel            ID of PROMModel
+	--prommodelws             Workspace with PROMModel
+	--defaultmaxflux          Default maximum reaction flux
+	--defaultminuptake        Default minimum nutrient uptake
+	--defaultmaxuptake        Default maximum nutrient uptake
+	--uptakelim               Atom uptake limits
+	--simplethermo            Use simple thermodynamic constraints
+	--thermoconst             Use full thermodynamic constraints
+	--nothermoerror           No uncertainty in thermodynamic constraints
+	--minthermoerror          Minimize uncertainty in thermodynamic
+	                          constraints
+	--allrev                  Treat all reactions as reversible
+	--objfraction             Fraction of objective for follow on analysis
+	--notes                   Notes for flux balance analysis
+	-w --workspace            Workspace to save FBA results
+	-o --overwrite            Overwrite any existing FBA with same name
+	--alltransporters         Add transporters for everything in EVERY
+	                          media in the phenotype set before doing the
+	                          simulation
+	--positivetransporters    Add transporters ONLY for media that the
+	                          organism grows on in the phenotype set
+	                          before doing the simulation
+	-e --showerror            Set as 1 to show any errors in execution
+	-v --verbose              Print verbose messages
+	-? -h --help              Print this usage information
+

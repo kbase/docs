@@ -1,0 +1,12 @@
+fba-adjustmaprole <Map ID> <Role ID> [-?ehvw] [long options...]
+	--name                  Name of role
+	--feature               Example feature for role
+	--new                   Create new role
+	--delete                Delete specified role
+	--aliasestoadd          Aliases to add to role (; delimited)
+	--aliasestoremove       Aliases to remove from role (; delimited)
+	-w --workspace          Workspace to save FBA results
+	-e --showerror          Set as 1 to show any errors in execution
+	-v --verbose            Print verbose messages
+	-? -h --help            Print this usage information
+

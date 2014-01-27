@@ -1,0 +1,11 @@
+fba-merge-models <Metagenome annotation ID> [-?aceehmrvw] [long options...]
+	-m --maxotumod         Maximum number of otu models to build
+	-a --minabundance      Minimum average abundance for compartment
+	-r --minreactions      Minimum reactions for otu model
+	-c --confthreshold     Confidence threshold for use of function
+	-e --metaannows        Metagenome annotation workspace
+	-w --workspace         Workspace to save merged model
+	-e --showerror         Set as 1 to show any errors in execution
+	-v --verbose           Print verbose messages
+	-? -h --help           Print this usage information
+

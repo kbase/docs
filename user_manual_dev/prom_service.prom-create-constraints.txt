@@ -20,7 +20,7 @@ DESCRIPTION
       -g [GENOME_ID], --genome [GENOME_ID]
                         indicate the genome object id of a genome in the
                         workspace to link the constraints to; a genome object
-                        can be created with the kbfba-loadgenome script.
+                        can be created with the fba-loadgenome script.
 
       -e [EXP_ID], --expression-data [EXP_ID]
                         indicate the id of the expression data collection with
@@ -51,7 +51,7 @@ EXAMPLES
 SEE ALSO
       prom-load-expression-data
       prom-load-regulatory-network
-      kbfba-loadgenome
+      fba-loadgenome
       
 AUTHORS
       Michael Sneddon (mwsneddon@lbl.gov)
