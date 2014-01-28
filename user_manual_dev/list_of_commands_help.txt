@@ -1,0 +1,988 @@
+
+#
+# MODULE = protein_info_service
+#
+
+#
+# MODULE = assembly
+#
+ar-avail   --help
+ar-get   --help
+ar-kill   --help
+ar-login   --help
+ar-logout   --help
+ar-run   --help
+ar-stat   --help
+
+#
+# MODULE = trees
+#
+tree-aln-to-html   --help
+tree-compute-abundance-profile   --help
+tree-create-group-file   --help
+tree-create-url-map   --help
+tree-filter-abundance-profile-column   --help
+tree-find-alignment-ids   --help
+tree-find-tree-ids   --help
+tree-get-alignment   --help
+tree-get-leaf-id-mapping   --help
+tree-get-leaf-nodes   --help
+tree-get-tree   --help
+tree-html-add-boxes   --help
+tree-html-relabel-leaves   --help
+tree-normalize-abundance-profile   --help
+tree-relabel-node-names   --help
+tree-remove-nodes   --help
+tree-to-html   --help
+
+#
+# MODULE = ontology_service
+#
+get_go_description   --help
+get_go_enrichment   --help
+get_goidlist   --help
+
+#
+# MODULE = sim_service
+#
+
+#
+# MODULE = awe_service
+#
+
+#
+# MODULE = KBaseFBAModeling
+#
+fba-addphenotypetransporters   --help
+fba-compare-mdls   --help
+fba-findpaths   --help
+fba-findreactionsyns   --help
+fba-import-meta-anno   --help
+fba-merge-models   --help
+fba-metaanno-to-models   --help
+fba-roles-rxns-pegs-of-models   --help
+fba-roles-used-in-models   --help
+fba-setcofactors   --help
+ga-annotate-ws-genome   --help
+ga-compare-genomes   --help
+ga-loadfasta   --help
+ga-seq-to-genome   --help
+kbfba-addaliases   --help
+kbfba-addmedia   --help
+kbfba-adjustbiomass   --help
+kbfba-adjustmapcomplex   --help
+kbfba-adjustmaprole   --help
+kbfba-adjustmapsubsystem   --help
+kbfba-adjustmodel   --help
+kbfba-adjusttempbiocpd   --help
+kbfba-adjusttempbiomass   --help
+kbfba-adjusttemprxn   --help
+kbfba-buildfbamodel   --help
+kbfba-exportfba   --help
+kbfba-exportfbamodel   --help
+kbfba-exportgenome   --help
+kbfba-exportmedia   --help
+kbfba-exportobject   --help
+kbfba-exportphenosim   --help
+kbfba-gapfill   --help
+kbfba-gapgen   --help
+kbfba-getbio   --help
+kbfba-getcompounds   --help
+kbfba-getfbas   --help
+kbfba-getgapfills   --help
+kbfba-getgapgens   --help
+kbfba-getmap   --help
+kbfba-getmedia   --help
+kbfba-getmodels   --help
+kbfba-getreactions   --help
+kbfba-gettemplate   --help
+kbfba-importfbamodel   --help
+kbfba-importpheno   --help
+kbfba-importprobanno   --help
+kbfba-importtemplate   --help
+kbfba-importtranslation   --help
+kbfba-integratesolution   --help
+kbfba-jobdone   --help
+kbfba-loadgenome   --help
+kbfba-queuefba   --help
+kbfba-runfba   --help
+kbfba-runjob   --help
+kbfba-simpheno   --help
+kbfba-url   --help
+
+#
+# MODULE = matR
+#
+
+#
+# MODULE = idserver
+#
+external_ids_to_kbase_ids   --help
+kbase_ids_to_external_ids   --help
+
+#
+# MODULE = experiment
+#
+exp_find_growmatch_data   --help
+
+#
+# MODULE = shock_service
+#
+
+#
+# MODULE = networks
+#
+net_build_first_neighbor_network   --help
+net_build_first_neighbor_network_limited_by_strength   --help
+net_build_internal_network   --help
+net_build_internal_network_limited_by_strength   --help
+net_dataset_source_to_datasets   --help
+net_entity_to_datasets   --help
+net_fetch_internal_networks   --help
+net_fetch_networks   --help
+net_get_all_dataset_sources   --help
+net_get_all_datasets   --help
+net_get_all_network_types   --help
+net_network_type_to_datasets   --help
+net_taxon_to_datasets   --help
+
+#
+# MODULE = workspace_service
+#
+kbws-addtype   --help
+kbws-checkjob   --help
+kbws-clone   --help
+kbws-copy   --help
+kbws-createws   --help
+kbws-delete   --help
+kbws-deletews   --help
+kbws-exists   --help
+kbws-get   --help
+kbws-getmeta   --help
+kbws-history   --help
+kbws-jobs   --help
+kbws-list   --help
+kbws-listobj   --help
+kbws-load   --help
+kbws-login   --help
+kbws-logout   --help
+kbws-meta   --help
+kbws-move   --help
+kbws-perm   --help
+kbws-removetype   --help
+kbws-resetjob   --help
+kbws-revert   --help
+kbws-setglobalperm   --help
+kbws-setuserperm   --help
+kbws-types   --help
+kbws-url   --help
+kbws-whoami   --help
+kbws-workspace   --help
+
+#
+# MODULE = plant_expression_service
+#
+coex_cluster   --help
+coex_cluster2   --help
+coex_filter   --help
+coex_net   --help
+coex_pipeline   --help
+get_all_eo   --help
+get_all_po   --help
+get_eo_descriptions   --help
+get_eo_sampleidlist   --help
+get_experiments_by_sampleid   --help
+get_experiments_by_sampleid_geneid   --help
+get_experiments_by_seriesid   --help
+get_po_descriptions   --help
+get_po_sampleidlist   --help
+get_repid_by_sampleid   --help
+
+#
+# MODULE = auth
+#
+kbase-login   --help
+kbase-logout   --help
+kbase-whoami   --help
+
+#
+# MODULE = genotype_phenotype_api
+#
+chromosome_position_from_variation_details   --help
+find_common_snps   --help
+genomes_with_trait   --help
+get_experiments   --help
+get_traits   --help
+selected_locations_to_genes   --help
+traits_to_genes   --help
+traits_to_variations   --help
+variations_to_genes   --help
+
+#
+# MODULE = genome_annotation
+#
+a_and_b   --help
+a_not_b   --help
+annotate_genome   --help
+assign_functions_to_CDSs   --help
+call_CDSs   --help
+call_CDSs_by_glimmer   --help
+call_RNAs   --help
+call_pyrrolysoproteins   --help
+call_selenoproteins   --help
+cluster_objects   --help
+cs_to_genome   --help
+fasta_to_genome   --help
+file_to_spreadsheet   --help
+genomeTO_strep_pneumo_repeats   --help
+genomeTO_strep_suis_repeats   --help
+genomeTO_to_coding_regions   --help
+genomeTO_to_feature_data   --help
+genomeTO_to_html   --help
+genomeTO_to_reconstructionTO   --help
+merge_features   --help
+reconstructionTO_to_roles   --help
+reconstructionTO_to_subsystems   --help
+regions_around   --help
+rel2tabs   --help
+sort_by_id   --help
+sort_by_loc   --help
+tabs2rel   --help
+
+#
+# MODULE = gene_conservation
+#
+
+#
+# MODULE = handle_service
+#
+
+#
+# MODULE = probabilistic_annotation
+#
+pa-annotate   --help
+pa-calculate   --help
+pa-checkjob   --help
+pa-getprobanno   --help
+pa-getrxnprobs   --help
+pa-url   --help
+
+#
+# MODULE = communities_api
+#
+mg-abundant-functions   --help
+mg-abundant-taxa   --help
+mg-annotate-metagenome   --help
+mg-awe-submit   --help
+mg-changing-annotation   --help
+mg-check-annotation-status   --help
+mg-compare-alpha-diversity   --help
+mg-compare-boxplot-plot   --help
+mg-compare-functions   --help
+mg-compare-heatmap   --help
+mg-compare-heatmap-plot   --help
+mg-compare-normalize   --help
+mg-compare-pcoa   --help
+mg-compare-pcoa-plot   --help
+mg-compare-taxa   --help
+mg-display-metadata   --help
+mg-display-statistics   --help
+mg-download-file   --help
+mg-download-full-file-list   --help
+mg-download-stage-file-list   --help
+mg-extract-sequences   --help
+mg-get-annotation-sequence   --help
+mg-get-annotation-set   --help
+mg-get-annotation-similarity   --help
+mg-get-library   --help
+mg-get-library-list   --help
+mg-get-metagenome   --help
+mg-get-metagenome-list   --help
+mg-get-project   --help
+mg-get-project-list   --help
+mg-get-sample   --help
+mg-get-sample-list   --help
+mg-get-sequences-for-function   --help
+mg-get-sequences-for-taxon   --help
+mg-get-similarity-for-function   --help
+mg-get-similarity-for-taxon   --help
+mg-group-significance   --help
+mg-jsonviewer   --help
+mg-kegg2ss   --help
+mg-pick-OTUs   --help
+mg-picrust-normalize-16s-copy   --help
+mg-picrust-predict   --help
+mg-retrieve-uniprot   --help
+mg-search-metagenomes   --help
+mg-select-significance   --help
+mg-stable-annotation   --help
+
+#
+# MODULE = interlog_projection
+#
+
+#
+# MODULE = workspace_deluxe
+#
+ws-clone   --help
+ws-copy   --help
+ws-createws   --help
+ws-delete   --help
+ws-deletews   --help
+ws-get   --help
+ws-getsubset   --help
+ws-history   --help
+ws-list   --help
+ws-listobj   --help
+ws-load   --help
+ws-rename   --help
+ws-revert   --help
+ws-share   --help
+ws-typespec-list   --help
+ws-typespec-register   --help
+ws-url   --help
+ws-workspace   --help
+
+#
+# MODULE = user_and_job_state
+#
+
+#
+# MODULE = translation
+#
+
+#
+# MODULE = communities_qc
+#
+consensus   --help
+drisee   --help
+kmer-tool   --help
+qc-get-drisee-compute   --help
+qc-get-drisee-instance   --help
+qc-get-histogram-compute   --help
+qc-get-histogram-instance   --help
+qc-get-kmer-compute   --help
+qc-get-kmer-instance   --help
+qiime-uclust   --help
+run_find_steiner   --help
+seq-length-stats   --help
+seq_length_stats   --help
+
+#
+# MODULE = phispy
+#
+find_prophages   --help
+get_all_training_sets   --help
+
+#
+# MODULE = file_type_service
+#
+
+#
+# MODULE = kb_seed
+#
+aliases_to_fids   --help
+all_entities_Alignment   --help
+all_entities_AlignmentAttribute   --help
+all_entities_AlignmentRow   --help
+all_entities_AlleleFrequency   --help
+all_entities_Annotation   --help
+all_entities_Assay   --help
+all_entities_AtomicRegulon   --help
+all_entities_Attribute   --help
+all_entities_Biomass   --help
+all_entities_CodonUsage   --help
+all_entities_Complex   --help
+all_entities_Compound   --help
+all_entities_CompoundInstance   --help
+all_entities_ConservedDomainModel   --help
+all_entities_Contig   --help
+all_entities_ContigChunk   --help
+all_entities_ContigSequence   --help
+all_entities_CoregulatedSet   --help
+all_entities_Diagram   --help
+all_entities_EcNumber   --help
+all_entities_Environment   --help
+all_entities_Experiment   --help
+all_entities_ExperimentMeta   --help
+all_entities_ExperimentalUnit   --help
+all_entities_ExperimentalUnitGroup   --help
+all_entities_Family   --help
+all_entities_Feature   --help
+all_entities_Genome   --help
+all_entities_Interaction   --help
+all_entities_InteractionDataset   --help
+all_entities_InteractionDetectionType   --help
+all_entities_Locality   --help
+all_entities_LocalizedCompound   --help
+all_entities_Location   --help
+all_entities_LocationInstance   --help
+all_entities_Measurement   --help
+all_entities_MeasurementDescription   --help
+all_entities_Media   --help
+all_entities_Model   --help
+all_entities_OTU   --help
+all_entities_ObservationalUnit   --help
+all_entities_PairSet   --help
+all_entities_Pairing   --help
+all_entities_Parameter   --help
+all_entities_Person   --help
+all_entities_ProbeSet   --help
+all_entities_ProteinSequence   --help
+all_entities_Protocol   --help
+all_entities_Publication   --help
+all_entities_Reaction   --help
+all_entities_ReactionInstance   --help
+all_entities_Role   --help
+all_entities_SSCell   --help
+all_entities_SSRow   --help
+all_entities_Scenario   --help
+all_entities_Source   --help
+all_entities_Strain   --help
+all_entities_StudyExperiment   --help
+all_entities_Subsystem   --help
+all_entities_SubsystemClass   --help
+all_entities_TaxonomicGrouping   --help
+all_entities_TimeSeries   --help
+all_entities_Trait   --help
+all_entities_Tree   --help
+all_entities_TreeAttribute   --help
+all_entities_TreeNodeAttribute   --help
+all_entities_Variant   --help
+all_roles_used_in_models   --help
+all_roles_used_in_models_and_subsystems   --help
+alleles_to_bp_locs   --help
+alleles_to_traits   --help
+atomic_regulons_to_fids   --help
+close_genomes   --help
+co_occurrence_evidence   --help
+complexes_to_complex_data   --help
+complexes_to_roles   --help
+contigs_to_lengths   --help
+contigs_to_md5s   --help
+contigs_to_sequences   --help
+corresponds   --help
+equiv_sequence_assertions   --help
+external_ids_to_fids   --help
+fids_to_annotations   --help
+fids_to_atomic_regulons   --help
+fids_to_co_occurring_fids   --help
+fids_to_coexpressed_fids   --help
+fids_to_dna_sequences   --help
+fids_to_feature_data   --help
+fids_to_functions   --help
+fids_to_genomes   --help
+fids_to_literature   --help
+fids_to_locations   --help
+fids_to_protein_families   --help
+fids_to_protein_sequences   --help
+fids_to_proteins   --help
+fids_to_regulon_data   --help
+fids_to_roles   --help
+fids_to_subsystem_data   --help
+fids_to_subsystems   --help
+genome_to_intergenic_regions   --help
+genomes_to_contigs   --help
+genomes_to_fids   --help
+genomes_to_genome_data   --help
+genomes_to_md5s   --help
+genomes_to_subsystems   --help
+genomes_to_taxonomies   --help
+get_abundance_profile   --help
+get_entity_Alignment   --help
+get_entity_AlignmentAttribute   --help
+get_entity_AlignmentRow   --help
+get_entity_AlleleFrequency   --help
+get_entity_Annotation   --help
+get_entity_Assay   --help
+get_entity_AtomicRegulon   --help
+get_entity_Attribute   --help
+get_entity_Biomass   --help
+get_entity_CodonUsage   --help
+get_entity_Complex   --help
+get_entity_Compound   --help
+get_entity_CompoundInstance   --help
+get_entity_ConservedDomainModel   --help
+get_entity_Contig   --help
+get_entity_ContigChunk   --help
+get_entity_ContigSequence   --help
+get_entity_CoregulatedSet   --help
+get_entity_Diagram   --help
+get_entity_EcNumber   --help
+get_entity_Environment   --help
+get_entity_Experiment   --help
+get_entity_ExperimentMeta   --help
+get_entity_ExperimentalUnit   --help
+get_entity_ExperimentalUnitGroup   --help
+get_entity_Family   --help
+get_entity_Feature   --help
+get_entity_Genome   --help
+get_entity_Interaction   --help
+get_entity_InteractionDataset   --help
+get_entity_InteractionDetectionType   --help
+get_entity_Locality   --help
+get_entity_LocalizedCompound   --help
+get_entity_Location   --help
+get_entity_LocationInstance   --help
+get_entity_Measurement   --help
+get_entity_MeasurementDescription   --help
+get_entity_Media   --help
+get_entity_Model   --help
+get_entity_OTU   --help
+get_entity_ObservationalUnit   --help
+get_entity_PairSet   --help
+get_entity_Pairing   --help
+get_entity_Parameter   --help
+get_entity_Person   --help
+get_entity_ProbeSet   --help
+get_entity_ProteinSequence   --help
+get_entity_Protocol   --help
+get_entity_Publication   --help
+get_entity_Reaction   --help
+get_entity_ReactionInstance   --help
+get_entity_Role   --help
+get_entity_SSCell   --help
+get_entity_SSRow   --help
+get_entity_Scenario   --help
+get_entity_Source   --help
+get_entity_Strain   --help
+get_entity_StudyExperiment   --help
+get_entity_Subsystem   --help
+get_entity_SubsystemClass   --help
+get_entity_TaxonomicGrouping   --help
+get_entity_TimeSeries   --help
+get_entity_Trait   --help
+get_entity_Tree   --help
+get_entity_TreeAttribute   --help
+get_entity_TreeNodeAttribute   --help
+get_entity_Variant   --help
+get_relationship_AffectsLevelOf   --help
+get_relationship_Aligned   --help
+get_relationship_Annotates   --help
+get_relationship_AreCodonsFor   --help
+get_relationship_AssertsFunctionFor   --help
+get_relationship_ComponentOf   --help
+get_relationship_CompoundMeasuredBy   --help
+get_relationship_Comprises   --help
+get_relationship_Concerns   --help
+get_relationship_ConsistsOfCompounds   --help
+get_relationship_Contains   --help
+get_relationship_ContainsAlignedDNA   --help
+get_relationship_ContainsAlignedProtein   --help
+get_relationship_ContainsExperimentalUnit   --help
+get_relationship_Controls   --help
+get_relationship_DefinedBy   --help
+get_relationship_DerivedFromGenome   --help
+get_relationship_DerivedFromStrain   --help
+get_relationship_Describes   --help
+get_relationship_DescribesAlignment   --help
+get_relationship_DescribesMeasurement   --help
+get_relationship_DescribesTree   --help
+get_relationship_DescribesTreeNode   --help
+get_relationship_DetectedBy   --help
+get_relationship_DetectedWithMethod   --help
+get_relationship_Determines   --help
+get_relationship_DeterminesFunctionOf   --help
+get_relationship_Displays   --help
+get_relationship_Encompasses   --help
+get_relationship_EvaluatedIn   --help
+get_relationship_ExperimentPublishedIn   --help
+get_relationship_FeatureInteractsIn   --help
+get_relationship_FeatureMeasuredBy   --help
+get_relationship_Formulated   --help
+get_relationship_GeneratedLevelsFor   --help
+get_relationship_GenomeParentOf   --help
+get_relationship_GroupedBy   --help
+get_relationship_HadResultsProducedBy   --help
+get_relationship_HasAlignmentAttribute   --help
+get_relationship_HasAsExemplar   --help
+get_relationship_HasAsSequence   --help
+get_relationship_HasAsTerminus   --help
+get_relationship_HasAssertedFunctionFrom   --help
+get_relationship_HasCompoundAliasFrom   --help
+get_relationship_HasConservedDomainModel   --help
+get_relationship_HasCoregulationWith   --help
+get_relationship_HasEnvironment   --help
+get_relationship_HasExperimentalUnit   --help
+get_relationship_HasFunctional   --help
+get_relationship_HasIndicatedSignalFrom   --help
+get_relationship_HasInteractionDataset   --help
+get_relationship_HasKnockoutIn   --help
+get_relationship_HasLevelsFrom   --help
+get_relationship_HasMeasurement   --help
+get_relationship_HasMedia   --help
+get_relationship_HasMember   --help
+get_relationship_HasNodeAttribute   --help
+get_relationship_HasParameter   --help
+get_relationship_HasParticipant   --help
+get_relationship_HasPresenceOf   --help
+get_relationship_HasProteinMember   --help
+get_relationship_HasReactionAliasFrom   --help
+get_relationship_HasRealLocationIn   --help
+get_relationship_HasRepresentativeOf   --help
+get_relationship_HasRequirementOf   --help
+get_relationship_HasResultsFor   --help
+get_relationship_HasResultsIn   --help
+get_relationship_HasRole   --help
+get_relationship_HasSection   --help
+get_relationship_HasStep   --help
+get_relationship_HasTrait   --help
+get_relationship_HasTreeAttribute   --help
+get_relationship_HasUnits   --help
+get_relationship_HasUsage   --help
+get_relationship_HasValueFor   --help
+get_relationship_HasValueIn   --help
+get_relationship_HasVariationIn   --help
+get_relationship_Impacts   --help
+get_relationship_ImplementedBasedOn   --help
+get_relationship_Implements   --help
+get_relationship_ImplementsReaction   --help
+get_relationship_InInteractionDataset   --help
+get_relationship_IncludedIn   --help
+get_relationship_Includes   --help
+get_relationship_IncludesAdditionalCompounds   --help
+get_relationship_IncludesAlignmentRow   --help
+get_relationship_IncludesPart   --help
+get_relationship_IncludesPartOf   --help
+get_relationship_IncludesStrain   --help
+get_relationship_IndicatedLevelsFor   --help
+get_relationship_IndicatesSignalFor   --help
+get_relationship_InteractionFeature   --help
+get_relationship_InteractionProtein   --help
+get_relationship_InteractionPublishedIn   --help
+get_relationship_Involves   --help
+get_relationship_IsARequirementOf   --help
+get_relationship_IsATopicOf   --help
+get_relationship_IsAffectedIn   --help
+get_relationship_IsAlignedDNAComponentOf   --help
+get_relationship_IsAlignedProteinComponentOf   --help
+get_relationship_IsAlignmentRowIn   --help
+get_relationship_IsAnnotatedBy   --help
+get_relationship_IsAssayOf   --help
+get_relationship_IsAssayedBy   --help
+get_relationship_IsBuiltFromAlignment   --help
+get_relationship_IsClassFor   --help
+get_relationship_IsCollectedInto   --help
+get_relationship_IsCollectionOf   --help
+get_relationship_IsComponentOf   --help
+get_relationship_IsComposedOf   --help
+get_relationship_IsComprisedOf   --help
+get_relationship_IsConfiguredBy   --help
+get_relationship_IsConservedDomainModelFor   --help
+get_relationship_IsConsistentTo   --help
+get_relationship_IsConsistentWith   --help
+get_relationship_IsContainedIn   --help
+get_relationship_IsContextOf   --help
+get_relationship_IsControlledUsing   --help
+get_relationship_IsCoregulatedWith   --help
+get_relationship_IsCoupledTo   --help
+get_relationship_IsCoupledWith   --help
+get_relationship_IsDatasetFor   --help
+get_relationship_IsDefinedBy   --help
+get_relationship_IsDescribedBy   --help
+get_relationship_IsDeterminedBy   --help
+get_relationship_IsDisplayedOn   --help
+get_relationship_IsDividedInto   --help
+get_relationship_IsDivisionOf   --help
+get_relationship_IsEncompassedIn   --help
+get_relationship_IsExecutedAs   --help
+get_relationship_IsExecutionOf   --help
+get_relationship_IsExemplarOf   --help
+get_relationship_IsExperimentalUnitOf   --help
+get_relationship_IsFamilyFor   --help
+get_relationship_IsFormedInto   --help
+get_relationship_IsFormedOf   --help
+get_relationship_IsFunctionalIn   --help
+get_relationship_IsGroupFor   --help
+get_relationship_IsGroupingOf   --help
+get_relationship_IsImpactedBy   --help
+get_relationship_IsImplementedBy   --help
+get_relationship_IsInClass   --help
+get_relationship_IsInGroup   --help
+get_relationship_IsInPair   --help
+get_relationship_IsInTaxa   --help
+get_relationship_IsIncludedIn   --help
+get_relationship_IsInstanceOf   --help
+get_relationship_IsInstantiatedBy   --help
+get_relationship_IsInvolvedIn   --help
+get_relationship_IsLocated   --help
+get_relationship_IsLocatedIn   --help
+get_relationship_IsLocusFor   --help
+get_relationship_IsManagedBy   --help
+get_relationship_IsMeasureOf   --help
+get_relationship_IsMeasurementMethodOf   --help
+get_relationship_IsMemberOf   --help
+get_relationship_IsModeledBy   --help
+get_relationship_IsModificationOfAlignment   --help
+get_relationship_IsModificationOfTree   --help
+get_relationship_IsModifiedToBuildAlignment   --help
+get_relationship_IsModifiedToBuildTree   --help
+get_relationship_IsOwnedBy   --help
+get_relationship_IsOwnerOf   --help
+get_relationship_IsPairOf   --help
+get_relationship_IsPartOf   --help
+get_relationship_IsParticipatingAt   --help
+get_relationship_IsParticipationOf   --help
+get_relationship_IsPresentIn   --help
+get_relationship_IsProteinFor   --help
+get_relationship_IsProteinMemberOf   --help
+get_relationship_IsReagentIn   --help
+get_relationship_IsRealLocationOf   --help
+get_relationship_IsReferencedBy   --help
+get_relationship_IsRegulatedIn   --help
+get_relationship_IsRegulatedSetOf   --help
+get_relationship_IsRelevantFor   --help
+get_relationship_IsRelevantTo   --help
+get_relationship_IsRepresentedBy   --help
+get_relationship_IsRepresentedIn   --help
+get_relationship_IsRoleFor   --help
+get_relationship_IsRoleOf   --help
+get_relationship_IsRowOf   --help
+get_relationship_IsSectionOf   --help
+get_relationship_IsSequenceOf   --help
+get_relationship_IsShownOn   --help
+get_relationship_IsStepOf   --help
+get_relationship_IsSubInstanceOf   --help
+get_relationship_IsSubclassOf   --help
+get_relationship_IsSummarizedBy   --help
+get_relationship_IsSuperclassOf   --help
+get_relationship_IsSupersededByAlignment   --help
+get_relationship_IsSupersededByTree   --help
+get_relationship_IsTaxonomyOf   --help
+get_relationship_IsTerminusFor   --help
+get_relationship_IsTimepointOf   --help
+get_relationship_IsTreeFrom   --help
+get_relationship_IsTriggeredBy   --help
+get_relationship_IsUsageOf   --help
+get_relationship_IsUsedBy   --help
+get_relationship_IsUsedToBuildTree   --help
+get_relationship_IsUtilizedIn   --help
+get_relationship_IsVariedIn   --help
+get_relationship_KnockedOutIn   --help
+get_relationship_Manages   --help
+get_relationship_Measures   --help
+get_relationship_MeasuresCompound   --help
+get_relationship_MeasuresFeature   --help
+get_relationship_Models   --help
+get_relationship_OfEnvironment   --help
+get_relationship_OperatesIn   --help
+get_relationship_OrdersExperimentalUnit   --help
+get_relationship_Overlaps   --help
+get_relationship_ParticipatesAs   --help
+get_relationship_ParticipatesAt   --help
+get_relationship_ParticipatesIn   --help
+get_relationship_PerformedBy   --help
+get_relationship_PerformedExperiment   --help
+get_relationship_ProducedResultsFor   --help
+get_relationship_Produces   --help
+get_relationship_ProteinInteractsIn   --help
+get_relationship_ProtocolPublishedIn   --help
+get_relationship_Provided   --help
+get_relationship_PublishedExperiment   --help
+get_relationship_PublishedInteraction   --help
+get_relationship_PublishedProtocol   --help
+get_relationship_ReflectsStateOf   --help
+get_relationship_Shows   --help
+get_relationship_StrainParentOf   --help
+get_relationship_Submitted   --help
+get_relationship_Summarizes   --help
+get_relationship_SupersedesAlignment   --help
+get_relationship_SupersedesTree   --help
+get_relationship_Targets   --help
+get_relationship_Treed   --help
+get_relationship_Triggers   --help
+get_relationship_UsedIn   --help
+get_relationship_Uses   --help
+get_relationship_UsesAliasForCompound   --help
+get_relationship_UsesAliasForReaction   --help
+get_relationship_UsesCodons   --help
+get_relationship_UsesReference   --help
+get_relationship_Validates   --help
+get_relationship_WasAlignedBy   --help
+get_relationship_WasFormulatedBy   --help
+get_relationship_WasGeneratedFrom   --help
+get_relationship_WasMeasuredBy   --help
+get_relationship_WasProvidedBy   --help
+get_relationship_WasSubmittedBy   --help
+locations_to_dna_sequences   --help
+locations_to_fids   --help
+md5s_to_genomes   --help
+otu_members   --help
+otus_to_representatives   --help
+ous_with_trait   --help
+protein_families_to_co_occurring_families   --help
+protein_families_to_fids   --help
+protein_families_to_functions   --help
+protein_families_to_proteins   --help
+proteins_to_fids   --help
+proteins_to_functions   --help
+proteins_to_literature   --help
+proteins_to_protein_families   --help
+proteins_to_roles   --help
+proteins_to_sequences   --help
+query_entity_Alignment   --help
+query_entity_AlignmentAttribute   --help
+query_entity_AlignmentRow   --help
+query_entity_AlleleFrequency   --help
+query_entity_Annotation   --help
+query_entity_Assay   --help
+query_entity_AtomicRegulon   --help
+query_entity_Attribute   --help
+query_entity_Biomass   --help
+query_entity_CodonUsage   --help
+query_entity_Complex   --help
+query_entity_Compound   --help
+query_entity_CompoundInstance   --help
+query_entity_ConservedDomainModel   --help
+query_entity_Contig   --help
+query_entity_ContigChunk   --help
+query_entity_ContigSequence   --help
+query_entity_CoregulatedSet   --help
+query_entity_Diagram   --help
+query_entity_EcNumber   --help
+query_entity_Environment   --help
+query_entity_Experiment   --help
+query_entity_ExperimentMeta   --help
+query_entity_ExperimentalUnit   --help
+query_entity_ExperimentalUnitGroup   --help
+query_entity_Family   --help
+query_entity_Feature   --help
+query_entity_Genome   --help
+query_entity_Interaction   --help
+query_entity_InteractionDataset   --help
+query_entity_InteractionDetectionType   --help
+query_entity_Locality   --help
+query_entity_LocalizedCompound   --help
+query_entity_Location   --help
+query_entity_LocationInstance   --help
+query_entity_Measurement   --help
+query_entity_MeasurementDescription   --help
+query_entity_Media   --help
+query_entity_Model   --help
+query_entity_OTU   --help
+query_entity_ObservationalUnit   --help
+query_entity_PairSet   --help
+query_entity_Pairing   --help
+query_entity_Parameter   --help
+query_entity_Person   --help
+query_entity_ProbeSet   --help
+query_entity_ProteinSequence   --help
+query_entity_Protocol   --help
+query_entity_Publication   --help
+query_entity_Reaction   --help
+query_entity_ReactionInstance   --help
+query_entity_Role   --help
+query_entity_SSCell   --help
+query_entity_SSRow   --help
+query_entity_Scenario   --help
+query_entity_Source   --help
+query_entity_Strain   --help
+query_entity_StudyExperiment   --help
+query_entity_Subsystem   --help
+query_entity_SubsystemClass   --help
+query_entity_TaxonomicGrouping   --help
+query_entity_TimeSeries   --help
+query_entity_Trait   --help
+query_entity_Tree   --help
+query_entity_TreeAttribute   --help
+query_entity_TreeNodeAttribute   --help
+query_entity_Variant   --help
+reaction_strings   --help
+reactions_to_complexes   --help
+region_to_alleles   --help
+region_to_fids   --help
+regulons_to_fids   --help
+representative   --help
+representative_sequences   --help
+roles_to_complexes   --help
+roles_to_fids   --help
+roles_to_protein_families   --help
+roles_to_proteins   --help
+roles_to_subsystems   --help
+subsystems_to_fids   --help
+subsystems_to_genomes   --help
+subsystems_to_roles   --help
+subsystems_to_spreadsheets   --help
+text_search   --help
+traits_to_alleles   --help
+
+#
+# MODULE = functional_ortholog_predictor
+#
+fop-rank-pgene   --help
+
+#
+# MODULE = erdb_service
+#
+
+#
+# MODULE = nr
+#
+m5nr-get-accession   --help
+m5nr-get-function   --help
+m5nr-get-md5   --help
+m5nr-get-ontology   --help
+m5nr-get-organism   --help
+m5nr-get-sources   --help
+m5nr-get-taxonomy   --help
+m5nr-tools   --help
+
+#
+# MODULE = prom_service
+#
+prom-change-expression-data-namespace   --help
+prom-change-regulatory-network-namespace   --help
+prom-create-constraints   --help
+prom-load-expression-data   --help
+prom-load-regulatory-network   --help
+
+#
+# MODULE = cbd
+#
+cbd-buildmatrix   --help
+cbd-filtermatrix   --help
+cbd-getmatrix   --help
+cbd-plotmatrix   --help
+cbd-url   --help
+
+#
+# MODULE = jnomics
+#
+jk-compute-bowtie   --help
+jk-compute-bwa   --help
+jk-compute-cuffcompare   --help
+jk-compute-cuffdiff   --help
+jk-compute-cufflinks   --help
+jk-compute-cuffmerge   --help
+jk-compute-grid-job-status   --help
+jk-compute-job-status   --help
+jk-compute-list-genomes   --help
+jk-compute-list-jobs   --help
+jk-compute-samtools-snp   --help
+jk-compute-shock-batch-write   --help
+jk-compute-tophat   --help
+jk-compute-vcf-merge   --help
+jk-fs-cat   --help
+jk-fs-get   --help
+jk-fs-ls   --help
+jk-fs-mkdir   --help
+jk-fs-mv   --help
+jk-fs-put   --help
+jk-fs-put-pe   --help
+jk-fs-put-pe-i   --help
+jk-fs-put-se   --help
+jk-fs-rm   --help
+jk-fs-rmr   --help
+jk-fs-shock-ls   --help
+jk-fs-shock-write   --help
+jk-fs-stage-shock   --help
+jkbase   --help
+
+#
+# MODULE = expression
+#
+expr-get-expression-data-by-feature-ids   --help
+expr-get-expression-data-by-samples-and-features   --help
+expr-get-expression-samples-data   --help
+expr-get-expression-samples-data-by-genome-ids   --help
+expr-get-expression-samples-data-by-series-ids   --help
