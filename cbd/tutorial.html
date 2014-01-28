@@ -1,0 +1,161 @@
+<?xml version="1.0" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>CompressionBasedDistance</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<link rev="made" href="mailto:ubuntu@dolson-v25-tmp.(none)" />
+</head>
+
+<body style="background-color: white">
+
+<h1 id="INTRODUCTION">INTRODUCTION  </h1>
+
+<p>Compression-based distance (CBD) is a simple, rapid, and accurate method to efficiently assess
+differences in microbiota samples. CBD characterizes the similarities between microbial communities
+via the amount of repetition or overlap in order to determine microbial community distance. CBD 
+relies on the fact that more repetitive data is the more it can be compressed. By combining 16S 
+rRNA hypervariable tag data from different samples and assessing the relative amounts of compression, 
+there is a proxy for the similarities between the communities. The amount of compression is converted 
+to a distance by taking compression gained by combining the datasets over the total compressed size 
+of the individual datasets. The distance has a value with a minimum of 0 meaning the communities are 
+the same and a maximum of 1 meaning the communities are completely different.</p>
+
+<h2 id="step_1">Create a list file describing the input sequence files</h2>
+
+<p>In order to build a distance matrix, you need the sequence data from 16S rRNA sequencing.  The
+sequence data is typically in a fasta file or fastq file.  The name of the file is used for labels
+when displaying the results so a short, descriptive file name is best.  Each
+sequence file contains the sequence reads for a microbial community. </p>
+
+<p>You can also assign one or more groups to each input sequence file.  For example, if each 
+sequence file is a sample from a subject at a specific time point, you can assign a subject group
+and a time point group.  The list of groups is a semicolon delimited list of group names.</p>
+
+<p>Each line of the list file has two tab delimited fields:
+<ol>
+<li>path to a sequence file 
+<li>list of groups the sequence file belongs to
+</ol>
+<p>The following is an example of the contents of a list file which is named mystudy.list. There
+are two subjects and four time points.</p>
+
+<pre class='example'>
+S01t1.fastq  subject1;timept1
+S01t2.fastq  subject1;timept2
+S01t3.fastq  subject1;timept3
+S01t4.fastq  subject1;timept4
+S02t1.fastq  subject2;timept1
+S02t2.fastq  subject2;timept2
+S02t3.fastq  subject2;timept3
+S02t4.fastq  subject2;timept4
+</pre>
+
+<h2 id="build_matrix">Build a distance matrix</h2>
+
+<p>You build a distance matrix using the cbd-buildmatrix command.  The first argument is the path to 
+the list file.  A job is 
+submitted to build a distance matrix because it can be a long running process, depending on the size
+and number of sequence files.  All of the sequence files must be in the same format. 
+
+<pre class='example'>
+> cbd-buildmatrix --format fastq mystudy.list
+Uploading sequence file 'S01t1.fastq'
+Uploading sequence file 'S01t2.fastq'
+Uploading sequence file 'S01t3.fastq'
+Uploading sequence file 'S01t4.fastq'
+Uploading sequence file 'S02t1.fastq'
+Uploading sequence file 'S02t2.fastq'
+Uploading sequence file 'S02t3.fastq'
+Uploading sequence file 'S02t4.fastq'
+Job '52e2ee73e4b0ef83573320af' submitted
+</pre>
+
+<p>The last line of the command output shows the job ID of the submitted job.</p>
+
+<h2 id="get_matrix">Get the distance matrix</h2>
+
+<p>You check the status of the job building the distance matrix and get the distance matrix using
+the cbd-getmatrix command.  The first argument is the job ID returned by cbd-buildmatrix and the
+second argument is the path to the file where the distance matrix is saved.  If the job is still 
+running, cbd-getmatrix shows the current status.</p>
+
+<pre class='example'>
+> cbd-getmatrix 52e2ee73e4b0ef83573320af mystudy.csv
+Job '52e2ee73e4b0ef83573320af' has status 'compressing sequence files' and is working on task 4 of 6.  Check again later.
+</pre>
+
+<p>When the job is finished, cbd-getmatrix saves the distance matrix to the specified file in csv format.
+
+<pre class='example'>
+> cbd-getmatrix 52e2ee73e4b0ef83573320af mystudy.csv
+</pre>
+ 
+<h2 id="filter_matrx">Filter the distance matrix</h2>
+
+<p>You can filter the distance matrix to compare specific samples based on the groups you assigned
+in the list file using the cbd-filtermatrix command.  The first argument is the path to the list file,
+the second argument is the path to the source
+distance matrix file, the third argument is the path to the destination distance matrix file, and 
+the fourth argument is the list of groups to filter. </p>
+
+<p>There are three ways you can filter the distance matrix.  First, you can filter within a group 
+to select samples only from the specified group.
+For example, you can filter the samples from the subject1 group with this command:</p>
+
+<pre class='example'>
+> cbd-filtermatrix --filter within mystudy.list mystudy.csv subject1.csv subject1
+</pre>
+
+<p>Second, you can filter out a group to exclude samples from the specified group.  For example,
+you can exclude the samples from the timept2 group with this command:</p>
+
+<pre class='example'>
+> cbd-filtermatrix --filter without mystudy.list mystudy.csv without-timept2.csv timept2
+</pre>
+
+<p>Third, you can filter between multiple groups to select samples from the specified groups.
+For example, you can filter the samples from the timept1 and timept3 groups with this command:</p>
+
+<pre class='example'>
+> cbd-filtermatrix --filter between mystudy.list mystudy.csv timept1-timept3.csv 'timept1;timept3'
+</pre>
+
+<h2 id="plot_matrix">Plot the distance matrix</h2>
+
+<p>You can plot a distance matrix to visualize the differences between the samples using the 
+cbd-plotmatrix command.  The first argument is path to the distance matrix file and the second
+argument is the path to the output file with the visualization.  The visualization is a dendrogram
+in a text format.</p>
+
+<pre class='example'>
+$ cbd-plotmatrix mystudy.csv mystudy.txt
+</pre>
+
+<p>Here is an example of the contents of the output file</p>
+
+<pre class='example'>
+                              /-S03t1
+                    /edge.1--|
+                   |          \-S01t1
+          /edge.0--|
+         |         |          /-S02t1
+         |          \edge.2--|
+         |                    \-S04t1
+-root----|
+         |                              /-S02t2
+         |                    /edge.5--|
+         |          /edge.4--|          \-S04t2
+         |         |         |
+          \edge.3--|          \-S03t2
+                   |
+                    \-S01t2
+</pre>
+
+<p>More visualization options are coming soon.</p>
+
+</body>
+
+</html>
+
+
