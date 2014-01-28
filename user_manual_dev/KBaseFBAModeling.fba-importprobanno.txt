@@ -1,0 +1,10 @@
+fba-importprobanno <Genome ID> <Probanno filename> [-?ehiovw] [long options...]
+	--probannoid        ID for phenotype set in workspace
+	--genomews          Workspace with genome object
+	-i --ignoreerrors   Ignore errors encountered during load
+	-w --workspace      Workspace to save phenotypes in
+	-o --overwrite      Overwrite any existing phenotypes with same name
+	-e --showerror      Set as 1 to show any errors in execution
+	-v --verbose        Print verbose messages
+	-? -h --help        Print this usage information
+

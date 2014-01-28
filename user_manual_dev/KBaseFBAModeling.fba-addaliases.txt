@@ -1,0 +1,7 @@
+fba-addaliases <Genome ID> <Filename> <ID type> [-?ehovw] [long options...]
+	-w --workspace     Reference default workspace
+	-o --overwrite     Overwrite any existing model with same name
+	-e --showerror     Set as 1 to show any errors in execution
+	-v --verbose       Print verbose messages
+	-? -h --help       Print this usage information
+

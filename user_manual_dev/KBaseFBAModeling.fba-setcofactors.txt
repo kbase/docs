@@ -1,0 +1,10 @@
+fba-setcofactors <Cofactor list filename> [-?behorvw] [long options...]
+	-b --biochem       ID of biochemistry database
+	-w --biochemws     Workspace where biochemistry database is located
+	-r --reset         Reset (turn off) compounds as universal cofactors
+	-o --overwrite     Overwrite existing biochemistry database with same
+	                   name
+	-e --showerror     Set as 1 to show any errors in execution
+	-v --verbose       Print verbose messages
+	-? -h --help       Print this usage information
+

@@ -1,0 +1,11 @@
+fba-merge-models <Models (workspace/ID/abundance) or Filename> [-?efhnuvw] [long options...]
+	-u --newuid        ID for merged model in workspace
+	-n --name          Name for merged model
+	-f --fromfile      Load model list from file. Input file should have
+	                   three columns with headers: Model, Workspace, and
+	                   Abundance.
+	-w --workspace     Workspace to save merged model
+	-e --showerror     Set as 1 to show any errors in execution
+	-v --verbose       Print verbose messages
+	-? -h --help       Print this usage information
+

@@ -1,0 +1,65 @@
+NAME
+    m5nr-tools
+
+VERSION
+    1
+
+SYNOPSIS
+    m5nr-tools [--help, --verbose, --api <api url>, --source <source name>,
+    --sim <similarity file>, --acc <accession ids>, --md5 <md5 checksums>,
+    --sequence <aa sequence>, --option <cv: sequence or annotation>]
+
+DESCRIPTION
+    Tool for retreiving M5NR annotations for inputed accession ids, md5
+    checksums, or protein sequence. Option to annotate a blast m8 formatted
+    similarity file.
+
+    Parameters:
+
+    --api api_url
+            url of m5nr API
+
+    --source source_name
+            source for annotation
+
+    Options:
+
+    --help  display this help message
+
+    --verbose
+            run in a verbose mode
+
+    --sim similarity_file
+            file in blast m8 format to be annotated
+
+    --acc accession_ids
+            file or comma seperated list of protein ids
+
+    --md5 md5_checksums
+            file or comma seperated list of md5sums
+
+    --sequence aa_sequence
+            protein sequence, returns md5sum of sequence
+
+    --option output_type
+            output type, one of: sequence or annotation note: sequence
+            output only available for --md5 input
+
+    Output:
+
+    M5NR annotations based on input options.
+
+EXAMPLES
+    m5nr-tools --api http://kbase.us/services/communities/1 --option
+    annotation --source RefSeq --md5
+    0b95101ffea9396db4126e4656460ce5,068792e95e38032059ba7d9c26c1be78,0b96c9
+    2ce600d8b2427eedbc221642f1
+
+SEE ALSO
+    -
+
+AUTHORS
+    Jared Bischof, Travis Harrison, Folker Meyer, Tobias Paczian, Andreas
+    Wilke
+
+

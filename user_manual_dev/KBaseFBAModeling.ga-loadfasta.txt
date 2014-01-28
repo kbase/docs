@@ -1,0 +1,13 @@
+ga-loadfasta <Filename> [-?ehinpstuvwy] [long options...]
+	-u --userid        ID for object in workspace
+	-t --transcripts   FASTA contains trascripts instead of full contigs
+	-p --proteins      FASTA contains proteins instead of full contigs
+	-n --name          Name for FASTA data
+	-i --sourceid      Source ID of FASTA data
+	-s --source        Source of FASTA data
+	-y --type          Type of sequence data
+	-w --workspace     Workspace to save FBA results
+	-e --showerror     Set as 1 to show any errors in execution
+	-v --verbose       Print verbose messages
+	-? -h --help       Print this usage information
+

@@ -1,0 +1,8 @@
+fba-getmap [-?ehmpv] [long options...]
+	-m --map         ID of mapping to be printed
+	--mapws          Workspace for mapping
+	-p --pretty      Pretty print output
+	-e --showerror   Set as 1 to show any errors in execution
+	-v --verbose     Print verbose messages
+	-? -h --help     Print this usage information
+

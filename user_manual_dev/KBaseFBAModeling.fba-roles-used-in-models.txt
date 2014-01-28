@@ -1,0 +1,9 @@
+fba-roles-used-in-models [-?ceghnpv] [long options...]
+	-g --grampos     Use the gram positive template
+	-n --gramneg     Use the gram negative template
+	-c --core        Use the core model template
+	-p --plant       Use the plant template
+	-e --showerror   Set as 1 to show any errors in execution
+	-v --verbose     Print verbose messages
+	-? -h --help     Print this usage information
+

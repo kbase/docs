@@ -1,0 +1,35 @@
+
+NAME
+    m5nr-get-md5 -- retrieve annotations based on inputted md5 checksum
+
+VERSION
+    2
+
+SYNOPSIS
+    m5nr-get-md5 [ --help, --user <user>, --pass <password>, --token <oAuth token>, --webkey <communities webkey>, --id <md5 checksum>]
+
+DESCRIPTION
+    retrieve annotations based on inputted md5 checksum
+
+  Options
+    help - display this message
+  user - username to authenticate against the API, requires a password to be set as well
+   pass - password to authenticate against the API, requires a username to be set as well
+   token - Globus Online authentication token
+   webkey - MG-RAST webkey to synch with the passed Globus Online authentication
+    	id - md5 checksum to retrieve annotations of
+
+
+  Output
+    JSON structure that contains the result data
+
+EXAMPLES
+    m5nr-get-md5 --id 000821a2e2f63df1a3873e4b280002a8
+
+SEE ALSO
+    -
+
+AUTHORS
+    Jared Bischof, Travis Harrison, Folker Meyer, Tobias Paczian, Andreas Wilke
+
+

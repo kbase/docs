@@ -1,0 +1,15 @@
+ga-annotate-ws-genome <Genome ID> [-?acefhoprsvw] [long options...]
+	--newuserid            New user ID for annotated genome
+	--genomews             Workspace with input genome
+	-s --selectstages      Run only selected stages of pipeline
+	-a --assignfunctions   Assign functions to genes
+	-o --callseleno        Call selenoproteins
+	-p --callpyrrolyso     Call pyrrolysoproteins
+	-r --callrna           Call RNAs
+	-c --callcds           Call CDSs
+	-f --findclosegen      Find close neighbors
+	-w --workspace         Workspace to save FBA results
+	-e --showerror         Set as 1 to show any errors in execution
+	-v --verbose           Print verbose messages
+	-? -h --help           Print this usage information
+

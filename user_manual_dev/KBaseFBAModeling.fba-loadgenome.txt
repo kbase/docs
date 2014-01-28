@@ -1,0 +1,14 @@
+fba-loadgenome <Genome file | Genome ID> [-?efhlmoprsvw] [long options...]
+	-f --fromfile      Load genome object from file
+	-s --seed          Load genome from SEED
+	-r --rast          Load genome from RAST
+	-l --login         Login for genome source (e.g. RAST)
+	-p --password      Password for genome source (e.g. RAST)
+	-m --mapping       Mapping to be used with loaded genome
+	--mappingws        Workspace of mapping to be used with loaded genome
+	-w --workspace     Workspace to load genome into
+	-o --overwrite     Overwrite existing genome with same name
+	-e --showerror     Set as 1 to show any errors in execution
+	-v --verbose       Print verbose messages
+	-? -h --help       Print this usage information
+

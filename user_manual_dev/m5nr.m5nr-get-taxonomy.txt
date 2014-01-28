@@ -1,0 +1,37 @@
+
+NAME
+    m5nr-get-taxonomy -- retrieve taxonomy from m5nr
+
+VERSION
+    2
+
+SYNOPSIS
+    m5nr-get-taxonomy [ --help, --user <user>, --pass <password>, --token <oAuth token>, --webkey <communities webkey>, --min_level <taxon level>, --filter_level <taxon level>, --filter <text>]
+
+DESCRIPTION
+    retrieve taxonomy from m5nr
+
+  Options
+    help - display this message
+  user - username to authenticate against the API, requires a password to be set as well
+   pass - password to authenticate against the API, requires a username to be set as well
+   token - Globus Online authentication token
+   webkey - MG-RAST webkey to synch with the passed Globus Online authentication
+    	min_level - lowest taxonomic level to retrieve
+	filter_level - taxonomic level to apply filter text to
+	filter - text to filter results by
+
+
+  Output
+    JSON structure that contains the result data
+
+EXAMPLES
+    m5nr-get-taxonomy --min_level genus filter_level phylum --filter Bacteroidetes
+
+SEE ALSO
+    -
+
+AUTHORS
+    Jared Bischof, Travis Harrison, Folker Meyer, Tobias Paczian, Andreas Wilke
+
+

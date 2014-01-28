@@ -1,0 +1,36 @@
+
+NAME
+    m5nr-get-function -- retrieve annotations based on functions
+
+VERSION
+    2
+
+SYNOPSIS
+    m5nr-get-function [ --help, --user <user>, --pass <password>, --token <oAuth token>, --webkey <communities webkey>, --text <text>, --source <source name>]
+
+DESCRIPTION
+    retrieve annotations based on searching functions matching inputted text
+
+  Options
+    help - display this message
+  user - username to authenticate against the API, requires a password to be set as well
+   pass - password to authenticate against the API, requires a username to be set as well
+   token - Globus Online authentication token
+   webkey - MG-RAST webkey to synch with the passed Globus Online authentication
+    	text - search functions based on this text
+	source - source to filter results by
+
+
+  Output
+    JSON structure that contains the result data
+
+EXAMPLES
+    m5nr-get-function --text sulfatase --source GenBank
+
+SEE ALSO
+    -
+
+AUTHORS
+    Jared Bischof, Travis Harrison, Folker Meyer, Tobias Paczian, Andreas Wilke
+
+

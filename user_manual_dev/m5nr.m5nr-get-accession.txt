@@ -1,0 +1,35 @@
+
+NAME
+    m5nr-get-accession -- retrieve annotations based on inputted accession ID
+
+VERSION
+    2
+
+SYNOPSIS
+    m5nr-get-accession [ --help, --user <user>, --pass <password>, --token <oAuth token>, --webkey <communities webkey>, --id <accession ID>]
+
+DESCRIPTION
+    retrieve annotations based on inputted accession ID
+
+  Options
+    help - display this message
+  user - username to authenticate against the API, requires a password to be set as well
+   pass - password to authenticate against the API, requires a username to be set as well
+   token - Globus Online authentication token
+   webkey - MG-RAST webkey to synch with the passed Globus Online authentication
+    	id - accession id to retrieve annotations of
+
+
+  Output
+    JSON structure that contains the result data
+
+EXAMPLES
+    m5nr-get-accession --id YP_003268079.1
+
+SEE ALSO
+    -
+
+AUTHORS
+    Jared Bischof, Travis Harrison, Folker Meyer, Tobias Paczian, Andreas Wilke
+
+
