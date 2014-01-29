@@ -1,0 +1,280 @@
+Compression Based Distance Service
+
+DESCRIPTION
+The Compression-based distance Service is a KBase service that 
+is a simple, rapid, and accurate method to
+efficiently assess differences in microbiota samples.  
+CBD characterizes the similarities between microbial communities via the amount of repetition
+or overlap in order to determine microbial community distance.  CBD relies on
+the fact that more repetitive data is the more it can be compressed.  By
+combining 16S rRNA hypervariable tag data from different samples and assessing
+the relative amounts of compression, there is a proxy for the similarities
+between the communities.  The amount of compression is converted to a distance
+by taking compression gained by combining the datasets over the total
+compressed size of the individual datasets.  The distance has a value with a
+minimum of 0 meaning the communities are the same and a maximum of 1 meaning
+the communities are completely different.
+
+COMMANDS
+cbd-buildmatrix
+cbd-filtermatrix
+cbd-getmatrix
+cbd-plotmatrix
+cbd-url
+
+NAME
+cbd-buildmatrix -- This command will build a distance matrix to compare microbiota samples.
+
+		   The cbd-buildmatrix command will build a distance matrix from a set of sequence files for microbiota
+		   comparisons. Compression based distance uses the relative compression of combined and individual 
+		   datasets to quantify overlaps between microbial communities.
+ 
+
+VERSION
+1.20 
+
+SYNOPSIS
+cbd_buildmatrix [-h] [-f FORMAT] [-s SCALE] [--shock-url URL]  <inputPath>
+
+DESCRIPTION
+INPUTS:  The input for this command is the path to the file with the list of INPUT sequence files. 
+
+OUTPUTS:  This command will output a distance matrix. 
+
+PARAMETERS:
+-h, --help      Display help message to standard out and exit with error code zero; 
+                ignore all other command-line arguments.
+
+-f, --format FORMAT        Format of the INPUT sequence files. (e.g. fastq)
+-s, --scale SCALE          Scale for distance matrix values.
+--shock-url URL            URL for the KBase shock service.
+
+inputPath                 The path to file with the list of INPUT sequence files.
+                          The inputPath argument is the path to a file with the list of
+                          paths to the input sequence files and the groups each file belongs to.
+                          Each line of the list file has two tab delimited fields: 
+                          (1) path to a sequence file, (2) list of groups the sequence file belongs to.
+
+EXAMPLES
+	Build a distance matrix from the sample1 fasta sequence file includes groups patient1 and day7.
+
+           /myhome/sample1.fasta    patient1;day7
+
+        Build a distance matrix for a set of fasta sequence files:
+           > cbd-buildmatrix mystudy.input
+     
+        Build a distance matrix for a set of fastq sequence files:
+    	   > cbd-buildmatrix --format fastq mystudy.input
+  
+SEE ALSO
+
+cbd-getmatrix
+cbd-filtermatrix 
+
+AUTHORS
+Mike Mundy, Fang Yang, Nicholas Chia, Patricio Jeraldo
+
+
+
+NAME
+cbd-filtermatrix -- This command will apply a filter to a distance matrix 
+                    to select groups for microbiota comparisons.
+
+VERSION
+1.2
+
+SYNOPSIS
+cbd_filtermatrix [-h] [-f FILTER] inputPath sourcePath destPath group
+
+DESCRIPTION
+INPUTS:   The input for this command is the path to the file with the list of INPUT sequence files, the path to the source distance matrix file, the path to the destination matrix file and list of group identifiers to apply with the filter.  
+
+
+PARAMETERS:
+
+-h, --help                  Display help message to standard out and exit with
+                            error code zero;ignore all other command-line arguments.
+
+-f, --filter FILTER         Specify the type of filter (within, without, or between) to apply to the source distance matrix.
+    	     		    Valid filters are 'within' to select one group, 'without' to exclude one group, 
+			    and 'between' to select multiple groups.
+
+inputPath                 Specify the path to file with a list of INPUT sequence files. 
+			  The inputPath argument is the path to a file with the list of
+                          paths to the input sequence files and the groups each file belongs to.
+                          Each line of the list file has two tab delimited fields:
+                          (1) path to a sequence file, (2) list of groups the sequence file belongs to.
+ 
+sourcePath                Specify the path to the source distance matrix file
+			  created by cbd-buildmatrix and saved by cbd-getmatrix.
+			  
+destPath                  Specify te path to destination distance matrix file
+			  after the filter is applied.
+
+group                     The list of group identifiers to apply with the filter (semicolon separated).
+
+
+EXAMPLES
+	Filter a distance matrix to select samples within group patient1:
+  	       > cbd-filtermatrix mystudy.input mystudy.csv dest.csv patient1
+   
+        Filter a distance matrix exclude samples with group patient5:
+               > cbd-filtermatrix --filter without
+                 mystudy.input mystudy.csv dest.csv patient5
+   
+        Filter a distance matrix to select samples between groups day0, day7, and day14:
+               > cbd-filtermatrix --filter between 
+                 mystudy.input mystudy.csv dest.csv 'day0;day7;day14'
+
+        Build a distance matrix from the sample1 fasta sequence file includes groups patient1 and day7.
+           /myhome/sample1.fasta    patient1;day7
+
+
+SEE ALSO
+        cbd-buildmatrix
+        cbd-getmatrix
+   
+AUTHORS
+        Mike Mundy 
+
+
+
+NAME
+cbd-getmatrix -- This command will get the distance matrix from a completed Job.
+
+VERSION
+1.2
+
+SYNOPSIS
+cbd-getmatrix [-h] [--ujs-url URL] jobID outputPath
+
+DESCRIPTION
+INPUTS:   The input for this command is the path to the file of INPUT sequence files 
+          and the path to the OUTPUT csv file. 
+
+OUTPUTS:  The output for this command is the distance matrix of a completed job. 
+
+PARAMETERS:
+
+-h, --help            Display help message to standard out and exit with
+                      error code zero;ignore all other command-line arguments.
+
+--ujs-url URL  	      Specify the URL for the user and job state service.
+	  	      The ujs-url argument specifies an alternate URL for the user and
+		      job state service.
+
+jobID                 The path to file with list of input sequence files.
+		      The jobID argument is the identifier of the job submitted by
+       		      cbd-buildmatrix to build a distance matrix from a set of sequence files.
+
+outputPath            The path to output csv file.
+		      The outputPath argument is the path to the output file where
+         	      the distance matrix is stored.  The output file is in csv format with a
+       		      row and column for each input sequence file.  The value of each cell in
+       		      the table is the distance between two microbial communities.  A value of
+       		      0 means the two communities are identical and a value of 1 means the two
+       		      communities are completely different.
+
+EXAMPLES
+         Get a distance matrix and save to a file:
+  	        > cbd-getmatrix 5285059be4b0ef8357331c34 mystudy.csv
+
+SEE ALSO
+         cbd-buildmatrix
+         cbd-filtermatrix
+   
+AUTHORS
+         Mike Mundy 
+
+
+NAME
+cbd-plotmatrix -- This command will generate a plot of a distance matrix to visualize the relationship between 
+	       	  entries within the matrix. 
+
+VERSION
+1.2
+
+SYNOPSIS
+cbd-plotmatrix [-h] [--type TYPE] sourcePath destPath
+
+
+DESCRIPTION
+INPUTS:   The input for this command are the source and destination paths of the matrix file. 
+
+OUTPUTS:  The output of this command is a plot of the distance matrix.    
+
+PARAMETERS:
+-h, --help      Display help message to standard out and exit with error code zero; 
+                ignore all other command-line arguments. 
+
+--type TYPE     Specify the type of plot to generate. (upgma, nj)
+       		Valid types are 'upgma' to generate a tree using the unweighted pair group
+		method with arithmetic mean algorithm, or 'nj' to generate a tree using
+		the neighbor joining algorithm.
+
+sourcePath      Specify the path to the source distance matrix file
+		created by cbd-buildmatrix and saved by cbd-getmatrix.
+
+destPath        Specify the path to destination OUTPUT distance matrix file containing the plot.
+
+EXAMPLES
+        Generate a plot using the upgma algorithm:
+         > cbd-plotmatrix mystudy.csv mystudy.txt
+  
+        Generate a plot using the nj algorithm:
+         > cbd-plotmatrix --type nj mystudy.csv mystudy.txt
+   
+SEE ALSO
+        cbd-buildmatrix
+        cbd-getmatrix
+        cbd-filtermatrix
+ 
+AUTHORS
+        Mike Mundy 
+
+
+NAME
+cbd-url -- This command will update or display the URL of the compression based distance service endpoint.
+
+	   If run with no arguments or options, then the current URL is displayed.
+           If run with a single argument, the current URL will be switched to the
+           specified URL.  If the specified URL is named default, then the URL is
+           reset to the default production URL.
+
+VERSION
+1.2
+
+SYNOPSIS
+cbd-url [-h] [-?] [newurl]
+
+DESCRIPTION
+INPUTS:   The input of this command is a current or new URL. 
+
+OUTPUTS:  This command will display the current or new URL. 
+
+PARAMETERS:
+-h, --help     		Display help message to standard out and exit with error code zero; 
+    			ignore all other command-line arguments. 
+
+-?, --usage             Show usage information.
+
+newurl       		The new URL endpoint.
+
+
+EXAMPLES
+        Display the current URL:
+         > cbd-url
+           Current URL: http://kbase.us/services/cbd/
+   
+        Use a new URL:
+         > cbd-url http://localhost:7102
+           New URL set to: http://localhost:7102
+  
+        Reset to the default URL:
+         > cbd-url default
+           New URL set to: http://kbase.us/services/cbd/
+ 
+AUTHORS
+     Mike Mundy
+
+
