@@ -9,30 +9,53 @@ The Communities API offers data retrieval methods for all available microbial co
 
 
 COMMANDS 
-   get_analysisset  
-   get_library_instance  
-   get_sample_query  
-   get_sequenceset  
-   get_library_query  
-   get_sample_instance  
-   get_sample  
-   get_metagenome_query  
-   get_library  
-   get_project_list  
-   get_abundanceprofile  
-   get_metagenome  
-   get_metagenome_instance  
-   get_sequenceset_instance  
-   get_metagenome_analysis
-   check_metagenome   
-   get_project  
-   get_abundanceprofile_instance  
-   get_metagenome_list  
-   get_project_query  
-   get_sample_list  
-   get_metagenome_statistics  
-   analyze_metagenome  
-   get_library_list 
+   mg-abundant-functions
+   mg-abundant-taxa
+   mg-annotate-metagenome
+   mg-awe-submit
+   mg-changing-annotation	
+   mg-check-annotation-status
+   mg-compare-alpha-diversity
+   mg-compare-boxplot-plot
+   mg-compare-functions
+   mg-compare-heatmap-plot 
+   mg-compare-heatmap
+   mg-compare-normalize
+   mg-compare-pcoa-plot
+   mg-compare-pcoa
+   mg-compare-taxa
+   mg-display-metadata
+   mg-display-statistics
+   mg-download-file
+   mg-download-full-file-list
+   mg-download-stage-file-list
+   mg-extract-sequences
+   mg-get-annotation-sequence
+   mg-get-annotation-set
+   mg-get-annotation-similarity
+   mg-get-library-list
+   mg-get-library  
+   mg-get-metagenome-list
+   mg-get-metagenome      
+   mg-get-project-list
+   mg-get-project
+   mg-get-sample-list
+   mg-get-sample
+   mg-get-sequences-for-function  
+   mg-get_sequences-for-taxon
+   mg-get-similarity-for-function
+   mg-get-similarity-for-taxon
+   mg-group-significance
+   mg-jsonviewer
+   mg-kegg2ss
+   mg-pick-OTUs
+   mg-picrust-normalize-16s-copy
+   mg-picrust-prediction
+   mg-retrieve-uniprot
+   mg-search-metagenomes
+   mg-select-significance
+   mg-stable-annotation
+
 
 
 NAME
