@@ -56,9 +56,9 @@ inputPath                 The path to file with the list of INPUT sequence files
                           (1) path to a sequence file, (2) list of groups the sequence file belongs to.
 
 EXAMPLES
-	Build a distance matrix from the sample1 fasta sequence file includes groups patient1 and day7.
+	Build a distance matrix from the sample1 fasta sequence file includes groups subject1 and day7.
 
-           /myhome/sample1.fasta    patient1;day7
+           /myhome/sample1.fasta    subject1;day7
 
         Build a distance matrix for a set of fasta sequence files:
            > cbd-buildmatrix mystudy.input
@@ -115,19 +115,19 @@ group                     The list of group identifiers to apply with the filter
 
 
 EXAMPLES
-	Filter a distance matrix to select samples within group patient1:
-  	       > cbd-filtermatrix mystudy.input mystudy.csv dest.csv patient1
+	Filter a distance matrix to select samples within group subject1:
+  	       > cbd-filtermatrix mystudy.input mystudy.csv dest.csv subject1
    
-        Filter a distance matrix exclude samples with group patient5:
+        Filter a distance matrix exclude samples with group subject5:
                > cbd-filtermatrix --filter without
-                 mystudy.input mystudy.csv dest.csv patient5
+                 mystudy.input mystudy.csv dest.csv subject5
    
         Filter a distance matrix to select samples between groups day0, day7, and day14:
                > cbd-filtermatrix --filter between 
                  mystudy.input mystudy.csv dest.csv 'day0;day7;day14'
 
-        Build a distance matrix from the sample1 fasta sequence file includes groups patient1 and day7.
-           /myhome/sample1.fasta    patient1;day7
+        Build a distance matrix from the sample1 fasta sequence file includes groups subject1 and day7.
+           /myhome/sample1.fasta    subject1;day7
 
 
 SEE ALSO
