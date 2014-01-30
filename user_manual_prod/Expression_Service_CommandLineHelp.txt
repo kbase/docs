@@ -1,0 +1,196 @@
+Expression Service 
+
+DESCRIPTION
+This service provides users methods for accessing the expression data.
+This service provides methods and scripts for extracting data from the portion of the KBase Central Data Store (CDS) relating to biological experiments.
+This expression schema is set up to contain a fair amount of metadata, hook ins to the experiment schema and being a data repository for different types of expression technologies (microarrays (all platforms), RNA-Seq, qPCR, proteomics).
+
+Given a list of sample ids and feature ids this command returns a LabelDataMapping {sampleID}->{featureId => value}}.
+
+AUTHOR: Jason Baumohl (jkbaumohl@lbl.gov)
+
+
+COMMANDS
+
+   get_expression_data_by_samples_and_features  
+   get_expression_samples_data  
+   get_expression_samples_data_by_genome_ids  
+   get_expression_data_by_feature_ids 
+
+
+NAME
+get_expression_data_by_samples_and_features -- This command returns an ExpressionDataSamplesMap.  
+
+VERSION 
+1.0
+
+SYNOPSIS
+get_expression_data_by_samples_and_features [--sampleID ID] [--featureID ID]
+
+DESCRIPTION
+INPUT:     The input for this command is one or more sample IDs and/or feature IDs. 
+OUTPUT:    The output file for this command is an ExpressionDataSamplesMap.
+
+PARAMETERS:
+
+--sampleID          The KBase sample IDs. Datatype = string. 
+                    Multiple sample IDs can be submitted, as 
+                    " -sampleID='kb|sample.2' -sampleID='kb|sample.3' "
+
+--featureID         The KBase feature IDs. Datatype = string.                
+                    Multiple feature IDs can be submitted, as
+                    "  -featureID='kb|g.20848.CDS.1800' -featureID='kb|g.20848.CDS.1687' "
+                    If no feature IDs are entered, then all features with measurement values will be      
+                    returned.
+
+--help             Display help message to standard out and exit with error code zero;                                                    
+                   ignore all other command-line arguments.      
+
+
+     
+EXAMPLES
+perl get_expression_data_by_samples_and_features.pl -sampleID='kb|sample.2' -sampleID='kb|sample.3' -featureID='kb|g.20848.CDS.1800' -featureID='kb|g.20848.CDS.1687'
+
+perl get_expression_data_by_samples_and_features.pl -sampleID='kb|sample.2' -sampleID='kb|sample.3' 
+
+This second example will return all features with measurements. 
+
+AUTHOR: Jason Baumohl (jkbaumohl@lbl.gov)
+
+ 
+
+NAME
+get_expression_samples_data -- This command returns mapping of SampleID to expressionSampleDataStructure 
+                               given a list of KBase sample IDs.  ExpressionSampleDataStructure 
+                               is essentially the core Expression Sample Object) : {sample_id -> 
+                               expressionSampleDataStructure}.
+
+
+VERSION 
+1.0
+
+SYNOPSIS
+get_expression_samples_data [--sampleID ID] 
+
+ 
+DESCRIPTION
+INPUT:     The input for this command is a list of KBase sample IDs. 
+
+OUTPUT:    This command returns an ExpressionDataSamplesMap. 
+
+expressionDataSamplesMap = obj->get_expression_samples_data(sampleIDs)
+
+PARAMETERS:
+
+--sampleID             The KBase sample IDs. Datatype = string.   
+                       Multiple sample IDs can be submitted, as:
+                       " -sampleID='kb|sample.2' -sampleID='kb|sample.3' "
+
+--help                 Display help message to standard out and exit with error code zero;                                                    
+                       ignore all other command-line arguments.
+   
+
+EXAMPLES
+perl get_expression_samples_data.pl -sampleID='kb|sample.2' -sampleID='kb|sample.3' 
+ 
+
+AUTHOR: Jason Baumohl (jkbaumohl@lbl.gov)
+
+
+
+NAME
+get_expression_samples_data_by_genome_ids  -- This command returns a GenomeExpressionDataSamplesMapping, 
+                                              GenomeId -> StrainId -> ExpressionDataSample. 
+StrainId -> ExpressionSampleDataStructure {genome_id -> {strain_id -> {sample_id -> expressionSampleDataStructure}}}. 
+
+
+VERSION 
+1.0
+
+SYNOPSIS
+get_expression_samples_data_by_genome_ids [--genomeID ID] [--sampleType] [--wildTypeOnly]
+
+
+DESCRIPTION
+INPUT:     This command takes a list of Genome IDs, a SampleType and the WildTypeOnly flag.
+
+ 
+OUTPUT:    This output of this command is a GenomeExpressionDataSamplesMapping, 
+                GenomeId -> StrainId -> ExpressionDataSample. StrainId -> 
+           ExpressionSampleDataStructure {genome_id -> {strain_id -> {sample_id -> expressionSampleDataStructure}}}
+
+
+PARAMETERS:
+ 
+--genomeID               The KBase genome ID.  
+                         Multiple sample IDs can be submitted, as: 
+                            " -genomeID='kb|g.20848'  -genomeID='kb|g.1' "
+
+--sampleType             The type of sample type to limit results to.  
+                         Acceptable values (case ignored): microarray, RNA-Seq, qPCR or proteomics. 
+		         Any other passed value will be evaluated to no filter on sample type, thus including all.
+ 
+--wildTypeOnly          The WildTypeOnly is a flag indicating true or false.  
+                        If equal to '1','Y' or 'TRUE' then only strains that are wild type will be included in the 
+                        results. 
+			If equal to '0', 'N', or 'FALSE' then results will include all strains. 
+                        
+
+--help                  Display help message to standard out and exit with error code zero;                                                    
+                        ignore all other command-line arguments.
+    
+
+ 
+EXAMPLES
+perl get_expression_samples_data_by_genome_ids.pl -genomeID='kb|g.20848' -genomeID='kb|g.0' -sampleType='microarray' -wildTypeOnly='Y'
+
+AUTHOR: Jason Baumohl (jkbaumohl@lbl.gov)
+
+
+
+NAME
+get_expression_data_by_feature_ids  -- This command returns a featureSampleMeasurementMapping.
+
+VERSION 
+1.0
+
+SYNOPSIS
+get_expression_data_by_feature_ids [--featureID ID] [--sampleType] [--wildTypeOnly]
+
+
+DESCRIPTION
+INPUT: The input of this command is a list of feature ids.
+
+OUTPUT: The output of this command is a featureSampleMeasurementMapping. 
+        {featureID}->{sampleID => value}}
+
+
+PARAMETERS:
+ 
+--featureID          The KBase feature ID.  
+                     Multiple sample IDs can be submitted, as:
+                          " -featureID='kb|g.20848.CDS.1800' -featureID='kb|g.20848.CDS.1687'  "
+                     If no featureIDs entered, then all features with measurement values will be returned.
+
+--sampleType         The type of sample type to limit results to.  
+                     Acceptable values (case ignored): microarray, RNA-Seq, qPCR or proteomics.
+                     Any other passed value will be evaluated to no filter on sample type, thus including all sample t
+                     types.    
+
+--wildTypeOnly       The WildTypeOnly is a flag indicating true or false.  
+                     If equal to '1','Y' or 'TRUE' then only strains that are wild type will be included in the 
+                     results. 
+	             If equal to '0', 'N', or 'FALSE' then results will include all strains. 
+
+
+
+--help                  Display help message to standard out and exit with error code zero;                                                    
+                        ignore all other command-line arguments.
+
+EXAMPLES
+perl get_expression_data_by_feature_ids.pl -featureID='kb|g.20848.CDS.1800' -featureID='kb|g.20848.CDS.1687' -sampleType='microarray' -wildTypeOnly='Y'
+
+
+AUTHOR: Jason Baumohl (jkbaumohl@lbl.gov)
+
+

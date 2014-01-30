@@ -1,0 +1,79 @@
+Ontology Service
+
+DESCRIPTION
+The Ontology Service: provides the basic functionality of annotation with GO ids, its description, domain ontologies (e.g., biological process, molecular function, cellular process) of interest and evidence codes for a given set of species specific genes. Additionally, this service also allows gene ontology enrichment analysis ("hypergeometric") to be performed on a set of genes that identifies statistically overrepresented GO terms within given gene sets, say for example, GO enrichment of over-expressed genes in drought stress in plant roots. 
+
+The Ontology Service has a number of useful capabilities:
+Find the GO description and domain information for a list of given GO ids
+Find out the significantly enriched GO terms in your gene set
+Map kbase gene id to go-ids along with go-description, ontology domain, and evidence code
+
+COMMANDS
+get_go_description
+get_go_enrichment
+get_goidlist
+
+
+NAME
+get_go_description -- extracts GO term description for a given list of GO identifiers.
+
+VERSION
+1.0
+
+SYNOPSIS
+get_go_description [-h|--help] [--url] [--version]  
+/kb/deployment/plbin/get_go_description.pl [--url=http://kbase.us/services/ontology_service] < GO_IDs
+
+DESCRIPTION
+INPUTS:      List of GO-ids (white space or comman separated).
+
+OUTPUTS:     A table of three columns, first column being the GO ids, the second column is the GO description and third column is GO domain (biological process, molecular function, cellular component).
+
+PARAMETERS:
+--url			url=[http://kbase.us/services/ontology_service] url of the server 
+-h, --help     		Display help message to standard out and exit with error code zero; ignore all other command-line arguments. 
+--version      		Print version information
+
+
+NAME
+get_go_enrichment -- Identifies the significantly renriched GO terms for a gene set.
+
+VERSION
+1.0
+
+SYNOPSIS
+ /Applications/KBase.app/deployment/plbin/get_go_enrichment.pl [--url=http://kbase.us/services/ontology_service] [--domain_list=biological_process] [--evidence_code_list=IEA] [--test_type=hypergeometric] [--p_value=XXX]< geneIDs
+
+DESCRIPTION
+INPUTS:      A list of kbase gene-identifiers, a list of ontology domains (e.g."biological process", "molecular function", "cellular component"), a list of evidence codes (e.g."IEA","IDA","IEP" etc.), and test type (e.g. "hypergeometric"). The list of kbase gene identifiers cannot be empty; however the list of ontology domains and the list of evidence codes can be empty.
+
+OUTPUTS:     List of GO terms
+
+PARAMETERS:
+-h, --help			Display help message to standard out and exit with error code zero; ignore all other command-line arguments. 
+-url			     	     	url=Url of the server. [http://kbase.us/services/ontology_service]
+--domain_list			Domain list (comma separated). [biological_process,molecular_function,cellular_component].
+--evidence_code_list  	 GO evidence code list. (comma separated). [XXX,YYY,ZZZ,...]
+--test_type		    	 The types of test. [hypergeometric|chisq]
+
+
+NAME
+get_goidlist -- This command returns a mapping of kbase gene-id to go-ids along with go-description, ontology domain, and evidence code; note that in the returned table of results, each gene-id is associated with a list of one of more go-ids.
+
+VERSION
+1.0
+
+SYNOPSIS
+/Applications/KBase.app/deployment/plbin/get_goidlist.pl [--url=http://kbase.us/services/ontology_service] [--domain_list=biological_process] [--evidence_code_list=IEA] < geneIDs
+
+DESCRIPTION
+INPUTS:      A list of kbase gene-identifiers, a list of ontology domains, and a list of evidence codes.
+
+OUTPUTS:    A mapping of kbase gene-id to go-ids along with go-description, ontology domain, and evidence code; note that in the returned table of results, each gene-id is associated with a list of one of more go-ids. 
+
+PARAMETERS:
+-h, --help			Display help message to standard out and exit with error code zero; ignore all other command-line arguments. 
+--url				url=Url of the server. [http://kbase.us/services/ontology_service]
+--domain_list 		Domain list (comma separated). [biological_process,molecular_function,cellular_component].
+--evidence_code_list	GO evidence code list. (comma separated). [XXX,YYY,ZZZ,...]
+-version 		   	    	Print version information.

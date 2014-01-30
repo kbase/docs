@@ -1,0 +1,188 @@
+Assembly Service
+
+DESCRIPTION
+The Assembly Service is a KBase service that allows users allows users to assemble genomes and metagenomes with their choice of several assembly algorithms. The Assmebly Service currently is only availble through the KBase Download. 
+This service is at an early phase, and supports the following capabilities:
+Velvet assembly: Velvet is a popular de Bruijn graph based assembler for de novo genomic and transcriptome sequence assembly. It was designed for short read sequencing technologies.
+Kiki assembly: is a de novo genome and metagenome assembler developed at Argonne. It uses a hybrid of overlap-layout-consensus and greedy extension approaches. Kiki is fast and can work on distributed-memory machines
+A5: A5 is an assembly pipeline optimized for de novo assembly of microbial genomes. It is known for generating large scaffolds.
+IDBA: IDBA is de Bruijn graph based assembler that iterates from small to large overlaps to reduce the false positive nodes in the assembly graph and improve assembly quality.
+
+COMMANDS
+ar-avail
+ar-get
+ar-kill
+ar-login
+ar-logout
+ar-run
+ar-stat
+
+NAME
+ar-avail -- List available Assembly RAST modules.
+
+VERSION
+1.0 
+
+SYNOPSIS
+ar-avail [-h]
+
+DESCRIPTION
+OUTPUTS:  The output or this command is the list of available Assembly RAST modules. 
+
+PARAMETERS:
+-h, --help      Display help message to standard out and exit with error code zero; 
+                ignore all other command-line arguments.
+
+
+NAME
+ar-get -- This command will download result data and retrieve the Job status.
+
+VERSION
+1.0
+
+SYNOPSIS
+ar-get [-h] <--job ID> [--assembly ID] [-s URL] [--stdout]
+
+DESCRIPTION
+INPUTS:  The input for this command is the Job ID.
+
+OUTPUTS: This command will produce three output files.     
+    JOB_ID_report.txt: a general log of commands run and files used
+    JOB_ID_assemblies.tar.gz: a compressed archive of assembler data
+    JOB_ID_analysis.tar.gz: assembly analysis performed via QUAST
+
+PARAMETERS:
+-h, --help                  Display help message to standard out and exit with
+                            error code zero;ignore all other command-line arguments.
+
+-j, --job ID                Specify which job data to get.
+-a ID, --assembly ID        Specify the i-th assembly, to get the associated contigs. 
+-s URL                      Specify the Assembly RAST server address.
+--stdout                    Print assembled contigs in FASTA to STDOUT. 
+
+
+NAME
+ar-kill -- This command sends a kill signal for a Job. 
+
+VERSION
+1.0
+
+SYNOPSIS
+ar-kill [-h] [--job ID] 
+
+DESCRIPTION
+INPUTS:  The input for this command is the Job ID. 
+
+PARAMETERS:
+-h, --help                  Display help message to standard out and exit with
+                            error code zero;ignore all other command-line arguments.
+
+-j ID, --job ID             Specify which Job to kill.
+
+
+NAME
+ar-login -- This command will authenticate the username and password.
+
+VERSION
+1.0
+
+SYNOPSIS
+ar-login [-h]
+
+
+DESCRIPTION
+INPUTS:   The input for this command is the username (will be prompted for password)
+
+PARAMETERS:
+-h, --help      Display help message to standard out and exit with error code zero; 
+                ignore all other command-line arguments. 
+
+
+NAME
+ar-logout -- This command will log out a user from the KBase shell. 
+
+VERSION
+1.0
+
+SYNOPSIS
+ar-logout [-h]
+
+DESCRIPTION
+
+PARAMETERS:
+-h, --help     		Display help message to standard out and exit with error code zero; 
+    			ignore all other command-line arguments. 
+
+
+NAME
+ar-run -- This command will run an Assembly RAST Job.
+
+VERSION
+1.0
+
+SYNOPSIS
+ar-run [-h]
+            [-a ASSEMBLERS]
+	    [--assemblers ASSEMBLERS]
+	    [--data ID]
+	    [-f NAME]
+	    [-m MESSAGE] 
+	    [--message MESSAGE]
+            [-p PIPELINE]
+	    [--pipeline PIPELINE]  
+            [-m MESSAGE]
+	    [--message MESSAGE]
+            [-p PIPELINE]
+	    [--pipeline PIPELINE]
+	    [--pair [PAIR]
+            [-s URL]
+	    [--single SINGLE]
+            
+
+DESCRIPTION
+INPUTS:   The input for this command includes a file of reads, the assembly tool to envoke, and the Job description. 
+
+OUTPUTS:     
+The assembly service will download 3 files
+    JOB_ID_report.txt: a general log of commands run and files used
+    JOB_ID_assemblies.tar.gz: a compressed archive of assembler data
+    JOB_ID_analysis.tar.gz: assembly analysis performed via QUAST
+
+PARAMETERS:
+-h, --help      Display help message to standard out and exit with error code zero;
+                ignore all other command-line arguments.
+
+-a, --assemblers ASSEMBLERS    Specify assemblers to use. None will invoke automatic mode.
+--data ID                      Reuse uploaded data.
+-f NAME                        Specify sequence file name(s).
+-m --message MESSAGE           Attach a description to the Job.
+-p, --pipeline PIPELINE        Invoke a pipeline. None will invoke automatic mode. 
+--pair PAIR                    Specify a paired-end library and parameters.
+-s URL                         Specify Assembly RAST server address.
+--single SINGLE                Specify a single end file and parameters.
+
+
+
+NAME
+ar-stat -- This command will query the status of running Jobs.
+
+VERSION
+1.0
+
+SYNOPSIS
+ar-stat [-h] [-data FILE] [-job STAT_JOB] [-n STAT_N] [-s URL] [--watch]
+
+DESCRIPTION
+OUTPUT: The query returns the status of running Jobs. 
+
+PARAMETERS:
+-h, --help      Display help message to standard out and exit with error code zero;
+                ignore all other command-line arguments.
+
+-d, --data FILE  	List latest or data-id specific files.
+-j, --job STAT_JOB      Display Job status.
+-n STAT_N               Specify the number of records to show.
+-s URL                  Specify the Assembly RAST server address.
+-w, --watch             Monitor the status of jobs in realtime.	This argument only works
+                        in Linux and Mac shells).
+

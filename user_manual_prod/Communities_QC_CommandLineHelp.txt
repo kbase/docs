@@ -1,0 +1,355 @@
+Communities QC Service 
+
+DESCRIPTION
+
+This KBase service provides a server for asynchronous computation of quality information for metagenomic sequences. It produces kmer, drisee and histogram statistics.
+  
+
+COMMANDS
+	get_kmer_compute  
+	get_drisee_compute  
+	kmer-tool  
+	get_drisee_instance  
+	consensus  
+	get_histogram_instance  
+	get_kmer_instance  
+	get_histogram_compute  
+	drisee  
+	seq_length_stats 
+
+NAME
+get_kmer_compute -- This command retrieves a kmer from the communities API
+
+VERSION 
+1.0
+
+SYNOPSIS 
+
+get_kmer_compute id [--password] [--username] [--token] [--webkey] [--help]
+
+DESCRIPTION
+
+INPUT:
+
+OUTPUT:
+
+PARAMETERS:
+
+id		the id of the kmer to be retrieved from the API
+  
+--help          display this message
+--username	Optionally specify username via command line (requires password)
+--password	Optionally specify password via command line (requires username)
+--token         Optionally specify Globus Online authentication token (requires webkey)
+--webkey        Optionally specify MG-RAST webkey (requires token)
+ 
+AUTHORS
+
+
+
+NAME
+
+get_drisee_compute -- This command retrieves a drisee from the communities API
+
+VERSION 
+1.0
+
+SYNOPSIS
+
+get_drisee_compute id [--password] [--username] [--token] [--webkey] [--help]
+
+
+DESCRIPTION
+
+INPUT:
+
+OUTPUT:
+
+PARAMETERS:
+
+id		the id of the drisee to be retrieved from the API
+  
+--help          display this message
+--username	Optionally specify username via command line (requires password)
+--password	Optionally specify password via command line (requires username)
+--token         Optionally specify Globus Online authentication token (requires webkey)
+--webkey        Optionally specify MG-RAST webkey (requires token)
+ 
+AUTHORS
+
+
+
+NAME
+kmer-tool.py -- ADD DESCRIPTION HERE
+
+VERSION
+1.0
+
+SYNOPSIS
+kmer-tool.py [--help] [--type=TYPE] [--max=MAX] [-procs=PROCS] [--length=LENGTH]
+[--size=SIZE] [--count=COUNT] [-format==FORMAT] [--histo_max=HISTO_MAX] [--ranked] [--tmpdir=TMPDIR] -i <input file> -o <output file>
+ 
+INPUT:
+
+OUTPUT:
+
+PARAMETERS:
+-h, --help                   Show this help message and exit.
+-i INPUT, --input=INPUT      Input file, sequence (fasta/fastq) or binary count hash.
+-o OUTPUT, --output=OUTPUT   Output file.
+-t TYPE, --type=TYPE         Input file type, one of: fasta, fastq, hash [default'fasta'].
+-m MAX, --max=MAX            Maximum size (in Gb) to count, files larger are split [default 10.0].
+-p PROCS, --procs=PROCS      Number of processors to use [default 4].
+-l LENGTH, --length=LENGTH   Length of kmer to use.
+-s SIZE, --size=SIZE         Size of hash to use, number of unique kmers [default '1G'].
+-c COUNT, --count=COUNT      Count size in bits [default '12'].
+-f FORMAT, --format=FORMAT   Output format, one of: hash, stats, dump, histo [default 'histo'].
+--histo_max=HISTO_MAX        Max count value for histogram [default 10000000].
+-r, --ranked                 histo output includes additional transformations for ranked plot.
+-d TMPDIR, --tmpdir=TMPDIR   Directory to store intermediate files [default is directory of output file].
+
+AUTHORS
+
+NAME
+get_drisee_instance  -- retrieve a drisee from the communities API
+ 
+VERSION 
+1.0 
+
+SYNOPSIS
+
+get_drisee_instance id [--password] [--username] [--token] [--webkey] [--help]
+
+
+DESCRIPTION
+
+INPUT:
+
+OUTPUT:
+
+PARAMETERS:
+
+id		the id of the drisee to be retrieved from the API
+  
+--help          display this message
+--username	Optionally specify username via command line (requires password)
+--password	Optionally specify password via command line (requires username)
+--token         Optionally specify Globus Online authentication token (requires webkey)
+--webkey        Optionally specify MG-RAST webkey (requires token)
+ 
+AUTHORS
+
+
+
+NAME
+
+consensus.py -- FILL IN DESCRIPTION HERE
+
+VERSION
+1.0
+
+SYNOPSIS
+
+consensus.py [--help] [--type=TYPE] [--bp_max=BP_MAX] [--seq_max=SEQ_MAX] [--verbose] -i <input sequence file> -o <output file>
+
+DESCRIPTION
+
+INPUT:
+
+OUTPUT:
+
+PARAMETERS:
+
+-h, --help                        Show this help message and exit.
+-i INPUT, --input=INPUT           Input sequence file.
+-o OUTPUT, --output=OUTPUT        Output file.
+-t TYPE, --type=TYPE              File type: fasta, fastq [default 'fasta'].
+-b BP_MAX, --bp_max=BP_MAX        Max number of bps to process [default 100].
+-s SEQ_MAX, --seq_max=SEQ_MAX     Max number of seqs to process [default 100000].
+-v, --verbose                     Wordy [default off].
+
+AUTHORS
+
+
+NAME
+get_histogram_instance -- retrieve a histogram <ADD MORE DETAIL>
+
+VERSION
+1.0
+
+SYNOPSIS
+
+get_histogram_instance id [--password] [--username] [--token] [--webkey] [--help]
+
+
+DESCRIPTION
+
+INPUT:
+
+OUTPUT:
+
+PARAMETERS:
+
+id		the id of the histogram to be retrieved from the API
+--help          display this message
+--username	Optionally specify username via command line (requires password)
+--password	Optionally specify password via command line (requires username)
+--token         Optionally specify Globus Online authentication token (requires webkey)
+--webkey        Optionally specify MG-RAST webkey (requires token)
+ 
+AUTHORS
+
+
+NAME
+get_kmer_instance -- Retrieve a kmer from the communities API
+
+VERSION
+1.0
+
+SYNOPSIS
+get_kmer_instance id [--password] [--username] [--token] [--webkey] [--help]
+
+
+DESCRIPTION
+
+INPUT:
+
+OUTPUT:
+
+PARAMETERS:
+
+id		the id of the kmer to be retrieved from the API
+--help          display this message
+--username	Optionally specify username via command line (requires password)
+--password	Optionally specify password via command line (requires username)
+--token         Optionally specify Globus Online authentication token (requires webkey)
+--webkey        Optionally specify MG-RAST webkey (requires token)
+ 
+AUTHORS
+ 
+
+
+NAME
+get_histogram_compute -- Retrieve a histogram from the communities API
+
+VERSION
+1.0
+
+SYNOPSIS
+get_histogram_compute  id [--password] [--username] [--token] [--webkey] [--help]
+
+
+DESCRIPTION
+
+INPUT:
+
+OUTPUT:
+
+PARAMETERS:
+
+id		the id of the histogram to be retrieved from the API
+--help          display this message
+--username	Optionally specify username via command line (requires password)
+--password	Optionally specify password via command line (requires username)
+--token         Optionally specify Globus Online authentication token (requires webkey)
+--webkey        Optionally specify MG-RAST webkey (requires token)
+ 
+AUTHORS
+ 
+
+
+NAME
+drisee.py -- Script to calculate sequence error
+
+VERSION
+1.0
+
+SYNOPSIS
+drisee.py [--version] [--help] [-processes=PROCESSES] [--seq_type=SEQ_TYPE] [--filter_seq] [--replicate_file=REP_FILE]
+[--tmp_dir=TMPDIR] [--log_file=LOGFILE] [--percent] [--prefix_length=PREF1] [--seq_max=SEQ_MAX]
+[--ambig_bp_mx=AMBIG_MAX] [--stdev_multiplier=STDEV_MULTI] [--bin_read_min=READ_MIN] [--bin_read_max=READ_MAX]
+[--bin_num_max=NUM_MAX] [--iter_max=ITER_MAX] [--converge_min=CONV_MIN] [--verbose] input_seq_file output_stat_file
+
+
+INPUT:
+
+	fasta/fastq file to get error on
+
+OUTPUT: 
+	Error matrix file
+	
+PARAMETERS
+
+--version                              Show program's version number and exit.
+-h, --help                             Show this help message and exit.
+-p PROCESSES, --processes=PROCESSES    Number of processes to use [default '8'].
+-t SEQ_TYPE, --seq_type=SEQ_TYPE       Sequence type: fasta, fastq [default 'fasta'].
+-f, --filter_seq                       Run sequence filtering, length and ambig bp [default off].
+-r REP_FILE, --replicate_file=REP_FILE  
+                                       File with sorted replicate bins (bin_id, seq_id) [default to calculate replicates].
+-d TMPDIR, --tmp_dir=TMPDIR            Directory for intermediate files (must be full path), deleted at end [default '/tmp'].
+-l LOGFILE, --log_file=LOGFILE         Detailed processing related stats [default  '/dev/null'].
+--percent                              Additional output (output_stat_file.per) with percent values [default off].
+--prefix_length=PREFI                  Prefix length for replicate bins [default 50].
+-s SEQ_MAX, --seq_max=SEQ_MAX          Maximum number of reads to process (chosen randomly) [default 1000000].
+-a AMBIG_MAX, --ambig_bp_max=AMBIG_MAX
+                                       Maximum number of ambiguity characters before  rejection [default 0].
+-m STDEV_MULTI, --stdev_multiplier=STDEV_MULTI
+                                       Multiplier to stddev to get min and max seq lengths [default 2.0].
+-n READ_MIN, --bin_read_min=READ_MIN
+                                       Minimum number of reads in bin to be considered [default 20].
+-x READ_MAX, --bin_read_max=READ_MAX
+                                       Maximum number of reads in bin to process (chosen randomly) [default 1000].
+-b NUM_MAX, --bin_num_max=NUM_MAX
+                                       Maximum number of bins to process (chosen randomly)[default 1000].
+-i ITER_MAX, --iter_max=ITER_MAX
+                                       Maximum number of iterations if alignment does not converge [default 10].
+
+-c CONV_MIN, --converge_min=CONV_MIN	Minimum number of iterations to identify convergence [default 3].
+ -v, --verbose                         Write runtime summary stats to STDOUT [default off].
+
+AUTHORS:
+
+
+
+NAME
+seq_length_stats.py -- Calculate statistics for fasta files
+
+VERSION
+1.0
+
+SYNOPSIS
+seq_length_stats.py [--help] [--fast] [--seq_type] [--length_bin=LENGTHFILE] [gc_percent_bin=GCFILE] [--type=TYPE] -i FILE1 [--output=OUTPUTFILE] 
+
+DESCRIPTION
+
+INPUT:
+ 
+OUTPUT:
+   bp_count
+   sequence_count
+   average_length
+   standard_deviation_length
+   length_min
+   length_max
+   average_gc_content
+   standard_deviation_gc_content
+   average_gc_ratio
+   standard_deviation_gc_ratio
+   ambig_char_count
+   ambig_sequence_count
+   average_ambig_chars
+   sequence_type
+
+PARAMETERS:
+
+-h, --help                         Show this help message and exit.
+-i INPUT, --input=INPUT            Input sequence file.
+-o OUTPUT, --output=OUTPUTFILE     Output stats file, if not called prints to STDOUT.
+-t TYPE, --type=TYPE               Input file type. Must be fasta or fastq [default 'fasta'].
+-l FILE, --length_bin=LENGTHFILE         File to place length bins [default is no output].
+-g FILE, --gc_percent_bin=GCFILE     File to place % gc bins [default is no output].
+-f, --fast                         Fast mode, only calculate length stats.
+-s, --seq_type                     Guess sequence type [wgs|amplicon] from kmer entropy.
+
+AUTHORS:
