@@ -115,12 +115,12 @@ group                     The list of group identifiers to apply with the filter
 
 
 EXAMPLES
-	Filter a distance matrix to select samples within group patient1:
-  	       > cbd-filtermatrix mystudy.input mystudy.csv dest.csv patient1
+	Filter a distance matrix to select samples within group subject1:
+  	       > cbd-filtermatrix mystudy.input mystudy.csv dest.csv subject1
    
-        Filter a distance matrix exclude samples with group patient5:
+        Filter a distance matrix exclude samples with group subject5:
                > cbd-filtermatrix --filter without
-                 mystudy.input mystudy.csv dest.csv patient5
+                 mystudy.input mystudy.csv dest.csv subject5
    
         Filter a distance matrix to select samples between groups day0, day7, and day14:
                > cbd-filtermatrix --filter between 
