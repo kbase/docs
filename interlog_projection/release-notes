@@ -1,0 +1,20 @@
+OVERVIEW
+-----------------------------------------------------------------------------------------
+ This service provides services for getting interlog network of species A projected from the query network of species B based on ortholog information.
+ The ortholog information is precomputed by Inparanoid algorithm and we plan to provide KBase Tree service based projection.
+ It will serve queries for various types of network transfer from one species to the other species network. (i.e., co-expression, PPI, metabolic pathway, functional association network)
+ User can exclude link pair that show low ortholog confidence using cut-off value.
+
+VERSION: 0.0.2 (Released 01/31/2014)
+-----------------------------------------------------------------------------------------
+NEW FEATURES:
+-This is the second internal release of the Interolog Projection Service.
+
+UPDATED FEATURES / MAJOR BUG FIXES:
+-The network typed object is conform to the new api standard.
+
+
+NEXT RELEASE PLAN:
+We plan to include  (next major build)
+  1) Tree service based orthology projection method
+  2) Evidence based orthology projection method
