@@ -1,8 +1,12 @@
 OVERVIEW
 -----------------------------------------
-
 The microbial communities API service provides access methods to all
 microbial communities data and analysis methods.
+
+CHANGES - 1/1/2014
+* merged mg-compare-pcoa-functions and mg-compare-pcoa-taxa into mg-compare-pcoa
+* IRIS compatible
+* various bugfixes 
 
 CHANGES - 9/10/2013
 ------------------
@@ -26,3 +30,21 @@ mg-compare-pcoa-functions
 mg-compare-pcoa-taxa
 
 * consolidated generic scripts
+
+
+VERSION: 0.9 (Released 8/15/2013)
+------------------------------------------
+NEW FEATURES:
+- submission script to analyze metagenomic reads
+- check status of current submission
+- retrieval of computed results
+- IRIS support for public metagenomes, command line script to list
+public metagenomes and retrieve single metagenomes
+
+
+VERSION: 0.04 (Released 4/4/2013)
+------------------------------------------
+NEW FEATURES:
+- data access methods for metadata from sample, library, project, metagenome
+- retrieval of abundance profiles in BIOM format
+- RESTful API
