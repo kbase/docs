@@ -1,0 +1,322 @@
+M5NR Service
+
+DESCRIPTION
+The M5NR Service: is an integration of many sequence databases into one single, searchable database. 
+
+A single similarity search (using BLAST or BLAT) will allow the user to retrieve similarities to 
+several databases (e.g. NCBI’s nr, KEGGs database or the EGGnogs , ...).
+The M5NR API facilitates mappings between M5NR IDs (sequence md5 checksums) and annotations from 
+databases integrated onto the M5NR. 
+
+COMMANDS
+     m5nr-tools  
+     m5nr-get-md5  
+     m5nr-get-organism  
+     m5nr-get-taxonomy  
+     m5nr-get-ontology  
+     m5nr-get-function  
+     m5nr-get-sources  
+     m5nr-get-accession  
+
+NAME
+m5nr-tools -- This command is a tool for retreiving M5NR annotations for inputed accession IDs, 
+              md5 checksums, or protein sequence. Option to annotate a blast m8 formatted
+              similarity file.
+
+VERSION
+1.0
+
+SYNOPSIS
+m5nr-tools [--help] [--verbose] [--api <URL>] [--source <NAME>]
+           [--sim <FILE>] [--acc <IDs>] [--md5 <md5 checksums>]
+           [--sequence <aa sequence>] [--option <cv: sequence or annotation>]
+
+DESCRIPTION
+INPUTS:      The input for this command is accession IDs, md5 checksums, or protein sequence.
+
+OUTPUTS:     The output for this command is the M5NR annotations. 
+
+
+PARAMETERS:
+-h, --help           Display help message to standard out and exit with error code zero; 
+    		     ignore all other command-line arguments. 
+
+--verbose 	        Run the command in a verbose mode. 
+--api URL	    	The URL of the M5NR API. 
+--source NAME       	The source for the annotation.
+--sim FILE	    	The file in blast m8 format to be annotated.
+--acc IDs	     	The file or comma separated list of protein IDs
+--md5 md5_checksums	A file or comma separated list of md5sums.
+--sequence aa_sequence  A protein sequence, returns md5sum of sequence.
+--option output_type    Specify an output type (sequence or annotation)
+	 		Sequence output is only available for --md5 input.
+  
+EXAMPLES
+     m5nr-tools --api http://kbase.us/services/communities/1 --option
+     annotation --source RefSeq --md5
+        0b95101ffea9396db4126e4656460ce5,068792e95e38032059ba7d9c26c1be78,0b96c9
+        2ce600d8b2427eedbc221642f1
+
+AUTHORS
+  Jared Bischof, Travis Harrison, Folker Meyer, Tobias Paczian, Andreas Wilke
+
+
+
+NAME
+m5nr-get-md5 -- This command will retrieve annotations based on inputted md5 checksum.
+
+VERSION
+2.0
+
+SYNOPSIS
+m5nr-get-md5 [--help] [--user <user>] [--pass <password>] [--token <oAuth token>] 
+	     [--webkey <communities webkey>] [--id <md5 checksum>]
+
+DESCRIPTION
+INPUTS:   The inputs for this command include the username and password, 
+	  a Globus Online authentification token, a MG-RAST webkey and a MD5 checksum ID.    
+
+OUTPUTS:  The output of this command is the JSON structure that contains the result data.
+
+PARAMETERS:
+-h, --help           Display help message to standard out and exit with error code zero; 
+                     ignore all other command-line arguments. 
+--user		     The username to authenticate against the API, requires a password to be set as well.
+--pass  	     A password to authenticate against the API, requires a username to be set as well.
+--token 	     Globus Online authentication token.
+--webkey 	     MG-RAST webkey to sync with the passed Globus Online authentication.
+--id                 The md5 checksum to retrieve annotations of.
+
+EXAMPLES
+m5nr-get-md5 --id 000821a2e2f63df1a3873e4b280002a8
+
+AUTHORS
+Jared Bischof, Travis Harrison, Folker Meyer, Tobias Paczian, Andreas Wilke
+
+
+NAME
+m5nr-get-organism -- This command will retrieve annotations based on organisms.
+
+VERSION
+2.0
+
+SYNOPSIS
+m5nr-get-organism  [--help] [--user <user>] [--pass <password>] [--token <oAuth token>] 
+		   [--webkey <communities webkey>] [--text <text>] [--source <source name>]
+
+DESCRIPTION
+INPUTS:  The inputs for this command include the username and password,
+          a Globus Online authentification token,  a MG-RAST webkey and the source for 
+	  filtering results.
+
+OUTPUTS:  The output of this command is the JSON structure that contains the result data. 
+
+PARAMETERS:
+-h, --help           Display help message to standard out and exit with error code zero;
+                     ignore all other command-line arguments.
+--user               The username to authenticate against the API, requires a password to be set as well.
+--pass               A password to authenticate against the API, requires a username to be set as well.
+--token              Globus Online authentication token.
+--webkey             MG-RAST webkey to sync with the passed Globus Online authentication.
+--source             The source to filter results by.
+
+EXAMPLES
+   m5nr-get-organism --text akkermansia --source KEGG
+
+AUTHORS
+Jared Bischof, Travis Harrison, Folker Meyer, Tobias Paczian, Andreas Wilke
+
+
+NAME
+m5nr-get-taxonomy -- This command will retrieve taxonomy from M5NR.
+     
+VERSION
+2.0
+
+SYNOPSIS
+m5nr-get-taxonomy [--help] [--user <user>] [--pass <password>] [--token <oAuth token>] 
+		  [--webkey <communities webkey], [--min_level <taxon level>] 
+		  [--filter_level <taxon level>] [--filter <text>]
+
+DESCRIPTION
+INPUTS:   The inputs for this command include the username and password,
+          a Globus Online authentification token, a MG-RAST webkey, the lowest taxonomic level 
+	  to retrieve, the taxonomic level to filter by and text to filter by.
+
+
+OUTPUTS:     The output of this command is the JSON structure that contains the result data.
+
+PARAMETERS:
+-h, --help           Display help message to standard out and exit with error code zero;
+                     ignore all other command-line arguments.
+
+--user               The username to authenticate against the API, requires a password to be set as well.
+--pass               A password to authenticate against the API, requires a username to be set as well.
+--token              Globus Online authentication token.
+--webkey             MG-RAST webkey to sync with the passed Globus Online authentication.
+--min_level 	     The lowest taxonomic level to retrieve.
+--filter_level       The taxonomic level to apply filter text to.
+--filter             Text to filter results by.
+
+EXAMPLES
+  m5nr-get-taxonomy --min_level genus filter_level phylum --filter Bacteroidetes
+
+AUTHORS 
+   Jared Bischof, Travis Harrison, Folker Meyer, Tobias Paczianx, Andreas Wilke
+
+
+
+NAME
+m5nr-get-ontology -- This command will retrieve ontology from m5nr.
+     
+VERSION
+2.0
+
+SYNOPSIS
+m5nr-get-ontology [--help] [--user <user>] [--pass <password>] [--token <oAuth token>] 
+		  [--webkey <communities webkey>] [--source <source name>] 
+		  [--min_level <ontology level>] [--filter_level <ontology level>] 
+		  [--filter <text>]
+  
+DESCRIPTION
+INPUTS:      The inputs for this command include the username and password,
+             a Globus Online authentification token, a MG-RAST webkey, the source of the ontology,
+             the lowest taxonomic level to retrieve, minimum taxonomic level to filter by and 
+	     text to filter by.
+
+
+OUTPUTS:     The output of this command is the JSON structure that contains the result data.
+
+PARAMETERS:
+-h, --help           Display help message to standard out and exit with error code zero;
+                     ignore all other command-line arguments.
+
+--user               The username to authenticate against the API, requires a password to be set as well.
+--pass               A password to authenticate against the API, requires a username to be set as well.
+--token              Globus Online authentication token.
+--webkey             MG-RAST webkey to sync with the passed Globus Online authentication.
+--source             The  source of the ontology to retrieve.
+--min_level          The lowest taxonomic level to retrieve.
+--filter_level       The taxonomic level to apply filter text to.
+--filter             Text to filter results by.
+
+EXAMPLES
+    m5nr-get-ontology --source Subsystems --min_level level3
+
+AUTHORS
+Jared Bischof, Travis Harrison, Folker Meyer, Tobias Paczian, Andreas Wilke
+
+
+NAME
+m5nr-get-function -- This command will retrieve annotations based on searching functions 
+		  matching inputted text.
+     
+VERSION
+2.0
+
+SYNOPSIS
+m5nr-get-function [--help] [--user <user>] [--pass <password>] [--token <oAuth token>] 
+		  [--webkey <communities webkey>] [--text <text>] [--source <source name>]
+
+DESCRIPTION
+INPUTS:      The inputs	for this command include the username and password,
+             a Globus Online authentification token, a MG-RAST webkey, and 
+	     the source of the ontology.
+
+
+OUTPUTS:     The output of this command is the JSON structure that contains the result data.
+
+PARAMETERS:
+-h, --help           Display help message to standard out and exit with error code zero;
+                     ignore all other command-line arguments.
+--user               The username to authenticate against the API, requires a password to be set as well.
+--pass               A password to authenticate against the API, requires a username to be set as well.
+--token              Globus Online authentication token.
+--webkey             MG-RAST webkey to sync with the passed Globus Online authentication.
+--text               Search functions based on this text.
+--source             The  source of the ontology to retrieve.
+
+EXAMPLES
+m5nr-get-function --text sulfatase --source GenBank
+
+AUTHORS
+Jared Bischof, Travis Harrison, Folker Meyer, Tobias Paczian, Andreas Wilke
+
+
+NAME
+m5nr-get-sources  -- This command will retrieve a list of source info objects from m5nr.
+    
+VERSION
+2.0
+
+SYNOPSIS
+m5nr-get-sources  [--help] [--user <user>] [--pass <password>] [--token <oAuth token>] 
+		  [--webkey <communities webkey>]
+
+DESCRIPTION
+INPUTS:	     The inputs	for this command include the username and password,
+             a Globus Online authentification token, and a MG-RAST webkey.
+             
+
+OUTPUTS:     The output of this command is the JSON structure that contains the result data.
+
+PARAMETERS:
+-h, --help           Display help message to standard out and exit with error code zero;
+                     ignore all other command-line arguments.
+
+--user               The username to authenticate against the API, requires a password to be set as well.
+--pass               A password to authenticate against the API, requires a username to be set as well.
+--token              Globus Online authentication token.
+--webkey             MG-RAST webkey to sync with the passed Globus Online authentication.
+
+EXAMPLES
+  m5nr-get-sources
+
+AUTHORS
+  Jared Bischof, Travis Harrison, Folker Meyer, Tobias Paczian, Andreas Wilke
+
+
+NAME
+m5nr-get-accession -- This command will retrieve annotations based on inputted accession ID.
+
+VERSION
+2.0
+
+SYNOPSIS
+m5nr-get-accession [--help] [--user <user>] [--pass <password>] [--token <oAuth token>] 
+		   [--webkey <communities webkey] [--id <ID>]
+
+DESCRIPTION
+INPUTS:
+             The inputs	for this command include the username and password,
+             a Globus Online authentification token, a MG-RAST webkey, and the accession ID.  
+	     
+
+
+OUTPUTS:     The output of this command is the JSON structure that contains the result data.
+
+PARAMETERS:
+-h, --help           Display help message to standard out and exit with error code zero;
+                     ignore all other command-line arguments.
+
+--user               The username to authenticate against the API, requires a password to be set as well.
+--pass               A password to authenticate against the API, requires a username to be set as well.
+--token              Globus Online authentication token.
+--webkey             MG-RAST webkey to sync with the passed Globus Online authentication.
+--id                 Accession ID to retrieve annotations of.
+
+EXAMPLES
+   m5nr-get-accession --id YP_003268079.1
+
+AUTHORS
+   Jared Bischof, Travis Harrison, Folker Meyer, Tobias Paczian, Andreas Wilke
+
+
+
+
+
+
+
+
+
+

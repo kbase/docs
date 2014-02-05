@@ -1,0 +1,47 @@
+OVERVIEW
+------------------------------------------
+This service provides users methods for accessing the expression data.
+This expression schema is set up to contain a fair amount of metadata, hook ins to the experiment schema and being a data repository for
+different types of expression technologies (microarrays (all platforms), RNA-Seq, qPCR, proteomics).
+
+
+Version 0.01 (GIT commit on 3/12/2013)
+-------------------------------------------
+NEW FEATURES:
+-The first internal release.  All methods are new.
+
+UPDATED FEATURES / MAJOR BUG FIXES:
+-none.
+
+ANTICIPATED FUTURE DEVELOPMENTS:
+-public release of the service
+
+
+Version 0.02 (GIT commit on 7/1/2013) 
+------------------------------------------- 
+NEW FEATURES: 
+-Release candidate
+-There are now 30+ functions.  The data is now stored n the expression database on db1.
+In the future it may be moved into the CDS. 
+ 
+UPDATED FEATURES / MAJOR BUG FIXES: 
+-Due to the compounds not being complete in the CDS and aliases across dtabases, the environments can not be currently uploaded into.
+If this gets moved into the CDS the across databases issue disappears.
+ 
+ANTICIPATED FUTURE DEVELOPMENTS: 
+-public release of the service 
+
+
+
+Version 1.0 (GIT commit on 2/4/2014)
+---------------------------------------------
+NEW FEATURES:
+Now the Data resides in the CDS.
+The data also resides in the WS.
+Completely changed the data pipeline.
+New way of getting aliases for GEO uploads.
+
+ANTICIPATED FUTURE DEVELOPMENTS:
+Add handling of multiple tax id GSEs to the GEO uploader.
+Add Sys:AlarmCall as the GEO files sometimes cannot be slurped up.
+

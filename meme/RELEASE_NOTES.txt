@@ -1,0 +1,32 @@
+OVERVIEW
+-----------------------------------------
+	This  KBase service integrate capabilities of three MEME Suite tools:
+	- MEME tool for finding ungapped motifs in unaligned DNA sequences
+	- TOMTOM tool for comparison of an input DNA motif to the elements of a database of known motifs
+	- MAST tool for searching biological sequence databases for occurrences of known motifs
+
+
+
+VERSION: 0.0.2 (Released 01/22/2014)
+------------------------------------------
+NEW FEATURES:
+-This is the first public release of the MEME Service.
+-added methods using User and Job State service
+-methods find_motifs_with_meme_job_from_ws, compare_motifs_with_tomtom_job_by_collection_from_ws, find_sites_with_mast_job_by_collection_from_ws now run on AWE server
+-methods compare_motifs_with_tomtom_from_ws, compare_motifs_with_tomtom_job_from_ws, find_sites_with_mast_from_ws, find_sites_with_mast_job_from_ws deleted
+
+UPDATED FEATURES / MAJOR BUG FIXES:
+-none.
+
+
+
+VERSION: 0.0.1 (Released 9/23/2013)
+------------------------------------------
+NEW FEATURES:
+-This is the first internal release of the MEME Service, all methods are new.
+
+UPDATED FEATURES / MAJOR BUG FIXES:
+-none.
+
+ANTICIPATED FUTURE DEVELOPMENTS:
+-public release of the service
