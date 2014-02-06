@@ -1,0 +1,49 @@
+NAME
+run_cmonkey - This command discovers co-regulated modules, or biclusters in gene expression profiles stored in workspace.
+
+
+VERSION
+1.0
+
+SYNOPSIS
+run_cmonkey [--url=http://140.221.85.173:7078/ --ws=<workspace name> --input=<expression data series reference> --genome=<genome reference> --motifs --networks --operons=<operons data reference> --string=<STRING data reference> --user=<username> --pw=<password>]
+
+DESCRIPTION
+INPUT:            This command requires the URL of the service, workspace name, and run parameters.
+
+OUTPUT:           This command returns Job object ID.
+
+PARAMETERS:
+--url             The URL of the service, --url=http://140.221.85.173:7078/, required.
+
+--ws              Workspace name where cMonkey run result will be stored, required.
+
+--input           Workspace reference of expression data series, required.
+
+--genome          Workspace reference of genome, required.
+
+--motifs          Motif scoring will be used.
+
+--networks        Network scoring will be used.
+
+--operons         Workspace reference of operons data set.
+
+--string          Workspace reference of STRING data set.
+
+--user            User name for access to workspace.
+
+--pw              Password for access to workspace.
+
+--help            Display help message to standard out and exit with error code zero; 
+                  ignore all other command-line arguments.  
+--version         Print version information. 
+
+ 
+EXAMPLES 
+run_cmonkey --url=http://140.221.85.173:7078/ --ws=AKtest --input="AKtest/Halobacterium_sp_NRC1_series" --genome="AKtest/kb|genome.9" --motifs --networks --operons="AKtest/kb|interactionset.8" --string="AKtest/kb|interactionset.7" --user=<username> --pw=<password>
+
+This command will return a Job object ID.
+
+
+Report bugs to aekazakov@lbl.gov
+
