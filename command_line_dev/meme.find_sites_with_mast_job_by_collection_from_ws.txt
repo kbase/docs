@@ -1,0 +1,45 @@
+NAME
+find_sites_with_mast_job_by_collection_from_ws - search a sequence database for occurences of known motifs by MAST.
+
+
+VERSION
+1.0
+
+SYNOPSIS
+find_sites_with_mast_job_by_collection_from_ws [--url=http://140.221.85.173:7077/ --ws=<workspace ID> --query=<MemePSPMCollection ID> --target=<sequence set ID> --matrix=<PSPM ID> --mt=<mt> --user=<username> --pw=<password>]
+
+DESCRIPTION
+INPUT:            This command requires the URL of the service, ID of query PSPM collection, ID of target sequence set, p-value threshold .
+
+OUTPUT:           The output of this command is Job object ID that keeps ID of a list of MAST hits.
+
+PARAMETERS:
+--url             The URL of the service, --url=http://140.221.85.173:7077/, required.
+
+--ws              Workspace name, required.
+
+--query           Workspace reference of the query PSPM collection, required.
+
+--target          Workspace reference of the target sequence set, required.
+
+--matrix          KBase ID of a MemePSPM from the query collection that will be used. If omitted, all motifs in the query collection will be used.
+
+--mt              Show motif matches with p-value < <mt>, required.
+
+--user            User name for access to workspace.
+
+--pw              Password for access to workspace.
+
+--help            Display help message to standard out and exit with error code zero; 
+                  ignore all other command-line arguments.  
+--version         Print version information. 
+
+ 
+EXAMPLES 
+find_sites_with_mast_job_by_collection_from_ws --url=http://140.221.85.173:7077/ --ws=AKtest --query="AKtest/kb|memepspmcollection.2" --target="AKtest/kb|sequenceset.8" --mt=0.001
+
+This command will return a Job object ID.
+
+ 
+Report bugs to aekazakov@lbl.gov
+

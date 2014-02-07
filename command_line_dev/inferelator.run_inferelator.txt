@@ -1,0 +1,43 @@
+NAME
+run_inferelator - Network Inference for cMonkey output.
+
+
+VERSION
+1.0
+
+SYNOPSIS
+run_inferelator [--url=http://140.221.85.173:7079/ --ws=<workspace name for run result> --series=<expression data series reference> --cmonkey=<cmonkey run result reference> --tflist=<regulators list reference> --user=<username> --pw=<password>]
+
+DESCRIPTION
+INPUT:            This command requires the URL of the service, workspace name, and workspace references for three input data objects.
+
+OUTPUT:           This command returns Job object ID.
+
+PARAMETERS:
+--url             The URL of the service, --url=http://140.221.85.173:7079/, required.
+
+--ws              Workspace name where cMonkey run result will be stored, required.
+
+--series          Workspace reference to ExpressionSeries object, required.
+
+--cmonkey         Workspace reference to CmonkeyRunResult object, required.
+
+--tflist          Workspace reference to GeneList object with IDs of regulatory genes, required.
+
+--user            User name for access to workspace, required.
+
+--pw              Password for access to workspace, required.
+
+--help            Display help message to standard out and exit with error code zero; 
+                  ignore all other command-line arguments.  
+--version         Print version information. 
+
+ 
+EXAMPLES 
+run_inferelator --url=http://140.221.85.173:7079/ --ws="AKtest" --series="AKtest/Halobacterium_sp_NRC1_series" --cmonkey="AKtest/kb|cmonkeyrunresult.132" --tflist="AKtest/kb|genelist.5" --user=<username> --pw=<password>
+
+This command will return a Job object ID.
+
+
+Report bugs to aekazakov@lbl.gov
+

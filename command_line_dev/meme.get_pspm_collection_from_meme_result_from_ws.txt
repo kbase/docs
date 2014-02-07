@@ -1,0 +1,37 @@
+NAME
+get_pspm_collection_from_meme_result_from_ws - converts MEME run result into collection of position-specific probability matrices
+
+
+VERSION
+1.0
+
+SYNOPSIS
+get_pspm_collection_from_meme_result_from_ws [--url=http://140.221.85.173:7077/ --ws=<workspace name> --input=<MemeRunResult reference> --user=<username> --pw=<password>]
+
+DESCRIPTION
+INPUT:            This command requires the URL of the service, workspace name, workspace reference of MemeRunresult, .
+
+OUTPUT:           The output of this command is a name of MemePSPMCollection.
+
+PARAMETERS:
+--url             The URL of the service, --url=http://140.221.85.173:7077/, required.
+
+--ws              Workspace name, required.
+
+--input           Workspace reference of the MemeRunResult , required.
+
+--user            User name for access to workspace.
+
+--pw              Password for access to workspace.
+
+--help            Display help message to standard out and exit with error code zero; 
+                  ignore all other command-line arguments.  
+--version         Print version information. 
+
+ 
+EXAMPLES 
+get_pspm_collection_from_meme_result_from_ws --url=http://140.221.85.173:7077/ --ws=AKtest --input="AKtest/kb|memerunresult.15"
+
+ 
+Report bugs to aekazakov@lbl.gov
+

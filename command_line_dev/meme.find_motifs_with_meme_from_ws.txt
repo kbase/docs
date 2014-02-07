@@ -1,0 +1,57 @@
+NAME
+find_motifs_with_meme_from_ws - This command reconstructs motifs with MEME in a set of sequences stored in workspace.
+
+
+VERSION
+1.0
+
+SYNOPSIS
+find_motifs_with_meme_from_ws [--url=http://140.221.85.173:7077/ --ws=<workspace name> --input=<sequence set reference> --mod=<oops|zoops|anr> --nmotifs=<nmotifs> --minw=<minw> --maxw=<maxw> --nsites=<nsites> --minsites=<minsites> --maxsites=<maxsites> --pal --revcomp --user=<username> --pw=<password>]
+
+DESCRIPTION
+INPUT:            This command requires the URL of the service, reference of a sequence set and parameters.
+
+OUTPUT:           This command returns name of MEME run result.
+
+PARAMETERS:
+--url             The URL of the service, --url=http://140.221.85.173:7077/, required.
+
+--ws              Workspace name, required.
+
+--input           Workspace reference of the input sequence set, required.
+
+--mod             Distribution of motifs (oops =  One Occurrence Per Sequence, zoops = Zero or One Occurrence Per Sequence, anr = Any Number of Repetitions), required.
+
+--nmotifs         Maximum number of motifs to find, required.
+
+--minw            Minumum motif width, required.
+
+--maxw            Maximum motif width, required.
+
+--nsites          Number of sites for each motif.
+
+--minsites        Minimum number of sites for each motif.
+
+--maxsites        Maximum number of sites for each motif.
+
+--pal             Force palindromes.
+
+--revcomp         Allow sites on + or - DNA strands. Default: look for DNA motifs only on the strand given in the training set.
+
+--user            User name for access to workspace.
+
+--pw              Password for access to workspace.
+
+--help            Display help message to standard out and exit with error code zero; 
+                  ignore all other command-line arguments.  
+--version         Print version information. 
+
+ 
+EXAMPLES 
+find_motifs_with_meme_from_ws --url=http://140.221.85.173:7077/ --ws=AKtest --input="AKtest/kb|sequenceset.8" --mod=oops --nmotifs=2 --minw=14 --maxw=28 
+
+This command will return a collection of two motifs with length between 14 and 28 bp.
+
+
+Report bugs to aekazakov@lbl.gov
+
