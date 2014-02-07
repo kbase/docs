@@ -1,0 +1,17 @@
+Usage: all_entities_Interaction [arguments] > entity.data
+
+    --fields list   Choose a set of fields to return. List is a comma-separated list of strings.
+    -a		    Return all available fields.
+    --show-fields   List the available fields.
+
+The following fields are available:
+
+    description
+        This is a description of this interaction.  If the protein complex has a name, this should be it. 
+    directional
+        True for directional binary interactions (e.g., those detected by a pulldown experiment), false for non-directional binary interactions and complexes. Bidirectional interactions (e.g., interactions detected by reciprocal pulldown experiments) should be encoded as 2 separate binary interactions. 
+    confidence
+        Optional numeric estimate of confidence in the interaction. Recommended to use a 0-100 scale. 
+    url
+        Optional URL for more info about this complex.
+

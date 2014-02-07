@@ -1,4 +1,4 @@
-Usage: get_relationship_HasPresenceOf [arguments] < ids > table.with.fields.added
+Usage: get_relationship_InteractionPublishedIn [arguments] < ids > table.with.fields.added
 
 --show-fields
     List the available fields.
@@ -7,38 +7,27 @@ Usage: get_relationship_HasPresenceOf [arguments] < ids > table.with.fields.adde
     Select the identifier from column num
 
 --from field-list
-    Choose a set of fields from the Media
+    Choose a set of fields from the Interaction
     entity to return. Field-list is a comma-separated list of strings. The
     following fields are available:
         id
-        mod_date
-        name
-        is_minimal
-        source_id
-        type
+        description
+        directional
+        confidence
+        url
 
 --rel field-list
     Choose a set of fields from the relationship to return. Field-list is a comma-separated list of 
     strings. The following fields are available:
         from_link
         to_link
-        concentration
-        minimum_flux
-        maximum_flux
 
 --to field-list
-    Choose a set of fields from the Compound entity to 
+    Choose a set of fields from the Publication entity to 
     return. Field-list is a comma-separated list of strings. The following fields are available:
         id
-        label
-        abbr
-        source_id
-        ubiquitous
-        mod_date
-        mass
-        formula
-        charge
-        deltaG
-        deltaG_error
+        title
+        link
+        pubdate
 
 

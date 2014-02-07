@@ -28,7 +28,8 @@ Usage: get_relationship_IsPresentIn [arguments] < ids > table.with.fields.added
         from_link
         to_link
         concentration
-        units
+        minimum_flux
+        maximum_flux
 
 --to field-list
     Choose a set of fields from the Media entity to 
@@ -37,9 +38,6 @@ Usage: get_relationship_IsPresentIn [arguments] < ids > table.with.fields.added
         mod_date
         name
         is_minimal
-        description
-        solid
-        is_defined
         source_id
         type
 

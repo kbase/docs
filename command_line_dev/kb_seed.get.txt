@@ -1,2 +1,0 @@
-Unknown option: help
-usage: get -p Path [-c Constraint] [-f Fields] > outut

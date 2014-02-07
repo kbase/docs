@@ -1,4 +1,4 @@
-query_entity_Media [arguments] > records
+query_entity_InteractionDetectionType [arguments] > records
 
 --is field,value
     Limit the results to entities where the given field has the given value.
@@ -32,9 +32,5 @@ query_entity_Media [arguments] > records
     Choose a set of fields to return. Field-list is a comma-separated list of 
     strings. The following fields are available:
 
-        mod_date
-        name
-        is_minimal
-        source_id
-        type
+        description
 

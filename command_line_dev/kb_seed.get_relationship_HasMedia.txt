@@ -30,9 +30,6 @@ Usage: get_relationship_HasMedia [arguments] < ids > table.with.fields.added
         mod_date
         name
         is_minimal
-        description
-        solid
-        is_defined
         source_id
         type
 

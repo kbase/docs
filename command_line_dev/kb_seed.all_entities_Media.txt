@@ -12,12 +12,6 @@ The following fields are available:
         descriptive name of the media
     is_minimal
         TRUE if this is a minimal media, else FALSE
-    description
-        description of the media condition
-    solid
-        Whether the media is solid (True) or liquid (False).
-    is_defined
-        TRUE if this media condition is defined (all components explicitly known)
     source_id
         The ID of the media used by the data source.
     type

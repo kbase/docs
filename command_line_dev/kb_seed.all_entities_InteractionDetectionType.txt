@@ -1,0 +1,11 @@
+Usage: all_entities_InteractionDetectionType [arguments] > entity.data
+
+    --fields list   Choose a set of fields to return. List is a comma-separated list of strings.
+    -a		    Return all available fields.
+    --show-fields   List the available fields.
+
+The following fields are available:
+
+    description
+        This is a brief description of this detection method. 
+

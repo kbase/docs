@@ -1,0 +1,24 @@
+----------TEST kb_seed ermodel_to_text with -h option
+Unknown option: h
+Usage: /kbase/deployments/20140109-prod//plbin/ermodel_to_text.pl [--decamelize] < DBD-xml-file > tab-sep-output
+
+----------TEST kb_seed ermodel_to_text with --help option
+Unknown option: help
+Usage: /kbase/deployments/20140109-prod//plbin/ermodel_to_text.pl [--decamelize] < DBD-xml-file > tab-sep-output
+
+----------TEST kb_seed dump_relationship with -h option
+Unknown option: h
+Usage: /kbase/deployments/20140109-prod//plbin/dump_relationship.pl relname [--camelize]  > tab-sep-output
+
+----------TEST kb_seed dump_relationship with --help option
+Unknown option: help
+Usage: /kbase/deployments/20140109-prod//plbin/dump_relationship.pl relname [--camelize]  > tab-sep-output
+
+
+
+Error Summary:
+ermodel_to_text                          -h        65280 
+ermodel_to_text                          --help    65280 
+dump_relationship                        -h        65280 
+dump_relationship                        --help    65280 
+
