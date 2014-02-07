@@ -20,19 +20,22 @@ COMMANDS
 
 
 NAME
-get_expression_data_by_samples_and_features -- This command returns an ExpressionDataSamplesMap.  
+get_expression_data_by_samples_and_features -- This command returns a Label Data Mapping.  
 
 VERSION 
 1.0
 
 SYNOPSIS
-get_expression_data_by_samples_and_features [--sampleID ID] [--featureID ID]
+get_expression_data_by_samples_and_features [--help] [--sampleID ID] [--featureID ID]
 
 DESCRIPTION
 INPUT:     The input for this command is one or more sample IDs and/or feature IDs. 
-OUTPUT:    The output file for this command is an ExpressionDataSamplesMap.
+OUTPUT:    The output file for this command is an Expression Data Samples Map.
 
 PARAMETERS:
+
+--help             Display help message to standard out and exit with error code zero;                    
+                   ignore all other command-line arguments.
 
 --sampleID          The KBase sample IDs. Datatype = string. 
                     Multiple sample IDs can be submitted, as 
