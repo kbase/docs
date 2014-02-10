@@ -1,0 +1,2157 @@
+<?xml version="1.0" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>M5NR Client</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<link rev="made" href="mailto:canon@t1.(none)" />
+</head>
+
+<body style="background-color: white">
+
+
+
+<ul id="index">
+  <li><a href="#NAME">NAME</a></li>
+  <li><a href="#DESCRIPTION">DESCRIPTION</a>
+    <ul>
+      <li><a href="#get_m5nr_ontology">get_m5nr_ontology</a></li>
+      <li><a href="#get_m5nr_taxonomy">get_m5nr_taxonomy</a></li>
+      <li><a href="#get_m5nr_sources">get_m5nr_sources</a></li>
+      <li><a href="#get_m5nr_accession">get_m5nr_accession</a></li>
+      <li><a href="#get_m5nr_alias">get_m5nr_alias</a></li>
+      <li><a href="#get_m5nr_md5">get_m5nr_md5</a></li>
+      <li><a href="#get_m5nr_function">get_m5nr_function</a></li>
+      <li><a href="#get_m5nr_organism">get_m5nr_organism</a></li>
+      <li><a href="#get_m5nr_sequence">get_m5nr_sequence</a></li>
+      <li><a href="#post_m5nr_accession">post_m5nr_accession</a></li>
+      <li><a href="#post_m5nr_alias">post_m5nr_alias</a></li>
+      <li><a href="#post_m5nr_md5">post_m5nr_md5</a></li>
+      <li><a href="#post_m5nr_function">post_m5nr_function</a></li>
+      <li><a href="#post_m5nr_organism">post_m5nr_organism</a></li>
+      <li><a href="#post_m5nr_sequence">post_m5nr_sequence</a></li>
+    </ul>
+  </li>
+  <li><a href="#TYPES">TYPES</a>
+    <ul>
+      <li><a href="#GetM5nrOntologyParams">GetM5nrOntologyParams</a></li>
+      <li><a href="#M5nrOntology">M5nrOntology</a></li>
+      <li><a href="#GetM5nrTaxonomyParams">GetM5nrTaxonomyParams</a></li>
+      <li><a href="#M5nrTaxonomy">M5nrTaxonomy</a></li>
+      <li><a href="#GetM5nrSourcesParams">GetM5nrSourcesParams</a></li>
+      <li><a href="#M5nrSources">M5nrSources</a></li>
+      <li><a href="#GetM5nrAccessionParams">GetM5nrAccessionParams</a></li>
+      <li><a href="#M5nrAccession">M5nrAccession</a></li>
+      <li><a href="#GetM5nrAliasParams">GetM5nrAliasParams</a></li>
+      <li><a href="#M5nrAlias">M5nrAlias</a></li>
+      <li><a href="#GetM5nrMd5Params">GetM5nrMd5Params</a></li>
+      <li><a href="#M5nrMd5">M5nrMd5</a></li>
+      <li><a href="#GetM5nrFunctionParams">GetM5nrFunctionParams</a></li>
+      <li><a href="#M5nrFunction">M5nrFunction</a></li>
+      <li><a href="#GetM5nrOrganismParams">GetM5nrOrganismParams</a></li>
+      <li><a href="#M5nrOrganism">M5nrOrganism</a></li>
+      <li><a href="#GetM5nrSequenceParams">GetM5nrSequenceParams</a></li>
+      <li><a href="#M5nrSequence">M5nrSequence</a></li>
+      <li><a href="#PostM5nrAccessionParams">PostM5nrAccessionParams</a></li>
+      <li><a href="#M5nrAccession1">M5nrAccession</a></li>
+      <li><a href="#PostM5nrAliasParams">PostM5nrAliasParams</a></li>
+      <li><a href="#M5nrAlias1">M5nrAlias</a></li>
+      <li><a href="#PostM5nrMd5Params">PostM5nrMd5Params</a></li>
+      <li><a href="#M5nrMd51">M5nrMd5</a></li>
+      <li><a href="#PostM5nrFunctionParams">PostM5nrFunctionParams</a></li>
+      <li><a href="#M5nrFunction1">M5nrFunction</a></li>
+      <li><a href="#PostM5nrOrganismParams">PostM5nrOrganismParams</a></li>
+      <li><a href="#M5nrOrganism1">M5nrOrganism</a></li>
+      <li><a href="#PostM5nrSequenceParams">PostM5nrSequenceParams</a></li>
+      <li><a href="#M5nrSequence1">M5nrSequence</a></li>
+    </ul>
+  </li>
+</ul>
+
+<h1 id="NAME">NAME</h1>
+
+<p>M5NRClient</p>
+
+<h1 id="DESCRIPTION">DESCRIPTION</h1>
+
+<p>RESTful Metagenomics RAST object and resource API For usage note that required parameters need to be passed as path parameters, optional parameters need to be query parameters. If an optional parameter has a list of option values, the first displayed will be used as default.</p>
+
+<h2 id="get_m5nr_ontology">get_m5nr_ontology</h2>
+
+<pre><code>  $return = $obj-&gt;get_m5nr_ontology($GetM5nrOntologyParams)</code></pre>
+
+<dl>
+
+<dt id="Parameter-and-return-types">Parameter and return types</dt>
+<dd>
+
+
+
+<pre>
+$GetM5nrOntologyParams is a GetM5nrOntologyParams
+$return is a M5nrOntology
+GetM5nrOntologyParams is a reference to a hash where the following keys are defined:
+	source has a value which is a string
+	filter has a value which is a string
+	version has a value which is an int
+	exact has a value which is an int
+	filter_level has a value which is a string
+	min_level has a value which is a string
+M5nrOntology is a reference to a hash where the following keys are defined:
+	version has a value which is an int
+	url has a value which is a string
+	data has a value which is a reference to a list where each element is a reference to a hash where the key is a string and the value is a string</pre>
+
+</dd>
+<dt id="Description">Description</dt>
+<dd>
+
+<p>M5NR provides data through a comprehensive non-redundant protein / rRNA database Return functional hierarchy</p>
+
+</dd>
+</dl>
+
+<h2 id="get_m5nr_taxonomy">get_m5nr_taxonomy</h2>
+
+<pre><code>  $return = $obj-&gt;get_m5nr_taxonomy($GetM5nrTaxonomyParams)</code></pre>
+
+<dl>
+
+<dt id="Parameter-and-return-types1">Parameter and return types</dt>
+<dd>
+
+
+
+<pre>
+$GetM5nrTaxonomyParams is a GetM5nrTaxonomyParams
+$return is a M5nrTaxonomy
+GetM5nrTaxonomyParams is a reference to a hash where the following keys are defined:
+	filter has a value which is a string
+	version has a value which is an int
+	exact has a value which is an int
+	filter_level has a value which is a string
+	min_level has a value which is a string
+M5nrTaxonomy is a reference to a hash where the following keys are defined:
+	version has a value which is an int
+	url has a value which is a string
+	data has a value which is a reference to a list where each element is a reference to a hash where the key is a string and the value is a string</pre>
+
+</dd>
+<dt id="Description1">Description</dt>
+<dd>
+
+<p>M5NR provides data through a comprehensive non-redundant protein / rRNA database Return organism hierarchy</p>
+
+</dd>
+</dl>
+
+<h2 id="get_m5nr_sources">get_m5nr_sources</h2>
+
+<pre><code>  $return = $obj-&gt;get_m5nr_sources($GetM5nrSourcesParams)</code></pre>
+
+<dl>
+
+<dt id="Parameter-and-return-types2">Parameter and return types</dt>
+<dd>
+
+
+
+<pre>
+$GetM5nrSourcesParams is a GetM5nrSourcesParams
+$return is a M5nrSources
+GetM5nrSourcesParams is a reference to a hash where the following keys are defined:
+	version has a value which is an int
+M5nrSources is a reference to a hash where the following keys are defined:
+	version has a value which is an int
+	url has a value which is a string
+	data has a value which is a reference to a list where each element is a reference to a hash where the key is a string and the value is a string</pre>
+
+</dd>
+<dt id="Description2">Description</dt>
+<dd>
+
+<p>M5NR provides data through a comprehensive non-redundant protein / rRNA database Return all sources in M5NR</p>
+
+</dd>
+</dl>
+
+<h2 id="get_m5nr_accession">get_m5nr_accession</h2>
+
+<pre><code>  $return = $obj-&gt;get_m5nr_accession($GetM5nrAccessionParams)</code></pre>
+
+<dl>
+
+<dt id="Parameter-and-return-types3">Parameter and return types</dt>
+<dd>
+
+
+
+<pre>
+$GetM5nrAccessionParams is a GetM5nrAccessionParams
+$return is a M5nrAccession
+GetM5nrAccessionParams is a reference to a hash where the following keys are defined:
+	order has a value which is a string
+	version has a value which is an int
+	id has a value which is a string
+	limit has a value which is an int
+	offset has a value which is an int
+M5nrAccession is a reference to a hash where the following keys are defined:
+	next has a value which is a string
+	prev has a value which is a string
+	version has a value which is an int
+	data has a value which is a reference to a list where each element is a reference to a hash where the key is a string and the value is a string
+	total_count has a value which is an int
+	url has a value which is a string
+	limit has a value which is an int
+	offset has a value which is an int</pre>
+
+</dd>
+<dt id="Description3">Description</dt>
+<dd>
+
+<p>M5NR provides data through a comprehensive non-redundant protein / rRNA database Return annotation of given source protein ID</p>
+
+</dd>
+</dl>
+
+<h2 id="get_m5nr_alias">get_m5nr_alias</h2>
+
+<pre><code>  $return = $obj-&gt;get_m5nr_alias($GetM5nrAliasParams)</code></pre>
+
+<dl>
+
+<dt id="Parameter-and-return-types4">Parameter and return types</dt>
+<dd>
+
+
+
+<pre>
+$GetM5nrAliasParams is a GetM5nrAliasParams
+$return is a M5nrAlias
+GetM5nrAliasParams is a reference to a hash where the following keys are defined:
+	source has a value which is a string
+	text has a value which is a string
+	order has a value which is a string
+	version has a value which is an int
+	exact has a value which is an int
+	limit has a value which is an int
+	offset has a value which is an int
+M5nrAlias is a reference to a hash where the following keys are defined:
+	next has a value which is a string
+	prev has a value which is a string
+	version has a value which is an int
+	data has a value which is a reference to a list where each element is a reference to a hash where the key is a string and the value is a string
+	total_count has a value which is an int
+	url has a value which is a string
+	limit has a value which is an int
+	offset has a value which is an int</pre>
+
+</dd>
+<dt id="Description4">Description</dt>
+<dd>
+
+<p>M5NR provides data through a comprehensive non-redundant protein / rRNA database Return annotations for alias IDs containing the given text</p>
+
+</dd>
+</dl>
+
+<h2 id="get_m5nr_md5">get_m5nr_md5</h2>
+
+<pre><code>  $return = $obj-&gt;get_m5nr_md5($GetM5nrMd5Params)</code></pre>
+
+<dl>
+
+<dt id="Parameter-and-return-types5">Parameter and return types</dt>
+<dd>
+
+
+
+<pre>
+$GetM5nrMd5Params is a GetM5nrMd5Params
+$return is a M5nrMd5
+GetM5nrMd5Params is a reference to a hash where the following keys are defined:
+	source has a value which is a string
+	sequence has a value which is an int
+	order has a value which is a string
+	version has a value which is an int
+	id has a value which is a string
+	limit has a value which is an int
+	offset has a value which is an int
+M5nrMd5 is a reference to a hash where the following keys are defined:
+	next has a value which is a string
+	prev has a value which is a string
+	version has a value which is an int
+	data has a value which is a reference to a list where each element is a reference to a hash where the key is a string and the value is a string
+	total_count has a value which is an int
+	url has a value which is a string
+	limit has a value which is an int
+	offset has a value which is an int</pre>
+
+</dd>
+<dt id="Description5">Description</dt>
+<dd>
+
+<p>M5NR provides data through a comprehensive non-redundant protein / rRNA database Return annotation(s) or sequence of given md5sum (M5NR ID)</p>
+
+</dd>
+</dl>
+
+<h2 id="get_m5nr_function">get_m5nr_function</h2>
+
+<pre><code>  $return = $obj-&gt;get_m5nr_function($GetM5nrFunctionParams)</code></pre>
+
+<dl>
+
+<dt id="Parameter-and-return-types6">Parameter and return types</dt>
+<dd>
+
+
+
+<pre>
+$GetM5nrFunctionParams is a GetM5nrFunctionParams
+$return is a M5nrFunction
+GetM5nrFunctionParams is a reference to a hash where the following keys are defined:
+	source has a value which is a string
+	version has a value which is an int
+	exact has a value which is an int
+	inverse has a value which is an int
+	order has a value which is a string
+	text has a value which is a string
+	limit has a value which is an int
+	offset has a value which is an int
+M5nrFunction is a reference to a hash where the following keys are defined:
+	next has a value which is a string
+	prev has a value which is a string
+	version has a value which is an int
+	data has a value which is a reference to a list where each element is a reference to a hash where the key is a string and the value is a string
+	total_count has a value which is an int
+	url has a value which is a string
+	limit has a value which is an int
+	offset has a value which is an int</pre>
+
+</dd>
+<dt id="Description6">Description</dt>
+<dd>
+
+<p>M5NR provides data through a comprehensive non-redundant protein / rRNA database Return annotations for function names containing the given text</p>
+
+</dd>
+</dl>
+
+<h2 id="get_m5nr_organism">get_m5nr_organism</h2>
+
+<pre><code>  $return = $obj-&gt;get_m5nr_organism($GetM5nrOrganismParams)</code></pre>
+
+<dl>
+
+<dt id="Parameter-and-return-types7">Parameter and return types</dt>
+<dd>
+
+
+
+<pre>
+$GetM5nrOrganismParams is a GetM5nrOrganismParams
+$return is a M5nrOrganism
+GetM5nrOrganismParams is a reference to a hash where the following keys are defined:
+	source has a value which is a string
+	version has a value which is an int
+	exact has a value which is an int
+	inverse has a value which is an int
+	text has a value which is a string
+	order has a value which is a string
+	tax_level has a value which is a string
+	limit has a value which is an int
+	offset has a value which is an int
+M5nrOrganism is a reference to a hash where the following keys are defined:
+	next has a value which is a string
+	prev has a value which is a string
+	version has a value which is an int
+	data has a value which is a reference to a list where each element is a reference to a hash where the key is a string and the value is a string
+	total_count has a value which is an int
+	url has a value which is a string
+	limit has a value which is an int
+	offset has a value which is an int</pre>
+
+</dd>
+<dt id="Description7">Description</dt>
+<dd>
+
+<p>M5NR provides data through a comprehensive non-redundant protein / rRNA database Return annotations for organism names containing the given text</p>
+
+</dd>
+</dl>
+
+<h2 id="get_m5nr_sequence">get_m5nr_sequence</h2>
+
+<pre><code>  $return = $obj-&gt;get_m5nr_sequence($GetM5nrSequenceParams)</code></pre>
+
+<dl>
+
+<dt id="Parameter-and-return-types8">Parameter and return types</dt>
+<dd>
+
+
+
+<pre>
+$GetM5nrSequenceParams is a GetM5nrSequenceParams
+$return is a M5nrSequence
+GetM5nrSequenceParams is a reference to a hash where the following keys are defined:
+	source has a value which is a string
+	text has a value which is a string
+	order has a value which is a string
+	version has a value which is an int
+	limit has a value which is an int
+	offset has a value which is an int
+M5nrSequence is a reference to a hash where the following keys are defined:
+	next has a value which is a string
+	prev has a value which is a string
+	version has a value which is an int
+	data has a value which is a reference to a list where each element is a reference to a hash where the key is a string and the value is a string
+	total_count has a value which is an int
+	url has a value which is a string
+	limit has a value which is an int
+	offset has a value which is an int</pre>
+
+</dd>
+<dt id="Description8">Description</dt>
+<dd>
+
+<p>M5NR provides data through a comprehensive non-redundant protein / rRNA database Return annotation(s) for md5sum (M5NR ID) of given sequence</p>
+
+</dd>
+</dl>
+
+<h2 id="post_m5nr_accession">post_m5nr_accession</h2>
+
+<pre><code>  $return = $obj-&gt;post_m5nr_accession($PostM5nrAccessionParams)</code></pre>
+
+<dl>
+
+<dt id="Parameter-and-return-types9">Parameter and return types</dt>
+<dd>
+
+
+
+<pre>
+$PostM5nrAccessionParams is a PostM5nrAccessionParams
+$return is a M5nrAccession
+PostM5nrAccessionParams is a reference to a hash where the following keys are defined:
+	order has a value which is a string
+	version has a value which is an int
+	data has a value which is a reference to a list where each element is a string
+	limit has a value which is an int
+	offset has a value which is an int
+M5nrAccession is a reference to a hash where the following keys are defined:
+	next has a value which is a string
+	prev has a value which is a string
+	version has a value which is an int
+	data has a value which is a reference to a list where each element is a reference to a hash where the key is a string and the value is a string
+	total_count has a value which is an int
+	url has a value which is a string
+	limit has a value which is an int
+	offset has a value which is an int</pre>
+
+</dd>
+<dt id="Description9">Description</dt>
+<dd>
+
+<p>M5NR provides data through a comprehensive non-redundant protein / rRNA database Return annotations of given source protein IDs</p>
+
+</dd>
+</dl>
+
+<h2 id="post_m5nr_alias">post_m5nr_alias</h2>
+
+<pre><code>  $return = $obj-&gt;post_m5nr_alias($PostM5nrAliasParams)</code></pre>
+
+<dl>
+
+<dt id="Parameter-and-return-types10">Parameter and return types</dt>
+<dd>
+
+
+
+<pre>
+$PostM5nrAliasParams is a PostM5nrAliasParams
+$return is a M5nrAlias
+PostM5nrAliasParams is a reference to a hash where the following keys are defined:
+	source has a value which is a string
+	order has a value which is a string
+	version has a value which is an int
+	exact has a value which is an int
+	data has a value which is a reference to a list where each element is a string
+	limit has a value which is an int
+	offset has a value which is an int
+M5nrAlias is a reference to a hash where the following keys are defined:
+	next has a value which is a string
+	prev has a value which is a string
+	version has a value which is an int
+	data has a value which is a reference to a list where each element is a reference to a hash where the key is a string and the value is a string
+	total_count has a value which is an int
+	url has a value which is a string
+	limit has a value which is an int
+	offset has a value which is an int</pre>
+
+</dd>
+<dt id="Description10">Description</dt>
+<dd>
+
+<p>M5NR provides data through a comprehensive non-redundant protein / rRNA database Return annotations for aliases containing the given texts</p>
+
+</dd>
+</dl>
+
+<h2 id="post_m5nr_md5">post_m5nr_md5</h2>
+
+<pre><code>  $return = $obj-&gt;post_m5nr_md5($PostM5nrMd5Params)</code></pre>
+
+<dl>
+
+<dt id="Parameter-and-return-types11">Parameter and return types</dt>
+<dd>
+
+
+
+<pre>
+$PostM5nrMd5Params is a PostM5nrMd5Params
+$return is a M5nrMd5
+PostM5nrMd5Params is a reference to a hash where the following keys are defined:
+	source has a value which is a string
+	order has a value which is a string
+	version has a value which is an int
+	data has a value which is a reference to a list where each element is a string
+	limit has a value which is an int
+	offset has a value which is an int
+M5nrMd5 is a reference to a hash where the following keys are defined:
+	next has a value which is a string
+	prev has a value which is a string
+	version has a value which is an int
+	data has a value which is a reference to a list where each element is a reference to a hash where the key is a string and the value is a string
+	total_count has a value which is an int
+	url has a value which is a string
+	limit has a value which is an int
+	offset has a value which is an int</pre>
+
+</dd>
+<dt id="Description11">Description</dt>
+<dd>
+
+<p>M5NR provides data through a comprehensive non-redundant protein / rRNA database Return annotations of given md5sums (M5NR ID)</p>
+
+</dd>
+</dl>
+
+<h2 id="post_m5nr_function">post_m5nr_function</h2>
+
+<pre><code>  $return = $obj-&gt;post_m5nr_function($PostM5nrFunctionParams)</code></pre>
+
+<dl>
+
+<dt id="Parameter-and-return-types12">Parameter and return types</dt>
+<dd>
+
+
+
+<pre>
+$PostM5nrFunctionParams is a PostM5nrFunctionParams
+$return is a M5nrFunction
+PostM5nrFunctionParams is a reference to a hash where the following keys are defined:
+	source has a value which is a string
+	version has a value which is an int
+	exact has a value which is an int
+	data has a value which is a reference to a list where each element is a string
+	inverse has a value which is an int
+	md5s has a value which is a reference to a list where each element is a string
+	order has a value which is a string
+	limit has a value which is an int
+	offset has a value which is an int
+M5nrFunction is a reference to a hash where the following keys are defined:
+	next has a value which is a string
+	prev has a value which is a string
+	version has a value which is an int
+	data has a value which is a reference to a list where each element is a reference to a hash where the key is a string and the value is a string
+	total_count has a value which is an int
+	url has a value which is a string
+	limit has a value which is an int
+	offset has a value which is an int</pre>
+
+</dd>
+<dt id="Description12">Description</dt>
+<dd>
+
+<p>M5NR provides data through a comprehensive non-redundant protein / rRNA database Return annotations for function names containing the given texts</p>
+
+</dd>
+</dl>
+
+<h2 id="post_m5nr_organism">post_m5nr_organism</h2>
+
+<pre><code>  $return = $obj-&gt;post_m5nr_organism($PostM5nrOrganismParams)</code></pre>
+
+<dl>
+
+<dt id="Parameter-and-return-types13">Parameter and return types</dt>
+<dd>
+
+
+
+<pre>
+$PostM5nrOrganismParams is a PostM5nrOrganismParams
+$return is a M5nrOrganism
+PostM5nrOrganismParams is a reference to a hash where the following keys are defined:
+	source has a value which is a string
+	version has a value which is an int
+	exact has a value which is an int
+	data has a value which is a reference to a list where each element is a string
+	inverse has a value which is an int
+	md5s has a value which is a reference to a list where each element is a string
+	order has a value which is a string
+	tax_level has a value which is a string
+	limit has a value which is an int
+	offset has a value which is an int
+M5nrOrganism is a reference to a hash where the following keys are defined:
+	next has a value which is a string
+	prev has a value which is a string
+	version has a value which is an int
+	data has a value which is a reference to a list where each element is a reference to a hash where the key is a string and the value is a string
+	total_count has a value which is an int
+	url has a value which is a string
+	limit has a value which is an int
+	offset has a value which is an int</pre>
+
+</dd>
+<dt id="Description13">Description</dt>
+<dd>
+
+<p>M5NR provides data through a comprehensive non-redundant protein / rRNA database Return annotations for organism names containing the given texts</p>
+
+</dd>
+</dl>
+
+<h2 id="post_m5nr_sequence">post_m5nr_sequence</h2>
+
+<pre><code>  $return = $obj-&gt;post_m5nr_sequence($PostM5nrSequenceParams)</code></pre>
+
+<dl>
+
+<dt id="Parameter-and-return-types14">Parameter and return types</dt>
+<dd>
+
+
+
+<pre>
+$PostM5nrSequenceParams is a PostM5nrSequenceParams
+$return is a M5nrSequence
+PostM5nrSequenceParams is a reference to a hash where the following keys are defined:
+	source has a value which is a string
+	order has a value which is a string
+	version has a value which is an int
+	data has a value which is a reference to a list where each element is a string
+	limit has a value which is an int
+	offset has a value which is an int
+M5nrSequence is a reference to a hash where the following keys are defined:
+	next has a value which is a string
+	prev has a value which is a string
+	version has a value which is an int
+	data has a value which is a reference to a list where each element is a reference to a hash where the key is a string and the value is a string
+	total_count has a value which is an int
+	url has a value which is a string
+	limit has a value which is an int
+	offset has a value which is an int</pre>
+
+</dd>
+<dt id="Description14">Description</dt>
+<dd>
+
+<p>M5NR provides data through a comprehensive non-redundant protein / rRNA database Return annotations for md5s (M5NR ID) of given sequences</p>
+
+</dd>
+</dl>
+
+<h1 id="TYPES">TYPES</h1>
+
+<h2 id="GetM5nrOntologyParams">GetM5nrOntologyParams</h2>
+
+<dl>
+
+<dt id="Description15">Description</dt>
+<dd>
+
+<p>A set of parameters the GetM5nrOntology method. This is a mapping of key value pairs, defined as follows:</p>
+
+<p>string source</p>
+
+<p>This parameter value can be chosen from the following (the first being default):</p>
+
+<pre><code>        Subsystems - ontology database, type ontology only
+        NOG - ontology database, type ontology only
+        COG - ontology database, type ontology only
+        KO - ontology database, type ontology only</code></pre>
+
+<p>string filter</p>
+
+<pre><code>        text of ontology group (filter_level) to filter by</code></pre>
+
+<p>int version</p>
+
+<pre><code>        M5NR version, default 10</code></pre>
+
+<p>int exact</p>
+
+<pre><code>        if true return only those ontologies that exactly match filter, default is false</code></pre>
+
+<p>string filter_level</p>
+
+<p>This parameter value can be chosen from the following (the first being default):</p>
+
+<pre><code>        function - bottom function ontology level
+        level3 - function ontology level
+        level2 - function ontology level
+        level1 - top function ontology level</code></pre>
+
+<p>string min_level</p>
+
+<p>This parameter value can be chosen from the following (the first being default):</p>
+
+<pre><code>        function - bottom function ontology level
+        level3 - function ontology level
+        level2 - function ontology level
+        level1 - top function ontology level</code></pre>
+
+</dd>
+<dt id="Definition">Definition</dt>
+<dd>
+
+
+
+<pre>
+a reference to a hash where the following keys are defined:
+source has a value which is a string
+filter has a value which is a string
+version has a value which is an int
+exact has a value which is an int
+filter_level has a value which is a string
+min_level has a value which is a string</pre>
+
+</dd>
+</dl>
+
+<h2 id="M5nrOntology">M5nrOntology</h2>
+
+<dl>
+
+<dt id="Description16">Description</dt>
+<dd>
+
+<p>Method M5nrOntology</p>
+
+<pre><code>        version of M5NR
+
+        resource location of this object instance
+
+        ontology object</code></pre>
+
+</dd>
+<dt id="Definition1">Definition</dt>
+<dd>
+
+
+
+<pre>
+a reference to a hash where the following keys are defined:
+version has a value which is an int
+url has a value which is a string
+data has a value which is a reference to a list where each element is a reference to a hash where the key is a string and the value is a string</pre>
+
+</dd>
+</dl>
+
+<h2 id="GetM5nrTaxonomyParams">GetM5nrTaxonomyParams</h2>
+
+<dl>
+
+<dt id="Description17">Description</dt>
+<dd>
+
+<p>A set of parameters the GetM5nrTaxonomy method. This is a mapping of key value pairs, defined as follows:</p>
+
+<p>string filter</p>
+
+<pre><code>        text of taxanomy group (filter_level) to filter by</code></pre>
+
+<p>int version</p>
+
+<pre><code>        M5NR version, default 10</code></pre>
+
+<p>int exact</p>
+
+<pre><code>        if true return only those taxonomies that exactly match filter, default is false</code></pre>
+
+<p>string filter_level</p>
+
+<p>This parameter value can be chosen from the following (the first being default):</p>
+
+<pre><code>        species - organism type level
+        genus - organism taxanomic level
+        family - organism taxanomic level
+        order - organism taxanomic level
+        class - organism taxanomic level
+        phylum - organism taxanomic level
+        domain - top organism taxanomic level</code></pre>
+
+<p>string min_level</p>
+
+<p>This parameter value can be chosen from the following (the first being default):</p>
+
+<pre><code>        species - organism type level
+        genus - organism taxanomic level
+        family - organism taxanomic level
+        order - organism taxanomic level
+        class - organism taxanomic level
+        phylum - organism taxanomic level
+        domain - top organism taxanomic level</code></pre>
+
+</dd>
+<dt id="Definition2">Definition</dt>
+<dd>
+
+
+
+<pre>
+a reference to a hash where the following keys are defined:
+filter has a value which is a string
+version has a value which is an int
+exact has a value which is an int
+filter_level has a value which is a string
+min_level has a value which is a string</pre>
+
+</dd>
+</dl>
+
+<h2 id="M5nrTaxonomy">M5nrTaxonomy</h2>
+
+<dl>
+
+<dt id="Description18">Description</dt>
+<dd>
+
+<p>Method M5nrTaxonomy</p>
+
+<pre><code>        version of M5NR
+
+        resource location of this object instance
+
+        taxonomy object</code></pre>
+
+</dd>
+<dt id="Definition3">Definition</dt>
+<dd>
+
+
+
+<pre>
+a reference to a hash where the following keys are defined:
+version has a value which is an int
+url has a value which is a string
+data has a value which is a reference to a list where each element is a reference to a hash where the key is a string and the value is a string</pre>
+
+</dd>
+</dl>
+
+<h2 id="GetM5nrSourcesParams">GetM5nrSourcesParams</h2>
+
+<dl>
+
+<dt id="Description19">Description</dt>
+<dd>
+
+<p>A set of parameters the GetM5nrSources method. This is a mapping of key value pairs, defined as follows:</p>
+
+<p>int version</p>
+
+<pre><code>        M5NR version, default 10</code></pre>
+
+</dd>
+<dt id="Definition4">Definition</dt>
+<dd>
+
+
+
+<pre>
+a reference to a hash where the following keys are defined:
+version has a value which is an int</pre>
+
+</dd>
+</dl>
+
+<h2 id="M5nrSources">M5nrSources</h2>
+
+<dl>
+
+<dt id="Description20">Description</dt>
+<dd>
+
+<p>Method M5nrSources</p>
+
+<pre><code>        version of M5NR
+
+        resource location of this object instance
+
+        source object</code></pre>
+
+</dd>
+<dt id="Definition5">Definition</dt>
+<dd>
+
+
+
+<pre>
+a reference to a hash where the following keys are defined:
+version has a value which is an int
+url has a value which is a string
+data has a value which is a reference to a list where each element is a reference to a hash where the key is a string and the value is a string</pre>
+
+</dd>
+</dl>
+
+<h2 id="GetM5nrAccessionParams">GetM5nrAccessionParams</h2>
+
+<dl>
+
+<dt id="Description21">Description</dt>
+<dd>
+
+<p>A set of parameters the GetM5nrAccession method. This is a mapping of key value pairs, defined as follows:</p>
+
+<p>string order</p>
+
+<pre><code>        name of the attribute the returned data is ordered by</code></pre>
+
+<p>int version</p>
+
+<pre><code>        M5NR version, default 10</code></pre>
+
+<p>string id</p>
+
+<pre><code>        unique identifier from source DB</code></pre>
+
+<p>int limit</p>
+
+<pre><code>        maximum number of items requested</code></pre>
+
+<p>int offset</p>
+
+<pre><code>        zero based index of the first data object to be returned</code></pre>
+
+</dd>
+<dt id="Definition6">Definition</dt>
+<dd>
+
+
+
+<pre>
+a reference to a hash where the following keys are defined:
+order has a value which is a string
+version has a value which is an int
+id has a value which is a string
+limit has a value which is an int
+offset has a value which is an int</pre>
+
+</dd>
+</dl>
+
+<h2 id="M5nrAccession">M5nrAccession</h2>
+
+<dl>
+
+<dt id="Description22">Description</dt>
+<dd>
+
+<p>Method M5nrAccession</p>
+
+<pre><code>        link to the previous set or null if this is the first set
+
+        link to the next set or null if this is the last set
+
+        version of M5NR
+
+        annotation object
+
+        total number of available data items
+
+        resource location of this object instance
+
+        maximum number of data items returned, default is 10
+
+        zero based index of the first returned data item</code></pre>
+
+</dd>
+<dt id="Definition7">Definition</dt>
+<dd>
+
+
+
+<pre>
+a reference to a hash where the following keys are defined:
+next has a value which is a string
+prev has a value which is a string
+version has a value which is an int
+data has a value which is a reference to a list where each element is a reference to a hash where the key is a string and the value is a string
+total_count has a value which is an int
+url has a value which is a string
+limit has a value which is an int
+offset has a value which is an int</pre>
+
+</dd>
+</dl>
+
+<h2 id="GetM5nrAliasParams">GetM5nrAliasParams</h2>
+
+<dl>
+
+<dt id="Description23">Description</dt>
+<dd>
+
+<p>A set of parameters the GetM5nrAlias method. This is a mapping of key value pairs, defined as follows:</p>
+
+<p>string source</p>
+
+<pre><code>        source name to restrict search by</code></pre>
+
+<p>string text</p>
+
+<pre><code>        text string of partial alias</code></pre>
+
+<p>string order</p>
+
+<pre><code>        name of the attribute the returned data is ordered by</code></pre>
+
+<p>int version</p>
+
+<pre><code>        M5NR version, default 10</code></pre>
+
+<p>int exact</p>
+
+<pre><code>        if true return only those annotations that exactly match input text, default is false</code></pre>
+
+<p>int limit</p>
+
+<pre><code>        maximum number of items requested</code></pre>
+
+<p>int offset</p>
+
+<pre><code>        zero based index of the first data object to be returned</code></pre>
+
+</dd>
+<dt id="Definition8">Definition</dt>
+<dd>
+
+
+
+<pre>
+a reference to a hash where the following keys are defined:
+source has a value which is a string
+text has a value which is a string
+order has a value which is a string
+version has a value which is an int
+exact has a value which is an int
+limit has a value which is an int
+offset has a value which is an int</pre>
+
+</dd>
+</dl>
+
+<h2 id="M5nrAlias">M5nrAlias</h2>
+
+<dl>
+
+<dt id="Description24">Description</dt>
+<dd>
+
+<p>Method M5nrAlias</p>
+
+<pre><code>        link to the previous set or null if this is the first set
+
+        link to the next set or null if this is the last set
+
+        version of M5NR
+
+        annotation object
+
+        total number of available data items
+
+        resource location of this object instance
+
+        maximum number of data items returned, default is 10
+
+        zero based index of the first returned data item</code></pre>
+
+</dd>
+<dt id="Definition9">Definition</dt>
+<dd>
+
+
+
+<pre>
+a reference to a hash where the following keys are defined:
+next has a value which is a string
+prev has a value which is a string
+version has a value which is an int
+data has a value which is a reference to a list where each element is a reference to a hash where the key is a string and the value is a string
+total_count has a value which is an int
+url has a value which is a string
+limit has a value which is an int
+offset has a value which is an int</pre>
+
+</dd>
+</dl>
+
+<h2 id="GetM5nrMd5Params">GetM5nrMd5Params</h2>
+
+<dl>
+
+<dt id="Description25">Description</dt>
+<dd>
+
+<p>A set of parameters the GetM5nrMd5 method. This is a mapping of key value pairs, defined as follows:</p>
+
+<p>string source</p>
+
+<pre><code>        source name to restrict search by</code></pre>
+
+<p>int sequence</p>
+
+<pre><code>        if true return sequence output, else return annotation output, default is false</code></pre>
+
+<p>string order</p>
+
+<pre><code>        name of the attribute the returned data is ordered by</code></pre>
+
+<p>int version</p>
+
+<pre><code>        M5NR version, default 10</code></pre>
+
+<p>string id</p>
+
+<pre><code>        unique identifier in form of md5 checksum</code></pre>
+
+<p>int limit</p>
+
+<pre><code>        maximum number of items requested</code></pre>
+
+<p>int offset</p>
+
+<pre><code>        zero based index of the first data object to be returned</code></pre>
+
+</dd>
+<dt id="Definition10">Definition</dt>
+<dd>
+
+
+
+<pre>
+a reference to a hash where the following keys are defined:
+source has a value which is a string
+sequence has a value which is an int
+order has a value which is a string
+version has a value which is an int
+id has a value which is a string
+limit has a value which is an int
+offset has a value which is an int</pre>
+
+</dd>
+</dl>
+
+<h2 id="M5nrMd5">M5nrMd5</h2>
+
+<dl>
+
+<dt id="Description26">Description</dt>
+<dd>
+
+<p>Method M5nrMd5</p>
+
+<pre><code>        link to the previous set or null if this is the first set
+
+        link to the next set or null if this is the last set
+
+        version of M5NR
+
+        annotation object
+
+        total number of available data items
+
+        resource location of this object instance
+
+        maximum number of data items returned, default is 10
+
+        zero based index of the first returned data item</code></pre>
+
+</dd>
+<dt id="Definition11">Definition</dt>
+<dd>
+
+
+
+<pre>
+a reference to a hash where the following keys are defined:
+next has a value which is a string
+prev has a value which is a string
+version has a value which is an int
+data has a value which is a reference to a list where each element is a reference to a hash where the key is a string and the value is a string
+total_count has a value which is an int
+url has a value which is a string
+limit has a value which is an int
+offset has a value which is an int</pre>
+
+</dd>
+</dl>
+
+<h2 id="GetM5nrFunctionParams">GetM5nrFunctionParams</h2>
+
+<dl>
+
+<dt id="Description27">Description</dt>
+<dd>
+
+<p>A set of parameters the GetM5nrFunction method. This is a mapping of key value pairs, defined as follows:</p>
+
+<p>string source</p>
+
+<pre><code>        source name to restrict search by</code></pre>
+
+<p>int version</p>
+
+<pre><code>        M5NR version, default 10</code></pre>
+
+<p>int exact</p>
+
+<pre><code>        if true return only those annotations that exactly match input text, default is false</code></pre>
+
+<p>int inverse</p>
+
+<pre><code>        if true return only those annotations that do not match input text, default is false</code></pre>
+
+<p>string order</p>
+
+<pre><code>        name of the attribute the returned data is ordered by</code></pre>
+
+<p>string text</p>
+
+<pre><code>        text string of partial function name</code></pre>
+
+<p>int limit</p>
+
+<pre><code>        maximum number of items requested</code></pre>
+
+<p>int offset</p>
+
+<pre><code>        zero based index of the first data object to be returned</code></pre>
+
+</dd>
+<dt id="Definition12">Definition</dt>
+<dd>
+
+
+
+<pre>
+a reference to a hash where the following keys are defined:
+source has a value which is a string
+version has a value which is an int
+exact has a value which is an int
+inverse has a value which is an int
+order has a value which is a string
+text has a value which is a string
+limit has a value which is an int
+offset has a value which is an int</pre>
+
+</dd>
+</dl>
+
+<h2 id="M5nrFunction">M5nrFunction</h2>
+
+<dl>
+
+<dt id="Description28">Description</dt>
+<dd>
+
+<p>Method M5nrFunction</p>
+
+<pre><code>        link to the previous set or null if this is the first set
+
+        link to the next set or null if this is the last set
+
+        version of M5NR
+
+        annotation object
+
+        total number of available data items
+
+        resource location of this object instance
+
+        maximum number of data items returned, default is 10
+
+        zero based index of the first returned data item</code></pre>
+
+</dd>
+<dt id="Definition13">Definition</dt>
+<dd>
+
+
+
+<pre>
+a reference to a hash where the following keys are defined:
+next has a value which is a string
+prev has a value which is a string
+version has a value which is an int
+data has a value which is a reference to a list where each element is a reference to a hash where the key is a string and the value is a string
+total_count has a value which is an int
+url has a value which is a string
+limit has a value which is an int
+offset has a value which is an int</pre>
+
+</dd>
+</dl>
+
+<h2 id="GetM5nrOrganismParams">GetM5nrOrganismParams</h2>
+
+<dl>
+
+<dt id="Description29">Description</dt>
+<dd>
+
+<p>A set of parameters the GetM5nrOrganism method. This is a mapping of key value pairs, defined as follows:</p>
+
+<p>string source</p>
+
+<pre><code>        source name to restrict search by</code></pre>
+
+<p>int version</p>
+
+<pre><code>        M5NR version, default 10</code></pre>
+
+<p>int exact</p>
+
+<pre><code>        if true return only those annotations that exactly match input text, default is false</code></pre>
+
+<p>int inverse</p>
+
+<pre><code>        if true return only those annotations that do not match input text, default is false</code></pre>
+
+<p>string text</p>
+
+<pre><code>        text string of partial organism name</code></pre>
+
+<p>string order</p>
+
+<pre><code>        name of the attribute the returned data is ordered by</code></pre>
+
+<p>string tax_level</p>
+
+<p>This parameter value can be chosen from the following (the first being default):</p>
+
+<pre><code>        strain - bottom organism taxanomic level
+        species - organism type level
+        genus - organism taxanomic level
+        family - organism taxanomic level
+        order - organism taxanomic level
+        class - organism taxanomic level
+        phylum - organism taxanomic level
+        domain - top organism taxanomic level</code></pre>
+
+<p>int limit</p>
+
+<pre><code>        maximum number of items requested</code></pre>
+
+<p>int offset</p>
+
+<pre><code>        zero based index of the first data object to be returned</code></pre>
+
+</dd>
+<dt id="Definition14">Definition</dt>
+<dd>
+
+
+
+<pre>
+a reference to a hash where the following keys are defined:
+source has a value which is a string
+version has a value which is an int
+exact has a value which is an int
+inverse has a value which is an int
+text has a value which is a string
+order has a value which is a string
+tax_level has a value which is a string
+limit has a value which is an int
+offset has a value which is an int</pre>
+
+</dd>
+</dl>
+
+<h2 id="M5nrOrganism">M5nrOrganism</h2>
+
+<dl>
+
+<dt id="Description30">Description</dt>
+<dd>
+
+<p>Method M5nrOrganism</p>
+
+<pre><code>        link to the previous set or null if this is the first set
+
+        link to the next set or null if this is the last set
+
+        version of M5NR
+
+        annotation object
+
+        total number of available data items
+
+        resource location of this object instance
+
+        maximum number of data items returned, default is 10
+
+        zero based index of the first returned data item</code></pre>
+
+</dd>
+<dt id="Definition15">Definition</dt>
+<dd>
+
+
+
+<pre>
+a reference to a hash where the following keys are defined:
+next has a value which is a string
+prev has a value which is a string
+version has a value which is an int
+data has a value which is a reference to a list where each element is a reference to a hash where the key is a string and the value is a string
+total_count has a value which is an int
+url has a value which is a string
+limit has a value which is an int
+offset has a value which is an int</pre>
+
+</dd>
+</dl>
+
+<h2 id="GetM5nrSequenceParams">GetM5nrSequenceParams</h2>
+
+<dl>
+
+<dt id="Description31">Description</dt>
+<dd>
+
+<p>A set of parameters the GetM5nrSequence method. This is a mapping of key value pairs, defined as follows:</p>
+
+<p>string source</p>
+
+<pre><code>        source name to restrict search by</code></pre>
+
+<p>string text</p>
+
+<pre><code>        text string of protein sequence</code></pre>
+
+<p>string order</p>
+
+<pre><code>        name of the attribute the returned data is ordered by</code></pre>
+
+<p>int version</p>
+
+<pre><code>        M5NR version, default 10</code></pre>
+
+<p>int limit</p>
+
+<pre><code>        maximum number of items requested</code></pre>
+
+<p>int offset</p>
+
+<pre><code>        zero based index of the first data object to be returned</code></pre>
+
+</dd>
+<dt id="Definition16">Definition</dt>
+<dd>
+
+
+
+<pre>
+a reference to a hash where the following keys are defined:
+source has a value which is a string
+text has a value which is a string
+order has a value which is a string
+version has a value which is an int
+limit has a value which is an int
+offset has a value which is an int</pre>
+
+</dd>
+</dl>
+
+<h2 id="M5nrSequence">M5nrSequence</h2>
+
+<dl>
+
+<dt id="Description32">Description</dt>
+<dd>
+
+<p>Method M5nrSequence</p>
+
+<pre><code>        link to the previous set or null if this is the first set
+
+        link to the next set or null if this is the last set
+
+        version of M5NR
+
+        annotation object
+
+        total number of available data items
+
+        resource location of this object instance
+
+        maximum number of data items returned, default is 10
+
+        zero based index of the first returned data item</code></pre>
+
+</dd>
+<dt id="Definition17">Definition</dt>
+<dd>
+
+
+
+<pre>
+a reference to a hash where the following keys are defined:
+next has a value which is a string
+prev has a value which is a string
+version has a value which is an int
+data has a value which is a reference to a list where each element is a reference to a hash where the key is a string and the value is a string
+total_count has a value which is an int
+url has a value which is a string
+limit has a value which is an int
+offset has a value which is an int</pre>
+
+</dd>
+</dl>
+
+<h2 id="PostM5nrAccessionParams">PostM5nrAccessionParams</h2>
+
+<dl>
+
+<dt id="Description33">Description</dt>
+<dd>
+
+<p>A set of parameters the PostM5nrAccession method. This is a mapping of key value pairs, defined as follows:</p>
+
+<p>string order</p>
+
+<pre><code>        name of the attribute the returned data is ordered by</code></pre>
+
+<p>int version</p>
+
+<pre><code>        M5NR version, default 10</code></pre>
+
+<p>list&lt;string&gt; data</p>
+
+<pre><code>        unique identifier from source DB</code></pre>
+
+<p>int limit</p>
+
+<pre><code>        maximum number of items requested</code></pre>
+
+<p>int offset</p>
+
+<pre><code>        zero based index of the first data object to be returned</code></pre>
+
+</dd>
+<dt id="Definition18">Definition</dt>
+<dd>
+
+
+
+<pre>
+a reference to a hash where the following keys are defined:
+order has a value which is a string
+version has a value which is an int
+data has a value which is a reference to a list where each element is a string
+limit has a value which is an int
+offset has a value which is an int</pre>
+
+</dd>
+</dl>
+
+<h2 id="M5nrAccession1">M5nrAccession</h2>
+
+<dl>
+
+<dt id="Description34">Description</dt>
+<dd>
+
+<p>Method M5nrAccession</p>
+
+<pre><code>        link to the previous set or null if this is the first set
+
+        link to the next set or null if this is the last set
+
+        version of M5NR
+
+        annotation object
+
+        total number of available data items
+
+        resource location of this object instance
+
+        maximum number of data items returned, default is 10
+
+        zero based index of the first returned data item</code></pre>
+
+</dd>
+<dt id="Definition19">Definition</dt>
+<dd>
+
+
+
+<pre>
+a reference to a hash where the following keys are defined:
+next has a value which is a string
+prev has a value which is a string
+version has a value which is an int
+data has a value which is a reference to a list where each element is a reference to a hash where the key is a string and the value is a string
+total_count has a value which is an int
+url has a value which is a string
+limit has a value which is an int
+offset has a value which is an int</pre>
+
+</dd>
+</dl>
+
+<h2 id="PostM5nrAliasParams">PostM5nrAliasParams</h2>
+
+<dl>
+
+<dt id="Description35">Description</dt>
+<dd>
+
+<p>A set of parameters the PostM5nrAlias method. This is a mapping of key value pairs, defined as follows:</p>
+
+<p>string source</p>
+
+<pre><code>        source name to restrict search by</code></pre>
+
+<p>string order</p>
+
+<pre><code>        name of the attribute the returned data is ordered by</code></pre>
+
+<p>int version</p>
+
+<pre><code>        M5NR version, default 10</code></pre>
+
+<p>int exact</p>
+
+<pre><code>        if true return only those annotations that exactly match input text, default is false</code></pre>
+
+<p>list&lt;string&gt; data</p>
+
+<pre><code>        text string of partial alias ID</code></pre>
+
+<p>int limit</p>
+
+<pre><code>        maximum number of items requested</code></pre>
+
+<p>int offset</p>
+
+<pre><code>        zero based index of the first data object to be returned</code></pre>
+
+</dd>
+<dt id="Definition20">Definition</dt>
+<dd>
+
+
+
+<pre>
+a reference to a hash where the following keys are defined:
+source has a value which is a string
+order has a value which is a string
+version has a value which is an int
+exact has a value which is an int
+data has a value which is a reference to a list where each element is a string
+limit has a value which is an int
+offset has a value which is an int</pre>
+
+</dd>
+</dl>
+
+<h2 id="M5nrAlias1">M5nrAlias</h2>
+
+<dl>
+
+<dt id="Description36">Description</dt>
+<dd>
+
+<p>Method M5nrAlias</p>
+
+<pre><code>        link to the previous set or null if this is the first set
+
+        link to the next set or null if this is the last set
+
+        version of M5NR
+
+        annotation object
+
+        total number of available data items
+
+        resource location of this object instance
+
+        maximum number of data items returned, default is 10
+
+        zero based index of the first returned data item</code></pre>
+
+</dd>
+<dt id="Definition21">Definition</dt>
+<dd>
+
+
+
+<pre>
+a reference to a hash where the following keys are defined:
+next has a value which is a string
+prev has a value which is a string
+version has a value which is an int
+data has a value which is a reference to a list where each element is a reference to a hash where the key is a string and the value is a string
+total_count has a value which is an int
+url has a value which is a string
+limit has a value which is an int
+offset has a value which is an int</pre>
+
+</dd>
+</dl>
+
+<h2 id="PostM5nrMd5Params">PostM5nrMd5Params</h2>
+
+<dl>
+
+<dt id="Description37">Description</dt>
+<dd>
+
+<p>A set of parameters the PostM5nrMd5 method. This is a mapping of key value pairs, defined as follows:</p>
+
+<p>string source</p>
+
+<pre><code>        source name to restrict search by</code></pre>
+
+<p>string order</p>
+
+<pre><code>        name of the attribute the returned data is ordered by</code></pre>
+
+<p>int version</p>
+
+<pre><code>        M5NR version, default 10</code></pre>
+
+<p>list&lt;string&gt; data</p>
+
+<pre><code>        unique identifier in form of md5 checksum</code></pre>
+
+<p>int limit</p>
+
+<pre><code>        maximum number of items requested</code></pre>
+
+<p>int offset</p>
+
+<pre><code>        zero based index of the first data object to be returned</code></pre>
+
+</dd>
+<dt id="Definition22">Definition</dt>
+<dd>
+
+
+
+<pre>
+a reference to a hash where the following keys are defined:
+source has a value which is a string
+order has a value which is a string
+version has a value which is an int
+data has a value which is a reference to a list where each element is a string
+limit has a value which is an int
+offset has a value which is an int</pre>
+
+</dd>
+</dl>
+
+<h2 id="M5nrMd51">M5nrMd5</h2>
+
+<dl>
+
+<dt id="Description38">Description</dt>
+<dd>
+
+<p>Method M5nrMd5</p>
+
+<pre><code>        link to the previous set or null if this is the first set
+
+        link to the next set or null if this is the last set
+
+        version of M5NR
+
+        annotation object
+
+        total number of available data items
+
+        resource location of this object instance
+
+        maximum number of data items returned, default is 10
+
+        zero based index of the first returned data item</code></pre>
+
+</dd>
+<dt id="Definition23">Definition</dt>
+<dd>
+
+
+
+<pre>
+a reference to a hash where the following keys are defined:
+next has a value which is a string
+prev has a value which is a string
+version has a value which is an int
+data has a value which is a reference to a list where each element is a reference to a hash where the key is a string and the value is a string
+total_count has a value which is an int
+url has a value which is a string
+limit has a value which is an int
+offset has a value which is an int</pre>
+
+</dd>
+</dl>
+
+<h2 id="PostM5nrFunctionParams">PostM5nrFunctionParams</h2>
+
+<dl>
+
+<dt id="Description39">Description</dt>
+<dd>
+
+<p>A set of parameters the PostM5nrFunction method. This is a mapping of key value pairs, defined as follows:</p>
+
+<p>string source</p>
+
+<pre><code>        source name to restrict search by</code></pre>
+
+<p>int version</p>
+
+<pre><code>        M5NR version, default 10</code></pre>
+
+<p>int exact</p>
+
+<pre><code>        if true return only those annotations that exactly match input text, default is false</code></pre>
+
+<p>list&lt;string&gt; data</p>
+
+<pre><code>        text string of partial function name</code></pre>
+
+<p>int inverse</p>
+
+<pre><code>        if true return only those annotations that do not match input text, default is false</code></pre>
+
+<p>list&lt;string&gt; md5s</p>
+
+<pre><code>        md5 to constrain search by</code></pre>
+
+<p>string order</p>
+
+<pre><code>        name of the attribute the returned data is ordered by</code></pre>
+
+<p>int limit</p>
+
+<pre><code>        maximum number of items requested</code></pre>
+
+<p>int offset</p>
+
+<pre><code>        zero based index of the first data object to be returned</code></pre>
+
+</dd>
+<dt id="Definition24">Definition</dt>
+<dd>
+
+
+
+<pre>
+a reference to a hash where the following keys are defined:
+source has a value which is a string
+version has a value which is an int
+exact has a value which is an int
+data has a value which is a reference to a list where each element is a string
+inverse has a value which is an int
+md5s has a value which is a reference to a list where each element is a string
+order has a value which is a string
+limit has a value which is an int
+offset has a value which is an int</pre>
+
+</dd>
+</dl>
+
+<h2 id="M5nrFunction1">M5nrFunction</h2>
+
+<dl>
+
+<dt id="Description40">Description</dt>
+<dd>
+
+<p>Method M5nrFunction</p>
+
+<pre><code>        link to the previous set or null if this is the first set
+
+        link to the next set or null if this is the last set
+
+        version of M5NR
+
+        annotation object
+
+        total number of available data items
+
+        resource location of this object instance
+
+        maximum number of data items returned, default is 10
+
+        zero based index of the first returned data item</code></pre>
+
+</dd>
+<dt id="Definition25">Definition</dt>
+<dd>
+
+
+
+<pre>
+a reference to a hash where the following keys are defined:
+next has a value which is a string
+prev has a value which is a string
+version has a value which is an int
+data has a value which is a reference to a list where each element is a reference to a hash where the key is a string and the value is a string
+total_count has a value which is an int
+url has a value which is a string
+limit has a value which is an int
+offset has a value which is an int</pre>
+
+</dd>
+</dl>
+
+<h2 id="PostM5nrOrganismParams">PostM5nrOrganismParams</h2>
+
+<dl>
+
+<dt id="Description41">Description</dt>
+<dd>
+
+<p>A set of parameters the PostM5nrOrganism method. This is a mapping of key value pairs, defined as follows:</p>
+
+<p>string source</p>
+
+<pre><code>        source name to restrict search by</code></pre>
+
+<p>int version</p>
+
+<pre><code>        M5NR version, default 10</code></pre>
+
+<p>int exact</p>
+
+<pre><code>        if true return only those annotations that exactly match input text, default is false</code></pre>
+
+<p>list&lt;string&gt; data</p>
+
+<pre><code>        text string of partial organism name</code></pre>
+
+<p>int inverse</p>
+
+<pre><code>        if true return only those annotations that do not match input text, default is false</code></pre>
+
+<p>list&lt;string&gt; md5s</p>
+
+<pre><code>        md5 to constrain search by</code></pre>
+
+<p>string order</p>
+
+<pre><code>        name of the attribute the returned data is ordered by</code></pre>
+
+<p>string tax_level</p>
+
+<p>This parameter value can be chosen from the following (the first being default):</p>
+
+<pre><code>        strain - bottom organism taxanomic level
+        species - organism type level
+        genus - organism taxanomic level
+        family - organism taxanomic level
+        order - organism taxanomic level
+        class - organism taxanomic level
+        phylum - organism taxanomic level
+        domain - top organism taxanomic level</code></pre>
+
+<p>int limit</p>
+
+<pre><code>        maximum number of items requested</code></pre>
+
+<p>int offset</p>
+
+<pre><code>        zero based index of the first data object to be returned</code></pre>
+
+</dd>
+<dt id="Definition26">Definition</dt>
+<dd>
+
+
+
+<pre>
+a reference to a hash where the following keys are defined:
+source has a value which is a string
+version has a value which is an int
+exact has a value which is an int
+data has a value which is a reference to a list where each element is a string
+inverse has a value which is an int
+md5s has a value which is a reference to a list where each element is a string
+order has a value which is a string
+tax_level has a value which is a string
+limit has a value which is an int
+offset has a value which is an int</pre>
+
+</dd>
+</dl>
+
+<h2 id="M5nrOrganism1">M5nrOrganism</h2>
+
+<dl>
+
+<dt id="Description42">Description</dt>
+<dd>
+
+<p>Method M5nrOrganism</p>
+
+<pre><code>        link to the previous set or null if this is the first set
+
+        link to the next set or null if this is the last set
+
+        version of M5NR
+
+        annotation object
+
+        total number of available data items
+
+        resource location of this object instance
+
+        maximum number of data items returned, default is 10
+
+        zero based index of the first returned data item</code></pre>
+
+</dd>
+<dt id="Definition27">Definition</dt>
+<dd>
+
+
+
+<pre>
+a reference to a hash where the following keys are defined:
+next has a value which is a string
+prev has a value which is a string
+version has a value which is an int
+data has a value which is a reference to a list where each element is a reference to a hash where the key is a string and the value is a string
+total_count has a value which is an int
+url has a value which is a string
+limit has a value which is an int
+offset has a value which is an int</pre>
+
+</dd>
+</dl>
+
+<h2 id="PostM5nrSequenceParams">PostM5nrSequenceParams</h2>
+
+<dl>
+
+<dt id="Description43">Description</dt>
+<dd>
+
+<p>A set of parameters the PostM5nrSequence method. This is a mapping of key value pairs, defined as follows:</p>
+
+<p>string source</p>
+
+<pre><code>        source name to restrict search by</code></pre>
+
+<p>string order</p>
+
+<pre><code>        name of the attribute the returned data is ordered by</code></pre>
+
+<p>int version</p>
+
+<pre><code>        M5NR version, default 10</code></pre>
+
+<p>list&lt;string&gt; data</p>
+
+<pre><code>        text string of protein sequence</code></pre>
+
+<p>int limit</p>
+
+<pre><code>        maximum number of items requested</code></pre>
+
+<p>int offset</p>
+
+<pre><code>        zero based index of the first data object to be returned</code></pre>
+
+</dd>
+<dt id="Definition28">Definition</dt>
+<dd>
+
+
+
+<pre>
+a reference to a hash where the following keys are defined:
+source has a value which is a string
+order has a value which is a string
+version has a value which is an int
+data has a value which is a reference to a list where each element is a string
+limit has a value which is an int
+offset has a value which is an int</pre>
+
+</dd>
+</dl>
+
+<h2 id="M5nrSequence1">M5nrSequence</h2>
+
+<dl>
+
+<dt id="Description44">Description</dt>
+<dd>
+
+<p>Method M5nrSequence</p>
+
+<pre><code>        link to the previous set or null if this is the first set
+
+        link to the next set or null if this is the last set
+
+        version of M5NR
+
+        annotation object
+
+        total number of available data items
+
+        resource location of this object instance
+
+        maximum number of data items returned, default is 10
+
+        zero based index of the first returned data item</code></pre>
+
+</dd>
+<dt id="Definition29">Definition</dt>
+<dd>
+
+
+
+<pre>
+a reference to a hash where the following keys are defined:
+next has a value which is a string
+prev has a value which is a string
+version has a value which is an int
+data has a value which is a reference to a list where each element is a reference to a hash where the key is a string and the value is a string
+total_count has a value which is an int
+url has a value which is a string
+limit has a value which is an int
+offset has a value which is an int</pre>
+
+</dd>
+</dl>
+
+
+</body>
+
+</html>
+
+
