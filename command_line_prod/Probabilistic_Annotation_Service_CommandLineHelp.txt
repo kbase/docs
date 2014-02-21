@@ -1,0 +1,284 @@
+Probabilistic Annotation Service
+
+DESCRIPTION
+The Probabilistic Annotation service : computes likelihoods for annotations and reactions for a given genome.
+Likelihoods are computed based on similarity to genes with literature evidence and genes
+in subsystems. More ambiguous role calls are given lower probabilities.
+
+
+
+COMMANDS
+pa-annotate
+pa-calculate
+pa-checkjob
+pa-getprbanno
+pa-getrxprobs
+pa-url
+
+
+
+NAME
+pa-annotate -- This command will generate probabilistic annotation for a genome.
+
+Generate alternative annotations for every gene in a genome together
+with their likelihoods.  The current method for calculating likelihoods
+is based on similarity (BLAST) to genes in subsystems and genes with
+literature evidence.
+       
+This command takes a significant amount of time to run (since it has to
+run BLAST against a large database), so it is placed on a queue and 
+returns a job ID.  Use the pa-checkjob command to see if your job has
+finished.  When it is done the results are saved in a ProbAnno typed
+object with the specified ID.
+       
+The ProbAnno object can be used as input to gapfilling a metabolic model
+using the --probanno option for the fba-gapfill command.
+
+VERSION 1.0.4
+
+SYNOPSIS
+pa-annotate <Genome ID> <ProbAnno ID> [OPTIONS]
+
+DESCRIPTION
+INPUTS:     The required inputs for this command are the Genome ID and the ProbAnno ID. 
+OUTPUTS:    The output for this command is a file containing the probabilistic annotation for the identified genome.
+
+
+PARAMETERS:
+-h, --help           Display help message to standard out and exit with error code zero;
+                     ignore all other command-line arguments.
+
+-e, --showerror      Show any errors in execution.
+--genomews           ID of workspace where Genome object is stored (default is the current workspace).
+-v, --verbose        Print verbose messages.
+-w, --probannows     ID of workspace where ProbAnno object is to be saved (default is the current workspace).
+
+
+EXAMPLES
+Generate probabilistic annotation for E. coli K12 genome:
+    > pa-annotate kb|g.0.genome kb|g.0.probanno
+
+
+SEE ALSO
+pa-calculate
+pa-url
+pa-checkjob
+fba-gapfill
+
+AUTHORS
+Matt Benedict, Mike Mundy
+
+
+
+NAME
+pa-calculate -- This command will calculate reaction likelihoods from a probabilistic annotation. 
+
+Calculate reaction likelihoods from a probabilistic annotation generated
+by the pa-annotate command.
+       
+The results are saved in a RxnProbs typed object and contain putative
+gene annotations (based on a cutoff from the gene most likely to fulfill
+each role associated with the reaction) and likelihood scores.
+       
+The RxnProbs object can be used as input to gapfilling a metabolic model
+using the --probrxn option for the fba-gapfill command.  However, if 
+you do this you must make sure that the same template model is used for
+gapfilling and for computing probabilities.  If you want to avoid this
+issue, we recommend using the ProbAnno object instead.
+
+VERSION 1.0.4
+
+SYNOPSIS
+pa-calculate <ProbAnno ID> <RxnProbs ID> [OPTIONS]
+
+
+DESCRIPTION
+INPUTS:     The required inputs for this command are th ProbAnno ID and the RxnProbs ID.
+OUTPUTS:    The output for this command is reaction likelihoods from a probabilistic annotation. 
+
+
+PARAMETERS:
+-h, --help           Display help message to standard out and exit with error code zero;
+                     ignore all other command-line arguments.
+-e, --showerror       Show any errors in execution.
+-w, --probannows      ID of workspace where ProbAnno object is stored (default is the current workspace).
+-t, --templateid      ID of ModelTemplate object (default is to use all reactions in the biochemistry).
+-m, --templatews      ID of workspace where ModelTemplate object is stored.
+-v, --verbose         Print verbose messages.
+-r, --rxnprobsws      ID of workspace where RxnProbs object is to be saved (default is the current workspace).
+
+
+EXAMPLES
+Calculate reaction likelihoods from probabilistic annotation of E. coli
+K12 genome:
+     > pa-calculate kb|g.0.probanno kb|g.0.rxnprobs
+
+SEE ALSO
+pa-annotate
+fba-gapfill
+
+AUTHORS
+Matt Benedict, Mike Mundy
+
+
+
+NAME
+pa-checkjob -- This command will check the status of probabilistic annotation jobs started by pa-annotate command.
+
+Check status of probabilistic annotation jobs submitted by the user.  For
+each job, information about the job is displayed.  A job that has completed
+is then deleted from the system.
+
+The --jobID optional argument is the identifier of a specific job to check. 
+The ujs-url optional argument specifies an alternate URL for the user and
+job state service.
+
+VERSION 1.0.4
+
+SYNOPSIS
+pa_checkjob [-h] [-jobID ID] [--ujs-url URL]
+
+
+DESCRIPTION
+INPUTS:     The input for this command is the JOB ID. 
+OUTPUTS:    The output for this command is the status of the job diplayed in STDOUT.
+
+
+
+PARAMETERS:
+-h, --help           Display help message to standard out and exit with error code zero;
+                     ignore all other command-line arguments.
+
+-j JOBID, --jobID JOBID     The JOB ID of the probabilistic annotation jobs submitted by the user.
+
+--ujs-url URL               The URL for the user and job state service.
+
+
+EXAMPLES
+Check all jobs:
+     > pa-checkjob
+       
+Check a specific job:
+     > pa-checkjob --jobID 52b317cbe4b0ef8357331c59
+ 
+SEE ALSO
+pa-annotate
+
+AUTHORS
+Matt Benedict, Mike Mundy
+
+
+NAME
+pa-getprobanno -- This command will get a table of probabilistic annotations.
+
+Get a table of annotation probabilities from a ProbAnno object.
+Each gene-annotation pair is given its own row in the table. An annotation is
+a set of roles delimited by '///'.
+       
+If -r is specified, gets gene-role pairs instead (the probability of the
+role is computed as the sum of the probabilities of annotations containing it).
+VERSION 1.0.4
+
+SYNOPSIS
+pa-getprobanno [ProbAnno ID] [Workspace]
+
+
+DESCRIPTION
+INPUTS:     The input for this command is a ProbAnno ID. 
+OUTPUTS:    The output for this command is a table of probabilistic annotations. 
+
+
+PARAMETERS:
+-h, --help           Display help message to standard out and exit with error code zero;
+                     ignore all other command-line arguments.
+
+-r, --roles          Specifies gene-role pairs are to be retrieved. 
+
+EXAMPLES
+> pa-getprobanno 'kb|g.0.probanno'
+       gene    annotation   likelihood
+ 
+> pa-getprobanno 'kb|g.0.probanno' -r
+       gene    role    likelihood
+ 
+SEE ALSO
+       pa-annotate
+
+AUTHORS
+Matt Benedict, Mike Mundy
+
+
+NAME
+pa-getrxnprobs -- This command will get a table of reaction probabilities from a rxnprobs object.
+
+Get a table of reaction probabilities from a RxnProbs object.
+Each reaction in the rxnprobs object is given a single row in the output table.
+Reactions with no complexes linked to them will have no rows in the table.
+
+VERSION 1.0.4
+
+SYNOPSIS
+pa-getrxnprobs [RxnProbs ID] [Workspace]
+
+DESCRIPTION
+INPUTS:     The input for this command is a RxnProbs ID.
+OUTPUTS:    The output for this command is a table of reaction probabilities from a rxnprobs object.
+
+
+PARAMETERS:
+-h, --help           Display help message to standard out and exit with error code zero;
+                     ignore all other command-line arguments.
+
+EXAMPLES
+> pa-getrxnprobs 'kb|g.0.rxnprobs' 'MyWorkspace'
+     reaction_id   probability   complex_diagnostic   complex_details   putative_GPR
+
+SEE ALSO
+     pa-calculate
+
+AUTHORS
+Matt Benedict, Mike Mundy
+
+
+
+NAME
+pa-url -- This command will update or view url of the probabilistic annotation service endpoint.
+
+Display or set the URL endpoint for the probabilistic annotation service.
+If run with no arguments or options, then the current URL is displayed.
+If run with a single argument, the current URL will be switched to the
+specified URL.  If the specified URL is named default, then the URL is
+reset to the default production URL.
+
+VERSION 1.0.4
+
+SYNOPSIS
+pa-url [OPTIONS] [NEW_URL]
+
+DESCRIPTION
+INPUTS:     The input for this command is a specified URL [optional]. 
+OUTPUTS:    The output for this command is the URL end point for the probabilistic annotation service.
+
+
+PARAMETERS:
+-h, --help           Display help message to standard out and exit with error code zero;
+                     ignore all other command-line arguments.
+
+EXAMPLES
+Display the current URL:
+ > pa-url
+     Current URL is:
+     http://kbase.us/services/probabilistic annotation
+       
+Use a new URL:
+> pa-url http://localhost:7073
+     Current URL is:
+     http://localhost:7073
+       
+Reset to the default URL:
+> pa-url default
+     Current URL is:
+     http://kbase.us/services/probabilistic annotation
+
+AUTHORS
+Matt Benedict, Mike Mundy
