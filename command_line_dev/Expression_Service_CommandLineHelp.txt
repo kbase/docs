@@ -56,8 +56,10 @@ PARAMETERS:
 
 
 EXAMPLES
-perl expr-get-expression-data-by-feature-ids.pl -featureID='kb|g.20848.CDS.1800' -featureID='kb|g.20848.CDS.1687' 
-        -sampleType='microarray' -wildTypeOnly='Y'
+    perl expr-get-expression-data-by-feature-ids.pl -featureID='kb|g.3899.CDS.39003' -featureID='kb|g.3899.CDS.39001' -sampleType='microarray' -wildTypeOnly='Y'
+
+    This will give a hash of the two feature ids as the key and then their value will be a hash.  
+    That hash has samples (that have that feature id and are from strains that are wildtype) are the keys and value is the expression value for the that feature in that sample.
 
 
 AUTHOR: Jason Baumohl (jkbaumohl@lbl.gov)
@@ -98,11 +100,11 @@ PARAMETERS:
 
      
 EXAMPLES
-perl expr-get-expression-data-by-samples-and-features.pl -sampleID='kb|sample.2' -sampleID='kb|sample.3' -featureID='kb|g.20848.CDS.1800' -featureID='kb|g.20848.CDS.1687'
-
-perl expr-get-expression-data-by-samples-and-features.pl -sampleID='kb|sample.2' -sampleID='kb|sample.3' 
-
-This second example will return all features with measurements. 
+EXAMPLES
+perl expr-get-expression-data-by-samples-and-features.pl -sampleID='kb|sample.5759' -sampleID='kb|sample.5079' -featureID='kb|g.3899.CDS.39001' -featureID='kb|g.3899.CDS.39003'
+ 
+perl expr-get-expression-data-by-samples-and-features.pl -sampleID='kb|sample.5759' -sampleID='kb|sample.5079'  
+      (if you want all features with measurments) 
 
 AUTHOR: Jason Baumohl (jkbaumohl@lbl.gov)
 
@@ -137,7 +139,7 @@ PARAMETERS:
                        " -sampleID='kb|sample.2' -sampleID='kb|sample.3' "   
 
 EXAMPLES
-perl expr-get-expression-samples-data.pl -sampleID='kb|sample.2' -sampleID='kb|sample.3' 
+perl expr-get-expression-samples-data.pl -sampleID='kb|sample.3746' -sampleID='kb|sample.3747' 
  
 
 AUTHOR: Jason Baumohl (jkbaumohl@lbl.gov)
@@ -185,7 +187,8 @@ PARAMETERS:
 			If equal to '0', 'N', or 'FALSE' then results will include all strains. 
                         
 EXAMPLES
-perl expr-get-expression-samples-data-by-genome-ids.pl -genomeID='kb|g.20848' -genomeID='kb|g.0' -sampleType='microarray' -wildTypeOnly='Y'
+perl expr-get-expression-samples-data-by-genome-ids.pl -genomeID='kb|g.3907' -genomeID='kb|g.0' -sampleType='microarray' -wildTypeOnly='Y'
+
 
 AUTHOR: Jason Baumohl (jkbaumohl@lbl.gov)
 
@@ -218,9 +221,8 @@ PARAMETERS:
 	   	    SeriesID is a string.     
 
 EXAMPLES
+perl expr-get-expression-samples-data-by-series-ids.pl -seriesID='kb|series.278' -seriesID='kb|series.279'
 
-EXAMPLES
-perl expr-get-expression-samples-data-by-series-ids.pl -seriesID='kb|series.2' -seriesID='kb|series.3' 
 
 AUTHOR: Jason Baumohl (jkbaumohl@lbl.gov)
 
