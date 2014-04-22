@@ -1,0 +1,5 @@
+rsync.ignore
+Makefile
+filter_config.pl
+pull-api-docs.py
+.git
