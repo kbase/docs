@@ -6,7 +6,7 @@ use Pod::Usage;
 my $man  = 0;
 my $help = 0;
 my ($in, $out);
-my $names;
+my ($names, $url);
 
 GetOptions(
 	'h'	=> \$help,
@@ -17,6 +17,7 @@ GetOptions(
 	'input=s'  => \$in,
 	'output=s' => \$out,
 	'n=s'      => \$names,
+	'url=s'   => \$url,
 
 ) or pod2usage(0);
 
@@ -59,6 +60,7 @@ my $perl_scalar = deserialize_handle($ih);
 foreach my $name (split /\s+/, $names) {
 	$repos->{$name} = $perl_scalar->{repos}->{$name};
 }
+$perl_scalar->{doc_format_string} = $url . '/$repo/$filespec';
 $perl_scalar->{repos} = $repos;
 serialize_handle($perl_scalar, $oh);
 
@@ -116,6 +118,10 @@ The input file, default is STDIN
 =item   -o, --output
 
 The output file, default is STDOUT
+
+=iten -url
+
+The url of the directory where the contents of the docs module can be found.
 
 =back
 
