@@ -2,9 +2,10 @@ TOP_DIR = ../..
 DEPLOY_RUNTIME ?= /kb/runtime
 TARGET ?= /kb/deployment
 
+DEPLOY_URL = http://140.221.85.86/docs
 DOCS_DIR = docs
 DOCS_HOME = $(TARGET)/$(DOCS_DIR)
-MODULES = "genome_annotation phispy kb_seed workspace_service"
+MODULES = "genome_annotation phispy kb_seed assembly"
 TUTORIALS_CFG = tutorials.cfg
 
 default:
@@ -35,4 +36,4 @@ deploy-docs: deploy-cfg
 
 deploy-cfg:
 	-mkdir -p $(DOCS_HOME)
-	perl ./filter_config.pl -n $(MODULES) -i $(TUTORIALS_CFG) > $(DOCS_HOME)/$(TUTORIALS_CFG)
+	perl ./filter_config.pl -url $(DEPLOY_URL) -n $(MODULES) -i $(TUTORIALS_CFG) > $(DOCS_HOME)/$(TUTORIALS_CFG)
