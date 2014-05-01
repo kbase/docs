@@ -1,0 +1,373 @@
+<div>
+<h1>RAST, Version 2</h1>
+
+<a target=_blank_ href=http://rast.nmpdr.org/rast.cgi>RAST</a> is a set of tools that support
+the construction of  automated annotation
+systems that accepts as input a set of contigs from a genome and produces as output
+the initial annotations needed to support researchers in their efforts to study the genome.  
+Since the initial publication of <a target=_blank_ href=http://www.ncbi.nlm.nih.gov/pubmed/18261238>
+The RAST Server: rapid annotations using subsystems technology</a> in 2008,
+over 120,000 requests for genome annotations have been processed, and the rate at which requests
+arrive has increased dramatically.  
+<p>
+
+As demand for ever more accurate annotations and the number of
+newly-sequenced genomes increases, there is a growing demand for "the
+next generation" of the RAST technology (RAST2).  This new version of the 
+architecture makes it trivial to construct custom pipelines,
+ integrate new bioinformatic tools, and make the developed pipelines
+easily accessible by a large user community.
+
+
+<p> In order to run the RAST2 tools, you must either download the Kbase app dmg 
+<a target=_blank_ href=http://kbase.us/developer-zone/tutorials/getting-started/installing-the-kbase-dmg/>here</a>,
+ use the
+<a target=_blank_ href=http://www.kbase.us/services/docs/invocation/Iris/>IRIS</a> environment. 
+An introduction to IRIS can be found  <a target=_blank_ href=http://kbase.us/for-users/get-started/>here</a>.  
+<p>
+There are advantages to using either tool.  The KBase app runs a bash shell on your
+machine with all of the necessary scripts installed and is therefore easier to use for processing batches of genomes.  
+On the other hand, the IRIS environment requires no installation, is always up to date, and is 
+ideal for small numbers of genomes.
+<p>
+
+</div>
+<div>
+
+<h2> Choices in using the RAST2 tools </h2>
+
+The RAST2 environment is designed so that users can compose annotation
+pipelines, and then run those pipelines to annotate genomes.
+There is a rich and growing body of annotation tools that we have either built or
+imported from other groups, and these offer a framework for incrementally constructing
+annotations.
+
+<p>
+In some cases users would rather execute a single command
+representing the currently recommended annotation pipeline.  Hence, we always maintain a command called
+<b>rast2-process-genome</b> that can be used to run the currently recommended 
+pipeline to annotate prokaryotic genomes.  This standard command embodies the pipeline
+used to generate the annotations for the genomes in the Central Store (CS), so if you were to
+run a CS genome through this command, it should produce the current annotations.  It is worth
+noting that this implies that the annotations stored in the CS are all automated annotations -- there
+are no manual annotations. 
+</p>
+
+<p>
+If you are following this tutorial with the KBase app, no login is required.  If you use <a target=_blank_ href=http://kbase.us/services/docs/invocation/Iris/iris.html>IRIS</a>, you
+must first login by typing "login" and then "some user name".  It is not necessary that you register, but you 
+should remember your user name so that you can retrieve your data later.  
+</p>
+
+</div>
+<div>
+
+<p>
+If you want to step through the tutorial, you can download  E. coli K12 contig in fasta fromat from KBase.  To download this genome open a command window in the KBase app or in the  IRIS command window, type:
+</p>
+
+<pre>
+    echo "kb|g.0" | <code title ="iris-tutorial"> genomes_to_contigs </code> | <code title ="iris-tutorial"> contigs_to_sequences </code> > E_coli.contig  
+</pre>
+
+<p>
+"kb|g.0" is the KBase identifier for E. coli K-12.  "genomes_to_contigs" provides the contig ids (there is only one for this genome),
+and "contigs_to_sequences" returns the sequence in fasta format.  There is a large body of scripts and database acquisition tools that 
+are visible in the side bar in IRIS and can also be implemented in the KBase.app.  Tutorials for these scripts exist on the Kbase website,
+ and all scripts contain a help (-h) option. When the time comes, you can manually upload your own genome (contigs in fasta format) to the IRIS environment by clicking on the up arrow button on the bottom left-hand side of the page below the file browser window.
+</p>
+<p>
+To run the standard RAST2 pipeline tool, type:
+<p>
+<pre>
+     <code title ="iris-tutorial"> rast2-process-genome </code> 'Escherichia coli K-12' Bacteria 11 < E_coli.contig > E_coli.gbk
+</pre>
+<p>
+Some processes in the pipeline require that you declare the scientific name, domain and genetic code, 
+so these are required fields.
+<p>
+
+</div>
+<div>
+
+The default pipeline performs the following steps which are described in detail below.
+<p>
+<pre>
+     1.  Converts the fasta file to a genome typed object
+     2.  Calls rRNAs with a custom BLAST-based SEED tool
+     3.  Calls tRNAs with tRNAscan
+     4.  Calls large repeat regions
+     5.  Calls seleno proteins
+     6.  Calls pyrrolysyl proteins
+     7.  If Streptococcus, calls box elements
+     8.  Calls CRISPRs
+     9.  Calls the protein-encoding genes with prodigal
+    10.  Annotates protein-encoding genes with kmers (version 2)
+    <font color="red">11.  Inherits gene names if a reference genome is provided 
+    12.  Performs a basic gene overlap removal
+    13.  Creates a table of CDD annotations</font>
+    14.  Exports the annotated genome in the desired file format 
+</pre>
+<p>
+
+<font color="red"> It is also possible to create customized pipeline and to run the rast2-process-genome in batch mode.  Instructions for this can be found here. (insert Bob's URL).
+<p>
+
+</div>
+<div>
+
+</font>
+<h2>RAST2 Incremental Commands </h2>
+<h3>The Concept of the <i>Genome Typed Object</i> </h3>
+
+All of the individual commands available in the RAST2 pipeline add data to a special file type called a genome typed object (GTO). 
+A GTO is a file format that is compatible with KBase. Annotations are incrementally appended to this file until it is ready for export. 
+Thus, one might start with a GTO containing just contigs, run a command that identifies genes, run another command that assigns 
+functions to the genes, and so forth.
+<p>
+To create a genomeTO use the command
+
+<pre>
+    <code title ="iris-tutorial"> fasta_to_genome </code> 'Escherichia coli K-12' Bacteria 11 < E_coli.contig > E_coli.gto
+</pre>
+The general form is
+<pre>
+     <code title ="iris-tutorial"> fasta_to_genome </code> scientific-name domain genetic-code < contigs > genomeTO 
+</pre>
+where the <i>domain</i> should be <i>Archaea</i> or <i> Bacteria</i>, and the <i>genetic-code</i> is usually 11 for prokaryotes
+(usually 4 for <i>Mycoplasmas</i>).  The domain and genetic code are necessary because they are required for subsequent steps.
+<p>
+An alternative form for converting genomes from the KBase central store is:
+<pre>
+     <code title ="iris-tutorial"> cs_to_genome </code> 'kb|g.0' > E_coli.gto
+</pre>
+<p>
+In this case, the domain, genetic code, and scientific name are retrieved from the database. 
+</p>
+
+</div>
+<div>
+
+
+<h3> Tools for Analysis </h3>
+
+The tools we list below represent a growing collection that can be invoked to alter/enhance
+the annotations for a genome represented by a GTO:
+
+<h3>Calling RNA Genes</h3>
+
+For the rRNA genes use: 
+<pre>
+     <code title ="iris-tutorial"> rast2-call-features-rRNA-SEED </code> < E_coli.gto > GTO.2
+</pre>
+
+<p>
+If you look at "GTO.2" you will see that it is the same as the original gto file except that
+the rRNA calls have been appended. All scripts work this way until the gto is exported
+in a designated format. This allows some insensitivity to order.  That is, you could call RNAs 
+before proteins or proteins before RNAs and won't make a difference in the output. Likewise you
+could call genes with prodigal and glimmer and append them to the growing gto. Obviously, some steps
+(like overlap removal) must be done afer the genes are called. "rast2-call-feautures-rRNA-SEED" is a
+specialty script developed by Gary Olsen that finds rRNA genes uisng BLAST.
+</p>
+
+For the tRNA genes use:
+<pre>    
+     <code title ="iris-tutorial"> rast2-call-features-tRNA-trnascan </code> < GTO.2 > GTO.3
+</pre>
+
+<p>
+<a target=_blank_ href=http://www.ncbi.nlm.nih.gov/pubmed/9023104?dopt=Abstract>Citation</a>
+</p>
+
+</div>
+<div>
+
+<h3>Identification of Genes Related to Selenocysteine and Pyrrolysine</h3>
+
+In some genomes, machinery exists to support inclusion of unusual amino acids.  In the case
+of selenocysteine and pyrrolysine you can use a tools created by Gary Olsen to locate and annotate genes
+related to selenocysteine and pyrolysine usage:
+<pre>
+       <code title ="iris-tutorial"> rast2-call-features-selenoprotein </code> < GTO.3 > GTO.4
+       <code title ="iris-tutorial"> rast2-call-features-pyrrolysoprotein </code>  < GTO.4 > GTO.5
+</pre>
+<p>
+Both of these scripts were developed by Gary Olsen.
+</p>
+
+</div>
+<div>
+
+<h3> Calling Protein-encoding Genes</h3>
+For Prodigal use:
+<pre>
+    <code title ="iris-tutorial"> rast2-call-features-CDS-prodigal </code> < GTO.5 > GTO.6
+</pre>
+<p>
+<a target=_blank_ href=http://www.ncbi.nlm.nih.gov/pubmed/?term=20211023> Citation </a>
+</p>
+
+Normally one would run prodigal or glimmer.
+
+For Glimmer use:
+<pre>
+    <code title ="iris-tutorial"> rast2-call-features-CDS-glimmer3 </code> < GTO.5 > GTO.6
+</pre>
+
+<p>
+<a target=_blank_ href=http://www.ncbi.nlm.nih.gov/pubmed/?term=17237039> Citation </a>
+</p>
+
+</div>
+<div>
+
+<h3>Annotating Protein-encoding Genes</h3>
+
+For Kmer based annotations we suggest: 
+<pre>
+       <code title ="iris-tutorial"> rast2-annotate-proteins-kmer-v2 </code> < GTO.6 > GTO.7
+       or
+       <code title ="iris-tutorial"> rast2-annotate-proteins-kmer-v1 </code> < GTO.6 > GTO.7
+</pre>
+
+<p>
+These scripts assign functions to protein-encoding genes by performing a kmer-based search.  That is, GTO.2 will be the updated GTO with
+the functions of a subset of the PEGs added. The "v1" and "v2" refer to the data set that the kmers
+were built from. "v2" is the default pipeline kmer set and it is built from all of the annotated proteins in the core SEED.  
+We also retain (but no longer support) a v1 version where the kmers are built from Figfams.  "v1" is consistent with previous versions of RAST, but "v2" provides more consistent annotations.
+</p>
+
+</div>
+<div>
+
+<h3><font color="red">Assigning Genes to Subsystems</h3></font>
+
+<h3><font color="red">Inheriting Gene Names From a Reference Genome</h3></font>
+
+<h3> Calling CRISPRs </h3>
+<pre>
+<code title ="iris-tutorial">  rast2-call-features-crispr </code> < GTO.7  > GTO.8
+
+    options:
+        -i --input      file from which the input is to be read
+        -o --output     file to which the output is to be written
+        -h --help       print usage message and exit
+        --url           URL for the genome annotation service
+</pre>
+</font>
+
+<h3>Calling Repeat Regions </h3>
+
+<pre>
+    <code title ="iris-tutorial"> rast2-call-features-repeat-region-SEED </code>  < GTO.8 > GTO.9
+    
+    options:
+            --min-identity
+            --min-length
+</pre>
+<p>
+This program uses BLAST to search within the genome to find repeat regions.
+The minimum nucleotide identity and mininimum length for the match can be specified.
+</p>
+
+</div>
+<div>
+
+
+<h3> <font color="red"> Removing Overlapping Gene Calls </h3>
+
+The basic strategy used by RAST2 is to use a selected set of tools to propose potential
+genes.  This includes tools to call different types of genes (e.g., RNAs and protein-encoding genes),
+as well as different tools to call the same types of genes (e.g., there are multiple
+tools provided for proposing calls for protein-encoding genes).
+<p>
+To produce a <i>genomeTO</i> that can be used to support construction of metabolic models,
+one should merge these sets of proposed genes into a single, "best estimate".  We form this
+best estimate by looking at the entire collection of proposed genes, deleting some that appear
+specious, and then keeping the remaining set.  Each gene in the merged set will include a very
+crude <i>score</i> between 0 and 1 estimating confidence levels for the calls (the numbers should
+be thought os as ordered, but the precise values have little statistical justification).
+</p>
+</font>
+
+</div>
+<div>
+
+<h2> Additional Speciality Gene Calling Programs </h2>
+
+<h3>Finding Streptococcus box elements</h3>
+<p>
+When the user invokes "rast2-process-genome", these scripts are run only if the genus is declared as Streptococcus.  This is an example of why it is important that the user declared information be as accurate as possible.
+</p>
+<pre>
+   <code title ="iris-tutorial"> rast2-call-features-strep-pneumo-repeat </code> < GTO.1 > GTO.2
+   <code title ="iris-tutorial"> rast2-call-features-strep-suis-repeat </code>   < GTO.1 > GTO.2
+
+       options:
+           -i   --input      file from which the input is to be read
+           -o   --output     file to which the output is to be written
+           -h   --help       print usage message and exit
+                --url           URL for the genome annotation service</pre>
+</pre>
+<p>
+<a target=_blank_ href=http://www.ncbi.nlm.nih.gov/pmc/articles/PMC3049150/>Citation</a>
+</p>
+
+<h3> Calling Prophage with PhiSpy </h3>
+<p>
+to call prophage  genes with phiSpy use:
+</p>
+<pre>
+    <code title ="iris-tutorial"> rast2-call-features-prophage-phispy </code> < GTO.1 > GTO.2 
+</pre>
+<p>
+<a target=_blank_ href=http://www.ncbi.nlm.nih.gov/pubmed/?term=22584627>Citation</a>
+</p>
+
+</div>
+<div>
+
+ <font color="red"><h3> Creating CDD annotations</h3>
+<h3> Inserting annotations from a custom source </h3>
+<p> Lets say you made a custom blast database and wanted to add the annotations from this... </p>
+
+
+<h3> Exporting the Annotated Genome in a Desired Format  </h3>
+</font>
+
+<h2>Additional RAST2 Scripts<h2>
+
+
+<h3>Assigning Functions to Putative Protein-encoding Genes Using Kmer Analysis</h3>
+
+<p>
+There are applications, particularly in metagenomics, where it is desirable to find the regions of a
+contig or read that may contain proteins without the need for a gene caller.  To do this in Rast2, use:
+</p> 
+
+<pre> 
+    <code title ="iris-tutorial"> call_features_ProtoCDS_kmer_v1 </code> < GTO.1 > GTO.2
+    <code title ="iris-tutorial"> call_features_ProtoCDS_kmer_v2 </code>< GTO.1 > GTO.2
+</pre> 
+
+<p> As above, v1 are figfam based kmers and v2 are functional role based kmers.
+</font>
+
+</div>
+<div>
+
+
+<h1>Summary</h1>
+
+The RAST2 Toolkit being developed at Argonne National Laboratory will offer a framework
+for constructing customized annotation pipelines.  This is useful for at least two purposes:
+<ol>
+<li>Customized pipelines offer a means of incorporating genus-specific algorithms like the tools
+for recognizing <i>Streptococcus</i>-specific repeats.  These specialized tools offer the ability
+to rapidly propagate advances in tools to immediately impact the rapidly emerging collections of genomes.
+<li>The second major use of the RAST2 Toolkit will be to evaluate alternative approaches to annotations.
+We anticipate introducing a number of feature-calling algorithms, and RAST2 offers a framework for
+evaluating alternative approaches.
+</ol>
+</div>
