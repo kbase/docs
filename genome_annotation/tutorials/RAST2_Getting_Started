@@ -136,7 +136,7 @@ This is the RAST2 Default Pipeline:
 </pre>
 <p>
 We have designed RAST2 to be modular so that users can build custom pipelines.
-In order to tap into this capability, please read the tutorial, "RAST2: The Incremental Commands".
+In order to tap into this capability, please read the tutorial, <b>"RAST2: The Incremental Commands"</b>.
 </p>
 
 </div>
