@@ -1,8 +1,8 @@
 <div>
 <h1>RAST2, the Incremental Commands</h1>
 <p>
-In the previous tutorial, we demonstrated how to run the RAST2 default pipeline with "<b>rast2-process-genome</b>. 
-In this tutorial we will step through the individual commands, discuss available options, and show how to add data to a genome typed object.
+In the previous tutorial, we demonstrated how to run the RAST2 default pipeline with <b>rast2-process-genome</b>. 
+In this tutorial, we will step through the individual commands, discuss available options and show how to add data to a genome typed object.
 We will also show some of the additional scripts that are not part of the standard pipeline.
 As before, these commands will work in the IRIS environment or in the KBase app.
 </p>
@@ -12,7 +12,6 @@ To do this type:
 </p>
  
 <pre>
-    ##
     <code title=“iris-tutorial"> echo "kb|g.0" | genomes_to_contigs | contigs_to_sequences  &gt; E_coli.contig </code>   
 </pre>
 
@@ -67,10 +66,10 @@ Thus, one might start with an empty GTO, add the contigs, run a command that ide
 
 
 <p>
-To create a GTO from scratch use the command
+To create a GTO from scratch we will use the command
 </p>
 <pre>
-    <code title ="iris-tutorial"> rast2-create-genome </code>
+    rast2-create-genome 
 
     options:
         -o --output            file to which the output is to be written
@@ -92,13 +91,13 @@ To create a GTO from scratch use the command
 
 We will use this command to create a GTO for the E. coli contig that we downloaded previously by typing:
 <pre>
-<code title ="iris-tutorial">rast2-create-genome </code> --scientific-name Escherichia coli K-12 --genetic-code 11 --contigs E_coli.contig > E_coli.gto
+<code title ="iris-tutorial">rast2-create-genome --scientific-name Escherichia coli K-12 --genetic-code 11 --contigs E_coli.contig > E_coli.gto </code>
 </pre>
 <p>
 An alternative form for directly retrieving GTOs from the KBase central store is:
 </p>
 <pre>
-     <code title ="iris-tutorial"> cs_to_genome </code> 'kb|g.0' > E_coli.gto
+     cs_to_genome </code> 'kb|g.0' > E_coli.gto
 </pre>
 <p>
 In this case, the domain, genetic code, and scientific name are retrieved from the database. 
@@ -109,8 +108,8 @@ In the above examples, we have built the GTO in one step.
 However, for more complex jobs, it is possible to start with an empty GTO and add or alter metadata (contigs, source database, scientific name, etc.) using the scripts:
 </p>
 <pre>
-    <code title ="iris-tutorial"> rast2-set-metadata </code> < input GTO > output GTO
-    <code title ="iris-tutorial"> rast2-add-contigs </code>  < input GTO > output GTO
+     rast2-set-metadata < input GTO > output GTO
+     rast2-add-contigs  < input GTO > output GTO
 </pre>
 
 
@@ -127,7 +126,7 @@ the annotations for a genome represented by a GTO:
 
 For the rRNA genes use: 
 <pre>
-     <code title ="iris-tutorial"> rast2-call-features-rRNA-SEED </code> < E_coli.gto > GTO.2
+     <code title ="iris-tutorial"> rast2-call-features-rRNA-SEED  < E_coli.gto > GTO.2 </code>
 </pre>
 
 <p>
@@ -140,9 +139,14 @@ could call genes with prodigal and glimmer and append them to the growing gto.</
 specialty script developed by Gary Olsen that finds rRNA genes uisng BLAST.
 </p>
 
+
+</div>
+<div>
+
+
 For the tRNA genes use:
 <pre>    
-     <code title ="iris-tutorial"> rast2-call-features-tRNA-trnascan </code> < GTO.2 > GTO.3
+     <code title ="iris-tutorial"> rast2-call-features-tRNA-trnascan < GTO.2 > GTO.3 </code>
 </pre>
 
 <p>
@@ -158,8 +162,8 @@ In some genomes, machinery exists to support inclusion of unusual amino acids.  
 of selenocysteine and pyrrolysine you can use a tools created by Gary Olsen to locate and annotate genes
 related to selenocysteine and pyrolysine usage:
 <pre>
-       <code title ="iris-tutorial"> rast2-call-features-selenoprotein </code> < GTO.3 > GTO.4
-       <code title ="iris-tutorial"> rast2-call-features-pyrrolysoprotein </code>  < GTO.4 > GTO.5
+       <code title ="iris-tutorial"> rast2-call-features-selenoprotein < GTO.3 > GTO.4 </code>
+       <code title ="iris-tutorial"> rast2-call-features-pyrrolysoprotein  < GTO.4 > GTO.5 </code>
 </pre>
 <p>
 Both of these scripts were developed by Gary Olsen.
@@ -171,7 +175,7 @@ Both of these scripts were developed by Gary Olsen.
 <h3> Calling Protein-encoding Genes</h3>
 For Prodigal use:
 <pre>
-    <code title ="iris-tutorial"> rast2-call-features-CDS-prodigal </code> < GTO.5 > GTO.6
+    <code title ="iris-tutorial"> rast2-call-features-CDS-prodigal < GTO.5 > GTO.6 </code>
 </pre>
 <p>
 <a target=_blank_ href="http://www.ncbi.nlm.nih.gov/pubmed/?term=20211023"> Citation </a>
@@ -181,7 +185,7 @@ Normally one would run prodigal or glimmer.
 
 For Glimmer use:
 <pre>
-    <code title ="iris-tutorial"> rast2-call-features-CDS-glimmer3 </code> < GTO.5 > GTO.6
+    <code title ="iris-tutorial"> rast2-call-features-CDS-glimmer3 < GTO.5 > GTO.6 </code>
 </pre>
 
 <p>
@@ -195,9 +199,9 @@ For Glimmer use:
 
 For Kmer based annotations we suggest: 
 <pre>
-       <code title ="iris-tutorial"> rast2-annotate-proteins-kmer-v2 </code> < GTO.6 > GTO.7
+       <code title ="iris-tutorial"> rast2-annotate-proteins-kmer-v2 < GTO.6 > GTO.7 </code>
        or
-       <code title ="iris-tutorial"> rast2-annotate-proteins-kmer-v1 </code> < GTO.6 > GTO.7
+       <code title ="iris-tutorial"> rast2-annotate-proteins-kmer-v1 < GTO.6 > GTO.7 </code>
 </pre>
 
 <p>
@@ -208,9 +212,13 @@ We also retain (but no longer support) a v1 version where the kmers are built fr
 </p>
 
 
+</div>
+<div>
+
+
 <h3> Calling CRISPRs </h3>
 <pre>
-<code title ="iris-tutorial">  rast2-call-features-crispr </code> < GTO.7  > GTO.8
+<code title ="iris-tutorial">  rast2-call-features-crispr < GTO.7  > GTO.8 </code>
 
     options:
         -i --input      file from which the input is to be read
@@ -228,7 +236,7 @@ We also retain (but no longer support) a v1 version where the kmers are built fr
 <h3>Calling Repeat Regions </h3>
 
 <pre>
-<code title ="iris-tutorial"> rast2-call-features-repeat-region-SEED </code>  < GTO.8 > GTO.9
+<code title ="iris-tutorial"> rast2-call-features-repeat-region-SEED < GTO.8 > GTO.9 </code>
 
 options:
         --min-identity
@@ -250,7 +258,7 @@ Now that we have performed the standard steps in the RAST2 pipleine, we will add
 </p>
 
 <pre>
- <code title ="iris-tutorial"> rast2-call-features-prophage-phispy </code> < GTO.9 > GTO.10
+ <code title ="iris-tutorial"> rast2-call-features-prophage-phispy < GTO.9 > GTO.10 </code>
 </pre>
 <p>
 This command may take a few minutes to run.  
@@ -293,7 +301,7 @@ We will export the data as a feature table.
 To do this type:
 </p>
 <pre>
-    <code title ="iris-tutorial">rast2-export-genome </code> --feature-type feature_data < GTO.11 > E_coli.table    
+    <code title ="iris-tutorial">rast2-export-genome --feature-type feature_data < GTO.11 > E_coli.table</code>    
 
     Using the --feature-type option allows you to export your genome in many different formats:
         genbank         Genbank format
@@ -325,8 +333,8 @@ For instance, we would not see the phage feature type from physpy in the protein
 When the user invokes "rast2-process-genome", these scripts are run only if the genus is declared as Streptococcus.  This is an example of why it is important that the user declared information be as accurate as possible.
 </p>
 <pre>
-   <code title ="iris-tutorial"> rast2-call-features-strep-pneumo-repeat </code> < GTO.1 > GTO.2
-   <code title ="iris-tutorial"> rast2-call-features-strep-suis-repeat </code>   < GTO.1 > GTO.2
+   rast2-call-features-strep-pneumo-repeat < GTO.1 > GTO.2
+   rast2-call-features-strep-suis-repeat   < GTO.1 > GTO.2
 
        options:
            -i   --input      file from which the input is to be read
@@ -348,7 +356,7 @@ When the user invokes "rast2-process-genome", these scripts are run only if the 
 to call prophage  genes with phiSpy use:
 </p>
 <pre>
-    <code title ="iris-tutorial"> rast2-call-features-prophage-phispy </code> < GTO.1 > GTO.2 
+    rast2-call-features-prophage-phispy < GTO.1 > GTO.2 
 </pre>
 <p>
 <a target=_blank_ href="http://www.ncbi.nlm.nih.gov/pubmed/?term=22584627">Citation</a>
@@ -384,7 +392,7 @@ to call prophage  genes with phiSpy use:
 If you have speciality scripts or annotations that you would prefer to add to your GTO before exporting, you can use:
 </p>
 <pre>
-    <code title ="iris-tutorial"> rast2-add-features </code> features-file < input GTO  > output GTO
+    rast2-add-features features-file < input GTO  > output GTO
 
         The features file is tab-delimited and must contain the following fields:
 
@@ -411,8 +419,8 @@ contig or read that may contain proteins without the need for a gene caller.  To
 </p> 
 
 <pre> 
-    <code title ="iris-tutorial"> call_features_ProtoCDS_kmer_v1 </code> < GTO.1 > GTO.2
-    <code title ="iris-tutorial"> call_features_ProtoCDS_kmer_v2 </code>< GTO.1 > GTO.2
+     call_features_ProtoCDS_kmer_v1 < GTO.1 > GTO.2
+     call_features_ProtoCDS_kmer_v2 < GTO.1 > GTO.2
 </pre> 
 
 <p> As above, v1 are figfam based kmers and v2 are functional role based kmers.
