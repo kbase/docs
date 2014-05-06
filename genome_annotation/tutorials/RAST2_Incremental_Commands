@@ -1,5 +1,5 @@
 <div>
-<h1>RAST2, the Incremental Commands</h1>
+<h3>RAST2, the Incremental Commands</h3>
 <p>
 In the previous tutorial, we demonstrated how to run the RAST2 default pipeline with <b>rast2-process-genome</b>. 
 In this tutorial, we will step through the individual commands, discuss available options and show how to add data to a genome typed object.
@@ -35,10 +35,8 @@ The default RAST2 pipeline performs the following steps which are described in d
      8.  Calls CRISPRs
      9.  Calls the protein-encoding genes with prodigal
     10.  Annotates protein-encoding genes with kmers (version 2)
-    <font color="red">11.  Inherits gene names if a reference genome is provided 
-    12.  Performs a basic gene overlap removal
-    13.  Creates a table of CDD annotations</font>
-    14.  Exports the annotated genome in the desired file format 
+    11.  <font color="red">Performs a basic gene overlap removal </font>
+    12.  Exports the annotated genome in the desired file format 
 </pre>
 
 
@@ -102,6 +100,9 @@ An alternative form for directly retrieving GTOs from the KBase central store is
 <p>
 In this case, the domain, genetic code, and scientific name are retrieved from the database. 
 </p>
+
+</div>
+<div>
 
 <p>
 In the above examples, we have built the GTO in one step.  
