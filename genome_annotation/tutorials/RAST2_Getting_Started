@@ -100,7 +100,7 @@ are no manual annotations.
 To run the default RAST2 pipeline tool, type:
 <p>
 <pre>
-     <code title ="iris-tutorial"> rast2-process-genome </code> 'Escherichia coli K-12' Bacteria 11 < E_coli.contig > E_coli.gbk
+     <code title ="iris-tutorial"> rast2-process-genome 'Escherichia coli K-12' Bacteria 11 < E_coli.contig > E_coli.gbk </code>
 </pre>
 <p>
 <font color="red"> We decided that this program will take as input contigs (several different formats) or a gto and output contigs in sevral different formats or a gto.</font>
@@ -116,8 +116,10 @@ so these are required fields.
 <div>
 
 
-The default pipeline performs the following steps which are described in the tutorial "RAST2: The incremental commands".
 <p>
+This is the RAST2 Default Pipeline:
+</p>
+
 <pre>
      1.  Converts the fasta file to a genome typed object
      2.  Calls rRNAs with a custom BLAST-based tool
@@ -132,6 +134,8 @@ The default pipeline performs the following steps which are described in the tut
     11.  Exports the annotated genome in the desired file format 
 </pre>
 
+We have designed RAST2 to be modular so that users can build custom pipelines.
+In order to tap into this capability, please read the tutorial, "RAST2: The Incremental Commands".
 
 </div>
 <div>
