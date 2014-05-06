@@ -133,9 +133,10 @@ This is the RAST2 Default Pipeline:
     10.  Annotates protein-encoding genes with kmers (version 2)
     11.  Exports the annotated genome in the desired file format 
 </pre>
-
+<p>
 We have designed RAST2 to be modular so that users can build custom pipelines.
 In order to tap into this capability, please read the tutorial, "RAST2: The Incremental Commands".
+</p>
 
 </div>
 <div>
