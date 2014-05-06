@@ -70,7 +70,7 @@ that are visible in the "command list" side bar in IRIS which can also be implem
 <div>
 
 
-<h3> Choices in using the RAST2 tools </h3>
+<h3> The Default RAST2 Pipeline </h3>
 
 <p>
 The RAST2 environment is designed so that users can compose annotation
@@ -130,8 +130,9 @@ This is the RAST2 Default Pipeline:
      7.  If Streptococcus, calls box elements
      8.  Calls CRISPRs
      9.  Calls the protein-encoding genes with prodigal
-    10.  Annotates protein-encoding genes with kmers (version 2)
-    11.  Exports the annotated genome in the desired file format 
+    10. <font color="red"> Annotates protein-encoding genes with kmers (version 2) </font>
+    11.  Performs a basic gene overlap removal
+    12.  Exports the annotated genome in the desired file format 
 </pre>
 <p>
 We have designed RAST2 to be modular so that users can build custom pipelines.
