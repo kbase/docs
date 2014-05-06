@@ -1,0 +1,141 @@
+<div>
+<h1>Getting Started with RAST2, the default pipeline</h1>
+
+<a target=_blank_ href="http://rast.nmpdr.org/rast.cgi">RAST</a> is a set of tools that support
+the construction of  automated annotation
+systems that accepts as input a set of contigs from a genome and produces as output
+the initial annotations needed to support researchers in their efforts to study the genome.  
+Since the initial publication of <a target=_blank_ href="http://www.ncbi.nlm.nih.gov/pubmed/18261238">
+The RAST Server: rapid annotations using subsystems technology</a> in 2008,
+over 150,000 requests for genome annotations have been processed, at a current rate of 1,200 jobs per week.  
+<p>
+
+As demand for ever more accurate annotations and the number of
+newly-sequenced genomes increases, there is a growing demand for "the
+next generation" of the RAST technology (RAST2).  This new version of the 
+architecture makes it possible to construct custom pipelines,
+ integrate new bioinformatic tools, and make the developed pipelines
+easily accessible by a large user community.
+
+
+</div>
+<div>
+
+
+<h3> Getting Started </h3>
+
+<p> 
+In order to run the RAST2 tools, you must either download the Kbase app dmg 
+<a target=_blank_ href="http://kbase.us/developer-zone/tutorials/getting-started/installing-the-kbase-dmg">here</a>,
+or use the
+<a target=_blank_ href="http://www.kbase.us/services/docs/invocation/Iris">IRIS</a> environment. 
+An introduction to IRIS can be found  <a target=_blank_ href="http://kbase.us/for-users/get-started">here</a>.  
+</p>
+
+<p>
+There are advantages to using either tool.  The KBase app runs a bash shell on your
+machine with all of the necessary scripts installed and is therefore easier to use for processing batches of genomes.  
+On the other hand, the IRIS environment requires no installation, is always up to date, and is 
+ideal for small numbers of genomes.
+</p>
+
+<p>
+If you are following this tutorial with the KBase app, no login is required.  If you use <a target=_blank_ href="http://kbase.us/services/docs/invocation/Iris/iris.html">IRIS</a>, you
+must first login by typing "login" and then "some user name".  It is not necessary that you register, but you 
+should remember your user name so that you can retrieve your data later.  
+</p>
+
+
+</div>
+<div>
+
+
+<p>
+If you want to step through the tutorial, you can download the  E. coli K-12 contig in fasta format from KBase.  To download this genome open a command window in the KBase app or in the IRIS command window and type:
+</p>
+
+<pre>
+    ##
+    <code title=“iris-tutorial"> echo "kb|g.0" | genomes_to_contigs | contigs_to_sequences  &gt; E_coli.contig </code>   
+</pre>
+"kb|g.0" is the KBase identifier for E. coli K-12.  "genomes_to_contigs" provides the contig ids (there is only one for this genome),
+and "contigs_to_sequences" returns the sequence in fasta format.  There is a large body of scripts and database acquisition tools that 
+that are visible in the "command list" side bar in IRIS which can also be implemented in the KBase.app.  Tutorials for these scripts exist on the KBase website,
+ and all scripts contain a help (-h) option. When the time comes, you can manually upload your own genome (contigs in fasta format) to the IRIS environment by clicking on the up arrow button on the bottom left-hand side of the page below the file browser window.
+</p>
+
+
+</div>
+<div>
+
+
+<h3> Choices in using the RAST2 tools </h3>
+
+<p>
+The RAST2 environment is designed so that users can compose annotation
+pipelines, and then run those pipelines to annotate genomes.
+There is a rich and growing body of annotation tools that we have either built or
+imported from other groups, and these offer a framework for incrementally constructing
+annotations.
+</p>
+
+<p>
+In some cases users would rather execute a single command
+representing the currently recommended annotation pipeline.  Hence, we always maintain a command called
+<font color="red"><b>rast2-process-genome</b></font> that can be used to run the currently recommended 
+pipeline to annotate prokaryotic genomes.  This standard command embodies the pipeline
+used to generate the annotations for the genomes in the Central Store (CS), so if you were to
+run a CS genome through this command, it should produce the current annotations.  It is worth
+noting that this implies that the annotations stored in the CS are all automated annotations -- there
+are no manual annotations. 
+</p>
+
+</div>
+<div>
+
+
+<p>
+<font color="red">
+To run the default RAST2 pipeline tool, type:
+<p>
+<pre>
+     <code title ="iris-tutorial"> rast2-process-genome </code> 'Escherichia coli K-12' Bacteria 11 < E_coli.contig > E_coli.gbk
+</pre>
+<p>
+<font color="red"> We decided that this program will take as input contigs (several different formats) or a gto and output cotings in sevral different formats or a gto.</font>
+</p>
+
+<p>
+Some processes in the pipeline require that you declare the scientific name, domain and genetic code, 
+so these are required fields.
+<p>
+</font>
+
+</div>
+<div>
+
+
+The default pipeline performs the following steps which are described in detail below.
+<p>
+<pre>
+     1.  Converts the fasta file to a genome typed object
+     2.  Calls rRNAs with a custom BLAST-based tool
+     3.  Calls tRNAs with tRNAscan
+     4.  Calls large repeat regions
+     5.  Calls seleno proteins
+     6.  Calls pyrrolysyl proteins
+     7.  If Streptococcus, calls box elements
+     8.  Calls CRISPRs
+     9.  Calls the protein-encoding genes with prodigal
+    10.  Annotates protein-encoding genes with kmers (version 2)
+    <font color="red">11.  Inherits gene names if a reference genome is provided 
+    12.  Performs a basic gene overlap removal
+    13.  Creates a table of CDD annotations</font>
+    14.  Exports the annotated genome in the desired file format 
+</pre>
+
+
+</div>
+<div>
+
+
