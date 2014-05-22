@@ -5,7 +5,7 @@ TARGET ?= /kb/deployment
 DEPLOY_URL = http://140.221.85.86/docs
 DOCS_DIR = docs
 DOCS_HOME = $(TARGET)/$(DOCS_DIR)
-MODULES = "genome_annotation phispy kb_seed assembly"
+MODULES = "genome_annotation kb_seed assembly"
 TUTORIALS_CFG = tutorials.cfg
 
 default:
