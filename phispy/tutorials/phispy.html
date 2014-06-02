@@ -1,40 +1,41 @@
-<div>
-<h1>PhiSpy - Finding Prophages in a Genome</h1>
-
-
-
+<h1>
+	PhiSpy - Finding Prophages in a Genome 
+</h1>
+<p>
+	As with other KBase services, you can use phispy from your local installation of KBase or from the web-based IRIS terminal. 
+<p>
+	<strong>
+		Required Prerequisite Activities: 
+	</strong>
+<a href="/developer-zone/tutorials/getting-started/installing-the-kbase-dmg/">
+	Download KBase: Installing the KBase Application DMG 
+</a>
+, OR 
+<a href="/for-users/get-started#iris">
+Get Started with IRIS 
+</a>
+</p>
+<h2>
+Introduction 
+</h2>
+<p>
+Learn how to find prophages in bacterial or archaeal genome by ranking genomic regions enriched in distinctive phage traits, which leads to the successful prediction of 94% of prophages in 50 complete bacterial genomes with a 6% false-negative rate and a 0.66% false-positive rate. This service can used from the command-line (KBase downloadable application) and our web-based terminal, IRIS. Prophages are phages in lysogeny that are integrated into, and replicated as part of, the host bacterial genome. These mobile elements can have tremendous impact on their bacterial hosts' genomes and phenotypes, which may lead to strain emergence and diversification, increased virulence or antibiotic resistance. However, finding prophages in microbial genomes remains a problem with no definitive solution. The majority of existing tools rely on detecting genomic regions enriched in protein-coding genes with known phage homologs, which hinders the de novo discovery of phage regions. 
+</p>
+<p>
+PhiSpy is a weighted phage detection algorithm that was developed based on seven distinctive characteristics of prophages, i.e. protein length, transcription strand directionality, customized AT and GC skew, the abundance of unique phage words, phage insertion points and the similarity of phage proteins. The first five characteristics are capable of identifying prophages without any sequence similarity with known phage genes. PhiSpy locates prophages by ranking genomic regions enriched in distinctive phage traits, which leads to the successful prediction of 94% of prophages in 50 complete bacterial genomes with a 6% false-negative rate and a 0.66% false-positive rate. 
+</p>
+<h2>
+Using Phispy 
+</h2>
 
 <p>
-As with other KBase services, you can use phispy from your local installation of
-  KBase or from the web-based IRIS terminal.
-<p>
-<strong>Required Prerequisite Activities:</strong> 
-<a href="http://kbase.us/developer-zone/tutorials/getting-started/installing-the-kbase-dmg/">Download KBase: Installing the KBase Application DMG</a>, OR <a href="/for-users/get-started#iris">Get Started with IRIS</a> </p>
-</div>
+Phispy has two commands to run. The first is get_all_training_sets. This command lists the available training sets for use in find_prophages. To view the available training sets, simply type: 
+</p>
 
-<div>
+<pre><code title="iris-tutorials">get_all_training_sets</code></pre> 
 
-<h2>Introduction</h2>
-Learn how to find prophages in bacterial or archaeal genome by ranking genomic regions
-  enriched in distinctive phage traits, which leads to the successful
-  prediction of 94% of prophages in 50 complete bacterial genomes with
-  a 6% false-negative rate and a 0.66% false-positive rate.
-  This service can used from the command-line (KBase downloadable application) and our web-based terminal, IRIS.
-Prophages are phages in lysogeny that are integrated into, and replicated as part of, the host bacterial genome. These mobile elements can have tremendous impact on their bacterial hosts’ genomes and phenotypes, which may lead to strain emergence and diversification, increased virulence or antibiotic resistance. However, finding prophages in microbial genomes remains a problem with no definitive solution. The majority of existing tools rely on detecting genomic regions enriched in protein-coding genes with known phage homologs, which hinders the de novo discovery of phage regions. 
-<p>
-PhiSpy is a weighted phage detection algorithm that was developed based on seven distinctive characteristics of prophages, i.e. protein length, transcription strand directionality, customized AT and GC skew, the abundance of unique phage words, phage insertion points and the similarity of phage proteins. The first five characteristics are capable of identifying prophages without any sequence similarity with known phage genes. PhiSpy locates prophages by ranking genomic regions enriched in distinctive phage traits, which leads to the successful prediction of 94% of prophages in 50 complete bacterial genomes with a 6% false-negative rate and a 0.66% false-positive rate.
+<p>This will return the entire list, like the one below.</p>
 
-</div>
-<div>
-<h2> Using Phispy </h2>
-
-Phispy has two commands to run.
-The first is get_all_training_sets. This command lists the available training sets for use in find_prophages. 
-To view the available training sets, simply type: 
-<pre>
-<code title = "iris-tutorials">get_all_training_sets</code>
-</pre>
-This will return the entire list, like the one below.
 <pre>
 >/ get_all_training_sets
 0 Generic Test Set
@@ -68,24 +69,33 @@ This will return the entire list, like the one below.
 28 Xanthomonas axonopodis
 29 Xylella fastidiosa
 30 Yersinia pestis 
-</pre>
-
-</div>
-<div>
-To use this with the phage finder, you'll need to identify the training set you would like to use. Pick one that is phylogentically close to your organism. If you are unsure or these do not fit, select training set 0 - Generic Test Set.
-
+</pre> 
 <p>
-Next you will run the phage finder. This is run using the command find_prophages.
-Use the phispy service to find prophages in a given genome. The genome input is a genome typed object as generated by <A HREF="FOR-USERS/TUTORIALS/ANNOTATING-A-GENOME/"><code title = "iris-tutorial">annotate_genome</code></a>. The output is a genome typed object with prophage features added.
-<p>
-To run <code title = "iris-tutorial">find_prophages</code>:
-<pre>
-find_prophages training-set-id < genome > genome.with.prophages
-</pre>
-find prophages is the command that finds the prophages, the training set id is the one you identified using get_all_training_sets, the genome file is the "genome typed object" that you generated from <a href="for-users/tutorials/annotating-a-genome/">annotate_genome</a>, and the output file (in this case we named it genome.with.prophages) will be the same "genome typed object" with prophage added as new features of feature_type "pp".
+To use this with the phage finder, you'll need to identify the training set you would like to use. Pick one that is phylogentically close to your organism. If you are unsure or these do not fit, select training set 0 - Generic Test Set. 
 </p>
-<h4>Citing PhiSpy</h4>
-  <p>
-  If you use PhiSpy in your work, please cite this paper: Akhter S, Aziz RK, Edwards RA. <i>PhiSpy: a novel algorithm for finding prophages in bacterial genomes that combines similarity- and composition-based strategies.</i> Nucleic Acids Research 2012 40: e126
-  </p>
-</div>
+<p>
+Next you will run the phage finder. This is run using the command find_prophages. Use the phispy service to find prophages in a given genome. The genome input is a genome typed object as generated by 
+<a href="/for-users/tutorials/analyzing-data/annotating-a-genome"><code>annotate_genome</code></a>
+. The output is a genome typed object with prophage features added. 
+</p>
+<p>
+To run 
+<code>find_prophages</code>:
+</p>
+<pre>
+find_prophages training-set-id &lt; genome &gt; genome.with.prophages
+</pre> 
+<p>
+find prophages is the command that finds the prophages, the training set id is the one you identified using get_all_training_sets, the genome file is the "genome typed object" that you generated from 
+<a href="/for-users/tutorials/analyzing-data/annotating-a-genome">annotate_genome</a>, and the output file (in this case we named it genome.with.prophages) will be the same "genome typed object" with prophage added as new features of feature_type "pp". 
+</p>
+<h4>
+Citing PhiSpy 
+</h4>
+<p>
+If you use PhiSpy in your work, please cite this paper: Akhter S, Aziz RK, Edwards RA. 
+<i>
+	PhiSpy: a novel algorithm for finding prophages in bacterial genomes that combines similarity- and composition-based strategies.
+</i>
+Nucleic Acids Research 2012 40: e126 
+</p>
