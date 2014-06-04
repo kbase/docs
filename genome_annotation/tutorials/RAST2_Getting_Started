@@ -51,14 +51,14 @@ should remember your user name so that you can retrieve your data later.
 
 
 <p>
-If you want to step through the tutorial, you can download the  E. coli K-12 contig in fasta format from KBase.  To download this genome open a command window in the KBase app or in the IRIS command window and type:
+If you want to step through the tutorial, you can download the  E. coli K-12 contig in fasta format from KBase.  To download this genome open a command window in the KBase app or in the IRIS command window type:
 </p>
 
 <pre>
     <code title=“iris-tutorial"> echo "kb|g.0" | genomes_to_contigs | contigs_to_sequences  &gt; E_coli.contig </code>   
 </pre>
-"kb|g.0" is the KBase identifier for E. coli K-12.  "genomes_to_contigs" provides the contig ids (there is only one for this genome),
-and "contigs_to_sequences" returns the sequence in fasta format.  There is a large body of scripts and database acquisition tools that 
+"kb|g.0" is the KBase identifier for E. coli K-12.  <b>genomes_to_contigs</b> provides the contig ids (there is only one for this genome),
+and <b>contigs_to_sequences</b> returns the sequence in fasta format.  There is a large body of scripts and database acquisition tools that 
 that are visible in the "command list" side bar in IRIS which can also be implemented in the KBase.app.  Tutorials for these scripts exist on the KBase website,
  and all scripts contain a help (-h) option. When the time comes, you can manually upload your own genome to the IRIS environment by clicking on the up arrow button on the bottom left-hand side of the page below the file browser window.
 </p>
@@ -84,11 +84,7 @@ annotations.
 In some cases users would rather execute a minimal set of commands
 representing the currently recommended annotation pipeline.  Hence, we always maintain a command called
 <b>rast2-process-genome</b> that can be used to run the currently recommended 
-pipeline to annotate prokaryotic genomes.  This standard command embodies the pipeline
-used to generate the annotations for the genomes in the Central Store (CS), so if you were to
-run a CS genome through this command, it should produce the current annotations.  It is worth
-noting that this implies that the annotations stored in the CS are all automated annotations -- there
-are no manual annotations. 
+pipeline to annotate prokaryotic genomes. 
 </p>
 
 </div>
@@ -162,16 +158,15 @@ This is the RAST2 Default Pipeline:
 </p>
 
 <pre>
-     1.  Converts the fasta file to a genome typed object
-     2.  Calls rRNAs with a custom BLAST-based tool
-     3.  Calls tRNAs with tRNAscan
-     4.  Calls large repeat regions
-     5.  Calls seleno proteins
-     6.  Calls pyrrolysyl proteins
-     7.  Calls CRISPRs
-     8.  Calls the protein-encoding genes with prodigal
-     9.  Annotates protein-encoding genes with kmers (version 2)
-    11.  Performs a basic gene overlap removal
+     1.  Calls rRNAs with a custom BLAST-based tool
+     2.  Calls tRNAs with tRNAscan
+     3.  Calls large repeat regions
+     4.  Calls seleno proteins
+     5.  Calls pyrrolysyl proteins
+     6.  Calls CRISPRs
+     7.  Calls the protein-encoding genes with prodigal
+     8.  Annotates protein-encoding genes with kmers (version 2)
+    9.  Performs a basic gene overlap removal
 </pre>
 
 
@@ -223,14 +218,14 @@ Using the "--feature-type" option, it is possible to filter the output.  For ins
 rast2-export-genome feature_dna --feature-type rna < E_coli.gto2 > E_coli.rna.fasta
 </pre>
 <p>
-Other feature types include "CDS" and "repeat".  We anticipate that the number of features will continue to grow as we add new functionality.  
+Other feature types include "CDS", "repeat", "crispr_array", "crispr_repeat", and "crispr_spacer".  We anticipate that the number of features will continue to grow as we add new functionality.  
 
 </div>
 <div>
 
 
 <p>
-That's it!  Three basic commands-- <b>rast2-create-genome</b>, <b>rast2-process-genome</b> and <b>rast2-export-genome</b>--give you the RAST2 default pathway.  However, this is only a subset of the available RAST2 functions.  We have designed RAST2 so that it is modular and users can build custom annotation pipelines.  In order to tap into this capability, please read the tutorial, <b>"RAST2: The Incremental Commands"</b>.
+That's it!  Three basic commands-- <b>rast2-create-genome</b>, <b>rast2-process-genome</b> and <b>rast2-export-genome</b>--give you the RAST2 default pathway.  However, this is only a subset of the available RAST2 functions.  We have designed RAST2 so that it is modular and users can build custom annotation pipelines.  In order to tap into this capabilityand to learn about individual steps please read the tutorial, <b>"RAST2: The Incremental Commands"</b>.
 </p>
 
 </div>
