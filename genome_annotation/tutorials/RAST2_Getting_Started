@@ -225,7 +225,11 @@ Other feature types include "CDS", "repeat", "crispr_array", "crispr_repeat", an
 
 
 <p>
-That's it!  Three basic commands-- <b>rast2-create-genome</b>, <b>rast2-process-genome</b> and <b>rast2-export-genome</b>--give you the RAST2 default pathway.  However, this is only a subset of the available RAST2 functions.  We have designed RAST2 so that it is modular and users can build custom annotation pipelines.  In order to tap into this capabilityand to learn about individual steps please read the tutorial, <b>"RAST2: The Incremental Commands"</b>.
+That's it!
+Three basic commands-- <b>rast2-create-genome</b>, <b>rast2-process-genome</b> and <b>rast2-export-genome</b>--give you the RAST2 default pathway.  
+However, this is only a subset of the available RAST2 functions.  
+We have designed RAST2 so that it is modular and users can build custom annotation pipelines.  
+In order to tap into this capability and to learn about individual steps please read the tutorial, <b>"RAST2: The Incremental Commands"</b>.
 </p>
 
 </div>
