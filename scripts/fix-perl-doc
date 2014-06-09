@@ -1,0 +1,103 @@
+#!/usr/bin/php
+<?php
+include('tags.php');
+/*
+Fix Perl API docs for inclusion in the info & doc web site.
+For a given doc, create a subsdirectory API, extract and save the navigation section, and remove
+the document framing, leaving just the body.
+
+fix-perl-api [--module-id] [--web-id] file.html
+
+file.html is the file to be fixed. 
+
+file will become the base for the new documents, unless module-id and/or web-id are provided. 
+
+*/
+
+// Need to write our own options parser (not hard, just grok it out of argv).
+// The built in one is not all that useful since it leaves everything together in argv
+// and you have to parse them out anyway.
+// deal with the command line options
+//$opts = getopt("m::w::", array('module::', 'web-name::'));
+//var_dump($opts);
+//var_dump($argv);
+$opts = array ();
+
+$file = $argv[1];
+
+// Find the file, exiting if not found.
+if (!file_exists($file)) {
+  die("File not found\n"); 
+}
+
+// If it is a dir, we take that to be the module name, and also the name
+// of the api doc. Otherwise, use the file's base name.
+$filepath = realpath($file);
+
+if (array_key_exists('module', $opts)) {
+	$module = $opts['module'];
+} else {
+	$module = 0;
+}
+if (is_dir($filepath)) {
+	$module = $module ? $module : basename($filepath);
+	$parentdir = $filepath;
+	$filepath = $filepath . '/' . $module . '.html';
+	if (!file_exists($filepath)) {
+		die("Tried to autodected the api doc from module '$module' but it does not exist.\n");
+	}
+} else {
+	$module = $module ? $module : basename($filepath, '.html');
+	$parentdir = dirname($filepath);
+}
+
+
+
+// Read the entire file.
+$content = file_get_contents($filepath);
+
+// Make sure it looks like a perl doc, and exit if not.
+// For now look for a standard part of the navigation html.
+if (! preg_match('/#DESCRIPTION/', $content)) {
+  die("Sorry, this doesn't look like a Perl Doc.\n");
+}
+
+// Look for the API directory, and create it if it does not exist.
+// Exit if the directory is not writable (or the parent dir if we need to 
+// create it.)
+$apidir = $parentdir . '/API';
+if (file_exists($apidir)) {
+  if (!is_writeable($apidir)) {
+    die("Sorry, the API dir already exists and is not writeable.\n");
+  }
+} else {
+  if (!is_writeable($parentdir)) {
+    die("Sorry, the module directory is not writeable.\n");
+  }
+  mkdir($apidir);
+}
+
+// Find the begin and end of the nav docs.
+$navBegin = findTagBegin($content, 'ul');
+$navEnd = findTagEnd($content, 'ul', $navBegin[2]);
+ 
+$nav = substr($content, $navBegin[1], $navEnd[2] - $navBegin[1]) ;
+
+// We know that the body actually begins after the nav, so we can just grab that.
+// Find the beginning and end of the body.
+$bodyBegin = findTagBegin($content, 'body');
+$bodyEnd = findTagEnd($content, 'body', $bodyBegin[2]);
+
+$body = substr($content, $navEnd[2], $bodyEnd[1]-$navEnd[2]);
+
+// The file name is composed of the module name + .html, or the module name + _nav.html
+// We get the module name for the time being from the original file name.
+$module = basename($filepath, '.html');
+
+$bodyPath = $apidir . '/' . $module . '.html';
+$navPath = $apidir . '/' . $module . '_nav.html'; 
+
+file_put_contents($bodyPath, $body);
+file_put_contents($navPath, $nav);
+
+echo "Finished fixing API docs for module '$module'.\n";

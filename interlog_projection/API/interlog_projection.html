@@ -1,0 +1,228 @@
+
+
+<h1 id="NAME">NAME</h1>
+
+<p>Bio::KBase::interlog_projection::Client</p>
+
+<h1 id="DESCRIPTION">DESCRIPTION</h1>
+
+<p>Interlog Projection Service APIs</p>
+
+<p>This module provides services for getting interlog network of species A projected from the query network of species B based on ortholog information. The ortholog information is precomputed by Inparanoid algorithm and we plan to provide KBase Tree service based projection. It will serve queries for various types of network transfer from one species to the other species network. (i.e., co-expression, PPI, metabolic pathway, functional association network) User can exclude link pair that show low ortholog confidence using cut-off value.</p>
+
+<h2 id="project_network_with_custom_methods">project_network_with_custom_methods</h2>
+
+<pre><code>  $results = $obj-&gt;project_network_with_custom_methods($source, $target_species, $projection_method, $cut_off)</code></pre>
+
+<dl>
+
+<dt id="Parameter-and-return-types">Parameter and return types</dt>
+<dd>
+
+
+
+<pre>
+$source is a Network
+$target_species is a string
+$projection_method is a string
+$cut_off is a float
+$results is a Network
+Network is a reference to a hash where the key is a string and the value is a string</pre>
+
+</dd>
+<dt id="Description">Description</dt>
+<dd>
+
+<p>Get the interlog projected network using two different projection_method at this time: &#39;any&#39; or &#39;bbh&#39; -- bidirectional best hits. This function will support additional projection_method in the near future. source is a source network to be projected. target_species is a genome id to project projection_method is either &#39;any&#39; or &#39;bbh&#39; for one to many projection or bidirectional best hits. cut_off is a float value to filter out uncertain orthologies. For inparanoid orthology informations, 1.0 is equal to bbh.</p>
+
+</dd>
+</dl>
+
+<h2 id="project_network">project_network</h2>
+
+<pre><code>  $results = $obj-&gt;project_network($source, $orthologs)</code></pre>
+
+<dl>
+
+<dt id="Parameter-and-return-types1">Parameter and return types</dt>
+<dd>
+
+
+
+<pre>
+$source is a Network
+$orthologs is an OrthologScoreMap
+$results is a Network
+Network is a reference to a hash where the key is a string and the value is a string
+OrthologScoreMap is a reference to a hash where the key is a fid and the value is an OrthologScore
+fid is a string
+OrthologScore is a reference to a hash where the key is a fid and the value is a float</pre>
+
+</dd>
+<dt id="Description1">Description</dt>
+<dd>
+
+<p>Get the interlog projected network with the prepopulated orthologs. source is a source network to be projected. orthologs is a perpopulated ortholog mapping table</p>
+
+</dd>
+</dl>
+
+<h2 id="project_network_edgelist">project_network_edgelist</h2>
+
+<pre><code>  $results = $obj-&gt;project_network_edgelist($source, $orthologs)</code></pre>
+
+<dl>
+
+<dt id="Parameter-and-return-types2">Parameter and return types</dt>
+<dd>
+
+
+
+<pre>
+$source is an EdgeList
+$orthologs is an OrthologScoreMap
+$results is a Network
+EdgeList is a reference to a list where each element is an Edge
+Edge is a reference to a hash where the following keys are defined:
+	fid1 has a value which is a string
+	fid2 has a value which is a string
+	score has a value which is a float
+OrthologScoreMap is a reference to a hash where the key is a fid and the value is an OrthologScore
+fid is a string
+OrthologScore is a reference to a hash where the key is a fid and the value is a float
+Network is a reference to a hash where the key is a string and the value is a string</pre>
+
+</dd>
+<dt id="Description2">Description</dt>
+<dd>
+
+<p>Get the interlog projected network with the prepopulated orthologs and edge network list. source is an edge network to be projected. orthologs is a perpopulated ortholog mapping table</p>
+
+</dd>
+</dl>
+
+<h1 id="TYPES">TYPES</h1>
+
+<h2 id="fid">fid</h2>
+
+<dl>
+
+<dt id="Definition">Definition</dt>
+<dd>
+
+
+
+<pre>
+a string
+</pre>
+
+</dd>
+</dl>
+
+<h2 id="OrthologScore">OrthologScore</h2>
+
+<dl>
+
+<dt id="Description3">Description</dt>
+<dd>
+
+<p>Ortholog score is list of ortholog information between two species. fid1 is a name of species B. (i.e., gene, protein, metabolite) score is an orthology score value of species B.</p>
+
+</dd>
+<dt id="Definition1">Definition</dt>
+<dd>
+
+
+
+<pre>
+a reference to a hash where the key is a fid and the value is a float
+</pre>
+
+</dd>
+</dl>
+
+<h2 id="OrthologScoreMap">OrthologScoreMap</h2>
+
+<dl>
+
+<dt id="Definition2">Definition</dt>
+<dd>
+
+
+
+<pre>
+a reference to a hash where the key is a fid and the value is an OrthologScore
+</pre>
+
+</dd>
+</dl>
+
+<h2 id="Edge">Edge</h2>
+
+<dl>
+
+<dt id="Description4">Description</dt>
+<dd>
+
+<p>Network edge score pair</p>
+
+</dd>
+<dt id="Definition3">Definition</dt>
+<dd>
+
+
+
+<pre>
+a reference to a hash where the following keys are defined:
+fid1 has a value which is a string
+fid2 has a value which is a string
+score has a value which is a float</pre>
+
+</dd>
+</dl>
+
+<h2 id="EdgeList">EdgeList</h2>
+
+<dl>
+
+<dt id="Description5">Description</dt>
+<dd>
+
+<p>Network edge score list</p>
+
+</dd>
+<dt id="Definition4">Definition</dt>
+<dd>
+
+
+
+<pre>
+a reference to a list where each element is an Edge
+</pre>
+
+</dd>
+</dl>
+
+<h2 id="Network">Network</h2>
+
+<dl>
+
+<dt id="Description6">Description</dt>
+<dd>
+
+<p>Networks object proxy. This will be converted to the true Networks API object if typecompiler support ``include&#39;&#39;</p>
+
+</dd>
+<dt id="Definition5">Definition</dt>
+<dd>
+
+
+
+<pre>
+a reference to a hash where the key is a string and the value is a string
+</pre>
+
+</dd>
+</dl>
+
+
