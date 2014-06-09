@@ -1,7 +1,7 @@
 <div>
 <h3>RAST2, the Incremental Commands</h3>
 <p>
-In the previous tutorial, we demonstrated how to run the RAST2 default pipeline with <b>rast2-process-genome</b>. 
+In the previous tutorial, we demonstrated how to run the RAST2 default pipeline. 
 In this tutorial, we will step through the individual commands, discuss available options and show how to add data to a genome typed object.
 We will also show some of the additional scripts that are not part of the standard pipeline.
 As before, these commands will work in the IRIS environment or in the KBase app.
@@ -16,28 +16,6 @@ To do this type:
 </pre>
 
 <p>
-
-
-</div>
-<div>
-
-
-The default RAST2 pipeline performs the following steps which are described in detail below.
-<p>
-<pre>
-     1.  Converts the fasta file to a genome typed object
-     2.  Calls rRNAs with a custom BLAST-based tool
-     3.  Calls tRNAs with tRNAscan
-     4.  Calls large repeat regions
-     5.  Calls seleno proteins
-     6.  Calls pyrrolysyl proteins
-     7.  If Streptococcus, calls box elements
-     8.  Calls CRISPRs
-     9.  Calls the protein-encoding genes with prodigal
-    10.  Annotates protein-encoding genes with kmers (version 2)
-    11.  <font color="red">Performs a basic gene overlap removal </font>
-    12.  Exports the annotated genome in the desired file format 
-</pre>
 
 
 </div>
@@ -89,7 +67,7 @@ To create a GTO from scratch we will use the command
 
 We will use this command to create a GTO for the E. coli contig that we downloaded previously by typing:
 <pre>
-<code title ="iris-tutorial">rast2-create-genome --scientific-name Escherichia coli K-12 --genetic-code 11 --contigs E_coli.contig > E_coli.gto </code>
+<code title ="iris-tutorial">rast2-create-genome --scientific-name "Escherichia coli K-12" --genetic-code 11 --domain Bacteria --contigs E_coli.contig > E_coli.gto </code>
 </pre>
 <p>
 An alternative form for directly retrieving GTOs from the KBase central store is:
@@ -114,14 +92,35 @@ However, for more complex jobs, it is possible to start with an empty GTO and ad
 </pre>
 
 
+
 </div>
 <div>
 
 
 <h3> Individual Analysis Tools </h3>
 
-The tools that we list below represent a growing collection that can be invoked to alter/enhance
-the annotations for a genome represented by a GTO:
+The default RAST2 pipeline performs the following steps which are described in detail below, but each step can also be called individually.
+<p>
+<pre>
+     1.  Calls rRNAs with a custom BLAST-based tool
+     2.  Calls tRNAs with tRNAscan
+     3.  Calls large repeat regions
+     4.  Calls seleno proteins
+     5.  Calls pyrrolysyl proteins
+     6.  Calls CRISPRs
+     7.  Calls the protein-encoding genes with prodigal
+     8.  Annotates protein-encoding genes with kmers (version 2)
+     9.  <font color="red">Performs a basic gene overlap removal </font>
+</pre>
+
+
+<p>
+The tools that we list below represent a growing collection that can be invoked to alter/enhance the annotations for a genome represented by a GTO.
+</p>
+
+</div>
+<div>
+
 
 <h3>Calling RNA Genes</h3>
 
@@ -133,10 +132,7 @@ For the rRNA genes use:
 <p>
 If you look at "GTO.2" you will see that it is the same as the original gto file except that
 the rRNA calls have been appended. All scripts work this way until the gto is exported
-in a designated format. This allows some insensitivity to order. <font color="red"> That is, you could call the RNAs 
-before proteins or proteins before RNAs and won't make a difference in the output. Likewise you
-could call genes with prodigal and glimmer and append them to the growing gto.</font> Obviously, some steps
-(like overlap removal) must be done afer the genes are called. "rast2-call-feautures-rRNA-SEED" is a
+in a designated format. "rast2-call-feautures-rRNA-SEED" is a
 specialty script developed by Gary Olsen that finds rRNA genes uisng BLAST.
 </p>
 
