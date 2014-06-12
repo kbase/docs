@@ -1,5 +1,5 @@
 <div>
-<h3>RAST2, the Incremental Commands</h3>
+<h3>RAST2, The Incremental Commands</h3>
 <p>
 In the previous tutorial, we demonstrated how to run the RAST2 default pipeline. 
 In this tutorial, we will step through the individual commands, discuss available options and show how to add data to a genome typed object.
@@ -54,7 +54,8 @@ To create a GTO from scratch we will use the command
            --genome-id         Genome identifier
            --scientific-name   Scientific name (Genus species strain) for the genome
            --domain            Domain (Bacteria/Archaea/Virus/Eukaryota) for the genome
-           --genetic-code      Genetic code for the genome (usually 11 for most organisms or 4 Mycoplasmas etc.)
+           --genetic-code      Genetic code for the genome (usually 11 for most 
+                               organisms or 4 Mycoplasmas etc.)
            --source            Source (external database) name for this genome
            --source-id         Identifier for this genome in the source (external source)
            --contigs           Fasta file containing DNA contig data
@@ -69,18 +70,6 @@ We will use this command to create a GTO for the E. coli contig that we download
 <pre>
 <code title ="iris-tutorial">rast2-create-genome --scientific-name "Escherichia coli K-12" --genetic-code 11 --domain Bacteria --contigs E_coli.contig > E_coli.gto </code>
 </pre>
-<p>
-An alternative form for directly retrieving GTOs from the KBase central store is:
-</p>
-<pre>
-     cs_to_genome </code> 'kb|g.0' > E_coli.gto
-</pre>
-<p>
-In this case, the domain, genetic code, and scientific name are retrieved from the database. 
-</p>
-
-</div>
-<div>
 
 <p>
 In the above examples, we have built the GTO in one step.  
@@ -90,8 +79,6 @@ However, for more complex jobs, it is possible to start with an empty GTO and ad
      rast2-set-metadata < input GTO > output GTO
      rast2-add-contigs  < input GTO > output GTO
 </pre>
-
-
 
 </div>
 <div>
@@ -162,9 +149,6 @@ related to selenocysteine and pyrolysine usage:
        <code title ="iris-tutorial"> rast2-call-features-selenoprotein < GTO.3 > GTO.4 </code>
        <code title ="iris-tutorial"> rast2-call-features-pyrrolysoprotein  < GTO.4 > GTO.5 </code>
 </pre>
-<p>
-Both of these scripts were developed by Gary Olsen.
-</p>
 
 </div>
 <div>
@@ -203,7 +187,7 @@ For Kmer based annotations we suggest:
 
 <p>
 These scripts assign functions to protein-encoding genes by performing a kmer-based search.  That is, GTO.7 will be the updated GTO with
-the functions of a subset of the PEGs added. The "v1" and "v2" refer to the data set that the kmers
+the functions of the protein-encoding genes added. The "v1" and "v2" refer to the data set that the kmers
 were built from. "v2" is the default pipeline kmer set and it is built from all of the annotated proteins in the core SEED.  
 We also retain (but no longer support) a v1 version where the kmers are built from Figfams.  "v1" is consistent with previous versions of RAST, but "v2" provides more consistent annotations.
 </p>
@@ -253,32 +237,25 @@ Now that we have performed the standard steps in the RAST2 pipleine, we will add
 </pre>
 <p>
 This command may take a few minutes to run.  
-When it completes we have have a GTO that is customized with phage elements as a feautre types.  
-We list some of the additional scripts that are avialable for use below.  
-We plan to continue adding specialty annotation scripts to this pipeline.  
-To see all of the RAST2 scripts that are currently available, click on the "Genome Annotation Commands" link in the Command List toobar.
+When it completes we have have a GTO that is customized with phage elements as a feature type.
 </p>
-
 
 </div>
 <div>
 
 
-<h3> <font color="red"> Removing Overlapping Gene Calls </h3>
+<h3>Removing Overlapping Features </h3>
 
-The basic strategy used by RAST2 is to use a selected set of tools to propose potential
-genes.  This includes tools to call different types of genes (e.g., RNAs and protein-encoding genes),
-as well as different tools to call the same types of genes (e.g., there are multiple
-tools provided for proposing calls for protein-encoding genes).
 <p>
-To produce a <i>genomeTO</i> that can be used to support construction of metabolic models,
-one should merge these sets of proposed genes into a single, "best estimate".  We form this
-best estimate by looking at the entire collection of proposed genes, deleting some that appear
-specious, and then keeping the remaining set.  Each gene in the merged set will include a very
-crude <i>score</i> between 0 and 1 estimating confidence levels for the calls (the numbers should
-be thought os as ordered, but the precise values have little statistical justification).
+The basic strategy used by RAST2 is to offer a diverse set of tools for annotating a genome.  
+This includes different gene callers and tools to call different types of genes (e.g., RNAs and protein-encoding genes). 
+Since any combination of these scripts could be called in a custom pipeline, it is necessary to merge the results of these sets of proposed genes into a single "best estimate".  
+We use a scoring algorithm to form this best estimate by looking at the entire collection of calls for a given location and choosing those that are most likely.  That is, you would not want protein-encoding genes to be called where the 16S rRNA should be.
 </p>
-</font>
+
+<pre>
+ <code title ="iris-tutorial"> rast2-resolve-overlapping-features < GTO.10 > GTO.11 </code>
+</pre>
 
 
 </div>
@@ -292,9 +269,9 @@ We will export the data as a feature table.
 To do this type:
 </p>
 <pre>
-    <code title ="iris-tutorial">rast2-export-genome --feature-type feature_data < GTO.11 > E_coli.table</code>    
+    <code title ="iris-tutorial">rast2-export-genome feature_data < GTO.11 > E_coli.table</code>    
 
-    Using the --feature-type option allows you to export your genome in many different formats:
+Available export formats include:
         genbank         Genbank format
         genbank_merged  Genbank format as single merged locus, suitable for Artemis
         feature_data    Tabular form of feature data
@@ -303,12 +280,15 @@ To do this type:
         feature_dna     Feature DNA sequences in fasta format
         gff             GFF format
         embl            EMBL format
+
 </pre>
 
 <p>
+You can export your genome in many different formats, or if you want only one feature type (such as RNA you can get that by using the --feature-type option. Some feature types include "CDS", "rna", "repeat", "crispr_array", "crispr_repeat", "crispr_spacer", and in this case "prophage". We anticipate that the number of features will continue to grow as we add new functionality.
+</p>
+<p>
 Note that not all output formats support the new feature types from the RAST2 pipeline.  
-For instance, we would not see the phage feature type from physpy in the protein_fasta formatted output. 
-<font color="red"> The tab-delimited "feature-data" format will contain all of the feature types that were created. </font> 
+For instance, we would not see the phage feature type from physpy in the protein_fasta formatted output.  The tab-delimited "feature-data" format will contain all of the feature types that were created. 
 </p>
 
 
