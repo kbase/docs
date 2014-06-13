@@ -1,13 +1,17 @@
 <div>
 <h1>Rast2: Getting Started With The Default Pipeline</h1>
+<p>
+<a target=_blank_ href="http://rast.nmpdr.org/rast.cgi">RAST</a> is a web-based environmet 
+that allows users to upload a genome, annotate the genome, edit the annotations and compare 
+the genome with other sequenced genomes in the SEED database.  
 
-<a target=_blank_ href="http://rast.nmpdr.org/rast.cgi">RAST</a> is a set of tools that support
-the construction of  automated annotation
-systems that accepts as input a set of contigs from a genome and produces as output
-the initial annotations needed to support researchers in their efforts to study the genome.  
 Since the initial publication of <a target=_blank_ href="http://www.ncbi.nlm.nih.gov/pubmed/18261238">
 The RAST Server: rapid annotations using subsystems technology</a> in 2008,
 over 150,000 requests for genome annotations have been processed, at a current rate of 1,200 jobs per week.  
+
+</div>
+<div>
+
 <p>
 
 As demand for ever more accurate annotations and the number of
@@ -16,8 +20,11 @@ next generation" of the RAST technology (RAST2).  This new version of the
 architecture makes it possible to construct custom pipelines,
  integrate new bioinformatic tools, and make the developed pipelines
 easily accessible by a large user community.
-
-
+</p>
+<p>
+In essence, RAST2 is an updated version of the RAST pipline which users can
+modify and customize. 
+</p>
 </div>
 <div>
 
@@ -82,13 +89,23 @@ annotations.
 
 <p>
 In some cases users would rather execute a minimal set of commands
-representing the currently recommended annotation pipeline.  Hence, we always maintain a command called
-<b>rast2-process-genome</b> that can be used to run the currently recommended 
-pipeline to annotate prokaryotic genomes. 
+representing the currently recommended annotation pipeline. This pipeline
+is composed of three easy scripts that:
 </p>
+<p>
+1. Formats the contigs file
+</p>
+<p>
+2. Annotates the genome 
+</p>
+<p>
+3. Exports the genome
+</p>
+
 
 </div>
 <div>
+
 
 <h3>The Concept of the <i>Genome Typed Object</i> </h3>
 <p>
@@ -96,6 +113,7 @@ All of the individual commands available in the RAST2 pipeline add data to a spe
 A GTO is a JSON file that is compatible with KBase. 
 Annotations are incrementally appended to this file until it is ready for export.  By creating the GTO and adding annotation data to it, it is possible to export the data in multiple file formats without having to reannotate the genome.
 </p>
+
 
 </div>
 <div>
