@@ -1,0 +1,256 @@
+<div>
+<h1>Rast2: Getting Started With The Default Pipeline</h1>
+<p>
+<a target=_blank_ href="http://rast.nmpdr.org/rast.cgi">RAST</a> is a web-based environmet 
+that allows users to upload a genome, annotate the genome, edit the annotations and compare 
+the genome with other sequenced genomes in the SEED database.  
+
+Since the initial publication of <a target=_blank_ href="http://www.ncbi.nlm.nih.gov/pubmed/18261238">
+The RAST Server: rapid annotations using subsystems technology</a> in 2008,
+over 150,000 requests for genome annotations have been processed, at a current rate of 1,200 jobs per week.  
+
+
+</div>
+<div>
+
+<p>
+As demand for ever more accurate annotations and the number of
+newly-sequenced genomes increases, there is a growing demand for "the
+next generation" of the RAST technology (RAST2).  This new version of the 
+architecture makes it possible to construct custom pipelines,
+ integrate new bioinformatic tools, and make the developed pipelines
+easily accessible by a large user community.
+</p>
+<p>
+In essence, RAST2 is an updated version of the RAST pipline which users can
+modify and customize, but it is not intended to replace the RAST web environment. 
+</p>
+</div>
+<div>
+
+
+<h3> Getting Started </h3>
+
+<p> 
+In order to run the RAST2 tools, you must either download the Kbase app dmg 
+<a target=_blank_ href="http://kbase.us/developer-zone/tutorials/getting-started/installing-the-kbase-dmg">here</a>,
+or use the
+<a target=_blank_ href="http://www.kbase.us/services/docs/invocation/Iris">IRIS</a> environment. 
+An introduction to IRIS can be found  <a target=_blank_ href="http://kbase.us/for-users/get-started">here</a>.  
+</p>
+
+<p>
+There are advantages to using either tool.  The KBase app runs a bash shell on your
+machine with all of the necessary scripts installed and is therefore easier to use for processing batches of genomes.  
+On the other hand, the IRIS environment requires no installation, is always up to date, and is 
+ideal for small numbers of genomes.
+</p>
+
+<p>
+If you are following this tutorial with the KBase app, no login is required.  If you use <a target=_blank_ href="http://kbase.us/services/docs/invocation/Iris/iris.html">IRIS</a>, you
+must first login by typing "login" and then "some user name".  It is not necessary that you register, but you 
+should remember your user name so that you can retrieve your data later.  
+</p>
+
+
+</div>
+<div>
+
+
+<p>
+If you want to step through the tutorial, you can download the  E. coli K-12 contig in fasta format from KBase.  To download this genome open a command window in the KBase app or in the IRIS command window type:
+</p>
+
+<pre>
+    <code title=“iris-tutorial"> echo "kb|g.0" | genomes_to_contigs | contigs_to_sequences  &gt; E_coli.contig </code>   
+</pre>
+"kb|g.0" is the KBase identifier for E. coli K-12.  <b>genomes_to_contigs</b> provides the contig ids (there is only one for this genome),
+and <b>contigs_to_sequences</b> returns the sequence in fasta format.  There is a large body of scripts and database acquisition tools that 
+that are visible in the "command list" side bar in IRIS which can also be implemented in the KBase.app.  Tutorials for these scripts exist on the KBase website,
+ and all scripts contain a help (-h) option. When the time comes, you can manually upload your own genome to the IRIS environment by clicking on the up arrow button on the bottom left-hand side of the page below the file browser window.
+</p>
+<p>
+<font color="red">If you want to annotate batches of genomes, please refer to our tutorial on this topic.</font></p> 
+
+
+</div>
+<div>
+
+
+<h3> The Default RAST2 Pipeline </h3>
+
+<p>
+The RAST2 environment is designed so that users can compose annotation
+pipelines, and then run those pipelines to annotate genomes.
+There is a rich and growing body of annotation tools that we have either built or
+imported from other groups, and these offer a framework for incrementally constructing
+annotations.
+</p>
+
+<p>
+In some cases users would rather execute a minimal set of commands
+representing the currently recommended annotation pipeline. This pipeline
+is composed of three easy scripts that:
+</p>
+<p>
+1. Formats the contigs file
+</p>
+<p>
+2. Annotates the genome 
+</p>
+<p>
+3. Exports the genome
+</p>
+
+
+</div>
+<div>
+
+
+<h3>The Concept of the <i>Genome Typed Object</i> </h3>
+<p>
+All of the individual commands available in the RAST2 pipeline add data to a special file type called a genome typed object (GTO). 
+A GTO is a JSON file that is compatible with KBase. 
+Annotations are incrementally appended to this file until it is ready for export.  By creating the GTO and adding annotation data to it, it is possible to export the data in multiple file formats without having to reannotate the genome.
+</p>
+
+
+</div>
+<div>
+
+
+<p>
+To create a GTO from scratch we will use the command
+</p>
+<pre>
+    rast2-create-genome 
+
+    options:
+        -o --output            file to which the output is to be written
+        -h --help              print usage message and exit
+           --url               URL for the genome annotation service
+           --genome-id         Genome identifier
+           --scientific-name   Scientific name (Genus species strain) for the genome
+           --domain            Domain (Bacteria/Archaea/Virus/Eukaryota) for the genome
+           --genetic-code      Genetic code for the genome (usually 11 for most organisms or 4 Mycoplasmas etc.)
+           --source            Source (external database) name for this genome
+           --source-id         Identifier for this genome in the source (external source)
+           --contigs           Fasta file containing DNA contig data
+</pre>
+
+
+</div>
+<div>
+
+
+We will use this command to create a GTO for the E. coli contig that we downloaded previously by typing:
+<pre>
+<code title ="iris-tutorial">rast2-create-genome --scientific-name "Escherichia coli K-12" --genetic-code 11 --domain Bacteria --contigs E_coli.contig > E_coli.gto </code>
+</pre>
+
+<p>
+Some processes in the pipeline require that you declare the scientific name, domain and genetic code, 
+so these are required fields.
+<p>
+
+
+</div>
+<div>
+
+
+<p>
+To run the default RAST2 pipeline tool, type:
+<pre>
+     <code title ="iris-tutorial"> rast2-process-genome < E_coli.gto > E_coli.gto2 </code>
+</pre>
+</p>
+<p>
+Here, "E_coli.gto2" is a second genome typed object with all of the RAST annotation data. 
+
+</div>
+<div>
+
+
+<p>
+This is the RAST2 Default Pipeline:
+</p>
+
+<pre>
+     1.  Calls rRNAs with a custom BLAST-based tool
+     2.  Calls tRNAs with tRNAscan
+     3.  Calls large repeat regions
+     4.  Calls seleno proteins
+     5.  Calls pyrrolysyl proteins
+     6.  Calls CRISPRs
+     7.  Calls the protein-encoding genes with prodigal
+     8.  Annotates protein-encoding genes with kmers (version 2)
+    9.  Performs a basic gene overlap removal
+</pre>
+
+
+</div>
+<div>
+
+
+<p>
+To export the genome in a desired format we will use the command:
+<pre>
+rast2-export-genome 
+  
+	options:
+	-i --input           file from which the input is to be read
+	-o --output          file to which the output is to be written
+	-h --help            print usage message and exit
+	--url                URL for the genome annotation service
+	--feature-type       Include this feature type in output. If no
+	                     feature-types specified, include all feature
+	                     types
+	                   
+	Supported formats: 
+	  genbank         Genbank format
+	  genbank_merged  Genbank format as single merged locus, suitable for Artemis
+	  feature_data    Tabular form of feature data
+	  protein_fasta   Protein translations in fasta format
+	  contig_fasta    Contig DNA in fasta format
+	  feature_dna     Feature DNA sequences in fasta format
+	  gff             GFF format
+	  embl            EMBL format
+</pre>
+
+</div>
+<div>
+
+
+<p>
+To illustrate how <b>rast2-export-genome </b> is used, we will export our genome in genbank format.  Type:
+</p>
+<pre>
+rast2-export-genome genbank < E_coli.gto2 > E_coli.gbk
+</pre>
+
+<p>
+Using the "--feature-type" option, it is possible to filter the output.  For instance if we wanted a fasta file of RNA sequences we would type:
+</p>
+
+<pre>
+rast2-export-genome feature_dna --feature-type rna < E_coli.gto2 > E_coli.rna.fasta
+</pre>
+<p>
+Other feature types include "CDS", "repeat", "crispr_array", "crispr_repeat", and "crispr_spacer".  We anticipate that the number of features will continue to grow as we add new functionality.  
+
+</div>
+<div>
+
+
+<p>
+That's it!
+Three basic commands-- <b>rast2-create-genome</b>, <b>rast2-process-genome</b> and <b>rast2-export-genome</b>--give you the RAST2 default pathway.  
+However, this is only a subset of the available RAST2 functions.  
+We have designed RAST2 so that it is modular and users can build custom annotation pipelines.  
+In order to tap into this capability and to learn about individual steps please read the tutorial, <b>"RAST2: The Incremental Commands"</b>.
+</p>
+
+</div>
+<div>
+
+
