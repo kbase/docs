@@ -13,6 +13,7 @@ over 150,000 requests for genome annotations have been processed, at a current r
 </div>
 <div>
 
+
 <p>
 As demand for ever more accurate annotations and the number of
 newly-sequenced genomes increases, there is a growing demand for "the
@@ -25,6 +26,8 @@ easily accessible by a large user community.
 In essence, RAST2 is an updated version of the RAST pipline which users can
 modify and customize, but it is not intended to replace the RAST web environment. 
 </p>
+
+
 </div>
 <div>
 
@@ -58,7 +61,7 @@ should remember your user name so that you can retrieve your data later.
 
 
 <p>
-If you want to step through the tutorial, you can download the  E. coli K-12 contig in fasta format from KBase.  To download this genome open a command window in the KBase app or in the IRIS command window type:
+If you want to step through the tutorial, you can download the  <i>E. coli</i> K-12 contig in fasta format from KBase.  To download this genome open a command window in the KBase app or in the IRIS command window type:
 </p>
 
 <pre>
@@ -93,13 +96,13 @@ representing the currently recommended annotation pipeline. This pipeline
 is composed of three easy scripts that:
 </p>
 <p>
-1. Formats the contigs file
+1. Format the contigs file
 </p>
 <p>
-2. Annotates the genome 
+2. Annotate the genome 
 </p>
 <p>
-3. Exports the genome
+3. Export the genome
 </p>
 
 
@@ -167,6 +170,7 @@ To run the default RAST2 pipeline tool, type:
 <p>
 Here, "E_coli.gto2" is a second genome typed object with all of the RAST annotation data. 
 
+
 </div>
 <div>
 
@@ -217,6 +221,7 @@ rast2-export-genome
 	  embl            EMBL format
 </pre>
 
+
 </div>
 <div>
 
@@ -238,6 +243,7 @@ rast2-export-genome feature_dna --feature-type rna < E_coli.gto2 > E_coli.rna.fa
 <p>
 Other feature types include "CDS", "repeat", "crispr_array", "crispr_repeat", and "crispr_spacer".  We anticipate that the number of features will continue to grow as we add new functionality.  
 
+
 </div>
 <div>
 
@@ -249,6 +255,7 @@ However, this is only a subset of the available RAST2 functions.
 We have designed RAST2 so that it is modular and users can build custom annotation pipelines.  
 In order to tap into this capability and to learn about individual steps please read the tutorial, <b>"RAST2: The Incremental Commands"</b>.
 </p>
+
 
 </div>
 <div>
