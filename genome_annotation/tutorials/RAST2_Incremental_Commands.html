@@ -180,7 +180,6 @@ related to selenocysteine and pyrolysine usage:
 
 
 <h3> Finding Streptococcus repeat elements</h3>
----
 <p>
 Since we are using *E. coli*  to demonstrate how to annotate a genome, we will not look for Streptococcus repeat elements.
 If you were annotating a Strep genome, you would use:
@@ -253,13 +252,17 @@ We also retain (but no longer support) a v1 version where the kmers are built fr
 </p>
 
 
+</div>
+<div>
+
+
 <h3>Let's add Prophage </h3>
 <p>
 Now that we have performed the standard steps in the RAST2 pipleine, we will add prophage elements to the GTO. 
 </p>
 
 <pre>
- <code title ="iris-tutorial"> rast2-call-features-prophage-phispy < GTO.9 > GTO.10 </code>
+<code title ="iris-tutorial"> rast2-call-features-prophage-phispy < GTO.9 > GTO.10 </code>
 </pre>
 <p>
 This command may take a few minutes to run.  
@@ -268,6 +271,7 @@ When it completes we have have a GTO that is customized with phage elements as a
 <p>
 <a target=_blank_ href="http://www.ncbi.nlm.nih.gov/pubmed/?term=22584627">Citation</a>
 </p>
+
 
 </div>
 <div>
@@ -335,8 +339,8 @@ It is also possible to create combinations of output types.  For instance if we 
 </p>
 
 <pre>
-rast2-export-genome  --feature-type rna  --feature-type CDS feature_dna < GTO.11 > E_coli.fasta</code>    
-<pre>
+<code title ="iris-tutorial">rast2-export-genome  --feature-type rna  --feature-type CDS feature_dna < GTO.11 > E_coli.fasta</code>    
+</pre>
 
 
 </div>
@@ -384,7 +388,7 @@ If you have speciality scripts or annotations that you would prefer to add to yo
         location     Location of the feature on the contig, in the format ContigID_<start-pos>[+=]<length>
         feature-type The type of feature (CDS, rna, etc.)
         function     Function assigned to the feature.
-        aliases <font color="red"> (optional) </font>      Comma-separated list of aliases for this feature
+        aliases  (optional)  Comma-separated list of aliases for this feature
 </pre>  
 
 
