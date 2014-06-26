@@ -1,5 +1,5 @@
 <div>
-<h1>Rast2: Getting Started With The Default Pipeline</h1>
+<h1>RASTtk: Getting Started With The Default Pipeline</h1>
 <p>
 <a target=_blank_ href="http://rast.nmpdr.org/rast.cgi">RAST</a> is a web-based environmet 
 that allows users to upload a genome, annotate the genome, edit the annotations and compare 
@@ -17,13 +17,13 @@ over 150,000 requests for genome annotations have been processed, at a current r
 <p>
 As demand for ever more accurate annotations and the number of
 newly-sequenced genomes increases, there is a growing demand for "the
-next generation" of the RAST technology (RAST2).  This new version of the 
+next generation" of the RAST technology (RASTtk).  This new version of the 
 architecture makes it possible to construct custom pipelines,
  integrate new bioinformatic tools, and make the developed pipelines
 easily accessible by a large user community.
 </p>
 <p>
-In essence, RAST2 is an updated version of the RAST pipline which users can
+In essence, RASTtk is an updated version of the RAST pipline which users can
 modify and customize, but it is not intended to replace the RAST web environment. 
 </p>
 
@@ -35,7 +35,7 @@ modify and customize, but it is not intended to replace the RAST web environment
 <h3> Getting Started </h3>
 
 <p> 
-In order to run the RAST2 tools, you must either download the Kbase app dmg 
+In order to run the RASTtk tools, you must either download the Kbase app dmg 
 <a target=_blank_ href="http://kbase.us/developer-zone/tutorials/getting-started/installing-the-kbase-dmg">here</a>,
 or use the
 <a target=_blank_ href="http://www.kbase.us/services/docs/invocation/Iris">IRIS</a> environment. 
@@ -80,10 +80,10 @@ that are visible in the "command list" side bar in IRIS which can also be implem
 <div>
 
 
-<h3> The Default RAST2 Pipeline </h3>
+<h3> The Default RASTtk Pipeline </h3>
 
 <p>
-The RAST2 environment is designed so that users can compose annotation
+The RASTtk environment is designed so that users can compose annotation
 pipelines, and then run those pipelines to annotate genomes.
 There is a rich and growing body of annotation tools that we have either built or
 imported from other groups, and these offer a framework for incrementally constructing
@@ -112,7 +112,7 @@ is composed of three easy scripts that:
 
 <h3>The Concept of the <i>Genome Typed Object</i> </h3>
 <p>
-All of the individual commands available in the RAST2 pipeline add data to a special file type called a genome typed object (GTO). 
+All of the individual commands available in the RASTtk pipeline add data to a special file type called a genome typed object (GTO). 
 A GTO is a JSON file that is compatible with KBase. 
 Annotations are incrementally appended to this file until it is ready for export.  By creating the GTO and adding annotation data to it, it is possible to export the data in multiple file formats without having to reannotate the genome.
 </p>
@@ -162,7 +162,7 @@ so these are required fields.
 
 
 <p>
-To run the default RAST2 pipeline tool, type:
+To run the default RASTtk pipeline tool, type:
 <pre>
      <code title ="iris-tutorial"> rast2-process-genome < E_coli.gto > E_coli.gto2 </code>
 </pre>
@@ -176,7 +176,7 @@ Here, "E_coli.gto2" is a second genome typed object with all of the RAST annotat
 
 
 <p>
-This is the RAST2 Default Pipeline:
+This is the RASTtk Default Pipeline:
 </p>
 
 <pre>
@@ -250,10 +250,10 @@ Other feature types include "CDS", "repeat", "crispr_array", "crispr_repeat", an
 
 <p>
 That's it!
-Three basic commands-- <b>rast2-create-genome</b>, <b>rast2-process-genome</b> and <b>rast2-export-genome</b>--give you the RAST2 default pathway.  
-However, this is only a subset of the available RAST2 functions.  
-We have designed RAST2 so that it is modular and users can build custom annotation pipelines.  
-In order to tap into this capability and to learn about individual steps please read the tutorial, <b>"RAST2: The Incremental Commands"</b>.
+Three basic commands-- <b>rast2-create-genome</b>, <b>rast2-process-genome</b> and <b>rast2-export-genome</b>--give you the RASTtk default pathway.  
+However, this is only a subset of the available RASTtk functions.  
+We have designed RASTtk so that it is modular and users can build custom annotation pipelines.  
+In order to tap into this capability and to learn about individual steps please read the tutorial, <b>"RASTtk: The Incremental Commands"</b>.
 </p>
 
 

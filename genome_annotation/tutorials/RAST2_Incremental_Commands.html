@@ -1,7 +1,7 @@
 <div>
-<h3>RAST2, The Incremental Commands</h3>
+<h3>RASTtk, The Incremental Commands</h3>
 <p>
-In the previous tutorial, we demonstrated how to run the RAST2 default pipeline. 
+In the previous tutorial, we demonstrated how to run the RASTtk default pipeline. 
 In this tutorial, we will step through the individual commands, discuss available options and show how to add data to a genome typed object.
 We will also show some of the additional scripts that are not part of the standard pipeline.
 As before, these commands will work in the IRIS environment or in the KBase app.
@@ -22,16 +22,16 @@ To do this type:
 <div>
 
 
-<h2>RAST2 Incremental Commands </h2>
+<h2>RASTtk Incremental Commands </h2>
 <p>
-The power of RAST2 lies in ability to chose custom annotation scripts or to add your own. 
+The power of RASTtk lies in ability to chose custom annotation scripts or to add your own. 
 To provide an illustration, we will step through the incremental steps and at the end we use an additional script that annotates prophages using a program called PhiSpy.  
 </p>
 
 
 <h3>The Concept of the <i>Genome Typed Object</i> </h3>
 <p>
-All of the individual commands available in the RAST2 pipeline add data to a special file type called a genome typed object (GTO). 
+All of the individual commands available in the RASTtk pipeline add data to a special file type called a genome typed object (GTO). 
 A GTO is a JSON file that is compatible with KBase. 
 Annotations are incrementally appended to this file until it is ready for export. 
 Thus, one might start with an empty GTO, add the contigs, run a command that identifies genes, run another command that assigns functions to the genes, and so forth. 
@@ -86,7 +86,7 @@ However, for more complex jobs, it is possible to start with an empty GTO and ad
 
 <h3> Individual Analysis Tools </h3>
 
-The default RAST2 pipeline performs the following steps which are described in detail below, but in this tutorial we will call each step individually.
+The default RASTtk pipeline performs the following steps which are described in detail below, but in this tutorial we will call each step individually.
 <p>
 <pre>
      1.  Call rRNAs with a custom BLAST-based tool
@@ -258,7 +258,7 @@ We also retain (but no longer support) a v1 version where the kmers are built fr
 
 <h3>Let's add Prophage </h3>
 <p>
-Now that we have performed the standard steps in the RAST2 pipleine, we will add prophage elements to the GTO. 
+Now that we have performed the standard steps in the RASTtk pipleine, we will add prophage elements to the GTO. 
 </p>
 
 <pre>
@@ -280,7 +280,7 @@ When it completes we have have a GTO that is customized with phage elements as a
 <h3>Removing Overlapping Features </h3>
 
 <p>
-The basic strategy used by RAST2 is to offer a diverse set of tools for annotating a genome.  
+The basic strategy used by RASTtk is to offer a diverse set of tools for annotating a genome.  
 This includes different gene callers and tools to call different types of genes (e.g., RNAs and protein-encoding genes). 
 Since any combination of these scripts could be called in a custom pipeline, it is necessary to merge the results of these sets of proposed genes into a single "best estimate".  
 We use a scoring algorithm to form this best estimate by looking at the entire collection of calls for a given location and choosing those that are most likely.  That is, you would not want protein-encoding genes to be called where the 16S rRNA should be.
@@ -396,18 +396,18 @@ If you have speciality scripts or annotations that you would prefer to add to yo
 <div>
 
 
-<h2>Additional RAST2 Scripts<h2>
+<h2>Additional RASTtk Scripts<h2>
 
 <h3>Assigning Functions to Putative Protein-encoding Genes Using Kmer Analysis</h3>
 
 <p>
 There are applications, particularly in metagenomics, where it is desirable to find the regions of a
-contig or read that may contain proteins without the need for a gene caller.  To do this in Rast2, use:
+contig or read that may contain proteins without the need for a gene caller.  To do this in RASTtk, use:
 </p> 
 
 <pre> 
-     call_features_ProtoCDS_kmer_v1 < GTO.1 > GTO.2
-     call_features_ProtoCDS_kmer_v2 < GTO.1 > GTO.2
+     rast2-call-features-ProtoCDS-kmer-v1 < GTO.1 > GTO.2
+     rast2-call-features-ProtoCDS-kmer-v2 < GTO.1 > GTO.2
 </pre> 
 
 <p> As above, v1 are figfam based kmers and v2 are functional role based kmers.
@@ -419,14 +419,14 @@ contig or read that may contain proteins without the need for a gene caller.  To
 
 <h1>Summary</h1>
 
-The RAST2 Toolkit being developed at Argonne National Laboratory will offer a framework
+The RASTtk Toolkit being developed at Argonne National Laboratory will offer a framework
 for constructing customized annotation pipelines.  This is useful for at least two purposes:
 <ol>
 <li>Customized pipelines offer a means of incorporating genus-specific algorithms like the tools
 for recognizing <i>Streptococcus</i>-specific repeats.  These specialized tools offer the ability
 to rapidly propagate advances in tools to immediately impact the rapidly emerging collections of genomes.
-<li>The second major use of the RAST2 Toolkit will be to evaluate alternative approaches to annotations.
-We anticipate introducing a number of feature-calling algorithms, and RAST2 offers a framework for
+<li>The second major use of the RASTtk Toolkit will be to evaluate alternative approaches to annotations.
+We anticipate introducing a number of feature-calling algorithms, and RASTtk offers a framework for
 evaluating alternative approaches.
 </ol>
 </div>
