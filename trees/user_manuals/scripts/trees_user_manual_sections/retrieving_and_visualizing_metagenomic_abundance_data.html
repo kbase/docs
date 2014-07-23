@@ -171,7 +171,7 @@ ids.  Then save the result to a file named 'fidToUrl.map'.  You can accomplish t
 need a map from leaf nodes to urls.  To do this, we need to use the 'paste' command which can concatenate text files together to
 create a new table of data.  First we create two new files with a list of leaf ids and a list of URLs in the same order.  Again, use
 the cut command to extract this data.  Then call the 'paste' command with the names of these two files, saving the results to the final
-map we need: leafToUrl.map. (Note: 'paste' was not available in Iris at the time of this writing). </p>
+map we need: leafToUrl.map. (Note: 'paste' was not available in IRIS at the time of this writing). </p>
 <pre>
     > cut leafToFid.map -f 1 > leaf_list.txt
     > cut fidToUrl.map -f 2 > url_list.txt
