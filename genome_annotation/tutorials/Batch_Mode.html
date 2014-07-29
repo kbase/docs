@@ -1,10 +1,10 @@
 <div>
 <h1>Using the RAST tool kit in batch mode</h1>
 
-Welcome to the tutorial on submitting genomes to RAST-tk in batch mode.  
+Welcome to the tutorial on submitting genomes to RASTtk in batch mode.  
 You can follow this tutorial by logging in to the IRIS environment or by working in the Kbase.app command window.
-We recommend that you first familiarize yourself with the RAST-tk commands in the tutorials, 
-"RAST-tk: Getting Started With The Default Pipeline", and "RAST-tk: The Incremental Commands".
+We recommend that you first familiarize yourself with the RASTtk commands in the tutorials, 
+"RASTtk: Getting Started With The Default Pipeline", and "RASTtk: The Incremental Commands".
 </p>
 
 
@@ -60,9 +60,9 @@ Then we will will convert these to genome typed objects and place them into "ToS
 </p>
 
 <pre>
-rast2-create-genome --scientific-name "Escherichia coli K-12" --genetic-code 11 --domain Bacteria --contigs E_coli.contig > ToSubmit/E_coli.gto 
+rast-create-genome --scientific-name "Escherichia coli K-12" --genetic-code 11 --domain Bacteria --contigs E_coli.contig > ToSubmit/E_coli.gto 
 
-rast2-create-genome --scientific-name "Bacillus subtilis 168" --genetic-code 11 --domain Bacteria --contigs B_subtilis.contig > ToSubmit/B_subtilis.gto 
+rast-create-genome --scientific-name "Bacillus subtilis 168" --genetic-code 11 --domain Bacteria --contigs B_subtilis.contig > ToSubmit/B_subtilis.gto 
 </pre>
 
 
@@ -70,7 +70,7 @@ rast2-create-genome --scientific-name "Bacillus subtilis 168" --genetic-code 11 
 <div>
 
 <p>
-Now we will submit the entire directory, "ToSubmit" to be processed by RAST-tk.  This command uses the RAST-tk default pipeline.
+Now we will submit the entire directory, "ToSubmit" to be processed by RASTtk.  This command uses the RASTtk default pipeline.
 </p>
 
 <pre>
@@ -122,7 +122,7 @@ kb|g.220034	completed	2014-07-29T08:48:36.758-05:00	2014-07-29T08:50:09.486-05:0
 
 
 <p>
-We will create a new directory for the output of our RAST-tk job.  Type:
+We will create a new directory for the output of our RASTtk job.  Type:
 </p>
 
 <pre>
@@ -197,11 +197,11 @@ Which returns:
 
 
 <p>
-Finally, we can convert the genome typed objects to the format we desire by using <b>rast2-export-genome</b>. 
+Finally, we can convert the genome typed objects to the format we desire by using <b>rast-export-genome</b>. 
 I will convert the <i> E. coli</i> genome to a genbank file by typing:
 </p>
 <pre>
-rast2-export-genome genbank < kb\|g.220034.gto > E_coli.gbk
+rast-export-genome genbank < kb\|g.220034.gto > E_coli.gbk
 </pre>
 
 
@@ -212,7 +212,7 @@ rast2-export-genome genbank < kb\|g.220034.gto > E_coli.gbk
 <p>
 That's all there is to it.  Batch mode submission centers around the commands <b>rast-process-genome-batch</b> 
 and <b>rast-download-genome-batch</b>.  The most difficult parts are creating the initial directory of genome
-typed objects and and the conversion of the downloaded genome typed objects into useful output using "rast2-export-genome".  
+typed objects and and the conversion of the downloaded genome typed objects into useful output using "rast-export-genome".  
 When you are annotating a directory with many genomes it may be necessary to write a script that does this pre- and post-processing for you.   
 </p>
 
