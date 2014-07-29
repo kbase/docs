@@ -56,7 +56,7 @@ echo "kb|g.424" |genomes_to_contigs |contigs_to_sequences >B_subtilis.contig
 </pre>
 
 <p>
-Then we will will convert these to genome typed objects and place them into ToSubmit. Type:
+Then we will will convert these to genome typed objects and place them into "ToSubmit". Type:
 </p>
 
 <pre>
@@ -202,7 +202,7 @@ I will convert the <i> E. coli</i> genome to a genbank file by typing:
 </p>
 <pre>
 rast2-export-genome genbank < kb\|g.220034.gto > E_coli.gbk
-<pre>
+</pre>
 
 
 </div>
@@ -213,7 +213,7 @@ rast2-export-genome genbank < kb\|g.220034.gto > E_coli.gbk
 That's all there is to it.  Batch mode submission centers around the commands <b>rast-process-genome-batch</b> 
 and <b>rast-download-genome-batch</b>.  The most difficult parts are creating the initial directory of genome
 typed objects and and the conversion of the downloaded genome typed objects into useful output using "rast2-export-genome".  
-When you are annotating many genomes it may be necessary to write a script that does this pre- and post-processing for you.   
+When you are annotating a directory with many genomes it may be necessary to write a script that does this pre- and post-processing for you.   
 </p>
 
 
