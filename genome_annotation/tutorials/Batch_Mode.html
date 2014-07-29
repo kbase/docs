@@ -1,0 +1,240 @@
+<div>
+<h1>Using the RAST tool kit in batch mode</h1>
+
+Welcome to the tutorial on submitting genomes to RAST-tk in batch mode.  
+You can follow this tutorial by logging in to the IRIS environment or by working in the Kbase.app command window.
+We recommend that you first familiarize yourself with the RAST-tk commands in the tutorials, 
+"RAST-tk: Getting Started With The Default Pipeline", and "RAST-tk: The Incremental Commands".
+</p>
+
+
+</div>
+<div>
+
+<p>
+We will start by logging in to IRIS or by opening the kbase.app and logging into Kbase
+by typing the following command:
+</p>
+
+<pre>
+kbase-login   username
+</pre>
+<p>
+The username and password are your RAST account username and password.
+</p>
+
+
+</div>
+<div>
+
+<p>
+After you have logged in to IRIS you will be in your home directory.  
+In the Kbase.app, you will be in a bash shell on your computer and should 
+navigate to a directory where you are comfortable working. 
+</p>
+
+<p>
+In order to demonstrate the submission of a batch of genomes we will start by making a new directory.
+Type:
+</p>
+<pre>
+mkdir ToSubmit
+</pre>
+
+
+</div>
+<div>
+
+<p>
+Next we will download the contig files for <i>E. coli</i> and <i>B. subtilis</i> from the Kbase central store into our current working directory.
+Type:
+</p>
+
+<pre>
+echo "kb|g.0" | genomes_to_contigs | contigs_to_sequences  > E_coli.contig   
+echo "kb|g.424" |genomes_to_contigs |contigs_to_sequences >B_subtilis.contig
+</pre>
+
+<p>
+Then we will will convert these to genome typed objects and place them into ToSubmit. Type:
+</p>
+
+<pre>
+rast2-create-genome --scientific-name "Escherichia coli K-12" --genetic-code 11 --domain Bacteria --contigs E_coli.contig > ToSubmit/E_coli.gto 
+
+rast2-create-genome --scientific-name "Bacillus subtilis 168" --genetic-code 11 --domain Bacteria --contigs B_subtilis.contig > ToSubmit/B_subtilis.gto 
+</pre>
+
+
+</div>
+<div>
+
+<p>
+Now we will submit the entire directory, "ToSubmit" to be processed by RAST-tk.  This command uses the RAST-tk default pipeline.
+</p>
+
+<pre>
+rast-process-genome-batch ToSubmit 
+</pre>
+
+<p>
+This command returns a job id, which you should save.  
+Mine is: 9f0d6d9a-c686-4b55-af6f-e0df59b0bb01
+</p>
+
+
+</div>
+<div>
+
+
+<p>
+You can query the status of your job by using the command <b> rast-query-genome-batch </b>.  Try it:
+</p>
+<pre>
+rast-query-genome-batch  your job id
+</pre>
+
+<p>
+If your job is running you will get a response from the server that looks like this:
+</p>
+
+<pre>
+kb|g.220035	in-progress	2014-07-29T08:48:36.733-05:00	0001-01-01T00:00:00Z			
+kb|g.220034	in-progress	2014-07-29T08:48:36.758-05:00	0001-01-01T00:00:00Z			
+</pre>
+
+
+</div>
+<div>
+
+
+<p>
+If your job is completed you will get a response from the server that looks like this:
+</p>
+<pre>
+kb|g.220035	completed	2014-07-29T08:48:36.733-05:00	2014-07-29T08:49:54.069-05:00	http://redwood.mcs.anl.gov:7078/node/751a0a8c-e13b-420d-84de-b2acdb79dd67?download	http://redwood.mcs.anl.gov:7078/node/dc44ef34-3855-42ea-bbb6-0294a5c91a47?download	http://redwood.mcs.anl.gov:7078/node/6e2be0e9-d3c9-4cc7-9eae-c821e30c2e01?download
+kb|g.220034	completed	2014-07-29T08:48:36.758-05:00	2014-07-29T08:50:09.486-05:00	http://redwood.mcs.anl.gov:7078/node/f295435a-247f-45e6-87a2-772915561759?download	http://redwood.mcs.anl.gov:7078/node/d7c7ff6f-7ae4-48a2-aea3-11afe89a1805?download	http://redwood.mcs.anl.gov:7078/node/a7abccc6-1534-42b1-abbc-51ae71390907?download
+</pre>
+
+
+</div>
+<div>
+
+
+<p>
+We will create a new directory for the output of our RAST-tk job.  Type:
+</p>
+
+<pre>
+mkdir Output
+</pre>
+
+<p>
+When your job is completed, you can download it into the directory "Output" by typing:
+</p>
+<pre>
+rast-download-genome-batch  your job id Output
+</pre>
+<p>
+This will download an annotated genome typed object for each genome.
+
+
+</div>
+<div>
+
+
+<p>
+Navigate to the Output directory by typing:
+</p>
+
+<pre>
+cd Output
+</pre>
+<p>
+if you type,
+</p>
+<pre>
+ls
+</pre>
+<p>
+You will see the contents of the output directory. 
+When I do this i see the following files:
+</p>
+<pre>
+kb|g.220034.gto  kb|g.220034.stderr  kb|g.220035.gto  kb|g.220035.stderr
+</pre>
+<p>
+Each file has been given a unique Kbase identifier.  
+The ".gto" files are the annotated genome typed objects and the ".stderr" files provide a record of what has been done.   
+</p>
+
+
+</div>
+<div>
+
+
+<p>
+You can see which genome each is by typing:
+<pre>
+grep "scientific_name" genomeid.gto
+</pre>
+<p>
+In my case it is:
+</p>
+<pre>
+grep "scientific_name" kb\|g.220034.gto
+</pre>
+<p>
+Which returns:
+</p>
+<pre>
+"scientific_name" : "Escherichia coli K-12",
+</pre>
+
+
+</div>
+<div>
+
+
+<p>
+Finally, we can convert the genome typed objects to the format we desire by using <b>rast2-export-genome</b>. 
+I will convert the <i> E. coli</i> genome to a genbank file by typing:
+</p>
+<pre>
+rast2-export-genome genbank < kb\|g.220034.gto > E_coli.gbk
+<pre>
+
+
+</div>
+<div>
+
+
+<p>
+That's all there is to it.  Batch mode submission centers around the commands <b>rast-process-genome-batch</b> 
+and <b>rast-download-genome-batch</b>.  The most difficult parts are creating the initial directory of genome
+typed objects and and the conversion of the downloaded genome typed objects into useful output using "rast2-export-genome".  
+When you are annotating many genomes it may be necessary to write a script that does this pre- and post-processing for you.   
+</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
