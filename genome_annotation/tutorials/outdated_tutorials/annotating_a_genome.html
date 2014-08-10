@@ -254,7 +254,7 @@ variant codes that were assigned), use the command:
 
 <p>
 You can view the contents of the "subsystems" file to see which
-subsystems are present in the metabolic reconstuction.  Note that some
+subsystems are present in the metabolic reconstruction.  Note that some
 subsystems are listed as missing, while others are listed as present
 in the genome.
 </p>
@@ -292,7 +292,7 @@ the result in the file "roles.for.models").
 
 <p>
 It is often useful to compare the set of roles found in your
-reconstucted genome with those from another organism; for example, We
+reconstructed genome with those from another organism; for example, We
 might compare with a well-tested reconstruction or a manually curated
 model for a closely related organism in order to see if we can find
 any clear mistakes in the new reconstruction.  (This step is not
@@ -382,7 +382,7 @@ workspace is "tutorial".  If you ever forget which workspace you
 are currently operating in, just run the "kbws-workspace" command again
 with no arguments. You can find a complete list of all workspaces accessible
 to you, see workspace contents, create workspaces, and manage workspaces
-using the <a href="http://140.221.84.142/">Workspace Browser</a> gui.
+using the <a href="https://narrative.kbase.us/functional-site/#/ws/">Workspace Browser</a> gui.
 </p>
 </div>
 
@@ -411,7 +411,7 @@ we'll see a list of attributes gleaned from our loaded genome object, including
 the unique genome ID (listed under the "Object ID" attribute). You should
 copy and paste this ID and use it in all future commands in this tutorial
 where we refer to a <i>genome id</i>. Now that our genome is loaded in an online
-workspace, we can view this genome in HTML format using the <a href="http://140.221.84.142/browse.html">workspace browser</a>.
+workspace, we can view this genome in HTML format using the <a href="https://narrative.kbase.us/functional-site/#/ws/">workspace browser</a>.
 </p>
 </div>
 
@@ -434,7 +434,7 @@ selected workspace:
 <p>
 This command prints a table of all objects currently in our workspace.
 Note, there will be many objects besides our genome in the "tutorial" workspace 
-because this public workspace is where all output from users runnning this tutorial is
+because this public workspace is where all output from users running this tutorial is
 directed. But we should see our genome listed under its unique <i>genome id</i>,
 and our KBase username should be listed as the owner of that object.
 </p>
@@ -462,7 +462,7 @@ object is created and added to our currently selected workspace, with the
 ID <i>genome id</i>.fbamdl.0. As with the "kbfba-loadgenome" command, we will 
 see a series of attributes of our new object printed as output, including
 stats about the model size, the models name, and the ID of the model in
-the workspace. Also like our genome, we can use the <a href="http://140.221.84.142/browse.html">workspace browser</a>
+the workspace. Also like our genome, we can use the <a href="https://narrative.kbase.us/functional-site/#/ws/">workspace browser</a>
 to view our new model in HTML format. Just be sure to refresh the browser
 if it is already open in another window.
 </p>
@@ -492,21 +492,21 @@ attributes about the object to screen when the command it run. This time, the
 object generated is an "FBA" typed object, holding all the parameters of our
 FBA study, as well as all of the results from our FBA study. Also like the
 Model and Genome objects, the FBA object may be viewed in html using the 
-<a href="http://140.221.84.142/browse.html">workspace browser</a>. If one
+<a href="https://narrative.kbase.us/functional-site/#/ws/">workspace browser</a>. If one
 refreshes the workspace browser, the new FBA object should now appear, with
 the ID <i>genome id</i>.fbamdl.0.fba.0. Note, this ID will iterate every time
 one runs the "kbfba-runfba" command. However, one can always pull the ID of
 generated FBA object from the output produced by the kbfba-runfba command.
-One key peice of information about the FBA analysis that is printed directly
+One key piece of information about the FBA analysis that is printed directly
 by the FBA command is the objective value found by the flux balance analysis.
-This objective value represents the maximum acheivable flux through the biomass
+This objective value represents the maximum achievable flux through the biomass
 reaction of the metabolic model. In all likelihood, the objective value for our
 first FBA run is zero. This is because the model is missing pathways needed for biomass
-production. When a model fails to grow, the FBA command attempst to
+production. When a model fails to grow, the FBA command attempts to
 diagnose the problem by identifying biomass components that cannot be
 produced. This is done by maximizing the production of each individual
 biomass component, one at a time. You can see these analysis results
-in the HTML view of the FBA object found from the <a href="http://140.221.84.142/browse.html">workspace browser</a>. Note
+in the HTML view of the FBA object found from the <a href="https://narrative.kbase.us/functional-site/#/ws/">workspace browser</a>. Note
 that some of your biomass components have a zero in this
 table. These are the components that cannot be produced. Next, we will try 
 to fix the model by adding reactions to enable production of these components.</p>
@@ -580,7 +580,7 @@ the runfba command again:
 
 <p>
 As before, this command should create a new "FBA" typed object in the workspace.
-You can view this object in HTML format using the <a href="http://140.221.84.142/browse.html">workspace browser</a>.
+You can view this object in HTML format using the <a href="https://narrative.kbase.us/functional-site/#/ws/">workspace browser</a>.
 This time, the maximum biomass production for your model should be greater
 than zero, and you should have meaningful fluxes listed under the reaction
 tab of the HTML view.
