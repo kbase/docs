@@ -1,4 +1,104 @@
+<?xml version="1.0" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Genome Annotation Service API</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<link rev="made" href="mailto:eapearson@ubuntu.(none)" />
+</head>
 
+<body style="background-color: white">
+
+
+
+<ul id="index">
+  <li><a href="#NAME">NAME</a></li>
+  <li><a href="#DESCRIPTION">DESCRIPTION</a></li>
+  <li><a href="#METHODS">METHODS</a>
+    <ul>
+      <li><a href="#genomeTO_to_reconstructionTO">genomeTO_to_reconstructionTO</a></li>
+      <li><a href="#genomeTO_to_feature_data">genomeTO_to_feature_data</a></li>
+      <li><a href="#reconstructionTO_to_roles">reconstructionTO_to_roles</a></li>
+      <li><a href="#reconstructionTO_to_subsystems">reconstructionTO_to_subsystems</a></li>
+      <li><a href="#assign_functions_to_CDSs">assign_functions_to_CDSs</a></li>
+      <li><a href="#annotate_genome">annotate_genome</a></li>
+      <li><a href="#call_selenoproteins">call_selenoproteins</a></li>
+      <li><a href="#call_pyrrolysoproteins">call_pyrrolysoproteins</a></li>
+      <li><a href="#call_features_rRNA_SEED">call_features_rRNA_SEED</a></li>
+      <li><a href="#call_features_tRNA_trnascan">call_features_tRNA_trnascan</a></li>
+      <li><a href="#call_RNAs">call_RNAs</a></li>
+      <li><a href="#call_features_CDS_glimmer3">call_features_CDS_glimmer3</a></li>
+      <li><a href="#call_features_CDS_prodigal">call_features_CDS_prodigal</a></li>
+      <li><a href="#call_features_CDS_SEED_projection">call_features_CDS_SEED_projection</a></li>
+      <li><a href="#call_features_CDS_FragGeneScan">call_features_CDS_FragGeneScan</a></li>
+      <li><a href="#call_features_repeat_region_SEED">call_features_repeat_region_SEED</a></li>
+      <li><a href="#call_features_prophage_phispy">call_features_prophage_phispy</a></li>
+      <li><a href="#call_features_scan_for_matches">call_features_scan_for_matches</a></li>
+      <li><a href="#annotate_proteins_kmer_v1">annotate_proteins_kmer_v1</a></li>
+      <li><a href="#annotate_proteins_kmer_v2">annotate_proteins_kmer_v2</a></li>
+      <li><a href="#call_features_ProtoCDS_kmer_v1">call_features_ProtoCDS_kmer_v1</a></li>
+      <li><a href="#call_features_ProtoCDS_kmer_v2">call_features_ProtoCDS_kmer_v2</a></li>
+      <li><a href="#annotate_proteins">annotate_proteins</a></li>
+      <li><a href="#estimate_crude_phylogenetic_position_kmer">estimate_crude_phylogenetic_position_kmer</a></li>
+      <li><a href="#find_close_neighbors">find_close_neighbors</a></li>
+      <li><a href="#call_features_strep_suis_repeat">call_features_strep_suis_repeat</a></li>
+      <li><a href="#call_features_strep_pneumo_repeat">call_features_strep_pneumo_repeat</a></li>
+      <li><a href="#call_features_crispr">call_features_crispr</a></li>
+      <li><a href="#export_genome">export_genome</a></li>
+      <li><a href="#enumerate_classifiers">enumerate_classifiers</a></li>
+      <li><a href="#query_classifier_groups">query_classifier_groups</a></li>
+      <li><a href="#query_classifier_taxonomies">query_classifier_taxonomies</a></li>
+      <li><a href="#classify_into_bins">classify_into_bins</a></li>
+      <li><a href="#classify_full">classify_full</a></li>
+      <li><a href="#default_workflow">default_workflow</a></li>
+      <li><a href="#run_pipeline">run_pipeline</a></li>
+      <li><a href="#version">version</a></li>
+    </ul>
+  </li>
+  <li><a href="#TYPES">TYPES</a>
+    <ul>
+      <li><a href="#bool">bool</a></li>
+      <li><a href="#md5">md5</a></li>
+      <li><a href="#md5s">md5s</a></li>
+      <li><a href="#genome_id">genome_id</a></li>
+      <li><a href="#feature_id">feature_id</a></li>
+      <li><a href="#contig_id">contig_id</a></li>
+      <li><a href="#feature_type">feature_type</a></li>
+      <li><a href="#region_of_dna">region_of_dna</a></li>
+      <li><a href="#location">location</a></li>
+      <li><a href="#analysis_event_id">analysis_event_id</a></li>
+      <li><a href="#analysis_event">analysis_event</a></li>
+      <li><a href="#annotation">annotation</a></li>
+      <li><a href="#feature_quality_measure">feature_quality_measure</a></li>
+      <li><a href="#feature">feature</a></li>
+      <li><a href="#contig">contig</a></li>
+      <li><a href="#close_genome">close_genome</a></li>
+      <li><a href="#genome_quality_measure">genome_quality_measure</a></li>
+      <li><a href="#genomeTO">genomeTO</a></li>
+      <li><a href="#subsystem">subsystem</a></li>
+      <li><a href="#variant">variant</a></li>
+      <li><a href="#variant_of_subsystem">variant_of_subsystem</a></li>
+      <li><a href="#variant_subsystem_pairs">variant_subsystem_pairs</a></li>
+      <li><a href="#fid">fid</a></li>
+      <li><a href="#role">role</a></li>
+      <li><a href="#function">function</a></li>
+      <li><a href="#fid_role_pair">fid_role_pair</a></li>
+      <li><a href="#fid_role_pairs">fid_role_pairs</a></li>
+      <li><a href="#fid_function_pair">fid_function_pair</a></li>
+      <li><a href="#fid_function_pairs">fid_function_pairs</a></li>
+      <li><a href="#reconstructionTO">reconstructionTO</a></li>
+      <li><a href="#fid_data_tuple">fid_data_tuple</a></li>
+      <li><a href="#fid_data_tuples">fid_data_tuples</a></li>
+      <li><a href="#rna_type">rna_type</a></li>
+      <li><a href="#glimmer3_parameters">glimmer3_parameters</a></li>
+      <li><a href="#repeat_region_SEED_parameters">repeat_region_SEED_parameters</a></li>
+      <li><a href="#kmer_v1_parameters">kmer_v1_parameters</a></li>
+      <li><a href="#kmer_v2_parameters">kmer_v2_parameters</a></li>
+      <li><a href="#pipeline_stage">pipeline_stage</a></li>
+      <li><a href="#workflow">workflow</a></li>
+    </ul>
+  </li>
+</ul>
 
 <h1 id="NAME">NAME</h1>
 
@@ -3746,5 +3846,10 @@ stages has a value which is a reference to a list where each element is a pipeli
 
 </dd>
 </dl>
+
+
+</body>
+
+</html>
 
 
