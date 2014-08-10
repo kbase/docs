@@ -8,6 +8,10 @@ the document framing, leaving just the body.
 
 fix-perl-api [--module-id] [--web-id] file.html
 
+try:
+
+fix-perl-api file [rename to module]
+
 file.html is the file to be fixed. 
 
 file will become the base for the new documents, unless module-id and/or web-id are provided. 
@@ -18,24 +22,77 @@ file will become the base for the new documents, unless module-id and/or web-id 
 // The built in one is not all that useful since it leaves everything together in argv
 // and you have to parse them out anyway.
 // deal with the command line options
-//$opts = getopt("m::w::", array('module::', 'web-name::'));
-//var_dump($opts);
-//var_dump($argv);
-$opts = array ();
+#$opts = getopt("m::w::", array('module::', 'web-name::'));
+#$opts = getopt("", array('module::', 'web-name::'));
+#var_dump($opts);
+#var_dump($argv);
+#die();
+# Argh, the PHP getopt is terrible, not very useful, we just do it ourselves.
 
-$file = $argv[1];
+# Loop through the args
 
-// Find the file, exiting if not found.
-if (!file_exists($file)) {
-  die("File not found\n"); 
-}
+# If option, store in options array
+# If not, store in args arrayoo
 
-// If it is a dir, we take that to be the module name, and also the name
-// of the api doc. Otherwise, use the file's base name.
+# Try this funky regex
+# $re = '/(?:(?:[\s]*[-]([\S])[\s]*([\S]*))|(?:[\s]*(?:([\S]*))*?))*?/';
+# oops, that will parse the command line, but that is already done in argv.
+$opts = array();
+$args = array();
+$nextMayBeArgValue = false;
+$savedArg = '';
+foreach ($argv as $arg) {
+  if (preg_match('/^-(\S)(.+)/', $arg, $match)) {
+    if ($nextMayBeArgValue) {
+      $opts[$savedArg] = '';
+      $nextMayBeArgValue = false;
+      $savedArg = '';
+    }
+    $opts[$match[1]] = $match[2];
+  } else if (preg_match('/^-(\S)$/', $arg, $match)) {
+    if ($nextMayBeArgValue) {
+      $opts[$savedArg] = '';
+      $nextMayBeArgValue = false;
+      $savedArg = '';
+    }
+    $nextMayBeArgValue = true;
+    $savedArg = $match[1];
+  } else {
+    if ($nextMayBeArgValue) {
+      $opts[$savedArg] = $arg;
+      $nextMayBeArgValue = false;
+      $savedArg = '';
+    } else {
+      array_push($args, $arg);
+    }
+  }
+} 
+array_shift($args);
+
+#var_dump($args);
+#var_dump($opts);
+
+
+$file = $args[0];
+
+echo 'Input file: ' . $file . "\n";
+
+/*
+ setting the file path and module name.
+In the canonical usage, the file given is also the module name: <module>.html
+If the module name is given as an option and no filename is given we can build the file name 
+  the same way: <module>.html
+If the filename is given in that case, and it is a directory, we look for the file there, and store
+  the results there in API
+If the filename is given in that case, and it is a file, we use the file for the input, but the module
+  name for the output.
+Finally, we can use the "web" option for the output if it is given, with the module name otherwise used.
+*/
 $filepath = realpath($file);
 
-if (array_key_exists('module', $opts)) {
-	$module = $opts['module'];
+if (array_key_exists('m', $opts)) {
+	$module = $opts['m'];
+  echo('Module option provided: ' . $module . "\n");
 } else {
 	$module = 0;
 }
@@ -44,11 +101,13 @@ if (is_dir($filepath)) {
 	$parentdir = $filepath;
 	$filepath = $filepath . '/' . $module . '.html';
 	if (!file_exists($filepath)) {
-		die("Tried to autodected the api doc from module '$module' but it does not exist.\n");
+		die("Tried to autodect the api doc from module '$module' but it does not exist.\n");
 	}
-} else {
+} else if (is_file($filepath)) {
 	$module = $module ? $module : basename($filepath, '.html');
 	$parentdir = dirname($filepath);
+} else {
+  die("Input file not found\n");
 }
 
 
@@ -92,7 +151,7 @@ $body = substr($content, $navEnd[2], $bodyEnd[1]-$navEnd[2]);
 
 // The file name is composed of the module name + .html, or the module name + _nav.html
 // We get the module name for the time being from the original file name.
-$module = basename($filepath, '.html');
+#$module = basename($filepath, '.html');
 
 $bodyPath = $apidir . '/' . $module . '.html';
 $navPath = $apidir . '/' . $module . '_nav.html'; 
