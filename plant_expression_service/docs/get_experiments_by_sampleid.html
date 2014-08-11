@@ -1,0 +1,76 @@
+<?xml version="1.0" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title></title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<link rev="made" href="mailto:eapearson@ubuntu.(none)" />
+</head>
+
+<body style="background-color: white">
+
+
+
+<ul id="index">
+  <li><a href="#NAME">NAME</a></li>
+  <li><a href="#SYNOPSIS">SYNOPSIS</a></li>
+  <li><a href="#DESCRIPTION">DESCRIPTION</a>
+    <ul>
+      <li><a href="#Documentation-for-underlying-call">Documentation for underlying call</a></li>
+    </ul>
+  </li>
+  <li><a href="#OPTIONS">OPTIONS</a></li>
+  <li><a href="#EXAMPLE">EXAMPLE</a></li>
+  <li><a href="#VERSION">VERSION</a></li>
+</ul>
+
+<h1 id="NAME">NAME</h1>
+
+<pre><code> get_experiments_by_sampleid</code></pre>
+
+<h1 id="SYNOPSIS">SYNOPSIS</h1>
+
+<pre><code> get_experiments_by_sampleid [--url=http://kbase.us/services/plant_expression_service] &lt; sampleIDs</code></pre>
+
+<h1 id="DESCRIPTION">DESCRIPTION</h1>
+
+<pre><code> This function provides the expression values for given experiment sample IDs (GSM#s).</code></pre>
+
+<h2 id="Documentation-for-underlying-call">Documentation for underlying call</h2>
+
+<p>This function provides the expression values corresponding to each given experiment sample in the input list of sample ids (GSM#s).For each sample in the input list of samples, it extracts the expressed genes (kbase gene identifier) and their corresponding expression values. e.g.for samples:&quot;GSM128731&quot;,&quot;GSM131686&quot; Output looks like this: &quot;&quot;,&quot;GSM128731&quot;,&quot;GSM131686&quot; &quot;kb|g.3899.locus.23281&quot;,4.19051374151256,4.81544532287956 &quot;kb|g.3899.locus.23342&quot;,8.0461118314498,7.75470811901751 &quot;kb|g.3899.locus.23319&quot;,8.95008412287335,8.0937520447078 &quot;kb|g.3899.locus.23295&quot;,6.70090411599666,7.42720023331292 &quot;kb|g.3899.locus.23378&quot;,8.79308438662897,8.23643301305399</p>
+
+<h1 id="OPTIONS">OPTIONS</h1>
+
+<dl>
+
+<dt id="u-http:-kbase.us-services-plant_expression_service---url-http:-kbase.us-services-plant_expression_service-hostname-of-the-server"><b>-u</b> <i>[http://kbase.us/services/plant_expression_service]</i> <b>--url</b>=<i>[http://kbase.us/services/plant_expression_service]</i> hostname of the server</dt>
+<dd>
+
+</dd>
+<dt id="help-prints-help-information"><b>--help</b> prints help information</dt>
+<dd>
+
+</dd>
+<dt id="version-print-version-information"><b>--version</b> print version information</dt>
+<dd>
+
+</dd>
+</dl>
+
+<h1 id="EXAMPLE">EXAMPLE</h1>
+
+<pre><code> echo GSM128731 | get_experiments_by_sampleid
+ get_experiments_by_sampleid --help
+ get_experiments_by_sampleid --version</code></pre>
+
+<h1 id="VERSION">VERSION</h1>
+
+<p>0.1</p>
+
+
+</body>
+
+</html>
+
+

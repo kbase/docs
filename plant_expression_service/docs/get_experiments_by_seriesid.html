@@ -1,0 +1,76 @@
+<?xml version="1.0" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title></title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<link rev="made" href="mailto:eapearson@ubuntu.(none)" />
+</head>
+
+<body style="background-color: white">
+
+
+
+<ul id="index">
+  <li><a href="#NAME">NAME</a></li>
+  <li><a href="#SYNOPSIS">SYNOPSIS</a></li>
+  <li><a href="#DESCRIPTION">DESCRIPTION</a>
+    <ul>
+      <li><a href="#Documentation-for-underlying-call">Documentation for underlying call</a></li>
+    </ul>
+  </li>
+  <li><a href="#OPTIONS">OPTIONS</a></li>
+  <li><a href="#EXAMPLE">EXAMPLE</a></li>
+  <li><a href="#VERSION">VERSION</a></li>
+</ul>
+
+<h1 id="NAME">NAME</h1>
+
+<p>get_experiments_by_seriesid</p>
+
+<h1 id="SYNOPSIS">SYNOPSIS</h1>
+
+<p>get_experiments_by_seriesid [--url=http://kbase.us/services/plant_expression_service] &lt; seriesIDs</p>
+
+<h1 id="DESCRIPTION">DESCRIPTION</h1>
+
+<p>This function provides the expression values, samples (GSM#) for the corresponding experiment (GSE series).</p>
+
+<h2 id="Documentation-for-underlying-call">Documentation for underlying call</h2>
+
+<pre><code>    This function provides the expression data for each experiment corresponding to the given list of series (GSE#s). It first retrieves the experiments sample ids (GSM#s) for each series and subsequently, it extracts the expressed genes and their corresponding expression values for each experiment. It then returns a table of data containing GSE#, GSM#, Expressed Gene ID, and Expression Value.*/</code></pre>
+
+<h1 id="OPTIONS">OPTIONS</h1>
+
+<dl>
+
+<dt id="u-http:-kbase.us-services-plant_expression_service---url-http:-kbase.us-services-plant_expression_service-hostname-of-the-server"><b>-u</b> <i>[http://kbase.us/services/plant_expression_service]</i> <b>--url</b>=<i>[http://kbase.us/services/plant_expression_service]</i> hostname of the server</dt>
+<dd>
+
+</dd>
+<dt id="help-prints-help-information"><b>--help</b> prints help information</dt>
+<dd>
+
+</dd>
+<dt id="version-print-version-information"><b>--version</b> print version information</dt>
+<dd>
+
+</dd>
+</dl>
+
+<h1 id="EXAMPLE">EXAMPLE</h1>
+
+<pre><code> echo &#39;GSE5684&#39; | get_experiments_by_seriesid
+ get_experiments_by_seriesid --help
+ get_experiments_by_seriesid --version</code></pre>
+
+<h1 id="VERSION">VERSION</h1>
+
+<p>0.1</p>
+
+
+</body>
+
+</html>
+
+

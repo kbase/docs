@@ -1,0 +1,46 @@
+OVERVIEW
+-----------------------------------------------------------------------------------------
+The plant expression service provides gene expression retrieval service in support of the co-expression network and ontology driven data needs of the plant sciences community. Currently, the processed data is Arabidopsis thaliana microarray gene expression experiments from NCBI GEO and consists of 7000 samples. This data will be used for co-expression analysis tools, included in scripts directory. 
+
+It will serve queries for tissue and condition specific gene expression co-expression network for biologically interesting genes/samples. The samples of these experiments are manually annotated using plant ontology (PO) [http://www.plantontology.org/] and environment ontology (EO) [http://obo.cvs.sourceforge.net/viewvc/obo/obo/ontology/phenotype/environment/environment_ontology.obo] controlled vocabularies. Users can search differentially expressed genes in different tissues (e.g root or shoot etc.) or in different experimental conditions/treatments (e.g various biotic or abiotic stresses etc.). Currently the metadata annotation is provided for a subset of gene expression experiments from the NCBI GEO microarray experiments. 
+
+
+VERSION: 0.0.2 (Released 08/06/2013)
+------------------------------------------
+NEW FEATURES:
+-coex_net provides edge weights
+-coex_cluster2 dumps h-cluster output
+
+UPDATED FEATURES / MAJOR BUG FIXES:
+None at this release
+
+NEXT RELEASE PLAN:
+This service will be replaced by unified expression service
+
+
+
+VERSION: 0.0.2 (Released 07/23/2013)
+------------------------------------------
+NEW FEATURES:
+-coex_pipeline, which provide a single command line to run all coexpression analysis
+
+UPDATED FEATURES / MAJOR BUG FIXES:
+-Fixed the command argument bugs on coex_filter, coex_net and coex_cluster
+
+NEXT RELEASE PLAN:
+This service will be replaced by unified expression service
+
+
+VERSION: 0.0.1 (Released 11/28/2012)
+-----------------------------------------------------------------------------------------
+NEW FEATURES:
+-This is the first internal release of the Plant Expression Service and it has near full functional API and CLIs.
+
+UPDATED FEATURES / MAJOR BUG FIXES:
+-none.
+
+NEXT RELEASE PLAN:
+We plan to include Populus gene expression data in the next release.
+
+
+ 

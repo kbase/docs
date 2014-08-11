@@ -1,0 +1,88 @@
+<?xml version="1.0" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title></title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<link rev="made" href="mailto:eapearson@ubuntu.(none)" />
+</head>
+
+<body style="background-color: white">
+
+
+
+<ul id="index">
+  <li><a href="#NAME">NAME</a></li>
+  <li><a href="#SYNOPSIS">SYNOPSIS</a></li>
+  <li><a href="#DESCRIPTION">DESCRIPTION</a>
+    <ul>
+      <li><a href="#Documentation-for-underlying-call">Documentation for underlying call</a></li>
+    </ul>
+  </li>
+  <li><a href="#OPTIONS">OPTIONS</a></li>
+  <li><a href="#EXAMPLE">EXAMPLE</a></li>
+  <li><a href="#VERSION">VERSION</a></li>
+</ul>
+
+<h1 id="NAME">NAME</h1>
+
+<p>get_eo_sampleidlist</p>
+
+<h1 id="SYNOPSIS">SYNOPSIS</h1>
+
+<p>get_eo_sampleidlist [--url=http://kbase.us/services/plant_expression_service] &lt; eoIDs</p>
+
+<h1 id="DESCRIPTION">DESCRIPTION</h1>
+
+<p>Find out the samples from those expression experiments that have been performed for one or more environmental conditions (EO) of interest.</p>
+
+<h2 id="Documentation-for-underlying-call">Documentation for underlying call</h2>
+
+<p>Retrieve the list of expression samples (GSM#s) that correspond to one or more of the environmental conditions of interest. for example if the input is: EO:0007107</p>
+
+<pre><code> then the output looks like:
+ EO:0007107      Arabidopsis thaliana    GSM131147
+ EO:0007107      Arabidopsis thaliana    GSM131148
+ EO:0007107      Arabidopsis thaliana    GSM131149
+ EO:0007107      Populus trichocarpa     GSM431198
+ EO:0007107      Populus trichocarpa     GSM431199
+ EO:0007107      Populus trichocarpa     GSM431200</code></pre>
+
+<h1 id="OPTIONS">OPTIONS</h1>
+
+<dl>
+
+<dt id="u-http:-kbase.us-services-plant_expression_service---url-http:-kbase.us-services-plant_expression_service-hostname-of-the-server"><b>-u</b> <i>[http://kbase.us/services/plant_expression_service]</i> <b>--url</b>=<i>[http://kbase.us/services/plant_expression_service]</i> hostname of the server</dt>
+<dd>
+
+</dd>
+<dt id="species-species-of-interest-e.g-Ara-for-Arabidopsis-and-Pop-for-Poplar"><b>--species</b> species of interest e.g Ara for Arabidopsis and Pop for Poplar</dt>
+<dd>
+
+</dd>
+<dt id="help-prints-help-information"><b>--help</b> prints help information</dt>
+<dd>
+
+</dd>
+<dt id="version-print-version-information"><b>--version</b> print version information</dt>
+<dd>
+
+</dd>
+</dl>
+
+<h1 id="EXAMPLE">EXAMPLE</h1>
+
+<pre><code> echo &#39;EO:0007107&#39; | get_eo_sampleidlist --species=Ara
+ get_eo_sampleidlist --help
+ get_eo_sampleidlis --version</code></pre>
+
+<h1 id="VERSION">VERSION</h1>
+
+<p>0.1</p>
+
+
+</body>
+
+</html>
+
+

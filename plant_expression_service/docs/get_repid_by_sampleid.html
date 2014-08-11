@@ -1,0 +1,76 @@
+<?xml version="1.0" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title></title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<link rev="made" href="mailto:eapearson@ubuntu.(none)" />
+</head>
+
+<body style="background-color: white">
+
+
+
+<ul id="index">
+  <li><a href="#NAME">NAME</a></li>
+  <li><a href="#SYNOPSIS">SYNOPSIS</a></li>
+  <li><a href="#DESCRIPTION">DESCRIPTION</a>
+    <ul>
+      <li><a href="#Documentation-for-underlying-call">Documentation for underlying call</a></li>
+    </ul>
+  </li>
+  <li><a href="#OPTIONS">OPTIONS</a></li>
+  <li><a href="#EXAMPLE">EXAMPLE</a></li>
+  <li><a href="#VERSION">VERSION</a></li>
+</ul>
+
+<h1 id="NAME">NAME</h1>
+
+<p>get_repid_by_sampleid</p>
+
+<h1 id="SYNOPSIS">SYNOPSIS</h1>
+
+<p>get_repid_by_sampleid [--url=http://kbase.us/services/plant_expression_service] &lt; sampleIDs</p>
+
+<h1 id="DESCRIPTION">DESCRIPTION</h1>
+
+<p>This function finds out the replicate information for expression samples of the experiments.</p>
+
+<h2 id="Documentation-for-underlying-call">Documentation for underlying call</h2>
+
+<p>For a given list of expression experiment samples (GSM#s):GSM131288,GSM131291,GSM131292 find out the replicate ids. e.g output looks like: 1605,1605,1604 All replicates have same identifier. e.g GSM131288 and GSM131291 are sample replicates as identified by replicate id 1605.</p>
+
+<h1 id="OPTIONS">OPTIONS</h1>
+
+<dl>
+
+<dt id="u-http:-kbase.us-services-plant_expression_service---url-http:-kbase.us-services-plant_expression_service-hostname-of-the-server"><b>-u</b> <i>[http://kbase.us/services/plant_expression_service]</i> <b>--url</b>=<i>[http://kbase.us/services/plant_expression_service]</i> hostname of the server</dt>
+<dd>
+
+</dd>
+<dt id="help-prints-help-information"><b>--help</b> prints help information</dt>
+<dd>
+
+</dd>
+<dt id="version-print-version-information"><b>--version</b> print version information</dt>
+<dd>
+
+</dd>
+</dl>
+
+<h1 id="EXAMPLE">EXAMPLE</h1>
+
+<pre><code> get_repid_by_sampleid --url=http://kbase.us/services/plant_expression_service
+ get_repid_by_sampleid --help
+ get_repid_by_sampleid --version</code></pre>
+
+<h1 id="VERSION">VERSION</h1>
+
+<p>0.1</p>
+
+
+</body>
+
+</html>
+
+

@@ -1,0 +1,80 @@
+<?xml version="1.0" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title></title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<link rev="made" href="mailto:eapearson@ubuntu.(none)" />
+</head>
+
+<body style="background-color: white">
+
+
+
+<ul id="index">
+  <li><a href="#NAME">NAME</a></li>
+  <li><a href="#SYNOPSIS">SYNOPSIS</a></li>
+  <li><a href="#DESCRIPTION">DESCRIPTION</a>
+    <ul>
+      <li><a href="#Documentation-for-underlying-call">Documentation for underlying call</a></li>
+    </ul>
+  </li>
+  <li><a href="#OPTIONS">OPTIONS</a></li>
+  <li><a href="#EXAMPLE">EXAMPLE</a></li>
+  <li><a href="#VERSION">VERSION</a></li>
+</ul>
+
+<h1 id="NAME">NAME</h1>
+
+<p>get_po_sampleidlist</p>
+
+<h1 id="SYNOPSIS">SYNOPSIS</h1>
+
+<p>get_po_sampleidlist [--url=http://kbase.us/services/plant_expression_service] &lt; poIDs</p>
+
+<h1 id="DESCRIPTION">DESCRIPTION</h1>
+
+<p>Retrieve expression sample Ids (GSM#s) for a given list of plant ontologies.</p>
+
+<h2 id="Documentation-for-underlying-call">Documentation for underlying call</h2>
+
+<p>Retrieve the list of expression samples (GSM#s) that corresponds to one or more of the plant tissue/organ type of interest. For example, if the input list of PO ids is:PO:0009049 then the output looks like: PO:0009049 Arabidopsis thaliana GSM133720 PO:0009049 Arabidopsis thaliana GSM133722 PO:0009049 Arabidopsis thaliana GSM133747 PO:0009049 Arabidopsis thaliana GSM133748 PO:0009049 Populus trichocarpa GSM327656 PO:0009049 Populus trichocarpa GSM327657 PO:0009049 Populus trichocarpa GSM327658 PO:0009049 Populus trichocarpa GSM327659 PO:0009049 Populus trichocarpa GSM327660 PO:0009049 Populus trichocarpa GSM327661</p>
+
+<h1 id="OPTIONS">OPTIONS</h1>
+
+<dl>
+
+<dt id="u-http:-kbase.us-services-plant_expression_service---url-http:-kbase.us-services-plant_expression_service-hostname-of-the-server"><b>-u</b> <i>[http://kbase.us/services/plant_expression_service]</i> <b>--url</b>=<i>[http://kbase.us/services/plant_expression_service]</i> hostname of the server</dt>
+<dd>
+
+</dd>
+<dt id="species-species-Ara-for-Arabidopsis-and-Pop-for-Poplar"><b>--species</b> species=Ara for Arabidopsis and Pop for Poplar</dt>
+<dd>
+
+</dd>
+<dt id="help-prints-help-information"><b>--help</b> prints help information</dt>
+<dd>
+
+</dd>
+<dt id="version-print-version-information"><b>--version</b> print version information</dt>
+<dd>
+
+</dd>
+</dl>
+
+<h1 id="EXAMPLE">EXAMPLE</h1>
+
+<pre><code> echo &#39;PO:0009047&#39; | get_po_sampleidlist
+ get_po_sampleidlist --help
+ get_po_sampleidlist --version</code></pre>
+
+<h1 id="VERSION">VERSION</h1>
+
+<p>0.1</p>
+
+
+</body>
+
+</html>
+
+
