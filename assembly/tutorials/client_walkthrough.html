@@ -2,15 +2,16 @@
 	Using the Assembly Service Command-Line Client 
 </h1>
 <p>
+
 	<strong>
 		Required Prerequisite Activities: 
 	</strong>
- <a href="/for-users/get-started#iris">Get Started with IRIS</a> </p>
-	</a>
-</p>
+	
+ <a href="/get-started/iris-quick-start">Get Started with IRIS</a> </p>
+	
 <p>
 	KBase command-line interfaces use Linux commands. To familiarize yourself, check out these quick guides: 
-	<a href="http://www1.cs.ucr.edu/faq/linux.pdf">
+	<a href="http://www.debian.org/doc/manuals/refcard/refcard">
 		Reference card 
 	</a>
 	, 
@@ -128,10 +129,11 @@ wget http://www.mcs.anl.gov/~fangfang/test/se.fastq
 			QUAST 
 		</a>
 	</li>
+	</ul>
 	<p>
 		Follow the QUAST link to learn more about output file contents. 
 	</p>
-</ul>
+
 <h2>
 	Assembling Pair-End Reads 
 </h2>
@@ -215,15 +217,14 @@ mkdir results
 tar -xf 95_analysis.tar.gz -C results/
 cat results/report.txt
 </pre> 
-</p>
 <p>
-	<tt>
+	<code>
 		mkdir
-	</tt>
+	</code>
 	makes a directory, in this case, called results. The .tar.gz file is an archived and compressed file. 
-	<tt>
+	<code>
 		tar -xf
-	</tt>
+	</code>
 	uncompresses and extracts the files; the "-C" option moves the extracted files into your new directory "results". 
 </p>
 <p>
