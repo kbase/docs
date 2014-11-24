@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<!-- saved from url=(0059)https://staging.kbase.us/get-started/narrative-quick-start/ -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		
+
+<title>KBase :: Narrative Interface Quick Start</title>
+<meta name="generator" content="concrete5 - 5.6.3.1">
+<script type="text/javascript">
+var CCM_DISPATCHER_FILENAME = '/index.php';
+var CCM_CID = 1451;
+var CCM_EDIT_MODE = false;
+var CCM_ARRANGE_MODE = false;
+var CCM_IMAGE_PATH = "/concrete/images";
+var CCM_TOOLS_PATH = "/index.php/tools/required";
+var CCM_BASE_URL = "https://staging.kbase.us";
+var CCM_REL = "";
+
+</script>
+
+	<link rel="shortcut icon" href="https://staging.kbase.us/files/2613/5006/8591/favicon.ico" type="image/x-icon">
+	<link rel="icon" href="https://staging.kbase.us/files/2613/5006/8591/favicon.ico" type="image/x-icon">
+
+<style type="text/css">html {margin-top: 49px !important;} </style>
+
+<script type="text/javascript">
+var CCM_SECURITY_TOKEN = '1416871030:3433bf1bb8f4b2206a660796e968ac0e';</script>
+
+<link rel="stylesheet" type="text/css" href="./narrative-user-guide_files/ccm.base.css">
+<script type="text/javascript" src="./narrative-user-guide_files/jquery.js"></script>
+<script type="text/javascript" src="./narrative-user-guide_files/ccm.base.js"></script>
+<link rel="stylesheet" type="text/css" href="./narrative-user-guide_files/ccm.app.css">
+<link rel="stylesheet" type="text/css" href="./narrative-user-guide_files/jquery.ui.css">
+		<link rel="canonical" href="http://staging.kbase.us/get-started/narrative-quick-start">
+<!-- < ?  php include_once("analyticstracking.php") ? > -->
+<link rel="stylesheet" type="text/css" href="./narrative-user-guide_files/style.css">
+<link rel="stylesheet" type="text/css" href="./narrative-user-guide_files/tweak.css">
+	<style type="text/css"></style></head>
+	<body class="kbase-right">
+<!-- Template: kbase-standard-page-template 
+2014-06-19: EAP created
+-->
+<!-- < ? php include_once("analyticstracking.php") ? > -->
+<div class="sticky-body">
+
+	
+<!-- googleoff: index, snippet -->
+<div class="bannerArea">
+    <div class="container clearfix">
+        <div class="header-left">
+            <div class="toplogo">
+                <a href="https://staging.kbase.us/"><img src="./narrative-user-guide_files/Kbase_Logo.png" width="250" height="86" alt="KBase Logo"></a>
+            </div>
+        </div>
+        <div class="header-right">
+            <div class="quick-service-nav">
+                
+<div id="HTMLBlock7901" class="HTMLBlock">
+<div class="button-bar">
+<a href="https://staging.kbase.us/get-started/overview" class="button" target="_blank">Get Started</a>
+<a href="https://narrative.kbase.us/functional-site/#/narratives/my-narratives" class="button" target="_blank">My Projects</a>
+</div></div>            </div>
+            <div id="search">
+                <div class="search-box">
+                    <form action="https://staging.kbase.us/search-results" method="get" class="ccm-search-block-form">
+                        <input name="query" type="text" title="Search this site" placeholder="Search this site" autocomplete="off" class="ccm-search-block-text" value="">
+                        <input class="search-icon" type="image" src="./narrative-user-guide_files/search_icon.png" alt="Search KBase">
+                    </form>
+                </div>
+                <!--<div class="search-suggestions dropdown-menu"></div>-->
+            </div>
+        </div>
+    </div>
+</div>
+<div class="top-nav-area">
+    <div class="container clearfix">
+        <div class="top-nav">
+            <div class="autonav"><ul><li><a href="https://staging.kbase.us/mission/what-is-kbase/" target="_self" class="nav-dropdown">Mission<span class="arrow-down"></span></a><ul><li><a href="https://staging.kbase.us/mission/what-is-kbase/" target="_self" class="">What is KBase?</a></li><li><a href="https://staging.kbase.us/mission/why-kbase/" target="_self" class="">Why KBase?</a></li><li><a href="https://staging.kbase.us/mission/what-can-you-do-with-kbase/" target="_self" class="">What can you do with KBase?</a></li><li><a href="https://staging.kbase.us/mission/narrative-overview/" target="_self" class="">Narrative User Interface Overview</a></li></ul></li><li><a href="https://staging.kbase.us/data/data-types/" target="_self" class="nav-dropdown">Data<span class="arrow-down"></span></a><ul><li><a href="https://staging.kbase.us/data/data-types/" target="_self" class="">Data Types</a></li><li><a href="https://staging.kbase.us/data/data-sources/" target="_self" class="">Data Sources</a></li><li><a href="https://staging.kbase.us/data/data-policy/" target="_self" class="">Data Policy</a></li><li><a href="https://staging.kbase.us/data/data-search/" target="_self" class="">Data Search</a></li></ul></li><li><a href="https://staging.kbase.us/developer-zone/services/" target="_self" class="nav-dropdown">Services<span class="arrow-down"></span></a><ul><li><a href="https://staging.kbase.us/developer-zone/services/" target="_self" class="">Services</a></li><li><a href="https://staging.kbase.us/developer-zone/service-architecture/" target="_self" class="">Service Architecture</a></li><li><a href="https://staging.kbase.us/developer-zone/developers/" target="_self" class="">Developer Support</a></li></ul></li><li><a href="https://staging.kbase.us/get-started/overview/" target="_self" class="nav-path-selected nav-dropdown">Get Started<span class="arrow-down"></span></a><ul><li><a href="https://staging.kbase.us/get-started/overview/" target="_self" class="">Overview</a></li><li><a href="https://staging.kbase.us/get-started/sign-up/" target="_self" class="">Sign up for a KBase Account</a></li><li><a href="./narrative-user-guide_files/narrative-user-guide.html" target="_self" class="nav-selected nav-path-selected">Narrative Interface Quick Start</a></li><li><a href="https://staging.kbase.us/get-started/data-search-quick-start/" target="_self" class="">Data Search Quick Start</a></li><li><a href="https://staging.kbase.us/get-started/iris-quick-start/" target="_self" class="">IRIS Interface Quick Start</a></li></ul></li><li><a href="https://staging.kbase.us/user-support/documentation/" target="_self" class="nav-dropdown">User Support<span class="arrow-down"></span></a><ul><li><a href="https://staging.kbase.us/user-support/documentation/" target="_self" class="">Documentation</a></li><li><a href="https://staging.kbase.us/user-support/tutorials/" target="_self" class="">Tutorials</a></li><li><a href="https://staging.kbase.us/user-support/videos/" target="_self" class="">Videos</a></li><li><a href="https://staging.kbase.us/user-support/report-issue/" target="_self" class="">Report Issue</a></li><li><a href="https://staging.kbase.us/user-support/iris/" target="_self" class="">IRIS</a></li></ul></li><li><a href="https://staging.kbase.us/about/the-team/" target="_self" class="nav-dropdown">About Us<span class="arrow-down"></span></a><ul><li><a href="https://staging.kbase.us/about/the-team/" target="_self" class="">The Team</a></li><li><a href="https://staging.kbase.us/about/faqs/" target="_self" class="">FAQs</a></li><li><a href="https://staging.kbase.us/about/news-archive/2014/" target="_self" class="">News Archive</a></li><li><a href="https://staging.kbase.us/about/events/" target="_self" class="">Calendar</a></li><li><a href="https://staging.kbase.us/about/terms-and-conditions/" target="_self" class="">Terms and Conditions</a></li><li><a href="https://staging.kbase.us/about/contact-us/" target="_self" class="">Contact Us</a></li></ul></li></ul></div>        </div>
+    </div>
+</div>
+<script>
+"use strict";
+function setSearchTerm() {
+  var href = window.location.href;
+  var url1 = href.split('?');
+  var queryString = url1[1];
+  if (!queryString) {
+    return;
+  }
+
+  var query = {};
+  queryString.split('&').forEach(function(item) {
+    var field = item.split("=");
+    query[decodeURIComponent(field[0]).replace(/\+/g, ' ')] = decodeURIComponent(field[1]).replace(/\+/g, ' ');
+  });
+  var searchTerm = query.query;
+  if (searchTerm) {
+    document.querySelector('form.ccm-search-block-form input[name="query"]').value = searchTerm;
+  }
+}
+
+try {
+  setSearchTerm();
+} catch (e) {
+  console.log('Error setting search term: '+e.message);
+}
+</script>
+<!-- googleon: index, snippet -->
+<div class="notifications-area">
+    <div class="container">
+    </div>
+</div>	<div class="contentArea">
+		<div class="container">
+			<div class="title-area">
+							</div>
+			<div class="left-content-area sidebar">
+				<div class="column">
+				<!-- googleoff: index, snippet -->
+				<div class="title">Get Started</div><div class="autonav"><ul><li><a href="https://staging.kbase.us/get-started/overview/" target="_self" class="">Overview</a></li><li><a href="https://staging.kbase.us/get-started/sign-up/" target="_self" class="">Sign up for a KBase Account</a></li><li><a href="./narrative-user-guide_files/narrative-user-guide.html" target="_self" class="nav-selected nav-path-selected">Narrative Interface Quick Start</a></li><li><a href="https://staging.kbase.us/get-started/data-search-quick-start/" target="_self" class="">Data Search Quick Start</a></li><li><a href="https://staging.kbase.us/get-started/iris-quick-start/" target="_self" class="">IRIS Interface Quick Start</a></li></ul></div>				<!-- googleon: index, snippet -->
+				</div>
+			</div>
+			<div class="right-content-area">
+				<div class="column">
+				<h1>Narrative Interface Quick Start Guide</h1>
+<div class="rounded-box" style="width: 25%; float: right; margin: 1em 1em 1em 1em;">
+<h2>Before Beginning</h2>
+<ul>
+<li><a href="https://staging.kbase.us/get-started/sign-up"><strong>Sign up for a KBase account</strong></a>, if you haven’t already.</li>
+<li>We recommend accessing the Narrative Interface and other KBase interfaces with the latest version of either <strong>Mozilla Firefox</strong> or <strong>Google Chrome</strong> browsers. Please see the <a href="https://staging.kbase.us/user-support/documentation/supported-browsers">Supported Browsers</a> page for more information.</li>
+</ul>
+</div>
+<p><span>The Narrative Interface is a new graphical user interface that enables researchers to create interactive, reproducible records of the data, computational steps, and thought processes underpinning their results. These records can be shared as “active papers” called Narratives that let others repeat the computational experiment, even altering parameters or input data to achieve different or improved results. </span>To learn more about the features of this interface, visit the <a href="https://staging.kbase.us/science/narrative-overview">Narrative User Interface Overview</a>.</p>
+<p>Although the Narrative Interface is still in early development, new capabilities and features are constantly being added, and users can begin to explore what is currently available using the prototype version available at <a href="https://narrative.kbase.us/">narrative.kbase.us</a>. This guide will help you get started by showing you how to:</p>
+<ul>
+<li><a href="https://staging.kbase.us/get-started/narrative-quick-start/#login">Log in to the Narrative Interface</a></li>
+<li><a href="https://staging.kbase.us/get-started/narrative-quick-start/#viewfeature">View a Featured Narrative</a></li>
+<li><a href="https://staging.kbase.us/get-started/narrative-quick-start/#copynarrative">Copy a Narrative</a></li>
+<li><a href="https://staging.kbase.us/get-started/narrative-quick-start/#create">Create a new Narrative</a></li>
+<li><a href="https://staging.kbase.us/get-started/narrative-quick-start/#addcontent">Add content to your Narrative</a></li>
+</ul>
+<h2 id="login">Log in to the Narrative Interface</h2>
+<p>Go to the Narrative Interface home page at <a href="http://narrative.kbase.us/" target="_blank">narrative.kbase.us</a>. At the top, you will see these key features:</p>
+<div class="screengrab"><img src="./narrative-user-guide_files/narrativeQS27.png" alt="narrativeQS27.png" width="750"></div>
+<ul>
+<li><strong>KBase logo</strong> — Links to the KBase home page (kbase.us).</li>
+<li><strong>Narratives</strong> — From the “Narratives” menu, you can create a new Narrative and access your existing Narratives, as well as others that have been shared with you by collaborators or made publicly available.</li>
+<li><strong>Workspaces</strong> — In KBase, workspaces let you store, analyze, and share your private data objects. The “Workspaces” menu links to Workspace Browser, where you can create and manage workspaces and view interactive information about the data objects stored in them.</li>
+<li><strong>Search Data</strong> — The new search interface, which is rapidly developing, allows you to search some of the public data stored in KBase. More data types will be added to the search interface soon.</li>
+<li><strong>Upload</strong> — Once developed, this tool will let you upload data files from your computer to your workspace so that you can analyze them in your Narratives.</li>
+<li><strong>Help</strong> — Links to documentation and contact information for submitting questions and help requests.</li>
+</ul>
+<p>Using either the link at the top right or the box in the center of the page, sign into KBase with your user account and password.</p>
+<h2 id="viewfeature">View a Featured Narrative</h2>
+<p>Once signed in, you will be taken to the Featured Narratives page (see image). These Featured Narratives demonstrate some of the types of systems biology questions that can be explored in KBase.</p>
+<div class="screengrab"><img src="./narrative-user-guide_files/Screen_Shot_2014-08-08_at_9.54.33_PM.png" alt="Featured Narratives screenshot" width="750"></div>
+<div class="rounded-box" style="width: 40%; float: right; margin: 1em 1em 1em 1em;">
+<h3>Error 502</h3>
+<p>Sometimes, instead of seeing a Narrative, you will see an error message that says "502 Bad Gateway Error". The Narrative team is working on resolving this problem. In the meantime, if you reload the page, you should be able to see the Narrative you selected.</p>
+</div>
+<p>&nbsp;</p>
+<p>Click on one of the Featured Narratives to open a read-only version of the Narrative that has already been populated with a summary, input datasets, and output from KBase services that have been run on the input data. The screenshot below shows part of the Comparative Genomics Narrative.</p>
+<div class="screengrab"><img src="./narrative-user-guide_files/narrativeQS2.png" alt="narrativeQS2.png" width="750" height="527"></div>
+<p>When you open a Narrative, there are several key features:</p>
+<ol type="a">
+<li>The "Data" panel in the upper left for viewing all data files in your Narrative</li>
+<li>The "Services" panel in the lower left for selecting different KBase services that you can use to analyze your data</li>
+<li>The main center panel for viewing or composing a Narrative</li>
+<li>A URL that is unique for every Narrative, allowing you to easily share your Narrative with collaborators or even the scientific community at large</li>
+</ol>
+<div class="rounded-box" style="width: 40%; float: right; margin: 1em 1em 1em 1em;">
+<h3>Why is the Narrative complaining about websockets?</h3>
+<p>The KBase Narrative Interface is based on the iPython Notebook, which uses a protocol called "websockets" for communicating between the browser and the server. The websocket protocol is similar to, but not the same as, the HTTP protocol used for the Web. Thus, some firewalls and Virtual Private Networks (VPNs) that work fine for web browsing can still block or interfere with websockets, causing the Narrative to fail.</p>
+<p>If you are trying to use the Narrative Interface and see error messages about websockets, you have two options: (a) stop using the VPN or firewall that is causing it to fail or (b) change the VPN or firewall to properly handle the websocket protocol. Option (b) will probably involve talking to your local network administrators.</p>
+<p>One other thing to check is that the URL you are visiting starts with https://. If it starts with http://, try changing it to https://.</p>
+<p>Another reason you might see a websocket error is in a Narrative window that you've left open for a while and your session has expired. If reloading the page doesn't work, you may have to log out and log in again.</p>
+<p>If you are not sure whether the errors you are seeing are due to websockets, you can test the websocket protocol on your connection to the Internet using the public server at <a href="http://www.websocket.org/echo.html" target="_blank">http://www.websocket.org/echo.html</a>.</p>
+</div>
+<h3>The Data Panel</h3>
+<div class="screengrab" style="float: right;"><img src="./narrative-user-guide_files/narrativeQS3.png" alt="narrativeQS3.png" width="300" height="419"></div>
+<p>Click on the “Narrative” tab in the data panel on the upper left side of the page. This tab shows the datasets that are used in the current Narrative. Note that this panel (see image) can take a while to load when you first open the Narrative.</p>
+<p>Several options are available for finding and displaying data objects in the data panel. A drop-down menu will let you sort data by type. By default, all types are shown when you open your Narrative.</p>
+<p>You can also list data objects by ID in alphabetical or reverse alphabetical order by clicking the ID button in the middle of the panel.</p>
+<p>A search box lets you search for a data object of interest within the data panel. For example, type “model” in the search box to display a list of models that were generated in this Featured Narrative. Your search will return a list of five data objects:</p>
+<ul>
+<li>CACIA_14H1_model_translated_gf.fba.0</li>
+<li>CACIA_14H1_model_translated.fba.0</li>
+<li>CACIA_14H1_model_translated</li>
+<li>CACIA_14H1_model_translated_gf</li>
+<li>CACIA_model_kbase</li>
+</ul>
+<p>As for all data objects in the panel, you can hover over the names of these models to see a short description of the type of object they are. For more information, click on the question mark to the right of a data object. This will open a window listing the data object’s properties. Below is the properties window for CACIA_model_kbase.</p>
+<p>&nbsp;</p>
+<div class="screengrab"><img src="./narrative-user-guide_files/narrativeQS4.png" alt="narrativeQS4.png" width="450" height="474"></div>
+<p>Among the information in this window is a drop-down menu at the bottom that shows the object’s version history. Also at the bottom are two buttons that link to further details.</p>
+<p>The “Object Type Details” button opens a window that displays information about what type of data you’re viewing and about data versioning.</p>
+<p>The “View Landing Page” button opens a new browser window showing a Landing Page with more information about the object. The information shown will depend on the type of object you have selected. Although not all data objects in KBase have Landing Pages yet, the number that do is increasing. The panels on Landing Pages are moveable so you can customize the layout of the page. In this example, the selected object is a flux balance analysis (fba) model, so the Landing Page provides overview information on the model, as well as other model details such as reactions and compounds. A graphical representation of the metabolic pathway is also provided. (Note that information on some Landing Pages may take a few minutes to load.) More details on Landing Pages are provided in the <a href="https://staging.kbase.us/get-started/data-search-quick-start/">Data Search Quick Start</a>.</p>
+<div class="screengrab"><img src="./narrative-user-guide_files/narrativeQS5.png" alt="narrativeQS5.png" width="750" height="387"></div>
+<p>Return to the browser window displaying the Featured Narrative and close the data object properties window. As you look through the Narrative, you can follow the analyses that were run by the creator of the Narrative, as well as read commentary about why these analyses were run and what the results imply.</p>
+<h2 id="copynarrative">Copy a Narrative</h2>
+<p>If you want to try running the steps in a Narrative and possibly even changing them, you will first need to make a copy of it. You can copy any Narrative for which you have read permission. Once you copy a Narrative and its associated data into your own workspace, you can run all of its analyses, alter parameters or datasets if you choose, and save your changes to your copy.</p>
+<p>To copy a Narrative, start from the page where you are viewing the Narrative that you are interested in. Click the “Workspaces” link at the top of the page to access the Workspace Browser. The workspaces that you have read or write access to are listed on the left side of the page. The one that holds the Narrative that you were looking at will appear at the top of the list with a blue background.</p>
+<div class="screengrab"><img src="./narrative-user-guide_files/Screen_Shot_2014-08-08_at_10.56.16_PM.png" alt="narrativeQS6.png" width="750"></div>
+<p>Hover your cursor over the workspace name that has the blue background; a gear icon will appear (see image) that will allow you to clone the workspace, including all of the Narratives and data it contains.</p>
+<div class="screengrab"><img src="./narrative-user-guide_files/narrativeQS7.png" alt="narrativeQS7.png" width="300" height="168"></div>
+<p>Clicking the gear will bring up a “Manage Workspace” window. At the bottom of this window is a “Clone” link (see below).</p>
+<div class="screengrab"><img src="./narrative-user-guide_files/e6a672212e6d1668705776e61cfc471a_f409.png" alt="narrativeQS8.png" width="300"></div>
+<p>Once you click this link, you will be prompted to choose a name for your new cloned workspace. Note that a workspace name can contain letters, numbers, or underscore characters, but empty spaces and other non-alphanumeric characters are not allowed. In this case, we chose “Featured_narratives_copy.” By default, the global permission for your new workspace is set to “none,” but you can change it to “read” to allow others to view your workspace. After choosing a name for your workspace, click the blue “Clone” button at the bottom of the window.</p>
+<div class="screengrab"><img src="./narrative-user-guide_files/1da743bfc7616155561e2824e107a93d_f410.png" alt="narrativeQS9.png" width="400"></div>
+<p>You now will see your cloned workspace at the top of the workspaces list on the left (see image below). When you cloned the “MicrobesFeaturedNarratives” workspace, that made a copy of all the Narratives and data objects that it contained. This workspace contained three other Narratives in addition to the Comparative Genomics Narrative you viewed earlier in this tutorial. You can see these other Narratives and browse through the data objects associated with each one by using the page navigation options at the bottom of your list of data objects.</p>
+<p>Narratives are distinguished from other data types in the list by their bold and italicized names. The “Type” column also tells you at a glance which data type an object is. If there are many objects in a workspace, you may want to use the pulldown list of types (which defaults to "All Types") to show only the Narratives.</p>
+<div class="screengrab"><img src="./narrative-user-guide_files/narrativeQS10.png" alt="narrativeQS10.png" width="750" height="336"></div>
+<p>Another way to locate your copy of the Narrative is to click on the "Narratives" link at the top of the page and then the "My Narratives" link on the left side. Your new cloned Narrative should appear at the top of the list (which is sorted by date, with the most recently created or copied at the top).</p>
+<p>Now that you have a copy of the Comparative Genomics Narrative, you can try running the steps in it or continue to the next section to learn how to recreate its steps in your own new Narrative, which will allow you to work through the Featured Narrative’s analyses and familiarize yourself with many aspects of the Narrative Interface.</p>
+<h2 id="create">Create a New Narrative</h2>
+<p>To create your own new Narrative, click the “Narratives” link in the top menu to access the Narratives page. At the top of this page, find the “+New Narrative” button.</p>
+<div class="screengrab"><img src="./narrative-user-guide_files/e04d17f171b9cea050073610e00fa4c2_f413.png" alt="qs1MM.png" width="300"></div>
+<p>Clicking on this button will open the “Create New Narrative” window (see image). Choose the workspace you want to put your new Narrative in by selecting one of your existing workspaces from the drop-down menu. You can also click the blue “New WS” link to create a new workspace for your Narrative. <strong>Here, we chose the cloned workspace that we created in the previous step of this tutorial because it contains all the data objects in the Featured Narrative we’re interested in recreating. </strong></p>
+<div class="screengrab"><img src="./narrative-user-guide_files/bf3b97d729c1d2f303fb54a18d54dbed_f414.png" alt="qs2mm.png" width="450"></div>
+<p>Once you have designated a workspace for your Narrative, enter a name for it. Here, we chose “My_new_narrative.” Add an optional description if you wish and then click the blue “Create” button.</p>
+<p>You will see your new Narrative listed at the top of the My Narratives page (see image).</p>
+<div class="screengrab"><img src="./narrative-user-guide_files/narrativeQS13.png" alt="qs3mm.png" width="750" height="182"></div>
+<p>This page has several options for displaying and managing your Narratives:</p>
+<ol type="a">
+<li>This drop-down lets you customize the columns of information displayed in your list of Narratives. By default, Narrative, Workspace, Last Modified, Modified by, and Shared With are displayed. Additional options include Timestamp, Size, Byte Size, and Module.</li>
+<li>The trash bin icon, along with the two buttons to its right, appears when you select a Narrative from the list. Clicking the trash bin will delete your selected Narrative. An undelete option is coming soon, so be aware that Narrative deletions are currently permanent.</li>
+<li>The open folder icon lets you copy a selected Narrative to a workspace you own or have admin privileges for.</li>
+<li>This button allows you to rename a selected Narrative.</li>
+<li>A search box lets you search for a specific Narrative, a useful option for quickly finding Narratives in a long list.</li>
+<li>Each Narrative is followed by a version number. Click on the number to see the history of the Narrative.</li>
+<li>Select or hover over a Narrative name to display a blue “More” link to the right. Clicking “More” will open a window that displays information about the Narrative data object including size, type, ID, owner, modified date, and more.</li>
+<li>As in Workspace Browser, the gear icon here will open the “Manage Workspace” window. In addition to cloning a workspace, this window provides options for sharing. Click the "Edit" button in the upper right corner if you want to assign specific read, write, or admin privileges for individual users. Currently, you need to enter each KBase user name if you want to set individual user permissions. In the future, there will be a search feature for finding other KBase users. The "Manage Workspace" window also has a button for deleting a workspace. Keep in mind that you cannot undo deletion of a workspace.</li>
+</ol>
+<p>Now that you’ve explored some of the features of the My Narratives page, find your new Narrative in the list and click on it to open your empty Narrative:</p>
+<div class="screengrab"><img src="./narrative-user-guide_files/narrativeQS14.png" alt="qs4mm.png" width="750" height="362"></div>
+<p>Notice that the data panel in your new Narrative is already populated with data objects that were copied from the Comparative Genomics Featured Narrative. When you create a new Narrative in a new workspace, the data panel will be empty until you add data using KBase’s <a href="http://narrative.kbase.us/functional-site/#/search/?q=*">search interface</a> or upload your own data. In the alpha version of the Narrative Interface, the tools for uploading your own data are currently under development.</p>
+<div class="rounded-box" style="width: 25%; float: right; margin: 1em 1em 1em 1em;">
+<h3>Save Your Work!</h3>
+<p>We are working on enabling autosave for Narratives, but for now, don't forget to click the Save button (the leftmost button) to save your Narrative.</p>
+</div>
+<h2 id="addcontent">Add Content to your Narrative</h2>
+<p>Narratives are composed of an ordered series of sections, or “cells,” that store your analysis steps and commentary. Cells can contain text (to help you record hypotheses, comments, or ideas), or they can hold an analysis step. “Input" cells (with blue borders) let you invoke one of KBase’s analysis functions, with input data and parameter settings of your choosing. (Empty input cells say "In [ ]" to the left--"In" stands for "input", and the empty brackets will later contain a number representing the number of times that cell has been run.) "Output" cells (with gray borders) show the output generated from an input cell.</p>
+<p>At the top of the Narrative page is a toolbar with a row of buttons that you can use to add cells to or edit your Narrative. If you use your mouse to hover over a button, a short description of the button's function will appear. (Please note that in this alpha version, the buttons may not all work as expected.) Descriptions of these buttons, along with their keyboard shortcuts, are provided below. The keyboard shortcuts will allow you to add content to and edit your Narrative without having to scroll to the toolbar at the top. You can access a list of all keyboard shortcuts at any time in the Narrative Interface by using "Ctrl-m h" (press and hold the "Control" and "m" keys, release, and then press "h").</p>
+<table class="layout"><colgroup> <col style="width: 68px;"> <col style="width: 151px;"> <col style="width: 69px;"> <col style="width: 149px;"> </colgroup>
+<tbody>
+<tr>
+<td><img src="./narrative-user-guide_files/saved_resource" alt="saveIcon.png" width="50" height="44"></td>
+<td>
+<p dir="ltr"><span>Save Narrative<br> Ctrl-m s<br></span></p>
+</td>
+<td><img src="./narrative-user-guide_files/saved_resource(1)" alt="arrowDnIcon.png" width="52" height="44"></td>
+<td>
+<p dir="ltr"><span>Move cell down<br> <span>Ctrl-m j</span><br></span></p>
+</td>
+</tr>
+<tr>
+<td><img src="./narrative-user-guide_files/saved_resource(2)" alt="cutIcon.png" width="53" height="44"></td>
+<td>
+<p dir="ltr"><span>Cut selected cell<br> <span>Ctrl-m x</span><br></span></p>
+</td>
+<td><img src="./narrative-user-guide_files/saved_resource(3)" alt="insertUpIcon.png" width="52" height="47"></td>
+<td>
+<p dir="ltr"><span>Insert cell above<br> <span>Ctrl-m a</span><br></span></p>
+</td>
+</tr>
+<tr>
+<td><img src="./narrative-user-guide_files/saved_resource(4)" alt="copyIcon.png" width="53" height="44"></td>
+<td>
+<p dir="ltr"><span>Copy selected cell<br> <span>Ctrl-m c</span><br></span></p>
+</td>
+<td><img src="./narrative-user-guide_files/saved_resource(5)" alt="insertDnIcon.png" width="52" height="49"></td>
+<td>
+<p dir="ltr"><span>Insert cell below<br> <span>Ctrl-m b</span><br></span></p>
+</td>
+</tr>
+<tr>
+<td><img src="./narrative-user-guide_files/saved_resource(6)" alt="pasteIcon.png" width="53" height="44"></td>
+<td>
+<p dir="ltr"><span>Paste cell<br> <span>Ctrl-m v</span><br></span></p>
+</td>
+<td><img src="./narrative-user-guide_files/saved_resource(7)" alt="runIcon.png" width="49" height="44"></td>
+<td>
+<p dir="ltr"><span>Run selected cell</span></p>
+</td>
+</tr>
+<tr>
+<td><img src="./narrative-user-guide_files/saved_resource(8)" alt="arrowUpIcon.png" width="52" height="44"></td>
+<td>
+<p dir="ltr"><span>Move cell up<br> <span>Ctrl-m k</span><br></span></p>
+</td>
+<td><img src="./narrative-user-guide_files/saved_resource(9)" alt="pauseIcon.png" width="50" height="44"></td>
+<td>
+<p dir="ltr"><span>Interrupt cell<br> <span>Ctrl-m i</span><br></span></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>From the drop-down menu next to the row of buttons, you can select the type of cell to add to your Narrative. The Markdown cell type stores formatted text and can be used to add annotations or descriptions within the Narrative. You can also choose to add cell types for entering raw text or adding headings to your Narrative. In the screenshot below, we selected "Markdown" from the drop-down menu, typed some text into the cell, and then double-clicked outside the cell.</p>
+<div class="screengrab"><img src="./narrative-user-guide_files/saved_resource(10)" alt="Selecting Cell Type"></div>
+<p>To exit a cell, simply click outside the cell or press the Shift+Return keys to take you out of the selected cell and into the next cell.</p>
+<h3>Recreating the Steps in a Featured Narrative</h3>
+<p>Opening the Featured Narrative in a new browser tab will be useful as you recreate the analysis steps in your own Narrative. To do this, click on “Workspaces” in the top menu and find the “Comparative_Genomics” Narrative in the list. Click on it to open it in a new tab. The screenshot below shows the first step in this Narrative and the first input cell: Build Genome Set Object.</p>
+<div class="screengrab"><img src="./narrative-user-guide_files/86cf47a03c20b252ff3e8f86d39fc954_f417.png" alt="qs5mm.png" width="700"></div>
+<p>Return to your new Narrative by clicking the tab that will take you back to Workspace Browser and your list of Narratives. Find your new Narrative in the list and open it.</p>
+<p>To add a new analysis to your Narrative, you can select a function from the “Services” menu on the lower left. Each function has a “?” button next to it that you can click for information about that function.</p>
+<div class="screengrab"><img src="./narrative-user-guide_files/d8a751cf7a8811931c52b28243d1a171_f426.png" alt="qs14mm.png" width="250"></div>
+<p>If you click on a function name, a new input cell will be added to your Narrative, with fields for you to fill in to set the parameters for that analysis.</p>
+<p>To add the “Build Genome Set Object” input cell to your Narrative, click on "Microbes Comparative Genomics" in the "Services" panel and scroll down unto you find it. Click on it to add it to your Narrative.</p>
+<div class="screengrab"><img src="./narrative-user-guide_files/5db30b30b28bb9b0269539f0d92f7b26_f419.png" alt="qs7mm.png" width="750"></div>
+<p>In the blue top border of the cell, a description of this service was displayed by clicking the "..." button to the right of the function name.</p>
+<p>To the left of each text box in an input cell you will see the name of that field (for example, "Output genome set ID"). The text to the right of the box provides more information about what you can enter in that field. When you click on the field for a given input cell, KBase recognizes the data objects from your workspace that are appropriate inputs for that cell and presents you with a drop-down list of options to choose from. In this case, select the first option, Rhodobacter_external_genomes.</p>
+<p>When you have entered the parameters for the analysis, click the Run button in the lower right of the cell to execute the function with your supplied parameters. If the run succeeded, you will see an output cell with a gray border. In the top right corner of the output cell border is the time and date when the run completed.</p>
+<div class="screengrab"><img src="./narrative-user-guide_files/4c0aad346c352943925cc14bdf82c8e7_f420.png" alt="qs8mm.png" width="650"></div>
+<p>You can continue recreating the analysis steps from the Featured Narrative, altering parameters and data if you choose.</p>
+<p>The next section will provide instructions on using KBase’s search function to load data to your workspace and then analyze it in the Narrative Interface.</p>
+<h3>Searching for Data and Analyzing it in a Narrative</h3>
+<p>You can load data selected from your search results to any workspace you own or have admin privileges for. For this step, we will add data to our “home” workspace, which KBase automatically generates for you when you sign up for an account.</p>
+<p>To access KBase’s search interface, click on “Search Data” at the top of the page.</p>
+<p>The <a href="http://kbase.us/get-started/data-search-quick-start/">Data Search Quick Start</a> has detailed instructions on how to search, sort, filter, and transfer data objects to your workspace for subsequent analysis with KBase tools. Please refer to it for in-depth information.</p>
+<p>Here, we will do a simple keyword search by typing “Escherichia coli<strong><em> </em></strong>” in the search box and pressing Enter or the search icon. Our search returns results in three categories of currently searchable data.</p>
+<div class="screengrab"><img src="./narrative-user-guide_files/narrativeQS20.png" alt="qs9mm.png" width="750"></div>
+<p>Click on “Genomes” to access the list of search results for this category. <em></em></p>
+<p>From this list, use the checkboxes in the first column to select the first genome, <em>Escherichia coli </em>TW10828. Notice that when you selected this genome, it was added to your Data Cart on the left. The number above the cart indicates that you have one data object in your cart. The number will increase as you select more data objects to add.</p>
+<div class="screengrab"><img src="./narrative-user-guide_files/narrativeQS21.png" alt="qs10mm.png" width="750"></div>
+<p>Once you are finished searching and selecting data, you are ready to transfer your data objects to a workspace of your choosing.</p>
+<p>To transfer your selections, click the blue button below the Data Cart to bring up the cart view:</p>
+<div class="screengrab"><img src="./narrative-user-guide_files/narrativeQS22.png" alt="qs11mm.png" width="750"></div>
+<p>You must first choose the workspace you want to transfer your data objects to. For this example, choose your “home” workspace.</p>
+<p>Once your workspace is selected, click on the blue “Genomes” label in the middle of the page to see the data objects you selected from your search results. Checkboxes will appear beside the data objects. Use these boxes to choose the data you want to transfer to your workspace. Once selected, click the blue “Copy” button that appears below your workspace name.</p>
+<div class="screengrab"><img src="./narrative-user-guide_files/narrativeQS23.png" alt="qs12mm.png" width="750"></div>
+<p>Close the Data Cart view by clicking the “x” in the right corner.</p>
+<p>Return to Workspace Browser by clicking “Workspaces” in the top menu and locate your home workspace to verify that your <em>E. coli</em> genome (with a KBase ID of kb|g.3696) was transferred to your workspace.</p>
+<div class="screengrab"><img src="./narrative-user-guide_files/narrativeQS24.png" alt="qs13mm.png" width="750" height="188"></div>
+<p>You can now use data from your search results in analysis steps in the Narrative Interface.</p>
+<p>Start by creating a new Narrative in your home workspace or open an existing one.</p>
+<p>Notice the kb|g.3696 genome is listed in the data panel of your Narrative. In this example, we are going to view of list of genes in this genome by using the “View Genome” widget under “Microbes Assembly &amp; Genome Import” in the Services panel (see image). Find this widget in the panel, and click on it to add the "View Genome" input cell to your Narrative.</p>
+<div class="screengrab"><img src="./narrative-user-guide_files/d8a751cf7a8811931c52b28243d1a171_f426.png" alt="qs14mm.png" width="250"></div>
+<p>In the input cell, select the kb|g.3696 genome from the drop-down list and click Run. In the resulting output cell, select the Genes tab to see the list of genes for this <em>E. coli</em> genome.</p>
+<div class="screengrab"><img src="./narrative-user-guide_files/narrativeQS26.png" alt="qs15mm.png" width="750"></div>
+<p>&nbsp;</p>
+<hr>
+<p>The Narrative User Interface and this documentation are both evolving rapidly. Please check back soon for more information.</p>
+<p style="text-align: right;"><em>Last updated 08/08/2014</em></p>				</div>
+			</div>
+			<div style="clear:both;">
+			</div>
+		</div>
+	</div>
+	<div class="sticky-push"></div>
+</div>
+<div class="sticky-footer">
+	<div class="footer">
+  <div class="container">
+    <div class="footer-column">
+      <ul>
+<li><a href="https://staging.kbase.us/get-started/sign-up">Sign up for a KBase account</a></li>
+<li><a href="https://www.surveymonkey.com/s/KB-user-info">Give us feedback!</a></li>
+<li><a class="share-icon" href="http://www.youtube.com/channel/UCTX9Pn_WCCCpOER9-3AGL_A"> <img src="./narrative-user-guide_files/youtube-32x32.png" alt="youtube link"> </a> <a class="share-icon" href="https://www.facebook.com/pages/DOE-Systems-Biology-Knowledgebase/148332628600806"> <img src="./narrative-user-guide_files/facebook-32x32.png" alt="facebook"> </a> <a class="share-icon" href="https://twitter.com/DOEKbase"> <img src="./narrative-user-guide_files/twitter-32x32.png" alt="twitter"> </a> <a class="share-icon" href="https://staging.kbase.us/index.php/tools/blocks/blog_archive/rss.php?cID=170"> <img src="./narrative-user-guide_files/rss-32x32.png" alt="rss feed"> </a></li>
+</ul>    </div>
+    <div class="footer-column">
+        <ul>
+<li><a title="Acknowledgements" href="https://staging.kbase.us/about/acknowledgements/">Acknowledgements</a></li>
+<li><a title="Terms and Conditions" href="https://staging.kbase.us/about/terms-and-conditions">Terms and Conditions</a></li>
+<li><a href="https://staging.kbase.us/data/data-policy">KBase Data Policy</a></li>
+</ul>    </div>        
+    <div class="footer-column">
+        <p style="font-size: .9em;">KBase is sponsored by the&nbsp;<a href="http://science.energy.gov/ber/">U.S. Department of Energy's Office of Biological and Environmental Research</a></p>
+<p><img style="float: left;" src="./narrative-user-guide_files/doe_office_of_science_250.png" alt="doe_office_of_science_250.png" width="250" height="42"></p>    </div>
+  <div style="clear:both;"></div> 
+  </div>
+</div>
+	<div id="ccm-page-controls-wrapper"><div id="ccm-page-controls-wrapper" class="ccm-ui"><div id="ccm-toolbar"><ul id="ccm-main-nav"><li id="ccm-logo-wrapper"><img id="ccm-logo" src="./narrative-user-guide_files/logo_menu.png" width="49" height="49" alt="concrete5" title="concrete5"></li><li><a class="ccm-icon-edit ccm-menu-icon" id="ccm-nav-edit" href="https://staging.kbase.us/index.php?cID=1451&ctask=check-out&ccm_token=1416871031:e10aa86a6226741b0ba3544a9baa8667" onclick="$(&#39;#ccm-edit-overlay&#39;).hide()">Edit</a></li></ul><ul id="ccm-system-nav"><li><a class="ccm-icon-dashboard ccm-menu-icon" id="ccm-nav-dashboard" href="https://staging.kbase.us/index.php/dashboard/">Dashboard</a></li><li id="ccm-nav-intelligent-search-wrapper"><input type="search" placeholder="Intelligent Search" id="ccm-nav-intelligent-search" tabindex="1"></li><li><a id="ccm-nav-sign-out" class="ccm-icon-sign-out ccm-menu-icon" href="https://staging.kbase.us/index.php/login/logout/">Sign Out</a></li></ul></div><div id="ccm-intelligent-search-results"><div class="ccm-intelligent-search-results-module ccm-intelligent-search-results-module-onsite"><h1>Composer</h1><ul class="ccm-intelligent-search-results-list"><li><a href="https://staging.kbase.us/index.php/dashboard/composer/write/">Write</a><span>Composer new blog, write, write blog, blogging Write new blog, write, write blog, blogging</span></li><li><a href="https://staging.kbase.us/index.php/dashboard/composer/drafts/">Drafts</a><span>Composer new blog, write, write blog, blogging Drafts blog drafts,composer</span></li></ul></div><div class="ccm-intelligent-search-results-module ccm-intelligent-search-results-module-onsite"><h1>Sitemap</h1><ul class="ccm-intelligent-search-results-list"><li><a href="https://staging.kbase.us/index.php/dashboard/sitemap/full/">Full Sitemap</a><span>Sitemap pages, add page, delete page, copy, move, alias Full Sitemap pages, add page, delete page, copy, move, alias</span></li><li><a href="https://staging.kbase.us/index.php/dashboard/sitemap/explore/">Flat View</a><span>Sitemap pages, add page, delete page, copy, move, alias Flat View pages, add page, delete page, copy, move, alias, bulk</span></li><li><a href="https://staging.kbase.us/index.php/dashboard/sitemap/search/">Page Search</a><span>Sitemap pages, add page, delete page, copy, move, alias Page Search find page, search page, search, find, pages, sitemap</span></li><li><a href="https://staging.kbase.us/index.php/dashboard/sitemap/jeramy_add_multi_page/">Add Multiple Pages</a><span>Sitemap pages, add page, delete page, copy, move, alias Add Multiple Pages </span></li></ul></div><div class="ccm-intelligent-search-results-module ccm-intelligent-search-results-module-onsite"><h1>Files</h1><ul class="ccm-intelligent-search-results-list"><li><a href="https://staging.kbase.us/index.php/dashboard/files/search/">File Manager</a><span>Files add file, delete file, copy, move, alias, resize, crop, rename, images, title, attribute File Manager files, add file, delete file, copy, move, alias</span></li><li><a href="https://staging.kbase.us/index.php/dashboard/files/attributes/">Attributes</a><span>Files add file, delete file, copy, move, alias, resize, crop, rename, images, title, attribute Attributes file, file attributes, title, attribute, description, rename</span></li><li><a href="https://staging.kbase.us/index.php/dashboard/files/sets/">File Sets</a><span>Files add file, delete file, copy, move, alias, resize, crop, rename, images, title, attribute File Sets files, category, categories</span></li><li><a href="https://staging.kbase.us/index.php/dashboard/files/add_set/">Add File Set</a><span>Files add file, delete file, copy, move, alias, resize, crop, rename, images, title, attribute Add File Set new file set</span></li></ul></div><div class="ccm-intelligent-search-results-module ccm-intelligent-search-results-module-onsite"><h1>Members</h1><ul class="ccm-intelligent-search-results-list"><li><a href="https://staging.kbase.us/index.php/dashboard/users/search/">Search Users</a><span>Members users, groups, people, find, delete user, remove user, change password, password Search Users find, search, people, delete user, remove user, change password, password</span></li><li><a href="https://staging.kbase.us/index.php/dashboard/users/groups/">User Groups</a><span>Members users, groups, people, find, delete user, remove user, change password, password User Groups user, group, people, permissions, access, expire</span></li><li><a href="https://staging.kbase.us/index.php/dashboard/users/attributes/">Attributes</a><span>Members users, groups, people, find, delete user, remove user, change password, password Attributes user attributes, user data, gather data, registration data</span></li><li><a href="https://staging.kbase.us/index.php/dashboard/users/add/">Add User</a><span>Members users, groups, people, find, delete user, remove user, change password, password Add User new user, create</span></li><li><a href="https://staging.kbase.us/index.php/dashboard/users/add_group/">Add Group</a><span>Members users, groups, people, find, delete user, remove user, change password, password Add Group new user group, new group, group, create</span></li><li><a href="https://staging.kbase.us/index.php/dashboard/users/group_sets/">Group Sets</a><span>Members users, groups, people, find, delete user, remove user, change password, password Group Sets group set</span></li></ul></div><div class="ccm-intelligent-search-results-module ccm-intelligent-search-results-module-onsite"><h1>Reports</h1><ul class="ccm-intelligent-search-results-list"><li><a href="https://staging.kbase.us/index.php/dashboard/reports/statistics/">Statistics</a><span>Reports forms, log, error, email, mysql, exception, survey Statistics hits, pageviews, visitors, activity</span></li><li><a href="https://staging.kbase.us/index.php/dashboard/reports/forms/">Form Results</a><span>Reports forms, log, error, email, mysql, exception, survey Form Results forms, questions, response, data</span></li><li><a href="https://staging.kbase.us/index.php/dashboard/reports/surveys/">Surveys</a><span>Reports forms, log, error, email, mysql, exception, survey Surveys questions, quiz, response</span></li><li><a href="https://staging.kbase.us/index.php/dashboard/reports/logs/">Logs</a><span>Reports forms, log, error, email, mysql, exception, survey Logs forms, log, error, email, mysql, exception, survey, history</span></li><li><a href="https://staging.kbase.us/index.php/dashboard/reports/email_list_signups/">Email List Signups</a><span>Reports forms, log, error, email, mysql, exception, survey Email List Signups </span></li></ul></div><div class="ccm-intelligent-search-results-module ccm-intelligent-search-results-module-onsite"><h1>Pages &amp; Themes</h1><ul class="ccm-intelligent-search-results-list"><li><a href="https://staging.kbase.us/index.php/dashboard/pages/themes/">Themes</a><span>Pages &amp; Themes themes Themes new theme, theme, active theme, change theme, template, css</span></li><li><a href="https://staging.kbase.us/index.php/dashboard/pages/types/">Page Types</a><span>Pages &amp; Themes themes Page Types page type defaults, global block, global area, starter, template</span></li><li><a href="https://staging.kbase.us/index.php/dashboard/pages/attributes/">Attributes</a><span>Pages &amp; Themes themes Attributes page attributes, custom</span></li><li><a href="https://staging.kbase.us/index.php/dashboard/pages/single/">Single Pages</a><span>Pages &amp; Themes themes Single Pages single, page, custom, application</span></li></ul></div><div class="ccm-intelligent-search-results-module ccm-intelligent-search-results-module-onsite"><h1>Stacks &amp; Blocks</h1><ul class="ccm-intelligent-search-results-list"><li><a href="https://staging.kbase.us/index.php/dashboard/blocks/stacks/">Stacks</a><span>Stacks &amp; Blocks  Stacks stacks, reusable content, scrapbook, copy, paste, paste block, copy block, site name, logo</span></li><li><a href="https://staging.kbase.us/index.php/dashboard/blocks/types/">Block Types</a><span>Stacks &amp; Blocks  Block Types block, refresh, custom</span></li><li><a href="https://staging.kbase.us/index.php/dashboard/blocks/permissions/">Block &amp; Stack Permissions</a><span>Stacks &amp; Blocks  Block &amp; Stack Permissions </span></li></ul></div><div class="ccm-intelligent-search-results-module ccm-intelligent-search-results-module-onsite"><h1>Extend concrete5</h1><ul class="ccm-intelligent-search-results-list"><li><a href="https://staging.kbase.us/index.php/dashboard/extend/install/">Add Functionality</a><span>Extend concrete5 add-on, addon, add on, package,applications, ecommerce, discussions, forums, themes, templates, blocks Add Functionality add-on, addon, ecommerce, install, discussions, forums, themes, templates, blocks</span></li><li><a href="https://staging.kbase.us/index.php/dashboard/extend/update/">Update Add-Ons</a><span>Extend concrete5 add-on, addon, add on, package,applications, ecommerce, discussions, forums, themes, templates, blocks Update Add-Ons update, upgrade</span></li><li><a href="https://staging.kbase.us/index.php/dashboard/extend/connect/">Connect to the Community</a><span>Extend concrete5 add-on, addon, add on, package,applications, ecommerce, discussions, forums, themes, templates, blocks Connect to the Community concrete5.org, my account, marketplace</span></li><li><a href="https://staging.kbase.us/index.php/dashboard/extend/themes/">Get More Themes</a><span>Extend concrete5 add-on, addon, add on, package,applications, ecommerce, discussions, forums, themes, templates, blocks Get More Themes buy theme, new theme, marketplace, template</span></li><li><a href="https://staging.kbase.us/index.php/dashboard/extend/add-ons/">Get More Add-Ons</a><span>Extend concrete5 add-on, addon, add on, package,applications, ecommerce, discussions, forums, themes, templates, blocks Get More Add-Ons buy addon, buy add on, buy add-on, purchase addon, purchase add on, purchase add-on, find addon, new addon, marketplace</span></li></ul></div><div class="ccm-intelligent-search-results-module ccm-intelligent-search-results-module-onsite"><h1>Dashboard</h1><ul class="ccm-intelligent-search-results-list"><li><a href="https://staging.kbase.us/index.php/dashboard/news/">Dashboard</a><span>Dashboard </span></li></ul></div><div class="ccm-intelligent-search-results-module ccm-intelligent-search-results-module-onsite"><h1>System &amp; Settings</h1><ul class="ccm-intelligent-search-results-list"><li><a href="https://staging.kbase.us/index.php/dashboard/system/">View All</a><span>System &amp; Settings dashboard, configuration</span></li><li><a href="https://staging.kbase.us/index.php/dashboard/system/basics/">Basics</a><span>Basics </span></li><li><a href="https://staging.kbase.us/index.php/dashboard/system/basics/site_name/">Site Name</a><span>Site Name website name, title</span></li><li><a href="https://staging.kbase.us/index.php/dashboard/system/basics/icons/">Bookmark Icons</a><span>Bookmark Icons logo, favicon, iphone, icon, bookmark</span></li><li><a href="https://staging.kbase.us/index.php/dashboard/system/basics/editor/">Rich Text Editor</a><span>Rich Text Editor tinymce, content block, fonts, editor, tinymce, content, overlay</span></li><li><a href="https://staging.kbase.us/index.php/dashboard/system/basics/multilingual/">Languages</a><span>Languages translate, translation, internationalization, multilingual, translate</span></li><li><a href="https://staging.kbase.us/index.php/dashboard/system/basics/timezone/">Time Zone</a><span>Time Zone timezone, profile, locale</span></li><li><a href="https://staging.kbase.us/index.php/dashboard/system/basics/interface/">Interface Preferences</a><span>Interface Preferences interface, quick nav, dashboard background, background image</span></li><li><a href="https://staging.kbase.us/index.php/dashboard/system/seo/">SEO &amp; Statistics</a><span>SEO &amp; Statistics vanity, pretty url, seo, pageview, view</span></li><li><a href="https://staging.kbase.us/index.php/dashboard/system/seo/urls/">Pretty URLs</a><span>Pretty URLs vanity,pretty url, clean url, seo</span></li><li><a href="https://staging.kbase.us/index.php/dashboard/system/seo/tracking_codes/">Tracking Codes</a><span>Tracking Codes traffic, statistics, google analytics, quant, pageviews, hits</span></li><li><a href="https://staging.kbase.us/index.php/dashboard/system/seo/statistics/">Statistics</a><span>Statistics turn off statistics, tracking, statistics, pageviews, hits</span></li><li><a href="https://staging.kbase.us/index.php/dashboard/system/seo/search_index/">Search Index</a><span>Search Index configure search, site search, search option</span></li><li><a href="https://staging.kbase.us/index.php/dashboard/system/seo/bulk_seo_tool/">Bulk SEO Updater</a><span>Bulk SEO Updater bulk, seo, change keywords, engine, optimization, search</span></li><li><a href="https://staging.kbase.us/index.php/dashboard/system/seo/excluded/">Excluded URL Word List</a><span>Excluded URL Word List pretty, slug</span></li><li><a href="https://staging.kbase.us/index.php/dashboard/system/optimization/">Optimization</a><span>Optimization cache option, change cache, turn on cache, turn off cache, no cache, page cache, caching</span></li><li><a href="https://staging.kbase.us/index.php/dashboard/system/optimization/cache/">Cache &amp; Speed Settings</a><span>Cache &amp; Speed Settings cache option, change cache, override, turn on cache, turn off cache, no cache, page cache, caching</span></li><li><a href="https://staging.kbase.us/index.php/dashboard/system/optimization/clear_cache/">Clear Cache</a><span>Clear Cache cache option, turn off cache, no cache, page cache, caching</span></li><li><a href="https://staging.kbase.us/index.php/dashboard/system/optimization/jobs/">Automated Jobs</a><span>Automated Jobs index search, reindex search, build sitemap, sitemap.xml, clear old versions, page versions, remove old</span></li><li><a href="https://staging.kbase.us/index.php/dashboard/system/permissions/">Permissions &amp; Access</a><span>Permissions &amp; Access /dashboard/system/permissions/site</span></li><li><a href="https://staging.kbase.us/index.php/dashboard/system/permissions/site/">Site Access</a><span>Site Access editors, hide site, offline, private, public</span></li><li><a href="https://staging.kbase.us/index.php/dashboard/system/permissions/files/">File Manager Permissions</a><span>File Manager Permissions file options, file manager, upload, modify</span></li><li><a href="https://staging.kbase.us/index.php/dashboard/system/permissions/file_types/">Allowed File Types</a><span>Allowed File Types security, files, media, extension, manager, upload</span></li><li><a href="https://staging.kbase.us/index.php/dashboard/system/permissions/tasks/">Task Permissions</a><span>Task Permissions security, actions, administrator, admin, package, marketplace, search</span></li><li><a href="https://staging.kbase.us/index.php/dashboard/system/permissions/ip_blacklist/">IP Blacklist</a><span>IP Blacklist security, lock ip, lock out, block ip, address, restrict, access</span></li><li><a href="https://staging.kbase.us/index.php/dashboard/system/permissions/captcha/">Captcha Setup</a><span>Captcha Setup security, registration</span></li><li><a href="https://staging.kbase.us/index.php/dashboard/system/permissions/antispam/">Spam Control</a><span>Spam Control antispam, block spam, security</span></li><li><a href="https://staging.kbase.us/index.php/dashboard/system/permissions/maintenance_mode/">Maintenance Mode</a><span>Maintenance Mode lock site, under construction, hide, hidden</span></li><li><a href="https://staging.kbase.us/index.php/dashboard/system/permissions/users/">User Permissions</a><span>User Permissions </span></li><li><a href="https://staging.kbase.us/index.php/dashboard/system/permissions/advanced/">Advanced Permissions</a><span>Advanced Permissions </span></li><li><a href="https://staging.kbase.us/index.php/dashboard/system/registration/">Login &amp; Registration</a><span>Login &amp; Registration profile, login, redirect, specific, dashboard, administrators</span></li><li><a href="https://staging.kbase.us/index.php/dashboard/system/registration/postlogin/">Login Destination</a><span>Login Destination profile</span></li><li><a href="https://staging.kbase.us/index.php/dashboard/system/registration/profiles/">Public Profiles</a><span>Public Profiles member profile, member page,community, forums, social, avatar</span></li><li><a href="https://staging.kbase.us/index.php/dashboard/system/registration/public_registration/">Public Registration</a><span>Public Registration signup, new user, community</span></li><li><a href="https://staging.kbase.us/index.php/dashboard/system/mail/">Email</a><span>Email smtp, mail settings</span></li><li><a href="https://staging.kbase.us/index.php/dashboard/system/mail/method/">SMTP Method</a><span>SMTP Method email server, mail settings, mail configuration, external, internal</span></li><li><a href="https://staging.kbase.us/index.php/dashboard/system/mail/method/test_settings/">Test Mail Settings</a><span>Test Mail Settings test smtp, test mail</span></li><li><a href="https://staging.kbase.us/index.php/dashboard/system/mail/importers/">Email Importers</a><span>Email Importers email server, mail settings, mail configuration, private message, message system, import, email, message</span></li><li><a href="https://staging.kbase.us/index.php/dashboard/system/attributes/">Attributes</a><span>Attributes attribute configuration</span></li><li><a href="https://staging.kbase.us/index.php/dashboard/system/attributes/sets/">Sets</a><span>Sets </span></li><li><a href="https://staging.kbase.us/index.php/dashboard/system/attributes/types/">Types</a><span>Types </span></li><li><a href="https://staging.kbase.us/index.php/dashboard/system/environment/info/">Environment Information</a><span>Environment Information overrides, override, system info, debug, support,help</span></li><li><a href="https://staging.kbase.us/index.php/dashboard/system/environment/debug/">Debug Settings</a><span>Debug Settings errors, exceptions, develop, support, help</span></li><li><a href="https://staging.kbase.us/index.php/dashboard/system/environment/logging/">Logging Settings</a><span>Logging Settings email, logging, logs, smtp, pop, errors, mysql, errors, log</span></li><li><a href="https://staging.kbase.us/index.php/dashboard/system/environment/file_storage_locations/">File Storage Locations</a><span>File Storage Locations security, alternate storage, hide files</span></li><li><a href="https://staging.kbase.us/index.php/dashboard/system/environment/proxy/">Proxy Server</a><span>Proxy Server network, proxy server</span></li><li><a href="https://staging.kbase.us/index.php/dashboard/system/backup_restore/">Backup &amp; Restore</a><span>Backup &amp; Restore export, backup, database, sql, mysql, encryption, restore</span></li><li><a href="https://staging.kbase.us/index.php/dashboard/system/backup_restore/backup/">Backup Database</a><span>Backup Database </span></li><li><a href="https://staging.kbase.us/index.php/dashboard/system/backup_restore/update/">Update concrete5</a><span>Update concrete5 upgrade, new version, update</span></li><li><a href="https://staging.kbase.us/index.php/dashboard/system/backup_restore/database/">Database XML</a><span>Database XML export, database, xml, starting, points, schema, refresh, custom, tables</span></li></ul></div><div class="ccm-intelligent-search-results-module ccm-intelligent-search-results-module-onsite"><h1>Welcome to concrete5</h1><ul class="ccm-intelligent-search-results-list"><li><a href="https://staging.kbase.us/index.php/dashboard/welcome/">Welcome to concrete5</a><span>Welcome to concrete5 </span></li></ul></div><div class="ccm-intelligent-search-results-module ccm-intelligent-search-results-module-onsite"><h1>Blog</h1><ul class="ccm-intelligent-search-results-list"><li><a href="https://staging.kbase.us/index.php/dashboard/blog/posts/">Posts</a><span>Blog  Posts </span></li><li><a href="https://staging.kbase.us/index.php/dashboard/blog/settings/">Settings</a><span>Blog  Settings </span></li><li><a href="https://staging.kbase.us/index.php/dashboard/blog/administration/">Administration</a><span>Blog  Administration </span></li></ul></div><div class="ccm-intelligent-search-results-module ccm-intelligent-search-results-module-onsite"><h1>RSS Feed Manager</h1><ul class="ccm-intelligent-search-results-list"><li><a href="https://staging.kbase.us/index.php/dashboard/rss_feeds/">RSS Feed Manager</a><span>RSS Feed Manager </span></li></ul></div><div class="ccm-intelligent-search-results-module ccm-intelligent-search-results-module-onsite"><h1>Workflow</h1><ul class="ccm-intelligent-search-results-list"><li><a href="https://staging.kbase.us/index.php/dashboard/workflow/list/">List</a><span>Workflow add workflow, remove workflow List </span></li><li><a href="https://staging.kbase.us/index.php/dashboard/workflow/me/">Waiting for Me</a><span>Workflow add workflow, remove workflow Waiting for Me </span></li></ul></div><div class="ccm-intelligent-search-results-module ccm-intelligent-search-results-module-onsite"><h1>Dashboard Home</h1><ul class="ccm-intelligent-search-results-list"><li><a href="https://staging.kbase.us/index.php/dashboard/home/">Customize <span>Customize Dashboard Home</span></a></li></ul></div><div class="ccm-intelligent-search-results-module ccm-intelligent-search-results-module-loading"><h1>Your Site</h1><ul class="ccm-intelligent-search-results-list" id="ccm-intelligent-search-results-list-your-site"></ul></div><div class="ccm-intelligent-search-results-module ccm-intelligent-search-results-module-offsite ccm-intelligent-search-results-module-loading"><h1>Help</h1><ul class="ccm-intelligent-search-results-list" id="ccm-intelligent-search-results-list-help"></ul></div><div class="ccm-intelligent-search-results-module ccm-intelligent-search-results-module-offsite ccm-intelligent-search-results-module-loading"><h1>Add-Ons</h1><ul class="ccm-intelligent-search-results-list" id="ccm-intelligent-search-results-list-marketplace"></ul></div></div><div id="ccm-dashboard-overlay" style="visibility: visible; display: none;"><div id="ccm-dashboard-overlay-core"><div class="ccm-dashboard-overlay-inner" id="ccm-dashboard-overlay-main"><ul class="breadcrumb"><li><strong>Recent</strong> <span class="divider">:</span></li> <li><a id="ccm-recent-page-1" href="https://staging.kbase.us/">Home</a><span class="divider">/</span></li> <li><a id="ccm-recent-page-1451" href="./narrative-user-guide_files/narrative-user-guide.html">Narrative Interface Quick Start</a></li></ul><div class="ccm-dashboard-overlay-module"><h1>Composer</h1><ul><li><a href="https://staging.kbase.us/index.php/dashboard/composer/write/">Write</a></li><li><a href="https://staging.kbase.us/index.php/dashboard/composer/drafts/">Drafts</a></li></ul></div><div class="ccm-dashboard-overlay-module"><h1>Sitemap</h1><ul><li><a href="https://staging.kbase.us/index.php/dashboard/sitemap/full/">Full Sitemap</a></li><li><a href="https://staging.kbase.us/index.php/dashboard/sitemap/search/">Page Search</a></li></ul></div><div class="ccm-dashboard-overlay-module"><h1>Files</h1><ul><li><a href="https://staging.kbase.us/index.php/dashboard/files/search/">File Manager</a></li><li><a href="https://staging.kbase.us/index.php/dashboard/files/sets/">File Sets</a></li></ul></div><div class="ccm-dashboard-overlay-module"><h1>Reports</h1><ul><li><a href="https://staging.kbase.us/index.php/dashboard/reports/statistics/">Statistics</a></li><li><a href="https://staging.kbase.us/index.php/dashboard/reports/forms/">Form Results</a></li></ul></div></div></div><div id="ccm-dashboard-overlay-misc" class="ccm-dashboard-overlay-misc-rounded"><div class="ccm-dashboard-overlay-inner">                            <ul>                                    <li><a href="https://staging.kbase.us/index.php/dashboard/news/"><strong>News</strong></a> – Learn about your site and concrete5.</li>                                    <li><a href="https://staging.kbase.us/index.php/dashboard/system/"><strong>System &amp; Settings</strong></a> – Secure and setup your site.</li>                                                    <li><a href="https://staging.kbase.us/index.php/dashboard/extend/"><strong>Extend concrete5</strong></a> –&nbsp;                                        <a href="https://staging.kbase.us/index.php/dashboard/extend/install/">Install</a>, <a href="https://staging.kbase.us/index.php/dashboard/extend/update/">update</a> or download more <a href="https://staging.kbase.us/index.php/dashboard/extend/themes/">themes</a> and <a href="https://staging.kbase.us/index.php/dashboard/extend/add-ons/">add-ons</a>.                    </li>                                </ul>            </div></div><div id="ccm-dashboard-overlay-footer"><div class="ccm-dashboard-overlay-inner"><a href="https://staging.kbase.us/index.php/dashboard/">View Full Dashboard  <i class="icon-arrow-right"></i></a></div></div></div><div id="ccm-edit-overlay"><div class="ccm-edit-overlay-inner"><div class="ccm-edit-overlay-actions"><a id="ccm-nav-check-out" href="https://staging.kbase.us/index.php?cID=1451&ctask=check-out&ccm_token=1416871031:e10aa86a6226741b0ba3544a9baa8667" class="btn primary  launch-tooltip" data-original-title="">Edit this Page</a><a id="ccm-toolbar-add-subpage" dialog-width="645" dialog-modal="false" dialog-append-buttons="true" dialog-height="345" dialog-title="Add a Sub-Page" href="https://staging.kbase.us/index.php/tools/required/edit_collection_popup.php?cID=1451&ctask=add" class="btn">Add a Sub-Page</a></div><span class="label notice">Version 55</span>Page last edited on 8/18/2014 at 11:24 AM</div><div id="ccm-edit-overlay-footer"><div class="ccm-edit-overlay-inner"><ul><li><a class="ccm-menu-icon ccm-icon-properties" dialog-on-close="ccm_sitemapExitEditMode(1451)" id="ccm-toolbar-nav-properties" dialog-width="640" dialog-height="450" dialog-append-buttons="true" dialog-modal="false" dialog-title="Page Properties" href="https://staging.kbase.us/index.php/tools/required/edit_collection_popup.php?approveImmediately=1&cID=1451&ctask=edit_metadata">Properties</a></li><li><a class="ccm-menu-icon ccm-icon-preview-as-user" dialog-on-close="ccm_sitemapExitEditMode(1451)" id="ccm-toolbar-nav-preview-as-user" dialog-width="90%" dialog-height="70%" dialog-append-buttons="true" dialog-modal="false" dialog-title="View Page as Someone Else" href="https://staging.kbase.us/index.php/tools/required/edit_collection_popup.php?cID=1451&ctask=preview_page_as_user">Preview as User</a></li><li><a class="ccm-menu-icon ccm-icon-design" dialog-on-close="ccm_sitemapExitEditMode(1451)" id="ccm-toolbar-nav-design" dialog-append-buttons="true" dialog-width="610" dialog-height="405" dialog-modal="false" dialog-title="Design" href="https://staging.kbase.us/index.php/tools/required/edit_collection_popup.php?cID=1451&ctask=set_theme">Design</a></li><li><a class="ccm-menu-icon ccm-icon-permissions" dialog-on-close="ccm_sitemapExitEditMode(1451)" dialog-append-buttons="true" id="ccm-toolbar-nav-permissions" dialog-width="420" dialog-height="630" dialog-modal="false" dialog-title="Permissions" href="https://staging.kbase.us/index.php/tools/required/edit_collection_popup.php?&cID=1451&ctask=edit_permissions">Permissions</a></li><li><a class="ccm-menu-icon ccm-icon-versions" dialog-on-close="ccm_sitemapExitEditMode(1451)" id="ccm-toolbar-nav-versions" dialog-width="640" dialog-height="340" dialog-modal="false" dialog-title="Page Versions" href="https://staging.kbase.us/index.php/tools/required/versions.php?cID=1451">Versions</a></li><li><a class="ccm-menu-icon ccm-icon-move-copy" id="ccm-toolbar-nav-move-copy" dialog-width="90%" dialog-height="70%" dialog-modal="false" dialog-title="Move/Copy Page" href="https://staging.kbase.us/index.php/tools/required/sitemap_search_selector?sitemap_select_mode=move_copy_delete&cID=1451">Move/Copy</a></li><li><a class="ccm-menu-icon ccm-icon-speed-settings" dialog-on-close="ccm_sitemapExitEditMode(1451)" id="ccm-toolbar-nav-speed-settings" dialog-append-buttons="true" dialog-width="550" dialog-height="280" dialog-modal="false" dialog-title="Full Page Caching" href="https://staging.kbase.us/index.php/tools/required/edit_collection_popup.php?&cID=1451&ctask=edit_speed_settings">Full Page Caching</a></li><li><a class="ccm-menu-icon ccm-icon-delete" dialog-on-close="ccm_sitemapExitEditMode(1451)" dialog-append-buttons="true" id="ccm-toolbar-nav-delete" dialog-width="360" dialog-height="150" dialog-modal="false" dialog-title="Delete Page" href="https://staging.kbase.us/index.php/tools/required/edit_collection_popup.php?&cID=1451&ctask=delete">Delete</a></li></ul></div></div></div></div></div>
+<script type="text/javascript" src="./narrative-user-guide_files/i18n_js"></script>
+<script type="text/javascript" src="./narrative-user-guide_files/jquery.ui.js"></script>
+<script type="text/javascript" src="./narrative-user-guide_files/jquery.form.js"></script>
+<script type="text/javascript" src="./narrative-user-guide_files/jquery.rating.js"></script>
+<script type="text/javascript" src="./narrative-user-guide_files/bootstrap.js"></script>
+<script type="text/javascript" src="./narrative-user-guide_files/ccm.app.js"></script>
+<script type="text/javascript" src="./narrative-user-guide_files/tiny_mce.js"></script>
+<script type="text/javascript" src="./narrative-user-guide_files/page_controls_menu_js"></script>
+</div>
+<script src="./narrative-user-guide_files/nav.js"></script>
+	
+
+</body></html>
