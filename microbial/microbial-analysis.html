@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<!-- saved from url=(0082) -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<style>.roundbox {background-color: #EEE8CD; color: black; border: thin gray solid; -moz-border-radius: 25px; border-radius: 25px; padding: 1em 1em 1em 1em; margin: 1em 1em 1em 1em;}
+.dropcap {float: left; font-size: 1.5em; line-height: 1.5em; padding-right:0.5em; font-weight:bold; }
+
+pre>.output {
+              font-family: "Times New Roman", serif;
+              font-size: 0.8em;
+}
+</style>
+
+<title>KBase :: Microbial Analysis Tutorial (IRIS)</title>
+<meta name="description" content="This  tutorial highlights the tools in KBase that support the reconstruction and  analysis of genome-scale metabolic models from genome sequence data.">
+    <meta name="robots" content="noindex">
+<meta name="generator" content="concrete5 - 5.5.1">
+
+<div>
+<h1>Microbial Metabolic Model Reconstruction and Reconciliation of Phenotypic
+  Data in IRIS</h1>
+<p><b>Please note</b>: the instructions in this tutorial use IRIS, the first user interface to KBase, which is a web-based command line interface. IRIS is a legacy system and is no longer officially supported. We recommend that you use the next generation KBase user interface, the <a href="https://narrative.kbase.us/">Narrative interface</a>, instead.</p> We are working on a new version of this tutorial for the Narrative interface. We are leaving this tutorial up in case--despite being out of date--it is useful to some of the KBase user community.</p>
+<h3><a name="top"></a>Sections</h3>
+<blockquote>
+<p><a href="#gettingstarted">Getting Started</a></p>
+</blockquote>
+<ol>
+<li><a href="#selectgenome">Use IRIS to Select a Genome from the KBase Central Store</a></li>
+<li><a href="#loadgenome">Load a Genome into a Workspace</a></li>
+<li><a href="#metabolicmodel">Build a Metabolic Model</a></li>
+<li><a href="#selectmedia">Specify Media for Flux Balance Analysis (FBA)</a></li>
+<li><a href="#performfba">Perform FBA on the Metabolic Model</a></li>
+<li><a href="#gapfill">Gapfill the Model</a></li>
+<li><a href="#integrate">Integrate a Selected Solution</a></li>
+<li><a href="#growth">Perform FBA on the Metabolic Model (Growth)</a></li>
+<li><a href="#phenotype">Load and Simulate Phenotype Data</a></li>
+<li><a href="#viewphenotype">View Phenotype Simulation Results</a></li>
+<li><a href="#reconcilemodel">Reconcile Model with Phenotype Simulation Results</a></li>
+</ol>
+<p><img src="images/microbialtutorial_workflow.png" alt="microbialtutorial_workflow.png" width="550" height="412"></p>
+<p>The Department of Energy Systems Biology Knowledgebase (KBase, <a href="http://kbase.us/">kbase.us</a>) is a software and data environment designed to enable researchers to collaboratively generate, test, and share new hypotheses about gene and protein functions; perform large-scale analyses on our scalable computing infrastructure; and model interactions in microbes, plants, and their communities. It permits secure sharing of data, tools, and scientific conclusions in a unified and extensible framework.</p>
+<p>A key scientific objective of KBase’s Microbes team is to reconstruct and predict metabolic and transcriptional regulatory networks to facilitate the manipulation of microbial function (for example, to optimize biofuel products). This tutorial highlights the tools in KBase that support the reconstruction and analysis of genome-scale metabolic models from genome sequence data.</p>
+<h2><a id="gettingstarted" name="gettingstarted"></a>Getting Started</h2>
+<p><strong>This tutorial assumes that you:</strong></p>
+<ul>
+<li>Have a KBase account (register at <a href="https://gologin.kbase.us/SignUp">https://gologin.kbase.us/SignUp</a>)</li>
+<li>Know how to access IRIS to run KBase commands (<a href="http://iris.kbase.us/">http://iris.kbase.us/</a>)<
+<p>IRIS, the first user interface to KBase, is a web-based command line interface. IRIS is a legacy system and is no longer official supported.</p>
+</li>
+<li>Have some familiarity with metabolic modeling <br> A good summary of Flux Balance Analysis, one of the topics in this tutorial, can be found in Orth, J.D., I. Thiele, and B.Ø.&nbsp;Palsson. 2010. “<a href="http://www.nature.com/nbt/journal/v28/n3/full/nbt.1614.html">What is Flux Balance Analysis?</a>”&nbsp;<em>Nature Biotechnology</em> <strong>28</strong>, 245–48.</li>
+<li>Know how to view workspaces and data objects using the <a href="https://narrative.kbase.us/functional-site/#/ws/">Workspace Browser</a></li>
+</ul>
+<p>Please refer to the IRIS User Guide (<a href="http://kbase.us/for-users/get-started/">http://kbase.us/for-users/get-started/</a>) for step-by-step instructions on how to sign up for a KBase user account, create a workspace, and get started with IRIS.</p>
+<div class="roundbox">
+<h3>IRIS Command Help</h3>
+<p>Any IRIS command can be called with the -h argument to see a help message for that command—for example:</p>
+<pre><strong>kbfba-buildfbamodel</strong> -h  </pre>
+<p>In the IRIS help messages, the following notation is used to indicate mandatory and optional arguments:</p>
+<pre>command_name   [optional argument]   </pre>
+<p>In addition to KBase commands, IRIS understands some Linux commands. Please
+  refer to the IRIS User Guide (<a href="http://kbase.us/for-users/get-started/#basiccmds">http://kbase.us/for-users/get-started/</a>) for more information.</p>
+</div>
+<h2>Logging In</h2>
+<p>Starting on the IRIS landing page (<a href="http://iris.kbase.us/">http://iris.kbase.us/</a>), click on “Get Started.”</p>
+<p>IRIS is a web-based command-line interface. After logging in (using the “Sign In” link at the top right), you can enter commands in the command entry box at the bottom of the screen.</p>
+<p><br><img src="images/microbialtutorial_login.png" alt="microbialtutorial_login.png" width="550" height="305"></p>
+<p>Now that you are logged in, you can start retrieving and analyzing data.</p>
+<h2><a id="selectgenome" name="selectgenome"></a>1. Use IRIS to Select a Genome from the KBase Central Store</h2>
+<p>KBase has two different data stores: the Central Store for KBase-curated public data and workspaces for user-controlled data (workspaces will be described in section 2 of this tutorial). You can upload your own data to KBase to analyze it, but for demonstration purposes in this tutorial, we’ll start by choosing a data object—a genome—already in the KBase Central Store.</p>
+<h3>List Genomes in the KBase Central Store</h3>
+<p>IRIS has a set of commands that let you look for data. One of these is the <strong>all_entities_Genome </strong>command, which lists the genomes that are stored in the KBase Central Store. Enter the following command line in the IRIS command entry box:</p>
+<pre><strong>all_entities_Genome</strong> -f  scientific_name</pre>
+<p>The output from this command shows the genomes in a two-column table in which the first column is the KBase genome ID and the second column is the scientific name of the organism—for example:</p>
+<table border="0" cellspacing="0" cellpadding="3">
+<tbody>
+<tr>
+<td valign="top">kb|g.3696</td>
+<td valign="top">Escherichia coli TW10828</td>
+</tr>
+<tr>
+<td valign="top">kb|g.1921</td>
+<td valign="top">Mycobacterium tuberculosis EAS054</td>
+</tr>
+<tr>
+<td valign="top">kb|g.9088</td>
+<td valign="top">Mycobacterium celatum</td>
+</tr>
+<tr>
+<td valign="top">kb|g.3624</td>
+<td valign="top">Streptococcus sanguinis VMC66</td>
+</tr>
+<tr>
+<td valign="top">kb|g.9009</td>
+<td valign="top">Zymomonas mobilis subsp. mobilis ZM4 &nbsp;</td>
+</tr>
+<tr>
+<td valign="top">…</td>
+<td valign="top">&nbsp;</td>
+</tr>
+</tbody>
+</table>
+<p>The Central Store contains thousands of genomes, and each genome sequence is assigned a unique KBase genome ID. Different genome sequences can exist for the same microbial strain, so the genome ID can be a very useful tool for identifying and retrieving a specific genome sequence for your analysis.</p>
+<h3>Search for Genomes by Scientific Name</h3>
+<p>To find an organism of interest, you can use the Linux “grep” command to list all genomes with names or IDs that contain a particular string of characters. For example, if you want to find <em>Escherichia coli </em>K12, you can use “grep” in the following command line to retrieve all genomes with K12 in the scientific name.</p>
+<pre><strong>all_entities_Genome</strong> -f  scientific_name | grep K12</pre>
+<p>Example output:</p>
+<table border="0" cellspacing="0" cellpadding="3">
+<tbody>
+<tr>
+<td valign="top">kb|g.3223</td>
+<td valign="top">Thiomonas intermedia K12</td>
+</tr>
+<tr>
+<td valign="top">kb|g.27746</td>
+<td valign="top">Neisseria meningitidis K1207</td>
+</tr>
+<tr>
+<td valign="top">kb|g.23270</td>
+<td valign="top">Streptococcus dysgalactiae subsp. equisimilis SK1250</td>
+</tr>
+<tr>
+<td valign="top">kb|g.25417</td>
+<td valign="top">Streptococcus salivarius K12</td>
+</tr>
+<tr>
+<td valign="top">kb|g.23052</td>
+<td valign="top">Streptococcus dysgalactiae subsp. equisimilis SK1249</td>
+</tr>
+<tr>
+<td valign="top"><span style="color: #ff0000;">kb|g.0</span></td>
+<td valign="top"><span style="color: #ff0000;">Escherichia coli K12</span></td>
+</tr>
+<tr>
+<td valign="top">…&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+<td valign="top">&nbsp;</td>
+</tr>
+</tbody>
+</table>
+<h3>Note the KBase ID for Your Genome</h3>
+<p>Make a note of the KBase ID for <em>Escherichia coli</em> K12 genome highlighted in red above. You will need to use this ID number (kb|g.0) in command lines described later in this tutorial.</p>
+<div>
+<h2><a id="loadgenome" name="loadgenome"></a>2. Load a Genome into a Workspace</h2>
+<h3>Workspaces</h3>
+<p>Workspaces provide a way for users to store, analyze, and share their private data objects in KBase. Workspaces are data “containers” that are analogous to a folder or directory on your computer, but instead of being on your computer, they are stored inside KBase. Once you place a genome, model, or other data object into your workspace, it remains there until you decide to delete it. The analysis tools in KBase can read input from and write output to data objects in your workspace, and workspaces automatically perform versioning and track provenance on all data objects stored there.</p>
+<div class="roundbox" style="width: 25%; float: right;">
+<h4><strong>Tips on Naming Workspaces</strong></h4>
+<p>Note that workspace names in KBase are case-sensitive and can only contain letters and numbers. You can also use the underscore character in a workspace name, but spaces, dashes, punctuation marks, and other non-alphanumeric characters are not allowed.</p>
+</div>
+<p><br> Before you begin the analysis workflow in this tutorial, you will need to choose an existing workspace to hold your analysis results, or create and name a new workspace.</p>
+<h3>Create Your Own Workspace</h3>
+<p>You can create your own new workspace with the <strong>kbws-createws</strong> command. To successfully run in IRIS, this command must be followed by two mandatory arguments: (1) a workspace name and (2) a permission setting. In the following command, “YourWorkspaceName” should be replaced with a unique name that you provide (see the “Tips on Naming Workspaces” box). The “r” argument sets the permissions to allow anyone to read your workspace and its contents (see box below for more about permission setting). <strong> </strong></p>
+<pre><strong>kbws-createws </strong>YourWorkspaceName r</pre>
+<p>If you were successful in setting up a new workspace, IRIS will immediately return a message stating that a workspace was created with the name you provided.</p>
+<div class="roundbox">
+<h3>Permission Setting Options in IRIS</h3>
+<p>When using the <strong>kbws-createws</strong> command, choose one of the following single-letter arguments to specify the permission setting for your workspace.</p>
+<p>n — Argument specifying that no other users can see or access your workspace.</p>
+<p>r — Argument specifying that all other users can read or view your workspace.</p>
+</div>
+<h3>Select a Workspace</h3>
+<div class="roundbox" style="width: 25%; float: right;">
+<h4><strong>What Workspace Is Selected?</strong></h4>
+<p>If you are signed in to IRIS and you forget which workspace you are currently working in, just run the <strong>kbws-workspace</strong> command again with no arguments. IRIS will return the name of your current workspace.</p>
+</div>
+<p>Before you start running commands that generate new data objects, you will need to select the workspace where you want to store those objects. To select a workspace, enter the <strong>kbws-workspace</strong> command followed by the name of the workspace you want to use (remember to replace “YourWorkspaceName” in the following command line):</p>
+<pre><strong>kbws-workspace </strong>YourWorkspaceName </pre>
+<h3>Load a Genome into Your Workspace</h3>
+<p>In the previous section, you found the genome ID (kb|g.0) for <em>Escherichia coli </em>K12. You can use the following command to load this genome from the Central Store into your workspace:</p>
+<pre><strong>kbfba-loadgenome </strong>kb|g.0 </pre>
+<p>This command may take a few seconds to run. When the process is complete, IRIS should return output stating that the genome was successfully loaded to your workspace.</p>
+<h3>List Objects in Your Workspace</h3>
+<p>To list all the objects in your selected workspace, use the following command with no arguments:</p>
+<pre><strong>kbws-listobj</strong></pre>
+<p>If you just created your workspace, the only object listed should be the genome you just loaded.</p>
+<h3>View Your Genome Object in the Workspace Browser</h3>
+<p>In addition to using IRIS to list objects, another option for viewing the contents of your workspace is to access the Workspace Browser (see the Workspace Browser box below). You can access the Workspace Browser from the <a href="https://narrative.kbase.us/functional-site/#/ws/">Narrative interface</a>.
+<img style="float: right;" src="images/microbialtutorial_kbg.png" alt="microbialtutorial_kbg.png" width="265" height="349"></p>
+<p>Go to the Workspace Browser, sign in, find your workspace, and refresh the page in your web browser. You should see the newly added genome object in your workspace. You can click any object ID to see more information about that object.</p>
+<p>Click on “kb|g.0” in the ID column of your genome object. This will open a pop-up window (see screenshot) in which you can click “View HTML.”</p>
+<p>Selecting the “View HTML” option for an object will bring up a web page showing object information such as the functional roles (in the “Annotation features” tab) and other genomic information for the selected genome.</p>
+<p>We will use the “View HTML” option in several of the steps in this tutorial. To easily move back and forth between IRIS and the Workspace Browser, you may want to open separate tabs in your browser for each of these tools.</p>
+<p><strong>NOTE: </strong>It is recommended that you run the commands and carry out the analyses described in this tutorial using your own workspace. For your reference, you can view all of the data objects generated using the steps in this tutorial from a workspace called SACDemo. You can access SACDemo and other publicly accessible workspaces using the Workspace Browser.</p>
+<br clear="all">
+<div class="roundbox">
+<h3>The Workspace Browser</h3>
+<p>The Workspace Browser is a prototype viewer that allows you to explore workspace objects in various formats. It also lets you create, copy, or delete workspaces. You can access the Workspace Browser from the <a href="https://narrative.kbase.us/functional-site/#/ws/">Narrative interface</a>.
+  </p>
+<p><img src="images/microbialtutorial_browser.png" alt="microbialtutorial_browser.png" width="508" height="123"></p>
+<p>When you click on a workspace listed on the left side of the Workspace Browser interface, you can view the objects stored in the selected workspace. Information about each object is displayed in a tabular HTML view (shown above). From left to right, the columns in this table are:</p>
+<ul>
+<li><strong>Workspace</strong> — Name of the workspace that your object is saved in.</li>
+<li><strong>ID</strong> — Name of the individual object.</li>
+<li><strong>Type</strong> — Type of data object (e.g., Genome, FBA, Model).</li>
+<li><strong>Command</strong> — Command that was used to create the object.</li>
+<li><strong>Owner</strong> — Name of the KBase account that owns the object.</li>
+<li><strong>Modified</strong> — Time stamp showing when the object was last edited.</li>
+</ul>
+</div>
+<br clear="all">
+<h2><a id="metabolicmodel" name="metabolicmodel"></a>3. Build a Metabolic Model</h2>
+<p>KBase’s toolkit includes a suite of commands relating to the reconstruction, curation, reconciliation, and analysis of metabolic models.&nbsp;This section and the sections that follow explore some of that functionality.</p>
+<p>Now that you’ve loaded a genome object into your workspace, you can build an initial draft metabolic model with the <strong>kbfba-buildfbamodel </strong>command. An initial draft metabolic model is built based on the gene annotations in your genome object. Create a metabolic model called “EcoliModel” from the kb|g.0 genome object using the following command line.</p>
+<pre><strong>kbfba-buildfbamodel</strong> kb|g.0  -m EcoliModel </pre>
+<p>The “-m” is an optional argument that lets you provide a name for the output model. If you do not include “-m EcoliModel” in your command line, KBase will automatically generate a name for the output model based on the genome ID.</p>
+<p>It may take a few seconds to create your draft metabolic model. Once the process is complete, you can use <strong>kbws-listobj</strong> to see the newly created model object or go to the Workspace Browser, refresh, and view the model object in the HTML view.</p>
+<div class="roundbox">
+<h3>Building Metabolic Models from Genomes in Other Workspaces</h3>
+<p>Suppose you have all your genomes loaded into another workspace (e.g., KBaseCDMGenomes), but you want your model to be created in your currently selected workspace. You can use the “--genomews” argument to specify the workspace where the genome object is located:</p>
+<pre><strong>kbfba-buildfbamodel</strong> kb|g.0 -m EcoliModel_CDM --genomews KBaseCDMGenomes</pre>
+</div>
+<h3>Export a Model Object in an Alternate Format</h3>
+<p>From the IRIS interface, you can export your model object to other file formats using <strong>kbfba-exportfbamodel</strong> command. Access the help documentation for this command by entering:</p>
+<pre><strong>kbfba-exportfbamodel</strong> -h </pre>
+<div class="roundbox" style="width: 25%; float: right;">
+<h4><strong>Shortcut for Entering Commands</strong></h4>
+<p>To quickly reenter commands that you have previously used, click in the IRIS command entry box and use the up and down arrow keys to scroll through your command history.</p>
+</div>
+<p>This will give you a list of all the arguments and usage. The <strong>kbfba-exportfbamodel</strong> command must be followed by two mandatory arguments: (1) the name of the model you want to export and (2) the format you want to use for the output file. Note that you can export your model in HTML, SBML, JSON, CytoSEED, or readable format.</p>
+<p>In this example, we will export the model to “readable” format, which creates a tab-delimited table that you can view in IRIS or download to your computer and manipulate with Excel or other spreadsheet software.</p>
+<p>In the following command line for exporting your model in readable format, the Linux “&gt;” redirect operator sends the output to the file “EcoliModel.readable”:</p>
+<pre><strong>kbfba-exportfbamodel</strong><strong> &nbsp;</strong>EcoliModel readable &gt; EcoliModel.readable</pre>
+<p>The output file is saved in your IRIS file space, and you should see “EcoliModel.readable” in the File Browser box on the left side of the IRIS interface. You can view, download, or delete it using the buttons that appear when you hover over the file name in the File Browser (see the box below for more information about the File Browser).</p>
+<p>&nbsp;</p>
+<table style="border: 1px solid gray;" border="1" cellspacing="0" cellpadding="5" align="center">
+<tbody>
+<tr>
+<td colspan="3" valign="top">
+<h3><strong>File Browser </strong><br> <em>How You Manage and Interact with Your Data in IRIS</em></h3>
+<p>In the bottom left corner of the IRIS screen, you should see the “File Browser,” a handy tool that lets you upload external files (from your local machine), create files (as described above in this tutorial), and download files to your computer.<strong> </strong></p>
+</td>
+</tr>
+<tr>
+<td rowspan="9" valign="top">
+<p>&nbsp;</p>
+<p><img src="images/microbialtutorial_filebrowser.jpg" alt="microbialtutorial_filebrowser.jpg" width="435" height="280"></p>
+</td>
+<td colspan="2">
+<p><strong>Icons that appear when you hover your mouse over a file:</strong></p>
+</td>
+</tr>
+<tr>
+<td><img src="images/microbialtutorial_deleteicon.jpg" alt="microbialtutorial_deleteicon.jpg" width="28" height="29"></td>
+<td>
+<p><strong>Delete a file</strong></p>
+</td>
+</tr>
+<tr>
+<td><img src="images/microbialtutorial_dnloadicon.jpg" alt="microbialtutorial_dnloadicon.jpg" width="27" height="27"></td>
+<td>
+<p><strong>Download a file</strong></p>
+</td>
+</tr>
+<tr>
+<td><img src="images/microbialtutorial_editicon.jpg" alt="microbialtutorial_editicon.jpg" width="27" height="27"></td>
+<td>
+<p><strong>Edit a file</strong></p>
+</td>
+</tr>
+<tr>
+<td><img src="images/microbialtutorial_addfileicon.jpg" alt="microbialtutorial_addfileicon.jpg" width="28" height="28"></td>
+<td>
+<p><strong>Add file to command input</strong></p>
+</td>
+</tr>
+<tr>
+<td colspan="2" valign="bottom">
+<p><strong>Other File Browser icons:</strong></p>
+</td>
+</tr>
+<tr>
+<td><img src="images/microbialtutorial_createicon.png" alt="microbialtutorial_createicon.png" width="25" height="28"></td>
+<td>
+<p><strong>Create and edit a file</strong><strong> </strong></p>
+</td>
+</tr>
+<tr>
+<td><img src="images/microbialtutorial_creatediricon.jpg" alt="microbialtutorial_creatediricon.jpg" width="26" height="26"></td>
+<td>
+<p><strong>Create a new directory </strong></p>
+</td>
+</tr>
+<tr>
+<td><img src="images/microbialtutorial_uploadicon.jpg" alt="microbialtutorial_uploadicon.jpg" width="27" height="27"></td>
+<td>
+<p><strong>Upload a file</strong></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>&nbsp;</p>
+<h2><a id="selectmedia" name="selectmedia"></a>4. Specify Media for Flux Balance Analysis (FBA)</h2>
+<p>Once you have built a metabolic model, you can perform flux balance analysis (FBA) to calculate the flow of metabolites through your model. FBA results can be used to predict the growth rate of an organism under certain conditions or the production rates for particular metabolites of interest.</p>
+<p>In order to perform FBA, you need to describe the media conditions that you want to investigate using your metabolic model. In KBase, a media object specifies the chemical content of the solution in which you want to analyze the growth of your organism. KBase provides users with more than 500 media conditions to use when running FBA. These can be found in the KBaseMedia workspace. New capabilities are constantly being added to IRIS, and in the future, users will be able to upload custom media formulations from a tab-delimited input file specifying compounds, concentrations, uptake limits, and other attributes.</p>
+<h3>View the Components of a Media Object</h3>
+<p>You can use the <strong>kbfba-exportmedia</strong> command to view the components of a media object in HTML, JSON, or human-readable text formats. For example, you can use the following command to view the “Carbon-D-Glucose” media object in “readable” format. The “-w” and “KBaseMedia” arguments specify the workspace in which the media is located.&nbsp;&nbsp;&nbsp;</p>
+<pre><strong>kbfba-exportmedia</strong> Carbon-D-Glucose readable -w KBaseMedia </pre>
+<p>Output produced:</p>
+<pre class="output">  Attributes {
+   uuid:KBaseMedia/Carbon-D-Glucose
+   id:Carbon-D-Glucose
+   name:Carbon-D-Glucose
+   compoundListString:Co2+;Cl;H+;Ca2+;Cu2+;Sulfate;Zn2+;Mn2+;NH3;Phosphate;H2O;O2;K+;Mg;Na+;Fe2+;fe3;Molybdate;Ni2+;D-Glucose
+   isDefined:0
+   isMinimal:0
+   type:unspecified
+   }</pre>
+<h3>Use of Complete Media</h3>
+<p>Note that if you do not specify the media conditions when running the FBA command (which is covered in the next section of this tutorial), KBase will use “Complete” media by default. “Complete” media includes many nutrients compared to minimal media. As such, it is a rich media, typically causing the model to make minimal use of biosynthesis pathways.</p>
+<h2><a id="performfba" name="performfba"></a>5. Perform FBA on the Metabolic Model</h2>
+<p>Now that you have a metabolic model, you can perform FBA on it by using the <strong>kbfba-runfba</strong> command.</p>
+<p>To run this command on the “EcoliModel” you created in section 3, you need a media object, as described in the previous section. In the following command line, the “-m” and “Carbon-D-Glucose” arguments specify the media object that you want to use. The “--mediaws” argument identifies the workspace (“KBaseMedia”) where the media object is located. Enter the following in the IRIS command entry box:</p>
+<pre><strong>kbfba-runfba</strong> EcoliModel -m Carbon-D-Glucose --mediaws KBaseMedia </pre>
+<p>In a few seconds, IRIS should return output indicating that the flux balance analysis was successful (see sample output below):</p>
+<pre class="output">  kbfba-runfba  EcoliModel -m Carbon-D-Glucose --mediaws KBaseMedia 
+  Flux balance analysis  successful:
+  <span style="border: thin red solid;">Object ID: EcoliModel.fba.0 </span>
+  Type: FBA
+  Workspace: YourWorkspaceName
+  Owner: yourusername
+  Instance: 0
+  Moddate: 2013-11-24T17:27:10
+  Last cmd: runfba
+  Modified by: yourusername 
+  Perm ref: A6306E12-552D-11E3-AF92-0D3DEFC29634
+  Checksum:  8a5ea07c7b890fbdda25368dad10b64c
+  <span style="border: thin blue solid;">object_value: 7.57306e-29 </span>
+  notes: 
+  <span style="border: thin green solid;">media_uuid: KBaseMedia/Carbon-D-Glucose</span> </pre>
+<h3>Review the Output for Your FBA Object</h3>
+<p><strong>Object ID.</strong> Note the “Object ID” (outlined in red in the output above) for the FBA object that you created. In this example, the resulting FBA object is named “EcoliModel.fba.0”.</p>
+<p><strong>object_value.</strong> The objective value (outlined in blue in the output above) represents the maximum achievable flux through the biomass reaction of the metabolic model. An objective value of 0 or something very close to 0 (e.g., 7.57306e-29) means that the model did not grow on Carbon-D-Glucose media. Initial draft models typically show no growth because the annotations in the genome object are often missing pathways needed for biomass production.</p>
+<p><strong>media_uuid</strong>. This attribute (outlined in green in the output above) identifies the media object used to create your FBA object. In this example, “KBaseMedia/Carbon-D-Glucose” means the Carbon-D-Glucose media from the KBaseMedia workspace was used.</p>
+<h3>View Your FBA Object in the Workspace Browser</h3>
+<p>Return to your workspace in the Workspace Browser, and refresh the page in your web browser. You should be able to see the newly created FBA object. (You may want to click on the “Modified” column header to bring the most recently changed objects to the top of the list.)</p>
+<p>Click on your FBA object ID, and then click on “View HTML” in the pop-up window. This will open the overview page for your FBA object (see next screenshot).</p>
+<p><br><img src="images/microbialtutorial_fbaobject.png" alt="microbialtutorial_fbaobject.png" width="400" height="357"></p>
+<p>The FBA process produces three general types of numerical fluxes:</p>
+<ul type="disc">
+<li><strong>Biomass.</strong> This flux describes how much organism growth is predicted to occur in the conditions described by the media object. You can see which individual biomass components were produced by clicking on the “Compound production” tab in the HTML view of your FBA object. Those biomass components with zero or near-zero values for “Maximum production” could not be produced.</li>
+<li><strong>Transport.</strong> These fluxes describe the rates at which nutrients are taken in and byproducts are secreted. The fluxes of all the transporter reactions can be viewed in the “Reaction fluxes” tab in the HTML view of your FBA object.</li>
+<li><strong>Internal fluxes.</strong> These are the fluxes through all internal reactions that allow for growth and byproduct creation. They can be further broken down into biological pathways of interest. A user may ask, “How much fatty acid production is happening?” or “How much of the media is being shunted through glycolysis?” These fluxes can also be viewed in the “Reaction fluxes” tab.</li>
+</ul>
+<h3>FBA with No Growth</h3>
+<p>The “Compound production” tab (see screenshot below) in the HTML view of your FBA object is a useful tool for identifying missing biomass components and learning about the gaps in your draft metabolic model. Typically, biomass reactions are large and complex, including 40 to 50 components. This analysis can help you identify which specific components cannot be produced by the pathways in the model in the specified media condition. This can be particularly useful if you do a knockout and lose biomass; you can see which biomass components were lost as a result of the knockout.</p>
+<p><img src="images/microbialtutorial_fbaviewer.png" alt="microbialtutorial_fbaviewer.png" width="550" height="332"></p>
+<p><strong>NOTE:</strong> The above screenshot shows the “Compound production” tab for the FBA object created from EcoliModel. Those compounds with a zero value in the “Maximum production” column were not produced. To see more compounds on a single page, change the number in the “Show” dropdown menu in the upper left corner.</p>
+<p>The FBA results generated in this section of the tutorial indicate that the initial draft EcoliModel did not grow on the specified media. This is very common. A draft model contains only the set of reactions derived from the set of annotated genes. It is possible that the annotation process may have missed genes that are essential to the organism’s metabolism, or that they are missing from the assembly stage. Some of the most common problems arise from having missing transporters—reactions that move metabolites across cell membranes—because they are very difficult to annotate well.</p>
+<p>As a result, the initial draft model may have gaps in its metabolic network. The gapfilling process (covered in the next section of this tutorial) attempts to fill the gaps in the best way possible. It uses a cost function associated with each internal reaction and transporter to find a solution that uses the fewest reactions to fill all gaps, and it does this without extra knowledge about the organism’s biochemistry. The solution with the minimal number of extra reactions is likely to be the most correct.<strong> </strong></p>
+<h2><a id="gapfill" name="gapfill"></a>6. Gapfill the Model</h2>
+<p>Now that you know your EcoliModel does not grow on Carbon-D-Glucose minimal media, you need to gapfill the model. The gapfilling process compares the set of reactions in your metabolic model to a database of all known reactions and attempts to find a set of reactions that, when added to your model, allow it to grow. The set of reactions (known as the gapfilling solution) can then be integrated into your model, creating a new model capable of growth on the media used in the gapfilling process.</p>
+<p>The following command line gapfills “EcoliModel” on Carbon-D-Glucose and limits the number of solutions to 5 (<em>--numsol 5</em>) and the total run time to 600 seconds (<em>--timelimit 600</em>). If no time limit is specified, the gapfill command can take hours to complete (see box below, “A Note about Compute-Intensive Analyses”). Even if you set a time limit for this process, it can still take hours to complete depending on the queue of jobs currently waiting to run on the KBase cluster. Enter the following to gapfill EcoliModel:</p>
+<pre><strong>kbfba-gapfill</strong> EcoliModel -m Carbon-D-Glucose --mediaws KBaseMedia&nbsp;--numsol 5 --timelimit 600 </pre>
+<p>The <strong>kbfba-gapfill</strong> command initializes the gapfilling process and queues your job. It produces a job ID and displays output describing the job status—for example:</p>
+<pre class="output">  Gapfilling job queued:
+  Job ID: job.44807
+  Job Type: FBA 
+  Job Owner: yourusername
+  Command: queue_gapfill_model 
+  Queue time: 2013-11-24T23:33:11
+  Job Status: queued 
+  Model: YourWorkspaceName/EcoliModel
+  Media: Carbon-D-Glucose</pre>
+<div class="roundbox">
+<h3>A Note about Compute-Intensive Analyses</h3>
+<p>Most of the commands that we’ve used so far finish quickly, but gapfilling is a compute-intensive process that takes a while to run. For this reason, the gapfilling command runs as a background job, allowing you to perform other commands in KBase while the long-running command completes.</p>
+<p>You can check the status of a job by calling the <strong>kbws-checkjob</strong> command with the job ID (in this example, job.44807). The status of a job may be “queued,” “running,” or “completed.”</p>
+<pre><strong>kbws-checkjob</strong> job.44807    </pre>
+<p>You can monitor the status of all the jobs you have submitted using the <strong>kbws-jobs</strong> command.</p>
+<p>If you sign out of IRIS before your job is complete, your job will continue to run on the KBase cluster.</p>
+</div>
+<p>It could take hours for your gapfilling process to complete. To save time, the next section of this tutorial will continue using an example model of <em>Escherichia coli</em> that has already been gapfilled. If you don’t want to wait for the gapfill of your EcoliModel to complete, you may want to skip ahead to section 7 and use the example gapfilled model to continue with the steps in this tutorial.</p>
+<p>If you do want to continue using your EcoliModel, you may want to log out and return later to log in and check the status of your gapfill job.</p>
+<p>The boxes below (“Model Curation,” &nbsp;“Managing Versions of Data Objects,” and “Automatically Integrate a Solution During the Gapfill Process”) provide some additional command options you may want to try out while you are waiting for your gapfilling job to finish.</p>
+<p>&nbsp;</p>
+<div class="roundbox">
+<h3>Model Curation</h3>
+<p>There are two commands relevant to model curation: <strong>kbfba-adjustbiomass</strong>, which lets you adjust the biomass composition reaction in your model, and <strong>kbfba-adjustmodel</strong>, which lets you adjust directionality, change the cellular compartment (cytosol as default), add or remove a reaction, etc.</p>
+<p>The <strong>kbfba-adjustbiomass</strong> command below is an example of how you can remove a particular biomass compound from your metabolic model. To find the “Model compound” number for a biomass component that you would like to remove, go to the Workspace Browser and access the “Biomass reactions” tab in the HTML view of your metabolic model (EcoliModel is used in the example below). The “Model compound” number begins with “cpd” (e.g., cpdl5560). The kbfba-adjustbiomass command below is followed by the arguments for the model name and the compound name. The last argument, 0, indicates that you want to remove compound cpdl5560 (it sets the coefficient to zero and strips it out of the reaction).</p>
+<pre><strong>kbfba-adjustbiomass</strong>  EcoliModel cpd15560 0</pre>
+<p>If you go back to the Workspace Browser and look at the HTML view of the EcoliModel object, under the “Biomass reactions” tab you will see that compound cpdl5560 is now gone. If you want to put it back in, then call <strong>kbfba-adjustbiomass</strong> again and give it a coefficient more than zero.</p>
+<p>You can add or delete reactions using the <strong>kbfba-adjustmodel</strong> command, which has several command-line options pertaining to reactions. Three of these options are: -r (removes a reaction), -a (adds a reaction back in), and -gpr (gene protein reaction association). To find a particular reaction number, go to the “Reactions” tab of your metabolic model. The reaction number is displayed in the “id” column.</p>
+<p>For example, the following command removes reaction rxn00245 from your model:</p>
+<pre><strong>kbfba-adjustmodel</strong>  EcoliModel rxn00245 –r </pre>
+</div>
+<br clear="all">
+<div class="roundbox">
+<h3>Managing Versions of Data Objects</h3>
+<p>KBase automatically tracks the history of all versions or instances of the models and other data objects that you create and modify in your workspace. The following <strong>kbws-history</strong> command lists all the versions of EcoliModel:</p>
+<pre><strong>kbws-history</strong>  Model  EcoliModel  </pre>
+<p>You can then use the <strong>kbws-revert</strong> command to revert back to a previous instance of your model. For example, in the following command line, the “-i” argument is used to reset the EcoliModel in your workspace back to the initial “0” version of the model:</p>
+<pre><strong>kbws-revert</strong>  Model  EcoliModel –i 0 </pre>
+</div>
+<br clear="all">
+<div class="roundbox">
+<h3>Automatically Integrate a Solution During the Gapfill Process</h3>
+<p>Adding the “--intsol” argument to the end of your kbfba-gapfill command line automatically integrates the best solution into the model (see example command line below).</p>
+<pre><strong>kbfba-gapfill</strong> EcoliModel -m Carbon-D-Glucose --mediaws KBaseMedia --numsol 5 --timelimit 600 --intsol  </pre>
+<p>Once the gapfilling process completes, you can go to the Workspace Browser HTML view of your model. Under the “Gapfilling” tab, you should be able to see the multiple solutions generated by gapfilling.</p>
+<p>Although using the “--intsol” argument can be a useful option for quickly integrating a solution, we recommend that you go through your solutions and then decide which ones make sense to integrate into your model. The steps for choosing a solution from the gapfilling results and integrating this solution into your model are covered in section 7.</p>
+</div>
+<br clear="all">
+<h2><a id="integrate" name="integrate"></a>7. Integrate a Selected Solution</h2>
+<p>While your gapfilling jobs are still running, you may want to continue with the steps in this tutorial using an example model that has already been gapfilled on Complete media. This example model object named “kb|g.0.fbamdl.464” can be copied from another workspace (see the box below, “Using Workspaces to Move, Copy, or Delete Models”).</p>
+<p>Type the following command line to copy the model “kb|g.0.fbamdl.464” into your workspace from the JanakaDemo workspace, and name the copied model “GapFilledEcoli.” Remember to replace “YourWorkspaceName.”</p>
+<pre><strong>kbws-copy </strong>Model kb|g.0.fbamdl.464  GapFilledEcoli -s JanakaDemo&nbsp;-n YourWorkspaceName</pre>
+<p>After a few seconds, if the model was successfully copied, IRIS will return a message stating “Object copied to new ID: GapFilledEcoli.” A new model called “GapFilledEcoli” should now be in your workspace. Using the Workspace Browser, go to your workspace, refresh the page, and go to the HTML view of the GapFilledEcoli object. Click on the “Gapfilling” tab and scroll down the page to see the three solutions that were generated. The following bullets describe the columns shown from left to right in the “Gapfilling” tab:</p>
+<ul>
+<li><strong>Integrated</strong> — Attribute showing whether a solution is integrated into the model or not.</li>
+<li><strong>Gapfill simulation </strong>— Unique ID (D22DEAC2-8043-11E2-8EC0-901F7082D269) for the specific solution generated (this will be replaced by a human readable number in the future).</li>
+<li><strong>Media </strong>&nbsp;— Media object used to gapfill. In this example, values in this column show a uuid for “Complete” media (which will be fixed in the future) or the actual name (e.g., “chenrydemo/LactateMinimalMedia”).</li>
+<li><strong>Solution</strong> — Version or instance of the solution (starting from 0,1,2…).</li>
+<li><strong>Cost</strong> — Number of reactions added for each gapfill solution.</li>
+<li><strong>Gapfilled reactions</strong> — Reactions used to gapfill.</li>
+<li><strong>Biomass removal</strong> — Any biomass components removed for the solution to work.</li>
+<li><strong>Media supplement</strong> — Additional compounds added to the media formulation.</li>
+</ul>
+<p>The <strong>kbfba-integratesolution</strong> command, which you call by specifying the gapfill simulation number to the “-f” argument, can be used to integrate a solution. The gapfill simulation number that you want to use in the following command line is D22DEAC2-8043-11E2-8EC0-901F7082D269<strong>. </strong>Note that you need to specify the solution number (which is “0” from the “Solution” column) by adding “.solution.0” to the end of the gapfill simulation number. The “-i” argument lets you set the name of the integrated gapfilled solution.</p>
+<pre><strong>kbfba-integratesolution</strong> GapFilledEcoli -f D22DEAC2-8043-11E2-8EC0-901F7082D269.solution.0 -i GapFilledEcoli_Integrated</pre>
+<p>Once the solution is integrated, IRIS should return an output message showing “Solutions successfully integrated.” The new object “GapFilledEcoli_Integrated” should now be in your workspace.</p>
+<p>If you look at the HTML view of the “Gapfilling” tab for the GapFilledEcoli_Integrated object, in the integrated column, where it previously said “No,” it now says “Yes” (as shown in the sample output below).</p>
+<pre class="output">Yes  D22DEAC2-8043-11E2-8EC0-901F7082D269  36A4741E-3A6A-11E2-837B-C916C85230E2  0  18</pre>
+<p>This means the above solution is now integrated into the model.</p>
+<div class="roundbox">
+<h3>Using Workspaces to Move, Copy, or Delete Models</h3>
+<p>KBase objects can be copied, moved, or deleted using the following commands:</p>
+<ul>
+<li><strong>kbws-copy </strong></li>
+<li><strong> kbws-move </strong></li>
+<li><strong>kbws-delete </strong></li>
+</ul>
+<p>You can copy any object with the <strong>kbws-copy</strong> command. The following command line shows the different kinds of arguments that you would need to include:</p>
+<pre><strong>kbws-copy</strong> object_type source_object_ID new_object_ID -s source_workspace -n new_workspace</pre>
+<p>You can delete your whole workspace by using <strong>kbws-deletews </strong>(to do this, you must first change your workspace to a different workspace using the <strong>kbws-workspace</strong> command). Only the workspace owner can delete a workspace.</p>
+<p>You can also copy or delete workspaces in the Workspace Browser.</p>
+</div>
+<h2><a id="growth" name="growth"></a>8. Perform FBA on the Metabolic Model (Growth)</h2>
+<p>Now that you have successfully integrated a solution into your gapfilled model, you can perform FBA on your GapFilledEcoli_Integrated object using Complete media (which is used by default):</p>
+<pre><strong>kbfba-runfba</strong> GapFilledEcoli_Integrated</pre>
+<p>Once the process is complete, IRIS should return output describing the new FBA object:</p>
+<pre>  Flux  balance analysis successful: 
+  <span style="border: thin red solid;">Object ID: GapFilledEcoli_Integrated.fba.0 </span>
+  Type:  FBA 
+  Workspace:  YourWorkspaceName 
+  Owner:  yourusername 
+  Instance:  0 
+  Moddate:  2013-11-25T16:26:41 
+  Last  cmd: runfba 
+  Modified  by: yourusername 
+  Perm  ref: 5DDB6614-55EE-11E3-9250-7022EFC29634 
+  Checksum:  731d5b0f6dd32c7e2fde7b06c8b85444 
+  <span style="border: thin blue solid;">object_value: 2.49313</span> </pre>
+<p><br> In this output information, you should see that a new FBA object has been added to your workspace. In this example, the default name of the new FBA object (outlined in red above) is “GapFilledEcoli_Integrated.fba.0.” The object_value (outlined in blue) is now 2.49, which means that the model grew. You can also go to your workspace in the Workspace Browser, refresh the page, and view the new FBA object. In the HTML view of this object, you can see the FBA solution overview as well as the reaction and compound fluxes.</p>
+<h2><br> <a id="phenotype" name="phenotype"></a>9. Load and Simulate Phenotype Data</h2>
+<p>One valuable use for metabolic models in KBase is the ability to simulate growth phenotypes such as gene essentiality data or Biolog phenotype array data. This is essential for model validation, as it permits the comparison of model phenotype predictions with experimental observations. Numerous Biolog and gene essentiality datasets are already available for analysis in KBase in the “KBasePhenotypeDatasets” workspace. You can browse and analyze these datasets, or you can use the phenotype import commands in KBase to load your own dataset from a phenotype file.</p>
+<p>The phenotype text file used in this part of the tutorial can be downloaded to your local computer from <a href="http://bioseed.mcs.anl.gov/~janakae/Phenosim/">http://bioseed.mcs.anl.gov/~janakae/Phenosim/</a>. Download the WT-phenotypes.txt file and use the up arrow button in the IRIS File Browser to upload the file from your computer to your IRIS file space. Examples in this tutorial use the WT-phenotypes.txt file, which is a dataset from a Biolog chip on a wild-type strain. Another phenotype data file of knock out mutants (KO_Phenotypes.txt) can also be uploaded into KBase.</p>
+<p>The columns in the phenotype files are as follows:</p>
+<ul>
+<li><strong>media</strong> — ID of the media condition loaded in KBase where the phenotype was observed.</li>
+<li><strong>mediaws </strong>— Workspace where the media for the phenotype data was loaded into KBase.</li>
+<li><strong>growth</strong> — Indication of whether or not the organism grew in the specified media with the specified knockouts. “1” means growth; “0” means no growth.</li>
+<li><strong>geneko</strong> — List of genes knocked out in the phenotype; use “none” for wild-type phenotypes.</li>
+<li><strong>addtlCpd </strong>— Additional media components added along with the primary media formulation.</li>
+</ul>
+<p>The excerpts below show example content contained in the WT-phenotypes.txt and KO_Phenotypes.txt files.</p>
+<p><strong>WT-phenotypes.txt</strong>:</p>
+<table style="border: thin solid gray;" border="0" cellspacing="3" cellpadding="5">
+<tbody>
+<tr align="left"><th scope="col">
+<p><strong>media</strong></p>
+</th><th scope="col">
+<p><strong>mediaws</strong></p>
+</th><th scope="col">
+<p><strong>growth</strong></p>
+</th><th scope="col">
+<p><strong>geneko</strong></p>
+</th><th scope="col">
+<p><strong>addtlCpd</strong></p>
+</th></tr>
+<tr>
+<td>
+<p>C-acetate</p>
+</td>
+<td>
+<p>phenotypeDemo</p>
+</td>
+<td>
+<p>1</p>
+</td>
+<td>
+<p>none</p>
+</td>
+<td>
+<p>none</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>C-adenosine</p>
+</td>
+<td>
+<p>phenotypeDemo</p>
+</td>
+<td>
+<p>1</p>
+</td>
+<td>
+<p>none</p>
+</td>
+<td>
+<p>none</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>C-alpha-ketoglutarate</p>
+</td>
+<td>
+<p>phenotypeDemo</p>
+</td>
+<td>
+<p>1</p>
+</td>
+<td>
+<p>none</p>
+</td>
+<td>
+<p>none</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>C-Butyrate</p>
+</td>
+<td>
+<p>phenotypeDemo</p>
+</td>
+<td>
+<p>1</p>
+</td>
+<td>
+<p>none</p>
+</td>
+<td>
+<p>none</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>&nbsp;</p>
+<p><strong>KO_Phenotypes.txt:</strong></p>
+<table style="border: thin solid gray;" border="0" cellspacing="3" cellpadding="5">
+<tbody>
+<tr align="left"><th scope="col">
+<p><strong>media</strong></p>
+</th><th scope="col">
+<p><strong>mediaws</strong></p>
+</th><th scope="col">
+<p><strong>growth</strong></p>
+</th><th scope="col">
+<p><strong>geneko</strong></p>
+</th><th scope="col">
+<p><strong>addtlCpd</strong></p>
+</th></tr>
+<tr>
+<td>
+<p>CN-Cytidine</p>
+</td>
+<td>
+<p>phenotypeDemo</p>
+</td>
+<td>
+<p>1</p>
+</td>
+<td>
+<p>none</p>
+</td>
+<td>
+<p>none</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>CN-Cytidine</p>
+</td>
+<td>
+<p>phenotypeDemo</p>
+</td>
+<td>
+<p>1</p>
+</td>
+<td>
+<p>kb|g.20848.CDS.602</p>
+</td>
+<td>
+<p>none</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>CN-Cytidine</p>
+</td>
+<td>
+<p>phenotypeDemo</p>
+</td>
+<td>
+<p>1</p>
+</td>
+<td>
+<p>kb|g.20848.CDS.17</p>
+</td>
+<td>
+<p>none</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>CN-Cytidine</p>
+</td>
+<td>
+<p>phenotypeDemo</p>
+</td>
+<td>
+<p>1</p>
+</td>
+<td>
+<p>kb|g.20848.CDS.930</p>
+</td>
+<td>
+<p>none</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>CN-Cytidine</p>
+</td>
+<td>
+<p>phenotypeDemo</p>
+</td>
+<td>
+<p>1</p>
+</td>
+<td>
+<p>kb|g.20848.CDS.10</p>
+</td>
+<td>
+<p>none</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>CN-Cytidine</p>
+</td>
+<td>
+<p>phenotypeDemo</p>
+</td>
+<td>
+<p>1</p>
+</td>
+<td>
+<p>kb|g.20848.CDS.380</p>
+</td>
+<td>
+<p>none</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>&nbsp;</p>
+<p>After the phenotype text files have been uploaded into File Browser, you can run the following <strong>kbfba-importpheno</strong> command to create a PhenotypeSet object called “Ecoli.Phenos” in your workspace.</p>
+<pre><strong>kbfba-importpheno</strong>&nbsp; kb|g.0<strong>&nbsp; </strong>WT-phenotypes.txt --phenoid Ecoli.Phenos </pre>
+<p>The <strong>kbfba-simpheno</strong> command simulates the growth of a model for a given set of media conditions. The following command simulates growth using the GapFilledEcoli_Integrated model on all the media conditions in the Ecoli.Phenos PhenotypeSet object (derived from the WT-phenoytpes.txt file). This command also creates a PhenotypeSimulationSet object called Ecoli.Phenos.simulation.</p>
+<pre><strong>kbfba-simpheno</strong> GapFilledEcoli_Integrated Ecoli.Phenos</pre>
+<p>Since there is no HTML view for phenotype objects, you can export the results as an HTML file:</p>
+<pre><strong>kbfba-exportphenosim</strong> Ecoli.Phenos.simulation html &gt; EcoliPhenotypes.html&nbsp; </pre>
+<p>This creates a new HTML file in your IRIS file system that you can then download to your computer and view in a web browser.</p>
+<h2><a id="viewphenotype" name="viewphenotype"></a>10. View Phenotype Simulation Results</h2>
+<p>You can see an HTML view of the results of the phenotypic simulations performed by the previous command by looking at the file <a href="http://bioseed.mcs.anl.gov/~janakae/phenos/EcoliPhenotypes.html">http://bioseed.mcs.anl.gov/~janakae/phenos/EcoliPhenotypes.html</a>.</p>
+<p>The list below describes the columns of data generated from phenotypic simulations. FBA results are listed for each media condition derived from the WT-phenotypes.txt file dataset.</p>
+<ul>
+<li><strong>Base media</strong> — Media used for simulation.</li>
+<li><strong>Additional compounds </strong>— If any additional media components were added, they will be listed here.</li>
+<li><strong>Gene KO </strong>— List of knocked out genes.</li>
+<li><strong>Growth </strong>— Growth result derived from the phenotypic data (1 = grew, 0 = did not grow).</li>
+<li><strong>Simulated growth </strong>— Model predicted objective growth value.</li>
+<li><strong>Simulated growth fraction </strong>— Model predicted growth result (1 = grew, 0 = did not grow).</li>
+<li><strong>Class </strong>— Explanation of the model predictions versus phenotypic data (FP = False Positive, CP = Correct Positive, CN = Correct Negative, and FN = False Negative).</li>
+</ul>
+<h2><a id="reconcilemodel" name="reconcilemodel"></a>11. Reconcile Model with Phenotype Simulation Results</h2>
+<p>When we simulate our phenotype data, we are likely to have conditions where either the model predicts growth and the organism does not grow [a false positive prediction (FP)] or the model does not predict growth and the organism does grow [a false negative prediction (FN)]. How do you determine the problems in the genome annotation and the metabolic model that are causing these FP and FN predictions? KBase has a variety of commands that can help you find the answers to this question. These commands, which represent an implementation of the “GrowMatch” algorithm, support the phenotype reconciliation process.</p>
+<h3>Curation of False Negatives</h3>
+<p>The most likely explanation for a FN prediction is that the model is missing reactions required for viable growth in the specified media conditions (e.g., no asparagine metabolism pathway in a media where asparagine is the only carbon source). This error can be corrected by using the <strong>kbfba-gapfill </strong>command to add a minimal set of reactions to the model such that growth is permitted. The following command will propose up to five distinct and minimal sets of reactions that may be added to the “EcoliModel” to permit growth in “CN-L-Asparagine” media.</p>
+<pre><strong>kbfba-gapfill</strong> EcoliModel --media CN-L-Asparagine --mediaws phenotypeDemo --numsol 5 --timelimit 600</pre>
+<p>Because gapfilling can take hours, in this example we use the “--timelimit” argument to force <strong>kbfba-gapfill</strong> to finish in 600 seconds. Once the gapfilling process is complete, it is then up the user to examine the solutions that result from this analysis and identify which one is the most plausible.</p>
+<h3>Curation of False Positives</h3>
+<p>FP predictions are the most challenging to resolve in metabolic modeling. This is because these errors may arise from many possible sources. Most importantly, a metabolic model only covers metabolism, meaning it includes no accounting for regulation, toxicity, and other non-metabolic effects that may disrupt viability. Still, there is a potential metabolic explanation for a FP prediction: the model may have pathways or transporters that the organism does not have. To explore this hypothesis, KBase offers the <strong>kbfba-gapgen</strong> command, which generates gaps to disrupt growth in a specified condition while preserving growth in another specified condition. As such, when running the gap generation command, you must provide two media conditions: a target condition in which growth is to be disrupted, and a reference condition in which growth must be preserved. In our example below, our target media is C-L-Proline, while our reference media is C-Lactate:</p>
+<pre><strong>kbfba-gapgen</strong> EcoliModel --media C-L-Proline --mediaws phenotypeDemo&nbsp;--refmedia C-Lactate --refmediaws phenotypeDemo --numsol 5 –-timelimit 600</pre>
+<p>Like the gapfilling command, the gap generation command takes a while to run. You can check for completion using the <strong>kbws-checkjob</strong> command that was described in section 6 of this tutorial.</p>
+<p>Upon integration of the solutions generated from multiple gapfilling and gap generation processes, the metabolic model is now reconciled with phenotypic data. As a result, the phenotypic data–reconciled model is a more accurate model compared to the initial draft model. It has been optimized to the growth conditions in the phenotype dataset, producing an accurate metabolic network. This optimized model can be used to address important biological questions such as:</p>
+<ul>
+<li>When we grow an organism in a certain carbon source with different electron acceptors (aerobic or anaerobic), what are the high flux pathways for each media condition?</li>
+<li>If you knock out certain genes in multiple pathways where the fluxes may flow, is the knocked out reaction an essential reaction?</li>
+<li>What are the best ways to optimize biofuel products such as ethanol or butanol?</li>
+</ul>
+<p style="float: right;">1/21/14&nbsp;</p>
+</div></div>
+				</div>
+				<div style="clear:both;">
+				</div>
+			</div>
+		</div>
+
+</div>
+
+</body></html>
