@@ -51,6 +51,7 @@ $files = [
   'auth/RELEASE_NOTES-auth.txt',
   'auth/RELEASE_NOTES-auth_service.txt',
   'command_line_prod/Authorization_Service_CommandLineHelp.txt',
+  'auth/PerlClientTutorial.html',
   
   'kb_seed/RELEASE_NOTES.txt',
   'kb_seed/API/cdmi-scripts-body.html',
@@ -110,9 +111,25 @@ $files = [
   
   'interlog_projection/release-notes',
   'interlog_projection/API/interlog_projection.html',
-  'interlog_projection/API/interlog_projection_nav.html'
+  'interlog_projection/API/interlog_projection_nav.html',
   
-  
+    # Just tutorials
+    'microbial/microbial-analysis.html',
+    'microbial/images/microbialtutorial_workflow.png',
+    'microbial/images/microbialtutorial_login.png',
+    'microbial/images/microbialtutorial_browser.png',
+    'microbial/images/microbialtutorial_filebrowser.jpg',
+    'microbial/images/microbialtutorial_deleteicon.jpg',
+    'microbial/images/microbialtutorial_dnloadicon.jpg',
+    'microbial/images/microbialtutorial_editicon.jpg',
+    'microbial/images/microbialtutorial_addfileicon.jpg',
+    'microbial/images/microbialtutorial_createicon.png',
+    'microbial/images/microbialtutorial_creatediricon.jpg',
+    'microbial/images/microbialtutorial_uploadicon.jpg',
+    'microbial/images/microbialtutorial_fbaobject.png',
+    'microbial/images/microbialtutorial_fbaviewer.png',
+    
+      
   
 ];
 
