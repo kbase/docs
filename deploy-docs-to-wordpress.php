@@ -11,7 +11,7 @@ Depends on a specific directory layout
      docs
    wordpress
      uploads
-       kbase
+       kb-include
          docs
 
 
@@ -34,7 +34,7 @@ references. (Haven't worked that out yet -- probably need to rewrite the image u
 */
 
 $source = realpath(".");
-$target = realpath("../../wordpress/wp-content/uploads/kbase/docs");
+$target = realpath("../../wordpress/wp-content/uploads/kb-include/docs");
 
 $files = [
   'genome_annotation/RELEASE_NOTES.txt',
