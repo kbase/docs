@@ -79,6 +79,7 @@ $files = [
   'expression/RELEASE_NOTES.txt',
   'command_line_prod/Expression_Service_CommandLineHelp.txt',
   'expression/API/ExpressionServices.html',
+  'expression/API/ExpressionServices_nav.html',
   
   'KBaseFBAModeling/build/kbase_us/RELEASE_NOTES.txt',
   'command_line_prod/FBA_Model_Service_CommandLineHelp.txt',
