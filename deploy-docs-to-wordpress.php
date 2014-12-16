@@ -131,6 +131,7 @@ $files = [
   'microbial/images/microbialtutorial_fbaviewer.png',
     
   'm5nr/RELEASE_NOTES.txt',
+  'command_line_prod/M5NR_Service_CommandLineHelp.txt',
   'm5nr/API/M5NR.html',
   'm5nr/API/M5NR_nav.html',
   
