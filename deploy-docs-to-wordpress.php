@@ -162,6 +162,7 @@ $files = [
   'trees/build/kbase_us/RELEASE_NOTES.txt',
   'trees/user_manuals/scripts/trees_overview.html',
   'trees/build/kbase_us/API/KBaseTrees.html',
+  'trees/build/kbase_us/API/KBaseTrees_nav.html',
   
   'plant_expression_service/build/kbase_us/RELEASE-NOTES.txt',
   'plant_expression_service/tutorials/plant_expression_service_tutorial.html',
