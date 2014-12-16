@@ -44,7 +44,7 @@ $files = [
   'genome_annotation/tutorials/outdated_tutorials/annotating_a_genome.html',
   
   'assembly/RELEASE_NOTES.txt',
-  'command_line_prod/Authorization_Service_CommandLineHelp.txt',
+  'command_line_prod/Assembly_Service_CommandLineHelp.txt',
   'assembly/tutorials/client_walkthrough.html',
   'assembly/tutorials/quast.png',
   
