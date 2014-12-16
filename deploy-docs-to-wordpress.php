@@ -176,6 +176,7 @@ $files = [
   
   'protein_info_service/build/kbase_us/RELEASE-NOTES.txt',
   'protein_info_service/build/kbase_us/API/ProteinInfoService.html',
+  'protein_info_service/build/kbase_us/API/ProteinInfoService_nav.html',
   
   'sim_service/build/kbase_us/RELEASE_NOTES.txt',
   'sim_service/build/kbase_us/API/SimService.html',
