@@ -11,7 +11,7 @@ Depends on a specific directory layout
      docs
    wordpress
      uploads
-       kbase
+       kb-include
          docs
 
 
@@ -34,7 +34,7 @@ references. (Haven't worked that out yet -- probably need to rewrite the image u
 */
 
 $source = realpath(".");
-$target = realpath("../../wordpress/wp-content/uploads/kbase/docs");
+$target = realpath("../../wordpress/wp-content/uploads/kb-include/docs");
 
 $files = [
   'genome_annotation/RELEASE_NOTES.txt',
@@ -44,13 +44,14 @@ $files = [
   'genome_annotation/tutorials/outdated_tutorials/annotating_a_genome.html',
   
   'assembly/RELEASE_NOTES.txt',
-  'command_line_prod/Authorization_Service_CommandLineHelp.txt',
+  'command_line_prod/Assembly_Service_CommandLineHelp.txt',
   'assembly/tutorials/client_walkthrough.html',
   'assembly/tutorials/quast.png',
   
   'auth/RELEASE_NOTES-auth.txt',
   'auth/RELEASE_NOTES-auth_service.txt',
   'command_line_prod/Authorization_Service_CommandLineHelp.txt',
+  'auth/PerlClientTutorial.html',
   
   'kb_seed/RELEASE_NOTES.txt',
   'kb_seed/API/cdmi-scripts-body.html',
@@ -78,6 +79,7 @@ $files = [
   'expression/RELEASE_NOTES.txt',
   'command_line_prod/Expression_Service_CommandLineHelp.txt',
   'expression/API/ExpressionServices.html',
+  'expression/API/ExpressionServices_nav.html',
   
   'KBaseFBAModeling/build/kbase_us/RELEASE_NOTES.txt',
   'command_line_prod/FBA_Model_Service_CommandLineHelp.txt',
@@ -110,8 +112,93 @@ $files = [
   
   'interlog_projection/release-notes',
   'interlog_projection/API/interlog_projection.html',
-  'interlog_projection/API/interlog_projection_nav.html'
+  'interlog_projection/API/interlog_projection_nav.html',
   
+  # Just tutorials
+  'microbial/microbial-analysis.html',
+  'microbial/images/microbialtutorial_workflow.png',
+  'microbial/images/microbialtutorial_login.png',
+  'microbial/images/microbialtutorial_browser.png',
+  'microbial/images/microbialtutorial_filebrowser.jpg',
+  'microbial/images/microbialtutorial_deleteicon.jpg',
+  'microbial/images/microbialtutorial_dnloadicon.jpg',
+  'microbial/images/microbialtutorial_editicon.jpg',
+  'microbial/images/microbialtutorial_addfileicon.jpg',
+  'microbial/images/microbialtutorial_createicon.png',
+  'microbial/images/microbialtutorial_creatediricon.jpg',
+  'microbial/images/microbialtutorial_uploadicon.jpg',
+  'microbial/images/microbialtutorial_fbaobject.png',
+  'microbial/images/microbialtutorial_fbaviewer.png',
+    
+  'm5nr/RELEASE_NOTES.txt',
+  'command_line_prod/M5NR_Service_CommandLineHelp.txt',
+  'm5nr/API/M5NR.html',
+  'm5nr/API/M5NR_nav.html',
+  
+  'meme/RELEASE_NOTES.txt',
+  'meme/API/meme.html',
+  'meme/API/meme_nav.html',
+  
+  'matR/RELEASE_NOTES.txt',
+  'communities/matR/matR-tutorial.html',
+  
+  'command_line_prod/Networks_Service_CommandLineHelp.txt',
+  'networks/release-notes.txt',
+  'networks/API/KBaseNetworksService.html',
+  'networks/API/KBaseNetworksService_nav.html',
+  
+  'command_line_prod/Ontology_Service_CommandLineHelp.txt',
+  'ontology_service/build/kbase_us/RELEASE-NOTES.txt',
+  'ontology_service/build/kbase_us/API/OntologyService.html',
+  'ontology_service/build/kbase_us/API/OntologyService_nav.html',
+  'ontology_service/tutorials/ontology_tutorial.html',
+  
+  'command_line_prod/Phispy_Service_CommandLineHelp.txt',
+  'phispy/build/kbase_us/RELEASE_NOTES.txt',
+  'phispy/build/kbase_us/API/Phispy.html',
+  'phispy/build/kbase_us/API/Phispy_nav.html',
+  'phispy/tutorials/phispy.html',
+  
+  'trees/build/kbase_us/RELEASE_NOTES.txt',
+  'trees/user_manuals/scripts/trees_overview.html',
+  'trees/build/kbase_us/API/KBaseTrees.html',
+  'trees/build/kbase_us/API/KBaseTrees_nav.html',
+  
+  'plant_expression_service/build/kbase_us/RELEASE-NOTES.txt',
+  'plant_expression_service/tutorials/plant_expression_service_tutorial.html',
+  'plant_expression_service/build/kbase_us/API/PlantExpressionService.html',
+  'plant_expression_service/build/kbase_us/API/PlantExpressionService_nav.html',
+  
+  'command_line_prod/Probabilistic_Annotation_Service_CommandLineHelp.txt',
+  'probabilistic_annotation/RELEASE_NOTES.txt',
+  'probabilistic_annotation/API/probabilistic_annotation.html',
+  'probabilistic_annotation/API/probabilistic_annotation_nav.html',
+  
+  'protein_info_service/build/kbase_us/RELEASE-NOTES.txt',
+  'protein_info_service/build/kbase_us/API/ProteinInfoService.html',
+  'protein_info_service/build/kbase_us/API/ProteinInfoService_nav.html',
+  
+  'sim_service/build/kbase_us/RELEASE_NOTES.txt',
+  'sim_service/build/kbase_us/API/SimService.html',
+  'sim_service/build/kbase_us/API/SimService_nav.html',
+  
+  'jnomics/RELEASE',
+  'jnomics/variation/tutorials/IdentifyVariants.html',
+  'command_line_prod/Genotyping_Variation_Service_CommandLineHelp.txt',
+  
+  'command_line_prod/Workspace_Service_CommandLineHelp.txt',
+  'workspace_deluxe/build/kbase_us/RELEASE_NOTES.txt',
+  'workspace_deluxe/build/kbase_us/API/WorkspaceDeluxe.html',
+  'workspace_deluxe/build/kbase_us/API/WorkspaceDeluxe_nav.html',
+  
+    # more tutorials. 
+  'plant_expression_service/tutorials/plant_expression_service_tutorial.html',
+  'ontology_service/tutorials/ontology_tutorial.html',
+  'trees/tutorials/script_basics/tree-community-tutorial.html',
+  'communities/matR/tutorial/KBase-matR-tutorial.html',
+  'KBaseFBAModeling/tutorials/FBABuildGenomeModel.html',
+  'jnomics/variation/tutorials/IdentifyVariants.html', 
+  'phispy/tutorials/phispy.html'
   
   
 ];
