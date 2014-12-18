@@ -116,19 +116,7 @@ $files = [
   
   # Just tutorials
   'microbial/microbial-analysis.html',
-  'microbial/images/microbialtutorial_workflow.png',
-  'microbial/images/microbialtutorial_login.png',
-  'microbial/images/microbialtutorial_browser.png',
-  'microbial/images/microbialtutorial_filebrowser.jpg',
-  'microbial/images/microbialtutorial_deleteicon.jpg',
-  'microbial/images/microbialtutorial_dnloadicon.jpg',
-  'microbial/images/microbialtutorial_editicon.jpg',
-  'microbial/images/microbialtutorial_addfileicon.jpg',
-  'microbial/images/microbialtutorial_createicon.png',
-  'microbial/images/microbialtutorial_creatediricon.jpg',
-  'microbial/images/microbialtutorial_uploadicon.jpg',
-  'microbial/images/microbialtutorial_fbaobject.png',
-  'microbial/images/microbialtutorial_fbaviewer.png',
+  'microbial/images',
     
   'm5nr/RELEASE_NOTES.txt',
   'command_line_prod/M5NR_Service_CommandLineHelp.txt',
