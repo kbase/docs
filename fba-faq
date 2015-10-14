@@ -1,6 +1,7 @@
 Metabolic Modeling FAQs
 
-KBase has a suite of apps, methods, and data that support the reconstruction, prediction, and design of metabolic networks in plants and microbes. These tools could help advance, for example, efforts to optimize microbial production of a certain biofuel, find the minimal media conditions under which that fuel is generated, or predict soil amendments that improve the productivity of plant bioenergy feedstocks. 
+KBase has a suite of apps, methods, and data that support the reconstruction, prediction, and design of metabolic networks in plants and microbes.
+These tools could help advance, for example, efforts to optimize microbial production of a certain biofuel, find the minimal media conditions under which that fuel is generated, or predict soil amendments that improve the productivity of plant bioenergy feedstocks. 
 
 Below are answers to common questions about KBase’s metabolic modeling tools, including:
 
@@ -75,9 +76,12 @@ At one time, KBase used a mixed-integer linear programming (MILP) formulation in
 
 If you leave the Media field blank, "complete" media will be used by default. Complete media is a special type of media that does not include an exact list of compounds. Instead, complete media consists of all metabolites for which a transporter is available in the KBase biochemistry database. When used on complete media, the gapfilling method is not limited by the transport reactions already available in the model and therefore will invariably will add more transport reactions to the model. 
 
-In addition to the default complete media, KBase provides more than 500 media conditions you can use for gapfilling. The [Narrative Interface User Guide](http://kbase.us/narrative-guide/add-data-to-your-narrative/) describes how to add these media and other data to your Narrative. You can also [upload your own custom media condition](http://kbase.us/data-upload-download-guide/media/). 
+In addition to the default complete media, KBase provides more than 500 media conditions you can use for gapfilling. The [Narrative Interface User Guide](http://kbase.us/narrative-guide/add-data-to-your-narrative/) describes how to add these media and other data to your Narrative.
+You can also [upload your own custom media condition](http://kbase.us/data-upload-download-guide/media/). 
 
-Choosing minimal media for the initial gapfilling is often a good idea because it ensures that the gapfilling algorithm will add the maximal set of reactions to the genome-inferred model. This will allow the model to biosynthesize many common substrates necessary for growth—substrates that otherwise would be present in the media. The gapfilling algorithm looks for incomplete metabolic pathways and tries to make an informed guess as to which protein-encoding genes may be responsible for the missing step in the pathway. This process works best when informed by the *a priori* knowledge that a particular organism can grow on a defined media type (e.g., a model of *Helicobacter pylori*, an endosymbiont, might require a media containing substrates it can’t biosynthesize *in vivo*.) Thus, specifying a growth media is beneficial. 
+Choosing minimal media for the initial gapfilling is often a good idea because it ensures that the gapfilling algorithm will add the maximal set of reactions to the genome-inferred model.
+This will allow the model to biosynthesize many common substrates necessary for growth—substrates that otherwise would be present in the media. The gapfilling algorithm looks for incomplete metabolic pathways and tries to make an informed guess as to which protein-encoding genes may be responsible for the missing step in the pathway.
+This process works best when informed by the *a priori* knowledge that a particular organism can grow on a defined media type (e.g., a model of *Helicobacter pylori*, an endosymbiont, might require a media containing substrates it can’t biosynthesize *in vivo*.) Thus, specifying a growth media is beneficial. 
 
 # Note that gapfilling runs can be stacked. That is, you can gapfill in complete media and then subsequently gapfill the model again in minimal media. The model will retain both gapfilling solutions. If you want to gapfill on the two media independently, be careful not to overwrite your original model during your gapfilling simulations and then use the same original model in both gapfilling runs.
 
